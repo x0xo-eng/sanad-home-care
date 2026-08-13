@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | سند</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Login page specific styles (keeps Sanad branding) */
+    .login-hero {
+      padding: 70px 7%;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      min-height: calc(100vh - 150px);
+      background: linear-gradient(180deg, #f7fbfa 0%, #eef7f5 100%);
+    }
+
+    .login-options {
+      width: 360px;
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 20px 50px rgba(22,70,65,.06);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .login-options h2 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .login-option-btn {
+      padding: 12px 15px;
+      border-radius: 12px;
+      background: #f8fbfa;
+      border: 1px solid #e6f0ee;
+      font-weight: 700;
+      color: #163b38;
+      cursor: pointer;
+      transition: .18s;
+      text-align: center;
+    }
+
+    .login-option-btn.active {
+      background: linear-gradient(90deg,#16877d,#0f7068);
+      color: white;
+      box-shadow: 0 10px 30px rgba(22,135,125,.18);
+    }
+
+    .login-panel {
+      flex: 1;
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      border: 1px solid #e3edeb;
+      box-shadow: 0 20px 50px rgba(22,70,65,.06);
+      max-width: 680px;
+    }
+
+    .login-panel h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .login-panel p.lead {
+      color: #718480;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    label {font-weight:700; color: #163b38;}
+
+    input[type="tel"],
+    input[type="password"] {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e6f0ee;
+      background: #fbfefe;
+      font-size: 15px;
+      outline: none;
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .forgot {
+      color: #16877d;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .btn-login {
+      background: #16877d;
+      color: white;
+      padding: 12px 26px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      transition: .18s;
+    }
+
+    .btn-login:active {transform: translateY(1px)}
+
+    /* small helper for hidden panels */
+    .panel-hidden {display: none}
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .login-hero {flex-direction: column; padding: 40px 5%}
+      .login-options {width: 100%; flex-direction: row; overflow-x: auto; padding: 12px}
+      .login-option-btn {min-width: 180px}
+      .login-panel {width: 100%; max-width: none}
+    }
+
+    @media (max-width: 520px) {
+      .login-panel h1 {font-size: 20px}
+      .login-options {gap:8px}
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <a href="index.html" class="logo">سند<span>.</span></a>
+
+  <nav class="nav">
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="#how">كيف يعمل سند؟</a>
+    <a href="#about">عن سند</a>
+  </nav>
+
+  <a href="login.html" class="login">تسجيل الدخول</a>
+</header>
+
+<main>
+
+  <section class="login-hero">
+
+    <aside class="login-options" aria-label="خيارات تسجيل الدخول">
+      <h2>اختر نوع الدخول</h2>
+      <button class="login-option-btn" data-target="elder" id="btn-elder">تسجيل دخول المسن</button>
+      <button class="login-option-btn" data-target="family" id="btn-family">تسجيل دخول ذوي المسن</button>
+      <button class="login-option-btn" data-target="staff" id="btn-staff">تسجيل دخول الكادر</button>
+    </aside>
+
+    <section class="login-panel" id="panel-elder">
+      <h1>تسجيل دخول المسن</h1>
+      <p class="lead">سجل الدخول للوصول إلى معلومات الرعاية والملف الشخصي للمسن.</p>
+
+      <form onsubmit="handleLogin(event, 'المسن')">
+        <div class="form-row">
+          <label for="elder-phone">رقم الهاتف</label>
+          <input id="elder-phone" name="phone" type="tel" placeholder="05xxxxxxxx" required>
+        </div>
+
+        <div class="form-row">
+          <label for="elder-password">كلمة المرور</label>
+          <input id="elder-password" name="password" type="password" placeholder="●●●●●●●●" required>
+        </div>
+
+        <div class="actions">
+          <a href="#" class="forgot">هل نسيت كلمة المرور؟</a>
+          <button class="btn-login" type="submit">تسجيل الدخول</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="login-panel panel-hidden" id="panel-family">
+      <h1>تسجيل دخول ذوي المسن</h1>
+      <p class="lead">للوصول إلى لوحة متابعة الحالة والتواصل مع فريق سند.</p>
+
+      <form onsubmit="handleLogin(event, 'ذوي المسن')">
+        <div class="form-row">
+          <label for="family-phone">رقم الهاتف</label>
+          <input id="family-phone" name="phone" type="tel" placeholder="05xxxxxxxx" required>
+        </div>
+
+        <div class="form-row">
+          <label for="family-password">كلمة المرور</label>
+          <input id="family-password" name="password" type="password" placeholder="●●●●●●●●" required>
+        </div>
+
+        <div class="actions">
+          <a href="#" class="forgot">هل نسيت كلمة المرور؟</a>
+          <button class="btn-login" type="submit">تسجيل الدخول</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="login-panel panel-hidden" id="panel-staff">
+      <h1>تسجيل دخول الكادر</h1>
+      <p class="lead">دخول فريق العمل للوصول إلى جداول الزيارات ومهام الرعاية.</p>
+
+      <form onsubmit="handleLogin(event, 'الكادر')">
+        <div class="form-row">
+          <label for="staff-phone">رقم الهاتف</label>
+          <input id="staff-phone" name="phone" type="tel" placeholder="05xxxxxxxx" required>
+        </div>
+
+        <div class="form-row">
+          <label for="staff-password">كلمة المرور</label>
+          <input id="staff-password" name="password" type="password" placeholder="●●●●●●●●" required>
+        </div>
+
+        <div class="actions">
+          <a href="#" class="forgot">هل نسيت كلمة المرور؟</a>
+          <button class="btn-login" type="submit">تسجيل الدخول</button>
+        </div>
+      </form>
+    </section>
+
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">سند<span>.</span></div>
+  <p>الرعاية المنزلية لكبار السن</p>
+  <small>© 2026 سند — جميع الحقوق محفوظة</small>
+</footer>
+
+<script>
+  // Tab switching logic
+  const buttons = document.querySelectorAll('.login-option-btn');
+  const panels = {
+    elder: document.getElementById('panel-elder'),
+    family: document.getElementById('panel-family'),
+    staff: document.getElementById('panel-staff')
+  };
+
+  function activate(target) {
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.target === target));
+    Object.keys(panels).forEach(k => {
+      panels[k].classList.toggle('panel-hidden', k !== target);
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => activate(btn.dataset.target));
+  });
+
+  // Default: activate elder
+  activate('elder');
+
+  function handleLogin(e, role) {
+    e.preventDefault();
+    // For now, just show a friendly message (no real authentication)
+    const phone = e.target.querySelector('input[name="phone"]').value;
+    alert('محاكاة تسجيل الدخول لـ ' + role + '\nالرقم: ' + phone + '\n
+(لم يتم تنفيذ المصادقة بعد)');
+  }
+</script>
+
+</body>
+</html>
