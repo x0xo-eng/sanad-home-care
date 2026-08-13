@@ -43,6 +43,7 @@
       cursor: pointer;
       transition: .18s;
       text-align: center;
+      display: inline-block;
     }
 
     .login-option-btn.active {
@@ -156,9 +157,9 @@
 
     <aside class="login-options" aria-label="خيارات تسجيل الدخول">
       <h2>اختر نوع الدخول</h2>
-      <button class="login-option-btn" data-target="elder" id="btn-elder">تسجيل دخول المسن</button>
-      <button class="login-option-btn" data-target="family" id="btn-family">تسجيل دخول ذوي المسن</button>
-      <button class="login-option-btn" data-target="staff" id="btn-staff">تسجيل دخول الكادر</button>
+      <a href="elder-login.html" class="login-option-btn" data-target="elder" id="btn-elder">تسجيل دخول المسن</a>
+      <a href="family-login.html" class="login-option-btn" data-target="family" id="btn-family">تسجيل دخول ذوي المسن</a>
+      <a href="staff-login.html" class="login-option-btn" data-target="staff" id="btn-staff">تسجيل دخول الكادر</a>
     </aside>
 
     <section class="login-panel" id="panel-elder">
@@ -238,7 +239,7 @@
 </footer>
 
 <script>
-  // Tab switching logic
+  // Keep optional panel activation behavior for users who may interact here
   const buttons = document.querySelectorAll('.login-option-btn');
   const panels = {
     elder: document.getElementById('panel-elder'),
@@ -254,7 +255,10 @@
   }
 
   buttons.forEach(btn => {
-    btn.addEventListener('click', () => activate(btn.dataset.target));
+    btn.addEventListener('click', () => {
+      // let the link navigate to the dedicated page; also activate visually for a brief moment
+      activate(btn.dataset.target);
+    });
   });
 
   // Default: activate elder
@@ -262,10 +266,8 @@
 
   function handleLogin(e, role) {
     e.preventDefault();
-    // For now, just show a friendly message (no real authentication)
     const phone = e.target.querySelector('input[name="phone"]').value;
-    alert('محاكاة تسجيل الدخول لـ ' + role + '\nالرقم: ' + phone + '\n
-(لم يتم تنفيذ المصادقة بعد)');
+    alert('محاكاة تسجيل الدخول لـ ' + role + '\nالرقم: ' + phone + '\n(لم يتم تنفيذ المصادقة بعد)');
   }
 </script>
 
