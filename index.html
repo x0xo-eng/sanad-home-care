@@ -1,107 +1,358 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>سند | رعاية كبار السن</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سند | الرعاية المنزلية لكبار السن</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- الشريط العلوي -->
-    <header class="navbar">
+<header class="header">
+  <a href="#" class="logo">سند<span>.</span></a>
 
-        <div class="logo">
-            سند
+  <nav class="nav">
+    <a href="#">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="#how">كيف يعمل سند؟</a>
+    <a href="#about">عن سند</a>
+  </nav>
+
+  <a href="login.html" class="login">تسجيل الدخول</a>
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        <span>✦</span>
+        رعاية منزلية بلمسة إنسانية
+      </div>
+
+      <h1>
+        لأن من
+        <span>نحبهم</span>
+        يستحقون أفضل رعاية
+      </h1>
+
+      <p>
+        سند يوفر لك رعاية منزلية موثوقة لكبار السن،
+        مع متابعة صحية واهتمام يومي يساعدهم على العيش
+        براحة وكرامة داخل منزلهم.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#services" class="btn-primary">
+          ابدأ طلب الرعاية
+          <span>←</span>
+        </a>
+
+        <a href="#services" class="btn-outline">
+          استكشف خدماتنا
+        </a>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-item">
+          <strong>24/7</strong>
+          <span>اهتمام ومتابعة</span>
         </div>
 
-        <nav>
-            <a href="#home">الرئيسية</a>
-            <a href="#services">خدماتنا</a>
-            <a href="#how">كيف يعمل سند</a>
-            <a href="#about">عن سند</a>
-        </nav>
+        <div class="trust-line"></div>
 
-    </header>
-
-
-    <!-- الواجهة الرئيسية -->
-    <main id="home" class="hero">
-
-        <div class="hero-content">
-
-            <div class="main-logo">
-                سند
-            </div>
-
-            <h1>
-                رعاية كبار السن بلمسة إنسانية
-            </h1>
-
-            <p class="hero-subtitle">
-                لأن من نحبهم يستحقون ذلك
-            </p>
-
-            <button class="login-btn">
-                تسجيل الدخول
-            </button>
-
-            <button class="services-btn">
-                استكشف خدماتنا
-            </button>
-
-            <p class="description">
-                سند يوفر رعاية صحية وطبية موثوقة ويومية لكبار السن،
-                يساعدهم على العيش براحة وكرامة في منازلهم.
-            </p>
-
+        <div class="trust-item">
+          <strong>رعاية</strong>
+          <span>داخل المنزل</span>
         </div>
 
-    </main>
+        <div class="trust-line"></div>
+
+        <div class="trust-item">
+          <strong>سند</strong>
+          <span>للعائلة أيضاً</span>
+        </div>
+      </div>
+
+    </div>
 
 
-    <!-- خدماتنا -->
-    <section id="services" class="section">
+    <div class="hero-visual">
 
-        <h2>خدماتنا</h2>
+      <div class="visual-glow"></div>
 
+      <div class="care-scene">
+
+        <div class="scene-top">
+          <span class="online-dot"></span>
+          فريق سند معك
+        </div>
+
+        <div class="person-visual">
+          <div class="person-circle">
+            <span>♥️</span>
+          </div>
+        </div>
+
+        <div class="care-info">
+          <span>رعاية اليوم</span>
+          <strong>اطمئن على أحبائك</strong>
+
+          <div class="progress">
+            <span></span>
+          </div>
+
+          <small>متابعة مستمرة واهتمام بكل التفاصيل</small>
+        </div>
+
+      </div>
+
+      <div class="floating-card card-one">
+        <span class="mini-icon">✓</span>
+        <div>
+          <strong>رعاية موثوقة</strong>
+          <small>اهتمام بكل التفاصيل</small>
+        </div>
+      </div>
+
+      <div class="floating-card card-two">
+        <span class="mini-icon">♥️</span>
+        <div>
+          <strong>راحة واطمئنان</strong>
+          <small>لمن تحب</small>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SERVICES -->
+
+  <section id="services" class="services">
+
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">خدمات سند</span>
+        <h2>رعاية متكاملة<br>تبدأ من منزلك</h2>
+      </div>
+
+      <p>
+        نقدم مجموعة من خدمات الرعاية التي تساعد كبار السن
+        وتمنح عائلاتهم راحة واطمئناناً أكبر.
+      </p>
+    </div>
+
+
+    <div class="service-grid">
+
+      <article class="service-card featured">
+        <div class="service-number">01</div>
+        <div class="service-icon">✚</div>
+        <h3>الرعاية التمريضية</h3>
         <p>
-            رعاية متكاملة تلبي احتياجات كبار السن
-            داخل منازلهم.
+          متابعة صحية وتمريضية داخل المنزل
+          حسب احتياجات كبير السن.
         </p>
+        <a href="#">اكتشف الخدمة ←</a>
+      </article>
 
-    </section>
-
-
-    <!-- كيف يعمل سند -->
-    <section id="how" class="section">
-
-        <h2>كيف يعمل سند</h2>
-
+      <article class="service-card">
+        <div class="service-number">02</div>
+        <div class="service-icon">⌂</div>
+        <h3>الرعاية اليومية</h3>
         <p>
-            نصل إليك، نفهم احتياجاتك، ونقدم الرعاية
-            المناسبة بأيدي كوادر مختصة.
+          مساعدة في الاحتياجات اليومية
+          والاهتمام براحة كبير السن.
         </p>
-
-    </section>
-
-
-    <!-- عن سند -->
-    <section id="about" class="section">
-
-        <h2>عن سند</h2>
-
+        <a href="#">اكتشف الخدمة ←</a>
+      </article><article class="service-card">
+        <div class="service-number">03</div>
+        <div class="service-icon">♡</div>
+        <h3>المتابعة الصحية</h3>
         <p>
-            سند مشروع متخصص في تقديم خدمات الرعاية
-            الصحية والطبية لكبار السن في منازلهم.
-        </p>
+          متابعة مستمرة للحالة الصحية
+          والتغيرات المهمة.
+        </p><a href="#">اكتشف الخدمة ←</a>
+      </article>
 
-    </section>
+      <article class="service-card">
+        <div class="service-number">04</div>
+        <div class="service-icon">☼</div>
+        <h3>الدعم والترفيه</h3>
+        <p>
+          اهتمام بالجانب النفسي والاجتماعي
+          وجودة الحياة اليومية.
+        </p>
+        <a href="#">اكتشف الخدمة ←</a>
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- HOW IT WORKS -->
+
+  <section id="how" class="how">
+
+    <div class="how-heading">
+      <span class="eyebrow">بكل بساطة</span>
+      <h2>كيف يعمل سند؟</h2>
+      <p>
+        ثلاث خطوات بسيطة لتبدأ رحلة الرعاية
+        لمن تحب.
+      </p>
+    </div>
+
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-icon">⌕</div>
+        <h3>اختر الخدمة</h3>
+        <p>
+          اختر نوع الرعاية التي يحتاجها
+          كبير السن.
+        </p>
+      </div>
+
+      <div class="step-line"></div>
+
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-icon">◷</div>
+        <h3>حدد الموعد</h3>
+        <p>
+          حدد الوقت المناسب لزيارة
+          فريق سند.
+        </p>
+      </div>
+
+      <div class="step-line"></div>
+
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-icon">✓</div>
+        <h3>نحن معك</h3>
+        <p>
+          يصل فريق سند وتبدأ رحلة
+          الرعاية والمتابعة.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+
+  <section id="about" class="about">
+
+    <div class="about-content">
+      <span class="eyebrow">لماذا سند؟</span>
+
+      <h2>
+        لأن الرعاية الحقيقية
+        <span>تبدأ بالاهتمام.</span>
+      </h2>
+
+      <p>
+        نؤمن أن رعاية كبار السن لا تقتصر على الجانب الصحي فقط،
+        بل تشمل الراحة والاهتمام والاحترام والشعور بالأمان.
+      </p>
+
+      <div class="about-points">
+
+        <div>
+          <span>✓</span>
+          <strong>اهتمام مستمر</strong>
+        </div>
+
+        <div>
+          <span>✓</span>
+          <strong>متابعة للعائلة</strong>
+        </div>
+
+        <div>
+          <span>✓</span>
+          <strong>رعاية داخل المنزل</strong>
+        </div>
+
+        <div>
+          <span>✓</span>
+          <strong>خصوصية وراحة</strong>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="about-card">
+      <div class="about-symbol">♥️</div>
+      <strong>سندك في كل خطوة</strong>
+      <p>
+        رعاية آمنة، اهتمام مستمر،
+        وراحة لمن تحب.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+
+  <section class="cta">
+
+    <span class="eyebrow">ابدأ الآن</span>
+
+    <h2>
+      خلي بالك مرتاح...
+      <br>
+      <span>سند يهتم بمن تحب.</span>
+    </h2>
+
+    <p>
+      ابدأ رحلة الرعاية المنزلية اليوم.
+    </p>
+
+    <a href="#" class="btn-white">
+      ابدأ طلب الرعاية
+      <span>←</span>
+    </a>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-logo">سند<span>.</span></div>
+
+  <p>الرعاية المنزلية لكبار السن</p>
+
+  <div class="footer-links">
+    <a href="#">الرئيسية</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#about">عن سند</a>
+    <a href="#">تواصل معنا</a>
+  </div>
+
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
+
+</footer>
 
 </body>
-
 </html>
