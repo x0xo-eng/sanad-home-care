@@ -989,3 +989,297 @@ body {
 .hero-content {
     width: 100%;
     max-width: 850px;
+/* =========================
+   SANAD NEW MAIN INTERFACE
+   ========================= */
+
+.sanad-header {
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8eeee;
+}
+
+.sanad-logo {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  color: #16877d;
+  text-decoration: none;
+  text-align: center;
+}
+
+.sanad-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+}
+
+.sanad-nav a {
+  color: #647874;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: .25s;
+}
+
+.sanad-nav a:hover {
+  color: #16877d;
+}
+
+
+/* HERO */
+
+.sanad-hero {
+  min-height: 760px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 35px;
+  padding: 65px 5% 80px;
+  background:
+    radial-gradient(
+      circle at 70% 45%,
+      rgba(220,239,235,.85),
+      transparent 48%
+    ),
+    #f7fbfb;
+}
+
+
+/* النص */
+
+.sanad-content {
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+.sanad-brand {
+  font-size: 86px;
+  font-weight: 900;
+  line-height: 1;
+  color: #137b80;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.sanad-brand span {
+  color: #d6a33a;
+}
+
+.sanad-identity {
+  color: #163b38;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.45;
+  margin: 0 auto;
+  font-weight: 800;
+}
+
+.sanad-identity span {
+  color: #16877d;
+}
+
+.sanad-slogan {
+  color: #55736e;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.8;
+  margin: 8px auto 30px;
+}
+
+
+/* الأزرار */
+
+.sanad-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.sanad-action {
+  width: min(100%, 330px);
+  min-height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.sanad-action:hover {
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.btn-primary .action-icon {
+  background: rgba(255,255,255,.18);
+  color: white;
+}
+
+.btn-outline .action-icon {
+  background: #e6f3f0;
+  color: #16877d;
+}
+
+
+/* الوصف */
+
+.sanad-description {
+  max-width: 520px;
+  margin: 30px auto 0;
+  color: #718480;
+  font-size: 16px;
+  line-height: 2.1;
+  text-align: center;
+}
+
+
+/* العنصر البصري */
+
+.sanad-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 500px;
+}
+
+
+/* نخلي البطاقات تظهر بشكل مرتب */
+
+.sanad-visual .card-one {
+  top: 70px;
+  right: 5px;
+}
+
+.sanad-visual .card-two {
+  bottom: 45px;
+  left: 5px;
+}
+
+
+/* موبايل */
+
+@media (max-width: 768px) {
+
+  .sanad-header {
+    min-height: 170px;
+    padding: 22px 15px;
+    gap: 17px;
+  }
+
+  .sanad-logo {
+    font-size: 48px;
+  }
+
+  .sanad-nav {
+    gap: 18px;
+    overflow: visible;
+    flex-wrap: nowrap;
+  }
+
+  .sanad-nav a {
+    font-size: 12px;
+  }
+
+  .sanad-hero {
+    grid-template-columns: 1fr;
+    padding: 50px 18px 70px;
+    gap: 45px;
+  }
+
+  .sanad-content {
+    order: 1;
+    width: 100%;
+  }
+
+  .sanad-visual {
+    order: 2;
+    width: 100%;
+    min-height: 460px;
+  }
+
+  .sanad-brand {
+    font-size: 72px;
+  }
+
+  .sanad-identity {
+    font-size: 32px;
+  }
+
+  .sanad-slogan {
+    font-size: 19px;
+  }
+
+  .sanad-description {
+    font-size: 14px;
+    max-width: 330px;
+  }
+
+  .sanad-action {
+    width: min(100%, 320px);
+    min-height: 60px;
+    font-size: 18px;
+  }
+
+}
+
+
+/* شاشات صغيرة جداً */
+
+@media (max-width: 430px) {
+
+  .sanad-nav {
+    gap: 13px;
+  }
+
+  .sanad-nav a {
+    font-size: 11px;
+  }
+
+  .sanad-brand {
+    font-size: 64px;
+  }
+
+  .sanad-identity {
+    font-size: 29px;
+  }
+
+  .sanad-slogan {
+    font-size: 18px;
+  }
+
+  .sanad-visual {
+    min-height: 430px;
+  }
+
+  .care-scene {
+    width: 88vw;
+  }
+
+}
