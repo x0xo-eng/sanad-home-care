@@ -177,3 +177,118 @@
   }
 
 }
+/* ================================
+   SANAD PACKAGES
+================================ */
+
+.packages-header {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+.packages-header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.packages-header p {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.packages-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+.package-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    transition: transform 0.25s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-6px);
+}
+
+.package-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 25px;
+}
+
+.package-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.package-card li {
+    padding: 13px 0;
+    border-bottom: 1px solid #eeeeee;
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+.package-btn {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    padding: 13px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    background: #168aad;
+    color: white;
+}
+
+.regular {
+    border-top: 5px solid #20a464;
+}
+
+.medium {
+    border-top: 5px solid #1976d2;
+}
+
+.premium {
+    border-top: 5px solid #7b2cbf;
+}
+
+@media (max-width: 900px) {
+    .packages-container {
+        grid-template-columns: 1fr;
+        width: 92%;
+    }
+
+    .package-card {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .packages-header h1 {
+        font-size: 30px;
+    }
+
+    .package-card h2 {
+        font-size: 22px;
+    }
+
+    .package-card li {
+        font-size: 15px;
+    }
+}
