@@ -492,3 +492,75 @@
     }
 
 }
+/* FIX: منع الباقات من الخروج من الشاشة */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.packages-wrapper {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.package-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 700px) {
+
+    .packages-wrapper {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+
+        padding-left: 10px;
+        padding-right: 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .package-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        margin-left: 0;
+        margin-right: 0;
+
+        padding: 20px 12px;
+
+        transform: none !important;
+    }
+
+    .service-item {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        grid-template-columns: 28px 27px minmax(0, 1fr);
+
+        overflow: hidden;
+    }
+
+    .service-item p {
+        min-width: 0;
+        max-width: 100%;
+
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+}
