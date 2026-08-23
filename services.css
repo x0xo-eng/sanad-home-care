@@ -564,3 +564,42 @@ body {
         word-wrap: break-word;
     }
 }
+/* ================================
+   SANAD FOOTER
+================================ */
+
+.packages-footer {
+    width: 100%;
+    background: linear-gradient(135deg, #0b3954, #087e8b);
+    color: rgba(255, 255, 255, 0.9);
+
+    text-align: center;
+
+    padding: 28px 20px;
+
+    margin-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.packages-footer p {
+    margin: 0;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #ffffff;
+
+    line-height: 1.8;
+}
+
+@media (max-width: 700px) {
+
+    .packages-footer {
+        padding: 24px 15px;
+    }
+
+    .packages-footer p {
+        font-size: 13px;
+    }
+}
