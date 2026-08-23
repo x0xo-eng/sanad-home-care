@@ -4,51 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>باقات سند | Sanad Home Care</title>
+    <title>باقات سند | سند</title>
 
+    <!-- ملف التصميم الأصلي للموقع -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- تصميم الباقات فقط -->
     <link rel="stylesheet" href="services.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header class="packages-hero">
+    <!-- الهيدر -->
+    <header class="header">
+        <div class="container">
 
-        <a href="index.html" class="back-home">
-            ← العودة للرئيسية
-        </a>
+            <a href="index.html" class="logo">
+                سند<span>.</span>
+            </a>
 
-        <div class="hero-content">
-            <span class="hero-badge">SANAD HOME CARE</span>
+            <nav class="nav">
+                <a href="index.html">الرئيسية</a>
+                <a href="services.html" class="active">باقات سند</a>
+                <a href="index.html#how">كيف يعمل سند؟</a>
+                <a href="index.html#about">عن سند</a>
+            </nav>
 
-            <h1>باقات سند للرعاية المنزلية</h1>
+            <a href="login.html" class="login-btn">
+                تسجيل الدخول
+            </a>
 
-            <p>
-                اختر مستوى الرعاية الذي يناسب احتياجات المسن
-                وامنحه حياة أكثر راحة واطمئناناً.
-            </p>
         </div>
-
     </header>
 
 
-    <!-- PACKAGES -->
-    <main class="packages-wrapper">
+    <!-- مقدمة الباقات -->
+    <section class="packages-intro">
+
+        <span class="packages-eyebrow">
+            SANAD HOME CARE
+        </span>
+
+        <h1>
+            باقات سند
+        </h1>
+
+        <p>
+            رعاية منزلية متكاملة صُممت لتمنح كبار السن
+            الراحة والاهتمام والاطمئنان.
+        </p>
+
+    </section>
+
+
+    <!-- الباقات -->
+    <main class="sanad-packages">
 
         <!-- =========================
-             BASIC / REGULAR
+             الاعتيادية
         ========================== -->
 
-        <section class="package-card regular">
+        <article class="sanad-package regular-package">
 
-            <div class="package-top">
+            <div class="package-heading">
 
-                <div class="package-icon">
+                <div class="package-color-dot green">
                     🟢
                 </div>
 
                 <div>
-                    <span class="package-label">
+                    <span class="package-small-title">
                         SANAD CARE
                     </span>
 
@@ -57,119 +82,115 @@
                     </h2>
 
                     <p>
-                        رعاية أساسية متكاملة في المنزل
+                        الرعاية الأساسية المتكاملة
                     </p>
                 </div>
 
             </div>
 
 
-            <div class="package-divider"></div>
+            <div class="package-line"></div>
 
 
-            <h3 class="services-title">
-                الخدمات المشمولة
-            </h3>
+            <div class="package-services-title">
+                <span>الخدمات المشمولة</span>
+                <b>7 خدمات</b>
+            </div>
 
 
-            <div class="services-list">
+            <div class="sanad-services">
 
-                <div class="service-item">
-                    <span class="service-number">01</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الممرض الصحي
-                        <strong>مرة واحدة يومياً</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">01</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الممرض الصحي</h3>
+                        <p>مرة واحدة يومياً</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">02</span>
-                    <span class="service-icon">🩺</span>
-                    <p>
-                        زيارة الطبيب المقيم
-                        <strong>مرة واحدة كل أسبوع</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">02</span>
+                    <span class="service-emoji">🩺</span>
+                    <div>
+                        <h3>زيارة الطبيب المقيم</h3>
+                        <p>مرة واحدة كل أسبوع</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">03</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الطبيب الاختصاص
-                        <strong>مرة واحدة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">03</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الطبيب الاختصاص</h3>
+                        <p>مرة واحدة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">04</span>
-                    <span class="service-icon">🧪</span>
-                    <p>
-                        إجراء تحاليل
-                        <strong>صورة الدم + وظائف الكلى</strong>
-                        مرة واحدة كل شهر.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">04</span>
+                    <span class="service-emoji">🧪</span>
+                    <div>
+                        <h3>تحاليل طبية</h3>
+                        <p>صورة الدم + وظائف الكلى، مرة واحدة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">05</span>
-                    <span class="service-icon">🚗</span>
-                    <p>
-                        الخروج للترفيه حسب رغبة المسن مع مرافق خاص
-                        <strong>مرة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">05</span>
+                    <span class="service-emoji">🚗</span>
+                    <div>
+                        <h3>الخروج للترفيه</h3>
+                        <p>حسب رغبة المسن مع مرافق خاص، مرة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">06</span>
-                    <span class="service-icon">📋</span>
-                    <p>
-                        إرسال تقارير
-                        <strong>يومية وأسبوعية وشهرية</strong>
-                        عن المسن إلى المسن وأحد ذويه.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">06</span>
+                    <span class="service-emoji">📋</span>
+                    <div>
+                        <h3>التقارير والمتابعة</h3>
+                        <p>تقارير يومية وأسبوعية وشهرية للمسن وأحد ذويه</p>
+                    </div>
                 </div>
 
-                <div class="service-item optional">
-                    <span class="service-number">07</span>
-                    <span class="service-icon">🛁</span>
-                    <p>
-                        زيارة المعين الخاص للاستحمام والمساعدة في النظافة الشخصية
-                        <strong>مرة كل أسبوع — اختياري</strong>.
-                        <small>يضاف سعر الخدمة إلى سعر الباقة.</small>
-                    </p>
+                <div class="sanad-service optional-service">
+                    <span class="service-num">07</span>
+                    <span class="service-emoji">🛁</span>
+                    <div>
+                        <h3>
+                            المعين الخاص
+                            <span>اختياري</span>
+                        </h3>
+                        <p>مرة كل أسبوع للاستحمام والمساعدة في النظافة الشخصية</p>
+                    </div>
                 </div>
 
             </div>
 
 
-            <a href="index.html#contact" class="package-button">
+            <a href="index.html#contact" class="sanad-package-btn green-btn">
                 طلب الاشتراك
                 <span>←</span>
             </a>
 
-        </section>
-
+        </article>
 
 
         <!-- =========================
-             MEDIUM
+             المتوسطة
         ========================== -->
 
-        <section class="package-card medium featured">
+        <article class="sanad-package medium-package">
 
-            <div class="popular-badge">
-                ⭐ الأكثر تميزاً
-            </div>
+            <div class="package-heading">
 
-            <div class="package-top">
-
-                <div class="package-icon">
+                <div class="package-color-dot blue">
                     🔵
                 </div>
 
                 <div>
-                    <span class="package-label">
+                    <span class="package-small-title">
                         SANAD PLUS
                     </span>
 
@@ -178,135 +199,133 @@
                     </h2>
 
                     <p>
-                        توازن مثالي بين الرعاية والخدمات
+                        توازن متكامل بين الرعاية والخدمات
                     </p>
                 </div>
 
             </div>
 
 
-            <div class="package-divider"></div>
+            <div class="package-line"></div>
 
 
-            <h3 class="services-title">
-                الخدمات المشمولة
-            </h3>
+            <div class="package-services-title">
+                <span>الخدمات المشمولة</span>
+                <b>9 خدمات</b>
+            </div>
 
 
-            <div class="services-list">
+            <div class="sanad-services">
 
-                <div class="service-item">
-                    <span class="service-number">01</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الممرض الصحي
-                        <strong>مرة واحدة يومياً</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">01</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الممرض الصحي</h3>
+                        <p>مرة واحدة يومياً</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">02</span>
-                    <span class="service-icon">🩺</span>
-                    <p>
-                        زيارة الطبيب المقيم
-                        <strong>مرتين كل أسبوع</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">02</span>
+                    <span class="service-emoji">🩺</span>
+                    <div>
+                        <h3>زيارة الطبيب المقيم</h3>
+                        <p>مرتين كل أسبوع</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">03</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الطبيب الاختصاص
-                        <strong>مرة واحدة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">03</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الطبيب الاختصاص</h3>
+                        <p>مرة واحدة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">04</span>
-                    <span class="service-icon">🧪</span>
-                    <p>
-                        إجراء تحاليل
-                        <strong>
-                            صورة الدم + وظائف الكلى + وظائف الكبد + إنزيم القلب
-                        </strong>
-                        مرة كل شهر.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">04</span>
+                    <span class="service-emoji">🧪</span>
+                    <div>
+                        <h3>تحاليل طبية متقدمة</h3>
+                        <p>صورة الدم + وظائف الكلى + وظائف الكبد + إنزيم القلب، مرة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">05</span>
-                    <span class="service-icon">🚗</span>
-                    <p>
-                        الخروج للترفيه حسب رغبة المسن مع مرافق خاص
-                        <strong>مرتين كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">05</span>
+                    <span class="service-emoji">🚗</span>
+                    <div>
+                        <h3>الخروج للترفيه</h3>
+                        <p>حسب رغبة المسن مع مرافق خاص، مرتين كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">06</span>
-                    <span class="service-icon">💇</span>
-                    <p>
-                        زيارة الكوافير
-                        <strong>مرة واحدة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">06</span>
+                    <span class="service-emoji">💇</span>
+                    <div>
+                        <h3>زيارة الكوافير</h3>
+                        <p>مرة واحدة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">07</span>
-                    <span class="service-icon">🤝</span>
-                    <p>
-                        زيارة المتحدث الاجتماعي
-                        <strong>(رفيق سند) مرة واحدة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">07</span>
+                    <span class="service-emoji">🤝</span>
+                    <div>
+                        <h3>رفيق سند</h3>
+                        <p>زيارة المتحدث الاجتماعي مرة واحدة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">08</span>
-                    <span class="service-icon">📋</span>
-                    <p>
-                        إرسال تقارير
-                        <strong>يومية وأسبوعية وشهرية</strong>
-                        عن حالة المسن إلى المسن وأحد ذويه.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">08</span>
+                    <span class="service-emoji">📋</span>
+                    <div>
+                        <h3>التقارير والمتابعة</h3>
+                        <p>تقارير يومية وأسبوعية وشهرية للمسن وأحد ذويه</p>
+                    </div>
                 </div>
 
-                <div class="service-item optional">
-                    <span class="service-number">09</span>
-                    <span class="service-icon">🛁</span>
-                    <p>
-                        زيارة المعين الخاص للاستحمام والمساعدة في النظافة الشخصية
-                        <strong>مرتين كل أسبوع — اختياري</strong>.
-                        <small>يضاف سعر الخدمة إلى سعر الباقة.</small>
-                    </p>
+                <div class="sanad-service optional-service">
+                    <span class="service-num">09</span>
+                    <span class="service-emoji">🛁</span>
+                    <div>
+                        <h3>
+                            المعين الخاص
+                            <span>اختياري</span>
+                        </h3>
+                        <p>مرتين كل أسبوع للاستحمام والمساعدة في النظافة الشخصية</p>
+                    </div>
                 </div>
 
             </div>
 
 
-            <a href="index.html#contact" class="package-button">
+            <a href="index.html#contact" class="sanad-package-btn blue-btn">
                 طلب الاشتراك
                 <span>←</span>
             </a>
 
-        </section>
-
+        </article>
 
 
         <!-- =========================
-             PREMIUM
+             الخاصة
         ========================== -->
 
-        <section class="package-card premium">
+        <article class="sanad-package premium-package">
 
-            <div class="package-top">
+            <div class="package-heading">
 
-                <div class="package-icon">
+                <div class="package-color-dot purple">
                     🟣
                 </div>
 
                 <div>
-                    <span class="package-label">
+                    <span class="package-small-title">
                         SANAD PREMIUM
                     </span>
 
@@ -322,122 +341,127 @@
             </div>
 
 
-            <div class="package-divider"></div>
+            <div class="package-line"></div>
 
 
-            <h3 class="services-title">
-                الخدمات المشمولة
-            </h3>
+            <div class="package-services-title">
+                <span>الخدمات المشمولة</span>
+                <b>10 خدمات</b>
+            </div>
 
 
-            <div class="services-list">
+            <div class="sanad-services">
 
-                <div class="service-item">
-                    <span class="service-number">01</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الممرض الصحي
-                        <strong>مرتين كل يوم</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">01</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الممرض الصحي</h3>
+                        <p>مرتين كل يوم</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">02</span>
-                    <span class="service-icon">🩺</span>
-                    <p>
-                        زيارة الطبيب المقيم
-                        <strong>مرتين كل أسبوع</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">02</span>
+                    <span class="service-emoji">🩺</span>
+                    <div>
+                        <h3>زيارة الطبيب المقيم</h3>
+                        <p>مرتين كل أسبوع</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">03</span>
-                    <span class="service-icon">👨‍⚕️</span>
-                    <p>
-                        زيارة الطبيب الاختصاص
-                        <strong>مرتين كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">03</span>
+                    <span class="service-emoji">👨‍⚕️</span>
+                    <div>
+                        <h3>زيارة الطبيب الاختصاص</h3>
+                        <p>مرتين كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">04</span>
-                    <span class="service-icon">🧪</span>
-                    <p>
-                        إجراء
-                        <strong>الفحص الشامل</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">04</span>
+                    <span class="service-emoji">🧪</span>
+                    <div>
+                        <h3>الفحص الشامل</h3>
+                        <p>إجراء الفحص الشامل</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">05</span>
-                    <span class="service-icon">💇</span>
-                    <p>
-                        زيارة الكوافير
-                        <strong>مرتين كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">05</span>
+                    <span class="service-emoji">💇</span>
+                    <div>
+                        <h3>زيارة الكوافير</h3>
+                        <p>مرتين كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">06</span>
-                    <span class="service-icon">🚗</span>
-                    <p>
-                        الخروج للترفيه حسب رغبة المسن مع مرافق خاص
-                        <strong>مرتين كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">06</span>
+                    <span class="service-emoji">🚗</span>
+                    <div>
+                        <h3>الخروج للترفيه</h3>
+                        <p>حسب رغبة المسن مع مرافق خاص، مرتين كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">07</span>
-                    <span class="service-icon">🥗</span>
-                    <p>
-                        زيارة أخصائي التغذية
-                        <strong>مرة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">07</span>
+                    <span class="service-emoji">🥗</span>
+                    <div>
+                        <h3>أخصائي التغذية</h3>
+                        <p>زيارة مرة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">08</span>
-                    <span class="service-icon">🏃</span>
-                    <p>
-                        زيارة المعالج الفيزيائي للحركة وبعض التمارين الرياضية
-                        <strong>مرتين كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">08</span>
+                    <span class="service-emoji">🏃</span>
+                    <div>
+                        <h3>المعالج الفيزيائي</h3>
+                        <p>للحركة وبعض التمارين الرياضية، مرتين كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item">
-                    <span class="service-number">09</span>
-                    <span class="service-icon">🧠</span>
-                    <p>
-                        زيارة الأخصائي النفسي
-                        <strong>مرة كل شهر</strong>.
-                    </p>
+                <div class="sanad-service">
+                    <span class="service-num">09</span>
+                    <span class="service-emoji">🧠</span>
+                    <div>
+                        <h3>الأخصائي النفسي</h3>
+                        <p>زيارة مرة كل شهر</p>
+                    </div>
                 </div>
 
-                <div class="service-item optional">
-                    <span class="service-number">10</span>
-                    <span class="service-icon">🛁</span>
-                    <p>
-                        زيارة المعين الخاص للاستحمام والمساعدة في النظافة الشخصية
-                        <strong>3 مرات كل أسبوع — اختياري</strong>.
-                        <small>يضاف سعر الخدمة إلى سعر الباقة.</small>
-                    </p>
+                <div class="sanad-service optional-service">
+                    <span class="service-num">10</span>
+                    <span class="service-emoji">🛁</span>
+                    <div>
+                        <h3>
+                            المعين الخاص
+                            <span>اختياري</span>
+                        </h3>
+                        <p>3 مرات كل أسبوع للاستحمام والمساعدة في النظافة الشخصية</p>
+                    </div>
                 </div>
 
             </div>
 
 
-            <a href="index.html#contact" class="package-button">
+            <a href="index.html#contact" class="sanad-package-btn purple-btn">
                 طلب الاشتراك
                 <span>←</span>
             </a>
 
-        </section>
+        </article>
 
     </main>
 
 
     <footer class="packages-footer">
-        <p>© 2026 Sanad Home Care — رعاية تليق بأحبائكم</p>
+        <p>
+            سند — رعاية تليق بأحبائكم
+        </p>
     </footer>
 
 </body>
