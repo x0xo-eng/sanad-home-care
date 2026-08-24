@@ -691,7 +691,158 @@ footer small {
   font-size: 11px;
 }
 
+/* HOW PAGE */
 
+.how-page {
+  padding: 100px 7%;
+  background: #f3f9f7;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.how-page .how-heading {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.how-page .how-heading h1 {
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.4;
+  color: #163b38;
+  margin-bottom: 10px;
+}
+
+.how-page .how-heading p {
+  color: #718480;
+  font-size: 16px;
+}
+
+.how-page .steps {
+  max-width: 1000px;
+  margin: 60px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-page .step {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+
+.how-page .step h3 {
+  color: #163b38;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.how-page .step p {
+  color: #7b8d8a;
+  font-size: 14px;
+  max-width: 220px;
+  margin: 7px auto 0;
+}
+
+.how-page .step-line {
+  width: 70px;
+  height: 1px;
+  flex-shrink: 0;
+  background: #cbdedb;
+}
+
+.how-extra {
+  max-width: 1000px;
+  margin: 65px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.how-extra-card {
+  background: white;
+  border: 1px solid #e3edeb;
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  box-shadow: 0 10px 25px rgba(27,73,68,.06);
+}
+
+.how-extra-card strong {
+  display: block;
+  color: #173d39;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.how-extra-card p {
+  color: #7b8d8a;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.how-extra-card .mini-icon {
+  flex-shrink: 0;
+}
+
+
+/* HOW PAGE MOBILE */
+
+@media (max-width: 900px) {
+
+  .how-page {
+    padding: 70px 5%;
+    overflow: hidden;
+  }
+
+  .how-page .steps {
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+  }
+
+  .how-page .step {
+    width: 100%;
+  }
+
+  .how-page .step-line {
+    width: 1px;
+    height: 35px;
+  }
+
+  .how-extra {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .how-extra-card {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .how-page {
+    padding: 60px 5%;
+  }
+
+  .how-page .how-heading h1 {
+    font-size: 36px;
+  }
+
+  .how-page .how-heading p {
+    font-size: 14px;
+  }
+
+  .how-extra-card {
+    padding: 20px;
+  }
+
+}
 /* MOBILE */
 
 @media (max-width: 900px) {
