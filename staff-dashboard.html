@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>لوحة الكادر | سند</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    body {
+      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
+    .dashboard {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 6%;
+    }
+
+
+    /* =========================
+       WELCOME
+    ========================= */
+
+    .welcome {
+      background: white;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 25px;
+
+      padding: 30px;
+
+      margin-bottom: 25px;
+
+      box-shadow:
+        0 18px 50px rgba(22,70,65,.07);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .welcome-text h1 {
+      color: #163b38;
+
+      margin: 0 0 8px;
+
+      font-size: 30px;
+    }
+
+    .welcome-text p {
+      color: #718480;
+
+      margin: 0;
+
+      line-height: 1.8;
+    }
+
+    .staff-icon {
+      width: 75px;
+      height: 75px;
+
+      border-radius: 24px;
+
+      background: #e8f5f3;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 36px;
+
+      flex-shrink: 0;
+    }
+
+
+    /* =========================
+       STAFF INFO
+    ========================= */
+
+    .staff-card {
+      background:
+        linear-gradient(135deg,#16877d,#0f7068);
+
+      color: white;
+
+      border-radius: 25px;
+
+      padding: 30px;
+
+      margin-bottom: 25px;
+
+      box-shadow:
+        0 20px 50px rgba(22,135,125,.20);
+    }
+
+    .staff-top {
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+
+      margin-bottom: 25px;
+    }
+
+    .staff-avatar {
+      width: 75px;
+      height: 75px;
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,.16);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 35px;
+    }
+
+    .staff-info h2 {
+      margin: 0 0 6px;
+
+      font-size: 25px;
+    }
+
+    .staff-info p {
+      margin: 0;
+
+      opacity: .85;
+    }
+
+    .staff-role {
+      display: inline-block;
+
+      margin-top: 8px;
+
+      padding: 7px 13px;
+
+      border-radius: 20px;
+
+      background: rgba(255,255,255,.15);
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       QUICK STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4,1fr);
+
+      gap: 12px;
+    }
+
+    .stat {
+      background:
+        rgba(255,255,255,.12);
+
+      border:
+        1px solid rgba(255,255,255,.13);
+
+      border-radius: 16px;
+
+      padding: 16px;
+
+      text-align: center;
+    }
+
+    .stat span {
+      display: block;
+
+      font-size: 12px;
+
+      opacity: .8;
+
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      font-size: 22px;
+    }
+
+
+    /* =========================
+       SECTION TITLE
+    ========================= */
+
+    .section-title {
+      color: #163b38;
+
+      font-size: 22px;
+
+      margin: 30px 0 15px;
+    }
+
+
+    /* =========================
+       TODAY TASKS
+    ========================= */
+
+    .tasks {
+      background: white;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 22px;
+
+      padding: 10px 25px;
+
+      box-shadow:
+        0 12px 35px rgba(22,70,65,.05);
+    }
+
+    .task {
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 17px 0;
+
+      border-bottom:
+        1px solid #edf3f2;
+    }
+
+    .task:last-child {
+      border-bottom: none;
+    }
+
+    .task-icon {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 14px;
+
+      background: #e8f5f3;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+
+      flex-shrink: 0;
+    }
+
+    .task-info {
+      flex: 1;
+    }
+
+    .task-info strong {
+      display: block;
+
+      color: #163b38;
+
+      margin-bottom: 4px;
+    }
+
+    .task-info span {
+      color: #718480;
+
+      font-size: 12px;
+    }
+
+    .task-status {
+      padding: 6px 11px;
+
+      border-radius: 15px;
+
+      background: #e8f5f3;
+
+      color: #16877d;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       PATIENTS
+    ========================= */
+
+    .patients {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2,1fr);
+
+      gap: 18px;
+    }
+
+    .patient {
+      background: white;
+
+      border:
+        1px solid #e3edeb;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      box-shadow:
+        0 12px 35px rgba(22,70,65,.05);
+
+      transition: .25s;
+    }
+
+    .patient:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 18px 40px rgba(22,70,65,.08);
+    }
+
+    .patient-top {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin-bottom: 15px;
+    }
+
+    .patient-avatar {
+      width: 52px;
+      height: 52px;
+
+      border-radius: 16px;
+
+      background: #e8f5f3;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 25px;
+    }
+
+    .patient h3 {
+      color: #163b38;
+
+      margin: 0 0 4px;
+
+      font-size: 17px;
+    }
+
+    .patient p {
+      color: #718480;
+
+      margin: 0;
+
+      font-size: 12px;
+    }
+
+    .patient-details {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-top: 15px;
+
+      padding-top: 15px;
+
+      border-top:
+        1px solid #edf3f2;
+    }
+
+    .patient-details span {
+      color: #718480;
+
+      font-size: 11px;
+    }
+
+    .patient-details strong {
+      display: block;
+
+      color: #163b38;
+
+      margin-top: 4px;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       REPORTS
+    ========================= */
+
+    .reports {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 18px;
+    }
+
+    .report {
+      background: white;
+
+      border:
+        1px solid #e3edeb;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      box-shadow:
+        0 12px 35px rgba(22,70,65,.05);
+    }
+
+    .report-icon {
+      width: 48px;
+      height: 48px;
+
+      border-radius: 14px;
+
+      background: #e8f5f3;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+
+      margin-bottom: 14px;
+    }
+
+    .report strong {
+      display: block;
+
+      color: #163b38;
+
+      margin-bottom: 6px;
+    }
+
+    .report span {
+      color: #718480;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    .logout {
+      display: flex;
+
+      justify-content: center;
+
+      margin: 35px auto 10px;
+
+      width: fit-content;
+
+      padding: 12px 24px;
+
+      border-radius: 13px;
+
+      border:
+        1px solid #e3edeb;
+
+      background: white;
+
+      color: #c05a5a;
+
+      text-decoration: none;
+
+      font-weight: 700;
+
+      transition: .25s;
+    }
+
+    .logout:hover {
+      background: #c05a5a;
+
+      color: white;
+
+      border-color: #c05a5a;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .dashboard {
+        padding: 30px 5%;
+      }
+
+      .stats {
+        grid-template-columns:
+          repeat(2,1fr);
+      }
+
+      .patients {
+        grid-template-columns: 1fr;
+      }
+
+      .reports {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      .welcome {
+        flex-direction: column-reverse;
+
+        text-align: center;
+
+        align-items: center;
+      }
+
+      .welcome-text h1 {
+        font-size: 24px;
+      }
+
+      .staff-card {
+        padding: 22px;
+      }
+
+      .staff-top {
+        flex-direction: column;
+
+        text-align: center;
+      }
+
+      .staff-info h2 {
+        font-size: 22px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .task {
+        align-items: flex-start;
+      }
+
+      .task-status {
+        display: none;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+  <a href="index.html" class="logo">
+    سند<span>.</span>
+  </a>
+
+  <nav class="nav">
+
+    <a href="index.html">
+      الرئيسية
+    </a>
+
+    <a href="services.html">
+      خدماتنا
+    </a>
+
+    <a href="index.html#how">
+      كيف يعمل سند؟
+    </a>
+
+    <a href="index.html#about">
+      عن سند
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<main class="dashboard">
+
+
+  <!-- WELCOME -->
+
+  <section class="welcome">
+
+    <div class="welcome-text">
+
+      <h1>
+        أهلاً بك في سند 👋
+      </h1>
+
+      <p>
+        من هنا تستطيع متابعة مهامك اليومية
+        وزيارات المسنين المسندة إليك.
+      </p>
+
+    </div>
+
+    <div class="staff-icon">
+      👨‍⚕️
+    </div>
+
+  </section>
+
+
+
+  <!-- STAFF INFORMATION -->
+
+  <section class="staff-card">
+
+    <div class="staff-top">
+
+      <div class="staff-avatar">
+        👨‍⚕️
+      </div>
+
+      <div class="staff-info">
+
+        <h2>
+          الممرض: أحمد محمد
+        </h2>
+
+        <p>
+          حالة الحساب: نشط
+        </p>
+
+        <span class="staff-role">
+          🩺 ممرض صحي
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <span>
+          زيارات اليوم
+        </span>
+
+        <strong>
+          8
+        </strong>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span>
+          المكتملة
+        </span>
+
+        <strong>
+          5
+        </strong>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span>
+          المتبقية
+        </span>
+
+        <strong>
+          3
+        </strong>
+
+      </div>
+
+
+      <div class="stat">
+
+        <span>
+          هذا الشهر
+        </span>
+
+        <strong>
+          96
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- TODAY TASKS -->
+
+  <h2 class="section-title">
+    📅 مهام اليوم
+  </h2>
+
+
+  <section class="tasks">
+
+
+    <div class="task">
+
+      <div class="task-icon">
+        👨‍⚕️
+      </div>
+
+      <div class="task-info">
+
+        <strong>
+          زيارة المريض محمد علي
+        </strong>
+
+        <span>
+          09:00 صباحاً — قياس العلامات الحيوية
+        </span>
+
+      </div>
+
+      <div class="task-status">
+        ✓ مكتملة
+      </div>
+
+    </div>
+
+
+    <div class="task">
+
+      <div class="task-icon">
+        🩺
+      </div>
+
+      <div class="task-info">
+
+        <strong>
+          زيارة المريض علي غلام
+        </strong>
+
+        <span>
+          10:00 صباحاً — متابعة الحالة الصحية
+        </span>
+
+      </div>
+
+      <div class="task-status">
+        ✓ مكتملة
+      </div>
+
+    </div>
+
+
+    <div class="task">
+
+      <div class="task-icon">
+        💊
+      </div>
+
+      <div class="task-info">
+
+        <strong>
+          زيارة المريض أحمد معين
+        </strong>
+
+        <span>
+          11:00 صباحاً — متابعة الأدوية
+        </span>
+
+      </div>
+
+      <div class="task-status">
+        قادمة
+      </div>
+
+    </div>
+
+
+    <div class="task">
+
+      <div class="task-icon">
+        ❤️
+      </div>
+
+      <div class="task-info">
+
+        <strong>
+          زيارة المريض حسين ناصر
+        </strong>
+
+        <span>
+          12:00 ظهراً — فحص ومتابعة
+        </span>
+
+      </div>
+
+      <div class="task-status">
+        قادمة
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- PATIENTS -->
+
+  <h2 class="section-title">
+    👴 المسنون المسندون إليّ
+  </h2>
+
+
+  <section class="patients">
+
+
+    <div class="patient">
+
+      <div class="patient-top">
+
+        <div class="patient-avatar">
+          👴
+        </div>
+
+        <div>
+
+          <h3>
+            محمد علي
+          </h3>
+
+          <p>
+            باقة سند الاعتيادية
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="patient-details">
+
+        <div>
+
+          <span>
+            الزيارة
+          </span>
+
+          <strong>
+            يومية
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            الحالة
+          </span>
+
+          <strong>
+            نشط
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="patient">
+
+      <div class="patient-top">
+
+        <div class="patient-avatar">
+          👴
+        </div>
+
+        <div>
+
+          <h3>
+            علي غلام
+          </h3>
+
+          <p>
+            باقة سند الاعتيادية
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="patient-details">
+
+        <div>
+
+          <span>
+            الزيارة
+          </span>
+
+          <strong>
+            يومية
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            الحالة
+          </span>
+
+          <strong>
+            نشط
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="patient">
+
+      <div class="patient-top">
+
+        <div class="patient-avatar">
+          👴
+        </div>
+
+        <div>
+
+          <h3>
+            أحمد معين
+          </h3>
+
+          <p>
+            باقة سند الاعتيادية
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="patient-details">
+
+        <div>
+
+          <span>
+            الزيارة
+          </span>
+
+          <strong>
+            يومية
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            الحالة
+          </span>
+
+          <strong>
+            نشط
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="patient">
+
+      <div class="patient-top">
+
+        <div class="patient-avatar">
+          👴
+        </div>
+
+        <div>
+
+          <h3>
+            حسين ناصر
+          </h3>
+
+          <p>
+            باقة سند الاعتيادية
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="patient-details">
+
+        <div>
+
+          <span>
+            الزيارة
+          </span>
+
+          <strong>
+            يومية
+          </strong>
+
+        </div>
+
+        <div>
+
+          <span>
+            الحالة
+          </span>
+
+          <strong>
+            نشط
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- REPORTS -->
+
+  <h2 class="section-title">
+    📋 التقارير
+  </h2>
+
+
+  <section class="reports">
+
+
+    <div class="report">
+
+      <div class="report-icon">
+        📝
+      </div>
+
+      <strong>
+        تقرير الزيارة
+      </strong>
+
+      <span>
+        تسجيل تفاصيل الزيارة والملاحظات
+        والحالة الصحية للمسن.
+      </span>
+
+    </div>
+
+
+    <div class="report">
+
+      <div class="report-icon">
+        📊
+      </div>
+
+      <strong>
+        التقارير اليومية
+      </strong>
+
+      <span>
+        مراجعة وإرسال تقارير الزيارات
+        اليومية إلى الإدارة.
+      </span>
+
+    </div>
+
+
+    <div class="report">
+
+      <div class="report-icon">
+        ⚠️
+      </div>
+
+      <strong>
+        الإبلاغ عن حالة طارئة
+      </strong>
+
+      <span>
+        إرسال تنبيه سريع إلى الإدارة
+        عند وجود حالة تستوجب المتابعة.
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- LOGOUT -->
+
+  <a href="login.html" class="logout">
+    تسجيل الخروج
+  </a>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-logo">
+    سند<span>.</span>
+  </div>
+
+  <p>
+    الرعاية المنزلية لكبار السن
+  </p>
+
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
+
+</footer>
+
+
+</body>
+
+</html>
