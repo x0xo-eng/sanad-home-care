@@ -16,6 +16,10 @@
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
+    /* =========================
+       PAGE
+    ========================= */
+
     .page {
       min-height: calc(100vh - 180px);
       padding: 65px 7%;
@@ -26,6 +30,11 @@
 
       overflow: hidden;
     }
+
+
+    /* =========================
+       LOGIN PANEL
+    ========================= */
 
     .panel {
       width: 100%;
@@ -43,6 +52,11 @@
         0 25px 65px rgba(22, 70, 65, .09);
     }
 
+
+    /* =========================
+       HEADER
+    ========================= */
+
     .panel-header {
       text-align: center;
       margin-bottom: 30px;
@@ -57,9 +71,11 @@
       border-radius: 22px;
 
       background: #e8f5f3;
+
       color: #16877d;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -68,19 +84,31 @@
 
     .panel-header h1 {
       color: #163b38;
+
       font-size: 30px;
-      margin-bottom: 8px;
+
+      margin: 0 0 8px;
     }
 
     .lead {
       color: #718480;
+
       font-size: 14px;
+
       line-height: 1.8;
+
       margin: 0;
     }
 
+
+    /* =========================
+       FORM
+    ========================= */
+
     .form-row {
+
       display: flex;
+
       flex-direction: column;
 
       gap: 9px;
@@ -89,8 +117,11 @@
     }
 
     label {
+
       font-weight: 700;
+
       color: #163b38;
+
       font-size: 14px;
     }
 
@@ -135,6 +166,11 @@
       color: #a1b1ae;
     }
 
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
     .actions {
 
       display: flex;
@@ -149,6 +185,7 @@
     }
 
     .forgot {
+
       color: #16877d;
 
       font-size: 13px;
@@ -161,6 +198,11 @@
     .forgot:hover {
       text-decoration: underline;
     }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
 
     .btn-login {
 
@@ -198,6 +240,11 @@
         0 14px 30px rgba(22, 135, 125, .23);
     }
 
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
     .back {
 
       display: flex;
@@ -234,11 +281,13 @@
     .back-icon {
 
       width: 26px;
+
       height: 26px;
 
       display: flex;
 
       align-items: center;
+
       justify-content: center;
 
       border-radius: 8px;
@@ -273,6 +322,11 @@
       color: white;
     }
 
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 700px) {
 
       .page {
@@ -280,13 +334,16 @@
       }
 
       .panel {
+
         padding: 30px 22px;
+
         border-radius: 22px;
       }
 
       .panel-icon {
 
         width: 60px;
+
         height: 60px;
 
         border-radius: 18px;
@@ -310,7 +367,9 @@
       }
 
       .forgot {
+
         text-align: center;
+
         order: 2;
       }
 
@@ -324,7 +383,9 @@
       .back {
         margin-top: 25px;
       }
+
     }
+
 
     @media (max-width: 420px) {
 
@@ -339,6 +400,7 @@
       .panel-header h1 {
         font-size: 24px;
       }
+
     }
 
   </style>
@@ -349,13 +411,16 @@
 <body>
 
 
-  <!-- HEADER -->
+  <!-- =========================
+       HEADER
+  ========================= -->
 
   <header class="header">
 
     <a href="index.html" class="logo">
       سند<span>.</span>
     </a>
+
 
     <nav class="nav">
 
@@ -380,12 +445,16 @@
   </header>
 
 
-  <!-- STAFF LOGIN -->
+  <!-- =========================
+       STAFF LOGIN
+  ========================= -->
 
   <main class="page">
 
     <div class="panel">
 
+
+      <!-- HEADER -->
 
       <div class="panel-header">
 
@@ -404,8 +473,12 @@
       </div>
 
 
+      <!-- FORM -->
+
       <form id="staffLoginForm">
 
+
+        <!-- PHONE -->
 
         <div class="form-row">
 
@@ -424,6 +497,8 @@
         </div>
 
 
+        <!-- PASSWORD -->
+
         <div class="form-row">
 
           <label for="staffPassword">
@@ -440,6 +515,8 @@
 
         </div>
 
+
+        <!-- ACTIONS -->
 
         <div class="actions">
 
@@ -480,7 +557,9 @@
   </main>
 
 
-  <!-- FOOTER -->
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
   <footer>
 
@@ -499,28 +578,26 @@
   </footer>
 
 
-  <!-- LOGIN SCRIPT -->
+  <!-- =========================
+       LOGIN SCRIPT
+  ========================= -->
 
   <script>
 
-    document
-      .getElementById("staffLoginForm")
-      .addEventListener("submit", function(event) {
+    const staffLoginForm =
+      document.getElementById("staffLoginForm");
+
+    staffLoginForm.addEventListener(
+      "submit",
+      function(event) {
 
         event.preventDefault();
 
-        /*
-          حالياً الانتقال تجريبي.
-          لاحقاً سيتم ربط الدخول بقاعدة البيانات
-          والتحقق من صلاحيات الكادر.
+        window.location.href =
+          "staff-dashboard.html";
 
-          بعد تسجيل الدخول:
-          ينتقل المستخدم إلى لوحة تحكم الكادر.
-        */
-
-        window.location.href = "staff-dashboard.html";
-
-      });
+      }
+    );
 
   </script>
 
