@@ -15,40 +15,24 @@
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
-    /* PAGE */
-
     .page {
       min-height: calc(100vh - 180px);
       padding: 65px 7%;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       overflow: hidden;
     }
-
-
-    /* LOGIN PANEL */
 
     .panel {
       width: 100%;
       max-width: 520px;
-
       background: white;
-
       border-radius: 26px;
-
       padding: 40px;
-
       border: 1px solid #e3edeb;
-
-      box-shadow:
-        0 25px 65px rgba(22, 70, 65, .09);
+      box-shadow: 0 25px 65px rgba(22, 70, 65, .09);
     }
-
-
-    /* HEADER */
 
     .panel-header {
       text-align: center;
@@ -58,25 +42,19 @@
     .panel-icon {
       width: 70px;
       height: 70px;
-
       margin: 0 auto 18px;
-
       border-radius: 22px;
-
       background: #e8f5f3;
       color: #16877d;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 32px;
     }
 
     .panel-header h1 {
       color: #163b38;
       font-size: 30px;
-
       margin-bottom: 8px;
     }
 
@@ -84,19 +62,13 @@
       color: #718480;
       font-size: 14px;
       line-height: 1.8;
-
       margin: 0;
     }
-
-
-    /* FORM */
 
     .form-row {
       display: flex;
       flex-direction: column;
-
       gap: 9px;
-
       margin-bottom: 18px;
     }
 
@@ -108,67 +80,42 @@
 
     input[type="tel"],
     input[type="password"] {
-
       padding: 14px 15px;
-
       border-radius: 12px;
-
       border: 1px solid #dfecea;
-
       background: #fbfefe;
-
       color: #163b38;
-
       font-family: 'Cairo', sans-serif;
-
       font-size: 14px;
-
       width: 100%;
-
       box-sizing: border-box;
-
       outline: none;
-
       transition: .25s;
     }
 
     input[type="tel"]:focus,
     input[type="password"]:focus {
-
       border-color: #16877d;
-
       background: white;
-
-      box-shadow:
-        0 0 0 4px rgba(22, 135, 125, .08);
+      box-shadow: 0 0 0 4px rgba(22, 135, 125, .08);
     }
 
     input::placeholder {
       color: #a1b1ae;
     }
 
-
-    /* ACTIONS */
-
     .actions {
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       gap: 15px;
-
       margin-top: 25px;
     }
 
     .forgot {
       color: #16877d;
-
       font-size: 13px;
-
       font-weight: 700;
-
       text-decoration: none;
     }
 
@@ -176,125 +123,69 @@
       text-decoration: underline;
     }
 
-
-    /* LOGIN BUTTON */
-
     .btn-login {
-
       background: #16877d;
-
       color: white;
-
       padding: 13px 25px;
-
       border-radius: 13px;
-
       font-family: 'Cairo', sans-serif;
-
       font-size: 14px;
-
       font-weight: 800;
-
       border: none;
-
       cursor: pointer;
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .18);
-
+      box-shadow: 0 10px 25px rgba(22, 135, 125, .18);
       transition: .3s;
     }
 
     .btn-login:hover {
-
       background: #0f7068;
-
       transform: translateY(-3px);
-
-      box-shadow:
-        0 14px 30px rgba(22, 135, 125, .23);
+      box-shadow: 0 14px 30px rgba(22, 135, 125, .23);
     }
 
-
-    /* BACK BUTTON */
-
     .back {
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       gap: 9px;
-
       width: fit-content;
-
       margin: 30px auto 0;
-
       padding: 10px 17px;
-
       border: 1px solid #d7e8e5;
-
       border-radius: 12px;
-
       background: #f8fcfb;
-
       color: #16877d;
-
       font-size: 12px;
-
       font-weight: 700;
-
       text-decoration: none;
-
       transition: .3s;
     }
 
     .back-icon {
-
       width: 26px;
       height: 26px;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       border-radius: 8px;
-
       background: #e5f3f0;
-
       color: #16877d;
-
       font-size: 16px;
-
       transition: .3s;
     }
 
     .back:hover {
-
       background: #16877d;
-
       color: white;
-
       border-color: #16877d;
-
       transform: translateY(-3px);
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .15);
+      box-shadow: 0 10px 25px rgba(22, 135, 125, .15);
     }
 
     .back:hover .back-icon {
-
       background: rgba(255,255,255,.16);
-
       color: white;
     }
-
-
-    /* MOBILE */
 
     @media (max-width: 700px) {
 
@@ -303,19 +194,14 @@
       }
 
       .panel {
-
         padding: 30px 22px;
-
         border-radius: 22px;
       }
 
       .panel-icon {
-
         width: 60px;
         height: 60px;
-
         border-radius: 18px;
-
         font-size: 28px;
       }
 
@@ -328,11 +214,8 @@
       }
 
       .actions {
-
         flex-direction: column;
-
         align-items: stretch;
-
       }
 
       .forgot {
@@ -341,18 +224,14 @@
       }
 
       .btn-login {
-
         width: 100%;
-
         padding: 14px;
       }
 
       .back {
         margin-top: 25px;
       }
-
     }
-
 
     @media (max-width: 420px) {
 
@@ -367,7 +246,6 @@
       .panel-header h1 {
         font-size: 24px;
       }
-
     }
 
   </style>
@@ -423,7 +301,7 @@
         </div>
 
         <h1>
-          أهلاً بك في سند
+          تسجيل دخول العائلة
         </h1>
 
         <p class="lead">
@@ -534,7 +412,7 @@
   </footer>
 
 
-  <!-- TEMPORARY LOGIN -->
+  <!-- FAMILY LOGIN SCRIPT -->
 
   <script>
 
@@ -544,9 +422,13 @@
 
         event.preventDefault();
 
-        alert(
-          "تسجيل الدخول الحقيقي سيتم تفعيله لاحقاً بعد ربط قاعدة البيانات."
-        );
+        /*
+          حالياً الانتقال تجريبي.
+          لاحقاً نستبدل هذا الجزء بربط قاعدة البيانات
+          والتحقق من رقم الهاتف وكلمة المرور.
+        */
+
+        window.location.href = "family-dashboard.html";
 
       });
 
