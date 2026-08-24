@@ -12,73 +12,62 @@
   <style>
 
     body {
-      background: #f5faf9;
+      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
     /* =========================
        DASHBOARD
     ========================= */
 
-    .dashboard {
-      padding: 45px 7% 80px;
-      max-width: 1400px;
+    .dashboard-page {
+      padding: 55px 7% 80px;
+      max-width: 1200px;
       margin: auto;
-    }
-
-    /* WELCOME */
-
-    .welcome {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-
-      margin-bottom: 30px;
-    }
-
-    .welcome-text span {
-      color: #16877d;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .welcome-text h1 {
-      color: #163b38;
-      font-size: clamp(28px, 4vw, 42px);
-      margin: 5px 0;
-    }
-
-    .welcome-text p {
-      color: #718480;
-      margin: 0;
-      font-size: 14px;
-    }
-
-    .profile-icon {
-      width: 65px;
-      height: 65px;
-
-      border-radius: 20px;
-
-      background: #e4f3f0;
-      color: #16877d;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 30px;
-
-      flex-shrink: 0;
     }
 
 
     /* =========================
-       SUBSCRIPTION CARD
+       WELCOME
+    ========================= */
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .welcome .eyebrow {
+      display: block;
+      color: #16877d;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .welcome h1 {
+      color: #163b38;
+      font-size: clamp(28px, 4vw, 40px);
+      margin: 0 0 8px;
+    }
+
+    .welcome p {
+      color: #718480;
+      font-size: 14px;
+      margin: 0;
+    }
+
+
+    /* =========================
+       SUBSCRIPTION
     ========================= */
 
     .subscription-card {
-      background: linear-gradient(135deg, #16877d, #0d6c65);
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(255,255,255,.10),
+          transparent 28%
+        ),
+        linear-gradient(135deg, #16877d, #0d6c65);
 
       color: white;
 
@@ -87,9 +76,9 @@
       padding: 30px;
 
       box-shadow:
-        0 20px 50px rgba(22, 135, 125, .18);
+        0 25px 60px rgba(22,135,125,.18);
 
-      margin-bottom: 25px;
+      margin-bottom: 40px;
     }
 
     .subscription-top {
@@ -101,57 +90,64 @@
 
     .subscription-label {
       color: #bfe5df;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
     }
 
     .subscription-card h2 {
-      font-size: 30px;
-      margin: 5px 0 10px;
+      font-size: clamp(24px, 4vw, 32px);
+      margin: 5px 0 0;
     }
 
     .subscription-status {
-      background: rgba(255,255,255,.15);
+      background: rgba(255,255,255,.13);
       border: 1px solid rgba(255,255,255,.18);
 
       padding: 8px 14px;
 
       border-radius: 20px;
 
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
 
       white-space: nowrap;
     }
 
-    .subscription-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
 
-      gap: 15px;
+    /* SUBSCRIPTION DATES */
+
+    .subscription-details {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 13px;
 
       margin-top: 25px;
     }
 
-    .subscription-info div {
+    .subscription-detail {
       background: rgba(255,255,255,.09);
 
-      padding: 15px;
+      border: 1px solid rgba(255,255,255,.08);
 
       border-radius: 15px;
+
+      padding: 15px;
     }
 
-    .subscription-info span {
+    .subscription-detail span {
       display: block;
 
       color: #bfe5df;
 
-      font-size: 11px;
+      font-size: 10px;
 
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
-    .subscription-info strong {
+    .subscription-detail strong {
       font-size: 14px;
     }
 
@@ -160,23 +156,26 @@
        SECTION TITLE
     ========================= */
 
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .section-heading {
+      text-align: center;
 
-      margin: 35px 0 18px;
+      margin-bottom: 25px;
     }
 
-    .section-title h2 {
+    .section-heading h2 {
       color: #163b38;
-      font-size: 22px;
-      margin: 0;
+
+      font-size: 25px;
+
+      margin: 0 0 5px;
     }
 
-    .section-title span {
-      color: #80928f;
+    .section-heading p {
+      color: #718480;
+
       font-size: 12px;
+
+      margin: 0;
     }
 
 
@@ -184,221 +183,209 @@
        SERVICES
     ========================= */
 
-    .care-grid {
+    .services-list {
       display: grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        repeat(2, 1fr);
 
-      gap: 17px;
+      gap: 15px;
     }
 
-    .care-card {
+    .service-item {
       background: white;
 
-      border: 1px solid #e2ecea;
+      border: 1px solid #e3edeb;
 
       border-radius: 20px;
 
-      padding: 22px;
+      padding: 20px;
 
-      box-shadow:
-        0 10px 30px rgba(22,70,65,.04);
-
-      transition: .3s;
-    }
-
-    .care-card:hover {
-      transform: translateY(-4px);
-
-      box-shadow:
-        0 15px 35px rgba(22,70,65,.08);
-    }
-
-    .care-icon {
-      width: 50px;
-      height: 50px;
-
-      border-radius: 15px;
-
-      background: #e8f5f3;
-      color: #16877d;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 23px;
-
-      margin-bottom: 15px;
-    }
-
-    .care-card h3 {
-      color: #163b38;
-
-      font-size: 17px;
-
-      margin-bottom: 7px;
-    }
-
-    .care-card p {
-      color: #718480;
-
-      font-size: 12px;
-
-      line-height: 1.8;
-
-      margin: 0;
-    }
-
-
-    /* =========================
-       DAILY CARE
-    ========================= */
-
-    .daily-card {
-      background: white;
-
-      border: 1px solid #e2ecea;
-
-      border-radius: 22px;
-
-      padding: 25px;
-
-      box-shadow:
-        0 10px 30px rgba(22,70,65,.04);
-    }
-
-    .daily-row {
       display: flex;
 
       align-items: center;
 
       gap: 15px;
 
-      padding: 15px 0;
+      transition: .3s ease;
 
-      border-bottom: 1px solid #edf3f1;
+      box-shadow:
+        0 10px 30px rgba(22,70,65,.04);
     }
 
-    .daily-row:last-child {
-      border-bottom: none;
+    .service-item:hover {
+      transform: translateY(-4px);
+
+      border-color: #cce3df;
+
+      box-shadow:
+        0 15px 35px rgba(22,70,65,.08);
     }
 
-    .daily-icon {
-      width: 45px;
-      height: 45px;
 
-      flex-shrink: 0;
+    /* NUMBER */
 
-      border-radius: 13px;
+    .service-number {
+      width: 35px;
+      height: 35px;
 
-      background: #e8f5f3;
-      color: #16877d;
+      border-radius: 11px;
+
+      background: #f0f7f5;
+
+      color: #9aadaa;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
-      font-size: 20px;
-    }
-
-    .daily-info {
-      flex: 1;
-    }
-
-    .daily-info strong {
-      display: block;
-
-      color: #163b38;
-
-      font-size: 14px;
-    }
-
-    .daily-info span {
-      color: #80928f;
-
       font-size: 11px;
+
+      font-weight: 800;
+
+      flex-shrink: 0;
     }
 
-    .care-status {
-      background: #e9f6ee;
 
-      color: #3b9062;
+    /* ICON */
 
-      padding: 6px 10px;
+    .service-icon {
+      width: 50px;
+      height: 50px;
 
       border-radius: 15px;
 
-      font-size: 10px;
+      background: #e8f5f3;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 23px;
+
+      flex-shrink: 0;
+    }
+
+
+    /* SERVICE TEXT */
+
+    .service-text {
+      flex: 1;
+    }
+
+    .service-text h3 {
+      color: #163b38;
+
+      font-size: 15px;
+
+      margin: 0 0 4px;
+    }
+
+    .service-text p {
+      color: #718480;
+
+      font-size: 11px;
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+
+    /* OPTIONAL SERVICE */
+
+    .optional-service {
+      border-color: #eadfbe;
+
+      background: #fffdf8;
+    }
+
+    .optional-badge {
+      background: #f8efd7;
+
+      color: #a17c2e;
+
+      padding: 5px 9px;
+
+      border-radius: 12px;
+
+      font-size: 9px;
 
       font-weight: 800;
+
+      white-space: nowrap;
     }
 
 
     /* =========================
-       BOTTOM CARDS
+       FUTURE SECTIONS
     ========================= */
 
-    .bottom-grid {
+    .dashboard-tools {
       display: grid;
 
       grid-template-columns:
-        1fr 1fr;
+        repeat(3, 1fr);
 
-      gap: 20px;
+      gap: 15px;
 
-      margin-top: 25px;
+      margin-top: 40px;
     }
 
-    .info-card {
+    .tool-card {
       background: white;
 
-      border: 1px solid #e2ecea;
+      border: 1px solid #e3edeb;
 
-      border-radius: 22px;
+      border-radius: 20px;
 
-      padding: 25px;
+      padding: 22px;
+
+      text-align: center;
+
+      transition: .3s;
     }
 
-    .info-card h3 {
-      color: #163b38;
-
-      font-size: 18px;
-
-      margin-bottom: 12px;
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 15px 35px rgba(22,70,65,.07);
     }
 
-    .info-card p {
-      color: #718480;
+    .tool-icon {
+      width: 48px;
+      height: 48px;
 
-      font-size: 13px;
+      margin: 0 auto 12px;
 
-      line-height: 1.9;
-    }
+      border-radius: 14px;
 
-    .contact-btn {
-      display: inline-flex;
+      background: #e8f5f3;
+
+      display: flex;
 
       align-items: center;
+      justify-content: center;
 
-      gap: 8px;
+      font-size: 22px;
+    }
 
-      margin-top: 10px;
+    .tool-card h3 {
+      color: #163b38;
 
-      background: #16877d;
+      font-size: 15px;
 
-      color: white;
+      margin: 0 0 5px;
+    }
 
-      padding: 10px 18px;
+    .tool-card p {
+      color: #80928f;
 
-      border-radius: 11px;
+      font-size: 11px;
 
-      font-size: 12px;
-
-      font-weight: 800;
-
-      text-decoration: none;
+      margin: 0;
     }
 
 
@@ -409,7 +396,7 @@
     .logout-area {
       text-align: center;
 
-      margin-top: 45px;
+      margin-top: 40px;
     }
 
     .logout {
@@ -417,15 +404,28 @@
 
       align-items: center;
 
+      justify-content: center;
+
       gap: 8px;
 
-      color: #a35d5d;
+      color: #9a6666;
+
+      text-decoration: none;
 
       font-size: 12px;
 
       font-weight: 700;
 
-      text-decoration: none;
+      padding: 9px 15px;
+
+      border-radius: 10px;
+
+      transition: .25s;
+    }
+
+    .logout:hover {
+      background: #fff1f1;
+      color: #a34d4d;
     }
 
 
@@ -433,81 +433,81 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 850px) {
+    @media (max-width: 750px) {
 
-      .dashboard {
-        padding: 35px 5% 60px;
-      }
-
-      .welcome {
-        align-items: flex-start;
-      }
-
-      .care-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .bottom-grid {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-
-    @media (max-width: 550px) {
-
-      .dashboard {
-        padding: 28px 5% 50px;
-      }
-
-      .welcome-text h1 {
-        font-size: 28px;
-      }
-
-      .profile-icon {
-        width: 55px;
-        height: 55px;
-
-        font-size: 25px;
-      }
-
-      .subscription-card {
-        padding: 23px;
-
-        border-radius: 22px;
+      .dashboard-page {
+        padding: 40px 5% 60px;
       }
 
       .subscription-top {
         flex-direction: column;
       }
 
+      .subscription-status {
+        align-self: flex-start;
+      }
+
+      .subscription-details {
+        grid-template-columns: 1fr;
+      }
+
+      .services-list {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-tools {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+      .dashboard-page {
+        padding: 30px 5% 50px;
+      }
+
+      .welcome {
+        margin-bottom: 28px;
+      }
+
+      .welcome h1 {
+        font-size: 27px;
+      }
+
+      .subscription-card {
+        padding: 22px;
+
+        border-radius: 22px;
+      }
+
       .subscription-card h2 {
-        font-size: 25px;
+        font-size: 23px;
       }
 
-      .subscription-info {
-        grid-template-columns: 1fr;
-      }
+      .service-item {
+        padding: 16px;
 
-      .care-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .care-card {
-        padding: 19px;
-      }
-
-      .daily-card {
-        padding: 18px;
-      }
-
-      .daily-row {
         gap: 10px;
       }
 
-      .care-status {
-        font-size: 9px;
-        padding: 5px 8px;
+      .service-number {
+        width: 30px;
+        height: 30px;
+      }
+
+      .service-icon {
+        width: 45px;
+        height: 45px;
+      }
+
+      .service-text h3 {
+        font-size: 14px;
+      }
+
+      .service-text p {
+        font-size: 10px;
       }
 
     }
@@ -558,41 +558,35 @@
      DASHBOARD
 ========================= -->
 
-<main class="dashboard">
+<main class="dashboard-page">
 
 
   <!-- WELCOME -->
 
   <section class="welcome">
 
-    <div class="welcome-text">
+    <span class="eyebrow">
+      لوحة الرعاية الشخصية
+    </span>
 
-      <span>
-        لوحة الرعاية الشخصية
-      </span>
+    <h1>
+      أهلاً بك، محمد 👋
+    </h1>
 
-      <h1>
-        أهلاً بك، محمد 👋
-      </h1>
-
-      <p>
-        نتمنى لك يوماً هادئاً وصحياً مع سند.
-      </p>
-
-    </div>
-
-
-    <div class="profile-icon">
-      👴
-    </div>
+    <p>
+      كل ما يتعلق برعايتك واشتراكك في سند أمامك.
+    </p>
 
   </section>
 
 
 
-  <!-- SUBSCRIPTION -->
+  <!-- =========================
+       SUBSCRIPTION
+  ========================= -->
 
   <section class="subscription-card">
+
 
     <div class="subscription-top">
 
@@ -603,334 +597,372 @@
         </span>
 
         <h2>
-          باقة سند الاعتيادية
+          🟢 باقة سند الاعتيادية
         </h2>
 
       </div>
 
 
-      <span class="subscription-status">
+      <span
+        class="subscription-status"
+        id="subscriptionStatus">
         ● الاشتراك نشط
       </span>
 
     </div>
 
 
-    <div class="subscription-info">
 
-      <div>
+    <div class="subscription-details">
+
+
+      <div class="subscription-detail">
 
         <span>
           تاريخ بداية الاشتراك
         </span>
 
-        <strong>
+        <strong id="startDate">
           01 / 08 / 2026
         </strong>
 
       </div>
 
 
-      <div>
+      <div class="subscription-detail">
 
         <span>
           تاريخ انتهاء الاشتراك
         </span>
 
-        <strong>
+        <strong id="endDate">
           31 / 08 / 2026
         </strong>
 
       </div>
 
+
+      <div class="subscription-detail">
+
+        <span>
+          المتبقي على انتهاء الاشتراك
+        </span>
+
+        <strong id="daysRemaining">
+          جاري الحساب...
+        </strong>
+
+      </div>
+
+
     </div>
 
   </section>
 
 
 
-  <!-- CARE SERVICES -->
+  <!-- =========================
+       SERVICES
+  ========================= -->
 
-  <div class="section-title">
+  <section>
 
-    <h2>
-      الرعاية والخدمات المشمولة
-    </h2>
+    <div class="section-heading">
 
-    <span>
-      حسب باقتك الحالية
-    </span>
-
-  </div>
-
-
-  <section class="care-grid">
-
-
-    <div class="care-card">
-
-      <div class="care-icon">
-        👨‍⚕️
-      </div>
-
-      <h3>
-        زيارة الممرض
-      </h3>
+      <h2>
+        الرعاية الخاصة بك
+      </h2>
 
       <p>
-        زيارة تمريضية يومية لمتابعة الحالة الصحية وتقديم الرعاية اللازمة.
+        الخدمات المشمولة ضمن باقة سند الاعتيادية
       </p>
 
     </div>
 
 
-    <div class="care-card">
 
-      <div class="care-icon">
-        🩺
+    <div class="services-list">
+
+
+      <!-- 01 -->
+
+      <div class="service-item">
+
+        <div class="service-number">
+          01
+        </div>
+
+        <div class="service-icon">
+          👨‍⚕️
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            زيارة الممرض الصحي
+          </h3>
+
+          <p>
+            مرة واحدة يومياً
+          </p>
+
+        </div>
+
       </div>
 
-      <h3>
-        متابعة الطبيب المقيم
-      </h3>
-
-      <p>
-        زيارة الطبيب المقيم حسب جدول الرعاية الخاص بالباقة.
-      </p>
-
-    </div>
 
 
-    <div class="care-card">
+      <!-- 02 -->
 
-      <div class="care-icon">
-        👨‍⚕️
+      <div class="service-item">
+
+        <div class="service-number">
+          02
+        </div>
+
+        <div class="service-icon">
+          🩺
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            زيارة الطبيب المقيم
+          </h3>
+
+          <p>
+            مرة واحدة كل أسبوع
+          </p>
+
+        </div>
+
       </div>
 
-      <h3>
-        الطبيب الأخصائي
-      </h3>
-
-      <p>
-        متابعة طبية من الطبيب الأخصائي وفق الخدمات المشمولة بالاشتراك.
-      </p>
-
-    </div>
 
 
-    <div class="care-card">
+      <!-- 03 -->
 
-      <div class="care-icon">
-        🛁
+      <div class="service-item">
+
+        <div class="service-number">
+          03
+        </div>
+
+        <div class="service-icon">
+          👨‍⚕️
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            زيارة الطبيب الاختصاص
+          </h3>
+
+          <p>
+            مرة واحدة كل شهر
+          </p>
+
+        </div>
+
       </div>
 
-      <h3>
-        العناية الشخصية
-      </h3>
-
-      <p>
-        مساعدة المسن في العناية الشخصية والاستحمام حسب الباقة.
-      </p>
-
-    </div>
 
 
-    <div class="care-card">
+      <!-- 04 -->
 
-      <div class="care-icon">
-        🩸
+      <div class="service-item">
+
+        <div class="service-number">
+          04
+        </div>
+
+        <div class="service-icon">
+          🧪
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            التحاليل الطبية
+          </h3>
+
+          <p>
+            صورة الدم + وظائف الكلى — مرة واحدة كل شهر
+          </p>
+
+        </div>
+
       </div>
 
-      <h3>
-        قياس المؤشرات الحيوية
-      </h3>
-
-      <p>
-        متابعة ضغط الدم وسكر الدم ضمن الزيارات التمريضية.
-      </p>
-
-    </div>
 
 
-    <div class="care-card">
+      <!-- 05 -->
 
-      <div class="care-icon">
-        🧪
+      <div class="service-item">
+
+        <div class="service-number">
+          05
+        </div>
+
+        <div class="service-icon">
+          🚗
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            الخروج للترفيه
+          </h3>
+
+          <p>
+            مع مرافق خاص — مرة كل شهر
+          </p>
+
+        </div>
+
       </div>
 
-      <h3>
-        الفحوصات المختبرية
-      </h3>
 
-      <p>
-        الفحوصات المشمولة ضمن خطة الرعاية الخاصة بالمشترك.
-      </p>
+
+      <!-- 06 -->
+
+      <div class="service-item">
+
+        <div class="service-number">
+          06
+        </div>
+
+        <div class="service-icon">
+          📋
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            التقارير والمتابعة
+          </h3>
+
+          <p>
+            تقارير يومية وأسبوعية وشهرية للمسن وأحد ذويه
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- 07 OPTIONAL -->
+
+      <div class="service-item optional-service">
+
+        <div class="service-number">
+          07
+        </div>
+
+        <div class="service-icon">
+          🛁
+        </div>
+
+        <div class="service-text">
+
+          <h3>
+            المعين الخاص
+          </h3>
+
+          <p>
+            للاستحمام والمساعدة في النظافة الشخصية — مرة كل أسبوع
+          </p>
+
+        </div>
+
+        <span class="optional-badge">
+          اختياري
+        </span>
+
+      </div>
+
 
     </div>
-
 
   </section>
 
 
 
-  <!-- DAILY CARE -->
+  <!-- =========================
+       TOOLS
+  ========================= -->
 
-  <div class="section-title">
+  <section>
 
-    <h2>
-      متابعة اليوم
-    </h2>
+    <div class="section-heading" style="margin-top:45px;">
 
-    <span>
-      اليوم
-    </span>
-
-  </div>
-
-
-  <section class="daily-card">
-
-
-    <div class="daily-row">
-
-      <div class="daily-icon">
-        💊
-      </div>
-
-      <div class="daily-info">
-
-        <strong>
-          متابعة الأدوية
-        </strong>
-
-        <span>
-          حسب الجدول الطبي للمسن
-        </span>
-
-      </div>
-
-      <span class="care-status">
-        ضمن الرعاية
-      </span>
-
-    </div>
-
-
-    <div class="daily-row">
-
-      <div class="daily-icon">
-        🩺
-      </div>
-
-      <div class="daily-info">
-
-        <strong>
-          قياس ضغط الدم
-        </strong>
-
-        <span>
-          ضمن الزيارة التمريضية
-        </span>
-
-      </div>
-
-      <span class="care-status">
-        ضمن الرعاية
-      </span>
-
-    </div>
-
-
-    <div class="daily-row">
-
-      <div class="daily-icon">
-        🩸
-      </div>
-
-      <div class="daily-info">
-
-        <strong>
-          قياس سكر الدم
-        </strong>
-
-        <span>
-          ضمن الزيارة التمريضية
-        </span>
-
-      </div>
-
-      <span class="care-status">
-        ضمن الرعاية
-      </span>
-
-    </div>
-
-
-    <div class="daily-row">
-
-      <div class="daily-icon">
-        🏃
-      </div>
-
-      <div class="daily-info">
-
-        <strong>
-          النشاط والحركة
-        </strong>
-
-        <span>
-          نشاط خفيف حسب حالة المسن
-        </span>
-
-      </div>
-
-      <span class="care-status">
-        ضمن الرعاية
-      </span>
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- BOTTOM -->
-
-  <section class="bottom-grid">
-
-
-    <div class="info-card">
-
-      <h3>
-        📋 ملف الرعاية
-      </h3>
+      <h2>
+        خدماتك الرقمية
+      </h2>
 
       <p>
-        يمكن لاحقاً عرض التقارير اليومية والأسبوعية والشهرية
-        وسجل الزيارات والملاحظات الطبية الخاصة بك هنا.
+        ستتوفر هذه الأقسام ضمن نظام سند
       </p>
 
     </div>
 
 
-    <div class="info-card">
+    <div class="dashboard-tools">
 
-      <h3>
-        📞 التواصل مع سند
-      </h3>
 
-      <p>
-        إذا كنت بحاجة إلى مساعدة أو لديك استفسار حول الرعاية،
-        يمكنك التواصل مع فريق سند.
-      </p>
+      <div class="tool-card">
 
-      <a href="#" class="contact-btn">
-        تواصل مع سند
-      </a>
+        <div class="tool-icon">
+          📊
+        </div>
+
+        <h3>
+          تقارير الرعاية
+        </h3>
+
+        <p>
+          التقارير اليومية والأسبوعية والشهرية
+        </p>
+
+      </div>
+
+
+      <div class="tool-card">
+
+        <div class="tool-icon">
+          📅
+        </div>
+
+        <h3>
+          مواعيد الرعاية
+        </h3>
+
+        <p>
+          معرفة الزيارات والمواعيد القادمة
+        </p>
+
+      </div>
+
+
+      <div class="tool-card">
+
+        <div class="tool-icon">
+          📞
+        </div>
+
+        <h3>
+          التواصل مع سند
+        </h3>
+
+        <p>
+          التواصل مع فريق الرعاية عند الحاجة
+        </p>
+
+      </div>
+
 
     </div>
-
 
   </section>
 
@@ -951,7 +983,9 @@
 
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -968,6 +1002,115 @@
   </small>
 
 </footer>
+
+
+
+<!-- =========================
+     SUBSCRIPTION COUNTER
+========================= -->
+
+<script>
+
+  /*
+    تاريخ انتهاء الاشتراك
+    حالياً تجريبي.
+    لاحقاً سيأتي هذا التاريخ من قاعدة البيانات.
+  */
+
+  const subscriptionEndDate =
+    new Date("2026-08-31T23:59:59");
+
+
+  function calculateRemainingDays() {
+
+    const now = new Date();
+
+    const difference =
+      subscriptionEndDate - now;
+
+
+    const days =
+      Math.ceil(
+        difference /
+        (1000 * 60 * 60 * 24)
+      );
+
+
+    const remainingElement =
+      document.getElementById(
+        "daysRemaining"
+      );
+
+    const statusElement =
+      document.getElementById(
+        "subscriptionStatus"
+      );
+
+
+    /* انتهى الاشتراك */
+
+    if (days <= 0) {
+
+      remainingElement.textContent =
+        "انتهى الاشتراك";
+
+      statusElement.textContent =
+        "● الاشتراك منتهي";
+
+      statusElement.style.background =
+        "rgba(180,60,60,.25)";
+
+      return;
+    }
+
+
+    /* يوم واحد */
+
+    if (days === 1) {
+
+      remainingElement.textContent =
+        "متبقي يوم واحد";
+
+    }
+
+    /* يومين */
+
+    else if (days === 2) {
+
+      remainingElement.textContent =
+        "متبقي يومان";
+
+    }
+
+    /* أكثر */
+
+    else {
+
+      remainingElement.textContent =
+        "متبقي " + days + " أيام";
+
+    }
+
+
+    /* الاشتراك قريب من الانتهاء */
+
+    if (days <= 7) {
+
+      remainingElement.style.color =
+        "#ffe4a8";
+
+      statusElement.textContent =
+        "● الاشتراك يقترب من الانتهاء";
+
+    }
+
+  }
+
+
+  calculateRemainingDays();
+
+
+</script>
 
 
 </body>
