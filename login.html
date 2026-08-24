@@ -10,42 +10,50 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+
     body {
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
+    /* LOGIN PAGE */
+
     .login-page {
       min-height: calc(100vh - 180px);
-      padding: 60px 7%;
+      padding: 70px 7%;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
     }
 
     .login-container {
       width: 100%;
-      max-width: 850px;
+      max-width: 900px;
       background: white;
-      border-radius: 22px;
-      padding: 35px;
-      box-shadow: 0 20px 60px rgba(22, 70, 65, 0.08);
+      border-radius: 28px;
+      padding: 45px;
+      box-shadow: 0 25px 70px rgba(22, 70, 65, 0.09);
       border: 1px solid #e3edeb;
     }
 
     .login-header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 38px;
+    }
+
+    .login-header .eyebrow {
+      margin-bottom: 8px;
     }
 
     .login-header h1 {
       color: #163b38;
-      font-size: 30px;
+      font-size: clamp(30px, 4vw, 40px);
       margin-bottom: 8px;
     }
 
     .login-header p {
       color: #718480;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .login-options {
@@ -60,78 +68,198 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      min-height: 190px;
-      padding: 25px 15px;
-      border: 2px solid #e3edeb;
-      border-radius: 18px;
+
+      min-height: 210px;
+      padding: 28px 18px;
+
+      border: 1.5px solid #e3edeb;
+      border-radius: 22px;
+
       text-decoration: none;
       background: #fbfefe;
-      transition: 0.25s ease;
+
+      transition: .3s ease;
     }
 
     .login-option:hover {
       border-color: #16877d;
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(22, 135, 125, 0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(22, 135, 125, .12);
     }
 
     .login-icon {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+
+      border-radius: 22px;
+
       background: #e8f5f3;
+      color: #16877d;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
-      margin-bottom: 18px;
+
+      font-size: 32px;
+
+      margin-bottom: 20px;
     }
 
     .login-option h2 {
       color: #163b38;
-      font-size: 19px;
-      margin: 0 0 8px;
+      font-size: 20px;
+      margin: 0 0 7px;
     }
 
     .login-option p {
       color: #718480;
-      font-size: 14px;
+      font-size: 13px;
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
+
+    /* BACK TO HOME BUTTON */
+
     .back-home {
-      display: block;
-      width: fit-content;
-      margin: 30px auto 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      margin: 32px auto 0;
+      padding: 11px 20px;
+
+      border: 1px solid #d7e8e5;
+      border-radius: 13px;
+
+      background: #f8fcfb;
       color: #16877d;
-      text-decoration: none;
+
+      font-size: 13px;
       font-weight: 700;
+
+      box-shadow: 0 6px 18px rgba(22, 135, 125, .06);
+
+      transition: .3s ease;
     }
 
     .back-home:hover {
-      text-decoration: underline;
+      background: #16877d;
+      color: white;
+      border-color: #16877d;
+
+      transform: translateY(-3px);
+
+      box-shadow: 0 10px 25px rgba(22, 135, 125, .15);
     }
 
-    @media (max-width: 750px) {
-      .login-options {
-        grid-template-columns: 1fr;
+    .back-icon {
+      width: 27px;
+      height: 27px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background: #e5f3f0;
+      color: #16877d;
+
+      font-size: 17px;
+
+      transition: .3s ease;
+    }
+
+    .back-home:hover .back-icon {
+      background: rgba(255,255,255,.16);
+      color: white;
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .login-page {
+        padding: 45px 5%;
       }
 
       .login-container {
-        padding: 25px 18px;
+        padding: 30px 20px;
+        border-radius: 22px;
       }
+
+      .login-options {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .login-option {
+        min-height: 150px;
+        padding: 22px 15px;
+      }
+
+      .login-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        font-size: 27px;
+        margin-bottom: 12px;
+      }
+
+      .login-option h2 {
+        font-size: 18px;
+      }
+
+      .login-option p {
+        font-size: 12px;
+      }
+
+      .back-home {
+        margin-top: 28px;
+        padding: 10px 17px;
+        font-size: 12px;
+      }
+
+    }
+
+
+    @media (max-width: 520px) {
 
       .login-page {
         padding: 35px 5%;
       }
+
+      .login-header {
+        margin-bottom: 28px;
+      }
+
+      .login-header h1 {
+        font-size: 28px;
+      }
+
+      .login-header p {
+        font-size: 13px;
+      }
+
+      .login-option {
+        min-height: 140px;
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- Header -->
+
+  <!-- HEADER -->
+
   <header class="header">
 
     <a href="index.html" class="logo">
@@ -139,30 +267,47 @@
     </a>
 
     <nav class="nav">
-      <a href="index.html">الرئيسية</a>
-      <a href="services.html">خدماتنا</a>
-      <a href="index.html#how">كيف يعمل سند؟</a>
-      <a href="index.html#about">عن سند</a>
-    </nav>
 
-    <a href="login.html" class="login">
-      تسجيل الدخول
-    </a>
+      <a href="index.html">
+        الرئيسية
+      </a>
+
+      <a href="services.html">
+        خدماتنا
+      </a>
+
+      <a href="how.html">
+        كيف يعمل سند؟
+      </a>
+
+      <a href="about.html">
+        عن سند
+      </a>
+
+    </nav>
 
   </header>
 
 
-  <!-- Login Page -->
+  <!-- LOGIN -->
+
   <main class="login-page">
 
     <div class="login-container">
 
+
       <div class="login-header">
 
-        <h1>اختر نوع الدخول</h1>
+        <span class="eyebrow">
+          مرحباً بك في سند
+        </span>
+
+        <h1>
+          اختر نوع الدخول
+        </h1>
 
         <p>
-          يرجى اختيار نوع الحساب للدخول إلى منصة سند
+          اختر الحساب المناسب للمتابعة
         </p>
 
       </div>
@@ -171,7 +316,8 @@
       <div class="login-options">
 
 
-        <!-- Elder -->
+        <!-- ELDER -->
+
         <a href="elder-login.html" class="login-option">
 
           <div class="login-icon">
@@ -179,17 +325,18 @@
           </div>
 
           <h2>
-            تسجيل دخول المسن
+            المسن
           </h2>
 
           <p>
-            الدخول إلى حساب المسن ومعلومات الرعاية
+            الوصول إلى معلومات الرعاية والمتابعة
           </p>
 
         </a>
 
 
-        <!-- Family -->
+        <!-- FAMILY -->
+
         <a href="family-login.html" class="login-option">
 
           <div class="login-icon">
@@ -197,17 +344,18 @@
           </div>
 
           <h2>
-            تسجيل دخول ذوي المسن
+            العائلة
           </h2>
 
           <p>
-            متابعة حالة المسن والتواصل مع فريق سند
+            متابعة حالة المسن والتواصل مع سند
           </p>
 
         </a>
 
 
-        <!-- Staff -->
+        <!-- STAFF -->
+
         <a href="staff-login.html" class="login-option">
 
           <div class="login-icon">
@@ -215,10 +363,11 @@
           </div>
 
           <h2>
-            تسجيل دخول الكادر
+            الكادر
           </h2>
 
-          <p>الدخول إلى مهام العمل وجداول الزيارات
+          <p>
+            إدارة المهام والزيارات اليومية
           </p>
 
         </a>
@@ -227,16 +376,28 @@
       </div>
 
 
+      <!-- BACK TO HOME -->
+
       <a href="index.html" class="back-home">
-        ← العودة إلى الصفحة الرئيسية
+
+        <span class="back-icon">
+          ⌂
+        </span>
+
+        <span>
+          العودة إلى الرئيسية
+        </span>
+
       </a>
+
 
     </div>
 
   </main>
 
 
-  <!-- Footer -->
+  <!-- FOOTER -->
+
   <footer>
 
     <div class="footer-logo">
@@ -252,6 +413,7 @@
     </small>
 
   </footer>
+
 
 </body>
 
