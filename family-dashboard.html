@@ -6,306 +6,344 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>دخول العائلة | سند</title>
+  <title>لوحة العائلة | سند</title>
 
   <link rel="stylesheet" href="style.css">
 
   <style>
 
     body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
+      background: #f7fbfa;
     }
 
     /* =========================
-       PAGE
+       DASHBOARD
     ========================= */
 
-    .page {
-      min-height: calc(100vh - 180px);
-      padding: 65px 7%;
+    .dashboard {
+      padding: 45px 7% 80px;
+      max-width: 1250px;
+      margin: auto;
+    }
 
+
+    /* =========================
+       WELCOME
+    ========================= */
+
+    .welcome {
+      background: linear-gradient(135deg, #16877d, #0f7068);
+      color: white;
+      border-radius: 28px;
+      padding: 32px;
+      margin-bottom: 25px;
+      box-shadow: 0 20px 50px rgba(22,135,125,.18);
+    }
+
+    .welcome-top {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-
-      overflow: hidden;
+      gap: 20px;
     }
 
-
-    /* =========================
-       LOGIN PANEL
-    ========================= */
-
-    .panel {
-      width: 100%;
-      max-width: 520px;
-
-      background: white;
-
-      border-radius: 26px;
-
-      padding: 40px;
-
-      border: 1px solid #e3edeb;
-
-      box-shadow:
-        0 25px 65px rgba(22, 70, 65, .09);
+    .welcome small {
+      color: #c8e8e4;
+      font-size: 13px;
     }
 
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .panel-header {
-      text-align: center;
-      margin-bottom: 30px;
+    .welcome h1 {
+      margin: 5px 0 8px;
+      font-size: 30px;
     }
 
-    .panel-icon {
+    .welcome p {
+      margin: 0;
+      color: #d7eeeb;
+      font-size: 14px;
+    }
+
+    .family-icon {
       width: 70px;
       height: 70px;
-
-      margin: 0 auto 18px;
-
       border-radius: 22px;
-
-      background: #e8f5f3;
-      color: #16877d;
-
+      background: rgba(255,255,255,.13);
       display: flex;
       align-items: center;
       justify-content: center;
-
-      font-size: 32px;
+      font-size: 34px;
+      flex-shrink: 0;
     }
 
-    .panel-header h1 {
+
+    /* =========================
+       PATIENT CARD
+    ========================= */
+
+    .patient-card {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 15px 40px rgba(22,70,65,.06);
+    }
+
+    .patient-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .patient-avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 19px;
+      background: #e8f5f3;
+      color: #16877d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 29px;
+    }
+
+    .patient-header h2 {
       color: #163b38;
-      font-size: 30px;
-
-      margin-bottom: 8px;
+      margin: 0 0 3px;
+      font-size: 22px;
     }
 
-    .lead {
-      color: #718480;
-      font-size: 14px;
-      line-height: 1.8;
+    .patient-header p {
+      margin: 0;
+      color: #82938f;
+      font-size: 13px;
+    }
 
+
+    /* =========================
+       SUBSCRIPTION
+    ========================= */
+
+    .subscription {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .info-box {
+      background: #f8fbfa;
+      border: 1px solid #e5efed;
+      border-radius: 17px;
+      padding: 18px;
+    }
+
+    .info-box span {
+      display: block;
+      color: #849693;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    .info-box strong {
+      display: block;
+      color: #163b38;
+      font-size: 15px;
+    }
+
+    .active {
+      color: #16877d !important;
+    }
+
+
+    /* =========================
+       REMAINING DAYS
+    ========================= */
+
+    .remaining {
+      margin-top: 18px;
+      background: #eaf6f3;
+      border-radius: 17px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .remaining-text strong {
+      color: #163b38;
+      font-size: 14px;
+    }
+
+    .remaining-text p {
+      color: #718480;
+      font-size: 11px;
+      margin: 3px 0 0;
+    }
+
+    .days {
+      color: #16877d;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+
+    /* =========================
+       SECTION TITLE
+    ========================= */
+
+    .section-title {
+      margin: 35px 0 18px;
+    }
+
+    .section-title h2 {
+      color: #163b38;
+      font-size: 23px;
+      margin: 0 0 4px;
+    }
+
+    .section-title p {
+      color: #7b8d89;
+      font-size: 13px;
       margin: 0;
     }
 
 
     /* =========================
-       FORM
+       SERVICES
     ========================= */
 
-    .form-row {
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .service {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 20px;
+      padding: 20px;
       display: flex;
-      flex-direction: column;
-
-      gap: 9px;
-
-      margin-bottom: 18px;
-    }
-
-    label {
-      font-weight: 700;
-      color: #163b38;
-      font-size: 14px;
-    }
-
-    input[type="tel"],
-    input[type="password"] {
-
-      padding: 14px 15px;
-
-      border-radius: 12px;
-
-      border: 1px solid #dfecea;
-
-      background: #fbfefe;
-
-      color: #163b38;
-
-      font-family: 'Cairo', sans-serif;
-
-      font-size: 14px;
-
-      width: 100%;
-
-      box-sizing: border-box;
-
-      outline: none;
-
+      align-items: flex-start;
+      gap: 15px;
+      box-shadow: 0 10px 30px rgba(22,70,65,.04);
       transition: .25s;
     }
 
-    input[type="tel"]:focus,
-    input[type="password"]:focus {
-
-      border-color: #16877d;
-
-      background: white;
-
-      box-shadow:
-        0 0 0 4px rgba(22, 135, 125, .08);
+    .service:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(22,70,65,.08);
     }
 
-    input::placeholder {
-      color: #a1b1ae;
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #e8f5f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .service-number {
+      color: #a0b1ae;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .service h3 {
+      color: #163b38;
+      font-size: 15px;
+      margin: 0 0 4px;
+    }
+
+    .service p {
+      color: #718480;
+      font-size: 11px;
+      line-height: 1.7;
+      margin: 0;
     }
 
 
     /* =========================
-       ACTIONS
+       QUICK ACTIONS
     ========================= */
 
-    .actions {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
-
-      margin-top: 25px;
     }
 
-    .forgot {
-      color: #16877d;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
+    .quick {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 20px;
+      padding: 23px;
       text-decoration: none;
+      text-align: center;
+      transition: .25s;
     }
 
-    .forgot:hover {
-      text-decoration: underline;
-    }
-
-
-    /* =========================
-       LOGIN BUTTON
-    ========================= */
-
-    .btn-login {
-
-      background: #16877d;
-
-      color: white;
-
-      padding: 13px 25px;
-
-      border-radius: 13px;
-
-      font-family: 'Cairo', sans-serif;
-
-      font-size: 14px;
-
-      font-weight: 800;
-
-      border: none;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .18);
-
-      transition: .3s;
-    }
-
-    .btn-login:hover {
-
-      background: #0f7068;
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 14px 30px rgba(22, 135, 125, .23);
-    }
-
-
-    /* =========================
-       BACK BUTTON
-    ========================= */
-
-    .back {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 9px;
-
-      width: fit-content;
-
-      margin: 30px auto 0;
-
-      padding: 10px 17px;
-
-      border: 1px solid #d7e8e5;
-
-      border-radius: 12px;
-
-      background: #f8fcfb;
-
-      color: #16877d;
-
-      font-size: 12px;
-
-      font-weight: 700;
-
-      text-decoration: none;
-
-      transition: .3s;
-    }
-
-    .back-icon {
-
-      width: 26px;
-      height: 26px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: #e5f3f0;
-
-      color: #16877d;
-
-      font-size: 16px;
-
-      transition: .3s;
-    }
-
-    .back:hover {
-
-      background: #16877d;
-
-      color: white;
-
+    .quick:hover {
+      transform: translateY(-4px);
       border-color: #16877d;
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .15);
+      box-shadow: 0 15px 35px rgba(22,135,125,.08);
     }
 
-    .back:hover .back-icon {
+    .quick-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
 
-      background: rgba(255,255,255,.16);
+    .quick strong {
+      display: block;
+      color: #163b38;
+      font-size: 14px;
+    }
 
-      color: white;
+    .quick span {
+      display: block;
+      color: #849693;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    .logout-area {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .logout {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 11px 22px;
+      border-radius: 13px;
+      background: white;
+      border: 1px solid #eadfdf;
+      color: #9a5d5d;
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .logout:hover {
+      background: #fff5f5;
+      border-color: #d9bcbc;
+      transform: translateY(-2px);
     }
 
 
@@ -313,76 +351,70 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 700px) {
+    @media (max-width: 800px) {
 
-      .page {
-        padding: 40px 5%;
+      .dashboard {
+        padding: 30px 5% 60px;
       }
 
-      .panel {
-
-        padding: 30px 22px;
-
+      .welcome {
+        padding: 25px;
         border-radius: 22px;
       }
 
-      .panel-icon {
-
-        width: 60px;
-        height: 60px;
-
-        border-radius: 18px;
-
-        font-size: 28px;
+      .welcome h1 {
+        font-size: 24px;
       }
 
-      .panel-header h1 {
+      .family-icon {
+        width: 58px;
+        height: 58px;
         font-size: 27px;
       }
 
-      .lead {
-        font-size: 13px;
+      .subscription {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .actions {
-
-        flex-direction: column;
-
-        align-items: stretch;
-
+      .services-grid {
+        grid-template-columns: 1fr;
       }
 
-      .forgot {
-        text-align: center;
-        order: 2;
-      }
-
-      .btn-login {
-
-        width: 100%;
-
-        padding: 14px;
-      }
-
-      .back {
-        margin-top: 25px;
+      .quick-grid {
+        grid-template-columns: 1fr;
       }
 
     }
 
 
-    @media (max-width: 420px) {
+    @media (max-width: 520px) {
 
-      .page {
-        padding: 30px 5%;
+      .welcome-top {
+        align-items: flex-start;
       }
 
-      .panel {
-        padding: 25px 18px;
+      .welcome p {
+        font-size: 12px;
       }
 
-      .panel-header h1 {
-        font-size: 24px;
+      .subscription {
+        grid-template-columns: 1fr;
+      }
+
+      .remaining {
+        align-items: flex-start;
+      }
+
+      .days {
+        font-size: 21px;
+      }
+
+      .patient-card {
+        padding: 20px;
+      }
+
+      .section-title h2 {
+        font-size: 20px;
       }
 
     }
@@ -405,199 +437,6 @@
       سند<span>.</span>
     </a>
 
-
     <nav class="nav">
 
-      <a href="index.html">
-        الرئيسية
-      </a>
-
-      <a href="services.html">
-        خدماتنا
-      </a>
-
-      <a href="index.html#how">
-        كيف يعمل سند؟
-      </a>
-
-      <a href="index.html#about">
-        عن سند
-      </a>
-
-    </nav>
-
-  </header>
-
-
-
-  <!-- =========================
-       FAMILY LOGIN
-  ========================= -->
-
-  <main class="page">
-
-    <div class="panel">
-
-
-      <!-- HEADER -->
-
-      <div class="panel-header">
-
-        <div class="panel-icon">
-          👨‍👩‍👦
-        </div>
-
-        <h1>
-          أهلاً بك في سند
-        </h1>
-
-        <p class="lead">
-          سجل الدخول لمتابعة حالة المسن والتواصل مع فريق سند.
-        </p>
-
-      </div>
-
-
-
-      <!-- FORM -->
-
-      <form id="familyLoginForm">
-
-
-        <!-- PHONE -->
-
-        <div class="form-row">
-
-          <label for="familyPhone">
-            رقم الهاتف
-          </label>
-
-          <input
-            id="familyPhone"
-            type="tel"
-            placeholder="أدخل رقم الهاتف"
-            autocomplete="tel"
-            required
-          >
-
-        </div>
-
-
-
-        <!-- PASSWORD -->
-
-        <div class="form-row">
-
-          <label for="familyPassword">
-            كلمة المرور
-          </label>
-
-          <input
-            id="familyPassword"
-            type="password"
-            placeholder="أدخل كلمة المرور"
-            autocomplete="current-password"
-            required
-          >
-
-        </div>
-
-
-
-        <!-- ACTIONS -->
-
-        <div class="actions">
-
-          <a href="#" class="forgot">
-            هل نسيت كلمة المرور؟
-          </a>
-
-
-          <button
-            type="submit"
-            class="btn-login"
-          >
-            تسجيل الدخول
-          </button>
-
-        </div>
-
-
-      </form>
-
-
-
-      <!-- BACK -->
-
-      <a href="login.html" class="back">
-
-        <span class="back-icon">
-          ←
-        </span>
-
-        <span>
-          العودة لاختيار نوع الحساب
-        </span>
-
-      </a>
-
-
-    </div>
-
-  </main>
-
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="footer-logo">
-      سند<span>.</span>
-    </div>
-
-    <p>
-      الرعاية المنزلية لكبار السن
-    </p>
-
-    <small>
-      © 2026 سند — جميع الحقوق محفوظة
-    </small>
-
-  </footer>
-
-
-
-  <!-- =========================
-       LOGIN SCRIPT
-  ========================= -->
-
-  <script>
-
-    document
-      .getElementById("familyLoginForm")
-      .addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        /*
-          الانتقال المؤقت إلى لوحة العائلة.
-
-          لاحقاً:
-          سيتم ربط تسجيل الدخول بقاعدة البيانات
-          والتحقق من رقم الهاتف وكلمة المرور
-          وربط حساب العائلة بملف المسن.
-        */
-
-        window.location.href = "family-dashboard.html";
-
-      });
-
-  </script>
-
-
-</body>
-
-</html>
+      <a href="index
