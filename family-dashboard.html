@@ -6,63 +6,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>لوحة العائلة | سند</title>
+  <title>دخول العائلة | سند</title>
 
   <link rel="stylesheet" href="style.css">
 
   <style>
 
     body {
-      background:
-        linear-gradient(180deg, #f7fbfa, #eef7f5);
+      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
     /* =========================
        PAGE
     ========================= */
 
-    .dashboard {
-      padding: 45px 7% 70px;
-      max-width: 1400px;
-      margin: auto;
+    .page {
+      min-height: calc(100vh - 180px);
+      padding: 65px 7%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      overflow: hidden;
     }
 
 
     /* =========================
-       WELCOME
+       LOGIN PANEL
     ========================= */
 
-    .welcome {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 26px;
-      padding: 30px 35px;
-      margin-bottom: 25px;
+    .panel {
+      width: 100%;
+      max-width: 520px;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
+      background: white;
+
+      border-radius: 26px;
+
+      padding: 40px;
+
+      border: 1px solid #e3edeb;
 
       box-shadow:
-        0 20px 55px rgba(22,70,65,.06);
+        0 25px 65px rgba(22, 70, 65, .09);
     }
 
-    .welcome-text h1 {
-      color: #163b38;
-      font-size: 30px;
-      margin-bottom: 6px;
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .panel-header {
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .welcome-text p {
-      color: #718480;
-      margin: 0;
-      font-size: 14px;
-    }
-
-    .family-icon {
+    .panel-icon {
       width: 70px;
       height: 70px;
+
+      margin: 0 auto 18px;
 
       border-radius: 22px;
 
@@ -73,382 +77,235 @@
       align-items: center;
       justify-content: center;
 
-      font-size: 34px;
-      flex-shrink: 0;
+      font-size: 32px;
     }
 
-
-    /* =========================
-       GRID
-    ========================= */
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 22px;
-    }
-
-
-    /* =========================
-       CARDS
-    ========================= */
-
-    .card {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 24px;
-      padding: 28px;
-
-      box-shadow:
-        0 18px 45px rgba(22,70,65,.055);
-    }
-
-    .card-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .card-title-icon {
-      width: 43px;
-      height: 43px;
-
-      border-radius: 13px;
-
-      background: #e8f5f3;
-      color: #16877d;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 21px;
-    }
-
-    .card-title h2 {
+    .panel-header h1 {
       color: #163b38;
-      font-size: 20px;
+      font-size: 30px;
+
+      margin-bottom: 8px;
+    }
+
+    .lead {
+      color: #718480;
+      font-size: 14px;
+      line-height: 1.8;
+
       margin: 0;
     }
 
 
     /* =========================
-       ELDER INFO
+       FORM
     ========================= */
 
-    .elder-info {
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 14px;
-    }
+    .form-row {
+      display: flex;
+      flex-direction: column;
 
-    .info-box {
-      background: #f8fcfb;
-      border: 1px solid #e7f0ee;
-      border-radius: 16px;
-      padding: 16px;
-    }
+      gap: 9px;
 
-    .info-box span {
-      display: block;
-      color: #849693;
-      font-size: 11px;
-      margin-bottom: 5px;
-    }
-
-    .info-box strong {
-      color: #163b38;
-      font-size: 15px;
-    }
-
-
-    /* =========================
-       SUBSCRIPTION
-    ========================= */
-
-    .subscription-card {
-      background:
-        linear-gradient(145deg,#16877d,#0e7069);
-
-      color: white;
-      border: none;
-    }
-
-    .subscription-card .card-title h2 {
-      color: white;
-    }
-
-    .subscription-card .card-title-icon {
-      background: rgba(255,255,255,.15);
-      color: white;
-    }
-
-    .package-name {
-      font-size: 25px;
-      font-weight: 800;
       margin-bottom: 18px;
     }
 
-    .subscription-dates {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .date-box {
-      background: rgba(255,255,255,.11);
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 14px;
-      padding: 13px;
-    }
-
-    .date-box span {
-      display: block;
-      color: #b9dfda;
-      font-size: 11px;
-      margin-bottom: 4px;
-    }
-
-    .date-box strong {
+    label {
+      font-weight: 700;
+      color: #163b38;
       font-size: 14px;
     }
 
-    .remaining {
-      margin-top: 18px;
-      padding: 14px;
+    input[type="tel"],
+    input[type="password"] {
 
-      background: rgba(255,255,255,.13);
-      border-radius: 14px;
+      padding: 14px 15px;
 
-      text-align: center;
-    }
+      border-radius: 12px;
 
-    .remaining strong {
-      font-size: 22px;
-    }
-
-    .remaining span {
-      display: block;
-      color: #c9e5e1;
-      font-size: 11px;
-    }
-
-
-    /* =========================
-       CARE TODAY
-    ========================= */
-
-    .care-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .care-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      padding: 14px;
-
-      border: 1px solid #e7efed;
-      border-radius: 15px;
+      border: 1px solid #dfecea;
 
       background: #fbfefe;
-    }
 
-    .care-icon {
-      width: 43px;
-      height: 43px;
-
-      border-radius: 12px;
-
-      background: #e8f5f3;
-      color: #16877d;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 20px;
-
-      flex-shrink: 0;
-    }
-
-    .care-item-text {
-      flex: 1;
-    }
-
-    .care-item-text strong {
-      display: block;
       color: #163b38;
-      font-size: 14px;
-    }
-
-    .care-item-text span {
-      color: #849693;
-      font-size: 11px;
-    }
-
-    .status {
-      padding: 5px 9px;
-      border-radius: 8px;
-      background: #e8f5f3;
-      color: #16877d;
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-
-    /* =========================
-       SERVICES
-    ========================= */
-
-    .services-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
-    }
-
-    .service-item {
-      padding: 13px;
-
-      background: #f8fcfb;
-      border: 1px solid #e7efed;
-      border-radius: 14px;
-
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .service-item span {
-      font-size: 17px;
-    }
-
-    .service-item strong {
-      color: #163b38;
-      font-size: 12px;
-    }
-
-
-    /* =========================
-       REPORTS
-    ========================= */
-
-    .reports {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 12px;
-    }
-
-    .report {
-      text-align: center;
-
-      padding: 17px 10px;
-
-      background: #f8fcfb;
-      border: 1px solid #e7efed;
-      border-radius: 15px;
-
-      transition: .25s;
-    }
-
-    .report:hover {
-      transform: translateY(-3px);
-      border-color: #16877d;
-    }
-
-    .report-icon {
-      font-size: 24px;
-      margin-bottom: 7px;
-    }
-
-    .report strong {
-      display: block;
-      color: #163b38;
-      font-size: 12px;
-    }
-
-    .report span {
-      color: #849693;
-      font-size: 10px;
-    }
-
-
-    /* =========================
-       CONTACT
-    ========================= */
-
-    .contact-box {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .contact-btn {
-      border: none;
-      border-radius: 14px;
-      padding: 15px;
 
       font-family: 'Cairo', sans-serif;
-      font-weight: 800;
-      font-size: 12px;
 
-      cursor: pointer;
-      text-decoration: none;
+      font-size: 14px;
 
-      text-align: center;
+      width: 100%;
+
+      box-sizing: border-box;
+
+      outline: none;
 
       transition: .25s;
     }
 
-    .contact-btn.primary {
-      background: #16877d;
-      color: white;
+    input[type="tel"]:focus,
+    input[type="password"]:focus {
+
+      border-color: #16877d;
+
+      background: white;
+
+      box-shadow:
+        0 0 0 4px rgba(22, 135, 125, .08);
     }
 
-    .contact-btn.secondary {
-      background: #e8f5f3;
-      color: #16877d;
-    }
-
-    .contact-btn:hover {
-      transform: translateY(-3px);
+    input::placeholder {
+      color: #a1b1ae;
     }
 
 
     /* =========================
-       LOGOUT
+       ACTIONS
     ========================= */
 
-    .logout {
+    .actions {
       display: flex;
-      justify-content: center;
-      margin-top: 35px;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 25px;
     }
 
-    .logout a {
-      padding: 11px 20px;
+    .forgot {
+      color: #16877d;
 
-      border: 1px solid #d7e8e5;
-      border-radius: 12px;
+      font-size: 13px;
 
-      color: #718480;
-      background: white;
-
-      text-decoration: none;
-      font-size: 12px;
       font-weight: 700;
 
-      transition: .25s;
+      text-decoration: none;
     }
 
-    .logout a:hover {
-      color: #d45b5b;
-      border-color: #e5bcbc;
-      transform: translateY(-2px);
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .btn-login {
+
+      background: #16877d;
+
+      color: white;
+
+      padding: 13px 25px;
+
+      border-radius: 13px;
+
+      font-family: 'Cairo', sans-serif;
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      border: none;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 25px rgba(22, 135, 125, .18);
+
+      transition: .3s;
+    }
+
+    .btn-login:hover {
+
+      background: #0f7068;
+
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 14px 30px rgba(22, 135, 125, .23);
+    }
+
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 9px;
+
+      width: fit-content;
+
+      margin: 30px auto 0;
+
+      padding: 10px 17px;
+
+      border: 1px solid #d7e8e5;
+
+      border-radius: 12px;
+
+      background: #f8fcfb;
+
+      color: #16877d;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      text-decoration: none;
+
+      transition: .3s;
+    }
+
+    .back-icon {
+
+      width: 26px;
+      height: 26px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background: #e5f3f0;
+
+      color: #16877d;
+
+      font-size: 16px;
+
+      transition: .3s;
+    }
+
+    .back:hover {
+
+      background: #16877d;
+
+      color: white;
+
+      border-color: #16877d;
+
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 10px 25px rgba(22, 135, 125, .15);
+    }
+
+    .back:hover .back-icon {
+
+      background: rgba(255,255,255,.16);
+
+      color: white;
     }
 
 
@@ -456,62 +313,76 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 900px) {
+    @media (max-width: 700px) {
 
-      .dashboard {
-        padding: 30px 5% 55px;
+      .page {
+        padding: 40px 5%;
       }
 
-      .welcome {
-        padding: 23px;
+      .panel {
+
+        padding: 30px 22px;
+
+        border-radius: 22px;
       }
 
-      .welcome-text h1 {
-        font-size: 24px;
+      .panel-icon {
+
+        width: 60px;
+        height: 60px;
+
+        border-radius: 18px;
+
+        font-size: 28px;
       }
 
-      .dashboard-grid {
-        grid-template-columns: 1fr;
+      .panel-header h1 {
+        font-size: 27px;
+      }
+
+      .lead {
+        font-size: 13px;
+      }
+
+      .actions {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+      }
+
+      .forgot {
+        text-align: center;
+        order: 2;
+      }
+
+      .btn-login {
+
+        width: 100%;
+
+        padding: 14px;
+      }
+
+      .back {
+        margin-top: 25px;
       }
 
     }
 
 
-    @media (max-width: 600px) {
+    @media (max-width: 420px) {
 
-      .welcome {
-        align-items: flex-start;
+      .page {
+        padding: 30px 5%;
       }
 
-      .family-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 27px;
-        border-radius: 17px;
+      .panel {
+        padding: 25px 18px;
       }
 
-      .elder-info {
-        grid-template-columns: 1fr;
-      }
-
-      .subscription-dates {
-        grid-template-columns: 1fr;
-      }
-
-      .services-list {
-        grid-template-columns: 1fr;
-      }
-
-      .reports {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-box {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        padding: 21px;
+      .panel-header h1 {
+        font-size: 24px;
       }
 
     }
@@ -524,540 +395,207 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+  <!-- =========================
+       HEADER
+  ========================= -->
 
-<header class="header">
+  <header class="header">
 
-  <a href="index.html" class="logo">
-    سند<span>.</span>
-  </a>
-
-  <nav class="nav">
-
-    <a href="index.html">
-      الرئيسية
+    <a href="index.html" class="logo">
+      سند<span>.</span>
     </a>
 
-    <a href="services.html">
-      خدماتنا
-    </a>
 
-    <a href="index.html#how">
-      كيف يعمل سند؟
-    </a>
+    <nav class="nav">
 
-    <a href="index.html#about">
-      عن سند
-    </a>
+      <a href="index.html">
+        الرئيسية
+      </a>
 
-  </nav>
+      <a href="services.html">
+        خدماتنا
+      </a>
 
-</header>
+      <a href="index.html#how">
+        كيف يعمل سند؟
+      </a>
 
+      <a href="index.html#about">
+        عن سند
+      </a>
 
+    </nav>
 
-<!-- =========================
-     DASHBOARD
-========================= -->
-
-<main class="dashboard">
-
-
-  <!-- WELCOME -->
-
-  <section class="welcome">
-
-    <div class="welcome-text">
-
-      <h1>
-        أهلاً بك في منصة سند
-      </h1>
-
-      <p>
-        من هنا يمكنك متابعة حالة المسن والرعاية المقدمة له.
-      </p>
-
-    </div>
-
-    <div class="family-icon">
-      👨‍👩‍👦
-    </div>
-
-  </section>
+  </header>
 
 
 
-  <div class="dashboard-grid">
+  <!-- =========================
+       FAMILY LOGIN
+  ========================= -->
+
+  <main class="page">
+
+    <div class="panel">
 
 
-    <!-- =========================
-         ELDER INFORMATION
-    ========================= -->
+      <!-- HEADER -->
 
-    <section class="card">
+      <div class="panel-header">
 
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          👴
+        <div class="panel-icon">
+          👨‍👩‍👦
         </div>
 
-        <h2>
-          معلومات المسن
-        </h2>
+        <h1>
+          أهلاً بك في سند
+        </h1>
+
+        <p class="lead">
+          سجل الدخول لمتابعة حالة المسن والتواصل مع فريق سند.
+        </p>
 
       </div>
 
 
-      <div class="elder-info">
 
-        <div class="info-box">
-          <span>اسم المسن</span>
-          <strong id="elderName">محمد علي</strong>
-        </div>
+      <!-- FORM -->
 
-        <div class="info-box">
-          <span>رقم الملف</span>
-          <strong id="elderId">SAN-00125</strong>
-        </div>
-
-        <div class="info-box">
-          <span>حالة الاشتراك</span>
-          <strong>🟢 فعال</strong>
-        </div>
-
-        <div class="info-box">
-          <span>جهة المتابعة</span>
-          <strong>العائلة</strong>
-        </div>
-
-      </div>
-
-    </section>
+      <form id="familyLoginForm">
 
 
+        <!-- PHONE -->
 
-    <!-- =========================
-         SUBSCRIPTION
-    ========================= -->
+        <div class="form-row">
 
-    <section class="card subscription-card">
+          <label for="familyPhone">
+            رقم الهاتف
+          </label>
 
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          📋
-        </div>
-
-        <h2>
-          الاشتراك
-        </h2>
-
-      </div>
-
-
-      <div class="package-name" id="packageName">
-        باقة سند الاعتيادية
-      </div>
-
-
-      <div class="subscription-dates">
-
-        <div class="date-box">
-
-          <span>
-            تاريخ بدء الاشتراك
-          </span>
-
-          <strong id="startDate">
-            01 / 08 / 2026
-          </strong>
+          <input
+            id="familyPhone"
+            type="tel"
+            placeholder="أدخل رقم الهاتف"
+            autocomplete="tel"
+            required
+          >
 
         </div>
 
 
-        <div class="date-box">
 
-          <span>
-            تاريخ انتهاء الاشتراك
-          </span>
+        <!-- PASSWORD -->
 
-          <strong id="endDate">
-            31 / 08 / 2026
-          </strong>
+        <div class="form-row">
+
+          <label for="familyPassword">
+            كلمة المرور
+          </label>
+
+          <input
+            id="familyPassword"
+            type="password"
+            placeholder="أدخل كلمة المرور"
+            autocomplete="current-password"
+            required
+          >
 
         </div>
 
-      </div>
 
 
-      <div class="remaining">
+        <!-- ACTIONS -->
 
-        <strong id="remainingDays">
-          7 يوم
-        </strong>
+        <div class="actions">
 
-        <span>
-          متبقي على انتهاء الاشتراك
+          <a href="#" class="forgot">
+            هل نسيت كلمة المرور؟
+          </a>
+
+
+          <button
+            type="submit"
+            class="btn-login"
+          >
+            تسجيل الدخول
+          </button>
+
+        </div>
+
+
+      </form>
+
+
+
+      <!-- BACK -->
+
+      <a href="login.html" class="back">
+
+        <span class="back-icon">
+          ←
         </span>
 
-      </div>
+        <span>
+          العودة لاختيار نوع الحساب
+        </span>
 
-    </section>
+      </a>
 
 
+    </div>
 
-    <!-- =========================
-         TODAY CARE
-    ========================= -->
+  </main>
 
-    <section class="card">
 
-      <div class="card-title">
 
-        <div class="card-title-icon">
-          ❤️
-        </div>
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
-        <h2>
-          الرعاية اليوم
-        </h2>
+  <footer>
 
-      </div>
+    <div class="footer-logo">
+      سند<span>.</span>
+    </div>
 
+    <p>
+      الرعاية المنزلية لكبار السن
+    </p>
 
-      <div class="care-list">
+    <small>
+      © 2026 سند — جميع الحقوق محفوظة
+    </small>
 
+  </footer>
 
-        <div class="care-item">
 
-          <div class="care-icon">
-            👨‍⚕️
-          </div>
 
-          <div class="care-item-text">
+  <!-- =========================
+       LOGIN SCRIPT
+  ========================= -->
 
-            <strong>
-              زيارة الممرض الصحي
-            </strong>
+  <script>
 
-            <span>
-              زيارة اليوم
-            </span>
+    document
+      .getElementById("familyLoginForm")
+      .addEventListener("submit", function(event) {
 
-          </div>
+        event.preventDefault();
 
-          <span class="status">
-            مكتملة
-          </span>
+        /*
+          الانتقال المؤقت إلى لوحة العائلة.
 
-        </div>
+          لاحقاً:
+          سيتم ربط تسجيل الدخول بقاعدة البيانات
+          والتحقق من رقم الهاتف وكلمة المرور
+          وربط حساب العائلة بملف المسن.
+        */
 
+        window.location.href = "family-dashboard.html";
 
-        <div class="care-item">
+      });
 
-          <div class="care-icon">
-            🩺
-          </div>
-
-          <div class="care-item-text">
-
-            <strong>
-              قياس الضغط والسكر
-            </strong>
-
-            <span>
-              ضمن زيارة الممرض
-            </span>
-
-          </div>
-
-          <span class="status">
-            مكتملة
-          </span>
-
-        </div>
-
-
-        <div class="care-item">
-
-          <div class="care-icon">
-            💊
-          </div>
-
-          <div class="care-item-text">
-
-            <strong>
-              متابعة الأدوية
-            </strong>
-
-            <span>
-              حسب جدول الأدوية
-            </span>
-
-          </div>
-
-          <span class="status">
-            مكتملة
-          </span>
-
-        </div>
-
-
-        <div class="care-item">
-
-          <div class="care-icon">
-            📋
-          </div>
-
-          <div class="care-item-text">
-
-            <strong>
-              التقرير اليومي
-            </strong>
-
-            <span>
-              تقرير رعاية المسن
-            </span>
-
-          </div>
-
-          <span class="status">
-            جاهز
-          </span>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         PACKAGE SERVICES
-    ========================= -->
-
-    <section class="card">
-
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          🧾
-        </div>
-
-        <h2>
-          الخدمات المشمولة بالباقة
-        </h2>
-
-      </div>
-
-
-      <div class="services-list">
-
-
-        <div class="service-item">
-          <span>👨‍⚕️</span>
-          <strong>زيارة الممرض يومياً</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>🩺</span>
-          <strong>زيارة الطبيب المقيم أسبوعياً</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>👨‍⚕️</span>
-          <strong>زيارة الطبيب الاختصاص شهرياً</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>🧪</span>
-          <strong>تحاليل شهرية</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>🚗</span>
-          <strong>خروج ترفيهي شهري</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>📋</span>
-          <strong>تقارير يومية وأسبوعية وشهرية</strong>
-        </div>
-
-
-        <div class="service-item">
-          <span>🛁</span>
-          <strong>خدمة المعين — اختيارية</strong>
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         REPORTS
-    ========================= -->
-
-    <section class="card">
-
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          📊
-        </div>
-
-        <h2>
-          التقارير
-        </h2>
-
-      </div>
-
-
-      <div class="reports">
-
-
-        <a href="#" class="report">
-
-          <div class="report-icon">
-            📅
-          </div>
-
-          <strong>
-            التقرير اليومي
-          </strong>
-
-          <span>
-            متابعة اليوم
-          </span>
-
-        </a>
-
-
-        <a href="#" class="report">
-
-          <div class="report-icon">
-            📈
-          </div>
-
-          <strong>
-            التقرير الأسبوعي
-          </strong>
-
-          <span>
-            ملخص الأسبوع
-          </span>
-
-        </a>
-
-
-        <a href="#" class="report">
-
-          <div class="report-icon">
-            📑
-          </div>
-
-          <strong>
-            التقرير الشهري
-          </strong>
-
-          <span>
-            ملخص الشهر
-          </span>
-
-        </a>
-
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         CONTACT
-    ========================= -->
-
-    <section class="card">
-
-      <div class="card-title">
-
-        <div class="card-title-icon">
-          📞
-        </div>
-
-        <h2>
-          التواصل مع سند
-        </h2>
-
-      </div>
-
-
-      <div class="contact-box">
-
-        <a href="#" class="contact-btn primary">
-          💬 التواصل مع فريق سند
-        </a>
-
-        <a href="#" class="contact-btn secondary">
-          🆘 طلب مساعدة
-        </a>
-
-      </div>
-
-    </section>
-
-
-  </div>
-
-
-
-  <!-- LOGOUT -->
-
-  <div class="logout">
-
-    <a href="login.html">
-      تسجيل الخروج
-    </a>
-
-  </div>
-
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  <div class="footer-logo">
-    سند<span>.</span>
-  </div>
-
-  <p>
-    الرعاية المنزلية لكبار السن
-  </p>
-
-  <small>
-    © 2026 سند — جميع الحقوق محفوظة
-  </small>
-
-</footer>
+  </script>
 
 
 </body>
