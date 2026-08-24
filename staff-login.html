@@ -2,10 +2,11 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>دخول الكادر | سند</title>
+  <title>تسجيل دخول الكادر | سند</title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -14,8 +15,6 @@
     body {
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
-
-    /* PAGE */
 
     .page {
       min-height: calc(100vh - 180px);
@@ -27,9 +26,6 @@
 
       overflow: hidden;
     }
-
-
-    /* LOGIN PANEL */
 
     .panel {
       width: 100%;
@@ -46,9 +42,6 @@
       box-shadow:
         0 25px 65px rgba(22, 70, 65, .09);
     }
-
-
-    /* HEADER */
 
     .panel-header {
       text-align: center;
@@ -76,7 +69,6 @@
     .panel-header h1 {
       color: #163b38;
       font-size: 30px;
-
       margin-bottom: 8px;
     }
 
@@ -84,12 +76,8 @@
       color: #718480;
       font-size: 14px;
       line-height: 1.8;
-
       margin: 0;
     }
-
-
-    /* FORM */
 
     .form-row {
       display: flex;
@@ -147,10 +135,8 @@
       color: #a1b1ae;
     }
 
-
-    /* ACTIONS */
-
     .actions {
+
       display: flex;
 
       justify-content: space-between;
@@ -175,9 +161,6 @@
     .forgot:hover {
       text-decoration: underline;
     }
-
-
-    /* LOGIN BUTTON */
 
     .btn-login {
 
@@ -214,9 +197,6 @@
       box-shadow:
         0 14px 30px rgba(22, 135, 125, .23);
     }
-
-
-    /* BACK BUTTON */
 
     .back {
 
@@ -293,9 +273,6 @@
       color: white;
     }
 
-
-    /* MOBILE */
-
     @media (max-width: 700px) {
 
       .page {
@@ -303,9 +280,7 @@
       }
 
       .panel {
-
         padding: 30px 22px;
-
         border-radius: 22px;
       }
 
@@ -332,7 +307,6 @@
         flex-direction: column;
 
         align-items: stretch;
-
       }
 
       .forgot {
@@ -350,9 +324,7 @@
       .back {
         margin-top: 25px;
       }
-
     }
-
 
     @media (max-width: 420px) {
 
@@ -367,7 +339,6 @@
       .panel-header h1 {
         font-size: 24px;
       }
-
     }
 
   </style>
@@ -423,11 +394,11 @@
         </div>
 
         <h1>
-          أهلاً بك في سند
+          تسجيل دخول الكادر
         </h1>
 
         <p class="lead">
-          سجل الدخول للوصول إلى مهامك وجدول الزيارات اليومية.
+          سجل الدخول للوصول إلى مهامك اليومية وجدول الزيارات وملفات المشتركين.
         </p>
 
       </div>
@@ -435,8 +406,6 @@
 
       <form id="staffLoginForm">
 
-
-        <!-- PHONE -->
 
         <div class="form-row">
 
@@ -455,8 +424,6 @@
         </div>
 
 
-        <!-- PASSWORD -->
-
         <div class="form-row">
 
           <label for="staffPassword">
@@ -473,8 +440,6 @@
 
         </div>
 
-
-        <!-- ACTIONS -->
 
         <div class="actions">
 
@@ -534,7 +499,7 @@
   </footer>
 
 
-  <!-- TEMPORARY LOGIN -->
+  <!-- LOGIN SCRIPT -->
 
   <script>
 
@@ -544,9 +509,16 @@
 
         event.preventDefault();
 
-        alert(
-          "تسجيل الدخول الحقيقي سيتم تفعيله لاحقاً بعد ربط قاعدة البيانات."
-        );
+        /*
+          حالياً الانتقال تجريبي.
+          لاحقاً سيتم ربط الدخول بقاعدة البيانات
+          والتحقق من صلاحيات الكادر.
+
+          بعد تسجيل الدخول:
+          ينتقل المستخدم إلى لوحة تحكم الكادر.
+        */
+
+        window.location.href = "staff-dashboard.html";
 
       });
 
