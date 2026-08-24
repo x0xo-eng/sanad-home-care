@@ -1072,3 +1072,236 @@ footer small {
     gap: 14px;
   }
 }
+/* ABOUT PAGE */
+
+.about-page {
+  padding: 100px 7%;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  align-items: center;
+  gap: 80px;
+  background: white;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.about-page-content {
+  max-width: 680px;
+  min-width: 0;
+}
+
+.about-page-content h1 {
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1.4;
+  color: #163b38;
+  margin-bottom: 25px;
+}
+
+.about-page-content h1 span {
+  color: #16877d;
+}
+
+.about-page-content p {
+  color: #718480;
+  font-size: 17px;
+  line-height: 2;
+  margin-bottom: 18px;
+  max-width: 620px;
+}
+
+.about-page-card {
+  min-height: 360px;
+  border-radius: 35px;
+  background: linear-gradient(145deg,#16877d,#0d6c65);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  box-shadow: 0 25px 60px rgba(22,135,125,.20);
+}
+
+.about-page-card .about-symbol {
+  width: 90px;
+  height: 90px;
+  background: rgba(255,255,255,.13);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+
+.about-page-card strong {
+  font-size: 29px;
+}
+
+.about-page-card p {
+  color: #d2ebe7;
+  margin-top: 8px;
+}
+
+.why-sanad {
+  padding: 100px 7%;
+  background: #f3f9f7;
+  text-align: center;
+  overflow: hidden;
+}
+
+.why-sanad .how-heading {
+  max-width: 650px;
+  margin: auto;
+}
+
+.why-sanad .how-heading h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.4;
+  color: #163b38;
+}
+
+.why-sanad .how-heading p {
+  color: #718480;
+  margin-top: 8px;
+}
+
+.why-sanad .about-points {
+  max-width: 850px;
+  margin: 55px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.why-sanad .about-points div {
+  background: white;
+  border: 1px solid #e3edeb;
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: right;
+}
+
+.sanad-vision {
+  padding: 100px 7%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: white;
+  overflow: hidden;
+}
+
+.sanad-vision > div {
+  min-width: 0;
+}
+
+.sanad-vision h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.5;
+  color: #163b38;
+}
+
+.sanad-vision p {
+  color: #718480;
+  font-size: 17px;
+  line-height: 2;
+}
+
+
+/* ABOUT PAGE MOBILE */
+
+@media (max-width: 900px) {
+
+  .about-page {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 70px 5%;
+    text-align: center;
+  }
+
+  .about-page-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-page-content h1 {
+    font-size: 40px;
+  }
+
+  .about-page-content p {
+    font-size: 15px;
+    max-width: 100%;
+  }
+
+  .about-page-card {
+    width: 100%;
+    min-height: 320px;
+  }
+
+  .why-sanad {
+    padding: 70px 5%;
+  }
+
+  .why-sanad .about-points {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .why-sanad .about-points div {
+    width: 100%;
+  }
+
+  .sanad-vision {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 70px 5%;
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .about-page {
+    padding: 55px 5%;
+  }
+
+  .about-page-content h1 {
+    font-size: 34px;
+  }
+
+  .about-page-content p {
+    font-size: 14px;
+  }
+
+  .about-page-card {
+    min-height: 290px;
+    padding: 30px 20px;
+  }
+
+  .about-page-card strong {
+    font-size: 24px;
+  }
+
+  .why-sanad {
+    padding: 60px 5%;
+  }
+
+  .sanad-vision {
+    padding: 60px 5%;
+  }
+
+  .sanad-vision h2 {
+    font-size: 30px;
+  }
+
+  .sanad-vision p {
+    font-size: 14px;
+  }
+
+}
