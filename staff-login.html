@@ -60,10 +60,6 @@
       margin: 0;
     }
 
-    /* =========================
-       ROLES
-    ========================= */
-
     .roles-title {
       color: #163b38;
       font-size: 17px;
@@ -115,10 +111,6 @@
       line-height: 1.5;
     }
 
-    /* =========================
-       LOGIN FORM
-    ========================= */
-
     .form-box {
       border-top: 1px solid #e3edeb;
       padding-top: 28px;
@@ -160,7 +152,6 @@
       font-family: inherit;
       font-size: 14px;
       outline: none;
-      transition: .25s;
     }
 
     .form-row input:focus {
@@ -184,10 +175,6 @@
       text-decoration: none;
     }
 
-    .forgot:hover {
-      text-decoration: underline;
-    }
-
     .btn-login {
       border: none;
       border-radius: 13px;
@@ -198,37 +185,32 @@
       font-size: 13px;
       font-weight: 800;
       cursor: pointer;
-      transition: .25s;
     }
 
     .btn-login:hover {
       background: #0f7068;
-      transform: translateY(-2px);
     }
 
-    .error {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 11px;
-      background: #fff0f0;
-      color: #a44b4b;
-      border: 1px solid #f0dada;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
+    .error,
     .success {
       display: none;
       margin-top: 15px;
       padding: 12px;
       border-radius: 11px;
-      background: #e6f6ef;
-      color: #16815f;
       text-align: center;
       font-size: 12px;
       font-weight: 800;
+    }
+
+    .error {
+      background: #fff0f0;
+      color: #a44b4b;
+      border: 1px solid #f0dada;
+    }
+
+    .success {
+      background: #e6f6ef;
+      color: #16815f;
     }
 
     .back-home {
@@ -282,7 +264,9 @@
 
 </head>
 
+
 <body>
+
 
 <header class="header">
 
@@ -305,6 +289,7 @@
 <main class="login-page">
 
   <div class="login-container">
+
 
     <div class="login-header">
 
@@ -331,67 +316,111 @@
     <div class="roles">
 
 
-      <button class="role" onclick="selectRole('owner', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('owner', this)"
+      >
         <div class="role-icon">👑</div>
         <span class="role-name">مالك النظام</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('manager', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('manager', this)"
+      >
         <div class="role-icon">👨‍💼</div>
         <span class="role-name">مدير الشركة</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('reception', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('reception', this)"
+      >
         <div class="role-icon">🧑‍💼</div>
         <span class="role-name">موظف الاستقبال</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('specialist', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('specialist', this)"
+      >
         <div class="role-icon">👨‍⚕️</div>
         <span class="role-name">الطبيب الأخصائي</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('resident', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('resident', this)"
+      >
         <div class="role-icon">🩺</div>
         <span class="role-name">الطبيب المقيم</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('nurse', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('nurse', this)"
+      >
         <div class="role-icon">👩‍⚕️</div>
         <span class="role-name">الممرض الصحي</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('nutrition', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('nutrition', this)"
+      >
         <div class="role-icon">🥗</div>
         <span class="role-name">أخصائي التغذية</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('physio', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('physio', this)"
+      >
         <div class="role-icon">🏃</div>
         <span class="role-name">أخصائي العلاج الطبيعي</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('psychologist', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('psychologist', this)"
+      >
         <div class="role-icon">🧠</div>
         <span class="role-name">الأخصائي النفسي</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('entertainment', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('entertainment', this)"
+      >
         <div class="role-icon">🎭</div>
         <span class="role-name">مرافق الترفيه</span>
       </button>
 
 
-      <button class="role" onclick="selectRole('hairdresser', this)">
+      <button
+        type="button"
+        class="role"
+        onclick="selectRole('hairdresser', this)"
+      >
         <div class="role-icon">💇</div>
         <span class="role-name">الكوافير</span>
       </button>
@@ -402,12 +431,17 @@
 
     <div class="form-box">
 
-      <div class="selected-role" id="selectedRole">
+
+      <div
+        class="selected-role"
+        id="selectedRole"
+      >
         ⚠️ يرجى اختيار الصفة الوظيفية أولاً
       </div>
 
 
       <form id="staffLoginForm">
+
 
         <div class="form-row">
 
@@ -453,6 +487,7 @@
             نسيت كلمة المرور؟
           </a>
 
+
           <button
             type="submit"
             class="btn-login"
@@ -463,18 +498,30 @@
         </div>
 
 
-        <div id="errorMessage" class="error"></div>
+        <div
+          id="errorMessage"
+          class="error"
+        ></div>
 
-        <div id="successMessage" class="success"></div>
+
+        <div
+          id="successMessage"
+          class="success"
+        ></div>
+
 
       </form>
 
     </div>
 
 
-    <a href="login.html" class="back-home">
+    <a
+      href="login.html"
+      class="back-home"
+    >
       ← العودة إلى اختيار نوع الحساب
     </a>
+
 
   </div>
 
@@ -500,10 +547,9 @@
 
 <script>
 
-/* =========================================
+/* =====================================================
    حسابات التجربة
-   لاحقاً ننقلها إلى قاعدة البيانات
-========================================= */
+===================================================== */
 
 const staffAccounts = [
 
@@ -518,6 +564,7 @@ const staffAccounts = [
     permissions: "all"
   },
 
+
   {
     phone: "07700000002",
     password: "123456",
@@ -529,6 +576,7 @@ const staffAccounts = [
     permissions: "manager"
   },
 
+
   {
     phone: "07700000003",
     password: "123456",
@@ -536,9 +584,10 @@ const staffAccounts = [
     name: "موظف الاستقبال",
     title: "موظف الاستقبال",
     employeeId: "ST-003",
-    dashboard: "staff-dashboard.html",
+    dashboard: "reception-dashboard.html",
     permissions: "reception"
   },
+
 
   {
     phone: "07700000004",
@@ -551,6 +600,7 @@ const staffAccounts = [
     permissions: "specialist"
   },
 
+
   {
     phone: "07700000005",
     password: "123456",
@@ -561,6 +611,7 @@ const staffAccounts = [
     dashboard: "staff-dashboard.html",
     permissions: "resident"
   },
+
 
   {
     phone: "07700000006",
@@ -573,6 +624,7 @@ const staffAccounts = [
     permissions: "nurse"
   },
 
+
   {
     phone: "07700000007",
     password: "123456",
@@ -583,6 +635,7 @@ const staffAccounts = [
     dashboard: "staff-dashboard.html",
     permissions: "nutrition"
   },
+
 
   {
     phone: "07700000008",
@@ -595,6 +648,7 @@ const staffAccounts = [
     permissions: "physio"
   },
 
+
   {
     phone: "07700000009",
     password: "123456",
@@ -606,6 +660,7 @@ const staffAccounts = [
     permissions: "psychologist"
   },
 
+
   {
     phone: "07700000010",
     password: "123456",
@@ -616,6 +671,7 @@ const staffAccounts = [
     dashboard: "staff-dashboard.html",
     permissions: "entertainment"
   },
+
 
   {
     phone: "07700000011",
@@ -631,20 +687,21 @@ const staffAccounts = [
 ];
 
 
-/* =========================================
+/* =====================================================
    الصفة المختارة
-========================================= */
+===================================================== */
 
 let selectedRole = null;
 
 
-/* =========================================
+/* =====================================================
    اختيار الصفة
-========================================= */
+===================================================== */
 
 function selectRole(role, element) {
 
   selectedRole = role;
+
 
   document
     .querySelectorAll(".role")
@@ -673,173 +730,234 @@ function selectRole(role, element) {
   if (account) {
 
     selectedRoleElement.textContent =
-      "✅ الصفة المختارة: " + account.title;
+      "✅ الصفة المختارة: " +
+      account.title;
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    تسجيل الدخول
-========================================= */
+===================================================== */
 
 document
   .getElementById("staffLoginForm")
-  .addEventListener("submit", function(event) {
+  .addEventListener(
+    "submit",
+    function(event) {
 
-    event.preventDefault();
-
-
-    const phone =
-      document
-        .getElementById("staffPhone")
-        .value
-        .trim();
+      event.preventDefault();
 
 
-    const password =
-      document
-        .getElementById("staffPassword")
-        .value
-        .trim();
+      const phone =
+        document
+          .getElementById("staffPhone")
+          .value
+          .trim();
 
 
-    const error =
-      document.getElementById("errorMessage");
+      const password =
+        document
+          .getElementById("staffPassword")
+          .value
+          .trim();
 
 
-    const success =
-      document.getElementById("successMessage");
-
-
-    error.style.display = "none";
-    success.style.display = "none";
-
-
-    /* لا توجد صفة */
-
-    if (!selectedRole) {
-
-      showError(
-        "يرجى اختيار الصفة الوظيفية أولاً"
-      );
-
-      return;
-
-    }
-
-
-    /* البحث عن الحساب */
-
-    const account =
-      staffAccounts.find(function(item) {
-
-        return (
-          item.phone === phone &&
-          item.password === password &&
-          item.role === selectedRole
+      const error =
+        document.getElementById(
+          "errorMessage"
         );
 
-      });
+
+      const success =
+        document.getElementById(
+          "successMessage"
+        );
 
 
-    /* الحساب غير موجود */
+      error.style.display =
+        "none";
 
-    if (!account) {
 
-      showError(
-        "رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة"
+      success.style.display =
+        "none";
+
+
+      /* لا توجد صفة */
+
+      if (!selectedRole) {
+
+        showError(
+          "يرجى اختيار الصفة الوظيفية أولاً"
+        );
+
+        return;
+
+      }
+
+
+      /* البحث عن الحساب */
+
+      const account =
+        staffAccounts.find(
+          function(item) {
+
+            return (
+              item.phone === phone &&
+              item.password === password &&
+              item.role === selectedRole
+            );
+
+          }
+        );
+
+
+      /* الحساب غير موجود */
+
+      if (!account) {
+
+        showError(
+          "رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة"
+        );
+
+        return;
+
+      }
+
+
+      /* =================================================
+         إنشاء جلسة الدخول
+      ================================================= */
+
+      const loggedInStaff = {
+
+        phone:
+          account.phone,
+
+        role:
+          account.role,
+
+        name:
+          account.name,
+
+        title:
+          account.title,
+
+        employeeId:
+          account.employeeId,
+
+        permissions:
+          account.permissions,
+
+        loginTime:
+          new Date().toISOString()
+
+      };
+
+
+      /*
+         هذا هو المفتاح الأساسي الجديد
+      */
+
+      localStorage.setItem(
+        "sanadLoggedInStaff",
+        JSON.stringify(
+          loggedInStaff
+        )
       );
 
-      return;
+
+      /*
+         مفاتيح قديمة نحافظ عليها
+         حتى لا تنكسر الصفحات السابقة
+      */
+
+      localStorage.setItem(
+        "sanadStaffName",
+        account.name
+      );
+
+
+      localStorage.setItem(
+        "sanadStaffRole",
+        account.title
+      );
+
+
+      success.textContent =
+        "✅ تم تسجيل الدخول بنجاح...";
+
+
+      success.style.display =
+        "block";
+
+
+      /* =================================================
+         تحديد لوحة التحكم حسب الصفة
+      ================================================= */
+
+      setTimeout(
+        function() {
+
+          /*
+             موظف الاستقبال
+          */
+
+          if (
+            account.role ===
+            "reception"
+          ) {
+
+            window.location.href =
+              "reception-dashboard.html";
+
+            return;
+
+          }
+
+
+          /*
+             بقية الكادر
+          */
+
+          window.location.href =
+            account.dashboard;
+
+        },
+        500
+      );
 
     }
+  );
 
 
-    /* =====================================
-       حفظ جلسة الكادر
-    ===================================== */
-
-    const loggedInStaff = {
-
-      phone: account.phone,
-
-      role: account.role,
-
-      name: account.name,
-
-      title: account.title,
-
-      employeeId: account.employeeId,
-
-      permissions: account.permissions,
-
-      loginTime:
-        new Date().toISOString()
-
-    };
-
-
-    localStorage.setItem(
-      "sanadLoggedInStaff",
-      JSON.stringify(loggedInStaff)
-    );
-
-
-    /* حفظ الاسم القديم أيضاً
-       حتى لا تنكسر الصفحات الحالية */
-
-    localStorage.setItem(
-      "sanadStaffName",
-      account.name
-    );
-
-
-    localStorage.setItem(
-      "sanadStaffRole",
-      account.title
-    );
-
-
-    success.textContent =
-      "✅ تم تسجيل الدخول بنجاح...";
-
-
-    success.style.display = "block";
-
-
-    /* الانتقال إلى لوحة الكادر */
-
-    setTimeout(function() {
-
-      window.location.href =
-        account.dashboard;
-
-    }, 500);
-
-  });
-
-
-/* =========================================
+/* =====================================================
    إظهار الخطأ
-========================================= */
+===================================================== */
 
 function showError(message) {
 
   const error =
-    document.getElementById("errorMessage");
+    document.getElementById(
+      "errorMessage"
+    );
 
-  error.textContent = message;
 
-  error.style.display = "block";
+  error.textContent =
+    message;
+
+
+  error.style.display =
+    "block";
 
 }
 
 
-/* =========================================
+/* =====================================================
    نسيت كلمة المرور
-========================================= */
+===================================================== */
 
 function forgotPassword(event) {
 
