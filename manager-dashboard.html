@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -17,7 +18,7 @@ background:linear-gradient(180deg,#f7fbfa,#eef7f5);
 }
 
 .dashboard{
-max-width:1250px;
+max-width:1400px;
 margin:auto;
 padding:45px 6%;
 }
@@ -118,65 +119,105 @@ font-size:13px;
 margin:0;
 }
 
-.actions-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-}
-
-.action{
+.schedule-form{
+background:#f8fcfb;
 border:1px solid #e3edeb;
-background:#fbfefe;
 border-radius:18px;
-padding:22px 15px;
-text-align:center;
-cursor:pointer;
-transition:.25s;
-font-family:inherit;
+padding:22px;
+margin-bottom:25px;
 }
 
-.action:hover{
-transform:translateY(-4px);
-border-color:#16877d;
-box-shadow:0 10px 28px rgba(22,135,125,.09);
+.form-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:17px;
 }
 
-.action-icon{
-width:55px;
-height:55px;
-border-radius:17px;
-background:#e8f5f3;
+.form-row{
 display:flex;
-align-items:center;
-justify-content:center;
-margin:0 auto 12px;
-font-size:26px;
+flex-direction:column;
+gap:7px;
 }
 
-.action h3{
+.form-row.full{
+grid-column:1/-1;
+}
+
+.form-row label{
 color:#163b38;
-font-size:14px;
-margin:0 0 5px;
+font-size:13px;
+font-weight:800;
 }
 
-.action p{
+.form-row input,
+.form-row select,
+.form-row textarea{
+width:100%;
+box-sizing:border-box;
+padding:13px;
+border-radius:12px;
+border:1px solid #dfecea;
+background:white;
+font-family:inherit;
+outline:none;
+font-size:13px;
+color:#163b38;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{
+border-color:#16877d;
+box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
+
+.form-row textarea{
+min-height:75px;
+resize:vertical;
+}
+
+.save-button{
+border:none;
+border-radius:13px;
+padding:13px 25px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+margin-top:18px;
+}
+
+.save-button:hover{
+background:#0f7068;
+}
+
+.cancel-button{
+border:1px solid #dfecea;
+border-radius:13px;
+padding:12px 22px;
+background:white;
 color:#718480;
-font-size:11px;
-line-height:1.6;
-margin:0;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+margin-top:18px;
+margin-right:8px;
 }
 
-.table-wrapper{
+.schedule-table-wrapper{
 overflow-x:auto;
 }
 
-.appointments-table{
+.schedule-table{
 width:100%;
 border-collapse:collapse;
-min-width:950px;
+min-width:1000px;
 }
 
-.appointments-table th{
+.schedule-table th{
 background:#f0f8f6;
 color:#163b38;
 font-size:12px;
@@ -186,15 +227,15 @@ border-bottom:1px solid #dfecea;
 white-space:nowrap;
 }
 
-.appointments-table td{
+.schedule-table td{
 padding:15px 12px;
-border-bottom:1px solid #edf3f2;
-color:#5f716e;
+border-bottom:1px solid #edf3f1;
+color:#718480;
 font-size:12px;
 vertical-align:middle;
 }
 
-.appointments-table tr:hover td{
+.schedule-table tr:hover td{
 background:#fbfefe;
 }
 
@@ -204,194 +245,87 @@ font-weight:900;
 }
 
 .patient-id{
+font-size:10px;
 color:#16877d;
-font-size:11px;
-font-weight:800;
 margin-top:4px;
 }
 
-.status{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:7px 11px;
-border-radius:9px;
-font-size:11px;
+.service-name{
+color:#163b38;
 font-weight:800;
+}
+
+.staff-name{
+color:#163b38;
+font-weight:800;
+}
+
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:900;
 white-space:nowrap;
 }
 
-.status.pending{
-background:#fff6df;
-color:#9a7318;
+.status-pending{
+background:#fff5dc;
+color:#9a7015;
 }
 
-.status.scheduled{
-background:#e7f5f2;
-color:#16877d;
-}
-
-.status.active{
+.status-scheduled{
 background:#e6f6ef;
 color:#16815f;
 }
 
-.status.suspended{
+.status-completed{
+background:#e8f0ff;
+color:#4266a3;
+}
+
+.status-cancelled{
 background:#fff0f0;
 color:#a44b4b;
 }
 
-.schedule-form{
+.table-actions{
 display:flex;
-align-items:center;
 gap:7px;
-min-width:300px;
 }
 
-.schedule-form input,
-.schedule-form select{
-padding:9px 10px;
+.table-button{
 border:1px solid #dfecea;
-border-radius:9px;
 background:white;
-font-family:inherit;
-font-size:11px;
-color:#163b38;
-outline:none;
-}
-
-.schedule-form input:focus,
-.schedule-form select:focus{
-border-color:#16877d;
-}
-
-.schedule-form input{
-width:135px;
-}
-
-.schedule-form select{
-width:105px;
-}
-
-.schedule-button{
-border:none;
 border-radius:9px;
-padding:9px 12px;
-background:#16877d;
-color:white;
+padding:7px 10px;
 font-family:inherit;
-font-size:11px;
+font-size:10px;
 font-weight:800;
 cursor:pointer;
-white-space:nowrap;
-}
-
-.schedule-button:hover{
-background:#0f7068;
-}
-
-.view-button{
-border:1px solid #dfecea;
-border-radius:9px;
-padding:8px 12px;
-background:white;
 color:#16877d;
-font-family:inherit;
-font-size:11px;
-font-weight:800;
-cursor:pointer;
 }
 
-.view-button:hover{
+.table-button:hover{
 background:#e8f5f3;
+}
+
+.delete-button{
+color:#a44b4b;
 }
 
 .empty{
 text-align:center;
 color:#718480;
-padding:30px;
+padding:35px;
 font-size:13px;
-}
-
-.customer-list{
-display:flex;
-flex-direction:column;
-gap:12px;
-}
-
-.customer{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-padding:17px;
-background:#fbfefe;
-border:1px solid #e3edeb;
-border-radius:15px;
-}
-
-.customer-name{
-color:#163b38;
-font-size:14px;
-font-weight:800;
-}
-
-.customer-info{
-color:#718480;
-font-size:11px;
-margin-top:5px;
-line-height:1.8;
-}
-
-.customer-id{
-color:#16877d;
-font-size:12px;
-font-weight:900;
-white-space:nowrap;
-}
-
-.package-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-}
-
-.package{
-border:1px solid #e3edeb;
-border-radius:19px;
-padding:22px;
-background:#fbfefe;
-}
-
-.package h3{
-color:#163b38;
-margin:0 0 8px;
-font-size:18px;
-}
-
-.package-price{
-color:#16877d;
-font-size:22px;
-font-weight:900;
-margin-bottom:15px;
-}
-
-.package ul{
-margin:0;
-padding-right:20px;
-}
-
-.package li{
-color:#718480;
-font-size:12px;
-line-height:2;
 }
 
 .message{
 display:none;
 padding:12px;
 border-radius:11px;
-margin-bottom:18px;
+margin-top:15px;
 text-align:center;
 font-size:12px;
 font-weight:800;
@@ -405,6 +339,35 @@ color:#16815f;
 .error{
 background:#fff0f0;
 color:#a44b4b;
+}
+
+.customer-table-wrapper{
+overflow-x:auto;
+}
+
+.customer-table{
+width:100%;
+border-collapse:collapse;
+min-width:800px;
+}
+
+.customer-table th{
+background:#f0f8f6;
+color:#163b38;
+font-size:12px;
+padding:14px;
+text-align:right;
+}
+
+.customer-table td{
+padding:14px;
+border-bottom:1px solid #edf3f1;
+font-size:12px;
+color:#718480;
+}
+
+.customer-table td strong{
+color:#163b38;
 }
 
 .logout-area{
@@ -426,85 +389,14 @@ font-size:13px;
 font-weight:800;
 }
 
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(16,45,42,.45);
-z-index:1000;
-align-items:center;
-justify-content:center;
-padding:20px;
-}
-
-.modal-box{
-width:100%;
-max-width:650px;
-background:white;
-border-radius:24px;
-padding:28px;
-box-shadow:0 25px 80px rgba(0,0,0,.18);
-max-height:90vh;
-overflow-y:auto;
-}
-
-.modal-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-margin-bottom:20px;
-}
-
-.modal-header h2{
-margin:0;
-color:#163b38;
-font-size:20px;
-}
-
-.close-modal{
-border:none;
-background:#f0f8f6;
-color:#16877d;
-width:38px;
-height:38px;
-border-radius:11px;
-font-size:20px;
-cursor:pointer;
-}
-
-.detail-row{
-display:flex;
-justify-content:space-between;
-gap:20px;
-padding:12px 0;
-border-bottom:1px solid #edf3f2;
-}
-
-.detail-label{
-color:#718480;
-font-size:12px;
-}
-
-.detail-value{
-color:#163b38;
-font-size:12px;
-font-weight:800;
-text-align:left;
-}
-
-@media(max-width:950px){
+@media(max-width:1000px){
 
 .stats{
 grid-template-columns:1fr 1fr;
 }
 
-.actions-grid{
+.form-grid{
 grid-template-columns:1fr 1fr;
-}
-
-.package-grid{
-grid-template-columns:1fr;
 }
 
 }
@@ -519,22 +411,21 @@ padding:30px 5%;
 padding:23px;
 }
 
-.stats{
-grid-template-columns:1fr;
-}
-
-.actions-grid{
-grid-template-columns:1fr;
-}
-
 .welcome{
 flex-direction:column;
 text-align:center;
 }
 
-.customer{
-align-items:flex-start;
-flex-direction:column;
+.stats{
+grid-template-columns:1fr;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.form-row.full{
+grid-column:auto;
 }
 
 }
@@ -565,6 +456,7 @@ flex-direction:column;
 
 <main class="dashboard">
 
+
 <section class="welcome">
 
 <div>
@@ -578,7 +470,7 @@ flex-direction:column;
 </h1>
 
 <p>
-إدارة المشتركين ومواعيد الزيارات ومتابعة سير العمل في سند
+إدارة المشتركين وتنظيم مواعيد الخدمات ومتابعة سير العمل
 </p>
 
 </div>
@@ -598,24 +490,7 @@ flex-direction:column;
 👥 إجمالي المشتركين
 </span>
 
-<div
-class="stat-number"
-id="customersCount">
-0
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<span class="stat-label">
-🆕 مشتركين جدد اليوم
-</span>
-
-<div
-class="stat-number"
-id="newCustomersCount">
+<div class="stat-number" id="customersCount">
 0
 </div>
 
@@ -628,9 +503,7 @@ id="newCustomersCount">
 📅 مواعيد اليوم
 </span>
 
-<div
-class="stat-number"
-id="todayAppointmentsCount">
+<div class="stat-number" id="todayAppointments">
 0
 </div>
 
@@ -643,9 +516,20 @@ id="todayAppointmentsCount">
 ⏳ بانتظار ترتيب الموعد
 </span>
 
-<div
-class="stat-number"
-id="pendingCount">
+<div class="stat-number" id="pendingCustomers">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+📋 إجمالي المواعيد
+</span>
+
+<div class="stat-number" id="appointmentsCount">
 0
 </div>
 
@@ -654,168 +538,272 @@ id="pendingCount">
 </section>
 
 
-<section class="section">
+<section class="section" id="schedule">
 
 <div class="section-title">
 
 <h2>
-⚡ الخدمات السريعة
+📅 جدول مواعيد الخدمات
 </h2>
 
 <p>
-أهم العمليات التي يحتاجها مدير الشركة
+من هنا يستطيع المدير تنظيم مواعيد جميع الخدمات للمشتركين
 </p>
 
 </div>
 
 
-<div class="actions-grid">
+<div class="schedule-form">
+
+<form id="appointmentForm">
+
+<div class="form-grid">
+
+
+<div class="form-row">
+
+<label>
+👴 المشترك
+</label>
+
+<select id="appointmentCustomer" required>
+
+<option value="">
+اختر المشترك
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row">
+
+<label>
+🩺 نوع الخدمة
+</label>
+
+<select id="appointmentService" required>
+
+<option value="">
+اختر الخدمة
+</option>
+
+<option value="nurse">
+👩‍⚕️ زيارة الممرض الصحي
+</option>
+
+<option value="resident">
+🩺 زيارة الطبيب المقيم
+</option>
+
+<option value="specialist">
+👨‍⚕️ زيارة الطبيب الأخصائي
+</option>
+
+<option value="bathing">
+🛁 الرعاية الشخصية / الاستحمام
+</option>
+
+<option value="nutrition">
+🥗 أخصائي التغذية
+</option>
+
+<option value="physio">
+🏃 العلاج الطبيعي
+</option>
+
+<option value="psychologist">
+🧠 الأخصائي النفسي
+</option>
+
+<option value="entertainment">
+🎭 الترفيه والمرافقة
+</option>
+
+<option value="hairdresser">
+💇 الكوافير
+</option>
+
+<option value="lab">
+🧪 الفحوصات والتحاليل
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row">
+
+<label>
+👨‍⚕️ الموظف المسؤول
+</label>
+
+<select id="appointmentStaff" required>
+
+<option value="">
+اختر الموظف
+</option>
+
+<option value="ممرض سند">
+👩‍⚕️ ممرض سند
+</option>
+
+<option value="ممرض صحي 2">
+👩‍⚕️ ممرض صحي 2
+</option>
+
+<option value="الطبيب المقيم">
+🩺 الطبيب المقيم
+</option>
+
+<option value="الطبيب الأخصائي">
+👨‍⚕️ الطبيب الأخصائي
+</option>
+
+<option value="أخصائي التغذية">
+🥗 أخصائي التغذية
+</option>
+
+<option value="أخصائي العلاج الطبيعي">
+🏃 أخصائي العلاج الطبيعي
+</option>
+
+<option value="الأخصائي النفسي">
+🧠 الأخصائي النفسي
+</option>
+
+<option value="مرافق سند">
+🎭 مرافق سند
+</option>
+
+<option value="كوافير سند">
+💇 كوافير سند
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row">
+
+<label>
+📅 التاريخ
+</label>
+
+<input
+type="date"
+id="appointmentDate"
+required
+>
+
+</div>
+
+
+<div class="form-row">
+
+<label>
+🕐 وقت الموعد
+</label>
+
+<input
+type="time"
+id="appointmentTime"
+required
+>
+
+</div>
+
+
+<div class="form-row">
+
+<label>
+⏱️ مدة الموعد
+</label>
+
+<select id="appointmentDuration">
+
+<option value="30">30 دقيقة</option>
+<option value="40" selected>40 دقيقة</option>
+<option value="60">ساعة واحدة</option>
+<option value="90">ساعة ونصف</option>
+<option value="120">ساعتان</option>
+
+</select>
+
+</div>
+
+
+<div class="form-row full">
+
+<label>
+📝 ملاحظات الموعد
+</label>
+
+<textarea
+id="appointmentNotes"
+placeholder="ملاحظات للموظف أو تفاصيل إضافية عن الموعد"
+></textarea>
+
+</div>
+
+
+</div>
+
 
 <button
-class="action"
-onclick="scrollToSection('appointments')">
+type="submit"
+class="save-button"
+id="saveAppointmentButton"
+>
+📅 حفظ الموعد
+</button>
 
-<div class="action-icon">
-📅
-</div>
-
-<h3>
-جدول المواعيد
-</h3>
-
-<p>
-ترتيب ومتابعة مواعيد المشتركين
-</p>
-
+<button
+type="button"
+class="cancel-button"
+id="cancelEditButton"
+onclick="cancelEdit()"
+style="display:none"
+>
+إلغاء التعديل
 </button>
 
 
-<button
-class="action"
-onclick="scrollToSection('customers')">
+<div id="successMessage" class="message success"></div>
 
-<div class="action-icon">
-👥
-</div>
+<div id="errorMessage" class="message error"></div>
 
-<h3>
-ملفات المشتركين
-</h3>
-
-<p>
-عرض جميع ملفات المشتركين
-</p>
-
-</button>
-
-
-<button
-class="action"
-onclick="scrollToSection('packages')">
-
-<div class="action-icon">
-📦
-</div>
-
-<h3>
-الباقات
-</h3>
-
-<p>
-عرض الباقات والخدمات والأسعار
-</p>
-
-</button>
-
-
-<button
-class="action"
-onclick="location.reload()">
-
-<div class="action-icon">
-🔄
-</div>
-
-<h3>
-تحديث البيانات
-</h3>
-
-<p>
-تحديث بيانات المشتركين والمواعيد
-</p>
-
-</button>
-
-</div>
-
-</section>
-
-
-<section
-class="section"
-id="appointments">
-
-<div class="section-title">
-
-<h2>
-📅 جدول مواعيد المشتركين
-</h2>
-
-<p>
-المشترك الذي يسجله موظف الاستقبال يظهر هنا مباشرة، ويمكن للمدير ترتيب موعده
-</p>
+</form>
 
 </div>
 
 
-<div
-id="scheduleMessage"
-class="message">
-</div>
+<div class="schedule-table-wrapper">
 
-
-<div class="table-wrapper">
-
-<table class="appointments-table">
+<table class="schedule-table">
 
 <thead>
 
 <tr>
 
-<th>
-المشترك
-</th>
-
-<th>
-الباقة
-</th>
-
-<th>
-هاتف العائلة
-</th>
-
-<th>
-الحالة
-</th>
-
-<th>
-تاريخ الموعد
-</th>
-
-<th>
-وقت الموعد
-</th>
-
-<th>
-الإجراء
-</th>
+<th>المشترك</th>
+<th>الخدمة</th>
+<th>الموظف</th>
+<th>التاريخ</th>
+<th>الوقت</th>
+<th>المدة</th>
+<th>الحالة</th>
+<th>الإجراءات</th>
 
 </tr>
 
 </thead>
 
-<tbody
-id="appointmentsBody">
+<tbody id="appointmentsBody">
+
 </tbody>
 
 </table>
@@ -825,14 +813,12 @@ id="appointmentsBody">
 </section>
 
 
-<section
-class="section"
-id="customers">
+<section class="section" id="customers">
 
 <div class="section-title">
 
 <h2>
-👥 ملفات المشتركين
+👥 المشتركين
 </h2>
 
 <p>
@@ -842,106 +828,30 @@ id="customers">
 </div>
 
 
-<div
-class="customer-list"
-id="customerList">
-</div>
+<div class="customer-table-wrapper">
 
-</section>
+<table class="customer-table">
 
+<thead>
 
-<section
-class="section"
-id="packages">
+<tr>
 
-<div class="section-title">
+<th>رقم المشترك</th>
+<th>اسم المسن</th>
+<th>الباقة</th>
+<th>العائلة</th>
+<th>الحالة</th>
+<th>إجراء</th>
 
-<h2>
-📦 الباقات والأسعار
-</h2>
+</tr>
 
-<p>
-المعلومات الإدارية الخاصة بالباقات
-</p>
+</thead>
 
-</div>
+<tbody id="customersBody">
 
+</tbody>
 
-<div class="package-grid">
-
-
-<div class="package">
-
-<h3>
-🟢 باقة سند الاعتيادية
-</h3>
-
-<div class="package-price">
-252,000 د.ع / شهرياً
-</div>
-
-<ul>
-
-<li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
-<li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
-<li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
-<li>🧪 الفحوصات والتحاليل</li>
-<li>🛁 الرعاية الشخصية اليومية</li>
-<li>📋 تقارير المتابعة</li>
-
-</ul>
-
-</div>
-
-
-<div class="package">
-
-<h3>
-🔵 الباقة المتوسطة
-</h3>
-
-<div class="package-price">
-337,000 د.ع / شهرياً
-</div>
-
-<ul>
-
-<li>👩‍⚕️ رعاية تمريضية موسعة</li>
-<li>🩺 متابعة الطبيب المقيم</li>
-<li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
-<li>🧪 الفحوصات والتحاليل</li>
-<li>🧠 دعم نفسي</li>
-<li>🎭 خدمات ترفيهية</li>
-<li>📋 تقارير شاملة</li>
-
-</ul>
-
-</div>
-
-
-<div class="package">
-
-<h3>
-🟣 باقة سند الفاخرة
-</h3>
-
-<div class="package-price">
-حسب الخدمات المختارة
-</div>
-
-<ul>
-
-<li>👩‍⚕️ رعاية تمريضية مكثفة</li>
-<li>👨‍⚕️ متابعة طبية متقدمة</li>
-<li>🧠 دعم نفسي</li>
-<li>🥗 متابعة غذائية</li>
-<li>🏃 علاج طبيعي</li>
-<li>🎭 ترفيه ومرافقة</li>
-<li>💇 خدمات إضافية</li>
-
-</ul>
-
-</div>
+</table>
 
 </div>
 
@@ -953,44 +863,14 @@ id="packages">
 <a
 href="#"
 class="logout"
-onclick="logoutManager(event)">
-
+onclick="logoutStaff(event)"
+>
 🚪 تسجيل الخروج
-
 </a>
 
 </div>
 
 </main>
-
-
-<div
-class="modal"
-id="customerModal"
-onclick="closeModalOutside(event)">
-
-<div
-class="modal-box">
-
-<div class="modal-header">
-
-<h2>
-👤 تفاصيل المشترك
-</h2>
-
-<button
-class="close-modal"
-onclick="closeCustomerModal()">
-×
-</button>
-
-</div>
-
-<div id="customerDetails"></div>
-
-</div>
-
-</div>
 
 
 <footer>
@@ -1013,7 +893,7 @@ onclick="closeCustomerModal()">
 <script>
 
 /* =========================================
-   التحقق من تسجيل الدخول
+   التحقق من دخول المدير
 ========================================= */
 
 const loggedStaffRaw =
@@ -1032,37 +912,30 @@ let loggedStaff=null;
 
 try{
 
-loggedStaff=
-JSON.parse(loggedStaffRaw);
+loggedStaff=JSON.parse(loggedStaffRaw);
 
 }catch(error){
 
-localStorage.removeItem(
-"sanadLoggedInStaff"
-);
+localStorage.removeItem("sanadLoggedInStaff");
 
-window.location.href=
-"staff-login.html";
+window.location.href="staff-login.html";
 
 }
 
 
 /* =========================================
-   التحقق من صلاحية المدير
+   التأكد من الصلاحية
 ========================================= */
 
 if(
 loggedStaff &&
 loggedStaff.role!=="manager" &&
-loggedStaff.role!=="owner"
+loggedStaff.permissions?.indexOf("all")===-1
 ){
 
-alert(
-"ليس لديك صلاحية الدخول إلى لوحة المدير."
-);
+alert("ليس لديك صلاحية الدخول إلى لوحة المدير.");
 
-window.location.href=
-"staff-dashboard.html";
+window.location.href="staff-dashboard.html";
 
 }
 
@@ -1073,37 +946,27 @@ window.location.href=
 
 if(loggedStaff){
 
-document.getElementById(
-"welcomeName"
-).textContent=
-"أهلاً بك، "+
-loggedStaff.name+
-" 👋";
+document.getElementById("welcomeName").textContent=
+"أهلاً بك، "+loggedStaff.name+" 👋";
 
 }
 
 
 /* =========================================
-   قاعدة بيانات المشتركين
+   قراءة المشتركين
 ========================================= */
 
 let customers=[];
-
-function loadCustomers(){
 
 try{
 
 customers=
 JSON.parse(
-localStorage.getItem(
-"sanadCustomers"
-) || "[]"
+localStorage.getItem("sanadCustomers") || "[]"
 );
 
 if(!Array.isArray(customers)){
-
 customers=[];
-
 }
 
 }catch(error){
@@ -1112,105 +975,98 @@ customers=[];
 
 }
 
-}
-
 
 /* =========================================
-   حفظ المشتركين
+   قراءة المواعيد
 ========================================= */
 
-function saveCustomers(){
+let appointments=[];
 
-localStorage.setItem(
-"sanadCustomers",
-JSON.stringify(customers)
+try{
+
+appointments=
+JSON.parse(
+localStorage.getItem("sanadAppointments") || "[]"
 );
 
+if(!Array.isArray(appointments)){
+appointments=[];
+}
+
+}catch(error){
+
+appointments=[];
+
 }
 
 
+let editingAppointmentId=null;
+
+
 /* =========================================
-   نص الحالة
+   أسماء الخدمات
 ========================================= */
 
-function getStatusText(status){
+const serviceNames={
 
-const statuses={
-
-pending_schedule:
-"بانتظار ترتيب الموعد",
-
-scheduled:
-"تم ترتيب الموعد",
-
-active:
-"اشتراك فعال",
-
-suspended:
-"موقوف",
-
-completed:
-"مكتمل"
+nurse:"👩‍⚕️ زيارة الممرض الصحي",
+resident:"🩺 زيارة الطبيب المقيم",
+specialist:"👨‍⚕️ زيارة الطبيب الأخصائي",
+bathing:"🛁 الرعاية الشخصية / الاستحمام",
+nutrition:"🥗 أخصائي التغذية",
+physio:"🏃 العلاج الطبيعي",
+psychologist:"🧠 الأخصائي النفسي",
+entertainment:"🎭 الترفيه والمرافقة",
+hairdresser:"💇 الكوافير",
+lab:"🧪 الفحوصات والتحاليل"
 
 };
 
-return (
-statuses[status] ||
-"غير محدد"
-);
+
+/* =========================================
+   ملء قائمة المشتركين
+========================================= */
+
+function renderCustomerSelect(){
+
+const select=
+document.getElementById("appointmentCustomer");
+
+select.innerHTML=`
+<option value="">
+اختر المشترك
+</option>
+`;
+
+customers.forEach(function(customer){
+
+const option=
+document.createElement("option");
+
+option.value=customer.id;
+
+option.textContent=
+customer.id+
+" — "+
+customer.name+
+" — "+
+(customer.packageName || "");
+
+select.appendChild(option);
+
+});
 
 }
 
 
 /* =========================================
-   فحص موعد اليوم
+   عرض المشتركين
 ========================================= */
 
-function isToday(dateString){
-
-if(!dateString){
-
-return false;
-
-}
-
-const appointmentDate=
-new Date(dateString);
-
-if(
-Number.isNaN(
-appointmentDate.getTime()
-)
-){
-
-return false;
-
-}
-
-const today=new Date();
-
-return(
-appointmentDate.getFullYear()===
-today.getFullYear() &&
-appointmentDate.getMonth()===
-today.getMonth() &&
-appointmentDate.getDate()===
-today.getDate()
-);
-
-}
-
-
-/* =========================================
-   عرض جدول المواعيد
-========================================= */
-
-function renderAppointments(){
+function renderCustomers(){
 
 const body=
-document.getElementById(
-"appointmentsBody"
-);
+document.getElementById("customersBody");
 
 body.innerHTML="";
 
@@ -1218,19 +1074,13 @@ body.innerHTML="";
 if(customers.length===0){
 
 body.innerHTML=`
-
 <tr>
-
-<td
-colspan="7"
-class="empty">
-
-لا توجد مشتركين مسجلين حالياً.
-
+<td colspan="6">
+<div class="empty">
+لا توجد مشتركين حالياً.
+</div>
 </td>
-
 </tr>
-
 `;
 
 return;
@@ -1246,146 +1096,40 @@ customers
 const row=
 document.createElement("tr");
 
-
-let appointmentDate="";
-
-let appointmentTime="";
-
-
-if(customer.appointment){
-
-appointmentDate=
-customer.appointment.date || "";
-
-appointmentTime=
-customer.appointment.time || "";
-
-}
-
-
-let actionHtml="";
-
-
-if(
-customer.status===
-"pending_schedule" ||
-!customer.appointment
-){
-
-actionHtml=`
-
-<div class="schedule-form">
-
-<input
-type="date"
-id="date-${escapeHtml(customer.id)}"
->
-
-<input
-type="time"
-id="time-${escapeHtml(customer.id)}"
->
-
-<button
-class="schedule-button"
-onclick="scheduleAppointment('${escapeJs(customer.id)}')">
-
-حفظ الموعد
-
-</button>
-
-</div>
-
-`;
-
-}else{
-
-actionHtml=`
-
-<button
-class="view-button"
-onclick="editAppointment('${escapeJs(customer.id)}')">
-
-تعديل الموعد
-
-</button>
-
-`;
-
-}
-
-
 row.innerHTML=`
 
 <td>
-
-<div class="patient-name">
-
-👴 ${escapeHtml(customer.name)}
-
-</div>
-
-<div class="patient-id">
-
+<strong>
 ${escapeHtml(customer.id)}
-
-</div>
-
+</strong>
 </td>
 
+<td>
+<strong>
+👴 ${escapeHtml(customer.name)}
+</strong>
+</td>
+
+<td>
+${escapeHtml(customer.packageName || "غير محددة")}
+</td>
+
+<td>
+${escapeHtml(customer.familyName || "-")}
+</td>
+
+<td>
+${getCustomerStatus(customer.status)}
+</td>
 
 <td>
 
-${escapeHtml(
-customer.packageName || "-"
-)}
-
-</td>
-
-
-<td>
-
-${escapeHtml(
-customer.familyPhone || "-"
-)}
-
-</td>
-
-
-<td>
-
-<span class="status ${getStatusClass(customer.status)}">
-
-${getStatusText(customer.status)}
-
-</span>
-
-</td>
-
-
-<td>
-
-${appointmentDate
-? formatDate(appointmentDate)
-: "-"
-}
-
-</td>
-
-
-<td>
-
-${appointmentTime
-? formatTime(appointmentTime)
-: "-"
-}
-
-</td>
-
-
-<td>
-
-${actionHtml}
+<button
+class="table-button"
+onclick="prepareAppointment('${escapeJs(customer.id)}')"
+>
+📅 تنظيم موعد
+</button>
 
 </td>
 
@@ -1399,45 +1143,105 @@ body.appendChild(row);
 
 
 /* =========================================
-   تنسيق الحالة
+   حالة المشترك
 ========================================= */
 
-function getStatusClass(status){
+function getCustomerStatus(status){
 
-if(status==="pending_schedule"){
+const statuses={
 
-return "pending";
+pending_schedule:
+"⏳ بانتظار الموعد",
 
-}
+scheduled:
+"📅 تم ترتيب الموعد",
 
-if(status==="scheduled"){
+active:
+"🟢 اشتراك فعال",
 
-return "scheduled";
+suspended:
+"⛔ موقوف",
 
-}
+completed:
+"✅ مكتمل"
 
-if(status==="active"){
+};
 
-return "active";
-
-}
-
-if(status==="suspended"){
-
-return "suspended";
-
-}
-
-return "";
+return statuses[status] || "غير محدد";
 
 }
 
 
 /* =========================================
-   ترتيب موعد
+   حفظ الموعد
 ========================================= */
 
-function scheduleAppointment(customerId){
+document
+.getElementById("appointmentForm")
+.addEventListener("submit",function(event){
+
+event.preventDefault();
+
+
+const customerId=
+document
+.getElementById("appointmentCustomer")
+.value;
+
+
+const service=
+document
+.getElementById("appointmentService")
+.value;
+
+
+const staff=
+document
+.getElementById("appointmentStaff")
+.value;
+
+
+const date=
+document
+.getElementById("appointmentDate")
+.value;
+
+
+const time=
+document
+.getElementById("appointmentTime")
+.value;
+
+
+const duration=
+document
+.getElementById("appointmentDuration")
+.value;
+
+
+const notes=
+document
+.getElementById("appointmentNotes")
+.value
+.trim();
+
+
+if(
+!customerId ||
+!service ||
+!staff ||
+!date ||
+!time
+){
+
+showError(
+"يرجى إكمال بيانات الموعد."
+);
+
+return;
+
+}
+
 
 const customer=
 customers.find(function(item){
@@ -1449,39 +1253,8 @@ return item.id===customerId;
 
 if(!customer){
 
-return;
-
-}
-
-
-const dateInput=
-document.getElementById(
-"date-"+customerId
-);
-
-const timeInput=
-document.getElementById(
-"time-"+customerId
-);
-
-
-const date=
-dateInput
-? dateInput.value
-: "";
-
-
-const time=
-timeInput
-? timeInput.value
-: "";
-
-
-if(!date || !time){
-
-showScheduleMessage(
-"يرجى اختيار تاريخ ووقت الموعد.",
-"error"
+showError(
+"لم يتم العثور على المشترك."
 );
 
 return;
@@ -1489,167 +1262,209 @@ return;
 }
 
 
-customer.appointment={
+/* =========================================
+   منع تعارض الموظف
+========================================= */
+
+const conflict=
+appointments.find(function(item){
+
+if(
+editingAppointmentId &&
+item.id===editingAppointmentId
+){
+
+return false;
+
+}
+
+return(
+item.staff===staff &&
+item.date===date &&
+item.time===time &&
+item.status!=="cancelled"
+);
+
+});
+
+
+if(conflict){
+
+showError(
+"⚠️ هذا الموظف لديه موعد آخر بنفس التاريخ والوقت."
+);
+
+return;
+
+}
+
+
+/* =========================================
+   إنشاء أو تعديل الموعد
+========================================= */
+
+if(editingAppointmentId){
+
+const appointment=
+appointments.find(function(item){
+
+return item.id===editingAppointmentId;
+
+});
+
+
+if(appointment){
+
+appointment.customerId=customerId;
+appointment.customerName=customer.name;
+appointment.service=service;
+appointment.serviceName=serviceNames[service];
+appointment.staff=staff;
+appointment.date=date;
+appointment.time=time;
+appointment.duration=duration;
+appointment.notes=notes;
+appointment.status="scheduled";
+appointment.updatedAt=new Date().toISOString();
+
+}
+
+showSuccess(
+"✅ تم تعديل الموعد بنجاح."
+);
+
+}else{
+
+const appointment={
+
+id:
+"APT-"+Date.now(),
+
+customerId:customerId,
+
+customerName:customer.name,
+
+service:service,
+
+serviceName:serviceNames[service],
+
+staff:staff,
 
 date:date,
 
 time:time,
 
-scheduledBy:
-loggedStaff
-? loggedStaff.name
-: "المدير",
+duration:duration,
 
-scheduledAt:
+notes:notes,
+
+status:"scheduled",
+
+createdBy:
+loggedStaff ? loggedStaff.name : "المدير",
+
+createdAt:
 new Date().toISOString()
 
 };
 
-
-customer.status=
-"scheduled";
-
-
-saveCustomers();
-
-renderAppointments();
-
-renderCustomers();
-
-updateStats();
-
-
-showScheduleMessage(
-"✅ تم ترتيب موعد "+customer.id+" بنجاح.",
-"success"
-);
-
-}
+appointments.push(appointment);
 
 
 /* =========================================
-   تعديل الموعد
+   تحديث حالة المشترك
 ========================================= */
 
-function editAppointment(customerId){
-
-const customer=
-customers.find(function(item){
+const customerIndex=
+customers.findIndex(function(item){
 
 return item.id===customerId;
 
 });
 
+if(customerIndex!==-1){
 
-if(!customer){
-
-return;
-
-}
-
-
-const newDate=
-prompt(
-"أدخل تاريخ الموعد الجديد:",
-customer.appointment
-? customer.appointment.date
-: ""
-);
-
-
-if(newDate===null){
-
-return;
-
-}
-
-
-const newTime=
-prompt(
-"أدخل وقت الموعد الجديد:",
-customer.appointment
-? customer.appointment.time
-: ""
-);
-
-
-if(newTime===null){
-
-return;
-
-}
-
-
-if(!newDate || !newTime){
-
-alert(
-"يرجى إدخال التاريخ والوقت."
-);
-
-return;
-
-}
-
-
-customer.appointment.date=
-newDate;
-
-customer.appointment.time=
-newTime;
-
-customer.appointment.scheduledBy=
-loggedStaff
-? loggedStaff.name
-: "المدير";
-
-customer.appointment.scheduledAt=
-new Date().toISOString();
-
-customer.status=
+customers[customerIndex].status=
 "scheduled";
 
+customers[customerIndex].appointment={
+date:date,
+time:time,
+service:service
+};
 
-saveCustomers();
+}
 
-renderAppointments();
-
-renderCustomers();
-
-updateStats();
-
-
-showScheduleMessage(
-"✅ تم تعديل موعد "+customer.id+" بنجاح.",
-"success"
+showSuccess(
+"✅ تم تنظيم الموعد بنجاح."
 );
 
 }
 
 
 /* =========================================
-   عرض المشتركين
+   الحفظ
 ========================================= */
 
-function renderCustomers(){
-
-const list=
-document.getElementById(
-"customerList"
+localStorage.setItem(
+"sanadAppointments",
+JSON.stringify(appointments)
 );
 
-list.innerHTML="";
+localStorage.setItem(
+"sanadCustomers",
+JSON.stringify(customers)
+);
 
 
-if(customers.length===0){
+document
+.getElementById("appointmentForm")
+.reset();
 
-list.innerHTML=`
+editingAppointmentId=null;
+
+document
+.getElementById("saveAppointmentButton")
+.textContent="📅 حفظ الموعد";
+
+document
+.getElementById("cancelEditButton")
+.style.display="none";
+
+
+renderAppointments();
+renderCustomers();
+updateStats();
+
+});
+
+
+/* =========================================
+   عرض جدول المواعيد
+========================================= */
+
+function renderAppointments(){
+
+const body=
+document.getElementById("appointmentsBody");
+
+body.innerHTML="";
+
+
+if(appointments.length===0){
+
+body.innerHTML=`
+<tr>
+
+<td colspan="8">
 
 <div class="empty">
-
-لا توجد ملفات مشتركين حالياً.
-
+📅 لا توجد مواعيد منظمة حالياً.
 </div>
 
+</td>
+
+</tr>
 `;
 
 return;
@@ -1657,97 +1472,356 @@ return;
 }
 
 
-customers
+appointments
 .slice()
-.reverse()
-.forEach(function(customer){
+.sort(function(a,b){
 
-const element=
-document.createElement("div");
+const first=
+new Date(
+a.date+"T"+a.time
+);
 
-element.className="customer";
+const second=
+new Date(
+b.date+"T"+b.time
+);
+
+return first-second;
+
+})
+.forEach(function(appointment){
+
+const row=
+document.createElement("tr");
 
 
-element.innerHTML=`
+let statusClass="status-scheduled";
 
-<div>
-
-<div class="customer-name">
-
-👴 ${escapeHtml(customer.name)}
-
-</div>
-
-
-<div class="customer-info">
-
-📦 ${escapeHtml(
-customer.packageName || "-"
-)}
-
-<br>
-
-👨‍👩‍👦 العائلة:
-${escapeHtml(
-customer.familyName || "-"
-)}
-
-<br>
-
-📞 هاتف العائلة:
-${escapeHtml(
-customer.familyPhone || "-"
-)}
-
-<br>
-
-📌 الحالة:
-${getStatusText(customer.status)}
-
-<br>
-
-📅 الموعد:
-${
-customer.appointment
-?
-formatDate(
-customer.appointment.date
-)
-+" — "+
-formatTime(
-customer.appointment.time
-)
-:
-"لم يتم الترتيب بعد"
+if(appointment.status==="pending"){
+statusClass="status-pending";
 }
 
+if(appointment.status==="completed"){
+statusClass="status-completed";
+}
+
+if(appointment.status==="cancelled"){
+statusClass="status-cancelled";
+}
+
+
+let statusText="📅 مجدول";
+
+if(appointment.status==="pending"){
+statusText="⏳ بانتظار الموعد";
+}
+
+if(appointment.status==="completed"){
+statusText="✅ مكتمل";
+}
+
+if(appointment.status==="cancelled"){
+statusText="❌ ملغى";
+}
+
+
+row.innerHTML=`
+
+<td>
+
+<div class="patient-name">
+👴 ${escapeHtml(appointment.customerName)}
 </div>
 
+<div class="patient-id">
+${escapeHtml(appointment.customerId)}
 </div>
 
+</td>
 
-<div class="customer-id">
 
-${escapeHtml(customer.id)}
+<td>
 
-<br><br>
+<div class="service-name">
+${escapeHtml(appointment.serviceName)}
+</div>
+
+</td>
+
+
+<td>
+
+<div class="staff-name">
+${escapeHtml(appointment.staff)}
+</div>
+
+</td>
+
+
+<td>
+${formatDate(appointment.date)}
+</td>
+
+
+<td>
+<strong>
+${escapeHtml(appointment.time)}
+</strong>
+</td>
+
+
+<td>
+${escapeHtml(appointment.duration)} دقيقة
+</td>
+
+
+<td>
+
+<span class="status ${statusClass}">
+${statusText}
+</span>
+
+</td>
+
+
+<td>
+
+<div class="table-actions">
 
 <button
-class="view-button"
-onclick="showCustomerDetails('${escapeJs(customer.id)}')">
+class="table-button"
+onclick="editAppointment('${escapeJs(appointment.id)}')"
+>
+✏️ تعديل
+</button>
 
-عرض الملف
-
+<button
+class="table-button delete-button"
+onclick="deleteAppointment('${escapeJs(appointment.id)}')"
+>
+🗑️ حذف
 </button>
 
 </div>
 
+</td>
+
 `;
 
 
-list.appendChild(element);
+body.appendChild(row);
 
 });
+
+}
+
+
+/* =========================================
+   تجهيز موعد لمشترك
+========================================= */
+
+function prepareAppointment(customerId){
+
+document
+.getElementById("appointmentCustomer")
+.value=customerId;
+
+
+document
+.getElementById("schedule")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   تعديل موعد
+========================================= */
+
+function editAppointment(id){
+
+const appointment=
+appointments.find(function(item){
+
+return item.id===id;
+
+});
+
+
+if(!appointment){
+return;
+}
+
+
+editingAppointmentId=id;
+
+
+document
+.getElementById("appointmentCustomer")
+.value=appointment.customerId;
+
+
+document
+.getElementById("appointmentService")
+.value=appointment.service;
+
+
+document
+.getElementById("appointmentStaff")
+.value=appointment.staff;
+
+
+document
+.getElementById("appointmentDate")
+.value=appointment.date;
+
+
+document
+.getElementById("appointmentTime")
+.value=appointment.time;
+
+
+document
+.getElementById("appointmentDuration")
+.value=appointment.duration;
+
+
+document
+.getElementById("appointmentNotes")
+.value=appointment.notes || "";
+
+
+document
+.getElementById("saveAppointmentButton")
+.textContent="💾 حفظ تعديل الموعد";
+
+
+document
+.getElementById("cancelEditButton")
+.style.display="inline-block";
+
+
+document
+.getElementById("schedule")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================================
+   إلغاء التعديل
+========================================= */
+
+function cancelEdit(){
+
+editingAppointmentId=null;
+
+document
+.getElementById("appointmentForm")
+.reset();
+
+document
+.getElementById("saveAppointmentButton")
+.textContent="📅 حفظ الموعد";
+
+document
+.getElementById("cancelEditButton")
+.style.display="none";
+
+}
+
+
+/* =========================================
+   حذف الموعد
+========================================= */
+
+function deleteAppointment(id){
+
+const appointment=
+appointments.find(function(item){
+
+return item.id===id;
+
+});
+
+
+if(!appointment){
+return;
+}
+
+
+const confirmDelete=
+confirm(
+"هل أنت متأكد من حذف هذا الموعد؟"
+);
+
+
+if(!confirmDelete){
+return;
+}
+
+
+appointments=
+appointments.filter(function(item){
+
+return item.id!==id;
+
+});
+
+
+/* =========================================
+   تحديث حالة المشترك
+========================================= */
+
+const customer=
+customers.find(function(item){
+
+return item.id===appointment.customerId;
+
+});
+
+
+if(customer){
+
+const hasOtherAppointments=
+appointments.some(function(item){
+
+return(
+item.customerId===customer.id &&
+item.status!=="cancelled"
+);
+
+});
+
+
+if(!hasOtherAppointments){
+
+customer.status="pending_schedule";
+customer.appointment=null;
+
+}
+
+}
+
+
+localStorage.setItem(
+"sanadAppointments",
+JSON.stringify(appointments)
+);
+
+localStorage.setItem(
+"sanadCustomers",
+JSON.stringify(customers)
+);
+
+
+renderAppointments();
+renderCustomers();
+updateStats();
 
 }
 
@@ -1758,327 +1832,51 @@ list.appendChild(element);
 
 function updateStats(){
 
-document.getElementById(
-"customersCount"
-).textContent=
-customers.length;
+document
+.getElementById("customersCount")
+.textContent=customers.length;
 
 
 const today=
-new Date();
+new Date()
+.toISOString()
+.split("T")[0];
 
 
-document.getElementById(
-"newCustomersCount"
-).textContent=
+document
+.getElementById("todayAppointments")
+.textContent=
 
-customers.filter(function(customer){
-
-if(!customer.createdAt){
-
-return false;
-
-}
-
-const created=
-new Date(customer.createdAt);
+appointments.filter(function(item){
 
 return(
-created.getFullYear()===
-today.getFullYear() &&
-created.getMonth()===
-today.getMonth() &&
-created.getDate()===
-today.getDate()
+item.date===today &&
+item.status!=="cancelled"
 );
 
 }).length;
 
 
-document.getElementById(
-"todayAppointmentsCount"
-).textContent=
+document
+.getElementById("pendingCustomers")
+.textContent=
 
-customers.filter(function(customer){
+customers.filter(function(item){
 
-return(
-customer.appointment &&
-isToday(
-customer.appointment.date
-)
-);
+return item.status==="pending_schedule";
 
 }).length;
 
 
-document.getElementById(
-"pendingCount"
-).textContent=
+document
+.getElementById("appointmentsCount")
+.textContent=
 
-customers.filter(function(customer){
+appointments.filter(function(item){
 
-return(
-customer.status===
-"pending_schedule"
-);
+return item.status!=="cancelled";
 
 }).length;
-
-}
-
-
-/* =========================================
-   رسالة الموعد
-========================================= */
-
-function showScheduleMessage(
-message,
-type
-){
-
-const box=
-document.getElementById(
-"scheduleMessage"
-);
-
-box.textContent=
-message;
-
-box.className=
-"message "+type;
-
-box.style.display=
-"block";
-
-
-setTimeout(function(){
-
-box.style.display=
-"none";
-
-},4000);
-
-}
-
-
-/* =========================================
-   تفاصيل المشترك
-========================================= */
-
-function showCustomerDetails(customerId){
-
-const customer=
-customers.find(function(item){
-
-return item.id===customerId;
-
-});
-
-
-if(!customer){
-
-return;
-
-}
-
-
-const details=
-document.getElementById(
-"customerDetails"
-);
-
-
-details.innerHTML=`
-
-<div class="detail-row">
-
-<span class="detail-label">
-رقم المشترك
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.id)}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-اسم المسن
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.name)}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-العمر
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.age || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-هاتف المسن
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.phone || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-اسم العائلة
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.familyName || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-هاتف العائلة
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.familyPhone || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-الباقة
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.packageName || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-العنوان
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.address || "-")}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-الحالة
-</span>
-
-<span class="detail-value">
-${getStatusText(customer.status)}
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-الموعد
-</span>
-
-<span class="detail-value">
-
-${
-customer.appointment
-?
-formatDate(
-customer.appointment.date
-)
-+" — "+
-formatTime(
-customer.appointment.time
-)
-:
-"لم يتم الترتيب بعد"
-}
-
-</span>
-
-</div>
-
-
-<div class="detail-row">
-
-<span class="detail-label">
-ملاحظات
-</span>
-
-<span class="detail-value">
-${escapeHtml(customer.notes || "-")}
-</span>
-
-</div>
-
-`;
-
-
-document.getElementById(
-"customerModal"
-).style.display="flex";
-
-}
-
-
-/* =========================================
-   إغلاق نافذة التفاصيل
-========================================= */
-
-function closeCustomerModal(){
-
-document.getElementById(
-"customerModal"
-).style.display="none";
-
-}
-
-
-function closeModalOutside(event){
-
-if(
-event.target.id===
-"customerModal"
-){
-
-closeCustomerModal();
-
-}
 
 }
 
@@ -2087,31 +1885,22 @@ closeCustomerModal();
    تنسيق التاريخ
 ========================================= */
 
-function formatDate(dateString){
+function formatDate(date){
 
-if(!dateString){
-
+if(!date){
 return "-";
-
 }
-
 
 const parts=
-dateString.split("-");
-
+date.split("-");
 
 if(parts.length!==3){
-
-return dateString;
-
+return date;
 }
 
-
 return(
-parts[2]+
-"/"+
-parts[1]+
-"/"+
+parts[2]+"/"+
+parts[1]+"/"+
 parts[0]
 );
 
@@ -2119,74 +1908,39 @@ parts[0]
 
 
 /* =========================================
-   تنسيق الوقت
+   رسائل
 ========================================= */
 
-function formatTime(timeString){
+function showSuccess(message){
 
-if(!timeString){
+const success=
+document.getElementById("successMessage");
 
-return "-";
+const error=
+document.getElementById("errorMessage");
 
-}
+error.style.display="none";
 
+success.textContent=message;
 
-const parts=
-timeString.split(":");
-
-
-if(parts.length<2){
-
-return timeString;
+success.style.display="block";
 
 }
 
 
-let hour=
-parseInt(parts[0]);
+function showError(message){
 
+const error=
+document.getElementById("errorMessage");
 
-const minute=
-parts[1];
+const success=
+document.getElementById("successMessage");
 
+success.style.display="none";
 
-const period=
-hour>=12
-? "مساءً"
-: "صباحاً";
+error.textContent=message;
 
-
-hour=
-hour%12 || 12;
-
-
-return(
-hour+
-":"+
-minute+
-" "+
-period
-);
-
-}
-
-
-/* =========================================
-   الانتقال إلى قسم
-========================================= */
-
-function scrollToSection(id){
-
-const section=
-document.getElementById(id);
-
-if(section){
-
-section.scrollIntoView({
-behavior:"smooth"
-});
-
-}
+error.style.display="block";
 
 }
 
@@ -2195,14 +1949,11 @@ behavior:"smooth"
    تسجيل الخروج
 ========================================= */
 
-function logoutManager(event){
+function logoutStaff(event){
 
 if(event){
-
 event.preventDefault();
-
 }
-
 
 localStorage.removeItem(
 "sanadLoggedInStaff"
@@ -2219,7 +1970,7 @@ window.location.href=
 
 
 /* =========================================
-   حماية النصوص
+   حماية HTML
 ========================================= */
 
 function escapeHtml(value){
@@ -2239,17 +1990,16 @@ function escapeJs(value){
 return String(value ?? "")
 .replace(/\\/g,"\\\\")
 .replace(/'/g,"\\'")
-.replace(/\r/g,"\\r")
-.replace(/\n/g,"\\n");
+.replace(/"/g,"&quot;");
 
 }
 
 
 /* =========================================
-   تشغيل الصفحة
+   التشغيل
 ========================================= */
 
-loadCustomers();
+renderCustomerSelect();
 
 renderAppointments();
 
@@ -2262,3 +2012,4 @@ updateStats();
 </body>
 
 </html>
+```
