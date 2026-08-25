@@ -1,7 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -164,6 +166,68 @@
     }
 
     /* =========================
+       MAIN ACTIONS
+    ========================= */
+
+    .main-actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 28px;
+    }
+
+    .main-action {
+      text-decoration: none;
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 19px;
+      padding: 20px;
+
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      box-shadow: 0 10px 30px rgba(22,70,65,.04);
+
+      transition: .25s;
+    }
+
+    .main-action:hover {
+      transform: translateY(-4px);
+      border-color: #16877d;
+      box-shadow: 0 15px 35px rgba(22,135,125,.10);
+    }
+
+    .main-action-icon {
+      width: 50px;
+      height: 50px;
+
+      border-radius: 15px;
+
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 25px;
+      flex-shrink: 0;
+    }
+
+    .main-action h3 {
+      color: #163b38;
+      margin: 0 0 5px;
+      font-size: 15px;
+    }
+
+    .main-action p {
+      color: #718480;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* =========================
        VISITS
     ========================= */
 
@@ -276,7 +340,7 @@
     }
 
     /* =========================
-       TASK CARDS
+       TASKS
     ========================= */
 
     .task-list {
@@ -366,6 +430,21 @@
       line-height: 1.7;
     }
 
+    .lab-button {
+      display: inline-block;
+      margin-top: 12px;
+
+      color: #16877d;
+      background: #e8f5f3;
+
+      padding: 8px 13px;
+      border-radius: 9px;
+
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
     /* =========================
        REPORTS
     ========================= */
@@ -382,6 +461,13 @@
       padding: 20px;
       background: #fbfefe;
       text-align: center;
+
+      transition: .25s;
+    }
+
+    .report-card:hover {
+      border-color: #16877d;
+      transform: translateY(-3px);
     }
 
     .report-card .report-icon {
@@ -478,6 +564,10 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .main-actions {
+        grid-template-columns: 1fr;
+      }
+
       .two-columns {
         grid-template-columns: 1fr;
       }
@@ -567,9 +657,7 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header class="header">
 
@@ -592,9 +680,7 @@
 </header>
 
 
-<!-- =========================
-     DASHBOARD
-========================= -->
+<!-- DASHBOARD -->
 
 <main class="dashboard">
 
@@ -718,6 +804,77 @@
   </section>
 
 
+  <!-- =========================
+       MAIN ACTIONS
+  ========================= -->
+
+  <section class="main-actions">
+
+    <a href="visit.html" class="main-action">
+
+      <div class="main-action-icon">
+        📅
+      </div>
+
+      <div>
+
+        <h3>
+          جدول الزيارات
+        </h3>
+
+        <p>
+          عرض وتنظيم جميع الزيارات والمهام المجدولة.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <a href="visit.html#reports" class="main-action">
+
+      <div class="main-action-icon">
+        📋
+      </div>
+
+      <div>
+
+        <h3>
+          التقارير
+        </h3>
+
+        <p>
+          الوصول إلى التقارير المطلوبة حسب اختصاص الكادر.
+        </p>
+
+      </div>
+
+    </a>
+
+
+    <a href="visit.html#labs" class="main-action">
+
+      <div class="main-action-icon">
+        🧪
+      </div>
+
+      <div>
+
+        <h3>
+          مواعيد التحاليل
+        </h3>
+
+        <p>
+          متابعة مواعيد إجراء التحاليل للمسنين.
+        </p>
+
+      </div>
+
+    </a>
+
+  </section>
+
+
   <!-- TODAY VISITS -->
 
   <section class="section">
@@ -735,6 +892,19 @@
         </p>
 
       </div>
+
+      <a href="visit.html"
+         style="
+         text-decoration:none;
+         background:#e8f5f3;
+         color:#16877d;
+         padding:10px 15px;
+         border-radius:11px;
+         font-size:12px;
+         font-weight:800;
+         ">
+        عرض الجدول الكامل
+      </a>
 
     </div>
 
@@ -758,9 +928,11 @@
             فحص ومتابعة الحالة الصحية
           </p>
 
-          <button class="visit-button">
+          <a href="visit.html"
+             class="visit-button"
+             style="display:inline-block;text-decoration:none;">
             فتح الزيارة
-          </button>
+          </a>
 
         </div>
 
@@ -787,9 +959,11 @@
             متابعة الوظائف الحيوية والأدوية
           </p>
 
-          <button class="visit-button">
+          <a href="visit.html"
+             class="visit-button"
+             style="display:inline-block;text-decoration:none;">
             فتح الزيارة
-          </button>
+          </a>
 
         </div>
 
@@ -816,9 +990,11 @@
             زيارة متابعة أسبوعية
           </p>
 
-          <button class="visit-button">
+          <a href="visit.html"
+             class="visit-button"
+             style="display:inline-block;text-decoration:none;">
             فتح الزيارة
-          </button>
+          </a>
 
         </div>
 
@@ -845,9 +1021,11 @@
             تقييم الحالة الصحية وإعداد التقرير
           </p>
 
-          <button class="visit-button">
+          <a href="visit.html"
+             class="visit-button"
+             style="display:inline-block;text-decoration:none;">
             فتح الزيارة
-          </button>
+          </a>
 
         </div>
 
@@ -962,7 +1140,7 @@
 
     <!-- LAB -->
 
-    <section class="section">
+    <section class="section" id="labs">
 
       <div class="section-header">
 
@@ -977,6 +1155,16 @@
           </p>
 
         </div>
+
+        <a href="visit.html#labs"
+           style="
+           text-decoration:none;
+           color:#16877d;
+           font-size:12px;
+           font-weight:800;
+           ">
+          عرض الكل
+        </a>
 
       </div>
 
@@ -1001,6 +1189,10 @@
           📅 الثلاثاء 25 أغسطس
         </p>
 
+        <a href="visit.html#labs" class="lab-button">
+          فتح الموعد
+        </a>
+
       </div>
 
 
@@ -1024,7 +1216,12 @@
           📅 الأربعاء 26 أغسطس
         </p>
 
+        <a href="visit.html#labs" class="lab-button">
+          فتح الموعد
+        </a>
+
       </div>
+
 
     </section>
 
@@ -1034,7 +1231,7 @@
 
   <!-- REPORTS -->
 
-  <section class="section">
+  <section class="section" id="reports">
 
     <div class="section-header">
 
@@ -1049,6 +1246,16 @@
         </p>
 
       </div>
+
+      <a href="visit.html#reports"
+         style="
+         text-decoration:none;
+         color:#16877d;
+         font-size:12px;
+         font-weight:800;
+         ">
+        فتح نظام التقارير
+      </a>
 
     </div>
 
@@ -1194,9 +1401,7 @@
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1218,3 +1423,4 @@
 </body>
 
 </html>
+```
