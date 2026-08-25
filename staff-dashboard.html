@@ -1,8 +1,8 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -92,7 +92,6 @@
       border: 1px solid #e3edeb;
       border-radius: 20px;
       padding: 22px;
-
       box-shadow: 0 12px 35px rgba(22,70,65,.05);
     }
 
@@ -137,7 +136,6 @@
       border-radius: 24px;
       padding: 28px;
       margin-bottom: 25px;
-
       box-shadow: 0 15px 45px rgba(22,70,65,.05);
     }
 
@@ -228,10 +226,6 @@
       background: #fff5df;
       color: #a66a00;
     }
-
-    /* =========================
-       OPEN VISIT BUTTON
-    ========================= */
 
     .open-visit {
       border: none;
@@ -335,7 +329,6 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
-
       margin-bottom: 9px;
     }
 
@@ -543,10 +536,6 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
 
   <a href="index.html" class="logo">
@@ -555,35 +544,22 @@
 
   <nav class="nav">
 
-    <a href="index.html">
-      الرئيسية
-    </a>
-
-    <a href="services.html">
-      خدماتنا
-    </a>
-
-    <a href="index.html#how">
-      كيف يعمل سند؟
-    </a>
-
-    <a href="index.html#about">
-      عن سند
-    </a>
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="index.html#how">كيف يعمل سند؟</a>
+    <a href="index.html#about">عن سند</a>
 
   </nav>
 
 </header>
 
 
-<!-- =========================
-     DASHBOARD
-========================= -->
-
 <main class="dashboard">
 
 
-  <!-- WELCOME -->
+  <!-- =========================
+       WELCOME
+  ========================= -->
 
   <section class="welcome">
 
@@ -593,26 +569,26 @@
         لوحة الكادر
       </span>
 
-      <h1>
-        أهلاً بك، د. أحمد 👋
+      <h1 id="welcomeName">
+        أهلاً بك 👋
       </h1>
 
-      <p>
-        طبيب مقيم — فريق سند
-        <br>
-        الثلاثاء، 25 أغسطس 2026
+      <p id="welcomeRole">
+        جاري تحميل بيانات الحساب...
       </p>
 
     </div>
 
-    <div class="staff-avatar">
+    <div class="staff-avatar" id="staffAvatar">
       👨‍⚕️
     </div>
 
   </section>
 
 
-  <!-- STATS -->
+  <!-- =========================
+       STATS
+  ========================= -->
 
   <section class="stats">
 
@@ -630,8 +606,8 @@
 
       </div>
 
-      <div class="stat-number">
-        4
+      <div class="stat-number" id="visitsCount">
+        0
       </div>
 
     </div>
@@ -651,8 +627,8 @@
 
       </div>
 
-      <div class="stat-number">
-        12
+      <div class="stat-number" id="patientsCount">
+        0
       </div>
 
     </div>
@@ -672,8 +648,8 @@
 
       </div>
 
-      <div class="stat-number">
-        2
+      <div class="stat-number" id="reportsCount">
+        0
       </div>
 
     </div>
@@ -693,8 +669,8 @@
 
       </div>
 
-      <div class="stat-number">
-        2
+      <div class="stat-number" id="labsCount">
+        0
       </div>
 
     </div>
@@ -714,172 +690,14 @@
         📅 جدول زياراتي اليوم
       </h2>
 
-      <p>
+      <p id="visitsDescription">
         الزيارات والمهام المجدولة حسب اختصاصك
       </p>
 
     </div>
 
 
-    <div class="visit-list">
-
-
-      <!-- VISIT 1 -->
-
-      <div class="visit">
-
-        <div class="visit-time">
-          09:00 ص
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            محمد علي
-          </h3>
-
-          <p>
-            متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير
-          </p>
-
-          <button
-            class="open-visit"
-            onclick="openVisit(
-              'محمد علي',
-              'متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير',
-              '09:00 ص',
-              'الثلاثاء 25 أغسطس 2026'
-            )"
-          >
-            🩺 فتح الزيارة
-          </button>
-
-        </div>
-
-        <span class="visit-status done">
-          مكتملة
-        </span>
-
-      </div>
-
-
-      <!-- VISIT 2 -->
-
-      <div class="visit">
-
-        <div class="visit-time">
-          11:00 ص
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            علي غلام
-          </h3>
-
-          <p>
-            متابعة الوظائف الحيوية والأدوية
-          </p>
-
-          <button
-            class="open-visit"
-            onclick="openVisit(
-              'علي غلام',
-              'متابعة الوظائف الحيوية والأدوية',
-              '11:00 ص',
-              'الثلاثاء 25 أغسطس 2026'
-            )"
-          >
-            🩺 فتح الزيارة
-          </button>
-
-        </div>
-
-        <span class="visit-status current">
-          الزيارة الحالية
-        </span>
-
-      </div>
-
-
-      <!-- VISIT 3 -->
-
-      <div class="visit">
-
-        <div class="visit-time">
-          02:00 م
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            أحمد معين
-          </h3>
-
-          <p>
-            زيارة متابعة أسبوعية
-          </p>
-
-          <button
-            class="open-visit"
-            onclick="openVisit(
-              'أحمد معين',
-              'زيارة متابعة أسبوعية',
-              '02:00 م',
-              'الثلاثاء 25 أغسطس 2026'
-            )"
-          >
-            🩺 فتح الزيارة
-          </button>
-
-        </div>
-
-        <span class="visit-status pending">
-          قادمة
-        </span>
-
-      </div>
-
-
-      <!-- VISIT 4 -->
-
-      <div class="visit">
-
-        <div class="visit-time">
-          04:00 م
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            حسين ناصر
-          </h3>
-
-          <p>
-            تقييم الحالة الصحية وإعداد التقرير
-          </p>
-
-          <button
-            class="open-visit"
-            onclick="openVisit(
-              'حسين ناصر',
-              'تقييم الحالة الصحية وإعداد التقرير',
-              '04:00 م',
-              'الثلاثاء 25 أغسطس 2026'
-            )"
-          >
-            🩺 فتح الزيارة
-          </button>
-
-        </div>
-
-        <span class="visit-status pending">
-          قادمة
-        </span>
-
-      </div>
-
-
+    <div class="visit-list" id="visitList">
     </div>
 
   </section>
@@ -906,77 +724,11 @@
 
       </div>
 
-
-      <div class="task-list">
-
-        <div class="task">
-
-          <div class="task-icon">
-            🩺
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              متابعة الوظائف الحيوية
-            </h3>
-
-            <p>
-              مراجعة ضغط الدم والسكر والحرارة والنبض.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="task">
-
-          <div class="task-icon">
-            💊
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              مراجعة الأدوية
-            </h3>
-
-            <p>
-              التأكد من الالتزام بالخطة العلاجية.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="task">
-
-          <div class="task-icon">
-            📋
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              إعداد التقرير الأسبوعي
-            </h3>
-
-            <p>
-              توثيق حالة المسن بعد الزيارة.
-            </p>
-
-          </div>
-
-        </div>
-
+      <div class="task-list" id="taskList">
       </div>
 
     </section>
 
-
-    <!-- LAB -->
 
     <section class="section">
 
@@ -987,55 +739,12 @@
         </h2>
 
         <p>
-          مواعيد التحاليل المرتبطة بالمسنين المكلف بهم
+          المواعيد المرتبطة بالمسنين المكلف بهم
         </p>
 
       </div>
 
-
-      <div class="lab-card">
-
-        <div class="lab-top">
-
-          <span class="lab-name">
-            محمد علي
-          </span>
-
-          <span class="lab-date">
-            10:30 ص
-          </span>
-
-        </div>
-
-        <p>
-          صورة الدم + وظائف الكلى
-          <br>
-          📅 الثلاثاء 25 أغسطس 2026
-        </p>
-
-      </div>
-
-
-      <div class="lab-card">
-
-        <div class="lab-top">
-
-          <span class="lab-name">
-            سمية هاشم
-          </span>
-
-          <span class="lab-date">
-            01:00 م
-          </span>
-
-        </div>
-
-        <p>
-          صورة الدم + وظائف الكلى
-          <br>
-          📅 الأربعاء 26 أغسطس 2026
-        </p>
-
+      <div id="labList">
       </div>
 
     </section>
@@ -1061,59 +770,7 @@
 
     </div>
 
-
-    <div class="reports">
-
-      <div class="report">
-
-        <div class="report-icon">
-          📝
-        </div>
-
-        <h3>
-          التقرير الأسبوعي
-        </h3>
-
-        <p>
-          متابعة تطور حالة المسن خلال الأسبوع.
-        </p>
-
-      </div>
-
-
-      <div class="report">
-
-        <div class="report-icon">
-          🩺
-        </div>
-
-        <h3>
-          التقرير الطبي
-        </h3>
-
-        <p>
-          تسجيل الفحص والتقييم والتوصيات الطبية.
-        </p>
-
-      </div>
-
-
-      <div class="report">
-
-        <div class="report-icon">
-          📊
-        </div>
-
-        <h3>
-          سجل المتابعة
-        </h3>
-
-        <p>
-          عرض الزيارات والملاحظات السابقة للمسن.
-        </p>
-
-      </div>
-
+    <div class="reports" id="reportList">
     </div>
 
   </section>
@@ -1137,7 +794,6 @@
 
     </div>
 
-
     <div class="profile">
 
       <div class="profile-item">
@@ -1146,8 +802,8 @@
           الاسم
         </span>
 
-        <strong>
-          د. أحمد محمد
+        <strong id="profileName">
+          —
         </strong>
 
       </div>
@@ -1159,8 +815,8 @@
           الصفة الوظيفية
         </span>
 
-        <strong>
-          طبيب مقيم
+        <strong id="profileRole">
+          —
         </strong>
 
       </div>
@@ -1172,8 +828,8 @@
           رقم الموظف
         </span>
 
-        <strong>
-          ST-001
+        <strong id="profileId">
+          —
         </strong>
 
       </div>
@@ -1183,14 +839,13 @@
   </section>
 
 
-  <!-- LOGOUT -->
+  <!-- =========================
+       LOGOUT
+  ========================= -->
 
   <div class="logout-area">
 
-    <a
-      href="login.html"
-      class="logout"
-    >
+    <a href="#" class="logout" onclick="logoutStaff()">
       🚪 تسجيل الخروج
     </a>
 
@@ -1219,9 +874,691 @@
 
 <script>
 
-/* =========================
-   OPEN VISIT
-========================= */
+/* =====================================================
+   بيانات الكادر
+===================================================== */
+
+const staffDatabase = {
+
+  "07700000001": {
+
+    name: "د. أحمد محمد",
+    role: "طبيب مقيم",
+    employeeId: "ST-001",
+    icon: "👨‍⚕️",
+
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير",
+        time: "09:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "متابعة الوظائف الحيوية والأدوية",
+        time: "11:00 ص",
+        status: "current",
+        statusText: "الزيارة الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "زيارة متابعة أسبوعية",
+        time: "02:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      },
+      {
+        patient: "حسين ناصر",
+        type: "تقييم الحالة الصحية وإعداد التقرير",
+        time: "04:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
+
+    tasks: [
+      {
+        icon: "🩺",
+        title: "متابعة الوظائف الحيوية",
+        text: "مراجعة ضغط الدم والسكر والحرارة والنبض."
+      },
+      {
+        icon: "💊",
+        title: "مراجعة الأدوية",
+        text: "التأكد من الالتزام بالخطة العلاجية."
+      },
+      {
+        icon: "📋",
+        title: "إعداد التقرير الأسبوعي",
+        text: "توثيق حالة المسن بعد الزيارة."
+      }
+    ],
+
+    labs: [
+      {
+        patient: "محمد علي",
+        time: "10:30 ص",
+        tests: "صورة الدم + وظائف الكلى",
+        date: "الثلاثاء 25 أغسطس 2026"
+      },
+      {
+        patient: "سمية هاشم",
+        time: "01:00 م",
+        tests: "صورة الدم + وظائف الكلى",
+        date: "الأربعاء 26 أغسطس 2026"
+      }
+    ],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "التقرير الأسبوعي",
+        text: "متابعة تطور حالة المسن خلال الأسبوع."
+      },
+      {
+        icon: "🩺",
+        title: "التقرير الطبي",
+        text: "تسجيل الفحص والتقييم والتوصيات الطبية."
+      },
+      {
+        icon: "📊",
+        title: "سجل المتابعة",
+        text: "عرض الزيارات والملاحظات السابقة للمسن."
+      }
+    ]
+
+  },
+
+
+  /* =========================
+     ممرض علي علاوي
+  ========================= */
+
+  "07700000002": {
+
+    name: "علي علاوي",
+    role: "ممرض",
+    employeeId: "ST-002",
+    icon: "👨‍⚕️",
+
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "زيارة تمريضية — قياس الضغط والسكر وإعطاء العلاج",
+        time: "08:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "زيارة تمريضية — العلامات الحيوية والأدوية",
+        time: "09:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "زيارة تمريضية",
+        time: "10:00 ص",
+        status: "pending",
+        statusText: "قادمة"
+      },
+      {
+        patient: "حسين ناصر",
+        type: "زيارة تمريضية",
+        time: "11:00 ص",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
+
+    tasks: [
+      {
+        icon: "🩺",
+        title: "قياس العلامات الحيوية",
+        text: "قياس ضغط الدم والسكر والحرارة والنبض."
+      },
+      {
+        icon: "💊",
+        title: "إعطاء الأدوية",
+        text: "إعطاء العلاج حسب الخطة المحددة للمسن."
+      },
+      {
+        icon: "🛁",
+        title: "متابعة الرعاية اليومية",
+        text: "متابعة الحالة العامة للمسن أثناء الزيارة."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "تقرير الزيارة",
+        text: "تسجيل القياسات والملاحظات بعد كل زيارة."
+      },
+      {
+        icon: "❤️",
+        title: "العلامات الحيوية",
+        text: "توثيق ضغط الدم والسكر والحرارة والنبض."
+      }
+    ]
+
+  },
+
+
+  /* =========================
+     ممرض درغام حسين
+  ========================= */
+
+  "07700000003": {
+
+    name: "درغام حسين",
+    role: "ممرض",
+    employeeId: "ST-003",
+    icon: "👨‍⚕️",
+
+    visits: [
+      {
+        patient: "سمية هاشم",
+        type: "زيارة تمريضية — قياس العلامات الحيوية",
+        time: "08:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "انتصار علي",
+        type: "زيارة تمريضية — إعطاء الأدوية",
+        time: "09:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "إيمان راضي",
+        type: "زيارة تمريضية",
+        time: "10:00 ص",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
+
+    tasks: [
+      {
+        icon: "🩺",
+        title: "قياس العلامات الحيوية",
+        text: "قياس الضغط والسكر والحرارة والنبض."
+      },
+      {
+        icon: "💊",
+        title: "إعطاء الأدوية",
+        text: "إعطاء الأدوية حسب جدول العلاج."
+      },
+      {
+        icon: "📋",
+        title: "تسجيل التقرير",
+        text: "تسجيل تفاصيل الزيارة والملاحظات."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "تقرير الزيارة",
+        text: "توثيق ما تم خلال الزيارة."
+      },
+      {
+        icon: "❤️",
+        title: "سجل العلامات الحيوية",
+        text: "تسجيل القياسات الصحية للمسن."
+      }
+    ]
+
+  },
+
+
+  /* =========================
+     مساعد حيرش حامي
+  ========================= */
+
+  "07700000004": {
+
+    name: "حيرش حامي",
+    role: "مساعد رعاية",
+    employeeId: "ST-004",
+    icon: "🧑‍⚕️",
+
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "رعاية شخصية — مساعدة في الاستحمام والعناية اليومية",
+        time: "08:30 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "رعاية شخصية ومتابعة النظافة",
+        time: "10:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "رعاية شخصية",
+        time: "11:30 ص",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
+
+    tasks: [
+      {
+        icon: "🛁",
+        title: "العناية الشخصية",
+        text: "مساعدة المسن في الاستحمام والنظافة الشخصية."
+      },
+      {
+        icon: "🧹",
+        title: "ترتيب محيط المسن",
+        text: "التأكد من نظافة وترتيب المكان المحيط بالمسن."
+      },
+      {
+        icon: "❤️",
+        title: "ملاحظة الحالة العامة",
+        text: "إبلاغ الممرض عن أي تغير ملحوظ في حالة المسن."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "تقرير الرعاية",
+        text: "تسجيل ما تم تقديمه خلال زيارة الرعاية."
+      }
+    ]
+
+  },
+
+
+  /* =========================
+     مساعد دلير أحمد
+  ========================= */
+
+  "07700000005": {
+
+    name: "دلير أحمد",
+    role: "مساعد رعاية",
+    employeeId: "ST-005",
+    icon: "🧑‍⚕️",
+
+    visits: [
+      {
+        patient: "سمية هاشم",
+        type: "رعاية شخصية — استحمام وعناية يومية",
+        time: "08:30 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "إيمان راضي",
+        type: "رعاية شخصية",
+        time: "10:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "فريزة علي",
+        type: "رعاية شخصية",
+        time: "11:30 ص",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
+
+    tasks: [
+      {
+        icon: "🛁",
+        title: "الاستحمام والعناية",
+        text: "مساعدة المسن في الاستحمام والعناية الشخصية."
+      },
+      {
+        icon: "🧹",
+        title: "النظافة والترتيب",
+        text: "المحافظة على نظافة وترتيب مكان المسن."
+      },
+      {
+        icon: "❤️",
+        title: "متابعة الحالة العامة",
+        text: "رفع أي ملاحظة مهمة إلى الممرض المسؤول."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "تقرير الرعاية",
+        text: "تسجيل الخدمات التي تم تقديمها للمسن."
+      }
+    ]
+
+  }
+
+};
+
+
+/* =====================================================
+   قراءة الحساب الذي سجل الدخول
+===================================================== */
+
+const loggedStaff =
+  localStorage.getItem("sanadLoggedStaff");
+
+
+/* =====================================================
+   التحقق من وجود تسجيل دخول
+===================================================== */
+
+if (!loggedStaff) {
+
+  alert("يرجى تسجيل الدخول أولاً.");
+
+  window.location.href = "staff-login.html";
+
+}
+
+
+/* =====================================================
+   الحصول على بيانات الموظف
+===================================================== */
+
+const staff = staffDatabase[loggedStaff];
+
+
+/* =====================================================
+   التحقق من الحساب
+===================================================== */
+
+if (!staff) {
+
+  alert("بيانات الحساب غير موجودة.");
+
+  localStorage.removeItem("sanadLoggedStaff");
+
+  window.location.href = "staff-login.html";
+
+}
+
+
+/* =====================================================
+   عرض بيانات الموظف
+===================================================== */
+
+document.getElementById("welcomeName").textContent =
+  "أهلاً بك، " + staff.name + " 👋";
+
+
+document.getElementById("welcomeRole").innerHTML =
+  staff.role +
+  " — فريق سند" +
+  "<br>" +
+  "الثلاثاء، 25 أغسطس 2026";
+
+
+document.getElementById("staffAvatar").textContent =
+  staff.icon;
+
+
+document.getElementById("profileName").textContent =
+  staff.name;
+
+
+document.getElementById("profileRole").textContent =
+  staff.role;
+
+
+document.getElementById("profileId").textContent =
+  staff.employeeId;
+
+
+/* =====================================================
+   الإحصائيات
+===================================================== */
+
+document.getElementById("visitsCount").textContent =
+  staff.visits.length;
+
+
+document.getElementById("patientsCount").textContent =
+  staff.visits.length;
+
+
+document.getElementById("reportsCount").textContent =
+  staff.reports.length;
+
+
+document.getElementById("labsCount").textContent =
+  staff.labs.length;
+
+
+/* =====================================================
+   عرض الزيارات
+===================================================== */
+
+const visitList =
+  document.getElementById("visitList");
+
+
+staff.visits.forEach(function(visit) {
+
+  const visitElement =
+    document.createElement("div");
+
+  visitElement.className =
+    "visit";
+
+
+  visitElement.innerHTML = `
+
+    <div class="visit-time">
+      ${visit.time}
+    </div>
+
+    <div class="visit-info">
+
+      <h3>
+        ${visit.patient}
+      </h3>
+
+      <p>
+        ${visit.type}
+      </p>
+
+      <button
+        class="open-visit"
+        onclick="openVisit(
+          '${visit.patient}',
+          '${visit.type}',
+          '${visit.time}',
+          'الثلاثاء 25 أغسطس 2026'
+        )"
+      >
+        🩺 فتح الزيارة
+      </button>
+
+    </div>
+
+    <span class="visit-status ${visit.status}">
+      ${visit.statusText}
+    </span>
+
+  `;
+
+
+  visitList.appendChild(visitElement);
+
+});
+
+
+/* =====================================================
+   عرض المهام
+===================================================== */
+
+const taskList =
+  document.getElementById("taskList");
+
+
+staff.tasks.forEach(function(task) {
+
+  const taskElement =
+    document.createElement("div");
+
+  taskElement.className =
+    "task";
+
+
+  taskElement.innerHTML = `
+
+    <div class="task-icon">
+      ${task.icon}
+    </div>
+
+    <div class="task-info">
+
+      <h3>
+        ${task.title}
+      </h3>
+
+      <p>
+        ${task.text}
+      </p>
+
+    </div>
+
+  `;
+
+
+  taskList.appendChild(taskElement);
+
+});
+
+
+/* =====================================================
+   عرض التحاليل
+===================================================== */
+
+const labList =
+  document.getElementById("labList");
+
+
+if (staff.labs.length === 0) {
+
+  labList.innerHTML = `
+
+    <div class="lab-card">
+
+      <p style="text-align:center;">
+        لا توجد مواعيد تحاليل مرتبطة بحسابك حالياً.
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+staff.labs.forEach(function(lab) {
+
+  const labElement =
+    document.createElement("div");
+
+  labElement.className =
+    "lab-card";
+
+
+  labElement.innerHTML = `
+
+    <div class="lab-top">
+
+      <span class="lab-name">
+        ${lab.patient}
+      </span>
+
+      <span class="lab-date">
+        ${lab.time}
+      </span>
+
+    </div>
+
+    <p>
+
+      ${lab.tests}
+
+      <br>
+
+      📅 ${lab.date}
+
+    </p>
+
+  `;
+
+
+  labList.appendChild(labElement);
+
+});
+
+
+/* =====================================================
+   عرض التقارير
+===================================================== */
+
+const reportList =
+  document.getElementById("reportList");
+
+
+staff.reports.forEach(function(report) {
+
+  const reportElement =
+    document.createElement("div");
+
+  reportElement.className =
+    "report";
+
+
+  reportElement.innerHTML = `
+
+    <div class="report-icon">
+      ${report.icon}
+    </div>
+
+    <h3>
+      ${report.title}
+    </h3>
+
+    <p>
+      ${report.text}
+    </p>
+
+  `;
+
+
+  reportList.appendChild(reportElement);
+
+});
+
+
+/* =====================================================
+   فتح الزيارة
+===================================================== */
 
 function openVisit(
   patientName,
@@ -1232,13 +1569,26 @@ function openVisit(
 
   const visitData = {
 
-    patientName: patientName,
+    patientName:
+      patientName,
 
-    visitType: visitType,
+    visitType:
+      visitType,
 
-    visitTime: visitTime,
+    visitTime:
+      visitTime,
 
-    date: date
+    date:
+      date,
+
+    staffName:
+      staff.name,
+
+    staffRole:
+      staff.role,
+
+    staffId:
+      staff.employeeId
 
   };
 
@@ -1249,7 +1599,28 @@ function openVisit(
   );
 
 
-  window.location.href = "visit.html";
+  window.location.href =
+    "visit.html";
+
+}
+
+
+/* =====================================================
+   تسجيل الخروج
+===================================================== */
+
+function logoutStaff() {
+
+  localStorage.removeItem(
+    "sanadLoggedStaff"
+  );
+
+  localStorage.removeItem(
+    "sanadCurrentVisit"
+  );
+
+  window.location.href =
+    "staff-login.html";
 
 }
 
@@ -1259,4 +1630,3 @@ function openVisit(
 </body>
 
 </html>
-```
