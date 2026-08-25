@@ -27,6 +27,7 @@
       padding: 45px 6%;
     }
 
+
     /* =========================
        WELCOME
     ========================= */
@@ -80,6 +81,7 @@
       flex-shrink: 0;
     }
 
+
     /* =========================
        QUICK STATS
     ========================= */
@@ -98,6 +100,13 @@
       padding: 22px;
 
       box-shadow: 0 12px 35px rgba(22,70,65,.05);
+
+      transition: .25s;
+    }
+
+    .stat:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 38px rgba(22,70,65,.08);
     }
 
     .stat-top {
@@ -130,6 +139,7 @@
       font-size: 28px;
       font-weight: 900;
     }
+
 
     /* =========================
        SECTION
@@ -165,67 +175,6 @@
       margin: 5px 0 0;
     }
 
-    /* =========================
-       MAIN ACTIONS
-    ========================= */
-
-    .main-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 28px;
-    }
-
-    .main-action {
-      text-decoration: none;
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 19px;
-      padding: 20px;
-
-      display: flex;
-      align-items: center;
-      gap: 14px;
-
-      box-shadow: 0 10px 30px rgba(22,70,65,.04);
-
-      transition: .25s;
-    }
-
-    .main-action:hover {
-      transform: translateY(-4px);
-      border-color: #16877d;
-      box-shadow: 0 15px 35px rgba(22,135,125,.10);
-    }
-
-    .main-action-icon {
-      width: 50px;
-      height: 50px;
-
-      border-radius: 15px;
-
-      background: #e8f5f3;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 25px;
-      flex-shrink: 0;
-    }
-
-    .main-action h3 {
-      color: #163b38;
-      margin: 0 0 5px;
-      font-size: 15px;
-    }
-
-    .main-action p {
-      color: #718480;
-      margin: 0;
-      font-size: 11px;
-      line-height: 1.6;
-    }
 
     /* =========================
        VISITS
@@ -277,6 +226,50 @@
       margin: 0;
     }
 
+
+    /* =========================
+       VISIT BUTTON
+    ========================= */
+
+    .visit-button {
+      display: inline-block;
+
+      margin-top: 10px;
+
+      background: #16877d;
+      color: white;
+
+      border: none;
+      border-radius: 10px;
+
+      padding: 9px 15px;
+
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      box-shadow: 0 7px 18px rgba(22,135,125,.12);
+
+      transition: .25s;
+    }
+
+    .visit-button:hover {
+      background: #0f7068;
+      color: white;
+      transform: translateY(-2px);
+
+      box-shadow: 0 10px 22px rgba(22,135,125,.18);
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
     .visit-status {
       padding: 7px 11px;
       border-radius: 9px;
@@ -301,33 +294,6 @@
       color: #16877d;
     }
 
-    /* =========================
-       VISIT BUTTON
-    ========================= */
-
-    .visit-button {
-      margin-top: 10px;
-
-      background: #16877d;
-      color: white;
-
-      border: none;
-      border-radius: 10px;
-
-      padding: 9px 15px;
-
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 800;
-
-      cursor: pointer;
-      transition: .25s;
-    }
-
-    .visit-button:hover {
-      background: #0f7068;
-      transform: translateY(-2px);
-    }
 
     /* =========================
        TWO COLUMNS
@@ -338,6 +304,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 25px;
     }
+
 
     /* =========================
        TASKS
@@ -359,6 +326,13 @@
       border-radius: 15px;
       background: #fbfefe;
       border: 1px solid #e5efed;
+
+      transition: .25s;
+    }
+
+    .task:hover {
+      border-color: #16877d;
+      transform: translateY(-2px);
     }
 
     .task-icon {
@@ -392,6 +366,7 @@
       margin: 0;
     }
 
+
     /* =========================
        LAB
     ========================= */
@@ -402,6 +377,13 @@
       border-radius: 17px;
       padding: 17px;
       margin-bottom: 12px;
+
+      transition: .25s;
+    }
+
+    .lab-card:hover {
+      border-color: #16877d;
+      transform: translateY(-2px);
     }
 
     .lab-top {
@@ -430,20 +412,6 @@
       line-height: 1.7;
     }
 
-    .lab-button {
-      display: inline-block;
-      margin-top: 12px;
-
-      color: #16877d;
-      background: #e8f5f3;
-
-      padding: 8px 13px;
-      border-radius: 9px;
-
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 800;
-    }
 
     /* =========================
        REPORTS
@@ -488,6 +456,7 @@
       line-height: 1.7;
     }
 
+
     /* =========================
        PROFILE
     ========================= */
@@ -516,6 +485,7 @@
       color: #163b38;
       font-size: 14px;
     }
+
 
     /* =========================
        LOGOUT
@@ -554,6 +524,7 @@
       transform: translateY(-2px);
     }
 
+
     /* =========================
        MOBILE
     ========================= */
@@ -562,10 +533,6 @@
 
       .stats {
         grid-template-columns: repeat(2, 1fr);
-      }
-
-      .main-actions {
-        grid-template-columns: 1fr;
       }
 
       .two-columns {
@@ -581,6 +548,7 @@
       }
 
     }
+
 
     @media (max-width: 650px) {
 
@@ -636,6 +604,7 @@
 
     }
 
+
     @media (max-width: 420px) {
 
       .stats {
@@ -657,770 +626,6 @@
 <body>
 
 
-<!-- HEADER -->
-
-<header class="header">
-
-  <a href="index.html" class="logo">
-    سند<span>.</span>
-  </a>
-
-  <nav class="nav">
-
-    <a href="index.html">الرئيسية</a>
-
-    <a href="services.html">خدماتنا</a>
-
-    <a href="index.html#how">كيف يعمل سند؟</a>
-
-    <a href="index.html#about">عن سند</a>
-
-  </nav>
-
-</header>
-
-
-<!-- DASHBOARD -->
-
-<main class="dashboard">
-
-
-  <!-- WELCOME -->
-
-  <section class="welcome">
-
-    <div class="welcome-text">
-
-      <span class="eyebrow">
-        لوحة الكادر
-      </span>
-
-      <h1>
-        أهلاً بك، د. أحمد 👋
-      </h1>
-
-      <p>
-        طبيب مقيم — فريق سند
-        <br>
-        الثلاثاء، 25 أغسطس 2026
-      </p>
-
-    </div>
-
-    <div class="staff-avatar">
-      👨‍⚕️
-    </div>
-
-  </section>
-
-
-  <!-- QUICK STATS -->
-
-  <section class="stats">
-
-    <div class="stat">
-
-      <div class="stat-top">
-
-        <span class="stat-label">
-          زيارات اليوم
-        </span>
-
-        <div class="stat-icon">
-          📅
-        </div>
-
-      </div>
-
-      <div class="stat-number">
-        5
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-top">
-
-        <span class="stat-label">
-          المسنون المكلف بهم
-        </span>
-
-        <div class="stat-icon">
-          👴
-        </div>
-
-      </div>
-
-      <div class="stat-number">
-        12
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-top">
-
-        <span class="stat-label">
-          تقارير بانتظار الإرسال
-        </span>
-
-        <div class="stat-icon">
-          📝
-        </div>
-
-      </div>
-
-      <div class="stat-number">
-        2
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-top">
-
-        <span class="stat-label">
-          تحاليل اليوم
-        </span>
-
-        <div class="stat-icon">
-          🧪
-        </div>
-
-      </div>
-
-      <div class="stat-number">
-        1
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       MAIN ACTIONS
-  ========================= -->
-
-  <section class="main-actions">
-
-    <a href="visit.html" class="main-action">
-
-      <div class="main-action-icon">
-        📅
-      </div>
-
-      <div>
-
-        <h3>
-          جدول الزيارات
-        </h3>
-
-        <p>
-          عرض وتنظيم جميع الزيارات والمهام المجدولة.
-        </p>
-
-      </div>
-
-    </a>
-
-
-    <a href="visit.html#reports" class="main-action">
-
-      <div class="main-action-icon">
-        📋
-      </div>
-
-      <div>
-
-        <h3>
-          التقارير
-        </h3>
-
-        <p>
-          الوصول إلى التقارير المطلوبة حسب اختصاص الكادر.
-        </p>
-
-      </div>
-
-    </a>
-
-
-    <a href="visit.html#labs" class="main-action">
-
-      <div class="main-action-icon">
-        🧪
-      </div>
-
-      <div>
-
-        <h3>
-          مواعيد التحاليل
-        </h3>
-
-        <p>
-          متابعة مواعيد إجراء التحاليل للمسنين.
-        </p>
-
-      </div>
-
-    </a>
-
-  </section>
-
-
-  <!-- TODAY VISITS -->
-
-  <section class="section">
-
-    <div class="section-header">
-
-      <div>
-
-        <h2>
-          📅 جدول زياراتي اليوم
-        </h2>
-
-        <p>
-          جميع الزيارات والمهام المجدولة لهذا اليوم
-        </p>
-
-      </div>
-
-      <a href="visit.html"
-         style="
-         text-decoration:none;
-         background:#e8f5f3;
-         color:#16877d;
-         padding:10px 15px;
-         border-radius:11px;
-         font-size:12px;
-         font-weight:800;
-         ">
-        عرض الجدول الكامل
-      </a>
-
-    </div>
-
-
-    <div class="visit-list">
-
-
-      <div class="visit">
-
-        <div class="visit-time">
-          09:00 ص
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            محمد علي
-          </h3>
-
-          <p>
-            فحص ومتابعة الحالة الصحية
-          </p>
-
-          <a href="visit.html"
-             class="visit-button"
-             style="display:inline-block;text-decoration:none;">
-            فتح الزيارة
-          </a>
-
-        </div>
-
-        <span class="visit-status status-done">
-          مكتملة
-        </span>
-
-      </div>
-
-
-      <div class="visit">
-
-        <div class="visit-time">
-          11:00 ص
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            علي غلام
-          </h3>
-
-          <p>
-            متابعة الوظائف الحيوية والأدوية
-          </p>
-
-          <a href="visit.html"
-             class="visit-button"
-             style="display:inline-block;text-decoration:none;">
-            فتح الزيارة
-          </a>
-
-        </div>
-
-        <span class="visit-status status-current">
-          الزيارة الحالية
-        </span>
-
-      </div>
-
-
-      <div class="visit">
-
-        <div class="visit-time">
-          02:00 م
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            أحمد معين
-          </h3>
-
-          <p>
-            زيارة متابعة أسبوعية
-          </p>
-
-          <a href="visit.html"
-             class="visit-button"
-             style="display:inline-block;text-decoration:none;">
-            فتح الزيارة
-          </a>
-
-        </div>
-
-        <span class="visit-status status-pending">
-          قادمة
-        </span>
-
-      </div>
-
-
-      <div class="visit">
-
-        <div class="visit-time">
-          04:00 م
-        </div>
-
-        <div class="visit-info">
-
-          <h3>
-            حسين ناصر
-          </h3>
-
-          <p>
-            تقييم الحالة الصحية وإعداد التقرير
-          </p>
-
-          <a href="visit.html"
-             class="visit-button"
-             style="display:inline-block;text-decoration:none;">
-            فتح الزيارة
-          </a>
-
-        </div>
-
-        <span class="visit-status status-pending">
-          قادمة
-        </span>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- TWO COLUMNS -->
-
-  <div class="two-columns">
-
-
-    <!-- TASKS -->
-
-    <section class="section">
-
-      <div class="section-header">
-
-        <div>
-
-          <h2>
-            📝 مهامي اليوم
-          </h2>
-
-          <p>
-            المهام المطلوبة منك
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="task-list">
-
-
-        <div class="task">
-
-          <div class="task-icon">
-            🩺
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              متابعة الوظائف الحيوية
-            </h3>
-
-            <p>
-              ضغط الدم والسكر والحرارة
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="task">
-
-          <div class="task-icon">
-            💊
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              مراجعة الأدوية
-            </h3>
-
-            <p>
-              التأكد من الالتزام بالخطة العلاجية
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="task">
-
-          <div class="task-icon">
-            📋
-          </div>
-
-          <div class="task-info">
-
-            <h3>
-              إعداد التقرير الأسبوعي
-            </h3>
-
-            <p>
-              تقرير حالة المسن بعد الزيارة
-            </p>
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- LAB -->
-
-    <section class="section" id="labs">
-
-      <div class="section-header">
-
-        <div>
-
-          <h2>
-            🧪 مواعيد التحاليل
-          </h2>
-
-          <p>
-            التحاليل المجدولة للمسنين
-          </p>
-
-        </div>
-
-        <a href="visit.html#labs"
-           style="
-           text-decoration:none;
-           color:#16877d;
-           font-size:12px;
-           font-weight:800;
-           ">
-          عرض الكل
-        </a>
-
-      </div>
-
-
-      <div class="lab-card">
-
-        <div class="lab-top">
-
-          <span class="lab-name">
-            محمد علي
-          </span>
-
-          <span class="lab-date">
-            10:30 ص
-          </span>
-
-        </div>
-
-        <p>
-          صورة الدم + وظائف الكلى
-          <br>
-          📅 الثلاثاء 25 أغسطس
-        </p>
-
-        <a href="visit.html#labs" class="lab-button">
-          فتح الموعد
-        </a>
-
-      </div>
-
-
-      <div class="lab-card">
-
-        <div class="lab-top">
-
-          <span class="lab-name">
-            سمية هاشم
-          </span>
-
-          <span class="lab-date">
-            01:00 م
-          </span>
-
-        </div>
-
-        <p>
-          صورة الدم + وظائف الكلى
-          <br>
-          📅 الأربعاء 26 أغسطس
-        </p>
-
-        <a href="visit.html#labs" class="lab-button">
-          فتح الموعد
-        </a>
-
-      </div>
-
-
-    </section>
-
-
-  </div>
-
-
-  <!-- REPORTS -->
-
-  <section class="section" id="reports">
-
-    <div class="section-header">
-
-      <div>
-
-        <h2>
-          📋 التقارير
-        </h2>
-
-        <p>
-          التقارير المطلوبة حسب طبيعة عملك
-        </p>
-
-      </div>
-
-      <a href="visit.html#reports"
-         style="
-         text-decoration:none;
-         color:#16877d;
-         font-size:12px;
-         font-weight:800;
-         ">
-        فتح نظام التقارير
-      </a>
-
-    </div>
-
-
-    <div class="report-list">
-
-
-      <div class="report-card">
-
-        <div class="report-icon">
-          📝
-        </div>
-
-        <h3>
-          التقرير اليومي
-        </h3>
-
-        <p>
-          توثيق الزيارة اليومية والملاحظات الصحية.
-        </p>
-
-      </div>
-
-
-      <div class="report-card">
-
-        <div class="report-icon">
-          📊
-        </div>
-
-        <h3>
-          التقرير الأسبوعي
-        </h3>
-
-        <p>
-          متابعة تطور حالة المسن خلال الأسبوع.
-        </p>
-
-      </div>
-
-
-      <div class="report-card">
-
-        <div class="report-icon">
-          📑
-        </div>
-
-        <h3>
-          التقرير الطبي
-        </h3>
-
-        <p>
-          تقرير الفحص والتقييم والتوصيات الطبية.
-        </p>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- PROFILE -->
-
-  <section class="section">
-
-    <div class="section-header">
-
-      <div>
-
-        <h2>
-          👨‍⚕️ معلومات الكادر
-        </h2>
-
-        <p>
-          معلومات الحساب الوظيفي
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="profile-grid">
-
-
-      <div class="profile-item">
-
-        <span>
-          الاسم
-        </span>
-
-        <strong>
-          د. أحمد
-        </strong>
-
-      </div>
-
-
-      <div class="profile-item">
-
-        <span>
-          التخصص
-        </span>
-
-        <strong>
-          طبيب مقيم
-        </strong>
-
-      </div>
-
-
-      <div class="profile-item">
-
-        <span>
-          الحالة
-        </span>
-
-        <strong>
-          متصل الآن
-        </strong>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- LOGOUT -->
-
-  <div class="logout-area">
-
-    <a href="login.html" class="logout">
-      🚪 تسجيل الخروج
-    </a>
-
-  </div>
-
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-  <div class="footer-logo">
-    سند<span>.</span>
-  </div>
-
-  <p>
-    الرعاية المنزلية لكبار السن
-  </p>
-
-  <small>
-    © 2026 سند — جميع الحقوق محفوظة
-  </small>
-
-</footer>
-
-
-</body>
-
-</html>
+<!-- =========================
+     HEADER
 ```
