@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>لوحة موظف الاستقبال | سند</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    body {
+      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
+    }
+
+    .dashboard {
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 6%;
+    }
+
+    /* =========================
+       WELCOME
+    ========================= */
+
+    .welcome {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 26px;
+      padding: 30px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+
+      box-shadow: 0 18px 50px rgba(22,70,65,.07);
+
+      margin-bottom: 25px;
+    }
+
+    .eyebrow {
+      display: block;
+      color: #16877d;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    .welcome h1 {
+      color: #163b38;
+      font-size: 30px;
+      margin: 0 0 8px;
+    }
+
+    .welcome p {
+      color: #718480;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .staff-avatar {
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 38px;
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 12px 35px rgba(22,70,65,.05);
+    }
+
+    .stat-label {
+      color: #718480;
+      font-size: 13px;
+    }
+
+    .stat-number {
+      color: #163b38;
+      font-size: 28px;
+      font-weight: 900;
+      margin-top: 10px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 25px;
+
+      box-shadow: 0 15px 45px rgba(22,70,65,.05);
+    }
+
+    .section-title {
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+      color: #163b38;
+      font-size: 21px;
+      margin: 0 0 5px;
+    }
+
+    .section-title p {
+      color: #718480;
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* =========================
+       QUICK ACTIONS
+    ========================= */
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .action {
+      border: 1px solid #e3edeb;
+      background: #fbfefe;
+      border-radius: 18px;
+      padding: 22px 15px;
+
+      text-align: center;
+
+      cursor: pointer;
+
+      transition: .25s;
+      font-family: inherit;
+    }
+
+    .action:hover {
+      transform: translateY(-4px);
+      border-color: #16877d;
+      box-shadow: 0 10px 28px rgba(22,135,125,.09);
+    }
+
+    .action-icon {
+      width: 55px;
+      height: 55px;
+
+      border-radius: 17px;
+
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 12px;
+
+      font-size: 26px;
+    }
+
+    .action h3 {
+      color: #163b38;
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+
+    .action p {
+      color: #718480;
+      font-size: 11px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =========================
+       PACKAGES
+    ========================= */
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .package {
+      border: 1px solid #e3edeb;
+      border-radius: 19px;
+      padding: 22px;
+
+      background: #fbfefe;
+    }
+
+    .package h3 {
+      color: #163b38;
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .package-price {
+      color: #16877d;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .package ul {
+      margin: 0;
+      padding-right: 20px;
+    }
+
+    .package li {
+      color: #718480;
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    /* =========================
+       NEW CUSTOMER
+    ========================= */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 17px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-row.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-row label {
+      color: #163b38;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+
+      width: 100%;
+      box-sizing: border-box;
+
+      padding: 13px;
+
+      border-radius: 12px;
+
+      border: 1px solid #dfecea;
+
+      background: #fbfefe;
+
+      font-family: inherit;
+
+      outline: none;
+
+      font-size: 13px;
+
+    }
+
+    .form-row textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+
+      border-color: #16877d;
+
+      box-shadow:
+        0 0 0 4px rgba(22,135,125,.08);
+
+      background: white;
+
+    }
+
+    .save-button {
+
+      border: none;
+
+      border-radius: 13px;
+
+      padding: 13px 25px;
+
+      background: #16877d;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      margin-top: 20px;
+
+    }
+
+    .save-button:hover {
+      background: #0f7068;
+    }
+
+    /* =========================
+       CUSTOMERS
+    ========================= */
+
+    .customer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .customer {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 16px;
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 15px;
+
+    }
+
+    .customer-name {
+      color: #163b38;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .customer-info {
+      color: #718480;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .customer-id {
+
+      color: #16877d;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      white-space: nowrap;
+
+    }
+
+    .empty {
+
+      text-align: center;
+
+      color: #718480;
+
+      padding: 25px;
+
+      font-size: 13px;
+
+    }
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    .logout-area {
+      text-align: center;
+      margin: 35px 0 10px;
+    }
+
+    .logout {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 11px 20px;
+
+      border-radius: 12px;
+
+      border: 1px solid #eadede;
+
+      background: white;
+
+      color: #a44b4b;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+    }
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message {
+
+      display: none;
+
+      padding: 12px;
+
+      border-radius: 11px;
+
+      margin-top: 15px;
+
+      text-align: center;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+    }
+
+    .success {
+
+      background: #e6f6ef;
+
+      color: #16815f;
+
+    }
+
+    .error {
+
+      background: #fff0f0;
+
+      color: #a44b4b;
+
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 950px) {
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .actions-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .packages {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .dashboard {
+        padding: 30px 5%;
+      }
+
+      .welcome {
+        padding: 23px;
+      }
+
+      .welcome h1 {
+        font-size: 24px;
+      }
+
+      .staff-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 29px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row.full {
+        grid-column: auto;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .actions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome {
+        flex-direction: column;
+        text-align: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+  <a href="index.html" class="logo">
+    سند<span>.</span>
+  </a>
+
+  <nav class="nav">
+
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="index.html#how">كيف يعمل سند؟</a>
+    <a href="index.html#about">عن سند</a>
+
+  </nav>
+
+</header>
+
+
+<main class="dashboard">
+
+
+  <!-- =========================
+       WELCOME
+  ========================= -->
+
+  <section class="welcome">
+
+    <div>
+
+      <span class="eyebrow">
+        🧑‍💼 لوحة موظف الاستقبال
+      </span>
+
+      <h1 id="welcomeName">
+        أهلاً بك 👋
+      </h1>
+
+      <p id="welcomeRole">
+        إدارة استقبال المشتركين وملفاتهم
+      </p>
+
+    </div>
+
+    <div class="staff-avatar">
+      🧑‍💼
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       STATS
+  ========================= -->
+
+  <section class="stats">
+
+    <div class="stat">
+
+      <span class="stat-label">
+        👥 إجمالي المشتركين
+      </span>
+
+      <div class="stat-number" id="customersCount">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <span class="stat-label">
+        🆕 مشتركون جدد
+      </span>
+
+      <div class="stat-number" id="newCustomersCount">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <span class="stat-label">
+        📦 الباقات المتاحة
+      </span>
+
+      <div class="stat-number">
+        3
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <span class="stat-label">
+        📅 اشتراكات بانتظار التفعيل
+      </span>
+
+      <div class="stat-number" id="pendingCount">
+        0
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       QUICK ACTIONS
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        ⚡ الخدمات السريعة
+      </h2>
+
+      <p>
+        أهم العمليات التي يحتاجها موظف الاستقبال
+      </p>
+
+    </div>
+
+
+    <div class="actions-grid">
+
+
+      <button
+        class="action"
+        onclick="scrollToSection('newCustomer')"
+      >
+
+        <div class="action-icon">
+          ➕
+        </div>
+
+        <h3>
+          تسجيل مشترك جديد
+        </h3>
+
+        <p>
+          إنشاء ملف جديد للمسن
+        </p>
+
+      </button>
+
+
+      <button
+        class="action"
+        onclick="scrollToSection('customers')"
+      >
+
+        <div class="action-icon">
+          👥
+        </div>
+
+        <h3>
+          ملفات المشتركين
+        </h3>
+
+        <p>
+          عرض المشتركين المسجلين
+        </p>
+
+      </button>
+
+
+      <button
+        class="action"
+        onclick="scrollToSection('packages')"
+      >
+
+        <div class="action-icon">
+          📦
+        </div>
+
+        <h3>
+          الباقات والأسعار
+        </h3>
+
+        <p>
+          تفاصيل وأسعار الاشتراكات
+        </p>
+
+      </button>
+
+
+      <button
+        class="action"
+        onclick="alert('سيتم ربط المدفوعات لاحقاً بالنظام المالي.')"
+      >
+
+        <div class="action-icon">
+          💳
+        </div>
+
+        <h3>
+          المدفوعات
+        </h3>
+
+        <p>
+          إدارة حالة الدفع والاشتراك
+        </p>
+
+      </button>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PACKAGES
+  ========================= -->
+
+  <section
+    class="section"
+    id="packages"
+  >
+
+    <div class="section-title">
+
+      <h2>
+        📦 الباقات والأسعار
+      </h2>
+
+      <p>
+        المعلومات التي يحتاجها موظف الاستقبال عند شرح الاشتراك للعميل
+      </p>
+
+    </div>
+
+
+    <div class="packages">
+
+
+      <!-- BASIC -->
+
+      <div class="package">
+
+        <h3>
+          🟢 باقة سند الاعتيادية
+        </h3>
+
+        <div class="package-price">
+          252,000 د.ع / شهرياً
+        </div>
+
+        <ul>
+
+          <li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
+
+          <li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
+
+          <li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
+
+          <li>🧪 الفحوصات والتحاليل حسب الخطة</li>
+
+          <li>🛁 الرعاية الشخصية اليومية</li>
+
+          <li>📋 تقارير المتابعة</li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- MEDIUM -->
+
+      <div class="package">
+
+        <h3>
+          🔵 الباقة المتوسطة
+        </h3>
+
+        <div class="package-price">
+          337,000 د.ع / شهرياً
+        </div>
+
+        <ul>
+
+          <li>👩‍⚕️ رعاية تمريضية موسعة</li>
+
+          <li>🩺 متابعة الطبيب المقيم</li>
+
+          <li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
+
+          <li>🧪 الفحوصات والتحاليل</li>
+
+          <li>🧠 دعم نفسي حسب الخطة</li>
+
+          <li>🎭 خدمات ترفيهية</li>
+
+          <li>📋 تقارير شاملة</li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- LUXURY -->
+
+      <div class="package">
+
+        <h3>
+          🟣 باقة سند الفاخرة
+        </h3>
+
+        <div class="package-price">
+          يحدد حسب الخدمات المختارة
+        </div>
+
+        <ul>
+
+          <li>👩‍⚕️ رعاية تمريضية مكثفة</li>
+
+          <li>👨‍⚕️ متابعة طبية متقدمة</li>
+
+          <li>🧠 دعم نفسي</li>
+
+          <li>🥗 متابعة غذائية</li>
+
+          <li>🏃 علاج طبيعي</li>
+
+          <li>🎭 ترفيه ومرافقة</li>
+
+          <li>💇 خدمات إضافية</li>
+
+        </ul>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NEW CUSTOMER
+  ========================= -->
+
+  <section
+    class="section"
+    id="newCustomer"
+  >
+
+    <div class="section-title">
+
+      <h2>
+        ➕ تسجيل مشترك جديد
+      </h2>
+
+      <p>
+        أدخل البيانات الأساسية لإنشاء ملف المسن داخل نظام سند
+      </p>
+
+    </div>
+
+
+    <form id="customerForm">
+
+
+      <div class="form-grid">
+
+
+        <div class="form-row">
+
+          <label>
+            👴 اسم المسن
+          </label>
+
+          <input
+            id="customerName"
+            type="text"
+            placeholder="الاسم الكامل"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label>
+            📱 رقم هاتف المسن
+          </label>
+
+          <input
+            id="customerPhone"
+            type="tel"
+            placeholder="رقم الهاتف"
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label>
+            👨‍👩‍👦 اسم أحد أفراد العائلة
+          </label>
+
+          <input
+            id="familyName"
+            type="text"
+            placeholder="اسم المسؤول عن المتابعة"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label>
+            📞 هاتف العائلة
+          </label>
+
+          <input
+            id="familyPhone"
+            type="tel"
+            placeholder="رقم هاتف العائلة"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label>
+            🎂 العمر
+          </label>
+
+          <input
+            id="customerAge"
+            type="number"
+            min="1"
+            max="120"
+            placeholder="العمر"
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <label>
+            📦 الباقة
+          </label>
+
+          <select
+            id="customerPackage"
+            required
+          >
+
+            <option value="">
+              اختر الباقة
+            </option>
+
+            <option value="basic">
+              باقة سند الاعتيادية — 252,000 د.ع
+            </option>
+
+            <option value="medium">
+              الباقة المتوسطة — 337,000 د.ع
+            </option>
+
+            <option value="luxury">
+              باقة سند الفاخرة — حسب الخدمات
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-row full">
+
+          <label>
+            🏠 عنوان السكن
+          </label>
+
+          <input
+            id="customerAddress"
+            type="text"
+            placeholder="عنوان منزل المسن"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-row full">
+
+          <label>
+            📝 ملاحظات أولية
+          </label>
+
+          <textarea
+            id="customerNotes"
+            placeholder="أي معلومات مهمة يذكرها العميل أثناء التسجيل..."
+          ></textarea>
+
+        </div>
+
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="save-button"
+      >
+        💾 إنشاء ملف المشترك
+      </button>
+
+
+      <div
+        id="successMessage"
+        class="message success"
+      ></div>
+
+
+      <div
+        id="errorMessage"
+        class="message error"
+      ></div>
+
+
+    </form>
+
+  </section>
+
+
+  <!-- =========================
+       CUSTOMERS
+  ========================= -->
+
+  <section
+    class="section"
+    id="customers"
+  >
+
+    <div class="section-title">
+
+      <h2>
+        👥 ملفات المشتركين
+      </h2>
+
+      <p>
+        جميع المسنين الذين تم تسجيلهم من خلال الاستقبال
+      </p>
+
+    </div>
+
+
+    <div
+      class="customer-list"
+      id="customerList"
+    >
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       LOGOUT
+  ========================= -->
+
+  <div class="logout-area">
+
+    <a
+      href="#"
+      class="logout"
+      onclick="logoutStaff(event)"
+    >
+      🚪 تسجيل الخروج
+    </a>
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  <div class="footer-logo">
+    سند<span>.</span>
+  </div>
+
+  <p>
+    الرعاية المنزلية لكبار السن
+  </p>
+
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   1. التحقق من تسجيل الدخول
+===================================================== */
+
+const loggedStaffRaw =
+  localStorage.getItem("sanadLoggedInStaff");
+
+
+if (!loggedStaffRaw) {
+
+  alert("يرجى تسجيل الدخول أولاً.");
+
+  window.location.href =
+    "staff-login.html";
+
+}
+
+
+/* =====================================================
+   2. قراءة بيانات الموظف
+===================================================== */
+
+let loggedStaff = null;
+
+try {
+
+  loggedStaff =
+    JSON.parse(loggedStaffRaw);
+
+} catch (error) {
+
+  localStorage.removeItem(
+    "sanadLoggedInStaff"
+  );
+
+  window.location.href =
+    "staff-login.html";
+
+}
+
+
+/* =====================================================
+   3. التأكد من أن المستخدم استقبال
+===================================================== */
+
+if (
+  loggedStaff &&
+  loggedStaff.role !== "reception" &&
+  loggedStaff.permissions !== "all"
+) {
+
+  alert(
+    "ليس لديك صلاحية الدخول إلى لوحة موظف الاستقبال."
+  );
+
+  window.location.href =
+    "staff-dashboard.html";
+
+}
+
+
+/* =====================================================
+   4. عرض بيانات الموظف
+===================================================== */
+
+if (loggedStaff) {
+
+  document.getElementById(
+    "welcomeName"
+  ).textContent =
+    "أهلاً بك، " +
+    loggedStaff.name +
+    " 👋";
+
+  document.getElementById(
+    "welcomeRole"
+  ).textContent =
+    "موظف الاستقبال — فريق سند";
+
+}
+
+
+/* =====================================================
+   5. قاعدة بيانات المشتركين
+===================================================== */
+
+let customers =
+  JSON.parse(
+    localStorage.getItem(
+      "sanadCustomers"
+    ) || "[]"
+  );
+
+
+/* =====================================================
+   6. إنشاء رقم ملف جديد
+===================================================== */
+
+function generateCustomerId() {
+
+  const number =
+    customers.length + 1;
+
+  return (
+    "SANAD-" +
+    String(number).padStart(4, "0")
+  );
+
+}
+
+
+/* =====================================================
+   7. حفظ مشترك جديد
+===================================================== */
+
+document
+  .getElementById("customerForm")
+  .addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+
+      const name =
+        document
+          .getElementById("customerName")
+          .value
+          .trim();
+
+
+      const phone =
+        document
+          .getElementById("customerPhone")
+          .value
+          .trim();
+
+
+      const familyName =
+        document
+          .getElementById("familyName")
+          .value
+          .trim();
+
+
+      const familyPhone =
+        document
+          .getElementById("familyPhone")
+          .value
+          .trim();
+
+
+      const age =
+        document
+          .getElementById("customerAge")
+          .value
+          .trim();
+
+
+      const packageType =
+        document
+          .getElementById("customerPackage")
+          .value;
+
+
+      const address =
+        document
+          .getElementById("customerAddress")
+          .value
+          .trim();
+
+
+      const notes =
+        document
+          .getElementById("customerNotes")
+          .value
+          .trim();
+
+
+      if (
+        !name ||
+        !familyName ||
+        !familyPhone ||
+        !packageType ||
+        !address
+      ) {
+
+        showError(
+          "يرجى إكمال البيانات الأساسية."
+        );
+
+        return;
+
+      }
+
+
+      const packageNames = {
+
+        basic:
+          "باقة سند الاعتيادية",
+
+        medium:
+          "الباقة المتوسطة",
+
+        luxury:
+          "باقة سند الفاخرة"
+
+      };
+
+
+      const packagePrices = {
+
+        basic:
+          252000,
+
+        medium:
+          337000,
+
+        luxury:
+          0
+
+      };
+
+
+      const newCustomer = {
+
+        id:
+          generateCustomerId(),
+
+        name:
+          name,
+
+        phone:
+          phone,
+
+        familyName:
+          familyName,
+
+        familyPhone:
+          familyPhone,
+
+        age:
+          age,
+
+        package:
+          packageType,
+
+        packageName:
+          packageNames[packageType],
+
+        packagePrice:
+          packagePrices[packageType],
+
+        address:
+          address,
+
+        notes:
+          notes,
+
+        status:
+          "pending_manager",
+
+        createdBy:
+          loggedStaff
+            ? loggedStaff.name
+            : "الاستقبال",
+
+        createdAt:
+          new Date().toISOString()
+
+      };
+
+
+      customers.push(
+        newCustomer
+      );
+
+
+      localStorage.setItem(
+        "sanadCustomers",
+        JSON.stringify(customers)
+      );
+
+
+      showSuccess(
+        "✅ تم إنشاء ملف المشترك " +
+        newCustomer.id +
+        " بنجاح، وأصبح بانتظار مراجعة المدير."
+      );
+
+
+      document
+        .getElementById("customerForm")
+        .reset();
+
+
+      renderCustomers();
+
+
+      updateStats();
+
+
+    }
+  );
+
+
+/* =====================================================
+   8. عرض المشتركين
+===================================================== */
+
+function renderCustomers() {
+
+  const list =
+    document.getElementById(
+      "customerList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if (
+    customers.length === 0
+  ) {
+
+    list.innerHTML = `
+      <div class="empty">
+        لا توجد ملفات مشتركين مسجلة حالياً.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  customers
+    .slice()
+    .reverse()
+    .forEach(
+      function(customer) {
+
+        const element =
+          document.createElement(
+            "div"
+          );
+
+
+        element.className =
+          "customer";
+
+
+        element.innerHTML = `
+
+          <div>
+
+            <div class="customer-name">
+              👴 ${customer.name}
+            </div>
+
+            <div class="customer-info">
+
+              📦 ${customer.packageName}
+
+              <br>
+
+              👨‍👩‍👦 العائلة:
+              ${customer.familyName}
+
+              <br>
+
+              📌 الحالة:
+              ${getStatusText(customer.status)}
+
+            </div>
+
+          </div>
+
+          <div class="customer-id">
+
+            ${customer.id}
+
+          </div>
+
+        `;
+
+
+        list.appendChild(
+          element
+        );
+
+      }
+    );
+
+}
+
+
+/* =====================================================
+   9. حالة المشترك
+===================================================== */
+
+function getStatusText(status) {
+
+  const statuses = {
+
+    pending_manager:
+      "بانتظار مراجعة المدير",
+
+    active:
+      "اشتراك فعال",
+
+    suspended:
+      "موقوف",
+
+    completed:
+      "مكتمل"
+
+  };
+
+
+  return (
+    statuses[status] ||
+    status
+  );
+
+}
+
+
+/* =====================================================
+   10. الإحصائيات
+===================================================== */
+
+function updateStats() {
+
+  document.getElementById(
+    "customersCount"
+  ).textContent =
+    customers.length;
+
+
+  document.getElementById(
+    "newCustomersCount"
+  ).textContent =
+    customers.filter(
+      function(customer) {
+
+        const created =
+          new Date(
+            customer.createdAt
+          );
+
+        const today =
+          new Date();
+
+        return (
+          created.toDateString() ===
+          today.toDateString()
+        );
+
+      }
+    ).length;
+
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent =
+    customers.filter(
+      function(customer) {
+
+        return (
+          customer.status ===
+          "pending_manager"
+        );
+
+      }
+    ).length;
+
+}
+
+
+/* =====================================================
+   11. الرسائل
+===================================================== */
+
+function showSuccess(message) {
+
+  const element =
+    document.getElementById(
+      "successMessage"
+    );
+
+
+  const error =
+    document.getElementById(
+      "errorMessage"
+    );
+
+
+  error.style.display =
+    "none";
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+function showError(message) {
+
+  const element =
+    document.getElementById(
+      "errorMessage"
+    );
+
+
+  const success =
+    document.getElementById(
+      "successMessage"
+    );
+
+
+  success.style.display =
+    "none";
+
+
+  element.textContent =
+    message;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+/* =====================================================
+   12. الانتقال إلى قسم
+===================================================== */
+
+function scrollToSection(id) {
+
+  const section =
+    document.getElementById(id);
+
+
+  if (section) {
+
+    section.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+}
+
+
+/* =====================================================
+   13. تسجيل الخروج
+===================================================== */
+
+function logoutStaff(event) {
+
+  if (event) {
+
+    event.preventDefault();
+
+  }
+
+
+  localStorage.removeItem(
+    "sanadLoggedInStaff"
+  );
+
+
+  localStorage.removeItem(
+    "sanadCurrentVisit"
+  );
+
+
+  window.location.href =
+    "staff-login.html";
+
+}
+
+
+/* =====================================================
+   14. تشغيل أولي
+===================================================== */
+
+renderCustomers();
+
+updateStats();
+
+</script>
+
+
+</body>
+
+</html>
