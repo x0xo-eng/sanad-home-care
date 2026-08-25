@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>جدول الزيارات | سند</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* =========================
+       GENERAL
+    ========================= */
+
+    body {
+      background:
+        linear-gradient(180deg, #f7fbfa 0%, #eef7f5 100%);
+      color: #163b38;
+    }
+
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .visit-page {
+      min-height: calc(100vh - 180px);
+      padding: 55px 7%;
+    }
+
+
+    /* =========================
+       TOP HEADER
+    ========================= */
+
+    .visit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+
+      margin-bottom: 30px;
+    }
+
+    .visit-title-area {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .eyebrow {
+      color: #16877d;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .visit-title-area h1 {
+      margin: 0;
+
+      color: #163b38;
+
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 900;
+    }
+
+    .visit-title-area p {
+      margin: 0;
+
+      color: #718480;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .back-dashboard {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      padding: 11px 17px;
+
+      border-radius: 13px;
+
+      background: white;
+
+      border: 1px solid #dbe9e6;
+
+      color: #16877d;
+
+      text-decoration: none;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      box-shadow:
+        0 8px 22px rgba(22, 70, 65, .06);
+
+      transition: .3s ease;
+    }
+
+    .back-dashboard:hover {
+      background: #16877d;
+      color: white;
+
+      border-color: #16877d;
+
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 12px 28px rgba(22, 135, 125, .16);
+    }
+
+
+    /* =========================
+       SUMMARY CARDS
+    ========================= */
+
+    .visit-summary {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 18px;
+
+      margin-bottom: 25px;
+    }
+
+    .summary-card {
+      background: white;
+
+      border: 1px solid #e2eeeb;
+
+      border-radius: 20px;
+
+      padding: 22px;
+
+      box-shadow:
+        0 12px 35px rgba(22, 70, 65, .055);
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .summary-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      right: 0;
+
+      width: 100%;
+      height: 4px;
+
+      background: #16877d;
+    }
+
+    .summary-icon {
+      width: 45px;
+      height: 45px;
+
+      border-radius: 14px;
+
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 21px;
+
+      margin-bottom: 14px;
+    }
+
+    .summary-number {
+      font-size: 27px;
+
+      font-weight: 900;
+
+      color: #163b38;
+
+      margin-bottom: 4px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+
+      color: #718480;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       CONTROL BAR
+    ========================= */
+
+    .visit-controls {
+      background: white;
+
+      border: 1px solid #e2eeeb;
+
+      border-radius: 22px;
+
+      padding: 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      flex-wrap: wrap;
+
+      margin-bottom: 22px;
+
+      box-shadow:
+        0 12px 35px rgba(22, 70, 65, .05);
+    }
+
+    .control-group {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+    }
+
+    .control-label {
+      color: #163b38;
+
+      font-size: 13px;
+
+      font-weight: 800;
+    }
+
+    .date-input,
+    .staff-select {
+      border: 1px solid #dceae7;
+
+      background: #f9fdfc;
+
+      color: #163b38;
+
+      border-radius: 11px;
+
+      padding: 10px 13px;
+
+      font-family: inherit;
+
+      outline: none;
+    }
+
+    .date-input:focus,
+    .staff-select:focus {
+      border-color: #16877d;
+
+      box-shadow:
+        0 0 0 4px rgba(22, 135, 125, .07);
+    }
+
+
+    /* =========================
+       VISITS TABLE
+    ========================= */
+
+    .visits-card {
+      background: white;
+
+      border: 1px solid #e2eeeb;
+
+      border-radius: 24px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 18px 50px rgba(22, 70, 65, .07);
+    }
+
+    .visits-card-header {
+      padding: 23px 25px;
+
+      border-bottom: 1px solid #e7efed;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .visits-card-header h2 {
+      margin: 0;
+
+      color: #163b38;
+
+      font-size: 20px;
+    }
+
+    .visits-card-header p {
+      margin: 5px 0 0;
+
+      color: #718480;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrapper {
+      width: 100%;
+
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 850px;
+    }
+
+    thead {
+      background: #f4faf8;
+    }
+
+    th {
+      padding: 15px;
+
+      color: #48645f;
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      text-align: right;
+
+      border-bottom: 1px solid #e2eeeb;
+
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 16px 15px;
+
+      color: #36534e;
+
+      font-size: 13px;
+
+      border-bottom: 1px solid #edf3f1;
+
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      transition: .2s ease;
+    }
+
+    tbody tr:hover {
+      background: #f9fdfc;
+    }
+
+
+    /* =========================
+       PATIENT
+    ========================= */
+
+    .patient {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+    }
+
+    .patient-avatar {
+      width: 39px;
+      height: 39px;
+
+      border-radius: 12px;
+
+      background: #e8f5f3;
+
+      color: #16877d;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 17px;
+
+      flex-shrink: 0;
+    }
+
+    .patient-info strong {
+      display: block;
+
+      color: #163b38;
+
+      font-size: 13px;
+
+      margin-bottom: 3px;
+    }
+
+    .patient-info span {
+      color: #849692;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================
+       VISIT TYPE
+    ========================= */
+
+    .visit-type {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: #24544e;
+
+      font-weight: 800;
+    }
+
+    .type-icon {
+      width: 30px;
+      height: 30px;
+
+      border-radius: 9px;
+
+      background: #edf7f5;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 6px 10px;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+    .status::before {
+      content: "";
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: currentColor;
+    }
+
+    .status.pending {
+      color: #a06a13;
+
+      background: #fff7e7;
+    }
+
+    .status.completed {
+      color: #16877d;
+
+      background: #e9f7f4;
+    }
+
+    .status.cancelled {
+      color: #a04d4d;
+
+      background: #fff0f0;
+    }
+
+
+    /* =========================
+       ACTION
+    ========================= */
+
+    .view-btn {
+      border: 1px solid #d6e8e4;
+
+      background: #f8fcfb;
+
+      color: #16877d;
+
+      border-radius: 10px;
+
+      padding: 8px 12px;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: .25s;
+    }
+
+    .view-btn:hover {
+      background: #16877d;
+
+      border-color: #16877d;
+
+      color: white;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       EMPTY MESSAGE
+    ========================= */
+
+    .empty-state {
+      display: none;
+
+      text-align: center;
+
+      padding: 60px 20px;
+
+      color: #718480;
+    }
+
+    .empty-state .empty-icon {
+      width: 65px;
+      height: 65px;
+
+      margin: 0 auto 15px;
+
+      border-radius: 20px;
+
+      background: #edf7f5;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 28px;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 6px;
+
+      color: #163b38;
+    }
+
+    .empty-state p {
+      margin: 0;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       FOOTER NOTE
+    ========================= */
+
+    .page-note {
+      margin-top: 18px;
+
+      padding: 16px 18px;
+
+      border-radius: 15px;
+
+      background: #f5faf8;
+
+      border: 1px solid #e1eeeb;
+
+      color: #718480;
+
+      font-size: 12px;
+
+      line-height: 1.8;
+    }
+
+    .page-note strong {
+      color: #16877d;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .visit-summary {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .visit-page {
+        padding: 40px 5%;
+      }
+
+      .visit-header {
+        flex-direction: column;
+
+        align-items: stretch;
+      }
+
+      .back-dashboard {
+        width: 100%;
+      }
+
+      .visit-summary {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
+      }
+
+      .summary-card {
+        padding: 17px;
+      }
+
+      .summary-number {
+        font-size: 23px;
+      }
+
+      .visit-controls {
+        align-items: stretch;
+
+        flex-direction: column;
+      }
+
+      .control-group {
+        width: 100%;
+      }
+
+      .date-input,
+      .staff-select {
+        flex: 1;
+      }
+
+      .visits-card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+    }
+
+
+    @media (max-width: 450px) {
+
+      .visit-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .visit-title-area h1 {
+        font-size: 27px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header class="header">
+
+    <a href="index.html" class="logo">
+      سند<span>.</span>
+    </a>
+
+    <nav class="nav">
+
+      <a href="index.html">
+        الرئيسية
+      </a>
+
+      <a href="services.html">
+        خدماتنا
+      </a>
+
+      <a href="index.html#how">
+        كيف يعمل سند؟
+      </a>
+
+      <a href="index.html#about">
+        عن سند
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       VISITS PAGE
+  ========================= -->
+
+  <main class="visit-page">
+
+
+    <!-- TITLE -->
+
+    <section class="visit-header">
+
+      <div class="visit-title-area">
+
+        <span class="eyebrow">
+          إدارة الزيارات والرعاية
+        </span>
+
+        <h1>
+          جدول الزيارات
+        </h1>
+
+        <p>
+          متابعة وتنظيم زيارات الكادر للمسنين ومواعيد الرعاية اليومية.
+        </p>
+
+      </div>
+
+
+      <a href="staff-dashboard.html" class="back-dashboard">
+
+        <span>
+          → 
+        </span>
+
+        العودة إلى لوحة الكادر
+
+      </a>
+
+    </section>
+
+
+
+    <!-- =========================
+         SUMMARY
+    ========================= -->
+
+    <section class="visit-summary">
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          📅
+        </div>
+
+        <div class="summary-number" id="todayVisits">
+          8
+        </div>
+
+        <div class="summary-label">
+          زيارات اليوم
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          ⏳
+        </div>
+
+        <div class="summary-number" id="pendingVisits">
+          3
+        </div>
+
+        <div class="summary-label">
+          زيارات قادمة
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          ✅
+        </div>
+
+        <div class="summary-number" id="completedVisits">
+          5
+        </div>
+
+        <div class="summary-label">
+          زيارات مكتملة
+        </div>
+
+      </div>
+
+
+      <div class="summary-card">
+
+        <div class="summary-icon">
+          👨‍⚕️
+        </div>
+
+        <div class="summary-number">
+          6
+        </div>
+
+        <div class="summary-label">
+          أنواع الكادر
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         CONTROLS
+    ========================= -->
+
+    <section class="visit-controls">
+
+
+      <div class="control-group">
+
+        <span class="control-label">
+          📅 التاريخ:
+        </span>
+
+        <input
+          type="date"
+          id="visitDate"
+          class="date-input"
+        >
+
+      </div>
+
+
+      <div class="control-group">
+
+        <span class="control-label">
+          👨‍⚕️ نوع الكادر:
+        </span>
+
+        <select
+          id="staffType"
+          class="staff-select"
+        >
+
+          <option value="all">
+            جميع الكوادر
+          </option>
+
+          <option value="nurse">
+            👩‍⚕️ الممرض
+          </option>
+
+          <option value="resident">
+            🩺 الطبيب المقيم
+          </option>
+
+          <option value="specialist">
+            👨‍⚕️ الطبيب الاختصاص
+          </option>
+
+          <option value="nutrition">
+            🥗 أخصائي التغذية
+          </option>
+
+          <option value="psychology">
+            🧠 الأخصائي النفسي
+          </option>
+
+          <option value="physio">
+            🏃 العلاج الطبيعي
+          </option>
+
+          <option value="entertainment">
+            🎯 أخصائي الترفيه
+          </option>
+
+          <option value="barber">
+            ✂️ الكوافير
+          </option>
+
+          <option value="lab">
+            🧪 التحاليل
+          </option>
+
+        </select>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =========================
+         VISITS TABLE
+    ========================= -->
+
+    <section class="visits-card">
+
+
+      <div class="visits-card-header">
+
+        <div>
+
+          <h2>
+            زيارات الكادر
+          </h2>
+
+          <p>
+            جميع المواعيد المسجلة ضمن جدول الرعاية
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>
+                الوقت
+              </th>
+
+              <th>
+                المسن
+              </th>
+
+              <th>
+                نوع الزيارة
+              </th>
+
+              <th>
+                الكادر
+              </th>
+
+              <th>
+                الحالة
+              </th>
+
+              <th>
+                الإجراء
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="visitsTable">
+
+
+            <!-- VISIT 1 -->
+
+            <tr data-type="nurse">
+
+              <td>
+                <strong>
+                  09:00 صباحاً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      محمد علي
+                    </strong>
+
+                    <span>
+                      مشترك في سند الاعتيادية
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    💉
+                  </span>
+
+                  زيارة تمريضية
+
+                </span>
+
+              </td>
+
+              <td>
+                الممرض
+              </td>
+
+              <td>
+
+                <span class="status pending">
+                  قادمة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('محمد علي','زيارة تمريضية','09:00 صباحاً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 2 -->
+
+            <tr data-type="resident">
+
+              <td>
+                <strong>
+                  11:00 صباحاً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      علي غلام
+                    </strong>
+
+                    <span>
+                      متابعة طبية
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🩺
+                  </span>
+
+                  فحص طبي
+
+                </span>
+
+              </td>
+
+              <td>
+                الطبيب المقيم
+              </td>
+
+              <td>
+
+                <span class="status pending">
+                  قادمة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('علي غلام','فحص طبي','11:00 صباحاً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 3 -->
+
+            <tr data-type="specialist">
+
+              <td>
+                <strong>
+                  01:00 ظهراً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      أحمد معين
+                    </strong>
+
+                    <span>
+                      مراجعة شهرية
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    👨‍⚕️
+                  </span>
+
+                  طبيب اختصاص
+
+                </span>
+
+              </td>
+
+              <td>
+                الطبيب الاختصاص
+              </td>
+
+              <td>
+
+                <span class="status completed">
+                  مكتملة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('أحمد معين','طبيب اختصاص','01:00 ظهراً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 4 -->
+
+            <tr data-type="nutrition">
+
+              <td>
+                <strong>
+                  03:00 عصراً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      حسين ناصر
+                    </strong>
+
+                    <span>
+                      متابعة غذائية
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🥗
+                  </span>
+
+                  تغذية
+
+                </span>
+
+              </td>
+
+              <td>
+                أخصائي التغذية
+              </td>
+
+              <td>
+
+                <span class="status pending">
+                  قادمة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('حسين ناصر','متابعة غذائية','03:00 عصراً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 5 -->
+
+            <tr data-type="psychology">
+
+              <td>
+                <strong>
+                  04:00 عصراً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      سمية هاشم
+                    </strong>
+
+                    <span>
+                      متابعة نفسية
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🧠
+                  </span>
+
+                  متابعة نفسية
+
+                </span>
+
+              </td>
+
+              <td>
+                الأخصائي النفسي
+              </td>
+
+              <td>
+
+                <span class="status completed">
+                  مكتملة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('سمية هاشم','متابعة نفسية','04:00 عصراً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 6 -->
+
+            <tr data-type="physio">
+
+              <td>
+                <strong>
+                  05:00 عصراً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      انتصار علي
+                    </strong>
+
+                    <span>
+                      جلسة علاج طبيعي
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🏃
+                  </span>
+
+                  علاج طبيعي
+
+                </span>
+
+              </td>
+
+              <td>
+                أخصائي العلاج الطبيعي
+              </td>
+
+              <td>
+
+                <span class="status pending">
+                  قادمة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('انتصار علي','علاج طبيعي','05:00 عصراً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 7 -->
+
+            <tr data-type="entertainment">
+
+              <td>
+                <strong>
+                  06:00 مساءً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      إيمان راضي
+                    </strong>
+
+                    <span>
+                      نشاط ترفيهي
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🎯
+                  </span>
+
+                  ترفيه
+
+                </span>
+
+              </td>
+
+              <td>
+                أخصائي الترفيه
+              </td>
+
+              <td>
+
+                <span class="status completed">
+                  مكتملة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('إيمان راضي','نشاط ترفيهي','06:00 مساءً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+
+            <!-- VISIT 8 -->
+
+            <tr data-type="lab">
+
+              <td>
+                <strong>
+                  10:00 صباحاً
+                </strong>
+              </td>
+
+              <td>
+
+                <div class="patient">
+
+                  <div class="patient-avatar">
+                    👴
+                  </div>
+
+                  <div class="patient-info">
+
+                    <strong>
+                      فريزة علي
+                    </strong>
+
+                    <span>
+                      موعد تحاليل
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <span class="visit-type">
+
+                  <span class="type-icon">
+                    🧪
+                  </span>
+
+                  إجراء تحاليل
+
+                </span>
+
+              </td>
+
+              <td>
+                المختبر
+              </td>
+
+              <td>
+
+                <span class="status pending">
+                  قادمة
+                </span>
+
+              </td>
+
+              <td>
+
+                <button
+                  class="view-btn"
+                  onclick="viewVisit('فريزة علي','إجراء تحاليل','10:00 صباحاً')"
+                >
+                  عرض التفاصيل
+                </button>
+
+              </td>
+
+            </tr>
+
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+      <!-- EMPTY -->
+
+      <div
+        id="emptyState"
+        class="empty-state"
+      >
+
+        <div class="empty-icon">
+          📅
+        </div>
+
+        <h3>
+          لا توجد زيارات
+        </h3>
+
+        <p>
+          لا توجد زيارات مسجلة لهذا النوع من الكادر.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- NOTE -->
+
+    <div class="page-note">
+
+      <strong>
+        ملاحظة:
+      </strong>
+
+      سيتم لاحقاً ربط هذا الجدول بقاعدة البيانات، بحيث تظهر
+      الزيارات الفعلية لكل مسن حسب الباقة المشترك بها،
+      مع إمكانية تسجيل الحضور وكتابة تقرير الزيارة.
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="footer-logo">
+      سند<span>.</span>
+    </div>
+
+    <p>
+      الرعاية المنزلية لكبار السن
+    </p>
+
+    <small>
+      © 2026 سند — جميع الحقوق محفوظة
+    </small>
+
+  </footer>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* =========================
+       DATE
+    ========================= */
+
+    const dateInput =
+      document.getElementById("visitDate");
+
+    const today =
+      new Date().toISOString().split("T")[0];
+
+    dateInput.value = today;
+
+
+
+    /* =========================
+       FILTER STAFF
+    ========================= */
+
+    const staffType =
+      document.getElementById("staffType");
+
+    const rows =
+      document.querySelectorAll("#visitsTable tr");
+
+    const emptyState =
+      document.getElementById("emptyState");
+
+
+    staffType.addEventListener("change", function() {
+
+      const selected =
+        this.value;
+
+      let visibleRows = 0;
+
+
+      rows.forEach(function(row) {
+
+        const type =
+          row.getAttribute("data-type");
+
+
+        if (
+          selected === "all" ||
+          selected === type
+        ) {
+
+          row.style.display = "";
+
+          visibleRows++;
+
+        } else {
+
+          row.style.display = "none";
+
+        }
+
+      });
+
+
+      if (visibleRows === 0) {
+
+        emptyState.style.display = "block";
+
+      } else {
+
+        emptyState.style.display = "none";
+
+      }
+
+    });
+
+
+
+    /* =========================
+       VIEW VISIT
+    ========================= */
+
+    function viewVisit(
+      patient,
+      visitType,
+      time
+    ) {
+
+      alert(
+        "تفاصيل الزيارة\n\n" +
+
+        "المسن: " + patient + "\n" +
+
+        "نوع الزيارة: " + visitType + "\n" +
+
+        "الوقت: " + time + "\n\n" +
+
+        "سيتم لاحقاً فتح صفحة كاملة تحتوي على:\n" +
+
+        "• معلومات المسن\n" +
+
+        "• بيانات الزيارة\n" +
+
+        "• الفحوصات المطلوبة\n" +
+
+        "• تسجيل الحضور\n" +
+
+        "• التقرير الطبي\n" +
+
+        "• الملاحظات"
+      );
+
+    }
+
+  </script>
+
+
+</body>
+
+</html>
