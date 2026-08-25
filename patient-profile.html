@@ -1,0 +1,1438 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ملف المسن | سند</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    body {
+      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
+    }
+
+    .profile-page {
+      max-width: 1250px;
+      margin: auto;
+      padding: 45px 6%;
+    }
+
+    /* =========================
+       PATIENT HEADER
+    ========================= */
+
+    .patient-header {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 26px;
+
+      padding: 30px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 25px;
+
+      box-shadow:
+        0 18px 50px rgba(22,70,65,.07);
+
+      margin-bottom: 25px;
+    }
+
+    .patient-main {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .patient-avatar {
+      width: 82px;
+      height: 82px;
+
+      border-radius: 25px;
+
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 40px;
+
+      flex-shrink: 0;
+    }
+
+    .eyebrow {
+      color: #16877d;
+      font-size: 13px;
+      font-weight: 800;
+
+      display: block;
+
+      margin-bottom: 7px;
+    }
+
+    .patient-main h1 {
+      color: #163b38;
+
+      font-size: 30px;
+
+      margin: 0 0 6px;
+    }
+
+    .patient-main p {
+      color: #718480;
+
+      margin: 0;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    .patient-status {
+      padding: 10px 15px;
+
+      background: #e6f6ef;
+
+      color: #16815f;
+
+      border-radius: 11px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      white-space: nowrap;
+    }
+
+
+    /* =========================
+       BASIC INFO
+    ========================= */
+
+    .info-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 15px;
+
+      margin-bottom: 25px;
+    }
+
+    .info-card {
+
+      background: white;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 18px;
+
+      padding: 19px;
+
+      box-shadow:
+        0 12px 35px rgba(22,70,65,.05);
+    }
+
+    .info-card span {
+
+      display: block;
+
+      color: #718480;
+
+      font-size: 11px;
+
+      margin-bottom: 6px;
+    }
+
+    .info-card strong {
+
+      color: #163b38;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+
+      background: white;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 24px;
+
+      padding: 28px;
+
+      margin-bottom: 25px;
+
+      box-shadow:
+        0 15px 45px rgba(22,70,65,.05);
+    }
+
+    .section-title {
+
+      margin-bottom: 22px;
+    }
+
+    .section-title h2 {
+
+      color: #163b38;
+
+      font-size: 21px;
+
+      margin: 0 0 5px;
+    }
+
+    .section-title p {
+
+      color: #718480;
+
+      font-size: 13px;
+
+      margin: 0;
+    }
+
+
+    /* =========================
+       HEALTH CARDS
+    ========================= */
+
+    .health-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 15px;
+    }
+
+    .health-card {
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 16px;
+
+      padding: 18px;
+    }
+
+    .health-card span {
+
+      display: block;
+
+      color: #718480;
+
+      font-size: 11px;
+
+      margin-bottom: 7px;
+    }
+
+    .health-card strong {
+
+      color: #163b38;
+
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       MEDICAL INFORMATION
+    ========================= */
+
+    .medical-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 18px;
+    }
+
+    .medical-card {
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 17px;
+
+      padding: 18px;
+    }
+
+    .medical-card h3 {
+
+      color: #163b38;
+
+      font-size: 14px;
+
+      margin: 0 0 10px;
+    }
+
+    .medical-card p {
+
+      color: #718480;
+
+      font-size: 12px;
+
+      line-height: 1.8;
+
+      margin: 0;
+    }
+
+
+    /* =========================
+       MEDICATIONS
+    ========================= */
+
+    .medication-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .medication {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 120px 100px;
+
+      align-items: center;
+
+      gap: 15px;
+
+      padding: 16px;
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 15px;
+    }
+
+    .medication-name {
+
+      color: #163b38;
+
+      font-weight: 800;
+
+      font-size: 13px;
+    }
+
+    .medication-time {
+
+      color: #718480;
+
+      font-size: 12px;
+    }
+
+    .medication-status {
+
+      text-align: center;
+
+      padding: 7px 9px;
+
+      border-radius: 9px;
+
+      background: #e6f6ef;
+
+      color: #16815f;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================
+       VISITS HISTORY
+    ========================= */
+
+    .history-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+    }
+
+    .history-item {
+
+      display: grid;
+
+      grid-template-columns:
+        110px 1fr auto;
+
+      align-items: center;
+
+      gap: 18px;
+
+      padding: 17px;
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 15px;
+    }
+
+    .history-date {
+
+      color: #16877d;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+    .history-info h3 {
+
+      color: #163b38;
+
+      font-size: 14px;
+
+      margin: 0 0 4px;
+    }
+
+    .history-info p {
+
+      color: #718480;
+
+      font-size: 11px;
+
+      margin: 0;
+    }
+
+    .history-type {
+
+      padding: 7px 10px;
+
+      background: #e8f5f3;
+
+      color: #16877d;
+
+      border-radius: 9px;
+
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+
+    /* =========================
+       LABS
+    ========================= */
+
+    .lab-list {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 15px;
+    }
+
+    .lab {
+
+      padding: 18px;
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 16px;
+    }
+
+    .lab-top {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-bottom: 9px;
+    }
+
+    .lab h3 {
+
+      color: #163b38;
+
+      font-size: 14px;
+
+      margin: 0;
+    }
+
+    .lab-date {
+
+      color: #16877d;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+    .lab p {
+
+      color: #718480;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+
+      margin: 0;
+    }
+
+
+    /* =========================
+       FAMILY
+    ========================= */
+
+    .family-box {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 15px;
+    }
+
+    .family-item {
+
+      background: #fbfefe;
+
+      border: 1px solid #e3edeb;
+
+      border-radius: 15px;
+
+      padding: 17px;
+    }
+
+    .family-item span {
+
+      display: block;
+
+      color: #718480;
+
+      font-size: 11px;
+
+      margin-bottom: 6px;
+    }
+
+    .family-item strong {
+
+      color: #163b38;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       ACTIONS
+    ========================= */
+
+    .actions {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 15px;
+
+      margin-top: 30px;
+    }
+
+    .btn {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      padding: 12px 20px;
+
+      border-radius: 12px;
+
+      text-decoration: none;
+
+      font-family: inherit;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      transition: .25s;
+    }
+
+    .btn-back {
+
+      background: white;
+
+      color: #16877d;
+
+      border: 1px solid #d7e8e5;
+    }
+
+    .btn-back:hover {
+
+      background: #e8f5f3;
+
+      transform: translateY(-2px);
+    }
+
+    .btn-visit {
+
+      background: #16877d;
+
+      color: white;
+
+      border: none;
+    }
+
+    .btn-visit:hover {
+
+      background: #0f7068;
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 950px) {
+
+      .info-grid {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .health-grid {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .family-box {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+    }
+
+    @media (max-width: 700px) {
+
+      .profile-page {
+
+        padding: 30px 5%;
+      }
+
+      .patient-header {
+
+        flex-direction: column;
+
+        text-align: center;
+      }
+
+      .patient-main {
+
+        flex-direction: column;
+      }
+
+      .info-grid {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .health-grid {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .medical-grid {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .medication {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .history-item {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .lab-list {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .family-box {
+
+        grid-template-columns:
+          1fr;
+      }
+
+      .actions {
+
+        flex-direction: column-reverse;
+      }
+
+      .btn {
+
+        width: 100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+  <a href="index.html" class="logo">
+    سند<span>.</span>
+  </a>
+
+  <nav class="nav">
+
+    <a href="index.html">
+      الرئيسية
+    </a>
+
+    <a href="services.html">
+      خدماتنا
+    </a>
+
+    <a href="index.html#how">
+      كيف يعمل سند؟
+    </a>
+
+    <a href="index.html#about">
+      عن سند
+    </a>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<main class="profile-page">
+
+
+  <!-- =========================
+       PATIENT HEADER
+  ========================= -->
+
+  <section class="patient-header">
+
+    <div class="patient-main">
+
+      <div class="patient-avatar">
+        👴
+      </div>
+
+      <div>
+
+        <span class="eyebrow">
+          👤 ملف المسن
+        </span>
+
+        <h1 id="patientName">
+          محمد علي
+        </h1>
+
+        <p>
+          ملف الرعاية الصحية والمتابعة المنزلية
+          <br>
+          فريق سند للرعاية المنزلية
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="patient-status">
+      ● مشترك فعال
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       BASIC INFO
+  ========================= -->
+
+  <section class="info-grid">
+
+
+    <div class="info-card">
+
+      <span>
+        🎂 العمر
+      </span>
+
+      <strong>
+        74 سنة
+      </strong>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <span>
+        📞 رقم الهاتف
+      </span>
+
+      <strong>
+        07XXXXXXXXX
+      </strong>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <span>
+        📦 الباقة
+      </span>
+
+      <strong>
+        سند الاعتيادية
+      </strong>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <span>
+        ⏳ الاشتراك
+      </span>
+
+      <strong>
+        متبقي 18 يوم
+      </strong>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =========================
+       HEALTH
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        ❤️ المؤشرات الصحية الأخيرة
+      </h2>
+
+      <p>
+        آخر القياسات المسجلة في ملف المسن
+      </p>
+
+    </div>
+
+
+    <div class="health-grid">
+
+
+      <div class="health-card">
+
+        <span>
+          ضغط الدم
+        </span>
+
+        <strong>
+          120 / 80
+        </strong>
+
+      </div>
+
+
+      <div class="health-card">
+
+        <span>
+          سكر الدم
+        </span>
+
+        <strong>
+          110 mg/dL
+        </strong>
+
+      </div>
+
+
+      <div class="health-card">
+
+        <span>
+          الحرارة
+        </span>
+
+        <strong>
+          36.7 °C
+        </strong>
+
+      </div>
+
+
+      <div class="health-card">
+
+        <span>
+          النبض
+        </span>
+
+        <strong>
+          75
+        </strong>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MEDICAL
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        🩺 المعلومات الطبية
+      </h2>
+
+      <p>
+        المعلومات الصحية الأساسية للمسن
+      </p>
+
+    </div>
+
+
+    <div class="medical-grid">
+
+
+      <div class="medical-card">
+
+        <h3>
+          🧬 الأمراض المزمنة
+        </h3>
+
+        <p>
+          ارتفاع ضغط الدم — السكري من النوع الثاني.
+        </p>
+
+      </div>
+
+
+      <div class="medical-card">
+
+        <h3>
+          ⚠️ الحساسية
+        </h3>
+
+        <p>
+          لا توجد حساسية دوائية مسجلة حالياً.
+        </p>
+
+      </div>
+
+
+      <div class="medical-card">
+
+        <h3>
+          🩻 الحالة الصحية
+        </h3>
+
+        <p>
+          الحالة مستقرة وتحتاج إلى متابعة دورية للضغط والسكر.
+        </p>
+
+      </div>
+
+
+      <div class="medical-card">
+
+        <h3>
+          🧑‍⚕️ الطبيب المسؤول
+        </h3>
+
+        <p>
+          د. أحمد محمد — طبيب مقيم — فريق سند.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       MEDICATIONS
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        💊 الأدوية الحالية
+      </h2>
+
+      <p>
+        الأدوية المسجلة ضمن الخطة العلاجية
+      </p>
+
+    </div>
+
+
+    <div class="medication-list">
+
+
+      <div class="medication">
+
+        <div class="medication-name">
+          دواء ضغط الدم
+        </div>
+
+        <div class="medication-time">
+          🕐 صباحاً
+        </div>
+
+        <div class="medication-status">
+          منتظم
+        </div>
+
+      </div>
+
+
+      <div class="medication">
+
+        <div class="medication-name">
+          دواء السكري
+        </div>
+
+        <div class="medication-time">
+          🕐 بعد الغداء
+        </div>
+
+        <div class="medication-status">
+          منتظم
+        </div>
+
+      </div>
+
+
+      <div class="medication">
+
+        <div class="medication-name">
+          دواء المساء
+        </div>
+
+        <div class="medication-time">
+          🕐 مساءً
+        </div>
+
+        <div class="medication-status">
+          منتظم
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VISIT HISTORY
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        📅 سجل الزيارات
+      </h2>
+
+      <p>
+        آخر الزيارات المسجلة في ملف المسن
+      </p>
+
+    </div>
+
+
+    <div class="history-list">
+
+
+      <div class="history-item">
+
+        <div class="history-date">
+          25 أغسطس 2026
+        </div>
+
+        <div class="history-info">
+
+          <h3>
+            د. أحمد محمد
+          </h3>
+
+          <p>
+            متابعة الحالة الصحية والأدوية
+          </p>
+
+        </div>
+
+        <div class="history-type">
+          طبيب مقيم
+        </div>
+
+      </div>
+
+
+      <div class="history-item">
+
+        <div class="history-date">
+          24 أغسطس 2026
+        </div>
+
+        <div class="history-info">
+
+          <h3>
+            الممرض محمد
+          </h3>
+
+          <p>
+            زيارة تمريضية وقياس العلامات الحيوية
+          </p>
+
+        </div>
+
+        <div class="history-type">
+          تمريض
+        </div>
+
+      </div>
+
+
+      <div class="history-item">
+
+        <div class="history-date">
+          22 أغسطس 2026
+        </div>
+
+        <div class="history-info">
+
+          <h3>
+            د. علي حسن
+          </h3>
+
+          <p>
+            فحص طبي اختصاصي وإعداد التقرير
+          </p>
+
+        </div>
+
+        <div class="history-type">
+          طبيب اختصاص
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       LABS
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        🧪 التحاليل
+      </h2>
+
+      <p>
+        مواعيد ونتائج التحاليل المرتبطة بالمسن
+      </p>
+
+    </div>
+
+
+    <div class="lab-list">
+
+
+      <div class="lab">
+
+        <div class="lab-top">
+
+          <h3>
+            صورة الدم CBC
+          </h3>
+
+          <span class="lab-date">
+            25 أغسطس 2026
+          </span>
+
+        </div>
+
+        <p>
+          الحالة: تم إجراء التحليل
+          <br>
+          النتيجة: بانتظار الإضافة
+        </p>
+
+      </div>
+
+
+      <div class="lab">
+
+        <div class="lab-top">
+
+          <h3>
+            وظائف الكلى
+          </h3>
+
+          <span class="lab-date">
+            25 أغسطس 2026
+          </span>
+
+        </div>
+
+        <p>
+          الحالة: تم إجراء التحليل
+          <br>
+          النتيجة: بانتظار الإضافة
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FAMILY
+  ========================= -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        👨‍👩‍👦 معلومات أحد ذوي المسن
+      </h2>
+
+      <p>
+        الشخص المخول بمتابعة حالة المسن
+      </p>
+
+    </div>
+
+
+    <div class="family-box">
+
+
+      <div class="family-item">
+
+        <span>
+          الاسم
+        </span>
+
+        <strong>
+          أحمد علي
+        </strong>
+
+      </div>
+
+
+      <div class="family-item">
+
+        <span>
+          صلة القرابة
+        </span>
+
+        <strong>
+          ابن
+        </strong>
+
+      </div>
+
+
+      <div class="family-item">
+
+        <span>
+          رقم الهاتف
+        </span>
+
+        <strong>
+          07XXXXXXXXX
+        </strong>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ACTIONS
+  ========================= -->
+
+  <div class="actions">
+
+    <a
+      href="staff-dashboard.html"
+      class="btn btn-back"
+    >
+      ← العودة إلى لوحة الكادر
+    </a>
+
+
+    <a
+      href="visit.html"
+      class="btn btn-visit"
+    >
+      🩺 تسجيل زيارة جديدة
+    </a>
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  <div class="footer-logo">
+    سند<span>.</span>
+  </div>
+
+  <p>
+    الرعاية المنزلية لكبار السن
+  </p>
+
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
+
+</footer>
+
+
+<script>
+
+/* =================================
+   LOAD PATIENT FROM CURRENT VISIT
+================================= */
+
+const savedVisit =
+  localStorage.getItem("sanadCurrentVisit");
+
+
+if (savedVisit) {
+
+  try {
+
+    const visit =
+      JSON.parse(savedVisit);
+
+    if (visit.patientName) {
+
+      document.getElementById("patientName")
+        .textContent =
+        visit.patientName;
+
+    }
+
+  } catch (error) {
+
+    console.log(
+      "تعذر تحميل بيانات المسن"
+    );
+
+  }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
