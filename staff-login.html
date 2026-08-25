@@ -3,6 +3,7 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,13 +12,14 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+
     body {
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
     .page {
       min-height: calc(100vh - 180px);
-      padding: 65px 7%;
+      padding: 50px 6%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -25,10 +27,10 @@
 
     .panel {
       width: 100%;
-      max-width: 520px;
+      max-width: 900px;
       background: white;
-      border-radius: 26px;
-      padding: 40px;
+      border-radius: 28px;
+      padding: 38px;
       border: 1px solid #e3edeb;
       box-shadow: 0 25px 65px rgba(22,70,65,.09);
     }
@@ -41,10 +43,9 @@
     .panel-icon {
       width: 70px;
       height: 70px;
-      margin: 0 auto 18px;
+      margin: 0 auto 16px;
       border-radius: 22px;
       background: #e8f5f3;
-      color: #16877d;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -57,76 +58,159 @@
       margin: 0 0 8px;
     }
 
-    .lead {
+    .panel-header p {
       color: #718480;
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: 13px;
       margin: 0;
+    }
+
+    /* =========================
+       ROLES
+    ========================= */
+
+    .roles-title {
+      color: #163b38;
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .role {
+      border: 1px solid #e3edeb;
+      background: #fbfefe;
+      border-radius: 15px;
+      padding: 16px 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: .25s;
+      font-family: inherit;
+    }
+
+    .role:hover {
+      border-color: #16877d;
+      transform: translateY(-2px);
+    }
+
+    .role.active {
+      background: #e8f5f3;
+      border-color: #16877d;
+      box-shadow: 0 8px 20px rgba(22,135,125,.10);
+    }
+
+    .role-icon {
+      font-size: 25px;
+      margin-bottom: 7px;
+    }
+
+    .role-name {
+      color: #163b38;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       LOGIN FORM
+    ========================= */
+
+    .login-box {
+      display: none;
+      border-top: 1px solid #e3edeb;
+      padding-top: 25px;
+    }
+
+    .selected-role {
+      text-align: center;
+      color: #16877d;
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 22px;
     }
 
     .form-row {
       display: flex;
       flex-direction: column;
-      gap: 9px;
-      margin-bottom: 18px;
+      gap: 8px;
+      margin-bottom: 17px;
     }
 
-    label {
-      font-weight: 700;
+    .form-row label {
       color: #163b38;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 800;
     }
 
-    input {
-      padding: 14px 15px;
+    .form-row input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px;
       border-radius: 12px;
       border: 1px solid #dfecea;
       background: #fbfefe;
       color: #163b38;
       font-family: inherit;
       font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
       outline: none;
     }
 
-    input:focus {
+    .form-row input:focus {
       border-color: #16877d;
       background: white;
       box-shadow: 0 0 0 4px rgba(22,135,125,.08);
     }
 
-    .actions {
-      margin-top: 25px;
+    .login-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-top: 22px;
+    }
+
+    .forgot {
+      color: #16877d;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
     }
 
     .btn-login {
-      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 13px 25px;
       background: #16877d;
       color: white;
-      padding: 14px 25px;
-      border-radius: 13px;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
-      border: none;
       cursor: pointer;
     }
 
     .btn-login:hover {
       background: #0f7068;
+      transform: translateY(-2px);
+    }
+
+    .message {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 11px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .error {
-      display: none;
-      margin-top: 15px;
-      padding: 13px;
-      border-radius: 12px;
       background: #fff0f0;
-      color: #b33b3b;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 700;
+      color: #a44b4b;
     }
 
     .back {
@@ -135,16 +219,37 @@
       margin-top: 25px;
       color: #16877d;
       text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    @media (max-width: 600px) {
-      .panel {
-        padding: 30px 22px;
+    @media (max-width: 800px) {
+
+      .roles {
+        grid-template-columns: repeat(2, 1fr);
       }
+
+      .panel {
+        padding: 28px 20px;
+      }
+
     }
+
+    @media (max-width: 500px) {
+
+      .login-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-login {
+        width: 100%;
+      }
+
+    }
+
   </style>
+
 </head>
 
 <body>
@@ -156,10 +261,12 @@
   </a>
 
   <nav class="nav">
+
     <a href="index.html">الرئيسية</a>
     <a href="services.html">خدماتنا</a>
-    <a href="index.html#how">كيف يعمل سند؟</a>
-    <a href="index.html#about">عن سند</a>
+    <a href="how.html">كيف يعمل سند؟</a>
+    <a href="about.html">عن سند</a>
+
   </nav>
 
 </header>
@@ -179,68 +286,145 @@
         تسجيل دخول الكادر
       </h1>
 
-      <p class="lead">
-        سجل الدخول للوصول إلى مهامك اليومية وجدول الزيارات وملفات المشتركين.
+      <p>
+        اختر صفتك الوظيفية أولاً ثم أدخل بيانات حسابك
       </p>
 
     </div>
 
 
-    <form id="staffLoginForm">
+    <div class="roles-title">
+      اختر الصفة الوظيفية
+    </div>
 
-      <div class="form-row">
 
-        <label for="staffPhone">
-          رقم الهاتف
-        </label>
+    <div class="roles">
 
-        <input
-          id="staffPhone"
-          type="tel"
-          placeholder="أدخل رقم الهاتف"
-          autocomplete="tel"
-          required
-        >
 
+      <button class="role" onclick="selectRole('manager', '👔', 'مدير الشركة', this)">
+        <div class="role-icon">👔</div>
+        <div class="role-name">مدير الشركة</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('reception', '🧑‍💼', 'موظف الاستقبال', this)">
+        <div class="role-icon">🧑‍💼</div>
+        <div class="role-name">موظف الاستقبال</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('specialist', '👨‍⚕️', 'الطبيب الأخصائي', this)">
+        <div class="role-icon">👨‍⚕️</div>
+        <div class="role-name">الطبيب الأخصائي</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('resident', '🩺', 'الطبيب المقيم', this)">
+        <div class="role-icon">🩺</div>
+        <div class="role-name">الطبيب المقيم</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('nurse', '👩‍⚕️', 'الممرض الصحي', this)">
+        <div class="role-icon">👩‍⚕️</div>
+        <div class="role-name">الممرض الصحي</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('nutrition', '🥗', 'أخصائي التغذية', this)">
+        <div class="role-icon">🥗</div>
+        <div class="role-name">أخصائي التغذية</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('physio', '🦿', 'أخصائي العلاج الطبيعي', this)">
+        <div class="role-icon">🦿</div>
+        <div class="role-name">أخصائي العلاج الطبيعي</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('psychologist', '🧠', 'الأخصائي النفسي', this)">
+        <div class="role-icon">🧠</div>
+        <div class="role-name">الأخصائي النفسي</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('entertainment', '🎭', 'مرافق الترفيه', this)">
+        <div class="role-icon">🎭</div>
+        <div class="role-name">مرافق الترفيه</div>
+      </button>
+
+
+      <button class="role" onclick="selectRole('hairdresser', '💇', 'الكوافير', this)">
+        <div class="role-icon">💇</div>
+        <div class="role-name">الكوافير</div>
+      </button>
+
+
+    </div>
+
+
+    <div class="login-box" id="loginBox">
+
+      <div class="selected-role" id="selectedRole">
+        —
       </div>
 
 
-      <div class="form-row">
+      <form id="staffLoginForm">
 
-        <label for="staffPassword">
-          كلمة المرور
-        </label>
+        <div class="form-row">
 
-        <input
-          id="staffPassword"
-          type="password"
-          placeholder="أدخل كلمة المرور"
-          autocomplete="current-password"
-          required
-        >
+          <label for="staffPhone">
+            رقم الهاتف
+          </label>
 
-      </div>
+          <input
+            id="staffPhone"
+            type="tel"
+            placeholder="أدخل رقم الهاتف"
+            autocomplete="tel"
+            required
+          >
+
+        </div>
 
 
-      <div class="actions">
+        <div class="form-row">
 
-        <button
-          type="submit"
-          class="btn-login"
-        >
-          🔐 تسجيل الدخول
-        </button>
+          <label for="staffPassword">
+            كلمة المرور
+          </label>
 
-      </div>
+          <input
+            id="staffPassword"
+            type="password"
+            placeholder="أدخل كلمة المرور"
+            autocomplete="current-password"
+            required
+          >
 
-      <div
-        id="loginError"
-        class="error"
-      >
-        ❌ رقم الهاتف أو كلمة المرور غير صحيحة
-      </div>
+        </div>
 
-    </form>
+
+        <div class="login-actions">
+
+          <a href="#" class="forgot" onclick="forgotPassword(event)">
+            نسيت كلمة المرور؟
+          </a>
+
+          <button type="submit" class="btn-login">
+            تسجيل الدخول
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div class="message error" id="errorMessage"></div>
+
+    </div>
 
 
     <a href="login.html" class="back">
@@ -271,92 +455,150 @@
 
 <script>
 
-/* =========================================
-   حسابات الكادر التجريبية
-========================================= */
-
-const staffAccounts = [
-
-  {
-    phone: "07700000001",
-    password: "1234",
-    name: "د. أحمد محمد",
-    role: "طبيب مقيم",
-    employeeId: "ST-001",
-    icon: "👨‍⚕️"
-  },
-
-  {
-    phone: "07700000002",
-    password: "1234",
-    name: "علي علاوي",
-    role: "ممرض",
-    employeeId: "ST-002",
-    icon: "👨‍⚕️"
-  },
-
-  {
-    phone: "07700000003",
-    password: "1234",
-    name: "درغام حسين",
-    role: "ممرض",
-    employeeId: "ST-003",
-    icon: "👨‍⚕️"
-  },
-
-  {
-    phone: "07700000004",
-    password: "1234",
-    name: "حيرش حامي",
-    role: "مساعد",
-    employeeId: "ST-004",
-    icon: "🧑‍⚕️"
-  },
-
-  {
-    phone: "07700000005",
-    password: "1234",
-    name: "دلير أحمد",
-    role: "مساعد",
-    employeeId: "ST-005",
-    icon: "🧑‍⚕️"
-  }
-
-];
+let selectedRole = null;
 
 
-/* =========================================
-   تسجيل الدخول
-========================================= */
+/* =========================
+   SELECT ROLE
+========================= */
 
-document
-  .getElementById("staffLoginForm")
-  .addEventListener("submit", function(event) {
+function selectRole(role, icon, name, element) {
+
+  selectedRole = {
+    role: role,
+    icon: icon,
+    name: name
+  };
+
+
+  document.querySelectorAll(".role").forEach(function(item) {
+    item.classList.remove("active");
+  });
+
+
+  element.classList.add("active");
+
+
+  document.getElementById("selectedRole").textContent =
+    icon + "  " + name;
+
+
+  document.getElementById("loginBox").style.display =
+    "block";
+
+
+  document.getElementById("staffPhone").focus();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+document.getElementById("staffLoginForm").addEventListener(
+  "submit",
+  function(event) {
 
     event.preventDefault();
+
+
+    if (!selectedRole) {
+      return;
+    }
+
 
     const phone =
       document.getElementById("staffPhone").value.trim();
 
     const password =
-      document.getElementById("staffPassword").value.trim();
+      document.getElementById("staffPassword").value;
 
-    const error =
-      document.getElementById("loginError");
+
+    /*
+      حسابات تجريبية مؤقتة
+      إلى حين إنشاء قاعدة البيانات
+    */
+
+    const accounts = {
+
+      manager: {
+        phone: "07700000001",
+        password: "1234",
+        name: "مدير الشركة"
+      },
+
+      reception: {
+        phone: "07700000002",
+        password: "1234",
+        name: "موظف الاستقبال"
+      },
+
+      specialist: {
+        phone: "07700000003",
+        password: "1234",
+        name: "د. أحمد محمد"
+      },
+
+      resident: {
+        phone: "07700000004",
+        password: "1234",
+        name: "د. علي محمد"
+      },
+
+      nurse: {
+        phone: "07700000005",
+        password: "1234",
+        name: "الممرض الصحي"
+      },
+
+      nutrition: {
+        phone: "07700000006",
+        password: "1234",
+        name: "أخصائي التغذية"
+      },
+
+      physio: {
+        phone: "07700000007",
+        password: "1234",
+        name: "أخصائي العلاج الطبيعي"
+      },
+
+      psychologist: {
+        phone: "07700000008",
+        password: "1234",
+        name: "الأخصائي النفسي"
+      },
+
+      entertainment: {
+        phone: "07700000009",
+        password: "1234",
+        name: "مرافق الترفيه"
+      },
+
+      hairdresser: {
+        phone: "07700000010",
+        password: "1234",
+        name: "الكوافير"
+      }
+
+    };
 
 
     const account =
-      staffAccounts.find(function(staff) {
-
-        return (
-          staff.phone === phone &&
-          staff.password === password
-        );
-
-      });
+      accounts[selectedRole.role];
 
 
-    if (!account) {
+    if (
+      phone !== account.phone ||
+      password !== account.password
+    ) {
+
+      const error =
+        document.getElementById("errorMessage");
+
+      error.textContent =
+        "❌ بيانات الحساب غير صحيحة. تأكد من الصفة ورقم الهاتف وكلمة المرور.";
 
       error.style.display = "block";
 
@@ -365,23 +607,62 @@ document
     }
 
 
-    /* حفظ الحساب الذي سجل الدخول */
+    /*
+      حفظ بيانات الموظف الحالي
+    */
+
+    const currentStaff = {
+
+      role: selectedRole.role,
+
+      roleName: selectedRole.name,
+
+      icon: selectedRole.icon,
+
+      name: account.name,
+
+      phone: account.phone,
+
+      loggedInAt: new Date().toISOString()
+
+    };
+
 
     localStorage.setItem(
-      "sanadLoggedStaff",
-      JSON.stringify(account)
+      "sanadCurrentStaff",
+      JSON.stringify(currentStaff)
     );
 
 
-    /* الانتقال إلى لوحة الكادر */
+    /*
+      فتح لوحة الكادر
+    */
 
     window.location.href =
       "staff-dashboard.html";
 
-  });
+  }
+);
+
+
+/* =========================
+   FORGOT PASSWORD
+========================= */
+
+function forgotPassword(event) {
+
+  event.preventDefault();
+
+  alert(
+    "استعادة كلمة المرور عبر واتساب سيتم تفعيلها لاحقاً عند ربط النظام بقاعدة البيانات وواتساب."
+  );
+
+}
 
 </script>
 
+
 </body>
+
 </html>
 ```
