@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -16,10 +17,6 @@
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
-    /* =========================
-       PAGE
-    ========================= */
-
     .page {
       min-height: calc(100vh - 180px);
       padding: 65px 7%;
@@ -30,11 +27,6 @@
 
       overflow: hidden;
     }
-
-
-    /* =========================
-       LOGIN PANEL
-    ========================= */
 
     .panel {
       width: 100%;
@@ -51,11 +43,6 @@
       box-shadow:
         0 25px 65px rgba(22, 70, 65, .09);
     }
-
-
-    /* =========================
-       HEADER
-    ========================= */
 
     .panel-header {
       text-align: center;
@@ -75,7 +62,6 @@
       color: #16877d;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
@@ -84,44 +70,27 @@
 
     .panel-header h1 {
       color: #163b38;
-
       font-size: 30px;
-
       margin: 0 0 8px;
     }
 
     .lead {
       color: #718480;
-
       font-size: 14px;
-
       line-height: 1.8;
-
       margin: 0;
     }
 
-
-    /* =========================
-       FORM
-    ========================= */
-
     .form-row {
-
       display: flex;
-
       flex-direction: column;
-
       gap: 9px;
-
       margin-bottom: 18px;
     }
 
     label {
-
       font-weight: 700;
-
       color: #163b38;
-
       font-size: 14px;
     }
 
@@ -166,11 +135,6 @@
       color: #a1b1ae;
     }
 
-
-    /* =========================
-       ACTIONS
-    ========================= */
-
     .actions {
 
       display: flex;
@@ -198,11 +162,6 @@
     .forgot:hover {
       text-decoration: underline;
     }
-
-
-    /* =========================
-       LOGIN BUTTON
-    ========================= */
 
     .btn-login {
 
@@ -240,10 +199,29 @@
         0 14px 30px rgba(22, 135, 125, .23);
     }
 
+    .error-message {
 
-    /* =========================
-       BACK BUTTON
-    ========================= */
+      display: none;
+
+      margin-top: 16px;
+
+      padding: 12px 15px;
+
+      border-radius: 12px;
+
+      background: #fff1f1;
+
+      border: 1px solid #f0d6d6;
+
+      color: #a44b4b;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      text-align: center;
+
+    }
 
     .back {
 
@@ -281,13 +259,11 @@
     .back-icon {
 
       width: 26px;
-
       height: 26px;
 
       display: flex;
 
       align-items: center;
-
       justify-content: center;
 
       border-radius: 8px;
@@ -322,11 +298,6 @@
       color: white;
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
-
     @media (max-width: 700px) {
 
       .page {
@@ -334,20 +305,14 @@
       }
 
       .panel {
-
         padding: 30px 22px;
-
         border-radius: 22px;
       }
 
       .panel-icon {
-
         width: 60px;
-
         height: 60px;
-
         border-radius: 18px;
-
         font-size: 28px;
       }
 
@@ -360,23 +325,17 @@
       }
 
       .actions {
-
         flex-direction: column;
-
         align-items: stretch;
       }
 
       .forgot {
-
         text-align: center;
-
         order: 2;
       }
 
       .btn-login {
-
         width: 100%;
-
         padding: 14px;
       }
 
@@ -385,7 +344,6 @@
       }
 
     }
-
 
     @media (max-width: 420px) {
 
@@ -411,197 +369,348 @@
 <body>
 
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+<header class="header">
 
-  <header class="header">
+  <a href="index.html" class="logo">
+    سند<span>.</span>
+  </a>
 
-    <a href="index.html" class="logo">
-      سند<span>.</span>
+  <nav class="nav">
+
+    <a href="index.html">
+      الرئيسية
     </a>
 
+    <a href="services.html">
+      خدماتنا
+    </a>
 
-    <nav class="nav">
+    <a href="index.html#how">
+      كيف يعمل سند؟
+    </a>
 
-      <a href="index.html">
-        الرئيسية
-      </a>
+    <a href="index.html#about">
+      عن سند
+    </a>
 
-      <a href="services.html">
-        خدماتنا
-      </a>
+  </nav>
 
-      <a href="index.html#how">
-        كيف يعمل سند؟
-      </a>
-
-      <a href="index.html#about">
-        عن سند
-      </a>
-
-    </nav>
-
-  </header>
+</header>
 
 
-  <!-- =========================
-       STAFF LOGIN
-  ========================= -->
+<main class="page">
 
-  <main class="page">
-
-    <div class="panel">
+  <div class="panel">
 
 
-      <!-- HEADER -->
+    <div class="panel-header">
 
-      <div class="panel-header">
+      <div class="panel-icon">
+        👨‍⚕️
+      </div>
 
-        <div class="panel-icon">
-          👨‍⚕️
-        </div>
+      <h1>
+        تسجيل دخول الكادر
+      </h1>
 
-        <h1>
-          تسجيل دخول الكادر
-        </h1>
+      <p class="lead">
+        سجل الدخول للوصول إلى مهامك اليومية وجدول الزيارات وملفات المشتركين.
+      </p>
 
-        <p class="lead">
-          سجل الدخول للوصول إلى مهامك اليومية وجدول الزيارات وملفات المشتركين.
-        </p>
+    </div>
+
+
+    <form id="staffLoginForm">
+
+
+      <div class="form-row">
+
+        <label for="staffPhone">
+          رقم الهاتف
+        </label>
+
+        <input
+          id="staffPhone"
+          type="tel"
+          placeholder="أدخل رقم الهاتف"
+          autocomplete="tel"
+          required
+        >
 
       </div>
 
 
-      <!-- FORM -->
+      <div class="form-row">
 
-      <form id="staffLoginForm">
+        <label for="staffPassword">
+          كلمة المرور
+        </label>
 
+        <input
+          id="staffPassword"
+          type="password"
+          placeholder="أدخل كلمة المرور"
+          autocomplete="current-password"
+          required
+        >
 
-        <!-- PHONE -->
-
-        <div class="form-row">
-
-          <label for="staffPhone">
-            رقم الهاتف
-          </label>
-
-          <input
-            id="staffPhone"
-            type="tel"
-            placeholder="أدخل رقم الهاتف"
-            autocomplete="tel"
-            required
-          >
-
-        </div>
+      </div>
 
 
-        <!-- PASSWORD -->
+      <div class="actions">
 
-        <div class="form-row">
+        <a href="#" class="forgot">
+          هل نسيت كلمة المرور؟
+        </a>
 
-          <label for="staffPassword">
-            كلمة المرور
-          </label>
+        <button
+          type="submit"
+          class="btn-login"
+        >
+          تسجيل الدخول
+        </button>
 
-          <input
-            id="staffPassword"
-            type="password"
-            placeholder="أدخل كلمة المرور"
-            autocomplete="current-password"
-            required
-          >
-
-        </div>
+      </div>
 
 
-        <!-- ACTIONS -->
-
-        <div class="actions">
-
-          <a href="#" class="forgot">
-            هل نسيت كلمة المرور؟
-          </a>
-
-          <button
-            type="submit"
-            class="btn-login"
-          >
-            تسجيل الدخول
-          </button>
-
-        </div>
+      <div
+        id="errorMessage"
+        class="error-message"
+      >
+        ⚠️ بيانات الدخول غير صحيحة
+      </div>
 
 
-      </form>
+    </form>
 
 
-      <!-- BACK -->
+    <a href="login.html" class="back">
 
-      <a href="login.html" class="back">
+      <span class="back-icon">
+        ←
+      </span>
 
-        <span class="back-icon">
-          ←
-        </span>
+      <span>
+        العودة لاختيار نوع الحساب
+      </span>
 
-        <span>
-          العودة لاختيار نوع الحساب
-        </span>
-
-      </a>
+    </a>
 
 
-    </div>
+  </div>
 
-  </main>
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="footer-logo">
-      سند<span>.</span>
-    </div>
-
-    <p>
-      الرعاية المنزلية لكبار السن
-    </p>
-
-    <small>
-      © 2026 سند — جميع الحقوق محفوظة
-    </small>
-
-  </footer>
+</main>
 
 
-  <!-- =========================
-       LOGIN SCRIPT
-  ========================= -->
+<footer>
 
-  <script>
+  <div class="footer-logo">
+    سند<span>.</span>
+  </div>
 
-    const staffLoginForm =
-      document.getElementById("staffLoginForm");
+  <p>
+    الرعاية المنزلية لكبار السن
+  </p>
 
-    staffLoginForm.addEventListener(
-      "submit",
-      function(event) {
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
 
-        event.preventDefault();
+</footer>
 
-        window.location.href =
-          "staff-dashboard.html";
 
-      }
+<script>
+
+/*
+==================================================
+نظام الكادر التجريبي
+==================================================
+
+حالياً لا توجد قاعدة بيانات.
+
+لذلك نستخدم حسابات تجريبية حتى نبني
+قاعدة البيانات لاحقاً.
+
+كل حساب مرتبط باختصاص معين.
+==================================================
+*/
+
+
+const staffAccounts = [
+
+  {
+    phone: "07700000001",
+    password: "1234",
+
+    name: "د. أحمد",
+    role: "طبيب مقيم",
+
+    icon: "👨‍⚕️"
+  },
+
+  {
+    phone: "07700000002",
+    password: "1234",
+
+    name: "د. محمد",
+    role: "طبيب أخصائي",
+
+    icon: "🩺"
+  },
+
+  {
+    phone: "07700000003",
+    password: "1234",
+
+    name: "علي",
+    role: "ممرض",
+
+    icon: "👨‍⚕️"
+  },
+
+  {
+    phone: "07700000004",
+    password: "1234",
+
+    name: "سارة",
+    role: "أخصائي نفسي",
+
+    icon: "🧠"
+  },
+
+  {
+    phone: "07700000005",
+    password: "1234",
+
+    name: "نور",
+    role: "أخصائي تغذية",
+
+    icon: "🥗"
+  },
+
+  {
+    phone: "07700000006",
+    password: "1234",
+
+    name: "حسن",
+    role: "علاج طبيعي",
+
+    icon: "🏃"
+  },
+
+  {
+    phone: "07700000007",
+    password: "1234",
+
+    name: "كرار",
+    role: "أخصائي ترفيه",
+
+    icon: "🎭"
+  },
+
+  {
+    phone: "07700000008",
+    password: "1234",
+
+    name: "ريم",
+    role: "كوافير",
+
+    icon: "💇"
+  }
+
+];
+
+
+document
+  .getElementById("staffLoginForm")
+  .addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    const phone =
+      document
+        .getElementById("staffPhone")
+        .value
+        .trim();
+
+
+    const password =
+      document
+        .getElementById("staffPassword")
+        .value
+        .trim();
+
+
+    const errorMessage =
+      document.getElementById("errorMessage");
+
+
+    /*
+    البحث عن الحساب
+    */
+
+    const staff =
+      staffAccounts.find(function(account) {
+
+        return (
+          account.phone === phone &&
+          account.password === password
+        );
+
+      });
+
+
+    /*
+    إذا الحساب غير موجود
+    */
+
+    if (!staff) {
+
+      errorMessage.style.display = "block";
+
+      return;
+
+    }
+
+
+    /*
+    حفظ بيانات الكادر
+    */
+
+    localStorage.setItem(
+      "sanadStaff",
+      JSON.stringify({
+
+        phone: staff.phone,
+
+        name: staff.name,
+
+        role: staff.role,
+
+        icon: staff.icon,
+
+        loginTime:
+          new Date().toLocaleString("ar-IQ")
+
+      })
     );
 
-  </script>
+
+    /*
+    الانتقال إلى لوحة الكادر
+    */
+
+    window.location.href =
+      "staff-dashboard.html";
+
+  });
+
+
+</script>
 
 
 </body>
 
 </html>
+```
