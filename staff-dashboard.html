@@ -3,7 +3,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,20 +16,13 @@
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
 
-    /* =========================
-       DASHBOARD
-    ========================= */
-
     .dashboard {
       max-width: 1250px;
       margin: auto;
       padding: 45px 6%;
     }
 
-
-    /* =========================
-       WELCOME
-    ========================= */
+    /* WELCOME */
 
     .welcome {
       background: white;
@@ -47,27 +39,27 @@
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
     }
 
-    .welcome-text .eyebrow {
+    .eyebrow {
       color: #16877d;
       font-size: 13px;
       font-weight: 800;
-      margin-bottom: 7px;
       display: block;
+      margin-bottom: 7px;
     }
 
-    .welcome-text h1 {
+    .welcome h1 {
       color: #163b38;
       font-size: 30px;
       margin: 0 0 8px;
     }
 
-    .welcome-text p {
+    .welcome p {
       color: #718480;
-      margin: 0;
       line-height: 1.8;
+      margin: 0;
     }
 
-    .staff-avatar {
+    .avatar {
       width: 78px;
       height: 78px;
       border-radius: 24px;
@@ -78,19 +70,15 @@
       justify-content: center;
 
       font-size: 38px;
-      flex-shrink: 0;
     }
 
-
-    /* =========================
-       QUICK STATS
-    ========================= */
+    /* STATS */
 
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
     .stat {
@@ -98,27 +86,12 @@
       border: 1px solid #e3edeb;
       border-radius: 20px;
       padding: 22px;
-
       box-shadow: 0 12px 35px rgba(22,70,65,.05);
-
-      transition: .25s;
-    }
-
-    .stat:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 38px rgba(22,70,65,.08);
-    }
-
-    .stat-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
     }
 
     .stat-icon {
-      width: 42px;
-      height: 42px;
+      width: 43px;
+      height: 43px;
       border-radius: 13px;
       background: #e8f5f3;
 
@@ -127,11 +100,13 @@
       justify-content: center;
 
       font-size: 21px;
+      margin-bottom: 12px;
     }
 
-    .stat-label {
+    .stat-title {
       color: #718480;
       font-size: 13px;
+      margin-bottom: 5px;
     }
 
     .stat-number {
@@ -140,10 +115,7 @@
       font-weight: 900;
     }
 
-
-    /* =========================
-       SECTION
-    ========================= */
+    /* SECTION */
 
     .section {
       background: white;
@@ -155,30 +127,23 @@
       box-shadow: 0 15px 45px rgba(22,70,65,.05);
     }
 
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
+    .section-title {
       margin-bottom: 22px;
     }
 
-    .section-header h2 {
+    .section-title h2 {
       color: #163b38;
       font-size: 21px;
+      margin: 0 0 5px;
+    }
+
+    .section-title p {
+      color: #718480;
+      font-size: 13px;
       margin: 0;
     }
 
-    .section-header p {
-      color: #718480;
-      font-size: 13px;
-      margin: 5px 0 0;
-    }
-
-
-    /* =========================
-       VISITS
-    ========================= */
+    /* VISITS */
 
     .visit-list {
       display: flex;
@@ -189,6 +154,7 @@
     .visit {
       display: grid;
       grid-template-columns: 100px 1fr auto;
+
       align-items: center;
       gap: 18px;
 
@@ -205,35 +171,50 @@
     .visit:hover {
       border-color: #16877d;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(22,135,125,.07);
     }
 
-    .visit-time {
+    .time {
       color: #16877d;
-      font-size: 15px;
       font-weight: 900;
+      font-size: 15px;
     }
 
-    .visit-info h3 {
+    .visit h3 {
       color: #163b38;
       font-size: 16px;
       margin: 0 0 5px;
     }
 
-    .visit-info p {
+    .visit p {
       color: #718480;
       font-size: 12px;
       margin: 0;
     }
 
+    .status {
+      padding: 7px 11px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
 
-    /* =========================
-       VISIT BUTTON
-    ========================= */
+    .done {
+      background: #e6f6ef;
+      color: #16815f;
+    }
 
-    .visit-button {
-      display: inline-block;
+    .current {
+      background: #e8f5f3;
+      color: #16877d;
+    }
 
+    .pending {
+      background: #fff5df;
+      color: #a66a00;
+    }
+
+    .open-btn {
       margin-top: 10px;
 
       background: #16877d;
@@ -245,76 +226,25 @@
       padding: 9px 15px;
 
       font-family: inherit;
-      font-size: 12px;
       font-weight: 800;
-
-      text-decoration: none;
+      font-size: 12px;
 
       cursor: pointer;
-
-      box-shadow: 0 7px 18px rgba(22,135,125,.12);
-
-      transition: .25s;
     }
 
-    .visit-button:hover {
+    .open-btn:hover {
       background: #0f7068;
-      color: white;
-      transform: translateY(-2px);
-
-      box-shadow: 0 10px 22px rgba(22,135,125,.18);
     }
 
+    /* TWO COLUMNS */
 
-    /* =========================
-       STATUS
-    ========================= */
-
-    .visit-status {
-      padding: 7px 11px;
-      border-radius: 9px;
-
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .status-pending {
-      background: #fff5df;
-      color: #a66a00;
-    }
-
-    .status-done {
-      background: #e6f6ef;
-      color: #16815f;
-    }
-
-    .status-current {
-      background: #e8f5f3;
-      color: #16877d;
-    }
-
-
-    /* =========================
-       TWO COLUMNS
-    ========================= */
-
-    .two-columns {
+    .columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 25px;
     }
 
-
-    /* =========================
-       TASKS
-    ========================= */
-
-    .task-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    /* TASK */
 
     .task {
       display: flex;
@@ -323,21 +253,17 @@
 
       padding: 15px;
 
+      border: 1px solid #e4efed;
       border-radius: 15px;
+
       background: #fbfefe;
-      border: 1px solid #e5efed;
 
-      transition: .25s;
-    }
-
-    .task:hover {
-      border-color: #16877d;
-      transform: translateY(-2px);
+      margin-bottom: 12px;
     }
 
     .task-icon {
-      width: 42px;
-      height: 42px;
+      width: 43px;
+      height: 43px;
       border-radius: 12px;
 
       background: #e8f5f3;
@@ -347,50 +273,35 @@
       justify-content: center;
 
       font-size: 20px;
-      flex-shrink: 0;
     }
 
-    .task-info {
-      flex: 1;
-    }
-
-    .task-info h3 {
+    .task h3 {
       color: #163b38;
       font-size: 14px;
       margin: 0 0 4px;
     }
 
-    .task-info p {
+    .task p {
       color: #718480;
       font-size: 11px;
       margin: 0;
     }
 
+    /* LAB */
 
-    /* =========================
-       LAB
-    ========================= */
-
-    .lab-card {
-      border: 1px solid #e3edeb;
+    .lab {
       background: #fbfefe;
-      border-radius: 17px;
+      border: 1px solid #e3edeb;
+      border-radius: 16px;
       padding: 17px;
       margin-bottom: 12px;
-
-      transition: .25s;
     }
 
-    .lab-card:hover {
-      border-color: #16877d;
-      transform: translateY(-2px);
-    }
-
-    .lab-top {
+    .lab-head {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .lab-name {
@@ -401,77 +312,64 @@
 
     .lab-date {
       color: #16877d;
-      font-size: 12px;
       font-weight: 800;
+      font-size: 12px;
     }
 
-    .lab-card p {
+    .lab p {
       color: #718480;
       font-size: 12px;
-      margin: 0;
       line-height: 1.7;
+      margin: 0;
     }
 
+    /* REPORTS */
 
-    /* =========================
-       REPORTS
-    ========================= */
-
-    .report-list {
+    .reports {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
     }
 
-    .report-card {
+    .report {
+      background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
       padding: 20px;
-      background: #fbfefe;
       text-align: center;
-
-      transition: .25s;
     }
 
-    .report-card:hover {
-      border-color: #16877d;
-      transform: translateY(-3px);
+    .report-icon {
+      font-size: 29px;
+      margin-bottom: 9px;
     }
 
-    .report-card .report-icon {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-
-    .report-card h3 {
+    .report h3 {
       color: #163b38;
       font-size: 14px;
       margin: 0 0 6px;
     }
 
-    .report-card p {
+    .report p {
       color: #718480;
       font-size: 11px;
-      margin: 0;
       line-height: 1.7;
+      margin: 0;
     }
 
+    /* PROFILE */
 
-    /* =========================
-       PROFILE
-    ========================= */
-
-    .profile-grid {
+    .profile {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
     }
 
     .profile-item {
-      padding: 16px;
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 15px;
+      padding: 16px;
     }
 
     .profile-item span {
@@ -486,10 +384,7 @@
       font-size: 14px;
     }
 
-
-    /* =========================
-       LOGOUT
-    ========================= */
+    /* LOGOUT */
 
     .logout-area {
       text-align: center;
@@ -514,20 +409,14 @@
 
       font-size: 13px;
       font-weight: 800;
-
-      transition: .25s;
     }
 
     .logout:hover {
       background: #a44b4b;
       color: white;
-      transform: translateY(-2px);
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
+    /* MOBILE */
 
     @media (max-width: 900px) {
 
@@ -535,20 +424,19 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .two-columns {
+      .columns {
         grid-template-columns: 1fr;
       }
 
-      .report-list {
+      .reports {
         grid-template-columns: 1fr;
       }
 
-      .profile-grid {
+      .profile {
         grid-template-columns: 1fr 1fr;
       }
 
     }
-
 
     @media (max-width: 650px) {
 
@@ -560,50 +448,19 @@
         padding: 23px;
       }
 
-      .welcome-text h1 {
+      .welcome h1 {
         font-size: 24px;
-      }
-
-      .staff-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 18px;
-        font-size: 29px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .stat {
-        padding: 16px;
-      }
-
-      .stat-number {
-        font-size: 23px;
-      }
-
-      .section {
-        padding: 20px 15px;
-        border-radius: 20px;
       }
 
       .visit {
         grid-template-columns: 1fr;
-        gap: 10px;
       }
 
-      .visit-status {
-        width: fit-content;
-      }
-
-      .profile-grid {
+      .profile {
         grid-template-columns: 1fr;
       }
 
     }
-
 
     @media (max-width: 420px) {
 
@@ -626,6 +483,592 @@
 <body>
 
 
-<!-- =========================
-     HEADER
+<header class="header">
+
+  <a href="index.html" class="logo">
+    سند<span>.</span>
+  </a>
+
+  <nav class="nav">
+
+    <a href="index.html">الرئيسية</a>
+
+    <a href="services.html">خدماتنا</a>
+
+    <a href="index.html#how">كيف يعمل سند؟</a>
+
+    <a href="index.html#about">عن سند</a>
+
+  </nav>
+
+</header>
+
+
+<main class="dashboard">
+
+
+  <!-- WELCOME -->
+
+  <section class="welcome">
+
+    <div>
+
+      <span class="eyebrow">
+        لوحة الكادر
+      </span>
+
+      <h1>
+        أهلاً بك، د. أحمد 👋
+      </h1>
+
+      <p>
+        طبيب مقيم — فريق سند
+        <br>
+        الثلاثاء، 25 أغسطس 2026
+      </p>
+
+    </div>
+
+    <div class="avatar">
+      👨‍⚕️
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">📅</div>
+
+      <div class="stat-title">
+        زيارات اليوم
+      </div>
+
+      <div class="stat-number">
+        5
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">👴</div>
+
+      <div class="stat-title">
+        المسنون المكلف بهم
+      </div>
+
+      <div class="stat-number">
+        12
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">📝</div>
+
+      <div class="stat-title">
+        تقارير بانتظار الإرسال
+      </div>
+
+      <div class="stat-number">
+        2
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">🧪</div>
+
+      <div class="stat-title">
+        مواعيد التحاليل
+      </div>
+
+      <div class="stat-number">
+        1
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VISITS -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        📅 جدول زياراتي
+      </h2>
+
+      <p>
+        الزيارات والمهام المجدولة للكادر
+      </p>
+
+    </div>
+
+
+    <div class="visit-list">
+
+
+      <div class="visit">
+
+        <div class="time">
+          09:00 ص
+        </div>
+
+        <div>
+
+          <h3>
+            محمد علي
+          </h3>
+
+          <p>
+            فحص ومتابعة الحالة الصحية
+          </p>
+
+          <button class="open-btn">
+            فتح الزيارة
+          </button>
+
+        </div>
+
+        <span class="status done">
+          مكتملة
+        </span>
+
+      </div>
+
+
+      <div class="visit">
+
+        <div class="time">
+          11:00 ص
+        </div>
+
+        <div>
+
+          <h3>
+            علي غلام
+          </h3>
+
+          <p>
+            متابعة الوظائف الحيوية والأدوية
+          </p>
+
+          <button class="open-btn">
+            فتح الزيارة
+          </button>
+
+        </div>
+
+        <span class="status current">
+          الزيارة الحالية
+        </span>
+
+      </div>
+
+
+      <div class="visit">
+
+        <div class="time">
+          02:00 م
+        </div>
+
+        <div>
+
+          <h3>
+            أحمد معين
+          </h3>
+
+          <p>
+            زيارة متابعة أسبوعية وإعداد التقرير
+          </p>
+
+          <button class="open-btn">
+            فتح الزيارة
+          </button>
+
+        </div>
+
+        <span class="status pending">
+          قادمة
+        </span>
+
+      </div>
+
+
+      <div class="visit">
+
+        <div class="time">
+          04:00 م
+        </div>
+
+        <div>
+
+          <h3>
+            حسين ناصر
+          </h3>
+
+          <p>
+            تقييم الحالة الصحية
+          </p>
+
+          <button class="open-btn">
+            فتح الزيارة
+          </button>
+
+        </div>
+
+        <span class="status pending">
+          قادمة
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- COLUMNS -->
+
+  <div class="columns">
+
+
+    <!-- TASKS -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>
+          📝 مهامي اليوم
+        </h2>
+
+        <p>
+          المهام المطلوبة حسب تخصص الكادر
+        </p>
+
+      </div>
+
+
+      <div class="task">
+
+        <div class="task-icon">
+          🩺
+        </div>
+
+        <div>
+
+          <h3>
+            متابعة الوظائف الحيوية
+          </h3>
+
+          <p>
+            ضغط الدم والسكر والحرارة
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="task">
+
+        <div class="task-icon">
+          💊
+        </div>
+
+        <div>
+
+          <h3>
+            مراجعة الأدوية
+          </h3>
+
+          <p>
+            التأكد من الالتزام بالخطة العلاجية
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="task">
+
+        <div class="task-icon">
+          📋
+        </div>
+
+        <div>
+
+          <h3>
+            إعداد التقرير
+          </h3>
+
+          <p>
+            توثيق حالة المسن بعد الزيارة
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- LAB -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>
+          🧪 مواعيد التحاليل
+        </h2>
+
+        <p>
+          التحاليل المجدولة للمسنين
+        </p>
+
+      </div>
+
+
+      <div class="lab">
+
+        <div class="lab-head">
+
+          <span class="lab-name">
+            محمد علي
+          </span>
+
+          <span class="lab-date">
+            10:30 ص
+          </span>
+
+        </div>
+
+        <p>
+          صورة الدم + وظائف الكلى
+          <br>
+          📅 الثلاثاء 25 أغسطس
+        </p>
+
+      </div>
+
+
+      <div class="lab">
+
+        <div class="lab-head">
+
+          <span class="lab-name">
+            سمية هاشم
+          </span>
+
+          <span class="lab-date">
+            01:00 م
+          </span>
+
+        </div>
+
+        <p>
+          صورة الدم + وظائف الكلى
+          <br>
+          📅 الأربعاء 26 أغسطس
+        </p>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <!-- REPORTS -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        📋 التقارير
+      </h2>
+
+      <p>
+        التقارير المطلوبة حسب طبيعة العمل
+      </p>
+
+    </div>
+
+
+    <div class="reports">
+
+
+      <div class="report">
+
+        <div class="report-icon">
+          📝
+        </div>
+
+        <h3>
+          التقرير اليومي
+        </h3>
+
+        <p>
+          توثيق الزيارة اليومية والملاحظات الصحية.
+        </p>
+
+      </div>
+
+
+      <div class="report">
+
+        <div class="report-icon">
+          📊
+        </div>
+
+        <h3>
+          التقرير الأسبوعي
+        </h3>
+
+        <p>
+          متابعة تطور حالة المسن خلال الأسبوع.
+        </p>
+
+      </div>
+
+
+      <div class="report">
+
+        <div class="report-icon">
+          📑
+        </div>
+
+        <h3>
+          التقرير الطبي
+        </h3>
+
+        <p>
+          تقرير الفحص والتقييم والتوصيات الطبية.
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+
+  <section class="section">
+
+    <div class="section-title">
+
+      <h2>
+        👨‍⚕️ معلومات الكادر
+      </h2>
+
+      <p>
+        معلومات الحساب الوظيفي
+      </p>
+
+    </div>
+
+
+    <div class="profile">
+
+
+      <div class="profile-item">
+
+        <span>
+          الاسم
+        </span>
+
+        <strong>
+          د. أحمد
+        </strong>
+
+      </div>
+
+
+      <div class="profile-item">
+
+        <span>
+          الوظيفة
+        </span>
+
+        <strong>
+          طبيب مقيم
+        </strong>
+
+      </div>
+
+
+      <div class="profile-item">
+
+        <span>
+          حالة الحساب
+        </span>
+
+        <strong>
+          متصل الآن
+        </strong>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- LOGOUT -->
+
+  <div class="logout-area">
+
+    <a href="login.html" class="logout">
+      🚪 تسجيل الخروج
+    </a>
+
+  </div>
+
+
+</main>
+
+
+<footer>
+
+  <div class="footer-logo">
+    سند<span>.</span>
+  </div>
+
+  <p>
+    الرعاية المنزلية لكبار السن
+  </p>
+
+  <small>
+    © 2026 سند — جميع الحقوق محفوظة
+  </small>
+
+</footer>
+
+
+</body>
+
+</html>
 ```
