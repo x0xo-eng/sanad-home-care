@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -23,16 +22,23 @@
       padding: 45px 6%;
     }
 
+    /* =========================
+       WELCOME
+    ========================= */
+
     .welcome {
       background: white;
       border: 1px solid #e3edeb;
       border-radius: 26px;
       padding: 30px;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
+
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
+
       margin-bottom: 25px;
     }
 
@@ -61,12 +67,53 @@
       height: 78px;
       border-radius: 24px;
       background: #e8f5f3;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       font-size: 38px;
       flex-shrink: 0;
     }
+
+    /* =========================
+       ROLE BADGE
+    ========================= */
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      background: #e8f5f3;
+      color: #16877d;
+
+      border: 1px solid #d5ebe7;
+
+      padding: 7px 12px;
+      border-radius: 10px;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      margin-top: 10px;
+    }
+
+    .owner-badge {
+      background: #fff5df;
+      color: #9a6500;
+      border-color: #f1dfb5;
+    }
+
+    .manager-badge {
+      background: #eaf0ff;
+      color: #4964a5;
+      border-color: #d9e1f7;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
 
     .stats {
       display: grid;
@@ -100,9 +147,11 @@
       height: 42px;
       border-radius: 13px;
       background: #e8f5f3;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       font-size: 21px;
     }
 
@@ -111,6 +160,10 @@
       font-size: 28px;
       font-weight: 900;
     }
+
+    /* =========================
+       SECTION
+    ========================= */
 
     .section {
       background: white;
@@ -137,8 +190,72 @@
       margin: 0;
     }
 
-    .visit-list,
-    .task-list {
+    /* =========================
+       MANAGEMENT
+    ========================= */
+
+    .management {
+      display: none;
+    }
+
+    .management.visible {
+      display: block;
+    }
+
+    .management-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .management-card {
+      border: 1px solid #e3edeb;
+      background: #fbfefe;
+      border-radius: 17px;
+      padding: 19px;
+      cursor: pointer;
+      transition: .25s;
+      text-align: right;
+    }
+
+    .management-card:hover {
+      border-color: #16877d;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(22,135,125,.08);
+    }
+
+    .management-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 13px;
+      background: #e8f5f3;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .management-card h3 {
+      color: #163b38;
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+
+    .management-card p {
+      color: #718480;
+      font-size: 11px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* =========================
+       VISITS
+    ========================= */
+
+    .visit-list {
       display: flex;
       flex-direction: column;
       gap: 13px;
@@ -149,10 +266,13 @@
       grid-template-columns: 95px 1fr auto;
       align-items: center;
       gap: 18px;
+
       padding: 18px;
+
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
+
       transition: .25s;
     }
 
@@ -207,11 +327,14 @@
       border: none;
       background: #16877d;
       color: white;
+
       border-radius: 10px;
       padding: 9px 15px;
+
       font-family: inherit;
       font-size: 12px;
       font-weight: 800;
+
       cursor: pointer;
       transition: .25s;
     }
@@ -221,17 +344,33 @@
       transform: translateY(-2px);
     }
 
+    /* =========================
+       TWO COLUMNS
+    ========================= */
+
     .two-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 25px;
     }
 
+    /* =========================
+       TASKS
+    ========================= */
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .task {
       display: flex;
       align-items: center;
       gap: 13px;
+
       padding: 15px;
+
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 15px;
@@ -241,10 +380,13 @@
       width: 42px;
       height: 42px;
       border-radius: 12px;
+
       background: #e8f5f3;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       font-size: 20px;
       flex-shrink: 0;
     }
@@ -266,9 +408,14 @@
       line-height: 1.7;
     }
 
+    /* =========================
+       LAB
+    ========================= */
+
     .lab-card {
       padding: 17px;
       margin-bottom: 12px;
+
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
@@ -300,6 +447,10 @@
       margin: 0;
     }
 
+    /* =========================
+       REPORTS
+    ========================= */
+
     .reports {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -308,9 +459,11 @@
 
     .report {
       text-align: center;
+
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
+
       padding: 20px;
     }
 
@@ -332,14 +485,19 @@
       margin: 0;
     }
 
+    /* =========================
+       PROFILE
+    ========================= */
+
     .profile {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 15px;
     }
 
     .profile-item {
       padding: 16px;
+
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 15px;
@@ -357,6 +515,10 @@
       font-size: 14px;
     }
 
+    /* =========================
+       LOGOUT
+    ========================= */
+
     .logout-area {
       text-align: center;
       margin: 35px 0 10px;
@@ -366,14 +528,21 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+
       padding: 11px 20px;
+
       border-radius: 12px;
+
       border: 1px solid #eadede;
+
       background: white;
       color: #a44b4b;
+
       text-decoration: none;
+
       font-size: 13px;
       font-weight: 800;
+
       transition: .25s;
     }
 
@@ -381,6 +550,22 @@
       background: #a44b4b;
       color: white;
       transform: translateY(-2px);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 1000px) {
+
+      .management-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .profile {
+        grid-template-columns: 1fr 1fr;
+      }
+
     }
 
     @media (max-width: 900px) {
@@ -395,10 +580,6 @@
 
       .reports {
         grid-template-columns: 1fr;
-      }
-
-      .profile {
-        grid-template-columns: 1fr 1fr;
       }
 
     }
@@ -433,6 +614,10 @@
         width: fit-content;
       }
 
+      .management-grid {
+        grid-template-columns: 1fr;
+      }
+
       .profile {
         grid-template-columns: 1fr;
       }
@@ -459,6 +644,7 @@
 
 <body>
 
+
 <header class="header">
 
   <a href="index.html" class="logo">
@@ -479,12 +665,17 @@
 
 <main class="dashboard">
 
+
+  <!-- =========================
+       WELCOME
+  ========================= -->
+
   <section class="welcome">
 
     <div>
 
       <span class="eyebrow">
-        لوحة الكادر
+        🏥 لوحة الكادر — سند
       </span>
 
       <h1 id="welcomeName">
@@ -495,14 +686,29 @@
         جاري تحميل بيانات الحساب...
       </p>
 
+      <div
+        id="roleBadge"
+        class="role-badge"
+      >
+        حساب سند
+      </div>
+
     </div>
 
-    <div class="staff-avatar" id="staffAvatar">
+
+    <div
+      class="staff-avatar"
+      id="staffAvatar"
+    >
       👨‍⚕️
     </div>
 
   </section>
 
+
+  <!-- =========================
+       STATS
+  ========================= -->
 
   <section class="stats">
 
@@ -520,7 +726,10 @@
 
       </div>
 
-      <div class="stat-number" id="visitsCount">
+      <div
+        class="stat-number"
+        id="visitsCount"
+      >
         0
       </div>
 
@@ -541,7 +750,10 @@
 
       </div>
 
-      <div class="stat-number" id="patientsCount">
+      <div
+        class="stat-number"
+        id="patientsCount"
+      >
         0
       </div>
 
@@ -553,7 +765,7 @@
       <div class="stat-top">
 
         <span class="stat-label">
-          التقارير المطلوبة
+          التقارير
         </span>
 
         <div class="stat-icon">
@@ -562,7 +774,10 @@
 
       </div>
 
-      <div class="stat-number" id="reportsCount">
+      <div
+        class="stat-number"
+        id="reportsCount"
+      >
         0
       </div>
 
@@ -583,7 +798,10 @@
 
       </div>
 
-      <div class="stat-number" id="labsCount">
+      <div
+        class="stat-number"
+        id="labsCount"
+      >
         0
       </div>
 
@@ -591,6 +809,202 @@
 
   </section>
 
+
+  <!-- =========================
+       MANAGEMENT
+       يظهر للمالك والمدير فقط
+  ========================= -->
+
+  <section
+    class="section management"
+    id="managementSection"
+  >
+
+    <div class="section-title">
+
+      <h2>
+        ⚙️ إدارة وتشغيل سند
+      </h2>
+
+      <p>
+        هذه الأدوات متاحة حسب صلاحيات حسابك
+      </p>
+
+    </div>
+
+
+    <div class="management-grid">
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('patients')"
+      >
+
+        <div class="management-icon">
+          👴
+        </div>
+
+        <h3>
+          إدارة المسنين
+        </h3>
+
+        <p>
+          إضافة ومتابعة وربط حسابات المسنين
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('staff')"
+      >
+
+        <div class="management-icon">
+          👥
+        </div>
+
+        <h3>
+          إدارة الكادر
+        </h3>
+
+        <p>
+          متابعة الكادر وتوزيع الاختصاصات
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('schedule')"
+      >
+
+        <div class="management-icon">
+          📅
+        </div>
+
+        <h3>
+          جدول الزيارات
+        </h3>
+
+        <p>
+          إنشاء وتنظيم جدول الزيارات اليومية
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('tasks')"
+      >
+
+        <div class="management-icon">
+          📋
+        </div>
+
+        <h3>
+          توزيع المهام
+        </h3>
+
+        <p>
+          إسناد المهام إلى الكادر المختص
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('reports')"
+      >
+
+        <div class="management-icon">
+          📊
+        </div>
+
+        <h3>
+          التقارير
+        </h3>
+
+        <p>
+          متابعة تقارير الزيارات والرعاية
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('monitor')"
+      >
+
+        <div class="management-icon">
+          🔎
+        </div>
+
+        <h3>
+          مراقبة التشغيل
+        </h3>
+
+        <p>
+          متابعة تنفيذ الزيارات والمهام
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        onclick="managementAction('packages')"
+      >
+
+        <div class="management-icon">
+          📦
+        </div>
+
+        <h3>
+          الباقات والخدمات
+        </h3>
+
+        <p>
+          إدارة الخدمات المرتبطة بالمسنين
+        </p>
+
+      </div>
+
+
+      <div
+        class="management-card"
+        id="ownerControlCard"
+        onclick="managementAction('owner')"
+      >
+
+        <div class="management-icon">
+          👑
+        </div>
+
+        <h3>
+          صلاحيات المالك
+        </h3>
+
+        <p>
+          تحكم ومراقبة جميع حسابات النظام
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       VISITS
+  ========================= -->
 
   <section class="section">
 
@@ -606,13 +1020,22 @@
 
     </div>
 
-    <div class="visit-list" id="visitList">
+
+    <div
+      class="visit-list"
+      id="visitList"
+    >
     </div>
 
   </section>
 
 
+  <!-- =========================
+       TASKS + LAB
+  ========================= -->
+
   <div class="two-columns">
+
 
     <section class="section">
 
@@ -628,7 +1051,10 @@
 
       </div>
 
-      <div class="task-list" id="taskList">
+      <div
+        class="task-list"
+        id="taskList"
+      >
       </div>
 
     </section>
@@ -656,6 +1082,10 @@
   </div>
 
 
+  <!-- =========================
+       REPORTS
+  ========================= -->
+
   <section class="section">
 
     <div class="section-title">
@@ -670,11 +1100,18 @@
 
     </div>
 
-    <div class="reports" id="reportList">
+    <div
+      class="reports"
+      id="reportList"
+    >
     </div>
 
   </section>
 
+
+  <!-- =========================
+       PROFILE
+  ========================= -->
 
   <section class="section">
 
@@ -730,18 +1167,40 @@
 
       </div>
 
+
+      <div class="profile-item">
+
+        <span>
+          مستوى الصلاحية
+        </span>
+
+        <strong id="profilePermission">
+          —
+        </strong>
+
+      </div>
+
     </div>
 
   </section>
 
 
+  <!-- =========================
+       LOGOUT
+  ========================= -->
+
   <div class="logout-area">
 
-    <a href="#" class="logout" onclick="logoutStaff(event)">
+    <a
+      href="#"
+      class="logout"
+      onclick="logoutStaff(event)"
+    >
       🚪 تسجيل الخروج
     </a>
 
   </div>
+
 
 </main>
 
@@ -766,94 +1225,402 @@
 <script>
 
 /* =====================================================
-   قراءة الحساب من تسجيل الدخول
-   مهم جداً:
-   نفس الاسم المستخدم في staff-login.html
+   قراءة جلسة تسجيل الدخول الجديدة
 ===================================================== */
 
-const storedStaff =
-  localStorage.getItem("sanadLoggedInStaff");
-
-
-/* =====================================================
-   منع الدخول بدون تسجيل
-===================================================== */
-
-if (!storedStaff) {
-
-  alert("يرجى تسجيل الدخول أولاً.");
-
-  window.location.href = "staff-login.html";
-
-}
-
-
-/* =====================================================
-   تحويل بيانات الحساب من JSON
-===================================================== */
-
-let staff = null;
+let loggedInStaff = null;
 
 try {
 
-  staff = JSON.parse(storedStaff);
+  const rawStaff =
+    localStorage.getItem("sanadLoggedInStaff");
+
+  if (rawStaff) {
+
+    loggedInStaff =
+      JSON.parse(rawStaff);
+
+  }
 
 } catch (error) {
 
-  staff = null;
+  console.error(
+    "خطأ في قراءة جلسة الكادر:",
+    error
+  );
+
+  localStorage.removeItem(
+    "sanadLoggedInStaff"
+  );
 
 }
 
 
 /* =====================================================
-   التحقق من صحة بيانات الحساب
+   التحقق من الجلسة
 ===================================================== */
 
 if (
-  !staff ||
-  !staff.phone ||
-  !staff.role
+  !loggedInStaff ||
+  typeof loggedInStaff !== "object" ||
+  !loggedInStaff.role
 ) {
 
-  alert("بيانات الحساب غير صالحة.");
+  alert(
+    "يرجى تسجيل الدخول أولاً."
+  );
 
-  localStorage.removeItem("sanadLoggedInStaff");
+  window.location.href =
+    "staff-login.html";
 
-  window.location.href = "staff-login.html";
+  throw new Error(
+    "No valid staff session"
+  );
 
 }
 
 
 /* =====================================================
-   بيانات تجريبية للوحة
-   مؤقتاً فقط حتى نربط قاعدة البيانات
+   تعريف الصفات الـ11
 ===================================================== */
 
-const roleData = {
+const roleInfo = {
+
+  owner: {
+    title: "مالك النظام",
+    icon: "👑",
+    permissionLevel: "صلاحيات مطلقة"
+  },
+
+  manager: {
+    title: "مدير الشركة",
+    icon: "👨‍💼",
+    permissionLevel: "إدارة وتشغيل"
+  },
+
+  reception: {
+    title: "موظف الاستقبال",
+    icon: "🧑‍💼",
+    permissionLevel: "استقبال وخدمة العملاء"
+  },
+
+  specialist: {
+    title: "الطبيب الأخصائي",
+    icon: "👨‍⚕️",
+    permissionLevel: "طبي — أخصائي"
+  },
+
+  resident: {
+    title: "الطبيب المقيم",
+    icon: "🩺",
+    permissionLevel: "طبي — مقيم"
+  },
+
+  nurse: {
+    title: "الممرض الصحي",
+    icon: "👩‍⚕️",
+    permissionLevel: "تمريضي"
+  },
+
+  nutrition: {
+    title: "أخصائي التغذية",
+    icon: "🥗",
+    permissionLevel: "تغذية"
+  },
+
+  physio: {
+    title: "أخصائي العلاج الطبيعي",
+    icon: "🏃",
+    permissionLevel: "علاج طبيعي"
+  },
+
+  psychologist: {
+    title: "الأخصائي النفسي",
+    icon: "🧠",
+    permissionLevel: "دعم نفسي"
+  },
+
+  entertainment: {
+    title: "مرافق الترفيه",
+    icon: "🎭",
+    permissionLevel: "ترفيه ومرافقة"
+  },
+
+  hairdresser: {
+    title: "الكوافير",
+    icon: "💇",
+    permissionLevel: "عناية شخصية"
+  }
+
+};
+
+
+/* =====================================================
+   الصلاحيات
+===================================================== */
+
+const permissions = {
 
   owner: {
 
-    icon: "👑",
+    viewAll: true,
+    managePatients: true,
+    manageStaff: true,
+    manageSchedules: true,
+    assignTasks: true,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: true,
+    managePackages: true,
+    manageManager: true
 
-    visits: [],
+  },
 
-    patients: 0,
+  manager: {
+
+    viewAll: true,
+    managePatients: true,
+    manageStaff: true,
+    manageSchedules: true,
+    assignTasks: true,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: true,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  reception: {
+
+    viewAll: false,
+    managePatients: true,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: false,
+    viewMedicalData: false,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  specialist: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  resident: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  nurse: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  nutrition: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  physio: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  psychologist: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: true,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  entertainment: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: false,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  },
+
+  hairdresser: {
+
+    viewAll: false,
+    managePatients: false,
+    manageStaff: false,
+    manageSchedules: false,
+    assignTasks: false,
+    viewReports: true,
+    manageReports: true,
+    viewMedicalData: false,
+    viewFinancials: false,
+    managePackages: false,
+    manageManager: false
+
+  }
+
+};
+
+
+/* =====================================================
+   الصفة الحالية
+===================================================== */
+
+const currentRole =
+  loggedInStaff.role;
+
+
+const currentRoleInfo =
+  roleInfo[currentRole];
+
+
+const currentPermissions =
+  permissions[currentRole];
+
+
+/* =====================================================
+   حماية الصفة
+===================================================== */
+
+if (!currentRoleInfo || !currentPermissions) {
+
+  alert(
+    "صفة الحساب غير معرفة في نظام سند."
+  );
+
+  localStorage.removeItem(
+    "sanadLoggedInStaff"
+  );
+
+  window.location.href =
+    "staff-login.html";
+
+  throw new Error(
+    "Unknown staff role"
+  );
+
+}
+
+
+/* =====================================================
+   بيانات تجريبية للزيارات
+   مؤقتاً إلى أن نبني جدول المدير
+===================================================== */
+
+const demoData = {
+
+  owner: {
+
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "مراقبة عامة لجدول الرعاية",
+        time: "09:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "مراجعة سير الرعاية",
+        time: "11:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      }
+    ],
 
     tasks: [
       {
-        icon: "📊",
+        icon: "👑",
         title: "مراقبة النظام",
-        text: "لديك صلاحية عامة لمتابعة جميع أجزاء نظام سند."
+        text: "لديك صلاحيات مطلقة لمتابعة جميع أعمال سند."
       },
       {
-        icon: "👥",
-        title: "متابعة الكادر",
-        text: "يمكنك مراقبة حسابات وصلاحيات جميع الكوادر."
+        icon: "📊",
+        title: "مراقبة المدير",
+        text: "يمكنك متابعة أعمال المدير وجميع عمليات التشغيل."
       },
       {
-        icon: "📅",
-        title: "متابعة الجداول",
-        text: "يمكنك الاطلاع على جداول الزيارات والمهام."
+        icon: "🔎",
+        title: "المتابعة الشاملة",
+        text: "الوصول إلى بيانات الكادر والمسنين والتقارير."
       }
     ],
 
@@ -862,8 +1629,8 @@ const roleData = {
     reports: [
       {
         icon: "📊",
-        title: "التقارير العامة",
-        text: "عرض ومراقبة تقارير الشركة والنظام."
+        title: "التقارير الشاملة",
+        text: "متابعة تقارير جميع أقسام سند."
       },
       {
         icon: "👥",
@@ -873,7 +1640,7 @@ const roleData = {
       {
         icon: "👴",
         title: "تقارير المسنين",
-        text: "متابعة بيانات وتقارير المسنين."
+        text: "متابعة حالة جميع المسنين."
       }
     ]
 
@@ -882,27 +1649,45 @@ const roleData = {
 
   manager: {
 
-    icon: "👨‍💼",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "إدارة جدول الزيارة ومتابعة التنفيذ",
+        time: "09:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "متابعة تنفيذ مهمة الكادر",
+        time: "11:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "مراجعة جدول الرعاية",
+        time: "02:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "📅",
         title: "إدارة جدول الزيارات",
-        text: "تعبئة وتنظيم جداول زيارات جميع الكوادر."
+        text: "تنظيم زيارات جميع الكوادر والمسنين."
       },
       {
         icon: "👥",
         title: "توزيع المهام",
-        text: "توزيع المهام على الكادر حسب اختصاص كل موظف."
+        text: "إسناد المهام إلى الكادر حسب الاختصاص."
       },
       {
-        icon: "📋",
-        title: "متابعة التنفيذ",
-        text: "متابعة حالة الزيارات والمهام والتقارير."
+        icon: "📊",
+        title: "مراقبة التنفيذ",
+        text: "متابعة الزيارات والمهام والتقارير."
       }
     ],
 
@@ -911,18 +1696,18 @@ const roleData = {
     reports: [
       {
         icon: "📊",
-        title: "التقرير الإداري",
+        title: "التقرير التشغيلي",
         text: "متابعة سير العمل اليومي."
+      },
+      {
+        icon: "📅",
+        title: "تقرير الزيارات",
+        text: "متابعة تنفيذ جدول الزيارات."
       },
       {
         icon: "👥",
         title: "تقرير الكادر",
-        text: "متابعة أداء الموظفين والزيارات."
-      },
-      {
-        icon: "👴",
-        title: "تقرير المسنين",
-        text: "متابعة حالة المسنين والخدمات المقدمة."
+        text: "متابعة توزيع المهام على الكادر."
       }
     ]
 
@@ -931,22 +1716,26 @@ const roleData = {
 
   reception: {
 
-    icon: "🧑‍💼",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "متابعة ملف المسن",
+        time: "09:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      }
+    ],
 
     tasks: [
       {
         icon: "📞",
         title: "التواصل مع العائلة",
-        text: "متابعة الاتصالات والاستفسارات."
+        text: "متابعة الاتصالات والمعلومات الإدارية."
       },
       {
         icon: "📋",
-        title: "تحديث بيانات المسنين",
-        text: "تحديث البيانات الإدارية المسموح بها."
+        title: "تحديث بيانات المسن",
+        text: "تحديث البيانات الأساسية للحساب."
       }
     ],
 
@@ -954,9 +1743,9 @@ const roleData = {
 
     reports: [
       {
-        icon: "📞",
-        title: "سجل التواصل",
-        text: "تسجيل الاتصالات والمتابعات."
+        icon: "📋",
+        title: "السجل الإداري",
+        text: "متابعة البيانات الإدارية للمسن."
       }
     ]
 
@@ -965,22 +1754,33 @@ const roleData = {
 
   specialist: {
 
-    icon: "👨‍⚕️",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "زيارة الطبيب الأخصائي",
+        time: "10:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "علي غلام",
+        type: "فحص ومتابعة تخصصية",
+        time: "01:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "🩺",
-        title: "الفحص الطبي",
-        text: "فحص المسن وتقييم حالته الصحية."
+        title: "الفحص التخصصي",
+        text: "فحص حالة المسن وإعداد التوصيات الطبية."
       },
       {
-        icon: "💊",
-        title: "الخطة العلاجية",
-        text: "مراجعة وتحديث الخطة العلاجية عند الحاجة."
+        icon: "📋",
+        title: "التقرير الطبي",
+        text: "توثيق نتائج الزيارة والتوصيات."
       }
     ],
 
@@ -988,9 +1788,14 @@ const roleData = {
 
     reports: [
       {
-        icon: "📝",
+        icon: "🩺",
         title: "التقرير الطبي",
-        text: "توثيق الفحص والتقييم والتوصيات."
+        text: "تسجيل نتائج الفحص الطبي."
+      },
+      {
+        icon: "📊",
+        title: "توصيات المتابعة",
+        text: "إضافة توصيات للطبيب المسؤول."
       }
     ]
 
@@ -999,32 +1804,67 @@ const roleData = {
 
   resident: {
 
-    icon: "🩺",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "متابعة أسبوعية للحالة الصحية",
+        time: "09:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "متابعة الوظائف الحيوية والأدوية",
+        time: "11:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "زيارة متابعة أسبوعية",
+        time: "02:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "🩺",
-        title: "المتابعة الطبية",
-        text: "متابعة الحالة الصحية للمسن."
+        title: "متابعة الوظائف الحيوية",
+        text: "مراجعة ضغط الدم والسكر والحرارة والنبض."
       },
       {
         icon: "💊",
         title: "مراجعة الأدوية",
-        text: "متابعة الالتزام بالخطة العلاجية."
+        text: "التأكد من الالتزام بالخطة العلاجية."
+      },
+      {
+        icon: "📋",
+        title: "إعداد التقرير",
+        text: "توثيق حالة المسن بعد الزيارة."
       }
     ],
 
-    labs: [],
+    labs: [
+      {
+        patient: "محمد علي",
+        time: "10:30 ص",
+        tests: "صورة الدم + وظائف الكلى",
+        date: "الثلاثاء 25 أغسطس 2026"
+      }
+    ],
 
     reports: [
       {
         icon: "📝",
-        title: "تقرير الزيارة",
-        text: "تسجيل نتائج الزيارة الطبية."
+        title: "التقرير الأسبوعي",
+        text: "متابعة تطور حالة المسن."
+      },
+      {
+        icon: "🩺",
+        title: "التقرير الطبي",
+        text: "تسجيل الفحص والتقييم."
       }
     ]
 
@@ -1033,17 +1873,35 @@ const roleData = {
 
   nurse: {
 
-    icon: "👩‍⚕️",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "زيارة تمريضية — قياس الضغط والسكر وإعطاء العلاج",
+        time: "08:00 ص",
+        status: "done",
+        statusText: "مكتملة"
+      },
+      {
+        patient: "علي غلام",
+        type: "زيارة تمريضية — العلامات الحيوية والأدوية",
+        time: "09:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      },
+      {
+        patient: "أحمد معين",
+        type: "زيارة تمريضية",
+        time: "10:00 ص",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "🩺",
         title: "قياس العلامات الحيوية",
-        text: "قياس الضغط والسكر والحرارة والنبض."
+        text: "قياس ضغط الدم والسكر والحرارة والنبض."
       },
       {
         icon: "💊",
@@ -1051,9 +1909,9 @@ const roleData = {
         text: "إعطاء العلاج حسب الخطة المحددة."
       },
       {
-        icon: "📋",
-        title: "تسجيل الزيارة",
-        text: "تسجيل القياسات والملاحظات."
+        icon: "📝",
+        title: "تقرير الزيارة",
+        text: "تسجيل تفاصيل الزيارة والملاحظات."
       }
     ],
 
@@ -1063,12 +1921,12 @@ const roleData = {
       {
         icon: "📝",
         title: "تقرير الزيارة",
-        text: "توثيق ما تم خلال الزيارة."
+        text: "تسجيل القياسات والملاحظات."
       },
       {
         icon: "❤️",
-        title: "سجل العلامات الحيوية",
-        text: "تسجيل القياسات الصحية للمسن."
+        title: "العلامات الحيوية",
+        text: "توثيق القياسات الصحية."
       }
     ]
 
@@ -1077,22 +1935,26 @@ const roleData = {
 
   nutrition: {
 
-    icon: "🥗",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "متابعة النظام الغذائي",
+        time: "10:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      }
+    ],
 
     tasks: [
       {
         icon: "🥗",
         title: "تقييم التغذية",
-        text: "تقييم الاحتياجات الغذائية للمسن."
+        text: "متابعة النظام الغذائي المناسب للمسن."
       },
       {
-        icon: "🍎",
+        icon: "📋",
         title: "الخطة الغذائية",
-        text: "متابعة الخطة الغذائية المناسبة."
+        text: "إعداد وتحديث الخطة الغذائية."
       }
     ],
 
@@ -1102,7 +1964,7 @@ const roleData = {
       {
         icon: "🥗",
         title: "التقرير الغذائي",
-        text: "تسجيل تقييم التغذية والتوصيات."
+        text: "تسجيل تقييم التغذية."
       }
     ]
 
@@ -1111,22 +1973,26 @@ const roleData = {
 
   physio: {
 
-    icon: "🏃",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "علي غلام",
+        type: "جلسة علاج طبيعي",
+        time: "10:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      }
+    ],
 
     tasks: [
       {
         icon: "🏃",
-        title: "العلاج الطبيعي",
-        text: "تنفيذ ومتابعة جلسات العلاج الطبيعي."
+        title: "جلسة العلاج الطبيعي",
+        text: "تنفيذ التمارين المناسبة للمسن."
       },
       {
-        icon: "💪",
-        title: "التمارين",
-        text: "متابعة التمارين المناسبة للمسن."
+        icon: "📋",
+        title: "تقييم الحركة",
+        text: "تسجيل مستوى الحركة والتقدم."
       }
     ],
 
@@ -1145,11 +2011,15 @@ const roleData = {
 
   psychologist: {
 
-    icon: "🧠",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "سمية هاشم",
+        type: "متابعة الحالة النفسية",
+        time: "11:00 ص",
+        status: "current",
+        statusText: "الحالية"
+      }
+    ],
 
     tasks: [
       {
@@ -1158,9 +2028,9 @@ const roleData = {
         text: "متابعة الحالة النفسية والاجتماعية للمسن."
       },
       {
-        icon: "💬",
-        title: "جلسة المتابعة",
-        text: "تنفيذ جلسات الدعم النفسي."
+        icon: "❤️",
+        title: "الدعم النفسي",
+        text: "تقديم الدعم المناسب حسب الحالة."
       }
     ],
 
@@ -1170,7 +2040,7 @@ const roleData = {
       {
         icon: "🧠",
         title: "التقرير النفسي",
-        text: "تسجيل نتائج المتابعة النفسية."
+        text: "توثيق نتائج المتابعة النفسية."
       }
     ]
 
@@ -1179,22 +2049,26 @@ const roleData = {
 
   entertainment: {
 
-    icon: "🎭",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "أحمد معين",
+        type: "مرافقة ونشاط ترفيهي",
+        time: "03:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "🎭",
         title: "النشاط الترفيهي",
-        text: "تنظيم الأنشطة الترفيهية المناسبة للمسن."
+        text: "تنظيم نشاط مناسب للمسن."
       },
       {
         icon: "🚶",
-        title: "النشاط الخارجي",
-        text: "تنفيذ النشاطات الخارجية المجدولة."
+        title: "المرافقة",
+        text: "مرافقة المسن حسب الجدول المحدد."
       }
     ],
 
@@ -1204,7 +2078,7 @@ const roleData = {
       {
         icon: "🎭",
         title: "تقرير النشاط",
-        text: "تسجيل النشاط الترفيهي المقدم."
+        text: "تسجيل النشاط الترفيهي المنفذ."
       }
     ]
 
@@ -1213,17 +2087,21 @@ const roleData = {
 
   hairdresser: {
 
-    icon: "💇",
-
-    visits: [],
-
-    patients: 0,
+    visits: [
+      {
+        patient: "محمد علي",
+        type: "العناية الشخصية وقص الشعر",
+        time: "04:00 م",
+        status: "pending",
+        statusText: "قادمة"
+      }
+    ],
 
     tasks: [
       {
         icon: "💇",
         title: "العناية الشخصية",
-        text: "تقديم خدمات الكوافير للمسن حسب الجدول."
+        text: "تقديم خدمات العناية الشخصية حسب الباقة."
       }
     ],
 
@@ -1233,7 +2111,7 @@ const roleData = {
       {
         icon: "💇",
         title: "تقرير الخدمة",
-        text: "تسجيل خدمة العناية الشخصية."
+        text: "تسجيل الخدمة المقدمة للمسن."
       }
     ]
 
@@ -1243,95 +2121,208 @@ const roleData = {
 
 
 /* =====================================================
-   بيانات الصفة الحالية
+   الحصول على بيانات الصفة
 ===================================================== */
 
-const currentRole =
-  roleData[staff.role] || roleData.owner;
+const data =
+  demoData[currentRole] || {
+
+    visits: [],
+    tasks: [],
+    labs: [],
+    reports: []
+
+  };
 
 
 /* =====================================================
    عرض بيانات الحساب
 ===================================================== */
 
-document.getElementById("welcomeName").textContent =
-  "أهلاً بك، " + (staff.name || "عضو فريق سند") + " 👋";
+document.getElementById(
+  "welcomeName"
+).textContent =
+  "أهلاً بك، " +
+  (loggedInStaff.name || "مستخدم سند") +
+  " 👋";
 
 
-document.getElementById("welcomeRole").innerHTML =
-  (staff.title || "عضو فريق سند") +
+document.getElementById(
+  "welcomeRole"
+).textContent =
+  currentRoleInfo.title +
   " — فريق سند";
 
 
-document.getElementById("staffAvatar").textContent =
-  currentRole.icon;
+document.getElementById(
+  "staffAvatar"
+).textContent =
+  currentRoleInfo.icon;
 
 
-document.getElementById("profileName").textContent =
-  staff.name || "—";
+document.getElementById(
+  "profileName"
+).textContent =
+  loggedInStaff.name || "—";
 
 
-document.getElementById("profileRole").textContent =
-  staff.title || "—";
+document.getElementById(
+  "profileRole"
+).textContent =
+  currentRoleInfo.title;
 
 
-document.getElementById("profileId").textContent =
-  staff.employeeId || "—";
+document.getElementById(
+  "profileId"
+).textContent =
+  loggedInStaff.employeeId || "—";
+
+
+document.getElementById(
+  "profilePermission"
+).textContent =
+  currentRoleInfo.permissionLevel;
+
+
+/* =====================================================
+   شارة الصفة
+===================================================== */
+
+const roleBadge =
+  document.getElementById(
+    "roleBadge"
+  );
+
+
+roleBadge.textContent =
+  currentRoleInfo.icon +
+  " " +
+  currentRoleInfo.title;
+
+
+if (currentRole === "owner") {
+
+  roleBadge.classList.add(
+    "owner-badge"
+  );
+
+}
+
+
+if (currentRole === "manager") {
+
+  roleBadge.classList.add(
+    "manager-badge"
+  );
+
+}
 
 
 /* =====================================================
    الإحصائيات
 ===================================================== */
 
-document.getElementById("visitsCount").textContent =
-  currentRole.visits.length;
+document.getElementById(
+  "visitsCount"
+).textContent =
+  data.visits.length;
 
 
-document.getElementById("patientsCount").textContent =
-  currentRole.patients;
+document.getElementById(
+  "patientsCount"
+).textContent =
+  data.visits.length;
 
 
-document.getElementById("reportsCount").textContent =
-  currentRole.reports.length;
+document.getElementById(
+  "reportsCount"
+).textContent =
+  data.reports.length;
 
 
-document.getElementById("labsCount").textContent =
-  currentRole.labs.length;
+document.getElementById(
+  "labsCount"
+).textContent =
+  data.labs.length;
 
 
 /* =====================================================
-   الزيارات
+   قسم الإدارة
+   يظهر للمالك والمدير فقط
+===================================================== */
+
+const managementSection =
+  document.getElementById(
+    "managementSection"
+  );
+
+
+if (
+  currentPermissions.manageSchedules ||
+  currentPermissions.assignTasks
+) {
+
+  managementSection.classList.add(
+    "visible"
+  );
+
+}
+
+
+/* =====================================================
+   إظهار بطاقة صلاحيات المالك للمالك فقط
+===================================================== */
+
+const ownerControlCard =
+  document.getElementById(
+    "ownerControlCard"
+  );
+
+
+if (currentRole !== "owner") {
+
+  ownerControlCard.style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   عرض الزيارات
 ===================================================== */
 
 const visitList =
-  document.getElementById("visitList");
+  document.getElementById(
+    "visitList"
+  );
 
 
-if (currentRole.visits.length === 0) {
+if (data.visits.length === 0) {
 
   visitList.innerHTML = `
 
     <div class="lab-card">
 
       <p style="text-align:center;">
-        لا توجد زيارات مجدولة لحسابك حالياً.
-        <br>
-        ستظهر الزيارات هنا بعد أن يقوم المدير بجدولتها.
+        لا توجد زيارات مجدولة حالياً.
       </p>
 
     </div>
 
   `;
 
-} else {
+}
 
-  currentRole.visits.forEach(function(visit) {
+
+data.visits.forEach(
+  function(visit) {
 
     const visitElement =
       document.createElement("div");
 
     visitElement.className =
       "visit";
+
 
     visitElement.innerHTML = `
 
@@ -1351,76 +2342,112 @@ if (currentRole.visits.length === 0) {
 
         <button
           class="open-visit"
-          onclick="openVisit('${visit.patient}')"
+          onclick="openVisit(
+            '${visit.patient}',
+            '${visit.type}',
+            '${visit.time}',
+            'الثلاثاء 25 أغسطس 2026'
+          )"
         >
           🩺 فتح الزيارة
         </button>
 
       </div>
 
-      <span class="visit-status ${visit.status}">
+      <span
+        class="visit-status ${visit.status}"
+      >
         ${visit.statusText}
       </span>
 
     `;
 
-    visitList.appendChild(visitElement);
 
-  });
+    visitList.appendChild(
+      visitElement
+    );
 
-}
+  }
+);
 
 
 /* =====================================================
-   المهام
+   عرض المهام
 ===================================================== */
 
 const taskList =
-  document.getElementById("taskList");
+  document.getElementById(
+    "taskList"
+  );
 
 
-currentRole.tasks.forEach(function(task) {
+if (data.tasks.length === 0) {
 
-  const taskElement =
-    document.createElement("div");
+  taskList.innerHTML = `
 
-  taskElement.className =
-    "task";
+    <div class="lab-card">
 
-  taskElement.innerHTML = `
-
-    <div class="task-icon">
-      ${task.icon}
-    </div>
-
-    <div class="task-info">
-
-      <h3>
-        ${task.title}
-      </h3>
-
-      <p>
-        ${task.text}
+      <p style="text-align:center;">
+        لا توجد مهام مسندة إليك حالياً.
       </p>
 
     </div>
 
   `;
 
-  taskList.appendChild(taskElement);
+}
 
-});
+
+data.tasks.forEach(
+  function(task) {
+
+    const taskElement =
+      document.createElement("div");
+
+    taskElement.className =
+      "task";
+
+
+    taskElement.innerHTML = `
+
+      <div class="task-icon">
+        ${task.icon}
+      </div>
+
+      <div class="task-info">
+
+        <h3>
+          ${task.title}
+        </h3>
+
+        <p>
+          ${task.text}
+        </p>
+
+      </div>
+
+    `;
+
+
+    taskList.appendChild(
+      taskElement
+    );
+
+  }
+);
 
 
 /* =====================================================
-   التحاليل
+   عرض التحاليل
 ===================================================== */
 
 const labList =
-  document.getElementById("labList");
+  document.getElementById(
+    "labList"
+  );
 
 
-if (currentRole.labs.length === 0) {
+if (data.labs.length === 0) {
 
   labList.innerHTML = `
 
@@ -1434,15 +2461,18 @@ if (currentRole.labs.length === 0) {
 
   `;
 
-} else {
+}
 
-  currentRole.labs.forEach(function(lab) {
+
+data.labs.forEach(
+  function(lab) {
 
     const labElement =
       document.createElement("div");
 
     labElement.className =
       "lab-card";
+
 
     labElement.innerHTML = `
 
@@ -1470,77 +2500,113 @@ if (currentRole.labs.length === 0) {
 
     `;
 
-    labList.appendChild(labElement);
 
-  });
+    labList.appendChild(
+      labElement
+    );
+
+  }
+);
+
+
+/* =====================================================
+   عرض التقارير
+===================================================== */
+
+const reportList =
+  document.getElementById(
+    "reportList"
+  );
+
+
+if (data.reports.length === 0) {
+
+  reportList.innerHTML = `
+
+    <div class="lab-card">
+
+      <p style="text-align:center;">
+        لا توجد تقارير حالياً.
+      </p>
+
+    </div>
+
+  `;
 
 }
 
 
-/* =====================================================
-   التقارير
-===================================================== */
+data.reports.forEach(
+  function(report) {
 
-const reportList =
-  document.getElementById("reportList");
+    const reportElement =
+      document.createElement("div");
+
+    reportElement.className =
+      "report";
 
 
-currentRole.reports.forEach(function(report) {
+    reportElement.innerHTML = `
 
-  const reportElement =
-    document.createElement("div");
+      <div class="report-icon">
+        ${report.icon}
+      </div>
 
-  reportElement.className =
-    "report";
+      <h3>
+        ${report.title}
+      </h3>
 
-  reportElement.innerHTML = `
+      <p>
+        ${report.text}
+      </p>
 
-    <div class="report-icon">
-      ${report.icon}
-    </div>
+    `;
 
-    <h3>
-      ${report.title}
-    </h3>
 
-    <p>
-      ${report.text}
-    </p>
+    reportList.appendChild(
+      reportElement
+    );
 
-  `;
-
-  reportList.appendChild(reportElement);
-
-});
+  }
+);
 
 
 /* =====================================================
    فتح الزيارة
 ===================================================== */
 
-function openVisit(patientName) {
+function openVisit(
+  patientName,
+  visitType,
+  visitTime,
+  date
+) {
 
   const visitData = {
 
-    patientName: patientName,
+    patientName:
+      patientName,
 
-    staffName:
-      staff.name,
+    visitType:
+      visitType,
 
-    staffRole:
-      staff.title,
-
-    staffId:
-      staff.employeeId,
-
-    staffPhone:
-      staff.phone,
-
-    role:
-      staff.role,
+    visitTime:
+      visitTime,
 
     date:
-      new Date().toISOString()
+      date,
+
+    staffName:
+      loggedInStaff.name,
+
+    staffRole:
+      currentRoleInfo.title,
+
+    staffId:
+      loggedInStaff.employeeId,
+
+    staffRoleKey:
+      currentRole
 
   };
 
@@ -1551,13 +2617,174 @@ function openVisit(patientName) {
   );
 
 
-  /*
-    مؤقتاً نفتح صفحة الزيارة.
-    لاحقاً سنربطها ببيانات المسن وجدول المدير.
-  */
-
   window.location.href =
     "visit.html";
+
+}
+
+
+/* =====================================================
+   أدوات الإدارة
+===================================================== */
+
+function managementAction(action) {
+
+  let message = "";
+
+
+  if (action === "patients") {
+
+    if (
+      !currentPermissions.managePatients
+    ) {
+
+      message =
+        "ليس لديك صلاحية إدارة المسنين.";
+
+    } else {
+
+      message =
+        "قسم إدارة المسنين سيتم ربطه بقاعدة بيانات المسنين.";
+
+    }
+
+  }
+
+
+  if (action === "staff") {
+
+    if (
+      !currentPermissions.manageStaff
+    ) {
+
+      message =
+        "ليس لديك صلاحية إدارة الكادر.";
+
+    } else {
+
+      message =
+        "قسم إدارة الكادر سيتم بناؤه في الخطوة التالية.";
+
+    }
+
+  }
+
+
+  if (action === "schedule") {
+
+    if (
+      !currentPermissions.manageSchedules
+    ) {
+
+      message =
+        "ليس لديك صلاحية إدارة جدول الزيارات.";
+
+    } else {
+
+      message =
+        "تم فتح صلاحية إدارة جدول الزيارات. سنبني شاشة الجدولة الآن.";
+
+    }
+
+  }
+
+
+  if (action === "tasks") {
+
+    if (
+      !currentPermissions.assignTasks
+    ) {
+
+      message =
+        "ليس لديك صلاحية توزيع المهام.";
+
+    } else {
+
+      message =
+        "تم فتح صلاحية توزيع المهام. سنبني شاشة توزيع المهام الآن.";
+
+    }
+
+  }
+
+
+  if (action === "reports") {
+
+    if (
+      !currentPermissions.viewReports
+    ) {
+
+      message =
+        "ليس لديك صلاحية مشاهدة التقارير.";
+
+    } else {
+
+      message =
+        "قسم التقارير متاح حسب صلاحيات حسابك.";
+
+    }
+
+  }
+
+
+  if (action === "monitor") {
+
+    if (
+      !currentPermissions.viewAll
+    ) {
+
+      message =
+        "المراقبة الشاملة متاحة للمالك والمدير فقط.";
+
+    } else {
+
+      message =
+        "قسم مراقبة التشغيل سيتم بناؤه في الخطوة التالية.";
+
+    }
+
+  }
+
+
+  if (action === "packages") {
+
+    if (
+      !currentPermissions.managePackages
+    ) {
+
+      message =
+        "إدارة الباقات متاحة للمالك فقط حالياً.";
+
+    } else {
+
+      message =
+        "قسم الباقات والخدمات متاح للمالك.";
+
+    }
+
+  }
+
+
+  if (action === "owner") {
+
+    if (
+      !currentPermissions.manageManager
+    ) {
+
+      message =
+        "هذه الصلاحية متاحة لمالك النظام فقط.";
+
+    } else {
+
+      message =
+        "صلاحيات المالك: تحكم مطلق بجميع حسابات النظام.";
+
+    }
+
+  }
+
+
+  alert(message);
 
 }
 
@@ -1569,29 +2796,46 @@ function openVisit(patientName) {
 function logoutStaff(event) {
 
   if (event) {
+
     event.preventDefault();
+
   }
+
 
   localStorage.removeItem(
     "sanadLoggedInStaff"
   );
 
-  localStorage.removeItem(
-    "sanadStaffName"
-  );
-
-  localStorage.removeItem(
-    "sanadStaffRole"
-  );
 
   localStorage.removeItem(
     "sanadCurrentVisit"
   );
 
+
   window.location.href =
     "staff-login.html";
 
 }
+
+
+/* =====================================================
+   معلومات للتأكد أثناء التجربة
+===================================================== */
+
+console.log(
+  "SANAD STAFF SESSION:",
+  loggedInStaff
+);
+
+console.log(
+  "SANAD ROLE:",
+  currentRole
+);
+
+console.log(
+  "SANAD PERMISSIONS:",
+  currentPermissions
+);
 
 </script>
 
@@ -1599,4 +2843,3 @@ function logoutStaff(event) {
 </body>
 
 </html>
-```
