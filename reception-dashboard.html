@@ -4,7 +4,11 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>لوحة موظف الاستقبال | سند</title>
 
@@ -13,7 +17,11 @@
   <style>
 
     body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
+      background: linear-gradient(
+        180deg,
+        #f7fbfa,
+        #eef7f5
+      );
     }
 
     .dashboard {
@@ -21,10 +29,6 @@
       margin: auto;
       padding: 45px 6%;
     }
-
-    /* =========================
-       WELCOME
-    ========================= */
 
     .welcome {
       background: white;
@@ -35,9 +39,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
       gap: 20px;
 
-      box-shadow: 0 18px 50px rgba(22,70,65,.07);
+      box-shadow:
+        0 18px 50px rgba(22,70,65,.07);
 
       margin-bottom: 25px;
     }
@@ -76,23 +82,71 @@
       flex-shrink: 0;
     }
 
-    /* =========================
+
+    /* =============================
+       STAFF INFO
+    ============================= */
+
+    .staff-info {
+      display: grid;
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 15px;
+
+      margin-bottom: 25px;
+    }
+
+    .info-card {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .info-label {
+      display: block;
+      color: #718480;
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .info-value {
+      color: #163b38;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+
+    /* =============================
        STATS
-    ========================= */
+    ============================= */
 
     .stats {
+
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
       gap: 18px;
+
       margin-bottom: 28px;
     }
 
     .stat {
+
       background: white;
+
       border: 1px solid #e3edeb;
+
       border-radius: 20px;
+
       padding: 22px;
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
+
+      box-shadow:
+        0 12px 35px rgba(22,70,65,.05);
+
     }
 
     .stat-label {
@@ -107,18 +161,26 @@
       margin-top: 10px;
     }
 
-    /* =========================
+
+    /* =============================
        SECTION
-    ========================= */
+    ============================= */
 
     .section {
+
       background: white;
+
       border: 1px solid #e3edeb;
+
       border-radius: 24px;
+
       padding: 28px;
+
       margin-bottom: 25px;
 
-      box-shadow: 0 15px 45px rgba(22,70,65,.05);
+      box-shadow:
+        0 15px 45px rgba(22,70,65,.05);
+
     }
 
     .section-title {
@@ -126,31 +188,50 @@
     }
 
     .section-title h2 {
+
       color: #163b38;
+
       font-size: 21px;
-      margin: 0 0 5px;
+
+      margin:
+        0 0 5px;
+
     }
 
     .section-title p {
+
       color: #718480;
+
       font-size: 13px;
+
       margin: 0;
+
     }
 
-    /* =========================
-       QUICK ACTIONS
-    ========================= */
+
+    /* =============================
+       ACTIONS
+    ============================= */
 
     .actions-grid {
+
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
       gap: 15px;
+
     }
 
     .action {
+
       border: 1px solid #e3edeb;
+
       background: #fbfefe;
+
       border-radius: 18px;
+
       padding: 22px 15px;
 
       text-align: center;
@@ -158,17 +239,29 @@
       cursor: pointer;
 
       transition: .25s;
+
       font-family: inherit;
+
     }
 
     .action:hover {
-      transform: translateY(-4px);
-      border-color: #16877d;
-      box-shadow: 0 10px 28px rgba(22,135,125,.09);
+
+      transform:
+        translateY(-4px);
+
+      border-color:
+        #16877d;
+
+      box-shadow:
+        0 10px 28px
+        rgba(22,135,125,.09);
+
     }
 
     .action-icon {
+
       width: 55px;
+
       height: 55px;
 
       border-radius: 17px;
@@ -176,93 +269,153 @@
       background: #e8f5f3;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      margin: 0 auto 12px;
+      margin:
+        0 auto 12px;
 
       font-size: 26px;
+
     }
 
     .action h3 {
+
       color: #163b38;
+
       font-size: 14px;
-      margin: 0 0 5px;
+
+      margin:
+        0 0 5px;
+
     }
 
     .action p {
+
       color: #718480;
+
       font-size: 11px;
+
       line-height: 1.6;
+
       margin: 0;
+
     }
 
-    /* =========================
+
+    /* =============================
        PACKAGES
-    ========================= */
+    ============================= */
 
     .packages {
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 18px;
+
     }
 
     .package {
-      border: 1px solid #e3edeb;
+
+      border:
+        1px solid #e3edeb;
+
       border-radius: 19px;
+
       padding: 22px;
 
-      background: #fbfefe;
+      background:
+        #fbfefe;
+
     }
 
     .package h3 {
+
       color: #163b38;
-      margin: 0 0 8px;
+
+      margin:
+        0 0 8px;
+
       font-size: 18px;
+
     }
 
     .package-price {
+
       color: #16877d;
+
       font-size: 22px;
+
       font-weight: 900;
+
       margin-bottom: 15px;
+
     }
 
     .package ul {
+
       margin: 0;
+
       padding-right: 20px;
+
     }
 
     .package li {
+
       color: #718480;
+
       font-size: 12px;
+
       line-height: 2;
+
     }
 
-    /* =========================
-       NEW CUSTOMER
-    ========================= */
+
+    /* =============================
+       FORM
+    ============================= */
 
     .form-grid {
+
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 17px;
+
     }
 
     .form-row {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 7px;
+
     }
 
     .form-row.full {
-      grid-column: 1 / -1;
+
+      grid-column:
+        1 / -1;
+
     }
 
     .form-row label {
+
       color: #163b38;
+
       font-size: 13px;
+
       font-weight: 800;
+
     }
 
     .form-row input,
@@ -270,13 +423,15 @@
     .form-row textarea {
 
       width: 100%;
+
       box-sizing: border-box;
 
       padding: 13px;
 
       border-radius: 12px;
 
-      border: 1px solid #dfecea;
+      border:
+        1px solid #dfecea;
 
       background: #fbfefe;
 
@@ -289,18 +444,23 @@
     }
 
     .form-row textarea {
+
       min-height: 100px;
+
       resize: vertical;
+
     }
 
     .form-row input:focus,
     .form-row select:focus,
     .form-row textarea:focus {
 
-      border-color: #16877d;
+      border-color:
+        #16877d;
 
       box-shadow:
-        0 0 0 4px rgba(22,135,125,.08);
+        0 0 0 4px
+        rgba(22,135,125,.08);
 
       background: white;
 
@@ -330,18 +490,19 @@
 
     }
 
-    .save-button:hover {
-      background: #0f7068;
-    }
 
-    /* =========================
+    /* =============================
        CUSTOMERS
-    ========================= */
+    ============================= */
 
     .customer-list {
+
       display: flex;
+
       flex-direction: column;
+
       gap: 12px;
+
     }
 
     .customer {
@@ -358,22 +519,33 @@
 
       background: #fbfefe;
 
-      border: 1px solid #e3edeb;
+      border:
+        1px solid #e3edeb;
 
       border-radius: 15px;
 
     }
 
     .customer-name {
+
       color: #163b38;
+
       font-size: 14px;
+
       font-weight: 800;
+
     }
 
     .customer-info {
+
       color: #718480;
+
       font-size: 11px;
+
       margin-top: 4px;
+
+      line-height: 1.8;
+
     }
 
     .customer-id {
@@ -400,44 +572,10 @@
 
     }
 
-    /* =========================
-       LOGOUT
-    ========================= */
 
-    .logout-area {
-      text-align: center;
-      margin: 35px 0 10px;
-    }
-
-    .logout {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding: 11px 20px;
-
-      border-radius: 12px;
-
-      border: 1px solid #eadede;
-
-      background: white;
-
-      color: #a44b4b;
-
-      text-decoration: none;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-    }
-
-    /* =========================
-       MESSAGE
-    ========================= */
+    /* =============================
+       MESSAGES
+    ============================= */
 
     .message {
 
@@ -473,69 +611,142 @@
 
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+
+    /* =============================
+       LOGOUT
+    ============================= */
+
+    .logout-area {
+
+      text-align: center;
+
+      margin:
+        35px 0 10px;
+
+    }
+
+    .logout {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        11px 20px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid #eadede;
+
+      background: white;
+
+      color: #a44b4b;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+    }
+
 
     @media (max-width: 950px) {
 
       .stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
       }
 
       .actions-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
       }
 
       .packages {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
+      }
+
+      .staff-info {
+        grid-template-columns:
+          1fr;
       }
 
     }
+
 
     @media (max-width: 650px) {
 
       .dashboard {
-        padding: 30px 5%;
+        padding:
+          30px 5%;
       }
 
       .welcome {
+
         padding: 23px;
+
       }
 
       .welcome h1 {
+
         font-size: 24px;
+
       }
 
       .staff-avatar {
+
         width: 60px;
+
         height: 60px;
+
         font-size: 29px;
+
       }
 
       .form-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
       .form-row.full {
+
         grid-column: auto;
+
       }
 
     }
 
+
     @media (max-width: 480px) {
 
       .stats {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
       .actions-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
 
       .welcome {
-        flex-direction: column;
+
+        flex-direction:
+          column;
+
         text-align: center;
+
       }
 
     }
@@ -556,10 +767,21 @@
 
   <nav class="nav">
 
-    <a href="index.html">الرئيسية</a>
-    <a href="services.html">خدماتنا</a>
-    <a href="index.html#how">كيف يعمل سند؟</a>
-    <a href="index.html#about">عن سند</a>
+    <a href="index.html">
+      الرئيسية
+    </a>
+
+    <a href="services.html">
+      خدماتنا
+    </a>
+
+    <a href="how.html">
+      كيف يعمل سند؟
+    </a>
+
+    <a href="about.html">
+      عن سند
+    </a>
 
   </nav>
 
@@ -569,9 +791,9 @@
 <main class="dashboard">
 
 
-  <!-- =========================
+  <!-- =============================
        WELCOME
-  ========================= -->
+  ============================= -->
 
   <section class="welcome">
 
@@ -598,9 +820,65 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =============================
+       STAFF INFORMATION
+  ============================= -->
+
+  <section class="staff-info">
+
+    <div class="info-card">
+
+      <span class="info-label">
+        👤 اسم الموظف
+      </span>
+
+      <div
+        class="info-value"
+        id="staffName"
+      >
+        -
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <span class="info-label">
+        🪪 الرقم الوظيفي
+      </span>
+
+      <div
+        class="info-value"
+        id="staffEmployeeId"
+      >
+        -
+      </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+      <span class="info-label">
+        🔐 مستوى الصلاحية
+      </span>
+
+      <div
+        class="info-value"
+        id="staffPermission"
+      >
+        -
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =============================
        STATS
-  ========================= -->
+  ============================= -->
 
   <section class="stats">
 
@@ -610,7 +888,10 @@
         👥 إجمالي المشتركين
       </span>
 
-      <div class="stat-number" id="customersCount">
+      <div
+        class="stat-number"
+        id="customersCount"
+      >
         0
       </div>
 
@@ -620,10 +901,13 @@
     <div class="stat">
 
       <span class="stat-label">
-        🆕 مشتركون جدد
+        🆕 مشتركون جدد اليوم
       </span>
 
-      <div class="stat-number" id="newCustomersCount">
+      <div
+        class="stat-number"
+        id="newCustomersCount"
+      >
         0
       </div>
 
@@ -646,10 +930,13 @@
     <div class="stat">
 
       <span class="stat-label">
-        📅 اشتراكات بانتظار التفعيل
+        ⏳ بانتظار المدير
       </span>
 
-      <div class="stat-number" id="pendingCount">
+      <div
+        class="stat-number"
+        id="pendingCount"
+      >
         0
       </div>
 
@@ -658,9 +945,9 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =============================
        QUICK ACTIONS
-  ========================= -->
+  ============================= -->
 
   <section class="section">
 
@@ -671,7 +958,7 @@
       </h2>
 
       <p>
-        أهم العمليات التي يحتاجها موظف الاستقبال
+        العمليات المسموحة لموظف الاستقبال
       </p>
 
     </div>
@@ -742,7 +1029,7 @@
 
       <button
         class="action"
-        onclick="alert('سيتم ربط المدفوعات لاحقاً بالنظام المالي.')"
+        onclick="showPayments()"
       >
 
         <div class="action-icon">
@@ -754,7 +1041,7 @@
         </h3>
 
         <p>
-          إدارة حالة الدفع والاشتراك
+          إدارة حالة الدفع
         </p>
 
       </button>
@@ -765,9 +1052,9 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =============================
        PACKAGES
-  ========================= -->
+  ============================= -->
 
   <section
     class="section"
@@ -781,7 +1068,7 @@
       </h2>
 
       <p>
-        المعلومات التي يحتاجها موظف الاستقبال عند شرح الاشتراك للعميل
+        معلومات الباقات التي يحتاجها موظف الاستقبال
       </p>
 
     </div>
@@ -789,8 +1076,6 @@
 
     <div class="packages">
 
-
-      <!-- BASIC -->
 
       <div class="package">
 
@@ -804,24 +1089,34 @@
 
         <ul>
 
-          <li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
+          <li>
+            👩‍⚕️ زيارة الممرض الصحي يومياً
+          </li>
 
-          <li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
+          <li>
+            🩺 زيارة الطبيب المقيم أسبوعياً
+          </li>
 
-          <li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
+          <li>
+            👨‍⚕️ زيارة الطبيب الأخصائي
+          </li>
 
-          <li>🧪 الفحوصات والتحاليل حسب الخطة</li>
+          <li>
+            🧪 الفحوصات والتحاليل
+          </li>
 
-          <li>🛁 الرعاية الشخصية اليومية</li>
+          <li>
+            🛁 الرعاية الشخصية اليومية
+          </li>
 
-          <li>📋 تقارير المتابعة</li>
+          <li>
+            📋 تقارير المتابعة
+          </li>
 
         </ul>
 
       </div>
 
-
-      <!-- MEDIUM -->
 
       <div class="package">
 
@@ -835,26 +1130,38 @@
 
         <ul>
 
-          <li>👩‍⚕️ رعاية تمريضية موسعة</li>
+          <li>
+            👩‍⚕️ رعاية تمريضية موسعة
+          </li>
 
-          <li>🩺 متابعة الطبيب المقيم</li>
+          <li>
+            🩺 متابعة الطبيب المقيم
+          </li>
 
-          <li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
+          <li>
+            👨‍⚕️ متابعة الطبيب الأخصائي
+          </li>
 
-          <li>🧪 الفحوصات والتحاليل</li>
+          <li>
+            🧪 الفحوصات والتحاليل
+          </li>
 
-          <li>🧠 دعم نفسي حسب الخطة</li>
+          <li>
+            🧠 دعم نفسي حسب الخطة
+          </li>
 
-          <li>🎭 خدمات ترفيهية</li>
+          <li>
+            🎭 خدمات ترفيهية
+          </li>
 
-          <li>📋 تقارير شاملة</li>
+          <li>
+            📋 تقارير شاملة
+          </li>
 
         </ul>
 
       </div>
 
-
-      <!-- LUXURY -->
 
       <div class="package">
 
@@ -863,38 +1170,51 @@
         </h3>
 
         <div class="package-price">
-          يحدد حسب الخدمات المختارة
+          حسب الخدمات المختارة
         </div>
 
         <ul>
 
-          <li>👩‍⚕️ رعاية تمريضية مكثفة</li>
+          <li>
+            👩‍⚕️ رعاية تمريضية مكثفة
+          </li>
 
-          <li>👨‍⚕️ متابعة طبية متقدمة</li>
+          <li>
+            👨‍⚕️ متابعة طبية متقدمة
+          </li>
 
-          <li>🧠 دعم نفسي</li>
+          <li>
+            🧠 دعم نفسي
+          </li>
 
-          <li>🥗 متابعة غذائية</li>
+          <li>
+            🥗 متابعة غذائية
+          </li>
 
-          <li>🏃 علاج طبيعي</li>
+          <li>
+            🏃 علاج طبيعي
+          </li>
 
-          <li>🎭 ترفيه ومرافقة</li>
+          <li>
+            🎭 ترفيه ومرافقة
+          </li>
 
-          <li>💇 خدمات إضافية</li>
+          <li>
+            💇 خدمات إضافية
+          </li>
 
         </ul>
 
       </div>
-
 
     </div>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =============================
        NEW CUSTOMER
-  ========================= -->
+  ============================= -->
 
   <section
     class="section"
@@ -908,14 +1228,13 @@
       </h2>
 
       <p>
-        أدخل البيانات الأساسية لإنشاء ملف المسن داخل نظام سند
+        إنشاء الملف الأولي للمسن
       </p>
 
     </div>
 
 
     <form id="customerForm">
-
 
       <div class="form-grid">
 
@@ -1056,7 +1375,7 @@
 
           <textarea
             id="customerNotes"
-            placeholder="أي معلومات مهمة يذكرها العميل أثناء التسجيل..."
+            placeholder="المعلومات الأولية التي يذكرها العميل..."
           ></textarea>
 
         </div>
@@ -1084,15 +1403,14 @@
         class="message error"
       ></div>
 
-
     </form>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =============================
        CUSTOMERS
-  ========================= -->
+  ============================= -->
 
   <section
     class="section"
@@ -1106,7 +1424,7 @@
       </h2>
 
       <p>
-        جميع المسنين الذين تم تسجيلهم من خلال الاستقبال
+        المشتركين الذين تم تسجيلهم من خلال الاستقبال
       </p>
 
     </div>
@@ -1115,16 +1433,10 @@
     <div
       class="customer-list"
       id="customerList"
-    >
-
-    </div>
+    ></div>
 
   </section>
 
-
-  <!-- =========================
-       LOGOUT
-  ========================= -->
 
   <div class="logout-area">
 
@@ -1162,16 +1474,24 @@
 <script>
 
 /* =====================================================
-   1. التحقق من تسجيل الدخول
+   1. قراءة جلسة الموظف
 ===================================================== */
 
 const loggedStaffRaw =
-  localStorage.getItem("sanadLoggedInStaff");
+  localStorage.getItem(
+    "sanadLoggedInStaff"
+  );
 
+
+/* =====================================================
+   2. منع الدخول بدون تسجيل
+===================================================== */
 
 if (!loggedStaffRaw) {
 
-  alert("يرجى تسجيل الدخول أولاً.");
+  alert(
+    "يرجى تسجيل الدخول أولاً."
+  );
 
   window.location.href =
     "staff-login.html";
@@ -1180,7 +1500,7 @@ if (!loggedStaffRaw) {
 
 
 /* =====================================================
-   2. قراءة بيانات الموظف
+   3. تحويل بيانات الجلسة
 ===================================================== */
 
 let loggedStaff = null;
@@ -1203,27 +1523,70 @@ try {
 
 
 /* =====================================================
-   3. التأكد من أن المستخدم استقبال
+   4. حماية لوحة الاستقبال
 ===================================================== */
 
 if (
-  loggedStaff &&
-  loggedStaff.role !== "reception" &&
-  loggedStaff.permissions !== "all"
+  !loggedStaff ||
+  loggedStaff.role !== "reception"
 ) {
 
   alert(
-    "ليس لديك صلاحية الدخول إلى لوحة موظف الاستقبال."
+    "⛔ هذه اللوحة مخصصة لموظف الاستقبال فقط."
   );
 
   window.location.href =
-    "staff-dashboard.html";
+    "staff-login.html";
 
 }
 
 
 /* =====================================================
-   4. عرض بيانات الموظف
+   5. التأكد من صلاحيات الاستقبال
+===================================================== */
+
+const receptionPermissions = [
+  "packages",
+  "new_customer",
+  "customers",
+  "payments"
+];
+
+
+if (
+  loggedStaff &&
+  Array.isArray(
+    loggedStaff.permissions
+  )
+) {
+
+  const hasReceptionAccess =
+    receptionPermissions.every(
+      function(permission) {
+
+        return loggedStaff.permissions
+          .includes(permission);
+
+      }
+    );
+
+
+  if (!hasReceptionAccess) {
+
+    alert(
+      "⛔ لا تملك الصلاحيات المطلوبة."
+    );
+
+    window.location.href =
+      "staff-login.html";
+
+  }
+
+}
+
+
+/* =====================================================
+   6. عرض معلومات الموظف
 ===================================================== */
 
 if (loggedStaff) {
@@ -1235,49 +1598,127 @@ if (loggedStaff) {
     loggedStaff.name +
     " 👋";
 
+
   document.getElementById(
     "welcomeRole"
   ).textContent =
-    "موظف الاستقبال — فريق سند";
+    loggedStaff.title +
+    " — إدارة استقبال المشتركين وملفاتهم";
+
+
+  document.getElementById(
+    "staffName"
+  ).textContent =
+    loggedStaff.name;
+
+
+  document.getElementById(
+    "staffEmployeeId"
+  ).textContent =
+    loggedStaff.employeeId;
+
+
+  document.getElementById(
+    "staffPermission"
+  ).textContent =
+    "استقبال — صلاحيات محددة";
 
 }
 
 
 /* =====================================================
-   5. قاعدة بيانات المشتركين
+   7. قاعدة بيانات المشتركين
 ===================================================== */
 
-let customers =
-  JSON.parse(
-    localStorage.getItem(
-      "sanadCustomers"
-    ) || "[]"
-  );
+let customers = [];
+
+try {
+
+  customers =
+    JSON.parse(
+      localStorage.getItem(
+        "sanadCustomers"
+      ) || "[]"
+    );
+
+  if (!Array.isArray(customers)) {
+
+    customers = [];
+
+  }
+
+} catch (error) {
+
+  customers = [];
+
+}
 
 
 /* =====================================================
-   6. إنشاء رقم ملف جديد
+   8. إنشاء رقم مشترك
 ===================================================== */
 
 function generateCustomerId() {
 
-  const number =
-    customers.length + 1;
+  let maxNumber = 0;
+
+
+  customers.forEach(
+    function(customer) {
+
+      if (!customer.id) {
+        return;
+      }
+
+
+      const match =
+        customer.id.match(
+          /SANAD-(\d+)/
+        );
+
+
+      if (match) {
+
+        const number =
+          parseInt(
+            match[1],
+            10
+          );
+
+
+        if (
+          number > maxNumber
+        ) {
+
+          maxNumber =
+            number;
+
+        }
+
+      }
+
+    }
+  );
+
 
   return (
     "SANAD-" +
-    String(number).padStart(4, "0")
+    String(
+      maxNumber + 1
+    ).padStart(4, "0")
   );
 
 }
 
 
 /* =====================================================
-   7. حفظ مشترك جديد
+   9. تسجيل مشترك
 ===================================================== */
 
 document
-  .getElementById("customerForm")
+  .getElementById(
+    "customerForm"
+  )
   .addEventListener(
     "submit",
     function(event) {
@@ -1287,55 +1728,71 @@ document
 
       const name =
         document
-          .getElementById("customerName")
+          .getElementById(
+            "customerName"
+          )
           .value
           .trim();
 
 
       const phone =
         document
-          .getElementById("customerPhone")
+          .getElementById(
+            "customerPhone"
+          )
           .value
           .trim();
 
 
       const familyName =
         document
-          .getElementById("familyName")
+          .getElementById(
+            "familyName"
+          )
           .value
           .trim();
 
 
       const familyPhone =
         document
-          .getElementById("familyPhone")
+          .getElementById(
+            "familyPhone"
+          )
           .value
           .trim();
 
 
       const age =
         document
-          .getElementById("customerAge")
+          .getElementById(
+            "customerAge"
+          )
           .value
           .trim();
 
 
       const packageType =
         document
-          .getElementById("customerPackage")
+          .getElementById(
+            "customerPackage"
+          )
           .value;
 
 
       const address =
         document
-          .getElementById("customerAddress")
+          .getElementById(
+            "customerAddress"
+          )
           .value
           .trim();
 
 
       const notes =
         document
-          .getElementById("customerNotes")
+          .getElementById(
+            "customerNotes"
+          )
           .value
           .trim();
 
@@ -1409,10 +1866,14 @@ document
           packageType,
 
         packageName:
-          packageNames[packageType],
+          packageNames[
+            packageType
+          ],
 
         packagePrice:
-          packagePrices[packageType],
+          packagePrices[
+            packageType
+          ],
 
         address:
           address,
@@ -1424,9 +1885,10 @@ document
           "pending_manager",
 
         createdBy:
-          loggedStaff
-            ? loggedStaff.name
-            : "الاستقبال",
+          loggedStaff.name,
+
+        createdById:
+          loggedStaff.employeeId,
 
         createdAt:
           new Date().toISOString()
@@ -1441,34 +1903,36 @@ document
 
       localStorage.setItem(
         "sanadCustomers",
-        JSON.stringify(customers)
+        JSON.stringify(
+          customers
+        )
       );
 
 
       showSuccess(
-        "✅ تم إنشاء ملف المشترك " +
+        "✅ تم إنشاء ملف " +
         newCustomer.id +
         " بنجاح، وأصبح بانتظار مراجعة المدير."
       );
 
 
       document
-        .getElementById("customerForm")
+        .getElementById(
+          "customerForm"
+        )
         .reset();
 
 
       renderCustomers();
 
-
       updateStats();
-
 
     }
   );
 
 
 /* =====================================================
-   8. عرض المشتركين
+   10. عرض المشتركين
 ===================================================== */
 
 function renderCustomers() {
@@ -1518,22 +1982,28 @@ function renderCustomers() {
           <div>
 
             <div class="customer-name">
-              👴 ${customer.name}
+              👴 ${escapeHtml(customer.name)}
             </div>
 
             <div class="customer-info">
 
-              📦 ${customer.packageName}
+              📦 ${escapeHtml(
+                customer.packageName || "-"
+              )}
 
               <br>
 
               👨‍👩‍👦 العائلة:
-              ${customer.familyName}
+              ${escapeHtml(
+                customer.familyName || "-"
+              )}
 
               <br>
 
               📌 الحالة:
-              ${getStatusText(customer.status)}
+              ${getStatusText(
+                customer.status
+              )}
 
             </div>
 
@@ -1541,7 +2011,9 @@ function renderCustomers() {
 
           <div class="customer-id">
 
-            ${customer.id}
+            ${escapeHtml(
+              customer.id
+            )}
 
           </div>
 
@@ -1559,7 +2031,7 @@ function renderCustomers() {
 
 
 /* =====================================================
-   9. حالة المشترك
+   11. حالة المشترك
 ===================================================== */
 
 function getStatusText(status) {
@@ -1567,30 +2039,31 @@ function getStatusText(status) {
   const statuses = {
 
     pending_manager:
-      "بانتظار مراجعة المدير",
+      "⏳ بانتظار مراجعة المدير",
 
     active:
-      "اشتراك فعال",
+      "🟢 اشتراك فعال",
 
     suspended:
-      "موقوف",
+      "🔴 موقوف",
 
     completed:
-      "مكتمل"
+      "⚫ مكتمل"
 
   };
 
 
   return (
     statuses[status] ||
-    status
+    status ||
+    "-"
   );
 
 }
 
 
 /* =====================================================
-   10. الإحصائيات
+   12. الإحصائيات
 ===================================================== */
 
 function updateStats() {
@@ -1601,19 +2074,24 @@ function updateStats() {
     customers.length;
 
 
+  const today =
+    new Date();
+
+
   document.getElementById(
     "newCustomersCount"
   ).textContent =
     customers.filter(
       function(customer) {
 
+        if (!customer.createdAt) {
+          return false;
+        }
+
         const created =
           new Date(
             customer.createdAt
           );
-
-        const today =
-          new Date();
 
         return (
           created.toDateString() ===
@@ -1642,16 +2120,15 @@ function updateStats() {
 
 
 /* =====================================================
-   11. الرسائل
+   13. الرسائل
 ===================================================== */
 
 function showSuccess(message) {
 
-  const element =
+  const success =
     document.getElementById(
       "successMessage"
     );
-
 
   const error =
     document.getElementById(
@@ -1663,11 +2140,11 @@ function showSuccess(message) {
     "none";
 
 
-  element.textContent =
+  success.textContent =
     message;
 
 
-  element.style.display =
+  success.style.display =
     "block";
 
 }
@@ -1675,11 +2152,10 @@ function showSuccess(message) {
 
 function showError(message) {
 
-  const element =
+  const error =
     document.getElementById(
       "errorMessage"
     );
-
 
   const success =
     document.getElementById(
@@ -1691,18 +2167,18 @@ function showError(message) {
     "none";
 
 
-  element.textContent =
+  error.textContent =
     message;
 
 
-  element.style.display =
+  error.style.display =
     "block";
 
 }
 
 
 /* =====================================================
-   12. الانتقال إلى قسم
+   14. الانتقال
 ===================================================== */
 
 function scrollToSection(id) {
@@ -1723,7 +2199,20 @@ function scrollToSection(id) {
 
 
 /* =====================================================
-   13. تسجيل الخروج
+   15. المدفوعات
+===================================================== */
+
+function showPayments() {
+
+  alert(
+    "💳 قسم المدفوعات سيتم ربطه بالمرحلة المالية من نظام سند."
+  );
+
+}
+
+
+/* =====================================================
+   16. تسجيل الخروج
 ===================================================== */
 
 function logoutStaff(event) {
@@ -1739,7 +2228,6 @@ function logoutStaff(event) {
     "sanadLoggedInStaff"
   );
 
-
   localStorage.removeItem(
     "sanadCurrentVisit"
   );
@@ -1752,7 +2240,23 @@ function logoutStaff(event) {
 
 
 /* =====================================================
-   14. تشغيل أولي
+   17. حماية بسيطة من HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =====================================================
+   18. تشغيل الصفحة
 ===================================================== */
 
 renderCustomers();
@@ -1760,7 +2264,6 @@ renderCustomers();
 updateStats();
 
 </script>
-
 
 </body>
 
