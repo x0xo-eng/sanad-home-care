@@ -3,7 +3,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -32,7 +31,6 @@
       border: 1px solid #e3edeb;
       border-radius: 26px;
       padding: 30px;
-      margin-bottom: 25px;
 
       display: flex;
       justify-content: space-between;
@@ -40,13 +38,15 @@
       gap: 20px;
 
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
+
+      margin-bottom: 25px;
     }
 
     .eyebrow {
+      display: block;
       color: #16877d;
       font-size: 13px;
       font-weight: 800;
-      display: block;
       margin-bottom: 7px;
     }
 
@@ -58,11 +58,11 @@
 
     .welcome p {
       color: #718480;
-      line-height: 1.8;
       margin: 0;
+      line-height: 1.8;
     }
 
-    .avatar {
+    .staff-avatar {
       width: 78px;
       height: 78px;
       border-radius: 24px;
@@ -76,7 +76,6 @@
       flex-shrink: 0;
     }
 
-
     /* =========================
        STATS
     ========================= */
@@ -85,7 +84,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-      margin-bottom: 25px;
+      margin-bottom: 28px;
     }
 
     .stat {
@@ -97,11 +96,22 @@
       box-shadow: 0 12px 35px rgba(22,70,65,.05);
     }
 
-    .stat-icon {
-      width: 43px;
-      height: 43px;
-      border-radius: 13px;
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
 
+    .stat-label {
+      color: #718480;
+      font-size: 13px;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
       background: #e8f5f3;
 
       display: flex;
@@ -109,13 +119,6 @@
       justify-content: center;
 
       font-size: 21px;
-      margin-bottom: 12px;
-    }
-
-    .stat-title {
-      color: #718480;
-      font-size: 13px;
-      margin-bottom: 5px;
     }
 
     .stat-number {
@@ -123,7 +126,6 @@
       font-size: 28px;
       font-weight: 900;
     }
-
 
     /* =========================
        SECTION
@@ -155,7 +157,6 @@
       margin: 0;
     }
 
-
     /* =========================
        VISITS
     ========================= */
@@ -163,22 +164,20 @@
     .visit-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 13px;
     }
 
     .visit {
       display: grid;
-      grid-template-columns: 100px 1fr auto;
-
+      grid-template-columns: 95px 1fr auto;
       align-items: center;
       gap: 18px;
 
       padding: 18px;
 
-      border: 1px solid #e4efed;
-      border-radius: 17px;
-
       background: #fbfefe;
+      border: 1px solid #e3edeb;
+      border-radius: 17px;
 
       transition: .25s;
     }
@@ -186,41 +185,32 @@
     .visit:hover {
       border-color: #16877d;
       transform: translateY(-2px);
-
-      box-shadow:
-        0 8px 25px rgba(22,135,125,.07);
+      box-shadow: 0 8px 25px rgba(22,135,125,.07);
     }
 
-    .time {
+    .visit-time {
       color: #16877d;
-      font-weight: 900;
       font-size: 15px;
+      font-weight: 900;
     }
 
-    .visit h3 {
+    .visit-info h3 {
       color: #163b38;
       font-size: 16px;
       margin: 0 0 5px;
     }
 
-    .visit p {
+    .visit-info p {
       color: #718480;
       font-size: 12px;
-      margin: 0;
+      margin: 0 0 10px;
     }
 
-
-    /* =========================
-       STATUS
-    ========================= */
-
-    .status {
+    .visit-status {
       padding: 7px 11px;
       border-radius: 9px;
-
       font-size: 11px;
       font-weight: 800;
-
       white-space: nowrap;
     }
 
@@ -239,310 +229,215 @@
       color: #a66a00;
     }
 
-
     /* =========================
        OPEN VISIT BUTTON
     ========================= */
 
-    .open-btn {
-
-      margin-top: 10px;
-
+    .open-visit {
+      border: none;
       background: #16877d;
       color: white;
 
-      border: none;
       border-radius: 10px;
-
       padding: 9px 15px;
 
       font-family: inherit;
-      font-weight: 800;
       font-size: 12px;
+      font-weight: 800;
 
       cursor: pointer;
-
       transition: .25s;
     }
 
-    .open-btn:hover {
-
+    .open-visit:hover {
       background: #0f7068;
-
       transform: translateY(-2px);
-
-      box-shadow:
-        0 8px 18px rgba(22,135,125,.18);
     }
-
 
     /* =========================
        TWO COLUMNS
     ========================= */
 
-    .columns {
-
+    .two-columns {
       display: grid;
-
       grid-template-columns: 1fr 1fr;
-
       gap: 25px;
-
     }
-
 
     /* =========================
        TASKS
     ========================= */
 
-    .task {
-
+    .task-list {
       display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
+    .task {
+      display: flex;
       align-items: center;
-
       gap: 13px;
 
       padding: 15px;
 
-      border: 1px solid #e4efed;
-
-      border-radius: 15px;
-
       background: #fbfefe;
-
-      margin-bottom: 12px;
-
+      border: 1px solid #e3edeb;
+      border-radius: 15px;
     }
 
     .task-icon {
-
-      width: 43px;
-      height: 43px;
-
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
 
       background: #e8f5f3;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
 
       font-size: 20px;
-
       flex-shrink: 0;
-
     }
 
-    .task h3 {
+    .task-info {
+      flex: 1;
+    }
 
+    .task-info h3 {
       color: #163b38;
-
       font-size: 14px;
-
       margin: 0 0 4px;
-
     }
 
-    .task p {
-
+    .task-info p {
       color: #718480;
-
       font-size: 11px;
-
       margin: 0;
-
+      line-height: 1.7;
     }
-
 
     /* =========================
        LAB
     ========================= */
 
-    .lab {
-
-      background: #fbfefe;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 16px;
-
+    .lab-card {
       padding: 17px;
-
       margin-bottom: 12px;
 
+      background: #fbfefe;
+      border: 1px solid #e3edeb;
+      border-radius: 17px;
     }
 
-    .lab-head {
-
+    .lab-top {
       display: flex;
-
       justify-content: space-between;
-
       gap: 10px;
 
-      margin-bottom: 8px;
-
+      margin-bottom: 9px;
     }
 
     .lab-name {
-
       color: #163b38;
-
       font-weight: 800;
-
       font-size: 14px;
-
     }
 
     .lab-date {
-
       color: #16877d;
-
+      font-size: 12px;
       font-weight: 800;
-
-      font-size: 12px;
-
     }
 
-    .lab p {
-
+    .lab-card p {
       color: #718480;
-
       font-size: 12px;
-
       line-height: 1.7;
-
       margin: 0;
-
     }
-
 
     /* =========================
        REPORTS
     ========================= */
 
     .reports {
-
       display: grid;
-
       grid-template-columns: repeat(3, 1fr);
-
       gap: 15px;
-
     }
 
     .report {
+      text-align: center;
 
       background: #fbfefe;
-
       border: 1px solid #e3edeb;
-
       border-radius: 17px;
 
       padding: 20px;
-
-      text-align: center;
-
     }
 
     .report-icon {
-
-      font-size: 29px;
-
-      margin-bottom: 9px;
-
+      font-size: 28px;
+      margin-bottom: 10px;
     }
 
     .report h3 {
-
       color: #163b38;
-
       font-size: 14px;
-
       margin: 0 0 6px;
-
     }
 
     .report p {
-
       color: #718480;
-
       font-size: 11px;
-
       line-height: 1.7;
-
       margin: 0;
-
     }
-
 
     /* =========================
        PROFILE
     ========================= */
 
     .profile {
-
       display: grid;
-
       grid-template-columns: repeat(3, 1fr);
-
       gap: 15px;
-
     }
 
     .profile-item {
-
-      background: #fbfefe;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 15px;
-
       padding: 16px;
 
+      background: #fbfefe;
+      border: 1px solid #e3edeb;
+      border-radius: 15px;
     }
 
     .profile-item span {
-
       display: block;
-
       color: #718480;
-
       font-size: 11px;
-
       margin-bottom: 5px;
-
     }
 
     .profile-item strong {
-
       color: #163b38;
-
       font-size: 14px;
-
     }
-
 
     /* =========================
        LOGOUT
     ========================= */
 
     .logout-area {
-
       text-align: center;
-
       margin: 35px 0 10px;
-
     }
 
     .logout {
-
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
 
       padding: 11px 20px;
@@ -552,29 +447,21 @@
       border: 1px solid #eadede;
 
       background: white;
-
       color: #a44b4b;
 
       text-decoration: none;
 
       font-size: 13px;
-
       font-weight: 800;
 
       transition: .25s;
-
     }
 
     .logout:hover {
-
       background: #a44b4b;
-
       color: white;
-
       transform: translateY(-2px);
-
     }
-
 
     /* =========================
        MOBILE
@@ -583,81 +470,68 @@
     @media (max-width: 900px) {
 
       .stats {
-
-        grid-template-columns: repeat(2, 1fr);
-
+        grid-template-columns: 1fr 1fr;
       }
 
-      .columns {
-
+      .two-columns {
         grid-template-columns: 1fr;
-
       }
 
       .reports {
-
         grid-template-columns: 1fr;
-
       }
 
       .profile {
-
         grid-template-columns: 1fr 1fr;
-
       }
 
     }
-
 
     @media (max-width: 650px) {
 
       .dashboard {
-
         padding: 30px 5%;
-
       }
 
       .welcome {
-
         padding: 23px;
-
       }
 
       .welcome h1 {
-
         font-size: 24px;
+      }
 
+      .staff-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        font-size: 29px;
       }
 
       .visit {
-
         grid-template-columns: 1fr;
+        gap: 10px;
+      }
 
+      .visit-status {
+        width: fit-content;
       }
 
       .profile {
-
         grid-template-columns: 1fr;
-
       }
 
     }
 
-
     @media (max-width: 420px) {
 
       .stats {
-
         grid-template-columns: 1fr;
-
       }
 
       .welcome {
-
         flex-direction: column;
-
         text-align: center;
-
       }
 
     }
@@ -665,7 +539,6 @@
   </style>
 
 </head>
-
 
 <body>
 
@@ -725,44 +598,40 @@
       </h1>
 
       <p>
-
         طبيب مقيم — فريق سند
-
         <br>
-
         الثلاثاء، 25 أغسطس 2026
-
       </p>
 
     </div>
 
-
-    <div class="avatar">
+    <div class="staff-avatar">
       👨‍⚕️
     </div>
 
   </section>
 
 
-  <!-- =========================
-       STATS
-  ========================= -->
+  <!-- STATS -->
 
   <section class="stats">
 
-
     <div class="stat">
 
-      <div class="stat-icon">
-        📅
-      </div>
+      <div class="stat-top">
 
-      <div class="stat-title">
-        زيارات اليوم
+        <span class="stat-label">
+          زيارات اليوم
+        </span>
+
+        <div class="stat-icon">
+          📅
+        </div>
+
       </div>
 
       <div class="stat-number">
-        5
+        4
       </div>
 
     </div>
@@ -770,12 +639,16 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        👴
-      </div>
+      <div class="stat-top">
 
-      <div class="stat-title">
-        المسنون المكلف بهم
+        <span class="stat-label">
+          المسنون المكلف بهم
+        </span>
+
+        <div class="stat-icon">
+          👴
+        </div>
+
       </div>
 
       <div class="stat-number">
@@ -787,12 +660,16 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        📝
-      </div>
+      <div class="stat-top">
 
-      <div class="stat-title">
-        تقارير بانتظار الإرسال
+        <span class="stat-label">
+          تقارير بانتظار الإرسال
+        </span>
+
+        <div class="stat-icon">
+          📝
+        </div>
+
       </div>
 
       <div class="stat-number">
@@ -804,20 +681,23 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        🧪
-      </div>
+      <div class="stat-top">
 
-      <div class="stat-title">
-        مواعيد التحاليل
+        <span class="stat-label">
+          مواعيد التحاليل
+        </span>
+
+        <div class="stat-icon">
+          🧪
+        </div>
+
       </div>
 
       <div class="stat-number">
-        1
+        2
       </div>
 
     </div>
-
 
   </section>
 
@@ -828,15 +708,14 @@
 
   <section class="section">
 
-
     <div class="section-title">
 
       <h2>
-        📅 جدول زياراتي
+        📅 جدول زياراتي اليوم
       </h2>
 
       <p>
-        الزيارات والمهام المجدولة للكادر
+        الزيارات والمهام المجدولة حسب اختصاصك
       </p>
 
     </div>
@@ -849,39 +728,35 @@
 
       <div class="visit">
 
-        <div class="time">
+        <div class="visit-time">
           09:00 ص
         </div>
 
-
-        <div>
+        <div class="visit-info">
 
           <h3>
             محمد علي
           </h3>
 
           <p>
-            فحص ومتابعة الحالة الصحية
+            متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير
           </p>
 
-
           <button
-            class="open-btn"
+            class="open-visit"
             onclick="openVisit(
               'محمد علي',
-              'فحص ومتابعة الحالة الصحية',
-              '09:00 ص'
+              'متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير',
+              '09:00 ص',
+              'الثلاثاء 25 أغسطس 2026'
             )"
           >
-
-            فتح الزيارة
-
+            🩺 فتح الزيارة
           </button>
 
         </div>
 
-
-        <span class="status done">
+        <span class="visit-status done">
           مكتملة
         </span>
 
@@ -892,12 +767,11 @@
 
       <div class="visit">
 
-        <div class="time">
+        <div class="visit-time">
           11:00 ص
         </div>
 
-
-        <div>
+        <div class="visit-info">
 
           <h3>
             علي غلام
@@ -907,24 +781,21 @@
             متابعة الوظائف الحيوية والأدوية
           </p>
 
-
           <button
-            class="open-btn"
+            class="open-visit"
             onclick="openVisit(
               'علي غلام',
               'متابعة الوظائف الحيوية والأدوية',
-              '11:00 ص'
+              '11:00 ص',
+              'الثلاثاء 25 أغسطس 2026'
             )"
           >
-
-            فتح الزيارة
-
+            🩺 فتح الزيارة
           </button>
 
         </div>
 
-
-        <span class="status current">
+        <span class="visit-status current">
           الزيارة الحالية
         </span>
 
@@ -935,39 +806,35 @@
 
       <div class="visit">
 
-        <div class="time">
+        <div class="visit-time">
           02:00 م
         </div>
 
-
-        <div>
+        <div class="visit-info">
 
           <h3>
             أحمد معين
           </h3>
 
           <p>
-            زيارة متابعة أسبوعية وإعداد التقرير
+            زيارة متابعة أسبوعية
           </p>
 
-
           <button
-            class="open-btn"
+            class="open-visit"
             onclick="openVisit(
               'أحمد معين',
-              'زيارة متابعة أسبوعية وإعداد التقرير',
-              '02:00 م'
+              'زيارة متابعة أسبوعية',
+              '02:00 م',
+              'الثلاثاء 25 أغسطس 2026'
             )"
           >
-
-            فتح الزيارة
-
+            🩺 فتح الزيارة
           </button>
 
         </div>
 
-
-        <span class="status pending">
+        <span class="visit-status pending">
           قادمة
         </span>
 
@@ -978,39 +845,35 @@
 
       <div class="visit">
 
-        <div class="time">
+        <div class="visit-time">
           04:00 م
         </div>
 
-
-        <div>
+        <div class="visit-info">
 
           <h3>
             حسين ناصر
           </h3>
 
           <p>
-            تقييم الحالة الصحية
+            تقييم الحالة الصحية وإعداد التقرير
           </p>
 
-
           <button
-            class="open-btn"
+            class="open-visit"
             onclick="openVisit(
               'حسين ناصر',
-              'تقييم الحالة الصحية',
-              '04:00 م'
+              'تقييم الحالة الصحية وإعداد التقرير',
+              '04:00 م',
+              'الثلاثاء 25 أغسطس 2026'
             )"
           >
-
-            فتح الزيارة
-
+            🩺 فتح الزيارة
           </button>
 
         </div>
 
-
-        <span class="status pending">
+        <span class="visit-status pending">
           قادمة
         </span>
 
@@ -1023,16 +886,13 @@
 
 
   <!-- =========================
-       COLUMNS
+       TASKS + LAB
   ========================= -->
 
-  <div class="columns">
+  <div class="two-columns">
 
-
-    <!-- TASKS -->
 
     <section class="section">
-
 
       <div class="section-title">
 
@@ -1041,74 +901,77 @@
         </h2>
 
         <p>
-          المهام المطلوبة حسب تخصص الكادر
+          المهام المطلوبة حسب طبيعة عملك
         </p>
 
       </div>
 
 
-      <div class="task">
+      <div class="task-list">
 
-        <div class="task-icon">
-          🩺
+        <div class="task">
+
+          <div class="task-icon">
+            🩺
+          </div>
+
+          <div class="task-info">
+
+            <h3>
+              متابعة الوظائف الحيوية
+            </h3>
+
+            <p>
+              مراجعة ضغط الدم والسكر والحرارة والنبض.
+            </p>
+
+          </div>
+
         </div>
 
-        <div>
 
-          <h3>
-            متابعة الوظائف الحيوية
-          </h3>
+        <div class="task">
 
-          <p>
-            ضغط الدم والسكر والحرارة
-          </p>
+          <div class="task-icon">
+            💊
+          </div>
+
+          <div class="task-info">
+
+            <h3>
+              مراجعة الأدوية
+            </h3>
+
+            <p>
+              التأكد من الالتزام بالخطة العلاجية.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="task">
+
+          <div class="task-icon">
+            📋
+          </div>
+
+          <div class="task-info">
+
+            <h3>
+              إعداد التقرير الأسبوعي
+            </h3>
+
+            <p>
+              توثيق حالة المسن بعد الزيارة.
+            </p>
+
+          </div>
 
         </div>
 
       </div>
-
-
-      <div class="task">
-
-        <div class="task-icon">
-          💊
-        </div>
-
-        <div>
-
-          <h3>
-            مراجعة الأدوية
-          </h3>
-
-          <p>
-            التأكد من الالتزام بالخطة العلاجية
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="task">
-
-        <div class="task-icon">
-          📋
-        </div>
-
-        <div>
-
-          <h3>
-            إعداد التقرير
-          </h3>
-
-          <p>
-            توثيق حالة المسن بعد الزيارة
-          </p>
-
-        </div>
-
-      </div>
-
 
     </section>
 
@@ -1117,7 +980,6 @@
 
     <section class="section">
 
-
       <div class="section-title">
 
         <h2>
@@ -1125,15 +987,15 @@
         </h2>
 
         <p>
-          التحاليل المجدولة للمسنين
+          مواعيد التحاليل المرتبطة بالمسنين المكلف بهم
         </p>
 
       </div>
 
 
-      <div class="lab">
+      <div class="lab-card">
 
-        <div class="lab-head">
+        <div class="lab-top">
 
           <span class="lab-name">
             محمد علي
@@ -1146,21 +1008,17 @@
         </div>
 
         <p>
-
           صورة الدم + وظائف الكلى
-
           <br>
-
-          📅 الثلاثاء 25 أغسطس
-
+          📅 الثلاثاء 25 أغسطس 2026
         </p>
 
       </div>
 
 
-      <div class="lab">
+      <div class="lab-card">
 
-        <div class="lab-head">
+        <div class="lab-top">
 
           <span class="lab-name">
             سمية هاشم
@@ -1173,20 +1031,14 @@
         </div>
 
         <p>
-
           صورة الدم + وظائف الكلى
-
           <br>
-
-          📅 الأربعاء 26 أغسطس
-
+          📅 الأربعاء 26 أغسطس 2026
         </p>
 
       </div>
 
-
     </section>
-
 
   </div>
 
@@ -1197,7 +1049,6 @@
 
   <section class="section">
 
-
     <div class="section-title">
 
       <h2>
@@ -1205,7 +1056,7 @@
       </h2>
 
       <p>
-        التقارير المطلوبة حسب طبيعة العمل
+        التقارير المطلوبة منك حسب صفتك الوظيفية
       </p>
 
     </div>
@@ -1213,28 +1064,10 @@
 
     <div class="reports">
 
-
       <div class="report">
 
         <div class="report-icon">
           📝
-        </div>
-
-        <h3>
-          التقرير اليومي
-        </h3>
-
-        <p>
-          توثيق الزيارة اليومية والملاحظات الصحية.
-        </p>
-
-      </div>
-
-
-      <div class="report">
-
-        <div class="report-icon">
-          📊
         </div>
 
         <h3>
@@ -1251,7 +1084,7 @@
       <div class="report">
 
         <div class="report-icon">
-          📑
+          🩺
         </div>
 
         <h3>
@@ -1259,11 +1092,27 @@
         </h3>
 
         <p>
-          تقرير الفحص والتقييم والتوصيات الطبية.
+          تسجيل الفحص والتقييم والتوصيات الطبية.
         </p>
 
       </div>
 
+
+      <div class="report">
+
+        <div class="report-icon">
+          📊
+        </div>
+
+        <h3>
+          سجل المتابعة
+        </h3>
+
+        <p>
+          عرض الزيارات والملاحظات السابقة للمسن.
+        </p>
+
+      </div>
 
     </div>
 
@@ -1276,7 +1125,6 @@
 
   <section class="section">
 
-
     <div class="section-title">
 
       <h2>
@@ -1284,14 +1132,13 @@
       </h2>
 
       <p>
-        معلومات الحساب الوظيفي
+        الحساب الوظيفي المسجل حالياً
       </p>
 
     </div>
 
 
     <div class="profile">
-
 
       <div class="profile-item">
 
@@ -1300,7 +1147,7 @@
         </span>
 
         <strong>
-          د. أحمد
+          د. أحمد محمد
         </strong>
 
       </div>
@@ -1309,7 +1156,7 @@
       <div class="profile-item">
 
         <span>
-          الوظيفة
+          الصفة الوظيفية
         </span>
 
         <strong>
@@ -1322,24 +1169,21 @@
       <div class="profile-item">
 
         <span>
-          حالة الحساب
+          رقم الموظف
         </span>
 
         <strong>
-          متصل الآن
+          ST-001
         </strong>
 
       </div>
-
 
     </div>
 
   </section>
 
 
-  <!-- =========================
-       LOGOUT
-  ========================= -->
+  <!-- LOGOUT -->
 
   <div class="logout-area">
 
@@ -1347,9 +1191,7 @@
       href="login.html"
       class="logout"
     >
-
       🚪 تسجيل الخروج
-
     </a>
 
   </div>
@@ -1357,10 +1199,6 @@
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
@@ -1379,13 +1217,18 @@
 </footer>
 
 
-<!-- =========================
-     VISIT SYSTEM
-========================= -->
-
 <script>
 
-function openVisit(patientName, visitType, visitTime) {
+/* =========================
+   OPEN VISIT
+========================= */
+
+function openVisit(
+  patientName,
+  visitType,
+  visitTime,
+  date
+) {
 
   const visitData = {
 
@@ -1395,7 +1238,7 @@ function openVisit(patientName, visitType, visitTime) {
 
     visitTime: visitTime,
 
-    date: "25 أغسطس 2026"
+    date: date
 
   };
 
