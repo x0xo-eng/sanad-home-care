@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لوحة المدير | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
+
+.dashboard{
+max-width:1250px;
+margin:auto;
+padding:45px 6%;
+}
+
+.welcome{
+background:white;
+border:1px solid #e3edeb;
+border-radius:26px;
+padding:30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+box-shadow:0 18px 50px rgba(22,70,65,.07);
+margin-bottom:25px;
+}
+
+.eyebrow{
+display:block;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:7px;
+}
+
+.welcome h1{
+color:#163b38;
+font-size:30px;
+margin:0 0 8px;
+}
+
+.welcome p{
+color:#718480;
+margin:0;
+line-height:1.8;
+}
+
+.manager-avatar{
+width:78px;
+height:78px;
+border-radius:24px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:28px;
+}
+
+.stat{
+background:white;
+border:1px solid #e3edeb;
+border-radius:20px;
+padding:22px;
+box-shadow:0 12px 35px rgba(22,70,65,.05);
+}
+
+.stat-label{
+color:#718480;
+font-size:13px;
+}
+
+.stat-number{
+color:#163b38;
+font-size:28px;
+font-weight:900;
+margin-top:10px;
+}
+
+.section{
+background:white;
+border:1px solid #e3edeb;
+border-radius:24px;
+padding:28px;
+margin-bottom:25px;
+box-shadow:0 15px 45px rgba(22,70,65,.05);
+}
+
+.section-title{
+margin-bottom:22px;
+}
+
+.section-title h2{
+color:#163b38;
+font-size:21px;
+margin:0 0 5px;
+}
+
+.section-title p{
+color:#718480;
+font-size:13px;
+margin:0;
+}
+
+.actions-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.action{
+border:1px solid #e3edeb;
+background:#fbfefe;
+border-radius:18px;
+padding:22px 15px;
+text-align:center;
+cursor:pointer;
+transition:.25s;
+font-family:inherit;
+}
+
+.action:hover{
+transform:translateY(-4px);
+border-color:#16877d;
+box-shadow:0 10px 28px rgba(22,135,125,.09);
+}
+
+.action-icon{
+width:55px;
+height:55px;
+border-radius:17px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 12px;
+font-size:26px;
+}
+
+.action h3{
+color:#163b38;
+font-size:14px;
+margin:0 0 5px;
+}
+
+.action p{
+color:#718480;
+font-size:11px;
+line-height:1.6;
+margin:0;
+}
+
+.table-wrapper{
+overflow-x:auto;
+}
+
+.appointments-table{
+width:100%;
+border-collapse:collapse;
+min-width:950px;
+}
+
+.appointments-table th{
+background:#f0f8f6;
+color:#163b38;
+font-size:12px;
+font-weight:900;
+padding:15px 12px;
+border-bottom:1px solid #dfecea;
+white-space:nowrap;
+}
+
+.appointments-table td{
+padding:15px 12px;
+border-bottom:1px solid #edf3f2;
+color:#5f716e;
+font-size:12px;
+vertical-align:middle;
+}
+
+.appointments-table tr:hover td{
+background:#fbfefe;
+}
+
+.patient-name{
+color:#163b38;
+font-weight:900;
+}
+
+.patient-id{
+color:#16877d;
+font-size:11px;
+font-weight:800;
+margin-top:4px;
+}
+
+.status{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:7px 11px;
+border-radius:9px;
+font-size:11px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.status.pending{
+background:#fff6df;
+color:#9a7318;
+}
+
+.status.scheduled{
+background:#e7f5f2;
+color:#16877d;
+}
+
+.status.active{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.status.suspended{
+background:#fff0f0;
+color:#a44b4b;
+}
+
+.schedule-form{
+display:flex;
+align-items:center;
+gap:7px;
+min-width:300px;
+}
+
+.schedule-form input,
+.schedule-form select{
+padding:9px 10px;
+border:1px solid #dfecea;
+border-radius:9px;
+background:white;
+font-family:inherit;
+font-size:11px;
+color:#163b38;
+outline:none;
+}
+
+.schedule-form input:focus,
+.schedule-form select:focus{
+border-color:#16877d;
+}
+
+.schedule-form input{
+width:135px;
+}
+
+.schedule-form select{
+width:105px;
+}
+
+.schedule-button{
+border:none;
+border-radius:9px;
+padding:9px 12px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+white-space:nowrap;
+}
+
+.schedule-button:hover{
+background:#0f7068;
+}
+
+.view-button{
+border:1px solid #dfecea;
+border-radius:9px;
+padding:8px 12px;
+background:white;
+color:#16877d;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+}
+
+.view-button:hover{
+background:#e8f5f3;
+}
+
+.empty{
+text-align:center;
+color:#718480;
+padding:30px;
+font-size:13px;
+}
+
+.customer-list{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.customer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:17px;
+background:#fbfefe;
+border:1px solid #e3edeb;
+border-radius:15px;
+}
+
+.customer-name{
+color:#163b38;
+font-size:14px;
+font-weight:800;
+}
+
+.customer-info{
+color:#718480;
+font-size:11px;
+margin-top:5px;
+line-height:1.8;
+}
+
+.customer-id{
+color:#16877d;
+font-size:12px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.package-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.package{
+border:1px solid #e3edeb;
+border-radius:19px;
+padding:22px;
+background:#fbfefe;
+}
+
+.package h3{
+color:#163b38;
+margin:0 0 8px;
+font-size:18px;
+}
+
+.package-price{
+color:#16877d;
+font-size:22px;
+font-weight:900;
+margin-bottom:15px;
+}
+
+.package ul{
+margin:0;
+padding-right:20px;
+}
+
+.package li{
+color:#718480;
+font-size:12px;
+line-height:2;
+}
+
+.message{
+display:none;
+padding:12px;
+border-radius:11px;
+margin-bottom:18px;
+text-align:center;
+font-size:12px;
+font-weight:800;
+}
+
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.error{
+background:#fff0f0;
+color:#a44b4b;
+}
+
+.logout-area{
+text-align:center;
+margin:35px 0 10px;
+}
+
+.logout{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:11px 20px;
+border-radius:12px;
+border:1px solid #eadede;
+background:white;
+color:#a44b4b;
+text-decoration:none;
+font-size:13px;
+font-weight:800;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(16,45,42,.45);
+z-index:1000;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.modal-box{
+width:100%;
+max-width:650px;
+background:white;
+border-radius:24px;
+padding:28px;
+box-shadow:0 25px 80px rgba(0,0,0,.18);
+max-height:90vh;
+overflow-y:auto;
+}
+
+.modal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.modal-header h2{
+margin:0;
+color:#163b38;
+font-size:20px;
+}
+
+.close-modal{
+border:none;
+background:#f0f8f6;
+color:#16877d;
+width:38px;
+height:38px;
+border-radius:11px;
+font-size:20px;
+cursor:pointer;
+}
+
+.detail-row{
+display:flex;
+justify-content:space-between;
+gap:20px;
+padding:12px 0;
+border-bottom:1px solid #edf3f2;
+}
+
+.detail-label{
+color:#718480;
+font-size:12px;
+}
+
+.detail-value{
+color:#163b38;
+font-size:12px;
+font-weight:800;
+text-align:left;
+}
+
+@media(max-width:950px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.actions-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.package-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:650px){
+
+.dashboard{
+padding:30px 5%;
+}
+
+.welcome{
+padding:23px;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.actions-grid{
+grid-template-columns:1fr;
+}
+
+.welcome{
+flex-direction:column;
+text-align:center;
+}
+
+.customer{
+align-items:flex-start;
+flex-direction:column;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="index.html" class="logo">
+سند<span>.</span>
+</a>
+
+<nav class="nav">
+
+<a href="index.html">الرئيسية</a>
+<a href="services.html">خدماتنا</a>
+<a href="how.html">كيف يعمل سند؟</a>
+<a href="about.html">عن سند</a>
+
+</nav>
+
+</header>
+
+
+<main class="dashboard">
+
+<section class="welcome">
+
+<div>
+
+<span class="eyebrow">
+👨‍💼 لوحة مدير الشركة
+</span>
+
+<h1 id="welcomeName">
+أهلاً بك 👋
+</h1>
+
+<p>
+إدارة المشتركين ومواعيد الزيارات ومتابعة سير العمل في سند
+</p>
+
+</div>
+
+<div class="manager-avatar">
+👨‍💼
+</div>
+
+</section>
+
+
+<section class="stats">
+
+<div class="stat">
+
+<span class="stat-label">
+👥 إجمالي المشتركين
+</span>
+
+<div
+class="stat-number"
+id="customersCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+🆕 مشتركين جدد اليوم
+</span>
+
+<div
+class="stat-number"
+id="newCustomersCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+📅 مواعيد اليوم
+</span>
+
+<div
+class="stat-number"
+id="todayAppointmentsCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+⏳ بانتظار ترتيب الموعد
+</span>
+
+<div
+class="stat-number"
+id="pendingCount">
+0
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>
+⚡ الخدمات السريعة
+</h2>
+
+<p>
+أهم العمليات التي يحتاجها مدير الشركة
+</p>
+
+</div>
+
+
+<div class="actions-grid">
+
+<button
+class="action"
+onclick="scrollToSection('appointments')">
+
+<div class="action-icon">
+📅
+</div>
+
+<h3>
+جدول المواعيد
+</h3>
+
+<p>
+ترتيب ومتابعة مواعيد المشتركين
+</p>
+
+</button>
+
+
+<button
+class="action"
+onclick="scrollToSection('customers')">
+
+<div class="action-icon">
+👥
+</div>
+
+<h3>
+ملفات المشتركين
+</h3>
+
+<p>
+عرض جميع ملفات المشتركين
+</p>
+
+</button>
+
+
+<button
+class="action"
+onclick="scrollToSection('packages')">
+
+<div class="action-icon">
+📦
+</div>
+
+<h3>
+الباقات
+</h3>
+
+<p>
+عرض الباقات والخدمات والأسعار
+</p>
+
+</button>
+
+
+<button
+class="action"
+onclick="location.reload()">
+
+<div class="action-icon">
+🔄
+</div>
+
+<h3>
+تحديث البيانات
+</h3>
+
+<p>
+تحديث بيانات المشتركين والمواعيد
+</p>
+
+</button>
+
+</div>
+
+</section>
+
+
+<section
+class="section"
+id="appointments">
+
+<div class="section-title">
+
+<h2>
+📅 جدول مواعيد المشتركين
+</h2>
+
+<p>
+المشترك الذي يسجله موظف الاستقبال يظهر هنا مباشرة، ويمكن للمدير ترتيب موعده
+</p>
+
+</div>
+
+
+<div
+id="scheduleMessage"
+class="message">
+</div>
+
+
+<div class="table-wrapper">
+
+<table class="appointments-table">
+
+<thead>
+
+<tr>
+
+<th>
+المشترك
+</th>
+
+<th>
+الباقة
+</th>
+
+<th>
+هاتف العائلة
+</th>
+
+<th>
+الحالة
+</th>
+
+<th>
+تاريخ الموعد
+</th>
+
+<th>
+وقت الموعد
+</th>
+
+<th>
+الإجراء
+</th>
+
+</tr>
+
+</thead>
+
+<tbody
+id="appointmentsBody">
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<section
+class="section"
+id="customers">
+
+<div class="section-title">
+
+<h2>
+👥 ملفات المشتركين
+</h2>
+
+<p>
+جميع المشتركين المسجلين في نظام سند
+</p>
+
+</div>
+
+
+<div
+class="customer-list"
+id="customerList">
+</div>
+
+</section>
+
+
+<section
+class="section"
+id="packages">
+
+<div class="section-title">
+
+<h2>
+📦 الباقات والأسعار
+</h2>
+
+<p>
+المعلومات الإدارية الخاصة بالباقات
+</p>
+
+</div>
+
+
+<div class="package-grid">
+
+
+<div class="package">
+
+<h3>
+🟢 باقة سند الاعتيادية
+</h3>
+
+<div class="package-price">
+252,000 د.ع / شهرياً
+</div>
+
+<ul>
+
+<li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
+<li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
+<li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
+<li>🧪 الفحوصات والتحاليل</li>
+<li>🛁 الرعاية الشخصية اليومية</li>
+<li>📋 تقارير المتابعة</li>
+
+</ul>
+
+</div>
+
+
+<div class="package">
+
+<h3>
+🔵 الباقة المتوسطة
+</h3>
+
+<div class="package-price">
+337,000 د.ع / شهرياً
+</div>
+
+<ul>
+
+<li>👩‍⚕️ رعاية تمريضية موسعة</li>
+<li>🩺 متابعة الطبيب المقيم</li>
+<li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
+<li>🧪 الفحوصات والتحاليل</li>
+<li>🧠 دعم نفسي</li>
+<li>🎭 خدمات ترفيهية</li>
+<li>📋 تقارير شاملة</li>
+
+</ul>
+
+</div>
+
+
+<div class="package">
+
+<h3>
+🟣 باقة سند الفاخرة
+</h3>
+
+<div class="package-price">
+حسب الخدمات المختارة
+</div>
+
+<ul>
+
+<li>👩‍⚕️ رعاية تمريضية مكثفة</li>
+<li>👨‍⚕️ متابعة طبية متقدمة</li>
+<li>🧠 دعم نفسي</li>
+<li>🥗 متابعة غذائية</li>
+<li>🏃 علاج طبيعي</li>
+<li>🎭 ترفيه ومرافقة</li>
+<li>💇 خدمات إضافية</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="logout-area">
+
+<a
+href="#"
+class="logout"
+onclick="logoutManager(event)">
+
+🚪 تسجيل الخروج
+
+</a>
+
+</div>
+
+</main>
+
+
+<div
+class="modal"
+id="customerModal"
+onclick="closeModalOutside(event)">
+
+<div
+class="modal-box">
+
+<div class="modal-header">
+
+<h2>
+👤 تفاصيل المشترك
+</h2>
+
+<button
+class="close-modal"
+onclick="closeCustomerModal()">
+×
+</button>
+
+</div>
+
+<div id="customerDetails"></div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<div class="footer-logo">
+سند<span>.</span>
+</div>
+
+<p>
+الرعاية المنزلية لكبار السن
+</p>
+
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   التحقق من تسجيل الدخول
+========================================= */
+
+const loggedStaffRaw =
+localStorage.getItem("sanadLoggedInStaff");
+
+if(!loggedStaffRaw){
+
+alert("يرجى تسجيل الدخول أولاً.");
+
+window.location.href="staff-login.html";
+
+}
+
+
+let loggedStaff=null;
+
+try{
+
+loggedStaff=
+JSON.parse(loggedStaffRaw);
+
+}catch(error){
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+window.location.href=
+"staff-login.html";
+
+}
+
+
+/* =========================================
+   التحقق من صلاحية المدير
+========================================= */
+
+if(
+loggedStaff &&
+loggedStaff.role!=="manager" &&
+loggedStaff.role!=="owner"
+){
+
+alert(
+"ليس لديك صلاحية الدخول إلى لوحة المدير."
+);
+
+window.location.href=
+"staff-dashboard.html";
+
+}
+
+
+/* =========================================
+   اسم المدير
+========================================= */
+
+if(loggedStaff){
+
+document.getElementById(
+"welcomeName"
+).textContent=
+"أهلاً بك، "+
+loggedStaff.name+
+" 👋";
+
+}
+
+
+/* =========================================
+   قاعدة بيانات المشتركين
+========================================= */
+
+let customers=[];
+
+function loadCustomers(){
+
+try{
+
+customers=
+JSON.parse(
+localStorage.getItem(
+"sanadCustomers"
+) || "[]"
+);
+
+if(!Array.isArray(customers)){
+
+customers=[];
+
+}
+
+}catch(error){
+
+customers=[];
+
+}
+
+}
+
+
+/* =========================================
+   حفظ المشتركين
+========================================= */
+
+function saveCustomers(){
+
+localStorage.setItem(
+"sanadCustomers",
+JSON.stringify(customers)
+);
+
+}
+
+
+/* =========================================
+   نص الحالة
+========================================= */
+
+function getStatusText(status){
+
+const statuses={
+
+pending_schedule:
+"بانتظار ترتيب الموعد",
+
+scheduled:
+"تم ترتيب الموعد",
+
+active:
+"اشتراك فعال",
+
+suspended:
+"موقوف",
+
+completed:
+"مكتمل"
+
+};
+
+return (
+statuses[status] ||
+"غير محدد"
+);
+
+}
+
+
+/* =========================================
+   فحص موعد اليوم
+========================================= */
+
+function isToday(dateString){
+
+if(!dateString){
+
+return false;
+
+}
+
+const appointmentDate=
+new Date(dateString);
+
+if(
+Number.isNaN(
+appointmentDate.getTime()
+)
+){
+
+return false;
+
+}
+
+const today=new Date();
+
+return(
+appointmentDate.getFullYear()===
+today.getFullYear() &&
+appointmentDate.getMonth()===
+today.getMonth() &&
+appointmentDate.getDate()===
+today.getDate()
+);
+
+}
+
+
+/* =========================================
+   عرض جدول المواعيد
+========================================= */
+
+function renderAppointments(){
+
+const body=
+document.getElementById(
+"appointmentsBody"
+);
+
+body.innerHTML="";
+
+
+if(customers.length===0){
+
+body.innerHTML=`
+
+<tr>
+
+<td
+colspan="7"
+class="empty">
+
+لا توجد مشتركين مسجلين حالياً.
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+customers
+.slice()
+.reverse()
+.forEach(function(customer){
+
+const row=
+document.createElement("tr");
+
+
+let appointmentDate="";
+
+let appointmentTime="";
+
+
+if(customer.appointment){
+
+appointmentDate=
+customer.appointment.date || "";
+
+appointmentTime=
+customer.appointment.time || "";
+
+}
+
+
+let actionHtml="";
+
+
+if(
+customer.status===
+"pending_schedule" ||
+!customer.appointment
+){
+
+actionHtml=`
+
+<div class="schedule-form">
+
+<input
+type="date"
+id="date-${escapeHtml(customer.id)}"
+>
+
+<input
+type="time"
+id="time-${escapeHtml(customer.id)}"
+>
+
+<button
+class="schedule-button"
+onclick="scheduleAppointment('${escapeJs(customer.id)}')">
+
+حفظ الموعد
+
+</button>
+
+</div>
+
+`;
+
+}else{
+
+actionHtml=`
+
+<button
+class="view-button"
+onclick="editAppointment('${escapeJs(customer.id)}')">
+
+تعديل الموعد
+
+</button>
+
+`;
+
+}
+
+
+row.innerHTML=`
+
+<td>
+
+<div class="patient-name">
+
+👴 ${escapeHtml(customer.name)}
+
+</div>
+
+<div class="patient-id">
+
+${escapeHtml(customer.id)}
+
+</div>
+
+</td>
+
+
+<td>
+
+${escapeHtml(
+customer.packageName || "-"
+)}
+
+</td>
+
+
+<td>
+
+${escapeHtml(
+customer.familyPhone || "-"
+)}
+
+</td>
+
+
+<td>
+
+<span class="status ${getStatusClass(customer.status)}">
+
+${getStatusText(customer.status)}
+
+</span>
+
+</td>
+
+
+<td>
+
+${appointmentDate
+? formatDate(appointmentDate)
+: "-"
+}
+
+</td>
+
+
+<td>
+
+${appointmentTime
+? formatTime(appointmentTime)
+: "-"
+}
+
+</td>
+
+
+<td>
+
+${actionHtml}
+
+</td>
+
+`;
+
+body.appendChild(row);
+
+});
+
+}
+
+
+/* =========================================
+   تنسيق الحالة
+========================================= */
+
+function getStatusClass(status){
+
+if(status==="pending_schedule"){
+
+return "pending";
+
+}
+
+if(status==="scheduled"){
+
+return "scheduled";
+
+}
+
+if(status==="active"){
+
+return "active";
+
+}
+
+if(status==="suspended"){
+
+return "suspended";
+
+}
+
+return "";
+
+}
+
+
+/* =========================================
+   ترتيب موعد
+========================================= */
+
+function scheduleAppointment(customerId){
+
+const customer=
+customers.find(function(item){
+
+return item.id===customerId;
+
+});
+
+
+if(!customer){
+
+return;
+
+}
+
+
+const dateInput=
+document.getElementById(
+"date-"+customerId
+);
+
+const timeInput=
+document.getElementById(
+"time-"+customerId
+);
+
+
+const date=
+dateInput
+? dateInput.value
+: "";
+
+
+const time=
+timeInput
+? timeInput.value
+: "";
+
+
+if(!date || !time){
+
+showScheduleMessage(
+"يرجى اختيار تاريخ ووقت الموعد.",
+"error"
+);
+
+return;
+
+}
+
+
+customer.appointment={
+
+date:date,
+
+time:time,
+
+scheduledBy:
+loggedStaff
+? loggedStaff.name
+: "المدير",
+
+scheduledAt:
+new Date().toISOString()
+
+};
+
+
+customer.status=
+"scheduled";
+
+
+saveCustomers();
+
+renderAppointments();
+
+renderCustomers();
+
+updateStats();
+
+
+showScheduleMessage(
+"✅ تم ترتيب موعد "+customer.id+" بنجاح.",
+"success"
+);
+
+}
+
+
+/* =========================================
+   تعديل الموعد
+========================================= */
+
+function editAppointment(customerId){
+
+const customer=
+customers.find(function(item){
+
+return item.id===customerId;
+
+});
+
+
+if(!customer){
+
+return;
+
+}
+
+
+const newDate=
+prompt(
+"أدخل تاريخ الموعد الجديد:",
+customer.appointment
+? customer.appointment.date
+: ""
+);
+
+
+if(newDate===null){
+
+return;
+
+}
+
+
+const newTime=
+prompt(
+"أدخل وقت الموعد الجديد:",
+customer.appointment
+? customer.appointment.time
+: ""
+);
+
+
+if(newTime===null){
+
+return;
+
+}
+
+
+if(!newDate || !newTime){
+
+alert(
+"يرجى إدخال التاريخ والوقت."
+);
+
+return;
+
+}
+
+
+customer.appointment.date=
+newDate;
+
+customer.appointment.time=
+newTime;
+
+customer.appointment.scheduledBy=
+loggedStaff
+? loggedStaff.name
+: "المدير";
+
+customer.appointment.scheduledAt=
+new Date().toISOString();
+
+customer.status=
+"scheduled";
+
+
+saveCustomers();
+
+renderAppointments();
+
+renderCustomers();
+
+updateStats();
+
+
+showScheduleMessage(
+"✅ تم تعديل موعد "+customer.id+" بنجاح.",
+"success"
+);
+
+}
+
+
+/* =========================================
+   عرض المشتركين
+========================================= */
+
+function renderCustomers(){
+
+const list=
+document.getElementById(
+"customerList"
+);
+
+list.innerHTML="";
+
+
+if(customers.length===0){
+
+list.innerHTML=`
+
+<div class="empty">
+
+لا توجد ملفات مشتركين حالياً.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+customers
+.slice()
+.reverse()
+.forEach(function(customer){
+
+const element=
+document.createElement("div");
+
+element.className="customer";
+
+
+element.innerHTML=`
+
+<div>
+
+<div class="customer-name">
+
+👴 ${escapeHtml(customer.name)}
+
+</div>
+
+
+<div class="customer-info">
+
+📦 ${escapeHtml(
+customer.packageName || "-"
+)}
+
+<br>
+
+👨‍👩‍👦 العائلة:
+${escapeHtml(
+customer.familyName || "-"
+)}
+
+<br>
+
+📞 هاتف العائلة:
+${escapeHtml(
+customer.familyPhone || "-"
+)}
+
+<br>
+
+📌 الحالة:
+${getStatusText(customer.status)}
+
+<br>
+
+📅 الموعد:
+${
+customer.appointment
+?
+formatDate(
+customer.appointment.date
+)
++" — "+
+formatTime(
+customer.appointment.time
+)
+:
+"لم يتم الترتيب بعد"
+}
+
+</div>
+
+</div>
+
+
+<div class="customer-id">
+
+${escapeHtml(customer.id)}
+
+<br><br>
+
+<button
+class="view-button"
+onclick="showCustomerDetails('${escapeJs(customer.id)}')">
+
+عرض الملف
+
+</button>
+
+</div>
+
+`;
+
+
+list.appendChild(element);
+
+});
+
+}
+
+
+/* =========================================
+   الإحصائيات
+========================================= */
+
+function updateStats(){
+
+document.getElementById(
+"customersCount"
+).textContent=
+customers.length;
+
+
+const today=
+new Date();
+
+
+document.getElementById(
+"newCustomersCount"
+).textContent=
+
+customers.filter(function(customer){
+
+if(!customer.createdAt){
+
+return false;
+
+}
+
+const created=
+new Date(customer.createdAt);
+
+return(
+created.getFullYear()===
+today.getFullYear() &&
+created.getMonth()===
+today.getMonth() &&
+created.getDate()===
+today.getDate()
+);
+
+}).length;
+
+
+document.getElementById(
+"todayAppointmentsCount"
+).textContent=
+
+customers.filter(function(customer){
+
+return(
+customer.appointment &&
+isToday(
+customer.appointment.date
+)
+);
+
+}).length;
+
+
+document.getElementById(
+"pendingCount"
+).textContent=
+
+customers.filter(function(customer){
+
+return(
+customer.status===
+"pending_schedule"
+);
+
+}).length;
+
+}
+
+
+/* =========================================
+   رسالة الموعد
+========================================= */
+
+function showScheduleMessage(
+message,
+type
+){
+
+const box=
+document.getElementById(
+"scheduleMessage"
+);
+
+box.textContent=
+message;
+
+box.className=
+"message "+type;
+
+box.style.display=
+"block";
+
+
+setTimeout(function(){
+
+box.style.display=
+"none";
+
+},4000);
+
+}
+
+
+/* =========================================
+   تفاصيل المشترك
+========================================= */
+
+function showCustomerDetails(customerId){
+
+const customer=
+customers.find(function(item){
+
+return item.id===customerId;
+
+});
+
+
+if(!customer){
+
+return;
+
+}
+
+
+const details=
+document.getElementById(
+"customerDetails"
+);
+
+
+details.innerHTML=`
+
+<div class="detail-row">
+
+<span class="detail-label">
+رقم المشترك
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.id)}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+اسم المسن
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.name)}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+العمر
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.age || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+هاتف المسن
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.phone || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+اسم العائلة
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.familyName || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+هاتف العائلة
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.familyPhone || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+الباقة
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.packageName || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+العنوان
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.address || "-")}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+الحالة
+</span>
+
+<span class="detail-value">
+${getStatusText(customer.status)}
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+الموعد
+</span>
+
+<span class="detail-value">
+
+${
+customer.appointment
+?
+formatDate(
+customer.appointment.date
+)
++" — "+
+formatTime(
+customer.appointment.time
+)
+:
+"لم يتم الترتيب بعد"
+}
+
+</span>
+
+</div>
+
+
+<div class="detail-row">
+
+<span class="detail-label">
+ملاحظات
+</span>
+
+<span class="detail-value">
+${escapeHtml(customer.notes || "-")}
+</span>
+
+</div>
+
+`;
+
+
+document.getElementById(
+"customerModal"
+).style.display="flex";
+
+}
+
+
+/* =========================================
+   إغلاق نافذة التفاصيل
+========================================= */
+
+function closeCustomerModal(){
+
+document.getElementById(
+"customerModal"
+).style.display="none";
+
+}
+
+
+function closeModalOutside(event){
+
+if(
+event.target.id===
+"customerModal"
+){
+
+closeCustomerModal();
+
+}
+
+}
+
+
+/* =========================================
+   تنسيق التاريخ
+========================================= */
+
+function formatDate(dateString){
+
+if(!dateString){
+
+return "-";
+
+}
+
+
+const parts=
+dateString.split("-");
+
+
+if(parts.length!==3){
+
+return dateString;
+
+}
+
+
+return(
+parts[2]+
+"/"+
+parts[1]+
+"/"+
+parts[0]
+);
+
+}
+
+
+/* =========================================
+   تنسيق الوقت
+========================================= */
+
+function formatTime(timeString){
+
+if(!timeString){
+
+return "-";
+
+}
+
+
+const parts=
+timeString.split(":");
+
+
+if(parts.length<2){
+
+return timeString;
+
+}
+
+
+let hour=
+parseInt(parts[0]);
+
+
+const minute=
+parts[1];
+
+
+const period=
+hour>=12
+? "مساءً"
+: "صباحاً";
+
+
+hour=
+hour%12 || 12;
+
+
+return(
+hour+
+":"+
+minute+
+" "+
+period
+);
+
+}
+
+
+/* =========================================
+   الانتقال إلى قسم
+========================================= */
+
+function scrollToSection(id){
+
+const section=
+document.getElementById(id);
+
+if(section){
+
+section.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* =========================================
+   تسجيل الخروج
+========================================= */
+
+function logoutManager(event){
+
+if(event){
+
+event.preventDefault();
+
+}
+
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+localStorage.removeItem(
+"sanadCurrentVisit"
+);
+
+window.location.href=
+"staff-login.html";
+
+}
+
+
+/* =========================================
+   حماية النصوص
+========================================= */
+
+function escapeHtml(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+return String(value ?? "")
+.replace(/\\/g,"\\\\")
+.replace(/'/g,"\\'")
+.replace(/\r/g,"\\r")
+.replace(/\n/g,"\\n");
+
+}
+
+
+/* =========================================
+   تشغيل الصفحة
+========================================= */
+
+loadCustomers();
+
+renderAppointments();
+
+renderCustomers();
+
+updateStats();
+
+</script>
+
+</body>
+
+</html>
