@@ -1,2263 +1,1468 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
 
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>لوحة موظف الاستقبال | سند</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-
-    body {
-      background: linear-gradient(
-        180deg,
-        #f7fbfa,
-        #eef7f5
-      );
-    }
-
-    .dashboard {
-      max-width: 1250px;
-      margin: auto;
-      padding: 45px 6%;
-    }
-
-    .welcome {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 26px;
-      padding: 30px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 20px;
-
-      box-shadow:
-        0 18px 50px rgba(22,70,65,.07);
-
-      margin-bottom: 25px;
-    }
-
-    .eyebrow {
-      display: block;
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 7px;
-    }
-
-    .welcome h1 {
-      color: #163b38;
-      font-size: 30px;
-      margin: 0 0 8px;
-    }
-
-    .welcome p {
-      color: #718480;
-      margin: 0;
-      line-height: 1.8;
-    }
-
-    .staff-avatar {
-      width: 78px;
-      height: 78px;
-      border-radius: 24px;
-      background: #e8f5f3;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 38px;
-      flex-shrink: 0;
-    }
-
-
-    /* =============================
-       STAFF INFO
-    ============================= */
-
-    .staff-info {
-      display: grid;
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 15px;
-
-      margin-bottom: 25px;
-    }
-
-    .info-card {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .info-label {
-      display: block;
-      color: #718480;
-      font-size: 11px;
-      margin-bottom: 7px;
-    }
-
-    .info-value {
-      color: #163b38;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-
-    /* =============================
-       STATS
-    ============================= */
-
-    .stats {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 18px;
-
-      margin-bottom: 28px;
-    }
-
-    .stat {
-
-      background: white;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-      box-shadow:
-        0 12px 35px rgba(22,70,65,.05);
-
-    }
-
-    .stat-label {
-      color: #718480;
-      font-size: 13px;
-    }
-
-    .stat-number {
-      color: #163b38;
-      font-size: 28px;
-      font-weight: 900;
-      margin-top: 10px;
-    }
-
-
-    /* =============================
-       SECTION
-    ============================= */
-
-    .section {
-
-      background: white;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 24px;
-
-      padding: 28px;
-
-      margin-bottom: 25px;
-
-      box-shadow:
-        0 15px 45px rgba(22,70,65,.05);
-
-    }
-
-    .section-title {
-      margin-bottom: 22px;
-    }
-
-    .section-title h2 {
-
-      color: #163b38;
-
-      font-size: 21px;
-
-      margin:
-        0 0 5px;
-
-    }
-
-    .section-title p {
-
-      color: #718480;
-
-      font-size: 13px;
-
-      margin: 0;
-
-    }
-
-
-    /* =============================
-       ACTIONS
-    ============================= */
-
-    .actions-grid {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      gap: 15px;
-
-    }
-
-    .action {
-
-      border: 1px solid #e3edeb;
-
-      background: #fbfefe;
-
-      border-radius: 18px;
-
-      padding: 22px 15px;
-
-      text-align: center;
-
-      cursor: pointer;
-
-      transition: .25s;
-
-      font-family: inherit;
-
-    }
-
-    .action:hover {
-
-      transform:
-        translateY(-4px);
-
-      border-color:
-        #16877d;
-
-      box-shadow:
-        0 10px 28px
-        rgba(22,135,125,.09);
-
-    }
-
-    .action-icon {
-
-      width: 55px;
-
-      height: 55px;
-
-      border-radius: 17px;
-
-      background: #e8f5f3;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      margin:
-        0 auto 12px;
-
-      font-size: 26px;
-
-    }
-
-    .action h3 {
-
-      color: #163b38;
-
-      font-size: 14px;
-
-      margin:
-        0 0 5px;
-
-    }
-
-    .action p {
-
-      color: #718480;
-
-      font-size: 11px;
-
-      line-height: 1.6;
-
-      margin: 0;
-
-    }
-
-
-    /* =============================
-       PACKAGES
-    ============================= */
-
-    .packages {
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 18px;
-
-    }
-
-    .package {
-
-      border:
-        1px solid #e3edeb;
-
-      border-radius: 19px;
-
-      padding: 22px;
-
-      background:
-        #fbfefe;
-
-    }
-
-    .package h3 {
-
-      color: #163b38;
-
-      margin:
-        0 0 8px;
-
-      font-size: 18px;
-
-    }
-
-    .package-price {
-
-      color: #16877d;
-
-      font-size: 22px;
-
-      font-weight: 900;
-
-      margin-bottom: 15px;
-
-    }
-
-    .package ul {
-
-      margin: 0;
-
-      padding-right: 20px;
-
-    }
-
-    .package li {
-
-      color: #718480;
-
-      font-size: 12px;
-
-      line-height: 2;
-
-    }
-
-
-    /* =============================
-       FORM
-    ============================= */
-
-    .form-grid {
-
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 17px;
-
-    }
-
-    .form-row {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 7px;
-
-    }
-
-    .form-row.full {
-
-      grid-column:
-        1 / -1;
-
-    }
-
-    .form-row label {
-
-      color: #163b38;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-    }
-
-    .form-row input,
-    .form-row select,
-    .form-row textarea {
-
-      width: 100%;
-
-      box-sizing: border-box;
-
-      padding: 13px;
-
-      border-radius: 12px;
-
-      border:
-        1px solid #dfecea;
-
-      background: #fbfefe;
-
-      font-family: inherit;
-
-      outline: none;
-
-      font-size: 13px;
-
-    }
-
-    .form-row textarea {
-
-      min-height: 100px;
-
-      resize: vertical;
-
-    }
-
-    .form-row input:focus,
-    .form-row select:focus,
-    .form-row textarea:focus {
-
-      border-color:
-        #16877d;
-
-      box-shadow:
-        0 0 0 4px
-        rgba(22,135,125,.08);
-
-      background: white;
-
-    }
-
-    .save-button {
-
-      border: none;
-
-      border-radius: 13px;
-
-      padding: 13px 25px;
-
-      background: #16877d;
-
-      color: white;
-
-      font-family: inherit;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      margin-top: 20px;
-
-    }
-
-
-    /* =============================
-       CUSTOMERS
-    ============================= */
-
-    .customer-list {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 12px;
-
-    }
-
-    .customer {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 15px;
-
-      padding: 16px;
-
-      background: #fbfefe;
-
-      border:
-        1px solid #e3edeb;
-
-      border-radius: 15px;
-
-    }
-
-    .customer-name {
-
-      color: #163b38;
-
-      font-size: 14px;
-
-      font-weight: 800;
-
-    }
-
-    .customer-info {
-
-      color: #718480;
-
-      font-size: 11px;
-
-      margin-top: 4px;
-
-      line-height: 1.8;
-
-    }
-
-    .customer-id {
-
-      color: #16877d;
-
-      font-size: 12px;
-
-      font-weight: 900;
-
-      white-space: nowrap;
-
-    }
-
-    .empty {
-
-      text-align: center;
-
-      color: #718480;
-
-      padding: 25px;
-
-      font-size: 13px;
-
-    }
-
-
-    /* =============================
-       MESSAGES
-    ============================= */
-
-    .message {
-
-      display: none;
-
-      padding: 12px;
-
-      border-radius: 11px;
-
-      margin-top: 15px;
-
-      text-align: center;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-    }
-
-    .success {
-
-      background: #e6f6ef;
-
-      color: #16815f;
-
-    }
-
-    .error {
-
-      background: #fff0f0;
-
-      color: #a44b4b;
-
-    }
-
-
-    /* =============================
-       LOGOUT
-    ============================= */
-
-    .logout-area {
-
-      text-align: center;
-
-      margin:
-        35px 0 10px;
-
-    }
-
-    .logout {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      padding:
-        11px 20px;
-
-      border-radius: 12px;
-
-      border:
-        1px solid #eadede;
-
-      background: white;
-
-      color: #a44b4b;
-
-      text-decoration: none;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-    }
-
-
-    @media (max-width: 950px) {
-
-      .stats {
-        grid-template-columns:
-          1fr 1fr;
-      }
-
-      .actions-grid {
-        grid-template-columns:
-          1fr 1fr;
-      }
-
-      .packages {
-        grid-template-columns:
-          1fr;
-      }
-
-      .staff-info {
-        grid-template-columns:
-          1fr;
-      }
-
-    }
-
-
-    @media (max-width: 650px) {
-
-      .dashboard {
-        padding:
-          30px 5%;
-      }
-
-      .welcome {
-
-        padding: 23px;
-
-      }
-
-      .welcome h1 {
-
-        font-size: 24px;
-
-      }
-
-      .staff-avatar {
-
-        width: 60px;
-
-        height: 60px;
-
-        font-size: 29px;
-
-      }
-
-      .form-grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .form-row.full {
-
-        grid-column: auto;
-
-      }
-
-    }
-
-
-    @media (max-width: 480px) {
-
-      .stats {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .actions-grid {
-
-        grid-template-columns:
-          1fr;
-
-      }
-
-      .welcome {
-
-        flex-direction:
-          column;
-
-        text-align: center;
-
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لوحة موظف الاستقبال | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
+
+.dashboard{
+max-width:1250px;
+margin:auto;
+padding:45px 6%;
+}
+
+.welcome{
+background:white;
+border:1px solid #e3edeb;
+border-radius:26px;
+padding:30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+box-shadow:0 18px 50px rgba(22,70,65,.07);
+margin-bottom:25px;
+}
+
+.eyebrow{
+display:block;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:7px;
+}
+
+.welcome h1{
+color:#163b38;
+font-size:30px;
+margin:0 0 8px;
+}
+
+.welcome p{
+color:#718480;
+margin:0;
+line-height:1.8;
+}
+
+.staff-avatar{
+width:78px;
+height:78px;
+border-radius:24px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:28px;
+}
+
+.stat{
+background:white;
+border:1px solid #e3edeb;
+border-radius:20px;
+padding:22px;
+box-shadow:0 12px 35px rgba(22,70,65,.05);
+}
+
+.stat-label{
+color:#718480;
+font-size:13px;
+}
+
+.stat-number{
+color:#163b38;
+font-size:28px;
+font-weight:900;
+margin-top:10px;
+}
+
+.section{
+background:white;
+border:1px solid #e3edeb;
+border-radius:24px;
+padding:28px;
+margin-bottom:25px;
+box-shadow:0 15px 45px rgba(22,70,65,.05);
+}
+
+.section-title{
+margin-bottom:22px;
+}
+
+.section-title h2{
+color:#163b38;
+font-size:21px;
+margin:0 0 5px;
+}
+
+.section-title p{
+color:#718480;
+font-size:13px;
+margin:0;
+}
+
+.actions-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.action{
+border:1px solid #e3edeb;
+background:#fbfefe;
+border-radius:18px;
+padding:22px 15px;
+text-align:center;
+cursor:pointer;
+transition:.25s;
+font-family:inherit;
+}
+
+.action:hover{
+transform:translateY(-4px);
+border-color:#16877d;
+box-shadow:0 10px 28px rgba(22,135,125,.09);
+}
+
+.action-icon{
+width:55px;
+height:55px;
+border-radius:17px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 12px;
+font-size:26px;
+}
+
+.action h3{
+color:#163b38;
+font-size:14px;
+margin:0 0 5px;
+}
+
+.action p{
+color:#718480;
+font-size:11px;
+line-height:1.6;
+margin:0;
+}
+
+.packages{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.package{
+border:1px solid #e3edeb;
+border-radius:19px;
+padding:22px;
+background:#fbfefe;
+}
+
+.package h3{
+color:#163b38;
+margin:0 0 8px;
+font-size:18px;
+}
+
+.package-price{
+color:#16877d;
+font-size:22px;
+font-weight:900;
+margin-bottom:15px;
+}
+
+.package ul{
+margin:0;
+padding-right:20px;
+}
+
+.package li{
+color:#718480;
+font-size:12px;
+line-height:2;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:17px;
+}
+
+.form-row{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+
+.form-row.full{
+grid-column:1/-1;
+}
+
+.form-row label{
+color:#163b38;
+font-size:13px;
+font-weight:800;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea{
+width:100%;
+box-sizing:border-box;
+padding:13px;
+border-radius:12px;
+border:1px solid #dfecea;
+background:#fbfefe;
+font-family:inherit;
+outline:none;
+font-size:13px;
+}
+
+.form-row textarea{
+min-height:100px;
+resize:vertical;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus{
+border-color:#16877d;
+box-shadow:0 0 0 4px rgba(22,135,125,.08);
+background:white;
+}
+
+.save-button{
+border:none;
+border-radius:13px;
+padding:13px 25px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+margin-top:20px;
+}
+
+.save-button:hover{
+background:#0f7068;
+}
+
+.customer-list{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.customer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:17px;
+background:#fbfefe;
+border:1px solid #e3edeb;
+border-radius:15px;
+}
+
+.customer-name{
+color:#163b38;
+font-size:14px;
+font-weight:800;
+}
+
+.customer-info{
+color:#718480;
+font-size:11px;
+margin-top:5px;
+line-height:1.8;
+}
+
+.customer-id{
+color:#16877d;
+font-size:12px;
+font-weight:900;
+white-space:nowrap;
+}
+
+.empty{
+text-align:center;
+color:#718480;
+padding:25px;
+font-size:13px;
+}
+
+.message{
+display:none;
+padding:12px;
+border-radius:11px;
+margin-top:15px;
+text-align:center;
+font-size:12px;
+font-weight:800;
+}
+
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.error{
+background:#fff0f0;
+color:#a44b4b;
+}
+
+.logout-area{
+text-align:center;
+margin:35px 0 10px;
+}
+
+.logout{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:11px 20px;
+border-radius:12px;
+border:1px solid #eadede;
+background:white;
+color:#a44b4b;
+text-decoration:none;
+font-size:13px;
+font-weight:800;
+}
+
+@media(max-width:950px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.actions-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.packages{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:650px){
+
+.dashboard{
+padding:30px 5%;
+}
+
+.welcome{
+padding:23px;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.form-row.full{
+grid-column:auto;
+}
+
+}
+
+@media(max-width:480px){
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.actions-grid{
+grid-template-columns:1fr;
+}
+
+.welcome{
+flex-direction:column;
+text-align:center;
+}
+
+.customer{
+align-items:flex-start;
+flex-direction:column;
+}
+
+}
+
+</style>
 
 </head>
 
-
 <body>
-
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    سند<span>.</span>
-  </a>
+<a href="index.html" class="logo">
+سند<span>.</span>
+</a>
 
-  <nav class="nav">
-
-    <a href="index.html">
-      الرئيسية
-    </a>
-
-    <a href="services.html">
-      خدماتنا
-    </a>
-
-    <a href="how.html">
-      كيف يعمل سند؟
-    </a>
-
-    <a href="about.html">
-      عن سند
-    </a>
-
-  </nav>
+<nav class="nav">
+<a href="index.html">الرئيسية</a>
+<a href="services.html">خدماتنا</a>
+<a href="how.html">كيف يعمل سند؟</a>
+<a href="about.html">عن سند</a>
+</nav>
 
 </header>
 
-
 <main class="dashboard">
 
+<section class="welcome">
 
-  <!-- =============================
-       WELCOME
-  ============================= -->
+<div>
 
-  <section class="welcome">
+<span class="eyebrow">
+🧑‍💼 لوحة موظف الاستقبال
+</span>
 
-    <div>
+<h1 id="welcomeName">
+أهلاً بك 👋
+</h1>
 
-      <span class="eyebrow">
-        🧑‍💼 لوحة موظف الاستقبال
-      </span>
+<p>
+إدارة استقبال المشتركين وإنشاء ملفاتهم
+</p>
 
-      <h1 id="welcomeName">
-        أهلاً بك 👋
-      </h1>
+</div>
 
-      <p id="welcomeRole">
-        إدارة استقبال المشتركين وملفاتهم
-      </p>
+<div class="staff-avatar">
+🧑‍💼
+</div>
 
-    </div>
+</section>
 
-    <div class="staff-avatar">
-      🧑‍💼
-    </div>
 
-  </section>
+<section class="stats">
 
+<div class="stat">
+<span class="stat-label">
+👥 إجمالي المشتركين
+</span>
 
-  <!-- =============================
-       STAFF INFORMATION
-  ============================= -->
+<div class="stat-number" id="customersCount">
+0
+</div>
+</div>
 
-  <section class="staff-info">
 
-    <div class="info-card">
+<div class="stat">
+<span class="stat-label">
+🆕 مشتركين جدد
+</span>
 
-      <span class="info-label">
-        👤 اسم الموظف
-      </span>
+<div class="stat-number" id="newCustomersCount">
+0
+</div>
+</div>
 
-      <div
-        class="info-value"
-        id="staffName"
-      >
-        -
-      </div>
 
-    </div>
+<div class="stat">
+<span class="stat-label">
+📦 الباقات
+</span>
 
+<div class="stat-number">
+3
+</div>
+</div>
 
-    <div class="info-card">
 
-      <span class="info-label">
-        🪪 الرقم الوظيفي
-      </span>
+<div class="stat">
+<span class="stat-label">
+📅 بانتظار ترتيب الموعد
+</span>
 
-      <div
-        class="info-value"
-        id="staffEmployeeId"
-      >
-        -
-      </div>
+<div class="stat-number" id="pendingCount">
+0
+</div>
+</div>
 
-    </div>
+</section>
 
 
-    <div class="info-card">
+<section class="section">
 
-      <span class="info-label">
-        🔐 مستوى الصلاحية
-      </span>
+<div class="section-title">
 
-      <div
-        class="info-value"
-        id="staffPermission"
-      >
-        -
-      </div>
+<h2>
+⚡ الخدمات السريعة
+</h2>
 
-    </div>
+<p>
+أهم العمليات التي يحتاجها موظف الاستقبال
+</p>
 
-  </section>
+</div>
 
+<div class="actions-grid">
 
-  <!-- =============================
-       STATS
-  ============================= -->
+<button class="action"
+onclick="scrollToSection('newCustomer')">
 
-  <section class="stats">
+<div class="action-icon">
+➕
+</div>
 
-    <div class="stat">
+<h3>
+تسجيل مشترك جديد
+</h3>
 
-      <span class="stat-label">
-        👥 إجمالي المشتركين
-      </span>
+<p>
+إنشاء ملف جديد للمسن
+</p>
 
-      <div
-        class="stat-number"
-        id="customersCount"
-      >
-        0
-      </div>
+</button>
 
-    </div>
 
+<button class="action"
+onclick="scrollToSection('customers')">
 
-    <div class="stat">
+<div class="action-icon">
+👥
+</div>
 
-      <span class="stat-label">
-        🆕 مشتركون جدد اليوم
-      </span>
+<h3>
+ملفات المشتركين
+</h3>
 
-      <div
-        class="stat-number"
-        id="newCustomersCount"
-      >
-        0
-      </div>
+<p>
+عرض جميع المشتركين
+</p>
 
-    </div>
+</button>
 
 
-    <div class="stat">
+<button class="action"
+onclick="scrollToSection('packages')">
 
-      <span class="stat-label">
-        📦 الباقات المتاحة
-      </span>
+<div class="action-icon">
+📦
+</div>
 
-      <div class="stat-number">
-        3
-      </div>
+<h3>
+الباقات والأسعار
+</h3>
 
-    </div>
+<p>
+تفاصيل وأسعار الاشتراكات
+</p>
 
+</button>
 
-    <div class="stat">
 
-      <span class="stat-label">
-        ⏳ بانتظار المدير
-      </span>
+<button class="action"
+onclick="scrollToSection('newCustomer')">
 
-      <div
-        class="stat-number"
-        id="pendingCount"
-      >
-        0
-      </div>
+<div class="action-icon">
+💳
+</div>
 
-    </div>
+<h3>
+تسجيل اشتراك
+</h3>
 
-  </section>
+<p>
+بدء إجراءات الاشتراك
+</p>
 
+</button>
 
-  <!-- =============================
-       QUICK ACTIONS
-  ============================= -->
+</div>
 
-  <section class="section">
+</section>
 
-    <div class="section-title">
 
-      <h2>
-        ⚡ الخدمات السريعة
-      </h2>
+<section class="section" id="packages">
 
-      <p>
-        العمليات المسموحة لموظف الاستقبال
-      </p>
+<div class="section-title">
 
-    </div>
+<h2>
+📦 الباقات والأسعار
+</h2>
 
+<p>
+المعلومات التي يحتاجها موظف الاستقبال
+</p>
 
-    <div class="actions-grid">
+</div>
 
+<div class="packages">
 
-      <button
-        class="action"
-        onclick="scrollToSection('newCustomer')"
-      >
 
-        <div class="action-icon">
-          ➕
-        </div>
+<div class="package">
 
-        <h3>
-          تسجيل مشترك جديد
-        </h3>
+<h3>
+🟢 باقة سند الاعتيادية
+</h3>
 
-        <p>
-          إنشاء ملف جديد للمسن
-        </p>
+<div class="package-price">
+252,000 د.ع / شهرياً
+</div>
 
-      </button>
+<ul>
 
+<li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
+<li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
+<li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
+<li>🧪 الفحوصات والتحاليل</li>
+<li>🛁 الرعاية الشخصية اليومية</li>
+<li>📋 تقارير المتابعة</li>
 
-      <button
-        class="action"
-        onclick="scrollToSection('customers')"
-      >
+</ul>
 
-        <div class="action-icon">
-          👥
-        </div>
+</div>
 
-        <h3>
-          ملفات المشتركين
-        </h3>
 
-        <p>
-          عرض المشتركين المسجلين
-        </p>
+<div class="package">
 
-      </button>
+<h3>
+🔵 الباقة المتوسطة
+</h3>
 
+<div class="package-price">
+337,000 د.ع / شهرياً
+</div>
 
-      <button
-        class="action"
-        onclick="scrollToSection('packages')"
-      >
+<ul>
 
-        <div class="action-icon">
-          📦
-        </div>
+<li>👩‍⚕️ رعاية تمريضية موسعة</li>
+<li>🩺 متابعة الطبيب المقيم</li>
+<li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
+<li>🧪 الفحوصات والتحاليل</li>
+<li>🧠 دعم نفسي</li>
+<li>🎭 خدمات ترفيهية</li>
+<li>📋 تقارير شاملة</li>
 
-        <h3>
-          الباقات والأسعار
-        </h3>
+</ul>
 
-        <p>
-          تفاصيل وأسعار الاشتراكات
-        </p>
+</div>
 
-      </button>
 
+<div class="package">
 
-      <button
-        class="action"
-        onclick="showPayments()"
-      >
+<h3>
+🟣 باقة سند الفاخرة
+</h3>
 
-        <div class="action-icon">
-          💳
-        </div>
+<div class="package-price">
+حسب الخدمات المختارة
+</div>
 
-        <h3>
-          المدفوعات
-        </h3>
+<ul>
 
-        <p>
-          إدارة حالة الدفع
-        </p>
+<li>👩‍⚕️ رعاية تمريضية مكثفة</li>
+<li>👨‍⚕️ متابعة طبية متقدمة</li>
+<li>🧠 دعم نفسي</li>
+<li>🥗 متابعة غذائية</li>
+<li>🏃 علاج طبيعي</li>
+<li>🎭 ترفيه ومرافقة</li>
+<li>💇 خدمات إضافية</li>
 
-      </button>
+</ul>
 
+</div>
 
-    </div>
+</div>
 
-  </section>
+</section>
 
 
-  <!-- =============================
-       PACKAGES
-  ============================= -->
+<section class="section" id="newCustomer">
 
-  <section
-    class="section"
-    id="packages"
-  >
+<div class="section-title">
 
-    <div class="section-title">
+<h2>
+➕ تسجيل مشترك جديد
+</h2>
 
-      <h2>
-        📦 الباقات والأسعار
-      </h2>
+<p>
+بعد الحفظ يظهر المشترك مباشرة عند المدير بانتظار ترتيب الموعد
+</p>
 
-      <p>
-        معلومات الباقات التي يحتاجها موظف الاستقبال
-      </p>
+</div>
 
-    </div>
+<form id="customerForm">
 
+<div class="form-grid">
 
-    <div class="packages">
 
+<div class="form-row">
 
-      <div class="package">
+<label>
+👴 اسم المسن
+</label>
 
-        <h3>
-          🟢 باقة سند الاعتيادية
-        </h3>
+<input
+id="customerName"
+type="text"
+placeholder="الاسم الكامل"
+required
+>
 
-        <div class="package-price">
-          252,000 د.ع / شهرياً
-        </div>
+</div>
 
-        <ul>
 
-          <li>
-            👩‍⚕️ زيارة الممرض الصحي يومياً
-          </li>
+<div class="form-row">
 
-          <li>
-            🩺 زيارة الطبيب المقيم أسبوعياً
-          </li>
+<label>
+📱 رقم هاتف المسن
+</label>
 
-          <li>
-            👨‍⚕️ زيارة الطبيب الأخصائي
-          </li>
+<input
+id="customerPhone"
+type="tel"
+placeholder="رقم الهاتف"
+>
 
-          <li>
-            🧪 الفحوصات والتحاليل
-          </li>
+</div>
 
-          <li>
-            🛁 الرعاية الشخصية اليومية
-          </li>
 
-          <li>
-            📋 تقارير المتابعة
-          </li>
+<div class="form-row">
 
-        </ul>
+<label>
+👨‍👩‍👦 اسم أحد أفراد العائلة
+</label>
 
-      </div>
+<input
+id="familyName"
+type="text"
+placeholder="اسم المسؤول عن المتابعة"
+required
+>
 
+</div>
 
-      <div class="package">
 
-        <h3>
-          🔵 الباقة المتوسطة
-        </h3>
+<div class="form-row">
 
-        <div class="package-price">
-          337,000 د.ع / شهرياً
-        </div>
+<label>
+📞 هاتف العائلة
+</label>
 
-        <ul>
+<input
+id="familyPhone"
+type="tel"
+placeholder="رقم هاتف العائلة"
+required
+>
 
-          <li>
-            👩‍⚕️ رعاية تمريضية موسعة
-          </li>
+</div>
 
-          <li>
-            🩺 متابعة الطبيب المقيم
-          </li>
 
-          <li>
-            👨‍⚕️ متابعة الطبيب الأخصائي
-          </li>
+<div class="form-row">
 
-          <li>
-            🧪 الفحوصات والتحاليل
-          </li>
+<label>
+🎂 العمر
+</label>
 
-          <li>
-            🧠 دعم نفسي حسب الخطة
-          </li>
+<input
+id="customerAge"
+type="number"
+min="1"
+max="120"
+placeholder="العمر"
+>
 
-          <li>
-            🎭 خدمات ترفيهية
-          </li>
+</div>
 
-          <li>
-            📋 تقارير شاملة
-          </li>
 
-        </ul>
+<div class="form-row">
 
-      </div>
+<label>
+📦 الباقة
+</label>
 
+<select id="customerPackage" required>
 
-      <div class="package">
+<option value="">
+اختر الباقة
+</option>
 
-        <h3>
-          🟣 باقة سند الفاخرة
-        </h3>
+<option value="basic">
+باقة سند الاعتيادية — 252,000 د.ع
+</option>
 
-        <div class="package-price">
-          حسب الخدمات المختارة
-        </div>
+<option value="medium">
+الباقة المتوسطة — 337,000 د.ع
+</option>
 
-        <ul>
+<option value="luxury">
+باقة سند الفاخرة — حسب الخدمات
+</option>
 
-          <li>
-            👩‍⚕️ رعاية تمريضية مكثفة
-          </li>
+</select>
 
-          <li>
-            👨‍⚕️ متابعة طبية متقدمة
-          </li>
+</div>
 
-          <li>
-            🧠 دعم نفسي
-          </li>
 
-          <li>
-            🥗 متابعة غذائية
-          </li>
+<div class="form-row full">
 
-          <li>
-            🏃 علاج طبيعي
-          </li>
+<label>
+🏠 عنوان السكن
+</label>
 
-          <li>
-            🎭 ترفيه ومرافقة
-          </li>
+<input
+id="customerAddress"
+type="text"
+placeholder="عنوان منزل المسن"
+required
+>
 
-          <li>
-            💇 خدمات إضافية
-          </li>
+</div>
 
-        </ul>
 
-      </div>
+<div class="form-row full">
 
-    </div>
+<label>
+📝 ملاحظات أولية
+</label>
 
-  </section>
+<textarea
+id="customerNotes"
+placeholder="أي معلومات مهمة..."
+></textarea>
 
+</div>
 
-  <!-- =============================
-       NEW CUSTOMER
-  ============================= -->
+</div>
 
-  <section
-    class="section"
-    id="newCustomer"
-  >
 
-    <div class="section-title">
+<button type="submit" class="save-button">
+💾 إنشاء ملف المشترك
+</button>
 
-      <h2>
-        ➕ تسجيل مشترك جديد
-      </h2>
 
-      <p>
-        إنشاء الملف الأولي للمسن
-      </p>
+<div id="successMessage" class="message success"></div>
 
-    </div>
+<div id="errorMessage" class="message error"></div>
 
+</form>
 
-    <form id="customerForm">
+</section>
 
-      <div class="form-grid">
 
+<section class="section" id="customers">
 
-        <div class="form-row">
+<div class="section-title">
 
-          <label>
-            👴 اسم المسن
-          </label>
+<h2>
+👥 ملفات المشتركين
+</h2>
 
-          <input
-            id="customerName"
-            type="text"
-            placeholder="الاسم الكامل"
-            required
-          >
+<p>
+المشتركين المسجلين في نظام سند
+</p>
 
-        </div>
+</div>
 
+<div
+class="customer-list"
+id="customerList">
+</div>
 
-        <div class="form-row">
+</section>
 
-          <label>
-            📱 رقم هاتف المسن
-          </label>
 
-          <input
-            id="customerPhone"
-            type="tel"
-            placeholder="رقم الهاتف"
-          >
+<div class="logout-area">
 
-        </div>
+<a
+href="#"
+class="logout"
+onclick="logoutStaff(event)"
+>
+🚪 تسجيل الخروج
+</a>
 
-
-        <div class="form-row">
-
-          <label>
-            👨‍👩‍👦 اسم أحد أفراد العائلة
-          </label>
-
-          <input
-            id="familyName"
-            type="text"
-            placeholder="اسم المسؤول عن المتابعة"
-            required
-          >
-
-        </div>
-
-
-        <div class="form-row">
-
-          <label>
-            📞 هاتف العائلة
-          </label>
-
-          <input
-            id="familyPhone"
-            type="tel"
-            placeholder="رقم هاتف العائلة"
-            required
-          >
-
-        </div>
-
-
-        <div class="form-row">
-
-          <label>
-            🎂 العمر
-          </label>
-
-          <input
-            id="customerAge"
-            type="number"
-            min="1"
-            max="120"
-            placeholder="العمر"
-          >
-
-        </div>
-
-
-        <div class="form-row">
-
-          <label>
-            📦 الباقة
-          </label>
-
-          <select
-            id="customerPackage"
-            required
-          >
-
-            <option value="">
-              اختر الباقة
-            </option>
-
-            <option value="basic">
-              باقة سند الاعتيادية — 252,000 د.ع
-            </option>
-
-            <option value="medium">
-              الباقة المتوسطة — 337,000 د.ع
-            </option>
-
-            <option value="luxury">
-              باقة سند الفاخرة — حسب الخدمات
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="form-row full">
-
-          <label>
-            🏠 عنوان السكن
-          </label>
-
-          <input
-            id="customerAddress"
-            type="text"
-            placeholder="عنوان منزل المسن"
-            required
-          >
-
-        </div>
-
-
-        <div class="form-row full">
-
-          <label>
-            📝 ملاحظات أولية
-          </label>
-
-          <textarea
-            id="customerNotes"
-            placeholder="المعلومات الأولية التي يذكرها العميل..."
-          ></textarea>
-
-        </div>
-
-
-      </div>
-
-
-      <button
-        type="submit"
-        class="save-button"
-      >
-        💾 إنشاء ملف المشترك
-      </button>
-
-
-      <div
-        id="successMessage"
-        class="message success"
-      ></div>
-
-
-      <div
-        id="errorMessage"
-        class="message error"
-      ></div>
-
-    </form>
-
-  </section>
-
-
-  <!-- =============================
-       CUSTOMERS
-  ============================= -->
-
-  <section
-    class="section"
-    id="customers"
-  >
-
-    <div class="section-title">
-
-      <h2>
-        👥 ملفات المشتركين
-      </h2>
-
-      <p>
-        المشتركين الذين تم تسجيلهم من خلال الاستقبال
-      </p>
-
-    </div>
-
-
-    <div
-      class="customer-list"
-      id="customerList"
-    ></div>
-
-  </section>
-
-
-  <div class="logout-area">
-
-    <a
-      href="#"
-      class="logout"
-      onclick="logoutStaff(event)"
-    >
-      🚪 تسجيل الخروج
-    </a>
-
-  </div>
-
+</div>
 
 </main>
 
 
 <footer>
 
-  <div class="footer-logo">
-    سند<span>.</span>
-  </div>
+<div class="footer-logo">
+سند<span>.</span>
+</div>
 
-  <p>
-    الرعاية المنزلية لكبار السن
-  </p>
+<p>
+الرعاية المنزلية لكبار السن
+</p>
 
-  <small>
-    © 2026 سند — جميع الحقوق محفوظة
-  </small>
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
 
 </footer>
 
 
 <script>
 
-/* =====================================================
-   1. قراءة جلسة الموظف
-===================================================== */
+/* =========================================
+   التحقق من الدخول
+========================================= */
 
 const loggedStaffRaw =
-  localStorage.getItem(
-    "sanadLoggedInStaff"
-  );
+localStorage.getItem("sanadLoggedInStaff");
 
+if(!loggedStaffRaw){
 
-/* =====================================================
-   2. منع الدخول بدون تسجيل
-===================================================== */
+alert("يرجى تسجيل الدخول أولاً.");
 
-if (!loggedStaffRaw) {
-
-  alert(
-    "يرجى تسجيل الدخول أولاً."
-  );
-
-  window.location.href =
-    "staff-login.html";
+window.location.href="staff-login.html";
 
 }
 
 
-/* =====================================================
-   3. تحويل بيانات الجلسة
-===================================================== */
+let loggedStaff=null;
 
-let loggedStaff = null;
+try{
 
-try {
+loggedStaff=JSON.parse(loggedStaffRaw);
 
-  loggedStaff =
-    JSON.parse(loggedStaffRaw);
+}catch(error){
 
-} catch (error) {
+localStorage.removeItem("sanadLoggedInStaff");
 
-  localStorage.removeItem(
-    "sanadLoggedInStaff"
-  );
-
-  window.location.href =
-    "staff-login.html";
+window.location.href="staff-login.html";
 
 }
 
 
-/* =====================================================
-   4. حماية لوحة الاستقبال
-===================================================== */
+/* =========================================
+   التأكد من الاستقبال
+========================================= */
 
-if (
-  !loggedStaff ||
-  loggedStaff.role !== "reception"
-) {
+if(
+loggedStaff &&
+loggedStaff.role!=="reception" &&
+loggedStaff.permissions!=="all"
+){
 
-  alert(
-    "⛔ هذه اللوحة مخصصة لموظف الاستقبال فقط."
-  );
+alert("ليس لديك صلاحية الدخول إلى لوحة الاستقبال.");
 
-  window.location.href =
-    "staff-login.html";
+window.location.href="staff-dashboard.html";
 
 }
 
 
-/* =====================================================
-   5. التأكد من صلاحيات الاستقبال
-===================================================== */
+/* =========================================
+   اسم الموظف
+========================================= */
 
-const receptionPermissions = [
-  "packages",
-  "new_customer",
-  "customers",
-  "payments"
-];
+if(loggedStaff){
 
-
-if (
-  loggedStaff &&
-  Array.isArray(
-    loggedStaff.permissions
-  )
-) {
-
-  const hasReceptionAccess =
-    receptionPermissions.every(
-      function(permission) {
-
-        return loggedStaff.permissions
-          .includes(permission);
-
-      }
-    );
-
-
-  if (!hasReceptionAccess) {
-
-    alert(
-      "⛔ لا تملك الصلاحيات المطلوبة."
-    );
-
-    window.location.href =
-      "staff-login.html";
-
-  }
+document.getElementById("welcomeName").textContent=
+"أهلاً بك، "+loggedStaff.name+" 👋";
 
 }
 
 
-/* =====================================================
-   6. عرض معلومات الموظف
-===================================================== */
+/* =========================================
+   قراءة المشتركين
+========================================= */
 
-if (loggedStaff) {
+let customers=[];
 
-  document.getElementById(
-    "welcomeName"
-  ).textContent =
-    "أهلاً بك، " +
-    loggedStaff.name +
-    " 👋";
+try{
 
+customers=
+JSON.parse(
+localStorage.getItem("sanadCustomers") || "[]"
+);
 
-  document.getElementById(
-    "welcomeRole"
-  ).textContent =
-    loggedStaff.title +
-    " — إدارة استقبال المشتركين وملفاتهم";
+if(!Array.isArray(customers)){
+customers=[];
+}
 
+}catch(error){
 
-  document.getElementById(
-    "staffName"
-  ).textContent =
-    loggedStaff.name;
-
-
-  document.getElementById(
-    "staffEmployeeId"
-  ).textContent =
-    loggedStaff.employeeId;
-
-
-  document.getElementById(
-    "staffPermission"
-  ).textContent =
-    "استقبال — صلاحيات محددة";
+customers=[];
 
 }
 
 
-/* =====================================================
-   7. قاعدة بيانات المشتركين
-===================================================== */
+/* =========================================
+   رقم المشترك
+========================================= */
 
-let customers = [];
+function generateCustomerId(){
 
-try {
+let maxNumber=0;
 
-  customers =
-    JSON.parse(
-      localStorage.getItem(
-        "sanadCustomers"
-      ) || "[]"
-    );
+customers.forEach(function(customer){
 
-  if (!Array.isArray(customers)) {
+if(customer.id){
 
-    customers = [];
+const match=
+customer.id.match(/SANAD-(\d+)/);
 
-  }
+if(match){
 
-} catch (error) {
+const number=
+parseInt(match[1]);
 
-  customers = [];
+if(number>maxNumber){
+maxNumber=number;
+}
+
+}
+
+}
+
+});
+
+return "SANAD-"+String(maxNumber+1).padStart(4,"0");
 
 }
 
 
-/* =====================================================
-   8. إنشاء رقم مشترك
-===================================================== */
-
-function generateCustomerId() {
-
-  let maxNumber = 0;
-
-
-  customers.forEach(
-    function(customer) {
-
-      if (!customer.id) {
-        return;
-      }
-
-
-      const match =
-        customer.id.match(
-          /SANAD-(\d+)/
-        );
-
-
-      if (match) {
-
-        const number =
-          parseInt(
-            match[1],
-            10
-          );
-
-
-        if (
-          number > maxNumber
-        ) {
-
-          maxNumber =
-            number;
-
-        }
-
-      }
-
-    }
-  );
-
-
-  return (
-    "SANAD-" +
-    String(
-      maxNumber + 1
-    ).padStart(4, "0")
-  );
-
-}
-
-
-/* =====================================================
-   9. تسجيل مشترك
-===================================================== */
+/* =========================================
+   تسجيل مشترك
+========================================= */
 
 document
-  .getElementById(
-    "customerForm"
-  )
-  .addEventListener(
-    "submit",
-    function(event) {
+.getElementById("customerForm")
+.addEventListener("submit",function(event){
 
-      event.preventDefault();
+event.preventDefault();
 
 
-      const name =
-        document
-          .getElementById(
-            "customerName"
-          )
-          .value
-          .trim();
+const name=
+document.getElementById("customerName")
+.value.trim();
 
 
-      const phone =
-        document
-          .getElementById(
-            "customerPhone"
-          )
-          .value
-          .trim();
+const phone=
+document.getElementById("customerPhone")
+.value.trim();
 
 
-      const familyName =
-        document
-          .getElementById(
-            "familyName"
-          )
-          .value
-          .trim();
+const familyName=
+document.getElementById("familyName")
+.value.trim();
 
 
-      const familyPhone =
-        document
-          .getElementById(
-            "familyPhone"
-          )
-          .value
-          .trim();
+const familyPhone=
+document.getElementById("familyPhone")
+.value.trim();
 
 
-      const age =
-        document
-          .getElementById(
-            "customerAge"
-          )
-          .value
-          .trim();
+const age=
+document.getElementById("customerAge")
+.value.trim();
 
 
-      const packageType =
-        document
-          .getElementById(
-            "customerPackage"
-          )
-          .value;
+const packageType=
+document.getElementById("customerPackage")
+.value;
 
 
-      const address =
-        document
-          .getElementById(
-            "customerAddress"
-          )
-          .value
-          .trim();
+const address=
+document.getElementById("customerAddress")
+.value.trim();
 
 
-      const notes =
-        document
-          .getElementById(
-            "customerNotes"
-          )
-          .value
-          .trim();
+const notes=
+document.getElementById("customerNotes")
+.value.trim();
 
 
-      if (
-        !name ||
-        !familyName ||
-        !familyPhone ||
-        !packageType ||
-        !address
-      ) {
+if(
+!name ||
+!familyName ||
+!familyPhone ||
+!packageType ||
+!address
+){
 
-        showError(
-          "يرجى إكمال البيانات الأساسية."
-        );
+showError(
+"يرجى إكمال البيانات الأساسية."
+);
 
-        return;
-
-      }
-
-
-      const packageNames = {
-
-        basic:
-          "باقة سند الاعتيادية",
-
-        medium:
-          "الباقة المتوسطة",
-
-        luxury:
-          "باقة سند الفاخرة"
-
-      };
-
-
-      const packagePrices = {
-
-        basic:
-          252000,
-
-        medium:
-          337000,
-
-        luxury:
-          0
-
-      };
-
-
-      const newCustomer = {
-
-        id:
-          generateCustomerId(),
-
-        name:
-          name,
-
-        phone:
-          phone,
-
-        familyName:
-          familyName,
-
-        familyPhone:
-          familyPhone,
-
-        age:
-          age,
-
-        package:
-          packageType,
-
-        packageName:
-          packageNames[
-            packageType
-          ],
-
-        packagePrice:
-          packagePrices[
-            packageType
-          ],
-
-        address:
-          address,
-
-        notes:
-          notes,
-
-        status:
-          "pending_manager",
-
-        createdBy:
-          loggedStaff.name,
-
-        createdById:
-          loggedStaff.employeeId,
-
-        createdAt:
-          new Date().toISOString()
-
-      };
-
-
-      customers.push(
-        newCustomer
-      );
-
-
-      localStorage.setItem(
-        "sanadCustomers",
-        JSON.stringify(
-          customers
-        )
-      );
-
-
-      showSuccess(
-        "✅ تم إنشاء ملف " +
-        newCustomer.id +
-        " بنجاح، وأصبح بانتظار مراجعة المدير."
-      );
-
-
-      document
-        .getElementById(
-          "customerForm"
-        )
-        .reset();
-
-
-      renderCustomers();
-
-      updateStats();
-
-    }
-  );
-
-
-/* =====================================================
-   10. عرض المشتركين
-===================================================== */
-
-function renderCustomers() {
-
-  const list =
-    document.getElementById(
-      "customerList"
-    );
-
-
-  list.innerHTML = "";
-
-
-  if (
-    customers.length === 0
-  ) {
-
-    list.innerHTML = `
-      <div class="empty">
-        لا توجد ملفات مشتركين مسجلة حالياً.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  customers
-    .slice()
-    .reverse()
-    .forEach(
-      function(customer) {
-
-        const element =
-          document.createElement(
-            "div"
-          );
-
-
-        element.className =
-          "customer";
-
-
-        element.innerHTML = `
-
-          <div>
-
-            <div class="customer-name">
-              👴 ${escapeHtml(customer.name)}
-            </div>
-
-            <div class="customer-info">
-
-              📦 ${escapeHtml(
-                customer.packageName || "-"
-              )}
-
-              <br>
-
-              👨‍👩‍👦 العائلة:
-              ${escapeHtml(
-                customer.familyName || "-"
-              )}
-
-              <br>
-
-              📌 الحالة:
-              ${getStatusText(
-                customer.status
-              )}
-
-            </div>
-
-          </div>
-
-          <div class="customer-id">
-
-            ${escapeHtml(
-              customer.id
-            )}
-
-          </div>
-
-        `;
-
-
-        list.appendChild(
-          element
-        );
-
-      }
-    );
+return;
 
 }
 
 
-/* =====================================================
-   11. حالة المشترك
-===================================================== */
+const packageNames={
 
-function getStatusText(status) {
+basic:"باقة سند الاعتيادية",
 
-  const statuses = {
+medium:"الباقة المتوسطة",
 
-    pending_manager:
-      "⏳ بانتظار مراجعة المدير",
+luxury:"باقة سند الفاخرة"
 
-    active:
-      "🟢 اشتراك فعال",
-
-    suspended:
-      "🔴 موقوف",
-
-    completed:
-      "⚫ مكتمل"
-
-  };
+};
 
 
-  return (
-    statuses[status] ||
-    status ||
-    "-"
-  );
+const packagePrices={
 
-}
+basic:252000,
 
+medium:337000,
 
-/* =====================================================
-   12. الإحصائيات
-===================================================== */
+luxury:0
 
-function updateStats() {
-
-  document.getElementById(
-    "customersCount"
-  ).textContent =
-    customers.length;
+};
 
 
-  const today =
-    new Date();
+/*
+   الحالة الجديدة المهمة:
+
+   pending_schedule
+   = المشترك ينتظر المدير حتى يرتب موعده
+
+   لا توجد موافقة مدير.
+*/
+
+const newCustomer={
+
+id:generateCustomerId(),
+
+name:name,
+
+phone:phone,
+
+familyName:familyName,
+
+familyPhone:familyPhone,
+
+age:age,
+
+package:packageType,
+
+packageName:packageNames[packageType],
+
+packagePrice:packagePrices[packageType],
+
+address:address,
+
+notes:notes,
+
+status:"pending_schedule",
+
+appointment:null,
+
+createdBy:
+loggedStaff ? loggedStaff.name : "الاستقبال",
+
+createdAt:new Date().toISOString()
+
+};
 
 
-  document.getElementById(
-    "newCustomersCount"
-  ).textContent =
-    customers.filter(
-      function(customer) {
-
-        if (!customer.createdAt) {
-          return false;
-        }
-
-        const created =
-          new Date(
-            customer.createdAt
-          );
-
-        return (
-          created.toDateString() ===
-          today.toDateString()
-        );
-
-      }
-    ).length;
+customers.push(newCustomer);
 
 
-  document.getElementById(
-    "pendingCount"
-  ).textContent =
-    customers.filter(
-      function(customer) {
+/*
+   حفظ نفس قاعدة البيانات
+*/
 
-        return (
-          customer.status ===
-          "pending_manager"
-        );
-
-      }
-    ).length;
-
-}
+localStorage.setItem(
+"sanadCustomers",
+JSON.stringify(customers)
+);
 
 
-/* =====================================================
-   13. الرسائل
-===================================================== */
-
-function showSuccess(message) {
-
-  const success =
-    document.getElementById(
-      "successMessage"
-    );
-
-  const error =
-    document.getElementById(
-      "errorMessage"
-    );
+showSuccess(
+"✅ تم إنشاء ملف "+newCustomer.id+
+" بنجاح، وتم إرساله مباشرة إلى المدير لترتيب الموعد."
+);
 
 
-  error.style.display =
-    "none";
+document
+.getElementById("customerForm")
+.reset();
 
 
-  success.textContent =
-    message;
+renderCustomers();
+
+updateStats();
+
+});
 
 
-  success.style.display =
-    "block";
+/* =========================================
+   عرض المشتركين
+========================================= */
 
-}
+function renderCustomers(){
 
+const list=
+document.getElementById("customerList");
 
-function showError(message) {
-
-  const error =
-    document.getElementById(
-      "errorMessage"
-    );
-
-  const success =
-    document.getElementById(
-      "successMessage"
-    );
+list.innerHTML="";
 
 
-  success.style.display =
-    "none";
+if(customers.length===0){
 
+list.innerHTML=`
+<div class="empty">
+لا توجد ملفات مشتركين حالياً.
+</div>
+`;
 
-  error.textContent =
-    message;
-
-
-  error.style.display =
-    "block";
+return;
 
 }
 
 
-/* =====================================================
-   14. الانتقال
-===================================================== */
+customers
+.slice()
+.reverse()
+.forEach(function(customer){
 
-function scrollToSection(id) {
+const element=
+document.createElement("div");
 
-  const section =
-    document.getElementById(id);
-
-
-  if (section) {
-
-    section.scrollIntoView({
-      behavior: "smooth"
-    });
-
-  }
-
-}
+element.className="customer";
 
 
-/* =====================================================
-   15. المدفوعات
-===================================================== */
+element.innerHTML=`
 
-function showPayments() {
+<div>
 
-  alert(
-    "💳 قسم المدفوعات سيتم ربطه بالمرحلة المالية من نظام سند."
-  );
+<div class="customer-name">
+👴 ${escapeHtml(customer.name)}
+</div>
 
-}
+<div class="customer-info">
+
+📦 ${escapeHtml(customer.packageName)}
+
+<br>
+
+👨‍👩‍👦 العائلة:
+${escapeHtml(customer.familyName)}
+
+<br>
+
+📌 الحالة:
+${getStatusText(customer.status)}
+
+</div>
+
+</div>
+
+<div class="customer-id">
+
+${escapeHtml(customer.id)}
+
+</div>
+
+`;
 
 
-/* =====================================================
-   16. تسجيل الخروج
-===================================================== */
+list.appendChild(element);
 
-function logoutStaff(event) {
-
-  if (event) {
-
-    event.preventDefault();
-
-  }
-
-
-  localStorage.removeItem(
-    "sanadLoggedInStaff"
-  );
-
-  localStorage.removeItem(
-    "sanadCurrentVisit"
-  );
-
-
-  window.location.href =
-    "staff-login.html";
+});
 
 }
 
 
-/* =====================================================
-   17. حماية بسيطة من HTML
-===================================================== */
+/* =========================================
+   حالات المشترك
+========================================= */
 
-function escapeHtml(value) {
+function getStatusText(status){
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+const statuses={
+
+pending_schedule:
+"بانتظار ترتيب الموعد",
+
+scheduled:
+"تم ترتيب الموعد",
+
+active:
+"اشتراك فعال",
+
+suspended:
+"موقوف",
+
+completed:
+"مكتمل"
+
+};
+
+
+return statuses[status] || "غير محدد";
 
 }
 
 
-/* =====================================================
-   18. تشغيل الصفحة
-===================================================== */
+/* =========================================
+   الإحصائيات
+========================================= */
+
+function updateStats(){
+
+document.getElementById(
+"customersCount"
+).textContent=customers.length;
+
+
+document.getElementById(
+"newCustomersCount"
+).textContent=
+
+customers.filter(function(customer){
+
+const created=
+new Date(customer.createdAt);
+
+const today=
+new Date();
+
+return(
+created.toDateString()===
+today.toDateString()
+);
+
+}).length;
+
+
+document.getElementById(
+"pendingCount"
+).textContent=
+
+customers.filter(function(customer){
+
+return customer.status==="pending_schedule";
+
+}).length;
+
+}
+
+
+/* =========================================
+   رسائل
+========================================= */
+
+function showSuccess(message){
+
+const success=
+document.getElementById("successMessage");
+
+const error=
+document.getElementById("errorMessage");
+
+error.style.display="none";
+
+success.textContent=message;
+
+success.style.display="block";
+
+}
+
+
+function showError(message){
+
+const error=
+document.getElementById("errorMessage");
+
+const success=
+document.getElementById("successMessage");
+
+success.style.display="none";
+
+error.textContent=message;
+
+error.style.display="block";
+
+}
+
+
+/* =========================================
+   الانتقال
+========================================= */
+
+function scrollToSection(id){
+
+const section=
+document.getElementById(id);
+
+if(section){
+
+section.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* =========================================
+   تسجيل الخروج
+========================================= */
+
+function logoutStaff(event){
+
+if(event){
+event.preventDefault();
+}
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+localStorage.removeItem(
+"sanadCurrentVisit"
+);
+
+window.location.href=
+"staff-login.html";
+
+}
+
+
+/* =========================================
+   حماية عرض HTML
+========================================= */
+
+function escapeHtml(value){
+
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   تشغيل
+========================================= */
 
 renderCustomers();
 
@@ -2268,3 +1473,4 @@ updateStats();
 </body>
 
 </html>
+```
