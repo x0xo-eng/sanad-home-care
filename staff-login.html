@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -65,7 +64,6 @@
       font-size: 17px;
       font-weight: 800;
       margin-bottom: 15px;
-      text-align: right;
     }
 
     .roles {
@@ -264,9 +262,7 @@
 
 </head>
 
-
 <body>
-
 
 <header class="header">
 
@@ -290,7 +286,6 @@
 
   <div class="login-container">
 
-
     <div class="login-header">
 
       <span class="eyebrow">
@@ -302,7 +297,7 @@
       </h1>
 
       <p>
-        اختر صفتك الوظيفية أولاً ثم أدخل بيانات حسابك
+        اختر صفتك الوظيفية ثم أدخل بيانات حسابك
       </p>
 
     </div>
@@ -315,133 +310,93 @@
 
     <div class="roles">
 
-
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('owner', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('owner', this)">
         <div class="role-icon">👑</div>
         <span class="role-name">مالك النظام</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('manager', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('manager', this)">
         <div class="role-icon">👨‍💼</div>
         <span class="role-name">مدير الشركة</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('reception', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('reception', this)">
         <div class="role-icon">🧑‍💼</div>
         <span class="role-name">موظف الاستقبال</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('specialist', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('specialist', this)">
         <div class="role-icon">👨‍⚕️</div>
         <span class="role-name">الطبيب الأخصائي</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('resident', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('resident', this)">
         <div class="role-icon">🩺</div>
         <span class="role-name">الطبيب المقيم</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('nurse', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('nurse', this)">
         <div class="role-icon">👩‍⚕️</div>
         <span class="role-name">الممرض الصحي</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('nutrition', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('nutrition', this)">
         <div class="role-icon">🥗</div>
         <span class="role-name">أخصائي التغذية</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('physio', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('physio', this)">
         <div class="role-icon">🏃</div>
         <span class="role-name">أخصائي العلاج الطبيعي</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('psychologist', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('psychologist', this)">
         <div class="role-icon">🧠</div>
         <span class="role-name">الأخصائي النفسي</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('entertainment', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('entertainment', this)">
         <div class="role-icon">🎭</div>
         <span class="role-name">مرافق الترفيه</span>
       </button>
 
 
-      <button
-        type="button"
-        class="role"
-        onclick="selectRole('hairdresser', this)"
-      >
+      <button type="button" class="role"
+        onclick="selectRole('hairdresser', this)">
         <div class="role-icon">💇</div>
         <span class="role-name">الكوافير</span>
       </button>
-
 
     </div>
 
 
     <div class="form-box">
 
-
-      <div
-        class="selected-role"
-        id="selectedRole"
-      >
+      <div class="selected-role" id="selectedRole">
         ⚠️ يرجى اختيار الصفة الوظيفية أولاً
       </div>
 
 
       <form id="staffLoginForm">
-
 
         <div class="form-row">
 
@@ -487,7 +442,6 @@
             نسيت كلمة المرور؟
           </a>
 
-
           <button
             type="submit"
             class="btn-login"
@@ -498,30 +452,18 @@
         </div>
 
 
-        <div
-          id="errorMessage"
-          class="error"
-        ></div>
+        <div id="errorMessage" class="error"></div>
 
-
-        <div
-          id="successMessage"
-          class="success"
-        ></div>
-
+        <div id="successMessage" class="success"></div>
 
       </form>
 
     </div>
 
 
-    <a
-      href="login.html"
-      class="back-home"
-    >
+    <a href="login.html" class="back-home">
       ← العودة إلى اختيار نوع الحساب
     </a>
-
 
   </div>
 
@@ -548,7 +490,7 @@
 <script>
 
 /* =====================================================
-   حسابات التجربة
+   حسابات الكادر التجريبية
 ===================================================== */
 
 const staffAccounts = [
@@ -561,9 +503,8 @@ const staffAccounts = [
     title: "مالك النظام",
     employeeId: "OWNER-001",
     dashboard: "staff-dashboard.html",
-    permissions: "all"
+    permissions: ["all"]
   },
-
 
   {
     phone: "07700000002",
@@ -572,10 +513,14 @@ const staffAccounts = [
     name: "مدير الشركة",
     title: "مدير الشركة",
     employeeId: "ST-002",
-    dashboard: "staff-dashboard.html",
-    permissions: "manager"
+    dashboard: "manager-dashboard.html",
+    permissions: [
+      "customers",
+      "packages",
+      "approvals",
+      "reports"
+    ]
   },
-
 
   {
     phone: "07700000003",
@@ -585,9 +530,13 @@ const staffAccounts = [
     title: "موظف الاستقبال",
     employeeId: "ST-003",
     dashboard: "reception-dashboard.html",
-    permissions: "reception"
+    permissions: [
+      "packages",
+      "new_customer",
+      "customers",
+      "payments"
+    ]
   },
-
 
   {
     phone: "07700000004",
@@ -597,9 +546,8 @@ const staffAccounts = [
     title: "طبيب أخصائي",
     employeeId: "ST-004",
     dashboard: "staff-dashboard.html",
-    permissions: "specialist"
+    permissions: ["medical_specialist"]
   },
-
 
   {
     phone: "07700000005",
@@ -609,9 +557,8 @@ const staffAccounts = [
     title: "طبيب مقيم",
     employeeId: "ST-005",
     dashboard: "staff-dashboard.html",
-    permissions: "resident"
+    permissions: ["medical_resident"]
   },
-
 
   {
     phone: "07700000006",
@@ -621,9 +568,8 @@ const staffAccounts = [
     title: "الممرض الصحي",
     employeeId: "ST-006",
     dashboard: "staff-dashboard.html",
-    permissions: "nurse"
+    permissions: ["nursing"]
   },
-
 
   {
     phone: "07700000007",
@@ -633,9 +579,8 @@ const staffAccounts = [
     title: "أخصائي التغذية",
     employeeId: "ST-007",
     dashboard: "staff-dashboard.html",
-    permissions: "nutrition"
+    permissions: ["nutrition"]
   },
-
 
   {
     phone: "07700000008",
@@ -645,9 +590,8 @@ const staffAccounts = [
     title: "أخصائي العلاج الطبيعي",
     employeeId: "ST-008",
     dashboard: "staff-dashboard.html",
-    permissions: "physio"
+    permissions: ["physio"]
   },
-
 
   {
     phone: "07700000009",
@@ -657,9 +601,8 @@ const staffAccounts = [
     title: "الأخصائي النفسي",
     employeeId: "ST-009",
     dashboard: "staff-dashboard.html",
-    permissions: "psychologist"
+    permissions: ["psychology"]
   },
-
 
   {
     phone: "07700000010",
@@ -669,9 +612,8 @@ const staffAccounts = [
     title: "مرافق الترفيه",
     employeeId: "ST-010",
     dashboard: "staff-dashboard.html",
-    permissions: "entertainment"
+    permissions: ["entertainment"]
   },
-
 
   {
     phone: "07700000011",
@@ -681,7 +623,7 @@ const staffAccounts = [
     title: "الكوافير",
     employeeId: "ST-011",
     dashboard: "staff-dashboard.html",
-    permissions: "hairdresser"
+    permissions: ["hairdresser"]
   }
 
 ];
@@ -702,7 +644,6 @@ function selectRole(role, element) {
 
   selectedRole = role;
 
-
   document
     .querySelectorAll(".role")
     .forEach(function(button) {
@@ -711,9 +652,7 @@ function selectRole(role, element) {
 
     });
 
-
   element.classList.add("active");
-
 
   const account =
     staffAccounts.find(function(item) {
@@ -722,16 +661,13 @@ function selectRole(role, element) {
 
     });
 
-
   const selectedRoleElement =
     document.getElementById("selectedRole");
-
 
   if (account) {
 
     selectedRoleElement.textContent =
-      "✅ الصفة المختارة: " +
-      account.title;
+      "✅ الصفة المختارة: " + account.title;
 
   }
 
@@ -744,213 +680,164 @@ function selectRole(role, element) {
 
 document
   .getElementById("staffLoginForm")
-  .addEventListener(
-    "submit",
-    function(event) {
+  .addEventListener("submit", function(event) {
 
-      event.preventDefault();
+    event.preventDefault();
 
+    hideMessages();
 
-      const phone =
-        document
-          .getElementById("staffPhone")
-          .value
-          .trim();
+    const phone =
+      document
+        .getElementById("staffPhone")
+        .value
+        .trim();
 
-
-      const password =
-        document
-          .getElementById("staffPassword")
-          .value
-          .trim();
+    const password =
+      document
+        .getElementById("staffPassword")
+        .value
+        .trim();
 
 
-      const error =
-        document.getElementById(
-          "errorMessage"
-        );
+    if (!selectedRole) {
 
-
-      const success =
-        document.getElementById(
-          "successMessage"
-        );
-
-
-      error.style.display =
-        "none";
-
-
-      success.style.display =
-        "none";
-
-
-      /* لا توجد صفة */
-
-      if (!selectedRole) {
-
-        showError(
-          "يرجى اختيار الصفة الوظيفية أولاً"
-        );
-
-        return;
-
-      }
-
-
-      /* البحث عن الحساب */
-
-      const account =
-        staffAccounts.find(
-          function(item) {
-
-            return (
-              item.phone === phone &&
-              item.password === password &&
-              item.role === selectedRole
-            );
-
-          }
-        );
-
-
-      /* الحساب غير موجود */
-
-      if (!account) {
-
-        showError(
-          "رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة"
-        );
-
-        return;
-
-      }
-
-
-      /* =================================================
-         إنشاء جلسة الدخول
-      ================================================= */
-
-      const loggedInStaff = {
-
-        phone:
-          account.phone,
-
-        role:
-          account.role,
-
-        name:
-          account.name,
-
-        title:
-          account.title,
-
-        employeeId:
-          account.employeeId,
-
-        permissions:
-          account.permissions,
-
-        loginTime:
-          new Date().toISOString()
-
-      };
-
-
-      /*
-         هذا هو المفتاح الأساسي الجديد
-      */
-
-      localStorage.setItem(
-        "sanadLoggedInStaff",
-        JSON.stringify(
-          loggedInStaff
-        )
+      showError(
+        "يرجى اختيار الصفة الوظيفية أولاً."
       );
 
-
-      /*
-         مفاتيح قديمة نحافظ عليها
-         حتى لا تنكسر الصفحات السابقة
-      */
-
-      localStorage.setItem(
-        "sanadStaffName",
-        account.name
-      );
-
-
-      localStorage.setItem(
-        "sanadStaffRole",
-        account.title
-      );
-
-
-      success.textContent =
-        "✅ تم تسجيل الدخول بنجاح...";
-
-
-      success.style.display =
-        "block";
-
-
-      /* =================================================
-         تحديد لوحة التحكم حسب الصفة
-      ================================================= */
-
-      setTimeout(
-        function() {
-
-          /*
-             موظف الاستقبال
-          */
-
-          if (
-            account.role ===
-            "reception"
-          ) {
-
-            window.location.href =
-              "reception-dashboard.html";
-
-            return;
-
-          }
-
-
-          /*
-             بقية الكادر
-          */
-
-          window.location.href =
-            account.dashboard;
-
-        },
-        500
-      );
+      return;
 
     }
-  );
+
+
+    const account =
+      staffAccounts.find(function(item) {
+
+        return (
+          item.phone === phone &&
+          item.password === password &&
+          item.role === selectedRole
+        );
+
+      });
+
+
+    if (!account) {
+
+      showError(
+        "رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة."
+      );
+
+      return;
+
+    }
+
+
+    /* =================================================
+       إنشاء جلسة المستخدم
+    ================================================= */
+
+    const loggedInStaff = {
+
+      phone: account.phone,
+
+      role: account.role,
+
+      name: account.name,
+
+      title: account.title,
+
+      employeeId: account.employeeId,
+
+      permissions: account.permissions,
+
+      dashboard: account.dashboard,
+
+      loginTime: new Date().toISOString()
+
+    };
+
+
+    /* حذف الجلسة القديمة أولاً */
+
+    localStorage.removeItem(
+      "sanadLoggedInStaff"
+    );
+
+
+    /* إنشاء الجلسة الجديدة */
+
+    localStorage.setItem(
+      "sanadLoggedInStaff",
+      JSON.stringify(loggedInStaff)
+    );
+
+
+    /* مفاتيح التوافق القديمة */
+
+    localStorage.setItem(
+      "sanadStaffName",
+      account.name
+    );
+
+    localStorage.setItem(
+      "sanadStaffRole",
+      account.title
+    );
+
+
+    showSuccess(
+      "✅ تم تسجيل الدخول بنجاح..."
+    );
+
+
+    setTimeout(function() {
+
+      window.location.href =
+        account.dashboard;
+
+    }, 500);
+
+  });
 
 
 /* =====================================================
-   إظهار الخطأ
+   الرسائل
 ===================================================== */
 
 function showError(message) {
 
   const error =
-    document.getElementById(
-      "errorMessage"
-    );
+    document.getElementById("errorMessage");
+
+  error.textContent = message;
+
+  error.style.display = "block";
+
+}
 
 
-  error.textContent =
-    message;
+function showSuccess(message) {
+
+  const success =
+    document.getElementById("successMessage");
+
+  success.textContent = message;
+
+  success.style.display = "block";
+
+}
 
 
-  error.style.display =
-    "block";
+function hideMessages() {
+
+  document.getElementById(
+    "errorMessage"
+  ).style.display = "none";
+
+  document.getElementById(
+    "successMessage"
+  ).style.display = "none";
 
 }
 
@@ -963,28 +850,23 @@ function forgotPassword(event) {
 
   event.preventDefault();
 
-
   if (!selectedRole) {
 
     showError(
-      "اختر الصفة الوظيفية أولاً حتى نحدد حسابك"
+      "اختر الصفة الوظيفية أولاً."
     );
 
     return;
 
   }
 
-
   alert(
-    "استعادة كلمة المرور عبر واتساب ستكون متاحة بعد ربط نظام سند بخدمة واتساب."
+    "سيتم لاحقاً ربط استعادة كلمة المرور بواتساب وإدارة النظام."
   );
 
 }
 
 </script>
 
-
 </body>
-
 </html>
-```
