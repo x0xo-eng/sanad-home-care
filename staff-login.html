@@ -3,7 +3,6 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,7 +11,6 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-
     body {
       background: linear-gradient(180deg, #f7fbfa, #eef7f5);
     }
@@ -20,28 +18,19 @@
     .page {
       min-height: calc(100vh - 180px);
       padding: 65px 7%;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
-      overflow: hidden;
     }
 
     .panel {
       width: 100%;
       max-width: 520px;
-
       background: white;
-
       border-radius: 26px;
-
       padding: 40px;
-
       border: 1px solid #e3edeb;
-
-      box-shadow:
-        0 25px 65px rgba(22, 70, 65, .09);
+      box-shadow: 0 25px 65px rgba(22,70,65,.09);
     }
 
     .panel-header {
@@ -52,19 +41,13 @@
     .panel-icon {
       width: 70px;
       height: 70px;
-
       margin: 0 auto 18px;
-
       border-radius: 22px;
-
       background: #e8f5f3;
-
       color: #16877d;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 32px;
     }
 
@@ -94,280 +77,77 @@
       font-size: 14px;
     }
 
-    input[type="tel"],
-    input[type="password"] {
-
+    input {
       padding: 14px 15px;
-
       border-radius: 12px;
-
       border: 1px solid #dfecea;
-
       background: #fbfefe;
-
       color: #163b38;
-
-      font-family: 'Cairo', sans-serif;
-
+      font-family: inherit;
       font-size: 14px;
-
       width: 100%;
-
       box-sizing: border-box;
-
       outline: none;
-
-      transition: .25s;
     }
 
-    input[type="tel"]:focus,
-    input[type="password"]:focus {
-
+    input:focus {
       border-color: #16877d;
-
       background: white;
-
-      box-shadow:
-        0 0 0 4px rgba(22, 135, 125, .08);
-    }
-
-    input::placeholder {
-      color: #a1b1ae;
+      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
     }
 
     .actions {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 15px;
-
       margin-top: 25px;
     }
 
-    .forgot {
-
-      color: #16877d;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      text-decoration: none;
-    }
-
-    .forgot:hover {
-      text-decoration: underline;
-    }
-
     .btn-login {
-
+      width: 100%;
       background: #16877d;
-
       color: white;
-
-      padding: 13px 25px;
-
+      padding: 14px 25px;
       border-radius: 13px;
-
-      font-family: 'Cairo', sans-serif;
-
+      font-family: inherit;
       font-size: 14px;
-
       font-weight: 800;
-
       border: none;
-
       cursor: pointer;
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .18);
-
-      transition: .3s;
     }
 
     .btn-login:hover {
-
       background: #0f7068;
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 14px 30px rgba(22, 135, 125, .23);
     }
 
-    .error-message {
-
+    .error {
       display: none;
-
-      margin-top: 16px;
-
-      padding: 12px 15px;
-
+      margin-top: 15px;
+      padding: 13px;
       border-radius: 12px;
-
-      background: #fff1f1;
-
-      border: 1px solid #f0d6d6;
-
-      color: #a44b4b;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
+      background: #fff0f0;
+      color: #b33b3b;
       text-align: center;
-
+      font-size: 13px;
+      font-weight: 700;
     }
 
     .back {
-
       display: flex;
-
-      align-items: center;
-
       justify-content: center;
-
-      gap: 9px;
-
-      width: fit-content;
-
-      margin: 30px auto 0;
-
-      padding: 10px 17px;
-
-      border: 1px solid #d7e8e5;
-
-      border-radius: 12px;
-
-      background: #f8fcfb;
-
+      margin-top: 25px;
       color: #16877d;
-
-      font-size: 12px;
-
-      font-weight: 700;
-
       text-decoration: none;
-
-      transition: .3s;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .back-icon {
-
-      width: 26px;
-      height: 26px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: #e5f3f0;
-
-      color: #16877d;
-
-      font-size: 16px;
-
-      transition: .3s;
-    }
-
-    .back:hover {
-
-      background: #16877d;
-
-      color: white;
-
-      border-color: #16877d;
-
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 10px 25px rgba(22, 135, 125, .15);
-    }
-
-    .back:hover .back-icon {
-
-      background: rgba(255,255,255,.16);
-
-      color: white;
-    }
-
-    @media (max-width: 700px) {
-
-      .page {
-        padding: 40px 5%;
-      }
-
+    @media (max-width: 600px) {
       .panel {
         padding: 30px 22px;
-        border-radius: 22px;
       }
-
-      .panel-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 18px;
-        font-size: 28px;
-      }
-
-      .panel-header h1 {
-        font-size: 27px;
-      }
-
-      .lead {
-        font-size: 13px;
-      }
-
-      .actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .forgot {
-        text-align: center;
-        order: 2;
-      }
-
-      .btn-login {
-        width: 100%;
-        padding: 14px;
-      }
-
-      .back {
-        margin-top: 25px;
-      }
-
     }
-
-    @media (max-width: 420px) {
-
-      .page {
-        padding: 30px 5%;
-      }
-
-      .panel {
-        padding: 25px 18px;
-      }
-
-      .panel-header h1 {
-        font-size: 24px;
-      }
-
-    }
-
   </style>
-
 </head>
 
-
 <body>
-
 
 <header class="header">
 
@@ -376,23 +156,10 @@
   </a>
 
   <nav class="nav">
-
-    <a href="index.html">
-      الرئيسية
-    </a>
-
-    <a href="services.html">
-      خدماتنا
-    </a>
-
-    <a href="index.html#how">
-      كيف يعمل سند؟
-    </a>
-
-    <a href="index.html#about">
-      عن سند
-    </a>
-
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="index.html#how">كيف يعمل سند؟</a>
+    <a href="index.html#about">عن سند</a>
   </nav>
 
 </header>
@@ -401,7 +168,6 @@
 <main class="page">
 
   <div class="panel">
-
 
     <div class="panel-header">
 
@@ -421,7 +187,6 @@
 
 
     <form id="staffLoginForm">
-
 
       <div class="form-row">
 
@@ -459,43 +224,28 @@
 
       <div class="actions">
 
-        <a href="#" class="forgot">
-          هل نسيت كلمة المرور؟
-        </a>
-
         <button
           type="submit"
           class="btn-login"
         >
-          تسجيل الدخول
+          🔐 تسجيل الدخول
         </button>
 
       </div>
 
-
       <div
-        id="errorMessage"
-        class="error-message"
+        id="loginError"
+        class="error"
       >
-        ⚠️ بيانات الدخول غير صحيحة
+        ❌ رقم الهاتف أو كلمة المرور غير صحيحة
       </div>
-
 
     </form>
 
 
     <a href="login.html" class="back">
-
-      <span class="back-icon">
-        ←
-      </span>
-
-      <span>
-        العودة لاختيار نوع الحساب
-      </span>
-
+      ← العودة لاختيار نوع الحساب
     </a>
-
 
   </div>
 
@@ -521,105 +271,63 @@
 
 <script>
 
-/*
-==================================================
-نظام الكادر التجريبي
-==================================================
-
-حالياً لا توجد قاعدة بيانات.
-
-لذلك نستخدم حسابات تجريبية حتى نبني
-قاعدة البيانات لاحقاً.
-
-كل حساب مرتبط باختصاص معين.
-==================================================
-*/
-
+/* =========================================
+   حسابات الكادر التجريبية
+========================================= */
 
 const staffAccounts = [
 
   {
     phone: "07700000001",
     password: "1234",
-
-    name: "د. أحمد",
+    name: "د. أحمد محمد",
     role: "طبيب مقيم",
-
+    employeeId: "ST-001",
     icon: "👨‍⚕️"
   },
 
   {
     phone: "07700000002",
     password: "1234",
-
-    name: "د. محمد",
-    role: "طبيب أخصائي",
-
-    icon: "🩺"
+    name: "علي علاوي",
+    role: "ممرض",
+    employeeId: "ST-002",
+    icon: "👨‍⚕️"
   },
 
   {
     phone: "07700000003",
     password: "1234",
-
-    name: "علي",
+    name: "درغام حسين",
     role: "ممرض",
-
+    employeeId: "ST-003",
     icon: "👨‍⚕️"
   },
 
   {
     phone: "07700000004",
     password: "1234",
-
-    name: "سارة",
-    role: "أخصائي نفسي",
-
-    icon: "🧠"
+    name: "حيرش حامي",
+    role: "مساعد",
+    employeeId: "ST-004",
+    icon: "🧑‍⚕️"
   },
 
   {
     phone: "07700000005",
     password: "1234",
-
-    name: "نور",
-    role: "أخصائي تغذية",
-
-    icon: "🥗"
-  },
-
-  {
-    phone: "07700000006",
-    password: "1234",
-
-    name: "حسن",
-    role: "علاج طبيعي",
-
-    icon: "🏃"
-  },
-
-  {
-    phone: "07700000007",
-    password: "1234",
-
-    name: "كرار",
-    role: "أخصائي ترفيه",
-
-    icon: "🎭"
-  },
-
-  {
-    phone: "07700000008",
-    password: "1234",
-
-    name: "ريم",
-    role: "كوافير",
-
-    icon: "💇"
+    name: "دلير أحمد",
+    role: "مساعد",
+    employeeId: "ST-005",
+    icon: "🧑‍⚕️"
   }
 
 ];
 
+
+/* =========================================
+   تسجيل الدخول
+========================================= */
 
 document
   .getElementById("staffLoginForm")
@@ -627,90 +335,53 @@ document
 
     event.preventDefault();
 
-
     const phone =
-      document
-        .getElementById("staffPhone")
-        .value
-        .trim();
-
+      document.getElementById("staffPhone").value.trim();
 
     const password =
-      document
-        .getElementById("staffPassword")
-        .value
-        .trim();
+      document.getElementById("staffPassword").value.trim();
+
+    const error =
+      document.getElementById("loginError");
 
 
-    const errorMessage =
-      document.getElementById("errorMessage");
-
-
-    /*
-    البحث عن الحساب
-    */
-
-    const staff =
-      staffAccounts.find(function(account) {
+    const account =
+      staffAccounts.find(function(staff) {
 
         return (
-          account.phone === phone &&
-          account.password === password
+          staff.phone === phone &&
+          staff.password === password
         );
 
       });
 
 
-    /*
-    إذا الحساب غير موجود
-    */
+    if (!account) {
 
-    if (!staff) {
-
-      errorMessage.style.display = "block";
+      error.style.display = "block";
 
       return;
 
     }
 
 
-    /*
-    حفظ بيانات الكادر
-    */
+    /* حفظ الحساب الذي سجل الدخول */
 
     localStorage.setItem(
-      "sanadStaff",
-      JSON.stringify({
-
-        phone: staff.phone,
-
-        name: staff.name,
-
-        role: staff.role,
-
-        icon: staff.icon,
-
-        loginTime:
-          new Date().toLocaleString("ar-IQ")
-
-      })
+      "sanadLoggedStaff",
+      JSON.stringify(account)
     );
 
 
-    /*
-    الانتقال إلى لوحة الكادر
-    */
+    /* الانتقال إلى لوحة الكادر */
 
     window.location.href =
       "staff-dashboard.html";
 
   });
 
-
 </script>
 
-
 </body>
-
 </html>
 ```
