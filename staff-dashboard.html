@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -22,23 +23,16 @@
       padding: 45px 6%;
     }
 
-    /* =========================
-       WELCOME
-    ========================= */
-
     .welcome {
       background: white;
       border: 1px solid #e3edeb;
       border-radius: 26px;
       padding: 30px;
-
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
-
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
-
       margin-bottom: 25px;
     }
 
@@ -67,18 +61,12 @@
       height: 78px;
       border-radius: 24px;
       background: #e8f5f3;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 38px;
       flex-shrink: 0;
     }
-
-    /* =========================
-       STATS
-    ========================= */
 
     .stats {
       display: grid;
@@ -112,11 +100,9 @@
       height: 42px;
       border-radius: 13px;
       background: #e8f5f3;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 21px;
     }
 
@@ -125,10 +111,6 @@
       font-size: 28px;
       font-weight: 900;
     }
-
-    /* =========================
-       SECTION
-    ========================= */
 
     .section {
       background: white;
@@ -155,11 +137,8 @@
       margin: 0;
     }
 
-    /* =========================
-       VISITS
-    ========================= */
-
-    .visit-list {
+    .visit-list,
+    .task-list {
       display: flex;
       flex-direction: column;
       gap: 13px;
@@ -170,13 +149,10 @@
       grid-template-columns: 95px 1fr auto;
       align-items: center;
       gap: 18px;
-
       padding: 18px;
-
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
-
       transition: .25s;
     }
 
@@ -231,14 +207,11 @@
       border: none;
       background: #16877d;
       color: white;
-
       border-radius: 10px;
       padding: 9px 15px;
-
       font-family: inherit;
       font-size: 12px;
       font-weight: 800;
-
       cursor: pointer;
       transition: .25s;
     }
@@ -248,33 +221,17 @@
       transform: translateY(-2px);
     }
 
-    /* =========================
-       TWO COLUMNS
-    ========================= */
-
     .two-columns {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 25px;
     }
 
-    /* =========================
-       TASKS
-    ========================= */
-
-    .task-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
     .task {
       display: flex;
       align-items: center;
       gap: 13px;
-
       padding: 15px;
-
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 15px;
@@ -284,13 +241,10 @@
       width: 42px;
       height: 42px;
       border-radius: 12px;
-
       background: #e8f5f3;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       font-size: 20px;
       flex-shrink: 0;
     }
@@ -312,14 +266,9 @@
       line-height: 1.7;
     }
 
-    /* =========================
-       LAB
-    ========================= */
-
     .lab-card {
       padding: 17px;
       margin-bottom: 12px;
-
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
@@ -351,10 +300,6 @@
       margin: 0;
     }
 
-    /* =========================
-       REPORTS
-    ========================= */
-
     .reports {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -363,11 +308,9 @@
 
     .report {
       text-align: center;
-
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 17px;
-
       padding: 20px;
     }
 
@@ -389,10 +332,6 @@
       margin: 0;
     }
 
-    /* =========================
-       PROFILE
-    ========================= */
-
     .profile {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -401,7 +340,6 @@
 
     .profile-item {
       padding: 16px;
-
       background: #fbfefe;
       border: 1px solid #e3edeb;
       border-radius: 15px;
@@ -419,10 +357,6 @@
       font-size: 14px;
     }
 
-    /* =========================
-       LOGOUT
-    ========================= */
-
     .logout-area {
       text-align: center;
       margin: 35px 0 10px;
@@ -432,21 +366,14 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-
       padding: 11px 20px;
-
       border-radius: 12px;
-
       border: 1px solid #eadede;
-
       background: white;
       color: #a44b4b;
-
       text-decoration: none;
-
       font-size: 13px;
       font-weight: 800;
-
       transition: .25s;
     }
 
@@ -455,10 +382,6 @@
       color: white;
       transform: translateY(-2px);
     }
-
-    /* =========================
-       MOBILE
-    ========================= */
 
     @media (max-width: 900px) {
 
@@ -533,8 +456,8 @@
 
 </head>
 
-<body>
 
+<body>
 
 <header class="header">
 
@@ -546,8 +469,8 @@
 
     <a href="index.html">الرئيسية</a>
     <a href="services.html">خدماتنا</a>
-    <a href="index.html#how">كيف يعمل سند؟</a>
-    <a href="index.html#about">عن سند</a>
+    <a href="how.html">كيف يعمل سند؟</a>
+    <a href="about.html">عن سند</a>
 
   </nav>
 
@@ -555,11 +478,6 @@
 
 
 <main class="dashboard">
-
-
-  <!-- =========================
-       WELCOME
-  ========================= -->
 
   <section class="welcome">
 
@@ -585,10 +503,6 @@
 
   </section>
 
-
-  <!-- =========================
-       STATS
-  ========================= -->
 
   <section class="stats">
 
@@ -639,7 +553,7 @@
       <div class="stat-top">
 
         <span class="stat-label">
-          تقارير بانتظار الإرسال
+          التقارير المطلوبة
         </span>
 
         <div class="stat-icon">
@@ -678,10 +592,6 @@
   </section>
 
 
-  <!-- =========================
-       VISITS
-  ========================= -->
-
   <section class="section">
 
     <div class="section-title">
@@ -696,19 +606,13 @@
 
     </div>
 
-
     <div class="visit-list" id="visitList">
     </div>
 
   </section>
 
 
-  <!-- =========================
-       TASKS + LAB
-  ========================= -->
-
   <div class="two-columns">
-
 
     <section class="section">
 
@@ -752,10 +656,6 @@
   </div>
 
 
-  <!-- =========================
-       REPORTS
-  ========================= -->
-
   <section class="section">
 
     <div class="section-title">
@@ -775,10 +675,6 @@
 
   </section>
 
-
-  <!-- =========================
-       PROFILE
-  ========================= -->
 
   <section class="section">
 
@@ -839,18 +735,13 @@
   </section>
 
 
-  <!-- =========================
-       LOGOUT
-  ========================= -->
-
   <div class="logout-area">
 
-    <a href="#" class="logout" onclick="logoutStaff()">
+    <a href="#" class="logout" onclick="logoutStaff(event)">
       🚪 تسجيل الخروج
     </a>
 
   </div>
-
 
 </main>
 
@@ -875,160 +766,255 @@
 <script>
 
 /* =====================================================
-   بيانات الكادر
+   قراءة الحساب من تسجيل الدخول
+   مهم جداً:
+   نفس الاسم المستخدم في staff-login.html
 ===================================================== */
 
-const staffDatabase = {
+const storedStaff =
+  localStorage.getItem("sanadLoggedInStaff");
 
-  "07700000001": {
 
-    name: "د. أحمد محمد",
-    role: "طبيب مقيم",
-    employeeId: "ST-001",
-    icon: "👨‍⚕️",
+/* =====================================================
+   منع الدخول بدون تسجيل
+===================================================== */
 
-    visits: [
-      {
-        patient: "محمد علي",
-        type: "متابعة أسبوعية — فحص الحالة الصحية وإعداد التقرير",
-        time: "09:00 ص",
-        status: "done",
-        statusText: "مكتملة"
-      },
-      {
-        patient: "علي غلام",
-        type: "متابعة الوظائف الحيوية والأدوية",
-        time: "11:00 ص",
-        status: "current",
-        statusText: "الزيارة الحالية"
-      },
-      {
-        patient: "أحمد معين",
-        type: "زيارة متابعة أسبوعية",
-        time: "02:00 م",
-        status: "pending",
-        statusText: "قادمة"
-      },
-      {
-        patient: "حسين ناصر",
-        type: "تقييم الحالة الصحية وإعداد التقرير",
-        time: "04:00 م",
-        status: "pending",
-        statusText: "قادمة"
-      }
-    ],
+if (!storedStaff) {
+
+  alert("يرجى تسجيل الدخول أولاً.");
+
+  window.location.href = "staff-login.html";
+
+}
+
+
+/* =====================================================
+   تحويل بيانات الحساب من JSON
+===================================================== */
+
+let staff = null;
+
+try {
+
+  staff = JSON.parse(storedStaff);
+
+} catch (error) {
+
+  staff = null;
+
+}
+
+
+/* =====================================================
+   التحقق من صحة بيانات الحساب
+===================================================== */
+
+if (
+  !staff ||
+  !staff.phone ||
+  !staff.role
+) {
+
+  alert("بيانات الحساب غير صالحة.");
+
+  localStorage.removeItem("sanadLoggedInStaff");
+
+  window.location.href = "staff-login.html";
+
+}
+
+
+/* =====================================================
+   بيانات تجريبية للوحة
+   مؤقتاً فقط حتى نربط قاعدة البيانات
+===================================================== */
+
+const roleData = {
+
+  owner: {
+
+    icon: "👑",
+
+    visits: [],
+
+    patients: 0,
 
     tasks: [
       {
-        icon: "🩺",
-        title: "متابعة الوظائف الحيوية",
-        text: "مراجعة ضغط الدم والسكر والحرارة والنبض."
+        icon: "📊",
+        title: "مراقبة النظام",
+        text: "لديك صلاحية عامة لمتابعة جميع أجزاء نظام سند."
       },
       {
-        icon: "💊",
-        title: "مراجعة الأدوية",
-        text: "التأكد من الالتزام بالخطة العلاجية."
+        icon: "👥",
+        title: "متابعة الكادر",
+        text: "يمكنك مراقبة حسابات وصلاحيات جميع الكوادر."
       },
       {
-        icon: "📋",
-        title: "إعداد التقرير الأسبوعي",
-        text: "توثيق حالة المسن بعد الزيارة."
+        icon: "📅",
+        title: "متابعة الجداول",
+        text: "يمكنك الاطلاع على جداول الزيارات والمهام."
       }
     ],
 
-    labs: [
-      {
-        patient: "محمد علي",
-        time: "10:30 ص",
-        tests: "صورة الدم + وظائف الكلى",
-        date: "الثلاثاء 25 أغسطس 2026"
-      },
-      {
-        patient: "سمية هاشم",
-        time: "01:00 م",
-        tests: "صورة الدم + وظائف الكلى",
-        date: "الأربعاء 26 أغسطس 2026"
-      }
-    ],
+    labs: [],
 
     reports: [
       {
-        icon: "📝",
-        title: "التقرير الأسبوعي",
-        text: "متابعة تطور حالة المسن خلال الأسبوع."
-      },
-      {
-        icon: "🩺",
-        title: "التقرير الطبي",
-        text: "تسجيل الفحص والتقييم والتوصيات الطبية."
-      },
-      {
         icon: "📊",
-        title: "سجل المتابعة",
-        text: "عرض الزيارات والملاحظات السابقة للمسن."
+        title: "التقارير العامة",
+        text: "عرض ومراقبة تقارير الشركة والنظام."
+      },
+      {
+        icon: "👥",
+        title: "تقارير الكادر",
+        text: "متابعة أداء جميع الكوادر."
+      },
+      {
+        icon: "👴",
+        title: "تقارير المسنين",
+        text: "متابعة بيانات وتقارير المسنين."
       }
     ]
 
   },
 
 
-  /* =========================
-     ممرض علي علاوي
-  ========================= */
+  manager: {
 
-  "07700000002": {
+    icon: "👨‍💼",
 
-    name: "علي علاوي",
-    role: "ممرض",
-    employeeId: "ST-002",
-    icon: "👨‍⚕️",
+    visits: [],
 
-    visits: [
+    patients: 0,
+
+    tasks: [
       {
-        patient: "محمد علي",
-        type: "زيارة تمريضية — قياس الضغط والسكر وإعطاء العلاج",
-        time: "08:00 ص",
-        status: "done",
-        statusText: "مكتملة"
+        icon: "📅",
+        title: "إدارة جدول الزيارات",
+        text: "تعبئة وتنظيم جداول زيارات جميع الكوادر."
       },
       {
-        patient: "علي غلام",
-        type: "زيارة تمريضية — العلامات الحيوية والأدوية",
-        time: "09:00 ص",
-        status: "current",
-        statusText: "الحالية"
+        icon: "👥",
+        title: "توزيع المهام",
+        text: "توزيع المهام على الكادر حسب اختصاص كل موظف."
       },
       {
-        patient: "أحمد معين",
-        type: "زيارة تمريضية",
-        time: "10:00 ص",
-        status: "pending",
-        statusText: "قادمة"
-      },
-      {
-        patient: "حسين ناصر",
-        type: "زيارة تمريضية",
-        time: "11:00 ص",
-        status: "pending",
-        statusText: "قادمة"
+        icon: "📋",
+        title: "متابعة التنفيذ",
+        text: "متابعة حالة الزيارات والمهام والتقارير."
       }
     ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📊",
+        title: "التقرير الإداري",
+        text: "متابعة سير العمل اليومي."
+      },
+      {
+        icon: "👥",
+        title: "تقرير الكادر",
+        text: "متابعة أداء الموظفين والزيارات."
+      },
+      {
+        icon: "👴",
+        title: "تقرير المسنين",
+        text: "متابعة حالة المسنين والخدمات المقدمة."
+      }
+    ]
+
+  },
+
+
+  reception: {
+
+    icon: "🧑‍💼",
+
+    visits: [],
+
+    patients: 0,
+
+    tasks: [
+      {
+        icon: "📞",
+        title: "التواصل مع العائلة",
+        text: "متابعة الاتصالات والاستفسارات."
+      },
+      {
+        icon: "📋",
+        title: "تحديث بيانات المسنين",
+        text: "تحديث البيانات الإدارية المسموح بها."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📞",
+        title: "سجل التواصل",
+        text: "تسجيل الاتصالات والمتابعات."
+      }
+    ]
+
+  },
+
+
+  specialist: {
+
+    icon: "👨‍⚕️",
+
+    visits: [],
+
+    patients: 0,
 
     tasks: [
       {
         icon: "🩺",
-        title: "قياس العلامات الحيوية",
-        text: "قياس ضغط الدم والسكر والحرارة والنبض."
+        title: "الفحص الطبي",
+        text: "فحص المسن وتقييم حالته الصحية."
       },
       {
         icon: "💊",
-        title: "إعطاء الأدوية",
-        text: "إعطاء العلاج حسب الخطة المحددة للمسن."
+        title: "الخطة العلاجية",
+        text: "مراجعة وتحديث الخطة العلاجية عند الحاجة."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "📝",
+        title: "التقرير الطبي",
+        text: "توثيق الفحص والتقييم والتوصيات."
+      }
+    ]
+
+  },
+
+
+  resident: {
+
+    icon: "🩺",
+
+    visits: [],
+
+    patients: 0,
+
+    tasks: [
+      {
+        icon: "🩺",
+        title: "المتابعة الطبية",
+        text: "متابعة الحالة الصحية للمسن."
       },
       {
-        icon: "🛁",
-        title: "متابعة الرعاية اليومية",
-        text: "متابعة الحالة العامة للمسن أثناء الزيارة."
+        icon: "💊",
+        title: "مراجعة الأدوية",
+        text: "متابعة الالتزام بالخطة العلاجية."
       }
     ],
 
@@ -1038,52 +1024,20 @@ const staffDatabase = {
       {
         icon: "📝",
         title: "تقرير الزيارة",
-        text: "تسجيل القياسات والملاحظات بعد كل زيارة."
-      },
-      {
-        icon: "❤️",
-        title: "العلامات الحيوية",
-        text: "توثيق ضغط الدم والسكر والحرارة والنبض."
+        text: "تسجيل نتائج الزيارة الطبية."
       }
     ]
 
   },
 
 
-  /* =========================
-     ممرض درغام حسين
-  ========================= */
+  nurse: {
 
-  "07700000003": {
+    icon: "👩‍⚕️",
 
-    name: "درغام حسين",
-    role: "ممرض",
-    employeeId: "ST-003",
-    icon: "👨‍⚕️",
+    visits: [],
 
-    visits: [
-      {
-        patient: "سمية هاشم",
-        type: "زيارة تمريضية — قياس العلامات الحيوية",
-        time: "08:00 ص",
-        status: "done",
-        statusText: "مكتملة"
-      },
-      {
-        patient: "انتصار علي",
-        type: "زيارة تمريضية — إعطاء الأدوية",
-        time: "09:00 ص",
-        status: "current",
-        statusText: "الحالية"
-      },
-      {
-        patient: "إيمان راضي",
-        type: "زيارة تمريضية",
-        time: "10:00 ص",
-        status: "pending",
-        statusText: "قادمة"
-      }
-    ],
+    patients: 0,
 
     tasks: [
       {
@@ -1094,12 +1048,12 @@ const staffDatabase = {
       {
         icon: "💊",
         title: "إعطاء الأدوية",
-        text: "إعطاء الأدوية حسب جدول العلاج."
+        text: "إعطاء العلاج حسب الخطة المحددة."
       },
       {
         icon: "📋",
-        title: "تسجيل التقرير",
-        text: "تسجيل تفاصيل الزيارة والملاحظات."
+        title: "تسجيل الزيارة",
+        text: "تسجيل القياسات والملاحظات."
       }
     ],
 
@@ -1121,56 +1075,24 @@ const staffDatabase = {
   },
 
 
-  /* =========================
-     مساعد حيرش حامي
-  ========================= */
+  nutrition: {
 
-  "07700000004": {
+    icon: "🥗",
 
-    name: "حيرش حامي",
-    role: "مساعد رعاية",
-    employeeId: "ST-004",
-    icon: "🧑‍⚕️",
+    visits: [],
 
-    visits: [
-      {
-        patient: "محمد علي",
-        type: "رعاية شخصية — مساعدة في الاستحمام والعناية اليومية",
-        time: "08:30 ص",
-        status: "done",
-        statusText: "مكتملة"
-      },
-      {
-        patient: "علي غلام",
-        type: "رعاية شخصية ومتابعة النظافة",
-        time: "10:00 ص",
-        status: "current",
-        statusText: "الحالية"
-      },
-      {
-        patient: "أحمد معين",
-        type: "رعاية شخصية",
-        time: "11:30 ص",
-        status: "pending",
-        statusText: "قادمة"
-      }
-    ],
+    patients: 0,
 
     tasks: [
       {
-        icon: "🛁",
-        title: "العناية الشخصية",
-        text: "مساعدة المسن في الاستحمام والنظافة الشخصية."
+        icon: "🥗",
+        title: "تقييم التغذية",
+        text: "تقييم الاحتياجات الغذائية للمسن."
       },
       {
-        icon: "🧹",
-        title: "ترتيب محيط المسن",
-        text: "التأكد من نظافة وترتيب المكان المحيط بالمسن."
-      },
-      {
-        icon: "❤️",
-        title: "ملاحظة الحالة العامة",
-        text: "إبلاغ الممرض عن أي تغير ملحوظ في حالة المسن."
+        icon: "🍎",
+        title: "الخطة الغذائية",
+        text: "متابعة الخطة الغذائية المناسبة."
       }
     ],
 
@@ -1178,65 +1100,33 @@ const staffDatabase = {
 
     reports: [
       {
-        icon: "📝",
-        title: "تقرير الرعاية",
-        text: "تسجيل ما تم تقديمه خلال زيارة الرعاية."
+        icon: "🥗",
+        title: "التقرير الغذائي",
+        text: "تسجيل تقييم التغذية والتوصيات."
       }
     ]
 
   },
 
 
-  /* =========================
-     مساعد دلير أحمد
-  ========================= */
+  physio: {
 
-  "07700000005": {
+    icon: "🏃",
 
-    name: "دلير أحمد",
-    role: "مساعد رعاية",
-    employeeId: "ST-005",
-    icon: "🧑‍⚕️",
+    visits: [],
 
-    visits: [
-      {
-        patient: "سمية هاشم",
-        type: "رعاية شخصية — استحمام وعناية يومية",
-        time: "08:30 ص",
-        status: "done",
-        statusText: "مكتملة"
-      },
-      {
-        patient: "إيمان راضي",
-        type: "رعاية شخصية",
-        time: "10:00 ص",
-        status: "current",
-        statusText: "الحالية"
-      },
-      {
-        patient: "فريزة علي",
-        type: "رعاية شخصية",
-        time: "11:30 ص",
-        status: "pending",
-        statusText: "قادمة"
-      }
-    ],
+    patients: 0,
 
     tasks: [
       {
-        icon: "🛁",
-        title: "الاستحمام والعناية",
-        text: "مساعدة المسن في الاستحمام والعناية الشخصية."
+        icon: "🏃",
+        title: "العلاج الطبيعي",
+        text: "تنفيذ ومتابعة جلسات العلاج الطبيعي."
       },
       {
-        icon: "🧹",
-        title: "النظافة والترتيب",
-        text: "المحافظة على نظافة وترتيب مكان المسن."
-      },
-      {
-        icon: "❤️",
-        title: "متابعة الحالة العامة",
-        text: "رفع أي ملاحظة مهمة إلى الممرض المسؤول."
+        icon: "💪",
+        title: "التمارين",
+        text: "متابعة التمارين المناسبة للمسن."
       }
     ],
 
@@ -1244,9 +1134,106 @@ const staffDatabase = {
 
     reports: [
       {
-        icon: "📝",
-        title: "تقرير الرعاية",
-        text: "تسجيل الخدمات التي تم تقديمها للمسن."
+        icon: "🏃",
+        title: "تقرير العلاج الطبيعي",
+        text: "توثيق الجلسة والتقدم."
+      }
+    ]
+
+  },
+
+
+  psychologist: {
+
+    icon: "🧠",
+
+    visits: [],
+
+    patients: 0,
+
+    tasks: [
+      {
+        icon: "🧠",
+        title: "التقييم النفسي",
+        text: "متابعة الحالة النفسية والاجتماعية للمسن."
+      },
+      {
+        icon: "💬",
+        title: "جلسة المتابعة",
+        text: "تنفيذ جلسات الدعم النفسي."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "🧠",
+        title: "التقرير النفسي",
+        text: "تسجيل نتائج المتابعة النفسية."
+      }
+    ]
+
+  },
+
+
+  entertainment: {
+
+    icon: "🎭",
+
+    visits: [],
+
+    patients: 0,
+
+    tasks: [
+      {
+        icon: "🎭",
+        title: "النشاط الترفيهي",
+        text: "تنظيم الأنشطة الترفيهية المناسبة للمسن."
+      },
+      {
+        icon: "🚶",
+        title: "النشاط الخارجي",
+        text: "تنفيذ النشاطات الخارجية المجدولة."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "🎭",
+        title: "تقرير النشاط",
+        text: "تسجيل النشاط الترفيهي المقدم."
+      }
+    ]
+
+  },
+
+
+  hairdresser: {
+
+    icon: "💇",
+
+    visits: [],
+
+    patients: 0,
+
+    tasks: [
+      {
+        icon: "💇",
+        title: "العناية الشخصية",
+        text: "تقديم خدمات الكوافير للمسن حسب الجدول."
+      }
+    ],
+
+    labs: [],
+
+    reports: [
+      {
+        icon: "💇",
+        title: "تقرير الخدمة",
+        text: "تسجيل خدمة العناية الشخصية."
       }
     ]
 
@@ -1256,77 +1243,40 @@ const staffDatabase = {
 
 
 /* =====================================================
-   قراءة الحساب الذي سجل الدخول
+   بيانات الصفة الحالية
 ===================================================== */
 
-const loggedStaff =
-  localStorage.getItem("sanadLoggedStaff");
+const currentRole =
+  roleData[staff.role] || roleData.owner;
 
 
 /* =====================================================
-   التحقق من وجود تسجيل دخول
-===================================================== */
-
-if (!loggedStaff) {
-
-  alert("يرجى تسجيل الدخول أولاً.");
-
-  window.location.href = "staff-login.html";
-
-}
-
-
-/* =====================================================
-   الحصول على بيانات الموظف
-===================================================== */
-
-const staff = staffDatabase[loggedStaff];
-
-
-/* =====================================================
-   التحقق من الحساب
-===================================================== */
-
-if (!staff) {
-
-  alert("بيانات الحساب غير موجودة.");
-
-  localStorage.removeItem("sanadLoggedStaff");
-
-  window.location.href = "staff-login.html";
-
-}
-
-
-/* =====================================================
-   عرض بيانات الموظف
+   عرض بيانات الحساب
 ===================================================== */
 
 document.getElementById("welcomeName").textContent =
-  "أهلاً بك، " + staff.name + " 👋";
+  "أهلاً بك، " + (staff.name || "عضو فريق سند") + " 👋";
 
 
 document.getElementById("welcomeRole").innerHTML =
-  staff.role +
-  " — فريق سند" +
-  "<br>" +
-  "الثلاثاء، 25 أغسطس 2026";
+  (staff.title || "عضو فريق سند") +
+  " — فريق سند";
 
 
 document.getElementById("staffAvatar").textContent =
-  staff.icon;
+  currentRole.icon;
 
 
 document.getElementById("profileName").textContent =
-  staff.name;
+  staff.name || "—";
 
 
 document.getElementById("profileRole").textContent =
-  staff.role;
+  staff.title || "—";
 
 
 document.getElementById("profileId").textContent =
-  staff.employeeId;
+  staff.employeeId || "—";
 
 
 /* =====================================================
@@ -1334,96 +1284,108 @@ document.getElementById("profileId").textContent =
 ===================================================== */
 
 document.getElementById("visitsCount").textContent =
-  staff.visits.length;
+  currentRole.visits.length;
 
 
 document.getElementById("patientsCount").textContent =
-  staff.visits.length;
+  currentRole.patients;
 
 
 document.getElementById("reportsCount").textContent =
-  staff.reports.length;
+  currentRole.reports.length;
 
 
 document.getElementById("labsCount").textContent =
-  staff.labs.length;
+  currentRole.labs.length;
 
 
 /* =====================================================
-   عرض الزيارات
+   الزيارات
 ===================================================== */
 
 const visitList =
   document.getElementById("visitList");
 
 
-staff.visits.forEach(function(visit) {
+if (currentRole.visits.length === 0) {
 
-  const visitElement =
-    document.createElement("div");
+  visitList.innerHTML = `
 
-  visitElement.className =
-    "visit";
+    <div class="lab-card">
 
-
-  visitElement.innerHTML = `
-
-    <div class="visit-time">
-      ${visit.time}
-    </div>
-
-    <div class="visit-info">
-
-      <h3>
-        ${visit.patient}
-      </h3>
-
-      <p>
-        ${visit.type}
+      <p style="text-align:center;">
+        لا توجد زيارات مجدولة لحسابك حالياً.
+        <br>
+        ستظهر الزيارات هنا بعد أن يقوم المدير بجدولتها.
       </p>
 
-      <button
-        class="open-visit"
-        onclick="openVisit(
-          '${visit.patient}',
-          '${visit.type}',
-          '${visit.time}',
-          'الثلاثاء 25 أغسطس 2026'
-        )"
-      >
-        🩺 فتح الزيارة
-      </button>
-
     </div>
-
-    <span class="visit-status ${visit.status}">
-      ${visit.statusText}
-    </span>
 
   `;
 
+} else {
 
-  visitList.appendChild(visitElement);
+  currentRole.visits.forEach(function(visit) {
 
-});
+    const visitElement =
+      document.createElement("div");
+
+    visitElement.className =
+      "visit";
+
+    visitElement.innerHTML = `
+
+      <div class="visit-time">
+        ${visit.time}
+      </div>
+
+      <div class="visit-info">
+
+        <h3>
+          ${visit.patient}
+        </h3>
+
+        <p>
+          ${visit.type}
+        </p>
+
+        <button
+          class="open-visit"
+          onclick="openVisit('${visit.patient}')"
+        >
+          🩺 فتح الزيارة
+        </button>
+
+      </div>
+
+      <span class="visit-status ${visit.status}">
+        ${visit.statusText}
+      </span>
+
+    `;
+
+    visitList.appendChild(visitElement);
+
+  });
+
+}
 
 
 /* =====================================================
-   عرض المهام
+   المهام
 ===================================================== */
 
 const taskList =
   document.getElementById("taskList");
 
 
-staff.tasks.forEach(function(task) {
+currentRole.tasks.forEach(function(task) {
 
   const taskElement =
     document.createElement("div");
 
   taskElement.className =
     "task";
-
 
   taskElement.innerHTML = `
 
@@ -1445,21 +1407,20 @@ staff.tasks.forEach(function(task) {
 
   `;
 
-
   taskList.appendChild(taskElement);
 
 });
 
 
 /* =====================================================
-   عرض التحاليل
+   التحاليل
 ===================================================== */
 
 const labList =
   document.getElementById("labList");
 
 
-if (staff.labs.length === 0) {
+if (currentRole.labs.length === 0) {
 
   labList.innerHTML = `
 
@@ -1473,66 +1434,64 @@ if (staff.labs.length === 0) {
 
   `;
 
+} else {
+
+  currentRole.labs.forEach(function(lab) {
+
+    const labElement =
+      document.createElement("div");
+
+    labElement.className =
+      "lab-card";
+
+    labElement.innerHTML = `
+
+      <div class="lab-top">
+
+        <span class="lab-name">
+          ${lab.patient}
+        </span>
+
+        <span class="lab-date">
+          ${lab.time}
+        </span>
+
+      </div>
+
+      <p>
+
+        ${lab.tests}
+
+        <br>
+
+        📅 ${lab.date}
+
+      </p>
+
+    `;
+
+    labList.appendChild(labElement);
+
+  });
+
 }
 
 
-staff.labs.forEach(function(lab) {
-
-  const labElement =
-    document.createElement("div");
-
-  labElement.className =
-    "lab-card";
-
-
-  labElement.innerHTML = `
-
-    <div class="lab-top">
-
-      <span class="lab-name">
-        ${lab.patient}
-      </span>
-
-      <span class="lab-date">
-        ${lab.time}
-      </span>
-
-    </div>
-
-    <p>
-
-      ${lab.tests}
-
-      <br>
-
-      📅 ${lab.date}
-
-    </p>
-
-  `;
-
-
-  labList.appendChild(labElement);
-
-});
-
-
 /* =====================================================
-   عرض التقارير
+   التقارير
 ===================================================== */
 
 const reportList =
   document.getElementById("reportList");
 
 
-staff.reports.forEach(function(report) {
+currentRole.reports.forEach(function(report) {
 
   const reportElement =
     document.createElement("div");
 
   reportElement.className =
     "report";
-
 
   reportElement.innerHTML = `
 
@@ -1550,7 +1509,6 @@ staff.reports.forEach(function(report) {
 
   `;
 
-
   reportList.appendChild(reportElement);
 
 });
@@ -1560,35 +1518,29 @@ staff.reports.forEach(function(report) {
    فتح الزيارة
 ===================================================== */
 
-function openVisit(
-  patientName,
-  visitType,
-  visitTime,
-  date
-) {
+function openVisit(patientName) {
 
   const visitData = {
 
-    patientName:
-      patientName,
-
-    visitType:
-      visitType,
-
-    visitTime:
-      visitTime,
-
-    date:
-      date,
+    patientName: patientName,
 
     staffName:
       staff.name,
 
     staffRole:
-      staff.role,
+      staff.title,
 
     staffId:
-      staff.employeeId
+      staff.employeeId,
+
+    staffPhone:
+      staff.phone,
+
+    role:
+      staff.role,
+
+    date:
+      new Date().toISOString()
 
   };
 
@@ -1598,6 +1550,11 @@ function openVisit(
     JSON.stringify(visitData)
   );
 
+
+  /*
+    مؤقتاً نفتح صفحة الزيارة.
+    لاحقاً سنربطها ببيانات المسن وجدول المدير.
+  */
 
   window.location.href =
     "visit.html";
@@ -1609,10 +1566,22 @@ function openVisit(
    تسجيل الخروج
 ===================================================== */
 
-function logoutStaff() {
+function logoutStaff(event) {
+
+  if (event) {
+    event.preventDefault();
+  }
 
   localStorage.removeItem(
-    "sanadLoggedStaff"
+    "sanadLoggedInStaff"
+  );
+
+  localStorage.removeItem(
+    "sanadStaffName"
+  );
+
+  localStorage.removeItem(
+    "sanadStaffRole"
   );
 
   localStorage.removeItem(
@@ -1630,3 +1599,4 @@ function logoutStaff() {
 </body>
 
 </html>
+```
