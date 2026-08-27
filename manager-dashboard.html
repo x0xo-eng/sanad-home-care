@@ -515,10 +515,6 @@ flex-direction:column;
 <main class="dashboard">
 
 
-<!-- =====================================================
-     الترحيب
-===================================================== -->
-
 <section class="welcome">
 
 <div>
@@ -544,10 +540,6 @@ flex-direction:column;
 </section>
 
 
-
-<!-- =====================================================
-     الإحصائيات
-===================================================== -->
 
 <section class="stats">
 
@@ -614,10 +606,6 @@ id="todayCount">
 
 
 
-<!-- =====================================================
-     المشتركين
-===================================================== -->
-
 <section class="section">
 
 <div class="section-title">
@@ -644,10 +632,6 @@ id="todayCount">
 
 
 
-<!-- =====================================================
-     جداول الخدمات
-===================================================== -->
-
 <section class="section">
 
 <div class="section-title">
@@ -667,9 +651,7 @@ id="todayCount">
 
 
 
-<!-- =====================================================
-     الممرض
-===================================================== -->
+<!-- الممرض -->
 
 <div class="schedule-card">
 
@@ -761,12 +743,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد الممرض
-
 </button>
 
 </form>
@@ -781,9 +759,7 @@ id="nurseAppointments">
 
 
 
-<!-- =====================================================
-     الطبيب المقيم
-===================================================== -->
+<!-- الطبيب المقيم -->
 
 <div class="schedule-card">
 
@@ -875,12 +851,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد الطبيب المقيم
-
 </button>
 
 </form>
@@ -895,9 +867,7 @@ id="residentAppointments">
 
 
 
-<!-- =====================================================
-     الطبيب الاختصاص
-===================================================== -->
+<!-- الطبيب الاختصاص -->
 
 <div class="schedule-card">
 
@@ -989,12 +959,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد الطبيب الاختصاص
-
 </button>
 
 </form>
@@ -1009,9 +975,7 @@ id="specialistAppointments">
 
 
 
-<!-- =====================================================
-     الترفيه
-===================================================== -->
+<!-- الترفيه -->
 
 <div class="schedule-card">
 
@@ -1103,12 +1067,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد الترفيه
-
 </button>
 
 </form>
@@ -1123,9 +1083,7 @@ id="entertainmentAppointments">
 
 
 
-<!-- =====================================================
-     الكوافير
-===================================================== -->
+<!-- الكوافير -->
 
 <div class="schedule-card">
 
@@ -1217,12 +1175,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد الكوافير
-
 </button>
 
 </form>
@@ -1237,9 +1191,7 @@ id="hairdresserAppointments">
 
 
 
-<!-- =====================================================
-     التغذية
-===================================================== -->
+<!-- التغذية -->
 
 <div class="schedule-card">
 
@@ -1331,12 +1283,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد التغذية
-
 </button>
 
 </form>
@@ -1351,9 +1299,7 @@ id="nutritionAppointments">
 
 
 
-<!-- =====================================================
-     العلاج الطبيعي
-===================================================== -->
+<!-- العلاج الطبيعي -->
 
 <div class="schedule-card">
 
@@ -1445,12 +1391,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد العلاج الطبيعي
-
 </button>
 
 </form>
@@ -1465,9 +1407,7 @@ id="physioAppointments">
 
 
 
-<!-- =====================================================
-     النفسي
-===================================================== -->
+<!-- النفسي -->
 
 <div class="schedule-card">
 
@@ -1559,12 +1499,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ الموعد النفسي
-
 </button>
 
 </form>
@@ -1579,9 +1515,7 @@ id="psychologistAppointments">
 
 
 
-<!-- =====================================================
-     المعين
-===================================================== -->
+<!-- المعين -->
 
 <div class="schedule-card">
 
@@ -1673,12 +1607,8 @@ required
 </label>
 
 
-<button
-class="save-schedule"
->
-
+<button class="save-schedule">
 💾 حفظ موعد المعين
-
 </button>
 
 </form>
@@ -1697,10 +1627,6 @@ id="assistantAppointments">
 </section>
 
 
-
-<!-- =====================================================
-     ملخص المواعيد
-===================================================== -->
 
 <section class="section">
 
@@ -1781,7 +1707,6 @@ const loggedStaffRaw =
 localStorage.getItem(
 "sanadLoggedInStaff"
 );
-
 
 if(!loggedStaffRaw){
 
@@ -1873,6 +1798,11 @@ customers=[];
 
 }catch(error){
 
+console.error(
+"خطأ في تحميل المشتركين:",
+error
+);
+
 customers=[];
 
 }
@@ -1907,6 +1837,11 @@ appointments=[];
 }
 
 }catch(error){
+
+console.error(
+"خطأ في تحميل المواعيد:",
+error
+);
 
 appointments=[];
 
@@ -2321,6 +2256,14 @@ role
 );
 
 
+/*
+   =====================================================
+   مهم:
+   قاعدة بيانات الكادر تعتمد staffId
+   وليس employee.id
+   =====================================================
+*/
+
 if(staff.length===0){
 
 const option=
@@ -2351,16 +2294,25 @@ document.createElement(
 );
 
 
-option.value=
-employee.id;
+/*
+   المعرّف الرسمي للموظف
+*/
 
+option.value=
+employee.staffId;
+
+
+/*
+   اسم الموظف للعرض
+*/
 
 option.dataset.staffName=
 employee.name;
 
-
 option.textContent=
-employee.name;
+employee.name+
+" — "+
+employee.staffId;
 
 
 select.appendChild(
@@ -2370,11 +2322,15 @@ option
 });
 
 
+/*
+   الاحتفاظ بالاختيار السابق
+*/
+
 if(
 staff.some(
 function(employee){
 
-return employee.id===
+return employee.staffId===
 currentValue;
 
 }
@@ -2473,8 +2429,6 @@ customer.name+
 "success"
 
 );
-
-
 
 }
 
@@ -2726,6 +2680,48 @@ return;
 
 
 /* =====================================================
+   التأكد من أن staffId موجود فعلاً
+   في قاعدة بيانات الكادر
+===================================================== */
+
+const selectedStaff=
+getStaffById(
+staffId
+);
+
+
+if(!selectedStaff){
+
+showMessage(
+
+"⚠️ لم يتم العثور على الكادر المحدد في قاعدة بيانات سند.",
+
+"error"
+
+);
+
+return;
+
+}
+
+
+if(!selectedStaff.active){
+
+showMessage(
+
+"⚠️ هذا الموظف غير فعال حالياً.",
+
+"error"
+
+);
+
+return;
+
+}
+
+
+
+/* =====================================================
    منع تعارض الكادر
 ===================================================== */
 
@@ -2877,23 +2873,25 @@ time,
 
 
 /*
-   هوية الكادر من قاعدة البيانات
+   =====================================================
+   هوية الكادر الرسمية
+   =====================================================
 */
 
 staffId:
-staffId,
+selectedStaff.staffId,
 
 
 /*
-   اسم الكادر للعرض
+   اسم الكادر للعرض فقط
 */
 
 staff:
-staffName,
+selectedStaff.name,
 
 
 staffType:
-serviceType,
+selectedStaff.role,
 
 
 status:
@@ -3086,9 +3084,9 @@ serviceType
 " للمشترك "+
 customer.name+
 " للكادر "+
-staffName+
+selectedStaff.name+
 " ("+
-staffId+
+selectedStaff.staffId+
 ")",
 
 "success"
