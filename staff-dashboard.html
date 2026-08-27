@@ -278,6 +278,8 @@
       font-weight: 900;
 
       cursor: pointer;
+
+      transition: .2s;
     }
 
     .start-btn {
@@ -287,6 +289,7 @@
 
     .start-btn:hover {
       background: #0f7068;
+      transform: translateY(-1px);
     }
 
     .complete-btn {
@@ -294,9 +297,18 @@
       color: white;
     }
 
+    .complete-btn:hover {
+      background: #116d50;
+      transform: translateY(-1px);
+    }
+
     .cancel-btn {
       background: #fff0f0;
       color: #a44b4b;
+    }
+
+    .cancel-btn:hover {
+      background: #ffe4e4;
     }
 
     /* =========================
@@ -606,7 +618,9 @@
 
   <nav class="nav">
 
-    <a href="index.html">الرئيسية</a>
+    <a href="index.html">
+      الرئيسية
+    </a>
 
     <a href="services.html">
       خدماتنا
@@ -766,10 +780,6 @@
 
 <!-- =========================
      VISIT FORM
-     
-     هذه الواجهة موجودة سابقاً.
-     حالياً سنستخدم visit.html
-     كواجهة الزيارة الرئيسية.
 ========================= -->
 
 <section
@@ -806,7 +816,9 @@
   </div>
 
 
-  <!-- العلامات الحيوية -->
+  <!-- =========================
+       العلامات الحيوية
+  ========================= -->
 
   <div
     class="medical-section"
@@ -819,6 +831,7 @@
 
 
     <div class="fields">
+
 
       <div class="field">
 
@@ -909,12 +922,15 @@
 
       </div>
 
+
     </div>
 
   </div>
 
 
-  <!-- التقييم الطبي -->
+  <!-- =========================
+       التقييم الطبي
+  ========================= -->
 
   <div
     class="medical-section"
@@ -927,6 +943,7 @@
 
 
     <div class="fields">
+
 
       <div class="field full">
 
@@ -997,12 +1014,15 @@
 
       </div>
 
+
     </div>
 
   </div>
 
 
-  <!-- التمريض -->
+  <!-- =========================
+       التمريض
+  ========================= -->
 
   <div
     class="medical-section"
@@ -1015,6 +1035,7 @@
 
 
     <div class="fields">
+
 
       <div class="field">
 
@@ -1108,12 +1129,15 @@
 
       </div>
 
+
     </div>
 
   </div>
 
 
-  <!-- التقرير النهائي -->
+  <!-- =========================
+       التقرير النهائي
+  ========================= -->
 
   <div class="medical-section">
 
@@ -1141,6 +1165,10 @@
 
   </div>
 
+
+  <!-- =========================
+       ACTIONS
+  ========================= -->
 
   <div class="visit-actions">
 
@@ -1316,12 +1344,26 @@ if (loggedStaff) {
    3. الزيارات
 ===================================================== */
 
-let visits =
-  JSON.parse(
-    localStorage.getItem(
-      "sanadVisits"
-    ) || "[]"
-  );
+let visits = [];
+
+try {
+
+  visits =
+    JSON.parse(
+      localStorage.getItem(
+        "sanadVisits"
+      ) || "[]"
+    );
+
+  if (!Array.isArray(visits)) {
+    visits = [];
+  }
+
+} catch (error) {
+
+  visits = [];
+
+}
 
 
 /* =====================================================
@@ -1385,10 +1427,7 @@ if (visits.length === 0) {
   ];
 
 
-  localStorage.setItem(
-    "sanadVisits",
-    JSON.stringify(visits)
-  );
+  saveVisits();
 
 }
 
@@ -1400,9 +1439,7 @@ if (visits.length === 0) {
 function getStaffVisits() {
 
   if (!loggedStaff) {
-
     return [];
-
   }
 
 
@@ -1446,7 +1483,7 @@ function getStaffVisits() {
 
 
 /* =====================================================
-   6. عرض عدد الزيارات
+   6. عرض عدد الزيارات اليوم
 ===================================================== */
 
 function updateTodayCount() {
@@ -1524,6 +1561,31 @@ function renderVisits() {
   }
 
 
+  /* ترتيب الزيارات حسب التاريخ والوقت */
+
+  staffVisits.sort(
+    function(a, b) {
+
+      const dateA =
+        new Date(
+          a.date +
+          "T" +
+          a.time
+        );
+
+      const dateB =
+        new Date(
+          b.date +
+          "T" +
+          b.time
+        );
+
+      return dateA - dateB;
+
+    }
+  );
+
+
   staffVisits.forEach(
     function(visit) {
 
@@ -1538,6 +1600,10 @@ function renderVisits() {
       let actionHTML = "";
 
 
+      /* =========================
+         بانتظار الزيارة
+      ========================= */
+
       if (
         visit.status ===
         "waiting"
@@ -1550,11 +1616,15 @@ function renderVisits() {
         `;
 
 
+        /*
+           زر بدء الزيارة يظهر هنا فقط.
+        */
+
         actionHTML = `
 
           <button
             class="start-btn"
-            onclick="startVisit('${visit.id}')"
+            onclick="startVisit('${escapeJS(visit.id)}')"
           >
             ▶ بدء الزيارة
           </button>
@@ -1563,6 +1633,10 @@ function renderVisits() {
 
       }
 
+
+      /* =========================
+         الزيارة قيد التنفيذ
+      ========================= */
 
       else if (
         visit.status ===
@@ -1576,19 +1650,36 @@ function renderVisits() {
         `;
 
 
+        /*
+           مهم:
+           لا يوجد هنا زر بدء الزيارة
+           ولا زر متابعة الزيارة.
+
+           لأن واجهة الزيارة أصبحت
+           مفتوحة أسفل الجدول.
+        */
+
         actionHTML = `
 
-          <button
-            class="start-btn"
-            onclick="startVisit('${visit.id}')"
+          <span
+            style="
+              color:#16877d;
+              font-size:11px;
+              font-weight:800;
+              white-space:nowrap;
+            "
           >
-            متابعة الزيارة
-          </button>
+            🩺 الزيارة قيد التنفيذ
+          </span>
 
         `;
 
       }
 
+
+      /* =========================
+         الزيارة مكتملة
+      ========================= */
 
       else if (
         visit.status ===
@@ -1603,15 +1694,18 @@ function renderVisits() {
 
 
         actionHTML = `
+
           <span
             style="
               color:#16815f;
               font-size:11px;
               font-weight:800;
+              white-space:nowrap;
             "
           >
             تم إرسال التقرير
           </span>
+
         `;
 
       }
@@ -1672,22 +1766,6 @@ function renderVisits() {
    8. بدء الزيارة
 ===================================================== */
 
-/*
-   ملاحظة مهمة:
-   هنا تم تعديل النظام.
-
-   سابقاً كانت الزيارة تفتح داخل
-   staff-dashboard.html.
-
-   الآن عند الضغط على "بدء الزيارة":
-
-   1. نحدد الزيارة قيد التنفيذ.
-   2. نحفظ بيانات المسن.
-   3. نحفظ بيانات الكادر.
-   4. نحفظ البيانات في sanadCurrentVisit.
-   5. نفتح visit.html.
-===================================================== */
-
 let currentVisit = null;
 
 
@@ -1715,10 +1793,25 @@ function startVisit(id) {
 
 
   /*
-     =========================================
-     تحديد الزيارة كقيد التنفيذ
-     =========================================
+     منع إعادة بدء زيارة مكتملة
   */
+
+  if (
+    visit.status ===
+    "completed"
+  ) {
+
+    alert(
+      "هذه الزيارة مكتملة بالفعل."
+    );
+
+    return;
+
+  }
+
+
+  currentVisit = visit;
+
 
   visit.status =
     "in_progress";
@@ -1728,90 +1821,31 @@ function startVisit(id) {
     new Date().toISOString();
 
 
-  /*
-     =========================================
-     بيانات الزيارة التي سترسل إلى visit.html
-     =========================================
-  */
-
-  const visitData = {
-
-    id:
-      visit.id,
-
-    patientName:
-      visit.patientName,
-
-    address:
-      visit.address,
-
-    visitType:
-      visit.type,
-
-    visitTime:
-      visit.time,
-
-    date:
-      visit.date,
-
-    staffName:
-      loggedStaff
-        ? loggedStaff.name
-        : "كادر سند",
-
-    staffRole:
-      loggedStaff
-        ? loggedStaff.role
-        : "staff",
-
-    staffTitle:
-      loggedStaff
-        ? loggedStaff.title
-        : "كادر سند",
-
-    startedAt:
-      visit.startedAt
-
-  };
-
-
-  /*
-     =========================================
-     حفظ الزيارة الحالية
-     =========================================
-  */
-
-  localStorage.setItem(
-    "sanadCurrentVisit",
-    JSON.stringify(
-      visitData
-    )
-  );
-
-
-  /*
-     =========================================
-     حفظ تحديث الزيارات
-     =========================================
-  */
-
   saveVisits();
 
 
   /*
-     =========================================
-     الانتقال إلى visit.html
-     =========================================
+     فتح واجهة الزيارة
   */
 
-  window.location.href =
-    "visit.html";
+  showVisitInterface(
+    visit
+  );
+
+
+  /*
+     تحديث الجدول فوراً
+  */
+
+  renderVisits();
+
+  updateTodayCount();
 
 }
 
 
 /* =====================================================
-   9. الواجهة القديمة داخل الصفحة
+   9. واجهة الزيارة
 ===================================================== */
 
 function showVisitInterface(
@@ -1826,12 +1860,6 @@ function showVisitInterface(
 
   section.style.display =
     "block";
-
-
-  section.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
 
 
   document.getElementById(
@@ -1909,6 +1937,12 @@ function showVisitInterface(
 
   clearVisitForm();
 
+
+  section.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
 }
 
 
@@ -1948,6 +1982,10 @@ function configureRoleInterface() {
     );
 
 
+  /*
+     الممرض
+  */
+
   if (role === "nurse") {
 
     roleNotice.innerHTML = `
@@ -1969,6 +2007,10 @@ function configureRoleInterface() {
 
   }
 
+
+  /*
+     الطبيب المقيم
+  */
 
   if (role === "resident") {
 
@@ -1992,6 +2034,10 @@ function configureRoleInterface() {
   }
 
 
+  /*
+     الطبيب الأخصائي
+  */
+
   if (role === "specialist") {
 
     roleNotice.innerHTML = `
@@ -2013,6 +2059,10 @@ function configureRoleInterface() {
 
   }
 
+
+  /*
+     بقية الكوادر
+  */
 
   roleNotice.innerHTML = `
     👤 <strong>${escapeHTML(
@@ -2040,7 +2090,7 @@ function configureRoleInterface() {
 
 
 /* =====================================================
-   11. إتمام الزيارة - للواجهة القديمة
+   11. إتمام الزيارة وإرسال التقرير
 ===================================================== */
 
 function completeVisit() {
@@ -2069,6 +2119,10 @@ function completeVisit() {
   }
 
 
+  /*
+     إنشاء التقرير الكامل
+  */
+
   const report = {
 
     id:
@@ -2078,34 +2132,50 @@ function completeVisit() {
     visitId:
       currentVisit.id,
 
-    patientName:
-      currentVisit.patientName,
+    patient: {
 
-    patientAddress:
-      currentVisit.address,
+      name:
+        currentVisit.patientName,
 
-    visitDate:
-      currentVisit.date,
+      address:
+        currentVisit.address
 
-    visitTime:
-      currentVisit.time,
+    },
 
-    visitType:
-      currentVisit.type,
+    visit: {
+
+      date:
+        currentVisit.date,
+
+      time:
+        currentVisit.time,
+
+      type:
+        currentVisit.type
+
+    },
 
     staff: {
 
       employeeId:
-        loggedStaff.employeeId,
+        loggedStaff
+          ? loggedStaff.employeeId
+          : "",
 
       name:
-        loggedStaff.name,
+        loggedStaff
+          ? loggedStaff.name
+          : "كادر سند",
 
       title:
-        loggedStaff.title,
+        loggedStaff
+          ? loggedStaff.title
+          : "كادر سند",
 
       role:
-        loggedStaff.role
+        loggedStaff
+          ? loggedStaff.role
+          : ""
 
     },
 
@@ -2169,8 +2239,19 @@ function completeVisit() {
     finalReport:
       getValue("finalReport"),
 
+    startedAt:
+      currentVisit.startedAt ||
+      null,
+
     completedAt:
       new Date().toISOString(),
+
+    status:
+      "completed",
+
+    /*
+       الجهات المستلمة للتقرير
+    */
 
     recipients: {
 
@@ -2181,6 +2262,12 @@ function completeVisit() {
       family: true
 
     },
+
+    /*
+       في المرحلة الحالية
+       هذه الحالات محفوظة محلياً.
+       لاحقاً نربطها بالإرسال الحقيقي.
+    */
 
     deliveryStatus: {
 
@@ -2198,12 +2285,30 @@ function completeVisit() {
   };
 
 
-  let reports =
-    JSON.parse(
-      localStorage.getItem(
-        "sanadVisitReports"
-      ) || "[]"
-    );
+  /* =====================================================
+     حفظ التقرير
+  ===================================================== */
+
+  let reports = [];
+
+  try {
+
+    reports =
+      JSON.parse(
+        localStorage.getItem(
+          "sanadVisitReports"
+        ) || "[]"
+      );
+
+    if (!Array.isArray(reports)) {
+      reports = [];
+    }
+
+  } catch (error) {
+
+    reports = [];
+
+  }
 
 
   reports.push(
@@ -2218,6 +2323,10 @@ function completeVisit() {
     )
   );
 
+
+  /* =====================================================
+     تحديث الزيارة
+  ===================================================== */
 
   currentVisit.status =
     "completed";
@@ -2234,6 +2343,10 @@ function completeVisit() {
   saveVisits();
 
 
+  /* =====================================================
+     رسالة النجاح
+  ===================================================== */
+
   const message =
     document.getElementById(
       "reportMessage"
@@ -2247,13 +2360,14 @@ function completeVisit() {
     <br>
 
     تم إنشاء تقرير الزيارة رقم:
+
     <strong>
       ${escapeHTML(report.id)}
     </strong>
 
     <br><br>
 
-    📤 التقرير جاهز للإرسال إلى:
+    📤 التقرير محفوظ لإرساله إلى:
 
     <br>
 
@@ -2267,6 +2381,14 @@ function completeVisit() {
 
     👨‍👩‍👦 العائلة
 
+    <br><br>
+
+    <small>
+      الإرسال الفعلي إلى أجهزة الإدارة
+      والمسن والعائلة سيتم ربطه بقاعدة البيانات
+      ونظام الإشعارات في المرحلة القادمة.
+    </small>
+
   `;
 
 
@@ -2274,13 +2396,25 @@ function completeVisit() {
     "block";
 
 
+  /*
+     إغلاق الزيارة الحالية
+  */
+
   currentVisit = null;
 
+
+  /*
+     تحديث الجدول
+  */
 
   renderVisits();
 
   updateTodayCount();
 
+
+  /*
+     إخفاء واجهة الزيارة بعد عدة ثوانٍ
+  */
 
   setTimeout(
     function() {
@@ -2298,7 +2432,7 @@ function completeVisit() {
 
 
 /* =====================================================
-   12. إلغاء الزيارة
+   12. إلغاء الزيارة الحالية
 ===================================================== */
 
 function cancelVisit() {
@@ -2312,7 +2446,7 @@ function cancelVisit() {
 
   const confirmed =
     confirm(
-      "هل تريد الخروج من الزيارة؟ سيتم الاحتفاظ بحالة الزيارة."
+      "هل تريد الخروج من الزيارة؟ سيتم الاحتفاظ بحالة الزيارة قيد التنفيذ."
     );
 
 
@@ -2323,6 +2457,11 @@ function cancelVisit() {
   }
 
 
+  /*
+     لا نعيد الحالة إلى waiting.
+     الزيارة تبقى in_progress.
+  */
+
   currentVisit = null;
 
 
@@ -2330,6 +2469,9 @@ function cancelVisit() {
     "visitSection"
   ).style.display =
     "none";
+
+
+  renderVisits();
 
 }
 
@@ -2348,11 +2490,13 @@ function clearVisitForm() {
     "pulse",
     "oxygen",
     "weight",
+
     "symptoms",
     "examination",
     "diagnosis",
     "treatment",
     "recommendations",
+
     "nursingNotes",
     "finalReport"
 
@@ -2381,6 +2525,7 @@ function clearVisitForm() {
       "medicationGiven"
     );
 
+
   if (medicationGiven) {
     medicationGiven.value = "";
   }
@@ -2390,6 +2535,7 @@ function clearVisitForm() {
     document.getElementById(
       "personalCare"
     );
+
 
   if (personalCare) {
     personalCare.value = "";
@@ -2401,28 +2547,22 @@ function clearVisitForm() {
       "nutritionStatus"
     );
 
+
   if (nutritionStatus) {
     nutritionStatus.value = "";
   }
 
 
-  const reportMessage =
-    document.getElementById(
-      "reportMessage"
-    );
-
-  if (reportMessage) {
-
-    reportMessage.style.display =
-      "none";
-
-  }
+  document.getElementById(
+    "reportMessage"
+  ).style.display =
+    "none";
 
 }
 
 
 /* =====================================================
-   14. قراءة قيمة
+   14. قراءة قيمة الحقل
 ===================================================== */
 
 function getValue(id) {
@@ -2541,7 +2681,44 @@ function escapeHTML(value) {
 
 
 /* =====================================================
-   18. تسجيل الخروج
+   18. حماية ID عند وضعه داخل onclick
+===================================================== */
+
+function escapeJS(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replaceAll(
+      "\\",
+      "\\\\"
+    )
+    .replaceAll(
+      "'",
+      "\\'"
+    )
+    .replaceAll(
+      "\n",
+      "\\n"
+    )
+    .replaceAll(
+      "\r",
+      "\\r"
+    );
+
+}
+
+
+/* =====================================================
+   19. تسجيل الخروج
 ===================================================== */
 
 function logoutStaff(event) {
@@ -2580,7 +2757,7 @@ function logoutStaff(event) {
 
 
 /* =====================================================
-   19. تشغيل الصفحة
+   20. تشغيل الصفحة
 ===================================================== */
 
 updateTodayCount();
