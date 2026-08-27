@@ -2,263 +2,262 @@
 <html lang="ar" dir="rtl">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل دخول الكادر | سند</title>
 
-  <title>تسجيل دخول الكادر | سند</title>
+<link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css">
+<style>
 
-  <style>
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
 
-    body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
-    }
+.login-page{
+min-height:calc(100vh - 180px);
+padding:55px 7%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-    .login-page {
-      min-height: calc(100vh - 180px);
-      padding: 55px 7%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.login-container{
+width:100%;
+max-width:1000px;
+background:white;
+border-radius:28px;
+padding:42px;
+box-shadow:0 25px 70px rgba(22,70,65,.09);
+border:1px solid #e3edeb;
+}
 
-    .login-container {
-      width: 100%;
-      max-width: 1000px;
-      background: white;
-      border-radius: 28px;
-      padding: 42px;
-      box-shadow: 0 25px 70px rgba(22,70,65,.09);
-      border: 1px solid #e3edeb;
-    }
+.login-header{
+text-align:center;
+margin-bottom:30px;
+}
 
-    .login-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.eyebrow{
+display:block;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:8px;
+}
 
-    .eyebrow {
-      display: block;
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
+.login-header h1{
+color:#163b38;
+font-size:34px;
+margin:0 0 8px;
+}
 
-    .login-header h1 {
-      color: #163b38;
-      font-size: 34px;
-      margin: 0 0 8px;
-    }
+.login-header p{
+color:#718480;
+font-size:14px;
+margin:0;
+}
 
-    .login-header p {
-      color: #718480;
-      font-size: 14px;
-      margin: 0;
-    }
+.roles-title{
+color:#163b38;
+font-size:17px;
+font-weight:800;
+margin-bottom:15px;
+}
 
-    .roles-title {
-      color: #163b38;
-      font-size: 17px;
-      font-weight: 800;
-      margin-bottom: 15px;
-    }
+.roles{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:13px;
+margin-bottom:28px;
+}
 
-    .roles {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 13px;
-      margin-bottom: 28px;
-    }
+.role{
+border:1.5px solid #e3edeb;
+background:#fbfefe;
+border-radius:17px;
+padding:17px 10px;
+min-height:115px;
+cursor:pointer;
+text-align:center;
+font-family:inherit;
+transition:.25s;
+}
 
-    .role {
-      border: 1.5px solid #e3edeb;
-      background: #fbfefe;
-      border-radius: 17px;
-      padding: 17px 10px;
-      min-height: 115px;
-      cursor: pointer;
-      text-align: center;
-      font-family: inherit;
-      transition: .25s;
-    }
+.role:hover{
+border-color:#16877d;
+transform:translateY(-3px);
+}
 
-    .role:hover {
-      border-color: #16877d;
-      transform: translateY(-3px);
-    }
+.role.active{
+background:#e8f5f3;
+border-color:#16877d;
+box-shadow:0 8px 22px rgba(22,135,125,.12);
+}
 
-    .role.active {
-      background: #e8f5f3;
-      border-color: #16877d;
-      box-shadow: 0 8px 22px rgba(22,135,125,.12);
-    }
+.role-icon{
+font-size:28px;
+margin-bottom:8px;
+}
 
-    .role-icon {
-      font-size: 28px;
-      margin-bottom: 8px;
-    }
+.role-name{
+display:block;
+color:#163b38;
+font-size:12px;
+font-weight:800;
+line-height:1.5;
+}
 
-    .role-name {
-      display: block;
-      color: #163b38;
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.5;
-    }
+.form-box{
+border-top:1px solid #e3edeb;
+padding-top:28px;
+}
 
-    .form-box {
-      border-top: 1px solid #e3edeb;
-      padding-top: 28px;
-    }
+.selected-role{
+background:#f0f8f6;
+border:1px solid #dcece9;
+border-radius:13px;
+padding:12px 15px;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:20px;
+text-align:center;
+}
 
-    .selected-role {
-      background: #f0f8f6;
-      border: 1px solid #dcece9;
-      border-radius: 13px;
-      padding: 12px 15px;
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.form-row{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:17px;
+}
 
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 17px;
-    }
+.form-row label{
+color:#163b38;
+font-size:13px;
+font-weight:800;
+}
 
-    .form-row label {
-      color: #163b38;
-      font-size: 13px;
-      font-weight: 800;
-    }
+.form-row input{
+width:100%;
+box-sizing:border-box;
+padding:14px;
+border-radius:12px;
+border:1px solid #dfecea;
+background:#fbfefe;
+color:#163b38;
+font-family:inherit;
+font-size:14px;
+outline:none;
+}
 
-    .form-row input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid #dfecea;
-      background: #fbfefe;
-      color: #163b38;
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-    }
+.form-row input:focus{
+border-color:#16877d;
+background:white;
+box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
 
-    .form-row input:focus {
-      border-color: #16877d;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
-    }
+.actions{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-top:23px;
+}
 
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-top: 23px;
-    }
+.forgot{
+color:#16877d;
+font-size:12px;
+font-weight:800;
+text-decoration:none;
+}
 
-    .forgot {
-      color: #16877d;
-      font-size: 12px;
-      font-weight: 800;
-      text-decoration: none;
-    }
+.btn-login{
+border:none;
+border-radius:13px;
+padding:13px 28px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+}
 
-    .btn-login {
-      border: none;
-      border-radius: 13px;
-      padding: 13px 28px;
-      background: #16877d;
-      color: white;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.btn-login:hover{
+background:#0f7068;
+}
 
-    .btn-login:hover {
-      background: #0f7068;
-    }
+.error,
+.success{
+display:none;
+margin-top:15px;
+padding:12px;
+border-radius:11px;
+text-align:center;
+font-size:12px;
+font-weight:800;
+}
 
-    .error,
-    .success {
-      display: none;
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 11px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 800;
-    }
+.error{
+background:#fff0f0;
+color:#a44b4b;
+border:1px solid #f0dada;
+}
 
-    .error {
-      background: #fff0f0;
-      color: #a44b4b;
-      border: 1px solid #f0dada;
-    }
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
 
-    .success {
-      background: #e6f6ef;
-      color: #16815f;
-    }
+.back-home{
+display:flex;
+width:fit-content;
+margin:28px auto 0;
+color:#16877d;
+text-decoration:none;
+font-size:12px;
+font-weight:800;
+}
 
-    .back-home {
-      display: flex;
-      width: fit-content;
-      margin: 28px auto 0;
-      color: #16877d;
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 800;
-    }
+@media(max-width:900px){
 
-    @media (max-width: 900px) {
+.roles{
+grid-template-columns:repeat(3,1fr);
+}
 
-      .roles {
-        grid-template-columns: repeat(3, 1fr);
-      }
+}
 
-    }
+@media(max-width:650px){
 
-    @media (max-width: 650px) {
+.login-page{
+padding:30px 5%;
+}
 
-      .login-page {
-        padding: 30px 5%;
-      }
+.login-container{
+padding:28px 20px;
+}
 
-      .login-container {
-        padding: 28px 20px;
-      }
+.roles{
+grid-template-columns:repeat(2,1fr);
+}
 
-      .roles {
-        grid-template-columns: repeat(2, 1fr);
-      }
+.actions{
+flex-direction:column;
+align-items:stretch;
+}
 
-      .actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
+.btn-login{
+width:100%;
+}
 
-      .btn-login {
-        width: 100%;
-      }
+.forgot{
+text-align:center;
+}
 
-      .forgot {
-        text-align: center;
-      }
+}
 
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -266,603 +265,570 @@
 
 <header class="header">
 
-  <a href="index.html" class="logo">
-    سند<span>.</span>
-  </a>
+<a href="index.html" class="logo">
+سند<span>.</span>
+</a>
 
-  <nav class="nav">
+<nav class="nav">
 
-    <a href="index.html">الرئيسية</a>
-    <a href="services.html">خدماتنا</a>
-    <a href="how.html">كيف يعمل سند؟</a>
-    <a href="about.html">عن سند</a>
+<a href="index.html">الرئيسية</a>
+<a href="services.html">خدماتنا</a>
+<a href="how.html">كيف يعمل سند؟</a>
+<a href="about.html">عن سند</a>
 
-  </nav>
+</nav>
 
 </header>
 
 
 <main class="login-page">
 
-  <div class="login-container">
+<div class="login-container">
 
-    <div class="login-header">
+<div class="login-header">
 
-      <span class="eyebrow">
-        🏥 نظام الكادر — سند
-      </span>
+<span class="eyebrow">
+🏥 نظام الكادر — سند
+</span>
 
-      <h1>
-        تسجيل دخول الكادر
-      </h1>
+<h1>
+تسجيل دخول الكادر
+</h1>
 
-      <p>
-        اختر صفتك الوظيفية ثم أدخل بيانات حسابك
-      </p>
+<p>
+اختر صفتك الوظيفية ثم أدخل بيانات حسابك
+</p>
 
-    </div>
-
-
-    <div class="roles-title">
-      اختر الصفة الوظيفية
-    </div>
+</div>
 
 
-    <div class="roles">
-
-      <button type="button" class="role"
-        onclick="selectRole('owner', this)">
-        <div class="role-icon">👑</div>
-        <span class="role-name">مالك النظام</span>
-      </button>
+<div class="roles-title">
+اختر الصفة الوظيفية
+</div>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('manager', this)">
-        <div class="role-icon">👨‍💼</div>
-        <span class="role-name">مدير الشركة</span>
-      </button>
+<div class="roles">
+
+<button type="button" class="role"
+onclick="selectRole('owner',this)">
+<div class="role-icon">👑</div>
+<span class="role-name">مالك النظام</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('reception', this)">
-        <div class="role-icon">🧑‍💼</div>
-        <span class="role-name">موظف الاستقبال</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('manager',this)">
+<div class="role-icon">👨‍💼</div>
+<span class="role-name">مدير الشركة</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('specialist', this)">
-        <div class="role-icon">👨‍⚕️</div>
-        <span class="role-name">الطبيب الأخصائي</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('reception',this)">
+<div class="role-icon">🧑‍💼</div>
+<span class="role-name">موظف الاستقبال</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('resident', this)">
-        <div class="role-icon">🩺</div>
-        <span class="role-name">الطبيب المقيم</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('specialist',this)">
+<div class="role-icon">👨‍⚕️</div>
+<span class="role-name">الطبيب الأخصائي</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('nurse', this)">
-        <div class="role-icon">👩‍⚕️</div>
-        <span class="role-name">الممرض الصحي</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('resident',this)">
+<div class="role-icon">🩺</div>
+<span class="role-name">الطبيب المقيم</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('nutrition', this)">
-        <div class="role-icon">🥗</div>
-        <span class="role-name">أخصائي التغذية</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('nurse',this)">
+<div class="role-icon">👩‍⚕️</div>
+<span class="role-name">الممرض الصحي</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('physio', this)">
-        <div class="role-icon">🏃</div>
-        <span class="role-name">أخصائي العلاج الطبيعي</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('nutrition',this)">
+<div class="role-icon">🥗</div>
+<span class="role-name">أخصائي التغذية</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('psychologist', this)">
-        <div class="role-icon">🧠</div>
-        <span class="role-name">الأخصائي النفسي</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('physio',this)">
+<div class="role-icon">🏃</div>
+<span class="role-name">أخصائي العلاج الطبيعي</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('entertainment', this)">
-        <div class="role-icon">🎭</div>
-        <span class="role-name">مرافق الترفيه</span>
-      </button>
+<button type="button" class="role"
+onclick="selectRole('psychologist',this)">
+<div class="role-icon">🧠</div>
+<span class="role-name">الأخصائي النفسي</span>
+</button>
 
 
-      <button type="button" class="role"
-        onclick="selectRole('hairdresser', this)">
-        <div class="role-icon">💇</div>
-        <span class="role-name">الكوافير</span>
-      </button>
-
-    </div>
+<button type="button" class="role"
+onclick="selectRole('entertainment',this)">
+<div class="role-icon">🎭</div>
+<span class="role-name">مرافق الترفيه</span>
+</button>
 
 
-    <div class="form-box">
+<button type="button" class="role"
+onclick="selectRole('hairdresser',this)">
+<div class="role-icon">💇</div>
+<span class="role-name">الكوافير</span>
+</button>
 
-      <div class="selected-role" id="selectedRole">
-        ⚠️ يرجى اختيار الصفة الوظيفية أولاً
-      </div>
-
-
-      <form id="staffLoginForm">
-
-        <div class="form-row">
-
-          <label for="staffPhone">
-            📱 رقم الهاتف
-          </label>
-
-          <input
-            id="staffPhone"
-            type="tel"
-            placeholder="أدخل رقم الهاتف"
-            autocomplete="tel"
-            required
-          >
-
-        </div>
+</div>
 
 
-        <div class="form-row">
+<div class="form-box">
 
-          <label for="staffPassword">
-            🔐 كلمة المرور
-          </label>
-
-          <input
-            id="staffPassword"
-            type="password"
-            placeholder="أدخل كلمة المرور"
-            autocomplete="current-password"
-            required
-          >
-
-        </div>
+<div class="selected-role" id="selectedRole">
+⚠️ يرجى اختيار الصفة الوظيفية أولاً
+</div>
 
 
-        <div class="actions">
+<form id="staffLoginForm">
 
-          <a
-            href="#"
-            class="forgot"
-            onclick="forgotPassword(event)"
-          >
-            نسيت كلمة المرور؟
-          </a>
+<div class="form-row">
 
-          <button
-            type="submit"
-            class="btn-login"
-          >
-            تسجيل الدخول
-          </button>
+<label for="staffPhone">
+📱 رقم الهاتف
+</label>
 
-        </div>
+<input
+id="staffPhone"
+type="tel"
+placeholder="أدخل رقم الهاتف"
+autocomplete="tel"
+required
+>
 
-
-        <div id="errorMessage" class="error"></div>
-
-        <div id="successMessage" class="success"></div>
-
-      </form>
-
-    </div>
+</div>
 
 
-    <a href="login.html" class="back-home">
-      ← العودة إلى اختيار نوع الحساب
-    </a>
+<div class="form-row">
 
-  </div>
+<label for="staffPassword">
+🔐 كلمة المرور
+</label>
+
+<input
+id="staffPassword"
+type="password"
+placeholder="أدخل كلمة المرور"
+autocomplete="current-password"
+required
+>
+
+</div>
+
+
+<div class="actions">
+
+<a
+href="#"
+class="forgot"
+onclick="forgotPassword(event)"
+>
+نسيت كلمة المرور؟
+</a>
+
+<button
+type="submit"
+class="btn-login"
+>
+تسجيل الدخول
+</button>
+
+</div>
+
+
+<div id="errorMessage" class="error"></div>
+
+<div id="successMessage" class="success"></div>
+
+</form>
+
+</div>
+
+
+<a href="login.html" class="back-home">
+← العودة إلى اختيار نوع الحساب
+</a>
+
+</div>
 
 </main>
 
 
 <footer>
 
-  <div class="footer-logo">
-    سند<span>.</span>
-  </div>
+<div class="footer-logo">
+سند<span>.</span>
+</div>
 
-  <p>
-    الرعاية المنزلية لكبار السن
-  </p>
+<p>
+الرعاية المنزلية لكبار السن
+</p>
 
-  <small>
-    © 2026 سند — جميع الحقوق محفوظة
-  </small>
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
 
 </footer>
 
 
 <script>
 
-/* =====================================================
-   حسابات الكادر التجريبية
-===================================================== */
+const staffAccounts=[
 
-const staffAccounts = [
+{
+phone:"07700000001",
+password:"123456",
+role:"owner",
+name:"منتظر",
+title:"مالك النظام",
+employeeId:"OWNER-001",
+dashboard:"owner-dashboard.html",
+permissions:["all"]
+},
 
-  {
-    phone: "07700000001",
-    password: "123456",
-    role: "owner",
-    name: "منتظر",
-    title: "مالك النظام",
-    employeeId: "OWNER-001",
-    dashboard: "staff-dashboard.html",
-    permissions: ["all"]
-  },
+{
+phone:"07700000002",
+password:"123456",
+role:"manager",
+name:"مدير الشركة",
+title:"مدير الشركة",
+employeeId:"ST-002",
+dashboard:"manager-dashboard.html",
+permissions:[
+"customers",
+"packages",
+"approvals",
+"reports"
+]
+},
 
-  {
-    phone: "07700000002",
-    password: "123456",
-    role: "manager",
-    name: "مدير الشركة",
-    title: "مدير الشركة",
-    employeeId: "ST-002",
-    dashboard: "manager-dashboard.html",
-    permissions: [
-      "customers",
-      "packages",
-      "approvals",
-      "reports"
-    ]
-  },
+{
+phone:"07700000003",
+password:"123456",
+role:"reception",
+name:"موظف الاستقبال",
+title:"موظف الاستقبال",
+employeeId:"ST-003",
+dashboard:"reception-dashboard.html",
+permissions:[
+"packages",
+"new_customer",
+"customers",
+"payments"
+]
+},
 
-  {
-    phone: "07700000003",
-    password: "123456",
-    role: "reception",
-    name: "موظف الاستقبال",
-    title: "موظف الاستقبال",
-    employeeId: "ST-003",
-    dashboard: "reception-dashboard.html",
-    permissions: [
-      "packages",
-      "new_customer",
-      "customers",
-      "payments"
-    ]
-  },
+{
+phone:"07700000004",
+password:"123456",
+role:"specialist",
+name:"د. محمد",
+title:"طبيب أخصائي",
+employeeId:"ST-004",
+dashboard:"staff-dashboard.html",
+permissions:["medical_specialist"]
+},
 
-  {
-    phone: "07700000004",
-    password: "123456",
-    role: "specialist",
-    name: "د. محمد",
-    title: "طبيب أخصائي",
-    employeeId: "ST-004",
-    dashboard: "staff-dashboard.html",
-    permissions: ["medical_specialist"]
-  },
+{
+phone:"07700000005",
+password:"123456",
+role:"resident",
+name:"د. أحمد",
+title:"طبيب مقيم",
+employeeId:"ST-005",
+dashboard:"staff-dashboard.html",
+permissions:["medical_resident"]
+},
 
-  {
-    phone: "07700000005",
-    password: "123456",
-    role: "resident",
-    name: "د. أحمد",
-    title: "طبيب مقيم",
-    employeeId: "ST-005",
-    dashboard: "staff-dashboard.html",
-    permissions: ["medical_resident"]
-  },
+{
+phone:"07700000006",
+password:"123456",
+role:"nurse",
+name:"ممرض سند",
+title:"الممرض الصحي",
+employeeId:"ST-006",
+dashboard:"staff-dashboard.html",
+permissions:["nursing"]
+},
 
-  {
-    phone: "07700000006",
-    password: "123456",
-    role: "nurse",
-    name: "ممرض سند",
-    title: "الممرض الصحي",
-    employeeId: "ST-006",
-    dashboard: "staff-dashboard.html",
-    permissions: ["nursing"]
-  },
+{
+phone:"07700000007",
+password:"123456",
+role:"nutrition",
+name:"أخصائي التغذية",
+title:"أخصائي التغذية",
+employeeId:"ST-007",
+dashboard:"staff-dashboard.html",
+permissions:["nutrition"]
+},
 
-  {
-    phone: "07700000007",
-    password: "123456",
-    role: "nutrition",
-    name: "أخصائي التغذية",
-    title: "أخصائي التغذية",
-    employeeId: "ST-007",
-    dashboard: "staff-dashboard.html",
-    permissions: ["nutrition"]
-  },
+{
+phone:"07700000008",
+password:"123456",
+role:"physio",
+name:"أخصائي العلاج الطبيعي",
+title:"أخصائي العلاج الطبيعي",
+employeeId:"ST-008",
+dashboard:"staff-dashboard.html",
+permissions:["physio"]
+},
 
-  {
-    phone: "07700000008",
-    password: "123456",
-    role: "physio",
-    name: "أخصائي العلاج الطبيعي",
-    title: "أخصائي العلاج الطبيعي",
-    employeeId: "ST-008",
-    dashboard: "staff-dashboard.html",
-    permissions: ["physio"]
-  },
+{
+phone:"07700000009",
+password:"123456",
+role:"psychologist",
+name:"الأخصائي النفسي",
+title:"الأخصائي النفسي",
+employeeId:"ST-009",
+dashboard:"staff-dashboard.html",
+permissions:["psychology"]
+},
 
-  {
-    phone: "07700000009",
-    password: "123456",
-    role: "psychologist",
-    name: "الأخصائي النفسي",
-    title: "الأخصائي النفسي",
-    employeeId: "ST-009",
-    dashboard: "staff-dashboard.html",
-    permissions: ["psychology"]
-  },
+{
+phone:"07700000010",
+password:"123456",
+role:"entertainment",
+name:"مرافق سند",
+title:"مرافق الترفيه",
+employeeId:"ST-010",
+dashboard:"staff-dashboard.html",
+permissions:["entertainment"]
+},
 
-  {
-    phone: "07700000010",
-    password: "123456",
-    role: "entertainment",
-    name: "مرافق سند",
-    title: "مرافق الترفيه",
-    employeeId: "ST-010",
-    dashboard: "staff-dashboard.html",
-    permissions: ["entertainment"]
-  },
-
-  {
-    phone: "07700000011",
-    password: "123456",
-    role: "hairdresser",
-    name: "كوافير سند",
-    title: "الكوافير",
-    employeeId: "ST-011",
-    dashboard: "staff-dashboard.html",
-    permissions: ["hairdresser"]
-  }
+{
+phone:"07700000011",
+password:"123456",
+role:"hairdresser",
+name:"كوافير سند",
+title:"الكوافير",
+employeeId:"ST-011",
+dashboard:"staff-dashboard.html",
+permissions:["hairdresser"]
+}
 
 ];
 
 
-/* =====================================================
-   الصفة المختارة
-===================================================== */
-
-let selectedRole = null;
+let selectedRole=null;
 
 
-/* =====================================================
-   اختيار الصفة
-===================================================== */
+function selectRole(role,element){
 
-function selectRole(role, element) {
-
-  selectedRole = role;
-
-  document
-    .querySelectorAll(".role")
-    .forEach(function(button) {
-
-      button.classList.remove("active");
-
-    });
-
-  element.classList.add("active");
-
-  const account =
-    staffAccounts.find(function(item) {
-
-      return item.role === role;
-
-    });
-
-  const selectedRoleElement =
-    document.getElementById("selectedRole");
-
-  if (account) {
-
-    selectedRoleElement.textContent =
-      "✅ الصفة المختارة: " + account.title;
-
-  }
-
-}
-
-
-/* =====================================================
-   تسجيل الدخول
-===================================================== */
+selectedRole=role;
 
 document
-  .getElementById("staffLoginForm")
-  .addEventListener("submit", function(event) {
+.querySelectorAll(".role")
+.forEach(function(button){
 
-    event.preventDefault();
+button.classList.remove("active");
 
-    hideMessages();
+});
 
-    const phone =
-      document
-        .getElementById("staffPhone")
-        .value
-        .trim();
-
-    const password =
-      document
-        .getElementById("staffPassword")
-        .value
-        .trim();
+element.classList.add("active");
 
 
-    if (!selectedRole) {
+const account=
+staffAccounts.find(function(item){
 
-      showError(
-        "يرجى اختيار الصفة الوظيفية أولاً."
-      );
+return item.role===role;
 
-      return;
-
-    }
+});
 
 
-    const account =
-      staffAccounts.find(function(item) {
+if(account){
 
-        return (
-          item.phone === phone &&
-          item.password === password &&
-          item.role === selectedRole
-        );
+document.getElementById("selectedRole").textContent=
+"✅ الصفة المختارة: "+account.title;
 
-      });
-
-
-    if (!account) {
-
-      showError(
-        "رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة."
-      );
-
-      return;
-
-    }
-
-
-    /* =================================================
-       إنشاء جلسة المستخدم
-    ================================================= */
-
-    const loggedInStaff = {
-
-      phone: account.phone,
-
-      role: account.role,
-
-      name: account.name,
-
-      title: account.title,
-
-      employeeId: account.employeeId,
-
-      permissions: account.permissions,
-
-      dashboard: account.dashboard,
-
-      loginTime: new Date().toISOString()
-
-    };
-
-
-    /* حذف الجلسة القديمة أولاً */
-
-    localStorage.removeItem(
-      "sanadLoggedInStaff"
-    );
-
-
-    /* إنشاء الجلسة الجديدة */
-
-    localStorage.setItem(
-      "sanadLoggedInStaff",
-      JSON.stringify(loggedInStaff)
-    );
-
-
-    /* مفاتيح التوافق القديمة */
-
-    localStorage.setItem(
-      "sanadStaffName",
-      account.name
-    );
-
-    localStorage.setItem(
-      "sanadStaffRole",
-      account.title
-    );
-
-
-    showSuccess(
-      "✅ تم تسجيل الدخول بنجاح..."
-    );
-
-
-    setTimeout(function() {
-
-      window.location.href =
-        account.dashboard;
-
-    }, 500);
-
-  });
-
-
-/* =====================================================
-   الرسائل
-===================================================== */
-
-function showError(message) {
-
-  const error =
-    document.getElementById("errorMessage");
-
-  error.textContent = message;
-
-  error.style.display = "block";
+}
 
 }
 
 
-function showSuccess(message) {
+document
+.getElementById("staffLoginForm")
+.addEventListener("submit",function(event){
 
-  const success =
-    document.getElementById("successMessage");
+event.preventDefault();
 
-  success.textContent = message;
+hideMessages();
 
-  success.style.display = "block";
+
+const phone=
+document
+.getElementById("staffPhone")
+.value
+.trim();
+
+
+const password=
+document
+.getElementById("staffPassword")
+.value
+.trim();
+
+
+if(!selectedRole){
+
+showError(
+"يرجى اختيار الصفة الوظيفية أولاً."
+);
+
+return;
 
 }
 
 
-function hideMessages() {
+const account=
+staffAccounts.find(function(item){
 
-  document.getElementById(
-    "errorMessage"
-  ).style.display = "none";
+return(
+item.phone===phone &&
+item.password===password &&
+item.role===selectedRole
+);
 
-  document.getElementById(
-    "successMessage"
-  ).style.display = "none";
+});
+
+
+if(!account){
+
+showError(
+"رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة."
+);
+
+return;
 
 }
 
 
-/* =====================================================
-   نسيت كلمة المرور
-===================================================== */
+const loggedInStaff={
 
-function forgotPassword(event) {
+phone:account.phone,
 
-  event.preventDefault();
+role:account.role,
 
-  if (!selectedRole) {
+name:account.name,
 
-    showError(
-      "اختر الصفة الوظيفية أولاً."
-    );
+title:account.title,
 
-    return;
+employeeId:account.employeeId,
 
-  }
+permissions:account.permissions,
 
-  alert(
-    "سيتم لاحقاً ربط استعادة كلمة المرور بواتساب وإدارة النظام."
-  );
+dashboard:account.dashboard,
+
+loginTime:new Date().toISOString()
+
+};
+
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+
+localStorage.setItem(
+"sanadLoggedInStaff",
+JSON.stringify(loggedInStaff)
+);
+
+
+localStorage.setItem(
+"sanadStaffName",
+account.name
+);
+
+
+localStorage.setItem(
+"sanadStaffRole",
+account.title
+);
+
+
+showSuccess(
+"✅ تم تسجيل الدخول بنجاح..."
+);
+
+
+setTimeout(function(){
+
+window.location.href=account.dashboard;
+
+},500);
+
+});
+
+
+function showError(message){
+
+const error=
+document.getElementById("errorMessage");
+
+error.textContent=message;
+
+error.style.display="block";
+
+}
+
+
+function showSuccess(message){
+
+const success=
+document.getElementById("successMessage");
+
+success.textContent=message;
+
+success.style.display="block";
+
+}
+
+
+function hideMessages(){
+
+document.getElementById(
+"errorMessage"
+).style.display="none";
+
+document.getElementById(
+"successMessage"
+).style.display="none";
+
+}
+
+
+function forgotPassword(event){
+
+event.preventDefault();
+
+if(!selectedRole){
+
+showError(
+"اختر الصفة الوظيفية أولاً."
+);
+
+return;
+
+}
+
+alert(
+"سيتم لاحقاً ربط استعادة كلمة المرور بواتساب وإدارة النظام."
+);
 
 }
 
