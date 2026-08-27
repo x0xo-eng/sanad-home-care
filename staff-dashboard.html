@@ -26,7 +26,7 @@
     .dashboard {
       max-width: 1250px;
       margin: auto;
-      padding: 45px 6%;
+      padding: 40px 6%;
     }
 
     /* =========================
@@ -47,7 +47,7 @@
 
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
 
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .eyebrow {
@@ -59,22 +59,58 @@
     }
 
     .welcome h1 {
-      color: #163b38;
-      font-size: 30px;
       margin: 0 0 8px;
+      font-size: 29px;
+      color: #163b38;
     }
 
     .welcome p {
-      color: #718480;
       margin: 0;
+      color: #718480;
       line-height: 1.8;
+      font-size: 14px;
     }
 
     .staff-avatar {
-      width: 82px;
-      height: 82px;
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      background: #e8f5f3;
 
-      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 38px;
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       TODAY VISITS
+    ========================= */
+
+    .today-box {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 22px;
+      padding: 24px;
+
+      margin-bottom: 25px;
+
+      box-shadow: 0 12px 35px rgba(22,70,65,.05);
+    }
+
+    .today-number {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .today-icon {
+      width: 58px;
+      height: 58px;
+
+      border-radius: 17px;
 
       background: #e8f5f3;
 
@@ -82,40 +118,19 @@
       align-items: center;
       justify-content: center;
 
-      font-size: 40px;
-
-      flex-shrink: 0;
+      font-size: 27px;
     }
 
-    /* =========================
-       STATS
-    ========================= */
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-
-    .stat {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-    }
-
-    .stat-label {
+    .today-label {
       color: #718480;
       font-size: 13px;
+      margin-bottom: 5px;
     }
 
-    .stat-number {
+    .today-count {
       color: #163b38;
       font-size: 28px;
       font-weight: 900;
-      margin-top: 10px;
     }
 
     /* =========================
@@ -126,288 +141,362 @@
       background: white;
       border: 1px solid #e3edeb;
       border-radius: 24px;
-      padding: 28px;
+
+      padding: 27px;
+
       margin-bottom: 25px;
+
       box-shadow: 0 15px 45px rgba(22,70,65,.05);
     }
 
     .section-title {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .section-title h2 {
+      margin: 0 0 6px;
       color: #163b38;
       font-size: 21px;
-      margin: 0 0 6px;
     }
 
     .section-title p {
+      margin: 0;
       color: #718480;
       font-size: 13px;
-      margin: 0;
       line-height: 1.7;
     }
 
     /* =========================
-       QUICK ACTIONS
+       VISITS TABLE
     ========================= */
 
-    .actions-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
     }
 
-    .action {
-      border: 1px solid #e3edeb;
-      background: #fbfefe;
-      border-radius: 18px;
-      padding: 22px 15px;
-      text-align: center;
-      cursor: pointer;
-      transition: .25s;
-      font-family: inherit;
+    .visits-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
     }
 
-    .action:hover {
-      transform: translateY(-4px);
-      border-color: #16877d;
-      box-shadow: 0 10px 28px rgba(22,135,125,.09);
+    .visits-table th {
+      background: #f0f8f6;
+      color: #4e6d68;
+
+      padding: 14px 10px;
+
+      font-size: 12px;
+      font-weight: 900;
+
+      text-align: right;
+
+      border-bottom: 1px solid #dcece9;
     }
 
-    .action-icon {
-      width: 55px;
-      height: 55px;
-      border-radius: 17px;
-      background: #e8f5f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      font-size: 26px;
-    }
+    .visits-table td {
+      padding: 15px 10px;
 
-    .action h3 {
-      color: #163b38;
-      font-size: 14px;
-      margin: 0 0 5px;
-    }
+      color: #4e6d68;
 
-    .action p {
-      color: #718480;
-      font-size: 11px;
-      line-height: 1.6;
-      margin: 0;
-    }
+      font-size: 12px;
 
-    /* =========================
-       PATIENTS
-    ========================= */
+      border-bottom: 1px solid #edf2f1;
 
-    .patient-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .patient-card {
-      background: #fbfefe;
-      border: 1px solid #e3edeb;
-      border-radius: 18px;
-      padding: 20px;
-    }
-
-    .patient-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 15px;
+      vertical-align: middle;
     }
 
     .patient-name {
       color: #163b38;
-      font-size: 17px;
       font-weight: 900;
     }
 
-    .patient-id {
+    .visit-time {
       color: #16877d;
-      font-size: 11px;
-      font-weight: 800;
-      margin-top: 5px;
+      font-weight: 900;
     }
 
-    .status {
-      padding: 7px 12px;
-      border-radius: 30px;
-      background: #e6f6ef;
-      color: #16815f;
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
+    .visit-type {
+      color: #718480;
     }
 
-    .patient-details {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-
-    .detail {
-      background: white;
-      border: 1px solid #e5eeec;
-      border-radius: 12px;
-      padding: 12px;
-    }
-
-    .detail-label {
-      color: #8a918e;
-      font-size: 10px;
-      margin-bottom: 5px;
-    }
-
-    .detail-value {
-      color: #163b38;
-      font-size: 12px;
-      font-weight: 800;
+    .address {
+      max-width: 210px;
+      line-height: 1.6;
     }
 
     /* =========================
-       ROLE BOX
+       STATUS
     ========================= */
 
-    .role-box {
-      background: #f0f8f6;
-      border: 1px solid #dcece9;
-      border-radius: 18px;
-      padding: 22px;
-      margin-bottom: 25px;
+    .status {
+      display: inline-flex;
+      padding: 7px 11px;
+
+      border-radius: 20px;
+
+      font-size: 10px;
+      font-weight: 900;
+
+      white-space: nowrap;
     }
 
-    .role-box h2 {
-      margin: 0 0 8px;
-      font-size: 19px;
-      color: #163b38;
+    .status-waiting {
+      background: #fff2d8;
+      color: #a66a0c;
     }
 
-    .role-box p {
-      color: #718480;
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.8;
+    .status-progress {
+      background: #e8f5f3;
+      color: #16877d;
+    }
+
+    .status-completed {
+      background: #e6f6ef;
+      color: #16815f;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .start-btn,
+    .complete-btn,
+    .cancel-btn {
+
+      border: none;
+
+      border-radius: 10px;
+
+      padding: 10px 15px;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      cursor: pointer;
+    }
+
+    .start-btn {
+      background: #16877d;
+      color: white;
+    }
+
+    .start-btn:hover {
+      background: #0f7068;
+    }
+
+    .complete-btn {
+      background: #16815f;
+      color: white;
+    }
+
+    .cancel-btn {
+      background: #fff0f0;
+      color: #a44b4b;
     }
 
     /* =========================
        VISIT FORM
     ========================= */
 
-    .visit-form {
+    #visitSection {
+      display: none;
+    }
+
+    .visit-header {
+      background: #f0f8f6;
+      border: 1px solid #dcece9;
+      border-radius: 18px;
+
+      padding: 20px;
+
+      margin-bottom: 22px;
+    }
+
+    .visit-header h3 {
+      margin: 0 0 8px;
+      color: #163b38;
+      font-size: 19px;
+    }
+
+    .visit-header p {
+      margin: 4px 0;
+      color: #718480;
+      font-size: 12px;
+    }
+
+    .visit-info-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+
+      margin-top: 17px;
+    }
+
+    .info-item {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .info-label {
+      color: #8a9692;
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      color: #163b38;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    /* =========================
+       FORM SECTIONS
+    ========================= */
+
+    .medical-section {
+      border: 1px solid #e3edeb;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      background: #fbfefe;
+    }
+
+    .medical-section h3 {
+      margin: 0 0 17px;
+      color: #163b38;
+      font-size: 16px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
     }
 
-    .form-group {
+    .field {
       display: flex;
       flex-direction: column;
       gap: 7px;
     }
 
-    .form-group.full {
+    .field.full {
       grid-column: 1 / -1;
     }
 
-    .form-group label {
+    .field label {
       color: #163b38;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
+    .field input,
+    .field select,
+    .field textarea {
+
       width: 100%;
-      padding: 13px;
+
       border: 1px solid #dfecea;
-      border-radius: 12px;
-      background: #fbfefe;
+
+      border-radius: 11px;
+
+      background: white;
+
       color: #163b38;
+
+      padding: 12px;
+
       font-family: inherit;
+
+      font-size: 12px;
+
       outline: none;
     }
 
-    .form-group textarea {
+    .field textarea {
       min-height: 110px;
       resize: vertical;
+      line-height: 1.8;
     }
 
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
       border-color: #16877d;
-      background: white;
       box-shadow: 0 0 0 4px rgba(22,135,125,.08);
     }
 
-    .save-btn {
-      border: none;
-      background: #16877d;
-      color: white;
-      padding: 13px 25px;
-      border-radius: 12px;
-      font-family: inherit;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .save-btn:hover {
-      background: #0f7068;
-    }
-
     /* =========================
-       INFO
+       ROLE NOTICE
     ========================= */
 
-    .info-list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+    .role-notice {
+      background: #fffdf5;
+      border: 1px solid #efe1bb;
+      border-radius: 14px;
 
-    .info-item {
-      padding: 16px;
-      background: #fbfefe;
-      border: 1px solid #e3edeb;
-      border-radius: 15px;
-    }
+      padding: 14px 16px;
 
-    .info-item strong {
-      display: block;
-      color: #163b38;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
+      color: #856c34;
 
-    .info-item span {
-      color: #718480;
       font-size: 12px;
-      line-height: 1.7;
+
+      line-height: 1.8;
+
+      margin-bottom: 18px;
     }
 
     /* =========================
-       EMPTY
+       VISIT ACTIONS
     ========================= */
 
-    .empty {
-      text-align: center;
-      color: #718480;
-      padding: 30px;
+    .visit-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+
+      padding-top: 10px;
+    }
+
+    .complete-btn {
+      padding: 13px 25px;
       font-size: 13px;
-      background: #fbfefe;
+    }
+
+    .cancel-btn {
+      padding: 13px 22px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       REPORT RESULT
+    ========================= */
+
+    .report-message {
+      display: none;
+
+      background: #e6f6ef;
+      border: 1px solid #cce9dc;
+
+      color: #16815f;
+
       border-radius: 15px;
-      border: 1px dashed #dce8e5;
+
+      padding: 16px;
+
+      margin-top: 18px;
+
+      font-size: 13px;
+
+      line-height: 1.8;
+
+      text-align: center;
     }
 
     /* =========================
@@ -416,20 +505,28 @@
 
     .logout-area {
       text-align: center;
-      margin: 35px 0 10px;
+      margin: 30px 0 10px;
     }
 
     .logout {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+
       padding: 11px 20px;
+
       border-radius: 12px;
+
       border: 1px solid #eadede;
+
       background: white;
+
       color: #a44b4b;
+
       text-decoration: none;
+
       font-size: 13px;
+
       font-weight: 800;
     }
 
@@ -437,17 +534,13 @@
        RESPONSIVE
     ========================= */
 
-    @media (max-width: 950px) {
+    @media (max-width: 900px) {
 
-      .stats {
+      .visit-info-grid {
         grid-template-columns: 1fr 1fr;
       }
 
-      .actions-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .patient-details {
+      .fields {
         grid-template-columns: 1fr 1fr;
       }
 
@@ -460,54 +553,35 @@
       }
 
       .welcome {
-        padding: 23px;
-      }
-
-      .welcome h1 {
-        font-size: 24px;
+        flex-direction: column;
+        text-align: center;
       }
 
       .staff-avatar {
-        width: 62px;
-        height: 62px;
+        width: 65px;
+        height: 65px;
         font-size: 30px;
       }
 
-      .patient-top {
-        flex-direction: column;
-      }
-
-      .patient-details {
+      .visit-info-grid {
         grid-template-columns: 1fr;
       }
 
-      .visit-form {
+      .fields {
         grid-template-columns: 1fr;
       }
 
-      .form-group.full {
+      .field.full {
         grid-column: auto;
       }
 
-      .info-list {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-    @media (max-width: 480px) {
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .actions-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .welcome {
+      .visit-actions {
         flex-direction: column;
-        text-align: center;
+      }
+
+      .complete-btn,
+      .cancel-btn {
+        width: 100%;
       }
 
     }
@@ -571,7 +645,7 @@
     </h1>
 
     <p id="welcomeRole">
-      لوحة عمل الكادر
+      فريق سند للرعاية المنزلية
     </p>
 
   </div>
@@ -588,87 +662,30 @@
 
 
 <!-- =========================
-     ROLE DESCRIPTION
+     TODAY COUNT
 ========================= -->
 
-<section class="role-box">
+<section class="today-box">
 
-  <h2 id="roleTitle">
-    لوحة الكادر
-  </h2>
+  <div class="today-number">
 
-  <p id="roleDescription">
-    أهلاً بك في نظام سند لإدارة الرعاية المنزلية.
-  </p>
-
-</section>
-
-
-<!-- =========================
-     STATS
-========================= -->
-
-<section class="stats">
-
-  <div class="stat">
-
-    <span class="stat-label">
-      👥 إجمالي المشتركين
-    </span>
-
-    <div
-      class="stat-number"
-      id="customersCount"
-    >
-      0
+    <div class="today-icon">
+      📅
     </div>
 
-  </div>
+    <div>
 
+      <div class="today-label">
+        عدد زياراتك اليوم
+      </div>
 
-  <div class="stat">
+      <div
+        class="today-count"
+        id="todayVisitsCount"
+      >
+        0
+      </div>
 
-    <span class="stat-label">
-      ✅ المشتركين الفعالين
-    </span>
-
-    <div
-      class="stat-number"
-      id="activeCount"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <span class="stat-label">
-      📅 زياراتي اليوم
-    </span>
-
-    <div
-      class="stat-number"
-      id="todayVisits"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <span class="stat-label">
-      📝 تقاريري
-    </span>
-
-    <div
-      class="stat-number"
-      id="myReports"
-    >
-      0
     </div>
 
   </div>
@@ -677,7 +694,7 @@
 
 
 <!-- =========================
-     QUICK ACTIONS
+     VISITS
 ========================= -->
 
 <section class="section">
@@ -685,198 +702,481 @@
   <div class="section-title">
 
     <h2>
-      ⚡ مهامي السريعة
+      📋 جدول الزيارات
     </h2>
 
-    <p id="actionsDescription">
-      العمليات المتاحة لك حسب صفتك الوظيفية.
+    <p>
+      جميع الزيارات المسندة إليك مرتبة حسب التاريخ والوقت.
     </p>
 
   </div>
 
 
-  <div
-    class="actions-grid"
-    id="actionsGrid"
-  ></div>
+  <div class="table-wrapper">
+
+    <table class="visits-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            التاريخ
+          </th>
+
+          <th>
+            الوقت
+          </th>
+
+          <th>
+            اسم المسن
+          </th>
+
+          <th>
+            العنوان
+          </th>
+
+          <th>
+            نوع الزيارة
+          </th>
+
+          <th>
+            الحالة
+          </th>
+
+          <th>
+            الإجراء
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="visitsTableBody">
+
+      </tbody>
+
+    </table>
+
+  </div>
 
 </section>
 
 
 <!-- =========================
-     PATIENTS
+     VISIT FORM
 ========================= -->
 
 <section
   class="section"
-  id="patientsSection"
+  id="visitSection"
 >
 
   <div class="section-title">
 
     <h2>
-      👴 المشتركين الفعالين
+      🩺 واجهة الزيارة
     </h2>
 
     <p>
-      قائمة المشتركين الذين لديهم اشتراك فعال في نظام سند.
+      أدخل المعلومات المطلوبة أثناء الزيارة ثم أتمم الزيارة لإرسال التقرير.
     </p>
 
   </div>
 
 
   <div
-    class="patient-list"
-    id="patientList"
-  ></div>
-
-</section>
-
-
-<!-- =========================
-     ROLE WORK AREA
-========================= -->
-
-<section
-  class="section"
-  id="workSection"
->
-
-  <div class="section-title">
-
-    <h2 id="workTitle">
-      📝 تسجيل العمل
-    </h2>
-
-    <p id="workDescription">
-      سجل نشاطك أو زيارتك للمشترك.
-    </p>
-
-  </div>
-
-
-  <form
-    class="visit-form"
-    id="workForm"
+    class="visit-header"
+    id="currentVisitHeader"
   >
 
-    <div class="form-group">
+  </div>
 
-      <label for="workCustomer">
-        👴 المشترك
-      </label>
 
-      <select
-        id="workCustomer"
-        required
-      >
+  <div
+    class="role-notice"
+    id="roleNotice"
+  >
 
-        <option value="">
-          اختر المشترك
-        </option>
+  </div>
 
-      </select>
+
+  <!-- =========================
+       العلامات الحيوية
+  ========================= -->
+
+  <div
+    class="medical-section"
+    id="vitalSection"
+  >
+
+    <h3>
+      ❤️ العلامات الحيوية
+    </h3>
+
+
+    <div class="fields">
+
+
+      <div class="field">
+
+        <label>
+          🩸 ضغط الدم
+        </label>
+
+        <input
+          type="text"
+          id="bloodPressure"
+          placeholder="مثال: 120/80"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          🍬 سكر الدم
+        </label>
+
+        <input
+          type="text"
+          id="bloodSugar"
+          placeholder="مثال: 110 mg/dL"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          🌡️ درجة الحرارة
+        </label>
+
+        <input
+          type="text"
+          id="temperature"
+          placeholder="مثال: 36.8 °C"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          ❤️ النبض
+        </label>
+
+        <input
+          type="text"
+          id="pulse"
+          placeholder="نبضة / دقيقة"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          🫁 نسبة الأوكسجين
+        </label>
+
+        <input
+          type="text"
+          id="oxygen"
+          placeholder="مثال: 97%"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          ⚖️ الوزن
+        </label>
+
+        <input
+          type="text"
+          id="weight"
+          placeholder="مثال: 72 كغم"
+        >
+
+      </div>
+
 
     </div>
 
+  </div>
 
-    <div class="form-group">
 
-      <label for="workType">
-        📋 نوع العمل
-      </label>
+  <!-- =========================
+       التقييم الطبي
+  ========================= -->
 
-      <select
-        id="workType"
-        required
-      ></select>
+  <div
+    class="medical-section"
+    id="medicalSection"
+  >
+
+    <h3>
+      🩺 التقييم والفحص
+    </h3>
+
+
+    <div class="fields">
+
+
+      <div class="field full">
+
+        <label>
+          الأعراض / الشكوى الرئيسية
+        </label>
+
+        <textarea
+          id="symptoms"
+          placeholder="اكتب شكوى المسن والأعراض التي تم ملاحظتها..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          نتيجة الفحص
+        </label>
+
+        <textarea
+          id="examination"
+          placeholder="اكتب نتيجة الفحص والملاحظات الطبية..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          التشخيص
+        </label>
+
+        <textarea
+          id="diagnosis"
+          placeholder="التشخيص إن وجد..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          العلاج / الأدوية / الإجراءات
+        </label>
+
+        <textarea
+          id="treatment"
+          placeholder="اكتب العلاج أو الأدوية أو الإجراءات التي تم اتخاذها..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          التوصيات
+        </label>
+
+        <textarea
+          id="recommendations"
+          placeholder="اكتب توصياتك للزيارة القادمة أو للعائلة..."
+        ></textarea>
+
+      </div>
+
 
     </div>
 
+  </div>
 
-    <div class="form-group">
 
-      <label for="workDate">
-        📅 التاريخ
-      </label>
+  <!-- =========================
+       التمريض
+  ========================= -->
 
-      <input
-        id="workDate"
-        type="date"
-        required
-      >
+  <div
+    class="medical-section"
+    id="nursingSection"
+  >
+
+    <h3>
+      👩‍⚕️ تفاصيل الرعاية التمريضية
+    </h3>
+
+
+    <div class="fields">
+
+
+      <div class="field">
+
+        <label>
+          💊 إعطاء الأدوية
+        </label>
+
+        <select id="medicationGiven">
+
+          <option value="">
+            اختر الحالة
+          </option>
+
+          <option value="yes">
+            تم إعطاء الأدوية
+          </option>
+
+          <option value="no">
+            لم يتم إعطاء الأدوية
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          🛁 الرعاية الشخصية
+        </label>
+
+        <select id="personalCare">
+
+          <option value="">
+            اختر الحالة
+          </option>
+
+          <option value="completed">
+            تمت
+          </option>
+
+          <option value="not_completed">
+            لم تتم
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          🥗 التغذية
+        </label>
+
+        <select id="nutritionStatus">
+
+          <option value="">
+            اختر الحالة
+          </option>
+
+          <option value="good">
+            جيدة
+          </option>
+
+          <option value="moderate">
+            متوسطة
+          </option>
+
+          <option value="poor">
+            ضعيفة
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          📝 ملاحظات التمريض
+        </label>
+
+        <textarea
+          id="nursingNotes"
+          placeholder="اكتب جميع الملاحظات المتعلقة بالرعاية التمريضية..."
+        ></textarea>
+
+      </div>
+
 
     </div>
 
-
-    <div class="form-group">
-
-      <label for="workTime">
-        🕐 الوقت
-      </label>
-
-      <input
-        id="workTime"
-        type="time"
-        required
-      >
-
-    </div>
+  </div>
 
 
-    <div class="form-group full">
+  <!-- =========================
+       الملاحظات النهائية
+  ========================= -->
 
-      <label for="workNotes">
-        📝 الملاحظات والتقرير
-      </label>
+  <div class="medical-section">
 
-      <textarea
-        id="workNotes"
-        placeholder="اكتب تفاصيل الزيارة أو العمل المنجز..."
-        required
-      ></textarea>
-
-    </div>
+    <h3>
+      📝 التقرير النهائي
+    </h3>
 
 
-    <div class="form-group full">
+    <div class="fields">
 
-      <button
-        type="submit"
-        class="save-btn"
-      >
-        💾 حفظ التقرير
-      </button>
+      <div class="field full">
+
+        <label>
+          تقرير الزيارة الكامل
+        </label>
+
+        <textarea
+          id="finalReport"
+          placeholder="اكتب ملخص الزيارة بالتفصيل..."
+        ></textarea>
+
+      </div>
 
     </div>
 
-  </form>
-
-</section>
+  </div>
 
 
-<!-- =========================
-     ROLE INFORMATION
-========================= -->
+  <div class="visit-actions">
 
-<section class="section">
+    <button
+      type="button"
+      class="cancel-btn"
+      onclick="cancelVisit()"
+    >
+      إلغاء الزيارة
+    </button>
 
-  <div class="section-title">
 
-    <h2>
-      🔐 صلاحياتي
-    </h2>
-
-    <p>
-      هذه الوظائف مرتبطة بصفتك الوظيفية.
-    </p>
+    <button
+      type="button"
+      class="complete-btn"
+      onclick="completeVisit()"
+    >
+      ✅ إتمام الزيارة وإرسال التقرير
+    </button>
 
   </div>
 
 
   <div
-    class="info-list"
-    id="permissionsList"
+    id="reportMessage"
+    class="report-message"
   ></div>
 
 </section>
@@ -943,10 +1243,6 @@ if (!loggedStaffRaw) {
 }
 
 
-/* =====================================================
-   2. تحويل الجلسة إلى كائن
-===================================================== */
-
 let loggedStaff = null;
 
 
@@ -970,555 +1266,277 @@ try {
 
 
 /* =====================================================
-   3. تعريف جميع الوظائف
+   2. بيانات الكادر
 ===================================================== */
 
-const roleConfig = {
+if (loggedStaff) {
 
-  owner: {
+  document.getElementById(
+    "welcomeName"
+  ).textContent =
+    "أهلاً بك، " +
+    loggedStaff.name +
+    " 👋";
 
-    title: "مالك النظام",
 
-    description:
-      "لديك صلاحيات الإدارة العليا ومتابعة جميع أعمال شركة سند.",
+  document.getElementById(
+    "welcomeRole"
+  ).textContent =
+    loggedStaff.title ||
+    "فريق سند";
 
-    icon: "👑",
 
-    workTitle:
-      "🛡️ المتابعة الإدارية",
+  const avatars = {
 
-    workDescription:
-      "يمكنك متابعة أعمال الكادر والمشتركين والتقارير.",
+    owner: "👑",
 
-    workTypes: [
-      "متابعة إدارية",
-      "مراجعة تقرير",
-      "متابعة مشترك",
-      "ملاحظة إدارية"
-    ],
+    manager: "👨‍💼",
 
-    permissions: [
-      "إدارة النظام",
-      "متابعة الكادر",
-      "متابعة المشتركين",
-      "الاطلاع على التقارير",
-      "متابعة الزيارات"
-    ]
+    reception: "🧑‍💼",
 
-  },
+    specialist: "👨‍⚕️",
 
+    resident: "🩺",
 
-  manager: {
+    nurse: "👩‍⚕️",
 
-    title: "مدير الشركة",
+    nutrition: "🥗",
 
-    description:
-      "إدارة ومتابعة عمليات شركة سند والمشتركين والكادر.",
+    physio: "🏃",
 
-    icon: "👨‍💼",
+    psychologist: "🧠",
 
-    workTitle:
-      "📊 المتابعة الإدارية",
+    entertainment: "🎭",
 
-    workDescription:
-      "متابعة ملفات المشتركين وأداء الكادر.",
+    hairdresser: "💇"
 
-    workTypes: [
-      "متابعة إدارية",
-      "مراجعة ملف",
-      "متابعة مشترك",
-      "ملاحظة إدارية"
-    ],
+  };
 
-    permissions: [
-      "إدارة المشتركين",
-      "مراجعة الطلبات",
-      "متابعة الكادر",
-      "التقارير",
-      "متابعة الزيارات"
-    ]
 
-  },
+  document.getElementById(
+    "staffAvatar"
+  ).textContent =
+    avatars[loggedStaff.role] ||
+    "👨‍⚕️";
 
+}
 
-  reception: {
 
-    title: "موظف الاستقبال",
+/* =====================================================
+   3. الزيارات
+===================================================== */
 
-    description:
-      "إدارة تسجيل المشتركين والتواصل مع العائلات ومتابعة الملفات.",
+/*
+   في المرحلة الحالية نقرأ الزيارات من localStorage.
 
-    icon: "🧑‍💼",
+   لاحقاً سنربطها بقاعدة البيانات.
+*/
 
-    workTitle:
-      "📞 أعمال الاستقبال",
+let visits =
+  JSON.parse(
+    localStorage.getItem(
+      "sanadVisits"
+    ) || "[]"
+  );
 
-    workDescription:
-      "تسجيل ومتابعة بيانات المشتركين والتواصل مع العائلة.",
 
-    workTypes: [
-      "تحديث بيانات",
-      "اتصال بالعائلة",
-      "متابعة ملف",
-      "تسجيل ملاحظة"
-    ],
+/* =====================================================
+   4. بيانات تجريبية إذا لا توجد زيارات
+===================================================== */
 
-    permissions: [
-      "تسجيل المشتركين",
-      "تحديث بيانات المشترك",
-      "متابعة الملفات",
-      "متابعة المدفوعات",
-      "التواصل مع العائلة"
-    ]
+if (visits.length === 0) {
 
-  },
+  const today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
 
 
-  specialist: {
+  visits = [
 
-    title: "الطبيب الأخصائي",
+    {
+      id: "VIS-001",
+      date: today,
+      time: "09:00",
+      patientName: "محمد علي",
+      address: "النجف - حي الأمير",
+      type: "زيارة تمريضية",
+      assignedRole: "nurse",
+      status: "waiting"
+    },
 
-    description:
-      "متابعة الحالة الطبية للمسن وإجراء التقييمات الطبية المتخصصة.",
-
-    icon: "👨‍⚕️",
-
-    workTitle:
-      "🩺 التقرير الطبي للأخصائي",
-
-    workDescription:
-      "سجل تقييمك الطبي وملاحظاتك وتوصياتك للمشترك.",
-
-    workTypes: [
-      "فحص طبي",
-      "تقييم الحالة",
-      "وصفة أو توصية",
-      "متابعة طبية"
-    ],
-
-    permissions: [
-      "عرض بيانات المشترك الطبية",
-      "إجراء التقييم الطبي",
-      "كتابة التقرير الطبي",
-      "إضافة التوصيات",
-      "متابعة الحالة"
-    ]
-
-  },
-
-
-  resident: {
-
-    title: "الطبيب المقيم",
-
-    description:
-      "متابعة الحالة اليومية للمسن والتنسيق مع فريق الرعاية.",
-
-    icon: "🩺",
-
-    workTitle:
-      "🩺 زيارة الطبيب المقيم",
-
-    workDescription:
-      "سجل الزيارة الطبية والملاحظات والتوصيات.",
-
-    workTypes: [
-      "زيارة طبية",
-      "فحص عام",
-      "متابعة حالة",
-      "توصية علاجية"
-    ],
-
-    permissions: [
-      "عرض ملف المشترك",
-      "إجراء الفحص",
-      "تسجيل الزيارة",
-      "كتابة الملاحظات",
-      "رفع التوصيات"
-    ]
-
-  },
-
-
-  nurse: {
-
-    title: "الممرض الصحي",
-
-    description:
-      "تنفيذ الرعاية التمريضية اليومية ومتابعة المؤشرات الصحية للمسن.",
-
-    icon: "👩‍⚕️",
-
-    workTitle:
-      "🩺 الزيارة التمريضية",
-
-    workDescription:
-      "سجل تفاصيل الزيارة التمريضية والمؤشرات الصحية للمشترك.",
-
-    workTypes: [
-      "زيارة تمريضية",
-      "إعطاء الأدوية",
-      "قياس ضغط الدم",
-      "قياس سكر الدم",
-      "رعاية شخصية",
-      "تمرين خفيف"
-    ],
-
-    permissions: [
-      "عرض مرضاي",
-      "تسجيل الزيارة التمريضية",
-      "تسجيل الأدوية",
-      "قياس ضغط الدم",
-      "قياس سكر الدم",
-      "كتابة التقرير التمريضي"
-    ]
-
-  },
-
-
-  nutrition: {
-
-    title: "أخصائي التغذية",
-
-    description:
-      "متابعة التغذية الصحية للمسن ووضع التوصيات الغذائية المناسبة.",
-
-    icon: "🥗",
-
-    workTitle:
-      "🥗 التقرير الغذائي",
-
-    workDescription:
-      "سجل تقييم التغذية والخطة أو التوصيات الغذائية.",
-
-    workTypes: [
-      "تقييم غذائي",
-      "خطة غذائية",
-      "متابعة التغذية",
-      "توصية غذائية"
-    ],
-
-    permissions: [
-      "عرض بيانات المشترك",
-      "التقييم الغذائي",
-      "وضع خطة غذائية",
-      "تسجيل التوصيات",
-      "متابعة التغذية"
-    ]
-
-  },
-
-
-  physio: {
-
-    title: "أخصائي العلاج الطبيعي",
-
-    description:
-      "تنفيذ ومتابعة تمارين العلاج الطبيعي والحركة المناسبة للمسن.",
-
-    icon: "🏃",
-
-    workTitle:
-      "🏃 جلسة العلاج الطبيعي",
-
-    workDescription:
-      "سجل جلسة العلاج الطبيعي والتمارين والتقدم.",
-
-    workTypes: [
-      "جلسة علاج طبيعي",
-      "تقييم الحركة",
-      "تمارين",
-      "متابعة التحسن"
-    ],
-
-    permissions: [
-      "عرض حالة المشترك",
-      "تقييم الحركة",
-      "تسجيل جلسة العلاج",
-      "تسجيل التمارين",
-      "متابعة التقدم"
-    ]
-
-  },
-
-
-  psychologist: {
-
-    title: "الأخصائي النفسي",
-
-    description:
-      "متابعة الحالة النفسية والاجتماعية للمسن وتقديم الدعم المناسب.",
-
-    icon: "🧠",
-
-    workTitle:
-      "🧠 التقرير النفسي",
-
-    workDescription:
-      "سجل الملاحظات والتقييم والمتابعة النفسية للمشترك.",
-
-    workTypes: [
-      "جلسة نفسية",
-      "تقييم نفسي",
-      "متابعة الحالة",
-      "توصية نفسية"
-    ],
-
-    permissions: [
-      "عرض المعلومات اللازمة للحالة",
-      "التقييم النفسي",
-      "تسجيل الجلسة",
-      "تسجيل الملاحظات",
-      "رفع التوصيات"
-    ]
-
-  },
-
-
-  entertainment: {
-
-    title: "مرافق الترفيه",
-
-    description:
-      "تنظيم الأنشطة الترفيهية والاجتماعية ومرافقة المسن.",
-
-    icon: "🎭",
-
-    workTitle:
-      "🎭 النشاط الترفيهي",
-
-    workDescription:
-      "سجل النشاط أو المرافقة التي تم تنفيذها للمشترك.",
-
-    workTypes: [
-      "نشاط ترفيهي",
-      "مرافقة",
-      "خروج ترفيهي",
-      "نشاط اجتماعي"
-    ],
-
-    permissions: [
-      "عرض المشتركين المكلف بهم",
-      "تسجيل النشاط",
-      "تسجيل المرافقة",
-      "تسجيل الخروج الترفيهي",
-      "كتابة التقرير"
-    ]
-
-  },
-
-
-  hairdresser: {
-
-    title: "الكوافير",
-
-    description:
-      "تقديم خدمات العناية الشخصية بالمظهر والنظافة الشخصية للمسن.",
-
-    icon: "💇",
-
-    workTitle:
-      "💇 خدمة العناية الشخصية",
-
-    workDescription:
-      "سجل الخدمة التي تم تقديمها للمشترك.",
-
-    workTypes: [
-      "قص الشعر",
-      "حلاقة",
-      "العناية الشخصية",
-      "خدمة أخرى"
-    ],
-
-    permissions: [
-      "عرض المشترك المكلف به",
-      "تسجيل الخدمة",
-      "تسجيل تاريخ الخدمة",
-      "كتابة الملاحظات"
-    ]
+    {
+      id: "VIS-002",
+      date: today,
+      time: "10:00",
+      patientName: "علي غلام",
+      address: "النجف - حي الجامعة",
+      type: "زيارة تمريضية",
+      assignedRole: "nurse",
+      status: "waiting"
+    },
+
+    {
+      id: "VIS-003",
+      date: today,
+      time: "11:00",
+      patientName: "أحمد معين",
+      address: "النجف - حي الإسكان",
+      type: "زيارة طبيب مقيم",
+      assignedRole: "resident",
+      status: "waiting"
+    },
+
+    {
+      id: "VIS-004",
+      date: today,
+      time: "12:00",
+      patientName: "حسين ناصر",
+      address: "النجف - حي الأمير",
+      type: "زيارة طبيب أخصائي",
+      assignedRole: "specialist",
+      status: "waiting"
+    }
+
+  ];
+
+
+  localStorage.setItem(
+    "sanadVisits",
+    JSON.stringify(visits)
+  );
+
+}
+
+
+/* =====================================================
+   5. الزيارات الخاصة بالكادر
+===================================================== */
+
+function getStaffVisits() {
+
+  if (!loggedStaff) {
+
+    return [];
 
   }
 
-};
+
+  /*
+     المالك والمدير والاستقبال لا يدخلون
+     ضمن جدول الزيارات الميدانية.
+  */
+
+  const fieldRoles = [
+
+    "nurse",
+    "resident",
+    "specialist",
+    "nutrition",
+    "physio",
+    "psychologist",
+    "entertainment",
+    "hairdresser"
+
+  ];
 
 
-/* =====================================================
-   4. التأكد من وجود الصفة
-===================================================== */
+  if (
+    !fieldRoles.includes(
+      loggedStaff.role
+    )
+  ) {
 
-if (!loggedStaff) {
+    return [];
 
-  window.location.href =
-    "staff-login.html";
-
-}
-
-
-const role =
-  loggedStaff.role;
+  }
 
 
-const config =
-  roleConfig[role];
+  return visits.filter(
+    function(visit) {
 
-
-/*
-   مهم جداً:
-
-   لا نطرد الكادر إذا لم يكن
-   manager أو owner.
-
-   أي صفة موجودة في roleConfig
-   مسموح لها بالدخول إلى
-   staff-dashboard.html.
-*/
-
-if (!config) {
-
-  alert(
-    "الصفة الوظيفية غير معروفة. يرجى تسجيل الدخول مرة أخرى."
-  );
-
-  localStorage.removeItem(
-    "sanadLoggedInStaff"
-  );
-
-  window.location.href =
-    "staff-login.html";
-
-}
-
-
-/* =====================================================
-   5. عرض بيانات الموظف
-===================================================== */
-
-document.getElementById(
-  "welcomeName"
-).textContent =
-  "أهلاً بك، " +
-  (loggedStaff.name || "عضو الكادر") +
-  " 👋";
-
-
-document.getElementById(
-  "welcomeRole"
-).textContent =
-  loggedStaff.title ||
-  config.title;
-
-
-document.getElementById(
-  "roleTitle"
-).textContent =
-  config.icon +
-  " " +
-  config.title;
-
-
-document.getElementById(
-  "roleDescription"
-).textContent =
-  config.description;
-
-
-document.getElementById(
-  "staffAvatar"
-).textContent =
-  config.icon;
-
-
-document.getElementById(
-  "workTitle"
-).textContent =
-  config.workTitle;
-
-
-document.getElementById(
-  "workDescription"
-).textContent =
-  config.workDescription;
-
-
-/* =====================================================
-   6. بيانات المشتركين
-===================================================== */
-
-let customers = [];
-
-
-try {
-
-  customers =
-    JSON.parse(
-      localStorage.getItem(
-        "sanadCustomers"
-      ) || "[]"
-    );
-
-} catch (error) {
-
-  customers = [];
-
-}
-
-
-/* =====================================================
-   7. المشتركين الفعالين
-===================================================== */
-
-const activeCustomers =
-  customers.filter(
-    function(customer) {
-
-      return customer.status === "active";
+      return (
+        visit.assignedRole ===
+        loggedStaff.role
+      );
 
     }
   );
 
-
-/* =====================================================
-   8. الإحصائيات
-===================================================== */
-
-document.getElementById(
-  "customersCount"
-).textContent =
-  customers.length;
-
-
-document.getElementById(
-  "activeCount"
-).textContent =
-  activeCustomers.length;
+}
 
 
 /* =====================================================
-   9. عرض المشتركين
+   6. عرض عدد الزيارات
 ===================================================== */
 
-function renderPatients() {
+function updateTodayCount() {
 
-  const list =
-    document.getElementById(
-      "patientList"
+  const today =
+    new Date()
+      .toISOString()
+      .split("T")[0];
+
+
+  const todayVisits =
+    getStaffVisits().filter(
+      function(visit) {
+
+        return visit.date === today;
+
+      }
     );
 
 
-  list.innerHTML = "";
+  document.getElementById(
+    "todayVisitsCount"
+  ).textContent =
+    todayVisits.length;
+
+}
+
+
+/* =====================================================
+   7. عرض جدول الزيارات
+===================================================== */
+
+function renderVisits() {
+
+  const body =
+    document.getElementById(
+      "visitsTableBody"
+    );
+
+
+  body.innerHTML = "";
+
+
+  const staffVisits =
+    getStaffVisits();
 
 
   if (
-    activeCustomers.length === 0
+    staffVisits.length === 0
   ) {
 
-    list.innerHTML = `
+    body.innerHTML = `
 
-      <div class="empty">
+      <tr>
 
-        👴 لا توجد حالياً مشتركين فعالين.
+        <td
+          colspan="7"
+          style="
+            text-align:center;
+            padding:35px;
+            color:#718480;
+          "
+        >
 
-      </div>
+          📅 لا توجد زيارات مسندة إليك حالياً.
+
+        </td>
+
+      </tr>
 
     `;
 
@@ -1527,1053 +1545,955 @@ function renderPatients() {
   }
 
 
-  activeCustomers
-    .slice()
-    .reverse()
-    .forEach(
-      function(customer) {
+  staffVisits.forEach(
+    function(visit) {
 
-        const card =
-          document.createElement(
-            "div"
-          );
-
-
-        card.className =
-          "patient-card";
-
-
-        card.innerHTML = `
-
-          <div class="patient-top">
-
-            <div>
-
-              <div class="patient-name">
-
-                👴 ${escapeHTML(
-                  customer.name ||
-                  "مشترك"
-                )}
-
-              </div>
-
-              <div class="patient-id">
-
-                🆔 رقم الملف:
-                ${escapeHTML(
-                  customer.id ||
-                  "-"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="status">
-
-              ✅ اشتراك فعال
-
-            </div>
-
-          </div>
-
-
-          <div class="patient-details">
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📦 الباقة
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(
-                  customer.packageName ||
-                  "غير محدد"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📞 الهاتف
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(
-                  customer.phone ||
-                  customer.familyPhone ||
-                  "غير مسجل"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                🎂 العمر
-              </div>
-
-              <div class="detail-value">
-
-                ${
-                  customer.age
-                    ? escapeHTML(
-                        customer.age
-                      ) +
-                      " سنة"
-                    : "غير مسجل"
-                }
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                👨‍👩‍👦 العائلة
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(
-                  customer.familyName ||
-                  "غير مسجل"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📍 العنوان
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(
-                  customer.address ||
-                  "غير مسجل"
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📅 حالة الملف
-              </div>
-
-              <div class="detail-value">
-
-                فعال
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          ${
-            role === "nurse"
-              ? `
-
-                <div class="detail">
-
-                  <div class="detail-label">
-                    🩺 ملاحظة تمريضية
-                  </div>
-
-                  <div class="detail-value">
-
-                    يمكن للممرض تسجيل الزيارة والمؤشرات الحيوية من نموذج العمل.
-
-                  </div>
-
-                </div>
-
-              `
-              : ""
-          }
-
-        `;
-
-
-        list.appendChild(
-          card
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   10. المهام السريعة
-===================================================== */
-
-function renderActions() {
-
-  const grid =
-    document.getElementById(
-      "actionsGrid"
-    );
-
-
-  grid.innerHTML = "";
-
-
-  const actions = [];
-
-
-  if (
-    role === "nurse"
-  ) {
-
-    actions.push(
-      {
-        icon: "🩺",
-        title: "زيارة تمريضية",
-        text: "تسجيل زيارة الممرض",
-        section: "workSection"
-      },
-      {
-        icon: "💊",
-        title: "الأدوية",
-        text: "تسجيل إعطاء الأدوية",
-        section: "workSection"
-      },
-      {
-        icon: "🩸",
-        title: "العلامات الحيوية",
-        text: "ضغط وسكر",
-        section: "workSection"
-      },
-      {
-        icon: "📝",
-        title: "تقرير تمريضي",
-        text: "تسجيل الملاحظات",
-        section: "workSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "specialist"
-  ) {
-
-    actions.push(
-      {
-        icon: "🩺",
-        title: "فحص طبي",
-        text: "إجراء تقييم طبي",
-        section: "workSection"
-      },
-      {
-        icon: "📋",
-        title: "التقارير",
-        text: "كتابة التقرير الطبي",
-        section: "workSection"
-      },
-      {
-        icon: "💊",
-        title: "التوصيات",
-        text: "إضافة التوصيات",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض المشتركين",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "resident"
-  ) {
-
-    actions.push(
-      {
-        icon: "🩺",
-        title: "زيارة طبية",
-        text: "تسجيل الزيارة",
-        section: "workSection"
-      },
-      {
-        icon: "📋",
-        title: "الفحص العام",
-        text: "تقييم الحالة",
-        section: "workSection"
-      },
-      {
-        icon: "💊",
-        title: "التوصيات",
-        text: "تسجيل التوصيات",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "nutrition"
-  ) {
-
-    actions.push(
-      {
-        icon: "🥗",
-        title: "تقييم غذائي",
-        text: "تقييم الحالة الغذائية",
-        section: "workSection"
-      },
-      {
-        icon: "🍎",
-        title: "الخطة الغذائية",
-        text: "إضافة خطة غذائية",
-        section: "workSection"
-      },
-      {
-        icon: "📋",
-        title: "التوصيات",
-        text: "تسجيل التوصيات",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "physio"
-  ) {
-
-    actions.push(
-      {
-        icon: "🏃",
-        title: "جلسة علاج",
-        text: "تسجيل الجلسة",
-        section: "workSection"
-      },
-      {
-        icon: "🦵",
-        title: "تقييم الحركة",
-        text: "تقييم قدرة الحركة",
-        section: "workSection"
-      },
-      {
-        icon: "🏋️",
-        title: "التمارين",
-        text: "تسجيل التمارين",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "psychologist"
-  ) {
-
-    actions.push(
-      {
-        icon: "🧠",
-        title: "جلسة نفسية",
-        text: "تسجيل الجلسة",
-        section: "workSection"
-      },
-      {
-        icon: "📋",
-        title: "تقييم نفسي",
-        text: "تقييم الحالة",
-        section: "workSection"
-      },
-      {
-        icon: "💬",
-        title: "الملاحظات",
-        text: "تسجيل الملاحظات",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "entertainment"
-  ) {
-
-    actions.push(
-      {
-        icon: "🎭",
-        title: "نشاط ترفيهي",
-        text: "تسجيل النشاط",
-        section: "workSection"
-      },
-      {
-        icon: "🚗",
-        title: "خروج ترفيهي",
-        text: "تسجيل الخروج",
-        section: "workSection"
-      },
-      {
-        icon: "🤝",
-        title: "مرافقة",
-        text: "تسجيل المرافقة",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else if (
-    role === "hairdresser"
-  ) {
-
-    actions.push(
-      {
-        icon: "💇",
-        title: "قص الشعر",
-        text: "تسجيل الخدمة",
-        section: "workSection"
-      },
-      {
-        icon: "🪒",
-        title: "الحلاقة",
-        text: "تسجيل الخدمة",
-        section: "workSection"
-      },
-      {
-        icon: "✨",
-        title: "العناية الشخصية",
-        text: "تسجيل الخدمة",
-        section: "workSection"
-      },
-      {
-        icon: "👴",
-        title: "المشتركين",
-        text: "عرض الملفات",
-        section: "patientsSection"
-      }
-    );
-
-  }
-
-  else {
-
-    actions.push(
-      {
-        icon: "👥",
-        title: "المشتركين",
-        text: "عرض المشتركين",
-        section: "patientsSection"
-      },
-      {
-        icon: "📝",
-        title: "تسجيل متابعة",
-        text: "تسجيل نشاط",
-        section: "workSection"
-      },
-      {
-        icon: "📊",
-        title: "التقارير",
-        text: "متابعة التقارير",
-        section: "workSection"
-      },
-      {
-        icon: "🔐",
-        title: "الصلاحيات",
-        text: "عرض صلاحياتك",
-        section: "permissionsList"
-      }
-    );
-
-  }
-
-
-  actions.forEach(
-    function(action) {
-
-      const button =
+      const row =
         document.createElement(
-          "button"
+          "tr"
         );
 
 
-      button.type = "button";
+      let statusHTML = "";
 
-      button.className =
-        "action";
-
-
-      button.innerHTML = `
-
-        <div class="action-icon">
-
-          ${action.icon}
-
-        </div>
-
-        <h3>
-
-          ${action.title}
-
-        </h3>
-
-        <p>
-
-          ${action.text}
-
-        </p>
-
-      `;
-
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          scrollToSection(
-            action.section
-          );
-
-        }
-      );
-
-
-      grid.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   11. أنواع العمل
-===================================================== */
-
-function renderWorkTypes() {
-
-  const select =
-    document.getElementById(
-      "workType"
-    );
-
-
-  select.innerHTML = `
-
-    <option value="">
-      اختر نوع العمل
-    </option>
-
-  `;
-
-
-  config.workTypes.forEach(
-    function(type) {
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-
-      option.value =
-        type;
-
-      option.textContent =
-        type;
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   12. المشتركين داخل النموذج
-===================================================== */
-
-function renderCustomerSelect() {
-
-  const select =
-    document.getElementById(
-      "workCustomer"
-    );
-
-
-  select.innerHTML = `
-
-    <option value="">
-      اختر المشترك
-    </option>
-
-  `;
-
-
-  activeCustomers.forEach(
-    function(customer) {
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-
-      option.value =
-        customer.id;
-
-
-      option.textContent =
-        customer.name +
-        " — " +
-        customer.id;
-
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   13. الصلاحيات
-===================================================== */
-
-function renderPermissions() {
-
-  const list =
-    document.getElementById(
-      "permissionsList"
-    );
-
-
-  list.innerHTML = "";
-
-
-  config.permissions.forEach(
-    function(permission) {
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-
-      item.className =
-        "info-item";
-
-
-      item.innerHTML = `
-
-        <strong>
-          ✅ ${escapeHTML(permission)}
-        </strong>
-
-        <span>
-          متاح ضمن صلاحياتك الوظيفية في نظام سند.
-        </span>
-
-      `;
-
-
-      list.appendChild(
-        item
-      );
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   14. حفظ التقرير
-===================================================== */
-
-document
-  .getElementById("workForm")
-  .addEventListener(
-    "submit",
-    function(event) {
-
-      event.preventDefault();
-
-
-      const customerId =
-        document.getElementById(
-          "workCustomer"
-        ).value;
-
-
-      const workType =
-        document.getElementById(
-          "workType"
-        ).value;
-
-
-      const date =
-        document.getElementById(
-          "workDate"
-        ).value;
-
-
-      const time =
-        document.getElementById(
-          "workTime"
-        ).value;
-
-
-      const notes =
-        document.getElementById(
-          "workNotes"
-        ).value.trim();
+      let actionHTML = "";
 
 
       if (
-        !customerId ||
-        !workType ||
-        !date ||
-        !time ||
-        !notes
+        visit.status ===
+        "waiting"
       ) {
 
-        alert(
-          "يرجى إكمال جميع الحقول."
-        );
-
-        return;
-
-      }
+        statusHTML = `
+          <span class="status status-waiting">
+            ⏳ بانتظار الزيارة
+          </span>
+        `;
 
 
-      let reports = [];
+        actionHTML = `
 
+          <button
+            class="start-btn"
+            onclick="startVisit('${visit.id}')"
+          >
+            ▶ بدء الزيارة
+          </button>
 
-      try {
-
-        reports =
-          JSON.parse(
-            localStorage.getItem(
-              "sanadStaffReports"
-            ) || "[]"
-          );
-
-      } catch (error) {
-
-        reports = [];
+        `;
 
       }
 
 
-      const customer =
-        customers.find(
-          function(item) {
+      else if (
+        visit.status ===
+        "in_progress"
+      ) {
 
-            return item.id === customerId;
-
-          }
-        );
-
-
-      const report = {
-
-        id:
-          "REP-" +
-          Date.now(),
-
-        customerId:
-          customerId,
-
-        customerName:
-          customer
-            ? customer.name
-            : "غير معروف",
-
-        staffName:
-          loggedStaff.name,
-
-        staffPhone:
-          loggedStaff.phone,
-
-        employeeId:
-          loggedStaff.employeeId,
-
-        role:
-          loggedStaff.role,
-
-        title:
-          loggedStaff.title,
-
-        workType:
-          workType,
-
-        date:
-          date,
-
-        time:
-          time,
-
-        notes:
-          notes,
-
-        createdAt:
-          new Date().toISOString()
-
-      };
+        statusHTML = `
+          <span class="status status-progress">
+            🟢 قيد الزيارة
+          </span>
+        `;
 
 
-      reports.push(
-        report
-      );
+        actionHTML = `
+
+          <button
+            class="start-btn"
+            onclick="startVisit('${visit.id}')"
+          >
+            متابعة الزيارة
+          </button>
+
+        `;
+
+      }
 
 
-      localStorage.setItem(
-        "sanadStaffReports",
-        JSON.stringify(
-          reports
-        )
-      );
+      else if (
+        visit.status ===
+        "completed"
+      ) {
+
+        statusHTML = `
+          <span class="status status-completed">
+            ✅ مكتملة
+          </span>
+        `;
 
 
-      updateReportCount();
+        actionHTML = `
+          <span
+            style="
+              color:#16815f;
+              font-size:11px;
+              font-weight:800;
+            "
+          >
+            تم إرسال التقرير
+          </span>
+        `;
+
+      }
 
 
-      document
-        .getElementById(
-          "workForm"
-        )
-        .reset();
+      row.innerHTML = `
+
+        <td>
+          ${formatDate(visit.date)}
+        </td>
+
+        <td>
+          <span class="visit-time">
+            ${escapeHTML(visit.time)}
+          </span>
+        </td>
+
+        <td>
+          <div class="patient-name">
+            👴 ${escapeHTML(visit.patientName)}
+          </div>
+        </td>
+
+        <td>
+          <div class="address">
+            📍 ${escapeHTML(visit.address)}
+          </div>
+        </td>
+
+        <td>
+          <span class="visit-type">
+            ${escapeHTML(visit.type)}
+          </span>
+        </td>
+
+        <td>
+          ${statusHTML}
+        </td>
+
+        <td>
+          ${actionHTML}
+        </td>
+
+      `;
 
 
-      setToday();
-
-
-      alert(
-        "✅ تم حفظ التقرير بنجاح."
+      body.appendChild(
+        row
       );
 
     }
   );
 
+}
+
 
 /* =====================================================
-   15. عدد التقارير
+   8. بدء الزيارة
 ===================================================== */
 
-function updateReportCount() {
-
-  let reports = [];
+let currentVisit = null;
 
 
-  try {
+function startVisit(id) {
 
-    reports =
-      JSON.parse(
-        localStorage.getItem(
-          "sanadStaffReports"
-        ) || "[]"
-      );
+  const visit =
+    visits.find(
+      function(item) {
 
-  } catch (error) {
-
-    reports = [];
-
-  }
-
-
-  const myReports =
-    reports.filter(
-      function(report) {
-
-        return (
-          report.employeeId ===
-          loggedStaff.employeeId
-        );
+        return item.id === id;
 
       }
     );
 
 
-  document.getElementById(
-    "myReports"
-  ).textContent =
-    myReports.length;
+  if (!visit) {
 
-}
-
-
-/* =====================================================
-   16. زيارات اليوم
-===================================================== */
-
-function updateTodayVisits() {
-
-  let reports = [];
-
-
-  try {
-
-    reports =
-      JSON.parse(
-        localStorage.getItem(
-          "sanadStaffReports"
-        ) || "[]"
-      );
-
-  } catch (error) {
-
-    reports = [];
-
-  }
-
-
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0, 10);
-
-
-  const visits =
-    reports.filter(
-      function(report) {
-
-        return (
-          report.employeeId ===
-            loggedStaff.employeeId &&
-          report.date ===
-            today
-        );
-
-      }
+    alert(
+      "لم يتم العثور على الزيارة."
     );
-
-
-  document.getElementById(
-    "todayVisits"
-  ).textContent =
-    visits.length;
-
-}
-
-
-/* =====================================================
-   17. التاريخ الحالي
-===================================================== */
-
-function setToday() {
-
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0, 10);
-
-
-  document.getElementById(
-    "workDate"
-  ).value =
-    today;
-
-}
-
-
-/* =====================================================
-   18. الانتقال إلى القسم
-===================================================== */
-
-function scrollToSection(id) {
-
-  const section =
-    document.getElementById(id);
-
-
-  if (!section) {
 
     return;
 
   }
 
 
-  section.scrollIntoView({
+  currentVisit = visit;
 
-    behavior:
-      "smooth",
 
-    block:
-      "start"
+  visit.status =
+    "in_progress";
 
-  });
+
+  visit.startedAt =
+    new Date().toISOString();
+
+
+  saveVisits();
+
+
+  showVisitInterface(
+    visit
+  );
+
+
+  renderVisits();
 
 }
 
 
 /* =====================================================
-   19. تسجيل الخروج
+   9. واجهة الزيارة
+===================================================== */
+
+function showVisitInterface(
+  visit
+) {
+
+  const section =
+    document.getElementById(
+      "visitSection"
+    );
+
+
+  section.style.display =
+    "block";
+
+
+  section.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+
+  document.getElementById(
+    "currentVisitHeader"
+  ).innerHTML = `
+
+    <h3>
+      👴 ${escapeHTML(visit.patientName)}
+    </h3>
+
+    <p>
+      📍 ${escapeHTML(visit.address)}
+    </p>
+
+    <div class="visit-info-grid">
+
+      <div class="info-item">
+
+        <div class="info-label">
+          📅 التاريخ
+        </div>
+
+        <div class="info-value">
+          ${formatDate(visit.date)}
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          🕐 وقت الزيارة
+        </div>
+
+        <div class="info-value">
+          ${escapeHTML(visit.time)}
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          🩺 نوع الزيارة
+        </div>
+
+        <div class="info-value">
+          ${escapeHTML(visit.type)}
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-label">
+          🆔 رقم الزيارة
+        </div>
+
+        <div class="info-value">
+          ${escapeHTML(visit.id)}
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  configureRoleInterface();
+
+
+  clearVisitForm();
+
+}
+
+
+/* =====================================================
+   10. تخصيص الواجهة حسب الكادر
+===================================================== */
+
+function configureRoleInterface() {
+
+  const role =
+    loggedStaff
+      ? loggedStaff.role
+      : "";
+
+
+  const roleNotice =
+    document.getElementById(
+      "roleNotice"
+    );
+
+
+  const medicalSection =
+    document.getElementById(
+      "medicalSection"
+    );
+
+
+  const nursingSection =
+    document.getElementById(
+      "nursingSection"
+    );
+
+
+  const vitalSection =
+    document.getElementById(
+      "vitalSection"
+    );
+
+
+  /*
+     الممرض
+  */
+
+  if (role === "nurse") {
+
+    roleNotice.innerHTML = `
+      👩‍⚕️ <strong>واجهة الممرض:</strong>
+      يرجى تسجيل العلامات الحيوية، الأدوية،
+      الرعاية الشخصية وجميع الملاحظات التمريضية.
+    `;
+
+    vitalSection.style.display =
+      "block";
+
+    nursingSection.style.display =
+      "block";
+
+    medicalSection.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     الطبيب المقيم
+  */
+
+  if (role === "resident") {
+
+    roleNotice.innerHTML = `
+      🩺 <strong>واجهة الطبيب المقيم:</strong>
+      قم بتسجيل العلامات الحيوية والفحص الطبي
+      والتشخيص والعلاج والتوصيات.
+    `;
+
+    vitalSection.style.display =
+      "block";
+
+    nursingSection.style.display =
+      "none";
+
+    medicalSection.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  /*
+     الطبيب الأخصائي
+  */
+
+  if (role === "specialist") {
+
+    roleNotice.innerHTML = `
+      👨‍⚕️ <strong>واجهة الطبيب الأخصائي:</strong>
+      قم بتسجيل التقييم التخصصي والتشخيص
+      والتوصيات والخطة العلاجية.
+    `;
+
+    vitalSection.style.display =
+      "block";
+
+    nursingSection.style.display =
+      "none";
+
+    medicalSection.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  /*
+     بقية الكوادر
+  */
+
+  roleNotice.innerHTML = `
+    👤 <strong>${escapeHTML(
+      loggedStaff
+        ? loggedStaff.title
+        : "الكادر"
+    )}:</strong>
+    أدخل تفاصيل الخدمة التي تم تقديمها
+    والملاحظات والتوصيات الخاصة بالمسن.
+  `;
+
+
+  vitalSection.style.display =
+    "none";
+
+
+  medicalSection.style.display =
+    "block";
+
+
+  nursingSection.style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   11. إتمام الزيارة
+===================================================== */
+
+function completeVisit() {
+
+  if (!currentVisit) {
+
+    alert(
+      "لا توجد زيارة مفتوحة حالياً."
+    );
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل أنت متأكد من إتمام الزيارة وإرسال التقرير؟"
+    );
+
+
+  if (!confirmed) {
+
+    return;
+
+  }
+
+
+  const report = {
+
+    id:
+      "REP-" +
+      Date.now(),
+
+    visitId:
+      currentVisit.id,
+
+    patientName:
+      currentVisit.patientName,
+
+    patientAddress:
+      currentVisit.address,
+
+    visitDate:
+      currentVisit.date,
+
+    visitTime:
+      currentVisit.time,
+
+    visitType:
+      currentVisit.type,
+
+    staff: {
+
+      employeeId:
+        loggedStaff.employeeId,
+
+      name:
+        loggedStaff.name,
+
+      title:
+        loggedStaff.title,
+
+      role:
+        loggedStaff.role
+
+    },
+
+    vitalSigns: {
+
+      bloodPressure:
+        getValue("bloodPressure"),
+
+      bloodSugar:
+        getValue("bloodSugar"),
+
+      temperature:
+        getValue("temperature"),
+
+      pulse:
+        getValue("pulse"),
+
+      oxygen:
+        getValue("oxygen"),
+
+      weight:
+        getValue("weight")
+
+    },
+
+    medical: {
+
+      symptoms:
+        getValue("symptoms"),
+
+      examination:
+        getValue("examination"),
+
+      diagnosis:
+        getValue("diagnosis"),
+
+      treatment:
+        getValue("treatment"),
+
+      recommendations:
+        getValue("recommendations")
+
+    },
+
+    nursing: {
+
+      medicationGiven:
+        getValue("medicationGiven"),
+
+      personalCare:
+        getValue("personalCare"),
+
+      nutritionStatus:
+        getValue("nutritionStatus"),
+
+      nursingNotes:
+        getValue("nursingNotes")
+
+    },
+
+    finalReport:
+      getValue("finalReport"),
+
+    completedAt:
+      new Date().toISOString(),
+
+    /*
+       الجهات التي يجب أن تستلم التقرير
+       في النظام النهائي.
+    */
+
+    recipients: {
+
+      administration: true,
+
+      elderly: true,
+
+      family: true
+
+    },
+
+    deliveryStatus: {
+
+      administration:
+        "pending",
+
+      elderly:
+        "pending",
+
+      family:
+        "pending"
+
+    }
+
+  };
+
+
+  /* =========================
+     حفظ التقرير
+  ========================= */
+
+  let reports =
+    JSON.parse(
+      localStorage.getItem(
+        "sanadVisitReports"
+      ) || "[]"
+    );
+
+
+  reports.push(
+    report
+  );
+
+
+  localStorage.setItem(
+    "sanadVisitReports",
+    JSON.stringify(
+      reports
+    )
+  );
+
+
+  /* =========================
+     تحديث الزيارة
+  ========================= */
+
+  currentVisit.status =
+    "completed";
+
+
+  currentVisit.completedAt =
+    report.completedAt;
+
+
+  currentVisit.reportId =
+    report.id;
+
+
+  saveVisits();
+
+
+  /* =========================
+     رسالة النجاح
+  ========================= */
+
+  const message =
+    document.getElementById(
+      "reportMessage"
+    );
+
+
+  message.innerHTML = `
+
+    ✅ تمت الزيارة بنجاح.
+
+    <br>
+
+    تم إنشاء تقرير الزيارة رقم:
+    <strong>
+      ${escapeHTML(report.id)}
+    </strong>
+
+    <br><br>
+
+    📤 التقرير جاهز للإرسال إلى:
+
+    <br>
+
+    🏢 الإدارة
+
+    <br>
+
+    👴 المسن
+
+    <br>
+
+    👨‍👩‍👦 العائلة
+
+    <br><br>
+
+    <small>
+      الإرسال الفعلي إلى أجهزة المستخدمين
+      سيتم ربطه بقاعدة البيانات والإشعارات
+      في المرحلة القادمة.
+    </small>
+
+  `;
+
+
+  message.style.display =
+    "block";
+
+
+  currentVisit = null;
+
+
+  renderVisits();
+
+  updateTodayCount();
+
+
+  setTimeout(
+    function() {
+
+      document.getElementById(
+        "visitSection"
+      ).style.display =
+        "none";
+
+    },
+    5000
+  );
+
+}
+
+
+/* =====================================================
+   12. إلغاء الزيارة الحالية
+===================================================== */
+
+function cancelVisit() {
+
+  if (!currentVisit) {
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل تريد الخروج من الزيارة؟ سيتم الاحتفاظ بحالة الزيارة."
+    );
+
+
+  if (!confirmed) {
+
+    return;
+
+  }
+
+
+  currentVisit = null;
+
+
+  document.getElementById(
+    "visitSection"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   13. تفريغ النموذج
+===================================================== */
+
+function clearVisitForm() {
+
+  const fields = [
+
+    "bloodPressure",
+    "bloodSugar",
+    "temperature",
+    "pulse",
+    "oxygen",
+    "weight",
+    "symptoms",
+    "examination",
+    "diagnosis",
+    "treatment",
+    "recommendations",
+    "nursingNotes",
+    "finalReport"
+
+  ];
+
+
+  fields.forEach(
+    function(id) {
+
+      const element =
+        document.getElementById(id);
+
+
+      if (element) {
+
+        element.value = "";
+
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    "medicationGiven"
+  ).value = "";
+
+
+  document.getElementById(
+    "personalCare"
+  ).value = "";
+
+
+  document.getElementById(
+    "nutritionStatus"
+  ).value = "";
+
+
+  document.getElementById(
+    "reportMessage"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =====================================================
+   14. قراءة قيمة
+===================================================== */
+
+function getValue(id) {
+
+  const element =
+    document.getElementById(id);
+
+
+  if (!element) {
+
+    return "";
+
+  }
+
+
+  return element.value.trim();
+
+}
+
+
+/* =====================================================
+   15. حفظ الزيارات
+===================================================== */
+
+function saveVisits() {
+
+  localStorage.setItem(
+    "sanadVisits",
+    JSON.stringify(
+      visits
+    )
+  );
+
+}
+
+
+/* =====================================================
+   16. تنسيق التاريخ
+===================================================== */
+
+function formatDate(date) {
+
+  if (!date) {
+
+    return "";
+
+  }
+
+
+  const parts =
+    date.split("-");
+
+
+  if (parts.length !== 3) {
+
+    return escapeHTML(date);
+
+  }
+
+
+  return (
+    parts[2] +
+    "/" +
+    parts[1] +
+    "/" +
+    parts[0]
+  );
+
+}
+
+
+/* =====================================================
+   17. حماية HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   18. تسجيل الخروج
 ===================================================== */
 
 function logoutStaff(event) {
@@ -2612,65 +2532,12 @@ function logoutStaff(event) {
 
 
 /* =====================================================
-   20. حماية النصوص
+   19. تشغيل الصفحة
 ===================================================== */
 
-function escapeHTML(value) {
+updateTodayCount();
 
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "";
-
-  }
-
-
-  return String(value)
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   21. التشغيل
-===================================================== */
-
-renderPatients();
-
-renderActions();
-
-renderWorkTypes();
-
-renderCustomerSelect();
-
-renderPermissions();
-
-updateReportCount();
-
-updateTodayVisits();
-
-setToday();
+renderVisits();
 
 </script>
 
