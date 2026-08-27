@@ -12,7 +12,6 @@ content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="style.css">
 
-<!-- قاعدة بيانات الكادر -->
 <script src="staff-database.js"></script>
 
 <style>
@@ -193,6 +192,47 @@ font-size:11px;
 font-weight:900;
 }
 
+.customer-actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:18px;
+}
+
+.schedule-customer-btn{
+border:none;
+border-radius:10px;
+padding:10px 14px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+}
+
+.schedule-customer-btn:hover{
+background:#0f7068;
+}
+
+.delete-customer-btn{
+border:none;
+border-radius:10px;
+padding:10px 14px;
+background:#fff0f0;
+border:1px solid #f0caca;
+color:#a44b4b;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+}
+
+.delete-customer-btn:hover{
+background:#fce0e0;
+color:#8e3535;
+}
+
 .schedule-grid{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -295,23 +335,6 @@ background:#0f7068;
 cursor:not-allowed;
 background:#b7c7c4;
 opacity:.6 !important;
-}
-
-.schedule-customer-btn{
-border:none;
-border-radius:10px;
-padding:10px 14px;
-background:#16877d;
-color:white;
-font-family:inherit;
-font-size:11px;
-font-weight:800;
-cursor:pointer;
-margin-top:15px;
-}
-
-.schedule-customer-btn:hover{
-background:#0f7068;
 }
 
 .appointment-list{
@@ -480,6 +503,14 @@ align-items:flex-start;
 flex-direction:column;
 }
 
+.customer-actions{
+flex-direction:column;
+}
+
+.customer-actions button{
+width:100%;
+}
+
 }
 
 </style>
@@ -499,11 +530,8 @@ flex-direction:column;
 <nav class="nav">
 
 <a href="index.html">الرئيسية</a>
-
 <a href="services.html">خدماتنا</a>
-
 <a href="how.html">كيف يعمل سند؟</a>
-
 <a href="about.html">عن سند</a>
 
 </nav>
@@ -514,6 +542,8 @@ flex-direction:column;
 
 <main class="dashboard">
 
+
+<!-- الترحيب -->
 
 <section class="welcome">
 
@@ -540,6 +570,8 @@ flex-direction:column;
 </section>
 
 
+
+<!-- الإحصائيات -->
 
 <section class="stats">
 
@@ -606,6 +638,8 @@ id="todayCount">
 
 
 
+<!-- المشتركين -->
+
 <section class="section">
 
 <div class="section-title">
@@ -631,6 +665,8 @@ id="todayCount">
 </section>
 
 
+
+<!-- جداول الخدمات -->
 
 <section class="section">
 
@@ -685,10 +721,7 @@ onsubmit="saveAppointment(event,'nurse')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -729,10 +762,7 @@ required
 
 الممرض الصحي
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الممرض
@@ -793,10 +823,7 @@ onsubmit="saveAppointment(event,'resident')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -837,10 +864,7 @@ required
 
 الطبيب المقيم
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الطبيب
@@ -901,10 +925,7 @@ onsubmit="saveAppointment(event,'specialist')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -945,10 +966,7 @@ required
 
 الطبيب الاختصاص
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الطبيب
@@ -1009,10 +1027,7 @@ onsubmit="saveAppointment(event,'entertainment')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1053,10 +1068,7 @@ required
 
 أخصائي الترفيه
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الأخصائي
@@ -1117,10 +1129,7 @@ onsubmit="saveAppointment(event,'hairdresser')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1161,10 +1170,7 @@ required
 
 الكوافير
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الكوافير
@@ -1225,10 +1231,7 @@ onsubmit="saveAppointment(event,'nutrition')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1269,10 +1272,7 @@ required
 
 أخصائي التغذية
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الأخصائي
@@ -1333,10 +1333,7 @@ onsubmit="saveAppointment(event,'physio')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1377,10 +1374,7 @@ required
 
 أخصائي العلاج الطبيعي
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الأخصائي
@@ -1441,10 +1435,7 @@ onsubmit="saveAppointment(event,'psychologist')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1485,10 +1476,7 @@ required
 
 الأخصائي النفسي
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر الأخصائي
@@ -1549,10 +1537,7 @@ onsubmit="saveAppointment(event,'assistant')"
 
 المشترك
 
-<select
-class="customer-select"
-required
->
+<select class="customer-select" required>
 
 <option value="">
 اختر المشترك
@@ -1593,10 +1578,7 @@ required
 
 المعين
 
-<select
-class="staff-select"
-required
->
+<select class="staff-select" required>
 
 <option value="">
 اختر المعين
@@ -1627,6 +1609,8 @@ id="assistantAppointments">
 </section>
 
 
+
+<!-- ملخص المواعيد -->
 
 <section class="section">
 
@@ -1710,9 +1694,7 @@ localStorage.getItem(
 
 if(!loggedStaffRaw){
 
-alert(
-"يرجى تسجيل الدخول أولاً."
-);
+alert("يرجى تسجيل الدخول أولاً.");
 
 window.location.href=
 "staff-login.html";
@@ -1722,13 +1704,10 @@ window.location.href=
 
 let loggedStaff=null;
 
-
 try{
 
 loggedStaff=
-JSON.parse(
-loggedStaffRaw
-);
+JSON.parse(loggedStaffRaw);
 
 }catch(error){
 
@@ -1777,7 +1756,6 @@ loggedStaff.name+
 
 let customers=[];
 
-
 function loadCustomers(){
 
 try{
@@ -1789,7 +1767,6 @@ localStorage.getItem(
 ) || "[]"
 );
 
-
 if(!Array.isArray(customers)){
 
 customers=[];
@@ -1797,11 +1774,6 @@ customers=[];
 }
 
 }catch(error){
-
-console.error(
-"خطأ في تحميل المشتركين:",
-error
-);
 
 customers=[];
 
@@ -1817,7 +1789,6 @@ customers=[];
 
 let appointments=[];
 
-
 function loadAppointments(){
 
 try{
@@ -1829,7 +1800,6 @@ localStorage.getItem(
 ) || "[]"
 );
 
-
 if(!Array.isArray(appointments)){
 
 appointments=[];
@@ -1837,11 +1807,6 @@ appointments=[];
 }
 
 }catch(error){
-
-console.error(
-"خطأ في تحميل المواعيد:",
-error
-);
 
 appointments=[];
 
@@ -1857,69 +1822,51 @@ appointments=[];
 
 const serviceNames={
 
-nurse:
-"الممرض الصحي",
+nurse:"الممرض الصحي",
 
-resident:
-"الطبيب المقيم",
+resident:"الطبيب المقيم",
 
-specialist:
-"الطبيب الاختصاص",
+specialist:"الطبيب الاختصاص",
 
-entertainment:
-"الترفيه ورفيق سند",
+entertainment:"الترفيه ورفيق سند",
 
-hairdresser:
-"الكوافير",
+hairdresser:"الكوافير",
 
-nutrition:
-"أخصائي التغذية",
+nutrition:"أخصائي التغذية",
 
-physio:
-"العلاج الطبيعي والتمارين",
+physio:"العلاج الطبيعي والتمارين",
 
-psychologist:
-"الأخصائي النفسي",
+psychologist:"الأخصائي النفسي",
 
-assistant:
-"المعين الخاص"
+assistant:"المعين الخاص"
 
 };
 
 
 
 /* =====================================================
-   5. ربط الخدمة بوظيفة الكادر
+   5. ربط الخدمة بالكادر
 ===================================================== */
 
 const serviceStaffRoles={
 
-nurse:
-"nurse",
+nurse:"nurse",
 
-resident:
-"resident",
+resident:"resident",
 
-specialist:
-"specialist",
+specialist:"specialist",
 
-entertainment:
-"entertainment",
+entertainment:"entertainment",
 
-hairdresser:
-"hairdresser",
+hairdresser:"hairdresser",
 
-nutrition:
-"nutrition",
+nutrition:"nutrition",
 
-physio:
-"physio",
+physio:"physio",
 
-psychologist:
-"psychologist",
+psychologist:"psychologist",
 
-assistant:
-"assistant"
+assistant:"assistant"
 
 };
 
@@ -1932,26 +1879,21 @@ assistant:
 const packageServices={
 
 basic:[
-
 "nurse",
 "resident",
 "specialist",
 "entertainment"
-
 ],
 
 medium:[
-
 "nurse",
 "resident",
 "specialist",
 "entertainment",
 "hairdresser"
-
 ],
 
 luxury:[
-
 "nurse",
 "resident",
 "specialist",
@@ -1960,7 +1902,6 @@ luxury:[
 "nutrition",
 "physio",
 "psychologist"
-
 ]
 
 };
@@ -1968,7 +1909,7 @@ luxury:[
 
 
 /* =====================================================
-   7. الحصول على خدمات المشترك
+   7. خدمات المشترك
 ===================================================== */
 
 function getRequiredServices(customer){
@@ -1979,22 +1920,17 @@ return [];
 
 }
 
-
 let services=[
 ...(packageServices[
 customer.package
 ] || [])
 ];
 
-
 if(customer.assistantRequested){
 
-services.push(
-"assistant"
-);
+services.push("assistant");
 
 }
-
 
 return services;
 
@@ -2009,17 +1945,13 @@ return services;
 function formatPrice(price){
 
 const numericPrice=
-Number(
-price || 0
-);
-
+Number(price || 0);
 
 if(!numericPrice){
 
 return "حسب الخدمات المختارة";
 
 }
-
 
 return numericPrice.toLocaleString(
 "ar-IQ"
@@ -2045,19 +1977,16 @@ return false;
 
 }
 
-
 if(service==="assistant"){
 
 return !!customer.assistantRequested;
 
 }
 
-
 const services=
 packageServices[
 customer.package
 ] || [];
-
 
 return services.includes(
 service
@@ -2078,13 +2007,11 @@ document.querySelectorAll(
 ".customer-select"
 );
 
-
 selects.forEach(
 function(select){
 
 const currentValue=
 select.value;
-
 
 select.innerHTML=
 `
@@ -2092,7 +2019,6 @@ select.innerHTML=
 اختر المشترك
 </option>
 `;
-
 
 customers.forEach(
 function(customer){
@@ -2105,16 +2031,13 @@ return;
 
 }
 
-
 const option=
 document.createElement(
 "option"
 );
 
-
 option.value=
 customer.id;
-
 
 option.textContent=
 customer.id+
@@ -2126,13 +2049,11 @@ customer.packageName ||
 ""
 );
 
-
 select.appendChild(
 option
 );
 
 });
-
 
 if(
 customers.some(
@@ -2157,7 +2078,7 @@ currentValue;
 
 
 /* =====================================================
-   11. تحديد نوع الخدمة
+   11. نوع الخدمة
 ===================================================== */
 
 function getServiceTypeFromForm(form){
@@ -2168,18 +2089,15 @@ return "";
 
 }
 
-
 const code=
 form.getAttribute(
 "onsubmit"
 ) || "";
 
-
 const match=
 code.match(
 /saveAppointment\(event,'([^']+)'\)/
 );
-
 
 return match
 ?
@@ -2192,7 +2110,7 @@ match[1]
 
 
 /* =====================================================
-   12. تعبئة الكادر من قاعدة البيانات
+   12. تعبئة الكادر
 ===================================================== */
 
 function populateStaffSelects(){
@@ -2202,7 +2120,6 @@ document.querySelectorAll(
 ".schedule-form"
 );
 
-
 forms.forEach(
 function(form){
 
@@ -2211,12 +2128,10 @@ getServiceTypeFromForm(
 form
 );
 
-
 const role=
 serviceStaffRoles[
 serviceType
 ];
-
 
 if(!role){
 
@@ -2224,12 +2139,10 @@ return;
 
 }
 
-
 const select=
 form.querySelector(
 ".staff-select"
 );
-
 
 if(!select){
 
@@ -2237,10 +2150,8 @@ return;
 
 }
 
-
 const currentValue=
 select.value;
-
 
 select.innerHTML=
 `
@@ -2249,20 +2160,10 @@ select.innerHTML=
 </option>
 `;
 
-
 const staff=
 getStaffByRole(
 role
 );
-
-
-/*
-   =====================================================
-   مهم:
-   قاعدة بيانات الكادر تعتمد staffId
-   وليس employee.id
-   =====================================================
-*/
 
 if(staff.length===0){
 
@@ -2284,7 +2185,6 @@ return;
 
 }
 
-
 staff.forEach(
 function(employee){
 
@@ -2293,38 +2193,20 @@ document.createElement(
 "option"
 );
 
-
-/*
-   المعرّف الرسمي للموظف
-*/
-
 option.value=
 employee.staffId;
-
-
-/*
-   اسم الموظف للعرض
-*/
 
 option.dataset.staffName=
 employee.name;
 
 option.textContent=
-employee.name+
-" — "+
-employee.staffId;
-
+employee.name;
 
 select.appendChild(
 option
 );
 
 });
-
-
-/*
-   الاحتفاظ بالاختيار السابق
-*/
 
 if(
 staff.some(
@@ -2366,7 +2248,6 @@ customerId;
 }
 );
 
-
 if(!customer){
 
 showMessage(
@@ -2377,7 +2258,6 @@ showMessage(
 return;
 
 }
-
 
 document
 .querySelectorAll(
@@ -2400,12 +2280,10 @@ bubbles:true
 
 });
 
-
 const scheduleGrid=
 document.querySelector(
 ".schedule-grid"
 );
-
 
 if(scheduleGrid){
 
@@ -2418,7 +2296,6 @@ block:"start"
 });
 
 }
-
 
 showMessage(
 
@@ -2452,12 +2329,10 @@ return;
 
 }
 
-
 const form=
 event.target.closest(
 "form"
 );
-
 
 if(!form){
 
@@ -2465,12 +2340,10 @@ return;
 
 }
 
-
 const serviceType=
 getServiceTypeFromForm(
 form
 );
-
 
 const customer=
 customers.find(
@@ -2482,19 +2355,16 @@ event.target.value;
 }
 );
 
-
 const submit=
 form.querySelector(
 ".save-schedule"
 );
-
 
 if(!submit){
 
 return;
 
 }
-
 
 if(!customer){
 
@@ -2505,7 +2375,6 @@ submit.style.opacity="1";
 return;
 
 }
-
 
 if(
 !customerCanUseService(
@@ -2526,8 +2395,7 @@ submit.style.opacity="1";
 
 }
 
-}
-);
+});
 
 
 
@@ -2542,34 +2410,28 @@ serviceType
 
 event.preventDefault();
 
-
 const form=
 event.target;
-
 
 const customerId=
 form.querySelector(
 ".customer-select"
 ).value;
 
-
 const date=
 form.querySelector(
 ".appointment-date"
 ).value;
-
 
 const time=
 form.querySelector(
 ".appointment-time-input"
 ).value;
 
-
 const staffSelect=
 form.querySelector(
 ".staff-select"
 );
-
 
 const staffId=
 staffSelect
@@ -2577,7 +2439,6 @@ staffSelect
 staffSelect.value
 :
 "";
-
 
 const selectedStaffOption=
 staffSelect
@@ -2587,7 +2448,6 @@ staffSelect.selectedIndex
 ]
 :
 null;
-
 
 const staffName=
 selectedStaffOption
@@ -2599,12 +2459,6 @@ selectedStaffOption.textContent.trim()
 :
 "";
 
-
-
-/* =====================================================
-   البحث عن المشترك
-===================================================== */
-
 const customer=
 customers.find(
 function(item){
@@ -2614,7 +2468,6 @@ customerId;
 
 }
 );
-
 
 if(!customer){
 
@@ -2626,12 +2479,6 @@ showMessage(
 return;
 
 }
-
-
-
-/* =====================================================
-   التحقق من الخدمة
-===================================================== */
 
 if(
 !customerCanUseService(
@@ -2656,12 +2503,6 @@ return;
 
 }
 
-
-
-/* =====================================================
-   التحقق من البيانات
-===================================================== */
-
 if(
 !date ||
 !time ||
@@ -2679,51 +2520,7 @@ return;
 
 
 
-/* =====================================================
-   التأكد من أن staffId موجود فعلاً
-   في قاعدة بيانات الكادر
-===================================================== */
-
-const selectedStaff=
-getStaffById(
-staffId
-);
-
-
-if(!selectedStaff){
-
-showMessage(
-
-"⚠️ لم يتم العثور على الكادر المحدد في قاعدة بيانات سند.",
-
-"error"
-
-);
-
-return;
-
-}
-
-
-if(!selectedStaff.active){
-
-showMessage(
-
-"⚠️ هذا الموظف غير فعال حالياً.",
-
-"error"
-
-);
-
-return;
-
-}
-
-
-
-/* =====================================================
-   منع تعارض الكادر
-===================================================== */
+/* منع تعارض الكادر */
 
 const staffConflict=
 appointments.some(
@@ -2747,7 +2544,6 @@ item.status!=="cancelled"
 }
 );
 
-
 if(staffConflict){
 
 showMessage(
@@ -2764,9 +2560,7 @@ return;
 
 
 
-/* =====================================================
-   منع تكرار الموعد
-===================================================== */
+/* منع التكرار */
 
 const duplicate=
 appointments.some(
@@ -2796,7 +2590,6 @@ item.status!=="cancelled"
 }
 );
 
-
 if(duplicate){
 
 showMessage(
@@ -2810,9 +2603,7 @@ return;
 
 
 
-/* =====================================================
-   إنشاء الموعد
-===================================================== */
+/* إنشاء الموعد */
 
 const appointment={
 
@@ -2823,7 +2614,6 @@ Date.now()+
 Math.random()
 .toString(36)
 .substring(2,8),
-
 
 customerId:
 customer.id,
@@ -2843,7 +2633,6 @@ customer.phone || "",
 address:
 customer.address || "",
 
-
 package:
 customer.package || "",
 
@@ -2855,7 +2644,6 @@ Number(
 customer.packagePrice || 0
 ),
 
-
 service:
 serviceType,
 
@@ -2864,39 +2652,23 @@ serviceNames[
 serviceType
 ],
 
-
 date:
 date,
 
 time:
 time,
 
-
-/*
-   =====================================================
-   هوية الكادر الرسمية
-   =====================================================
-*/
-
 staffId:
-selectedStaff.staffId,
-
-
-/*
-   اسم الكادر للعرض فقط
-*/
+staffId,
 
 staff:
-selectedStaff.name,
-
+staffName,
 
 staffType:
-selectedStaff.role,
-
+serviceType,
 
 status:
 "scheduled",
-
 
 createdBy:
 loggedStaff
@@ -2904,7 +2676,6 @@ loggedStaff
 loggedStaff.name
 :
 "المدير",
-
 
 createdByStaffId:
 loggedStaff
@@ -2917,10 +2688,8 @@ loggedStaff.employeeId ||
 :
 "",
 
-
 createdAt:
 new Date().toISOString(),
-
 
 visitStartedAt:
 null,
@@ -2932,58 +2701,40 @@ null
 
 
 
-/* =====================================================
-   حفظ الموعد
-===================================================== */
-
 appointments.push(
 appointment
 );
 
-
 localStorage.setItem(
-
 "sanadAppointments",
-
 JSON.stringify(
 appointments
 )
-
 );
-
 
 localStorage.setItem(
-
 "sanadAppointmentsLastUpdate",
-
 new Date().toISOString()
-
 );
 
 
 
-/* =====================================================
-   تحديث المشترك
-===================================================== */
+/* تحديث المشترك */
 
 customer.lastScheduledAt=
 new Date().toISOString();
-
 
 customer.lastScheduledService=
 serviceType;
 
 
 
-/* =====================================================
-   حساب الخدمات
-===================================================== */
+/* حساب الخدمات */
 
 const requiredServices=
 getRequiredServices(
 customer
 );
-
 
 const scheduledServices=
 appointments.filter(
@@ -3001,7 +2752,6 @@ item.status!=="cancelled"
 }
 );
 
-
 const scheduledServiceTypes=
 [
 ...new Set(
@@ -3017,9 +2767,7 @@ return item.service;
 )
 ];
 
-
 const completedScheduling=
-
 requiredServices.length>0 &&
 
 requiredServices.every(
@@ -3031,7 +2779,6 @@ service
 
 }
 );
-
 
 if(completedScheduling){
 
@@ -3045,22 +2792,16 @@ customer.status=
 
 }
 
-
 localStorage.setItem(
-
 "sanadCustomers",
-
 JSON.stringify(
 customers
 )
-
 );
 
 
 
-/* =====================================================
-   تحديث الواجهة
-===================================================== */
+/* تحديث الواجهة */
 
 form.reset();
 
@@ -3074,7 +2815,6 @@ renderPendingCustomers();
 
 updateStats();
 
-
 showMessage(
 
 "✅ تم حفظ موعد "+
@@ -3084,9 +2824,9 @@ serviceType
 " للمشترك "+
 customer.name+
 " للكادر "+
-selectedStaff.name+
+staffName+
 " ("+
-selectedStaff.staffId+
+staffId+
 ")",
 
 "success"
@@ -3098,7 +2838,147 @@ selectedStaff.staffId+
 
 
 /* =====================================================
-   16. عرض المشتركين
+   16. حذف مشترك
+===================================================== */
+
+function deleteCustomer(customerId){
+
+const customer=
+customers.find(
+function(item){
+
+return item.id===
+customerId;
+
+}
+);
+
+if(!customer){
+
+showMessage(
+"لم يتم العثور على المشترك.",
+"error"
+);
+
+return;
+
+}
+
+
+
+/* تأكيد الحذف */
+
+const confirmed=
+confirm(
+
+"⚠️ تأكيد حذف المشترك\n\n"+
+"المشترك: "+
+customer.name+
+"\n"+
+"رقم المشترك: "+
+customer.id+
+"\n\n"+
+"سيتم حذف المشترك وجميع مواعيده المرتبطة به من هذا المتصفح.\n\n"+
+"هل أنت متأكد؟"
+
+);
+
+if(!confirmed){
+
+return;
+
+}
+
+
+
+/* حذف المشترك */
+
+customers=
+customers.filter(
+function(item){
+
+return item.id!==
+customerId;
+
+}
+);
+
+
+
+/* حذف مواعيد المشترك */
+
+appointments=
+appointments.filter(
+function(item){
+
+return item.customerId!==
+customerId;
+
+}
+);
+
+
+
+/* حفظ البيانات */
+
+localStorage.setItem(
+"sanadCustomers",
+JSON.stringify(
+customers
+)
+);
+
+localStorage.setItem(
+"sanadCustomersLastUpdate",
+new Date().toISOString()
+);
+
+localStorage.setItem(
+"sanadAppointments",
+JSON.stringify(
+appointments
+)
+);
+
+localStorage.setItem(
+"sanadAppointmentsLastUpdate",
+new Date().toISOString()
+);
+
+
+
+/* إعادة تحميل الواجهة */
+
+loadCustomers();
+
+loadAppointments();
+
+populateCustomerSelects();
+
+renderPendingCustomers();
+
+renderAppointments();
+
+updateStats();
+
+
+
+showMessage(
+
+"🗑️ تم حذف المشترك "+
+customer.name+
+" وجميع مواعيده بنجاح.",
+
+"success"
+
+);
+
+}
+
+
+
+/* =====================================================
+   17. عرض المشتركين
 ===================================================== */
 
 function renderPendingCustomers(){
@@ -3108,9 +2988,7 @@ document.getElementById(
 "pendingCustomers"
 );
 
-
 container.innerHTML="";
-
 
 const pending=
 customers.filter(
@@ -3129,7 +3007,6 @@ customer.status===
 }
 );
 
-
 if(pending.length===0){
 
 container.innerHTML=
@@ -3145,7 +3022,6 @@ return;
 
 }
 
-
 pending.forEach(
 function(customer){
 
@@ -3154,16 +3030,13 @@ document.createElement(
 "div"
 );
 
-
 div.className=
 "customer-card";
-
 
 const requiredServices=
 getRequiredServices(
 customer
 );
-
 
 const scheduledServices=
 appointments.filter(
@@ -3181,7 +3054,6 @@ item.status!=="cancelled"
 }
 );
 
-
 const scheduledServiceTypes=
 [
 ...new Set(
@@ -3197,17 +3069,13 @@ return item.service;
 )
 ];
 
-
 const scheduledCount=
 scheduledServiceTypes.length;
-
 
 const totalServices=
 requiredServices.length;
 
-
 let schedulingStatus="";
-
 
 if(scheduledCount===0){
 
@@ -3233,7 +3101,6 @@ schedulingStatus=
 
 let servicesHtml="";
 
-
 if(requiredServices.length===0){
 
 servicesHtml=
@@ -3252,7 +3119,6 @@ const done=
 scheduledServiceTypes.includes(
 service
 );
-
 
 servicesHtml+=
 `
@@ -3429,6 +3295,9 @@ ${totalServices}
 
 
 
+<div class="customer-actions">
+
+
 <button
 type="button"
 class="schedule-customer-btn"
@@ -3439,8 +3308,21 @@ onclick="startCustomerScheduling('${escapeHtml(customer.id)}')"
 
 </button>
 
-`;
 
+<button
+type="button"
+class="delete-customer-btn"
+onclick="deleteCustomer('${escapeHtml(customer.id)}')"
+>
+
+🗑️ حذف المشترك
+
+</button>
+
+
+</div>
+
+`;
 
 container.appendChild(
 div
@@ -3453,7 +3335,7 @@ div
 
 
 /* =====================================================
-   17. عرض المواعيد
+   18. عرض المواعيد
 ===================================================== */
 
 function renderAppointments(){
@@ -3462,7 +3344,6 @@ const serviceTypes=
 Object.keys(
 serviceNames
 );
-
 
 serviceTypes.forEach(
 function(service){
@@ -3473,16 +3354,13 @@ service+
 "Appointments"
 );
 
-
 if(!container){
 
 return;
 
 }
 
-
 container.innerHTML="";
-
 
 const serviceAppointments=
 appointments
@@ -3516,7 +3394,6 @@ b.time
 }
 );
 
-
 if(
 serviceAppointments.length===0
 ){
@@ -3534,7 +3411,6 @@ return;
 
 }
 
-
 serviceAppointments.forEach(
 function(item){
 
@@ -3543,10 +3419,8 @@ document.createElement(
 "div"
 );
 
-
 div.className=
 "appointment";
-
 
 div.innerHTML=
 `
@@ -3621,7 +3495,6 @@ item.status
 
 `;
 
-
 container.appendChild(
 div
 );
@@ -3630,7 +3503,6 @@ div
 
 });
 
-
 renderAllAppointments();
 
 }
@@ -3638,7 +3510,7 @@ renderAllAppointments();
 
 
 /* =====================================================
-   18. الملخص العام
+   19. الملخص العام
 ===================================================== */
 
 function renderAllAppointments(){
@@ -3648,9 +3520,7 @@ document.getElementById(
 "allAppointments"
 );
 
-
 container.innerHTML="";
-
 
 if(
 appointments.length===0
@@ -3668,7 +3538,6 @@ container.innerHTML=
 return;
 
 }
-
 
 const sorted=
 appointments
@@ -3693,7 +3562,6 @@ b.time
 }
 );
 
-
 sorted.forEach(
 function(item){
 
@@ -3702,10 +3570,8 @@ document.createElement(
 "div"
 );
 
-
 div.className=
 "appointment";
-
 
 div.innerHTML=
 `
@@ -3790,7 +3656,6 @@ item.status
 
 `;
 
-
 container.appendChild(
 div
 );
@@ -3802,7 +3667,7 @@ div
 
 
 /* =====================================================
-   19. الإحصائيات
+   20. الإحصائيات
 ===================================================== */
 
 function updateStats(){
@@ -3811,7 +3676,6 @@ document.getElementById(
 "customersCount"
 ).textContent=
 customers.length;
-
 
 document.getElementById(
 "pendingCount"
@@ -3833,7 +3697,6 @@ customer.status===
 }
 ).length;
 
-
 document.getElementById(
 "appointmentsCount"
 ).textContent=
@@ -3846,12 +3709,10 @@ return item.status!=="cancelled";
 }
 ).length;
 
-
 const today=
 new Date()
 .toISOString()
 .split("T")[0];
-
 
 document.getElementById(
 "todayCount"
@@ -3878,27 +3739,22 @@ item.status===
 
 
 /* =====================================================
-   20. حالات الموعد
+   21. حالات الموعد
 ===================================================== */
 
 function getAppointmentStatus(status){
 
 const statuses={
 
-scheduled:
-"مجدول",
+scheduled:"مجدول",
 
-completed:
-"تمت الزيارة",
+completed:"تمت الزيارة",
 
-cancelled:
-"ملغى",
+cancelled:"ملغى",
 
-missed:
-"لم تتم الزيارة"
+missed:"لم تتم الزيارة"
 
 };
-
 
 return statuses[
 status
@@ -3910,7 +3766,7 @@ status
 
 
 /* =====================================================
-   21. الرسائل
+   22. الرسائل
 ===================================================== */
 
 function showMessage(
@@ -3923,10 +3779,8 @@ document.getElementById(
 "message"
 );
 
-
 box.textContent=
 message;
-
 
 box.className=
 "message "+
@@ -3938,10 +3792,8 @@ type==="success"
 "error"
 );
 
-
 box.style.display=
 "block";
-
 
 setTimeout(
 function(){
@@ -3958,13 +3810,12 @@ box.style.display=
 
 
 /* =====================================================
-   22. تسجيل الخروج
+   23. تسجيل الخروج
 ===================================================== */
 
 function logoutManager(event){
 
 event.preventDefault();
-
 
 localStorage.removeItem(
 "sanadLoggedInStaff"
@@ -3986,7 +3837,6 @@ localStorage.removeItem(
 "sanadCurrentVisit"
 );
 
-
 window.location.href=
 "staff-login.html";
 
@@ -3995,7 +3845,7 @@ window.location.href=
 
 
 /* =====================================================
-   23. حماية النصوص
+   24. حماية النصوص
 ===================================================== */
 
 function escapeHtml(value){
@@ -4034,13 +3884,12 @@ value ?? ""
 
 
 /* =====================================================
-   24. التحديث التلقائي
+   25. التحديث التلقائي
 ===================================================== */
 
 window.addEventListener(
 "storage",
 function(event){
-
 
 if(
 event.key===
@@ -4057,7 +3906,6 @@ updateStats();
 
 }
 
-
 if(
 event.key===
 "sanadAppointments"
@@ -4071,7 +3919,6 @@ updateStats();
 
 }
 
-
 if(
 event.key===
 "sanadStaffDatabase"
@@ -4081,13 +3928,12 @@ populateStaffSelects();
 
 }
 
-}
-);
+});
 
 
 
 /* =====================================================
-   25. التشغيل الأول
+   26. التشغيل الأول
 ===================================================== */
 
 loadCustomers();
