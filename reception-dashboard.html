@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -240,17 +239,83 @@ outline:none;
 font-size:13px;
 }
 
-.form-row textarea{
-min-height:100px;
-resize:vertical;
-}
-
 .form-row input:focus,
 .form-row select:focus,
 .form-row textarea:focus{
 border-color:#16877d;
 box-shadow:0 0 0 4px rgba(22,135,125,.08);
 background:white;
+}
+
+.form-row textarea{
+min-height:100px;
+resize:vertical;
+}
+
+.package-info{
+margin-top:10px;
+padding:15px;
+border-radius:14px;
+background:#f1f9f7;
+border:1px solid #dcefeb;
+display:none;
+}
+
+.package-info-title{
+font-size:13px;
+font-weight:900;
+color:#163b38;
+margin-bottom:7px;
+}
+
+.package-info-price{
+font-size:20px;
+font-weight:900;
+color:#16877d;
+margin-bottom:8px;
+}
+
+.package-info-services{
+font-size:11px;
+line-height:2;
+color:#718480;
+}
+
+.optional-box{
+background:#fbfefe;
+border:1px solid #e3edeb;
+border-radius:15px;
+padding:16px;
+}
+
+.optional-title{
+color:#163b38;
+font-size:13px;
+font-weight:900;
+margin-bottom:10px;
+}
+
+.radio-group{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+.radio-option{
+display:flex;
+align-items:center;
+gap:7px;
+padding:10px 15px;
+border-radius:11px;
+background:white;
+border:1px solid #dfecea;
+cursor:pointer;
+font-size:12px;
+color:#163b38;
+}
+
+.radio-option input{
+width:auto;
 }
 
 .save-button{
@@ -305,6 +370,45 @@ color:#16877d;
 font-size:12px;
 font-weight:900;
 white-space:nowrap;
+}
+
+.package-small{
+display:inline-block;
+padding:5px 9px;
+background:#e8f5f3;
+color:#16877d;
+border-radius:8px;
+font-weight:800;
+margin-top:5px;
+}
+
+.status-badge{
+display:inline-block;
+padding:5px 9px;
+border-radius:8px;
+font-size:10px;
+font-weight:900;
+margin-top:5px;
+}
+
+.status-pending{
+background:#fff6df;
+color:#a16b00;
+}
+
+.status-scheduled{
+background:#e8f5f3;
+color:#16877d;
+}
+
+.status-active{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.status-suspended{
+background:#fff0f0;
+color:#a44b4b;
 }
 
 .empty{
@@ -415,6 +519,7 @@ flex-direction:column;
 
 </head>
 
+
 <body>
 
 <header class="header">
@@ -424,15 +529,19 @@ flex-direction:column;
 </a>
 
 <nav class="nav">
+
 <a href="index.html">الرئيسية</a>
 <a href="services.html">خدماتنا</a>
 <a href="how.html">كيف يعمل سند؟</a>
 <a href="about.html">عن سند</a>
+
 </nav>
 
 </header>
 
+
 <main class="dashboard">
+
 
 <section class="welcome">
 
@@ -447,7 +556,7 @@ flex-direction:column;
 </h1>
 
 <p>
-إدارة استقبال المشتركين وإنشاء ملفاتهم
+إدارة استقبال المشتركين وإنشاء ملفاتهم واختيار الباقة المناسبة
 </p>
 
 </div>
@@ -462,6 +571,7 @@ flex-direction:column;
 <section class="stats">
 
 <div class="stat">
+
 <span class="stat-label">
 👥 إجمالي المشتركين
 </span>
@@ -469,21 +579,25 @@ flex-direction:column;
 <div class="stat-number" id="customersCount">
 0
 </div>
+
 </div>
 
 
 <div class="stat">
+
 <span class="stat-label">
-🆕 مشتركين جدد
+🆕 مشتركون جدد اليوم
 </span>
 
 <div class="stat-number" id="newCustomersCount">
 0
 </div>
+
 </div>
 
 
 <div class="stat">
+
 <span class="stat-label">
 📦 الباقات
 </span>
@@ -491,17 +605,20 @@ flex-direction:column;
 <div class="stat-number">
 3
 </div>
+
 </div>
 
 
 <div class="stat">
+
 <span class="stat-label">
-📅 بانتظار ترتيب الموعد
+⏳ بانتظار المدير
 </span>
 
 <div class="stat-number" id="pendingCount">
 0
 </div>
+
 </div>
 
 </section>
@@ -521,10 +638,14 @@ flex-direction:column;
 
 </div>
 
+
 <div class="actions-grid">
 
-<button class="action"
-onclick="scrollToSection('newCustomer')">
+
+<button
+class="action"
+onclick="scrollToSection('newCustomer')"
+>
 
 <div class="action-icon">
 ➕
@@ -541,8 +662,10 @@ onclick="scrollToSection('newCustomer')">
 </button>
 
 
-<button class="action"
-onclick="scrollToSection('customers')">
+<button
+class="action"
+onclick="scrollToSection('customers')"
+>
 
 <div class="action-icon">
 👥
@@ -559,8 +682,10 @@ onclick="scrollToSection('customers')">
 </button>
 
 
-<button class="action"
-onclick="scrollToSection('packages')">
+<button
+class="action"
+onclick="scrollToSection('packages')"
+>
 
 <div class="action-icon">
 📦
@@ -571,14 +696,16 @@ onclick="scrollToSection('packages')">
 </h3>
 
 <p>
-تفاصيل وأسعار الاشتراكات
+شرح الباقات والأسعار للعميل
 </p>
 
 </button>
 
 
-<button class="action"
-onclick="scrollToSection('newCustomer')">
+<button
+class="action"
+onclick="scrollToSection('newCustomer')"
+>
 
 <div class="action-icon">
 💳
@@ -589,10 +716,11 @@ onclick="scrollToSection('newCustomer')">
 </h3>
 
 <p>
-بدء إجراءات الاشتراك
+اختيار الباقة وإنشاء الملف
 </p>
 
 </button>
+
 
 </div>
 
@@ -608,10 +736,11 @@ onclick="scrollToSection('newCustomer')">
 </h2>
 
 <p>
-المعلومات التي يحتاجها موظف الاستقبال
+هذه المعلومات تظهر لموظف الاستقبال لشرح الخيارات للعميل
 </p>
 
 </div>
+
 
 <div class="packages">
 
@@ -630,7 +759,7 @@ onclick="scrollToSection('newCustomer')">
 
 <li>👩‍⚕️ زيارة الممرض الصحي يومياً</li>
 <li>🩺 زيارة الطبيب المقيم أسبوعياً</li>
-<li>👨‍⚕️ زيارة الطبيب الأخصائي</li>
+<li>👨‍⚕️ زيارة الطبيب الاختصاص</li>
 <li>🧪 الفحوصات والتحاليل</li>
 <li>🛁 الرعاية الشخصية اليومية</li>
 <li>📋 تقارير المتابعة</li>
@@ -654,7 +783,7 @@ onclick="scrollToSection('newCustomer')">
 
 <li>👩‍⚕️ رعاية تمريضية موسعة</li>
 <li>🩺 متابعة الطبيب المقيم</li>
-<li>👨‍⚕️ متابعة الطبيب الأخصائي</li>
+<li>👨‍⚕️ متابعة الطبيب الاختصاص</li>
 <li>🧪 الفحوصات والتحاليل</li>
 <li>🧠 دعم نفسي</li>
 <li>🎭 خدمات ترفيهية</li>
@@ -689,6 +818,7 @@ onclick="scrollToSection('newCustomer')">
 
 </div>
 
+
 </div>
 
 </section>
@@ -703,10 +833,11 @@ onclick="scrollToSection('newCustomer')">
 </h2>
 
 <p>
-بعد الحفظ يظهر المشترك مباشرة عند المدير بانتظار ترتيب الموعد
+موظف الاستقبال يختار الباقة مع العميل، وبعد الحفظ ينتقل الملف مباشرة إلى المدير
 </p>
 
 </div>
+
 
 <form id="customerForm">
 
@@ -799,7 +930,10 @@ placeholder="العمر"
 📦 الباقة
 </label>
 
-<select id="customerPackage" required>
+<select
+id="customerPackage"
+required
+>
 
 <option value="">
 اختر الباقة
@@ -818,6 +952,32 @@ placeholder="العمر"
 </option>
 
 </select>
+
+
+<div
+class="package-info"
+id="selectedPackageInfo"
+>
+
+<div
+class="package-info-title"
+id="selectedPackageTitle"
+>
+</div>
+
+<div
+class="package-info-price"
+id="selectedPackagePrice"
+>
+</div>
+
+<div
+class="package-info-services"
+id="selectedPackageServices"
+>
+</div>
+
+</div>
 
 </div>
 
@@ -840,28 +1000,90 @@ required
 
 <div class="form-row full">
 
+<div class="optional-box">
+
+<div class="optional-title">
+🛁 خدمة المعين الخاص
+</div>
+
+<div
+style="font-size:11px;color:#718480;margin-bottom:10px;"
+>
+هل يحتاج المسن إلى معين للمساعدة في الاستحمام والنظافة الشخصية؟
+</div>
+
+
+<div class="radio-group">
+
+<label class="radio-option">
+
+<input
+type="radio"
+name="assistantRequested"
+value="true"
+>
+
+نعم، يحتاج معين
+
+</label>
+
+
+<label class="radio-option">
+
+<input
+type="radio"
+name="assistantRequested"
+value="false"
+checked
+>
+
+لا يحتاج
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="form-row full">
+
 <label>
 📝 ملاحظات أولية
 </label>
 
 <textarea
 id="customerNotes"
-placeholder="أي معلومات مهمة..."
+placeholder="أي معلومات مهمة عن المسن..."
 ></textarea>
 
 </div>
 
+
 </div>
 
 
-<button type="submit" class="save-button">
+<button
+type="submit"
+class="save-button"
+>
 💾 إنشاء ملف المشترك
 </button>
 
 
-<div id="successMessage" class="message success"></div>
+<div
+id="successMessage"
+class="message success"
+></div>
 
-<div id="errorMessage" class="message error"></div>
+
+<div
+id="errorMessage"
+class="message error"
+></div>
+
 
 </form>
 
@@ -882,10 +1104,11 @@ placeholder="أي معلومات مهمة..."
 
 </div>
 
+
 <div
 class="customer-list"
-id="customerList">
-</div>
+id="customerList"
+></div>
 
 </section>
 
@@ -901,6 +1124,7 @@ onclick="logoutStaff(event)"
 </a>
 
 </div>
+
 
 </main>
 
@@ -925,11 +1149,12 @@ onclick="logoutStaff(event)"
 <script>
 
 /* =========================================
-   التحقق من الدخول
+   1. التحقق من تسجيل الدخول
 ========================================= */
 
 const loggedStaffRaw =
 localStorage.getItem("sanadLoggedInStaff");
+
 
 if(!loggedStaffRaw){
 
@@ -942,21 +1167,26 @@ window.location.href="staff-login.html";
 
 let loggedStaff=null;
 
+
 try{
 
-loggedStaff=JSON.parse(loggedStaffRaw);
+loggedStaff=
+JSON.parse(loggedStaffRaw);
 
 }catch(error){
 
-localStorage.removeItem("sanadLoggedInStaff");
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
 
-window.location.href="staff-login.html";
+window.location.href=
+"staff-login.html";
 
 }
 
 
 /* =========================================
-   التأكد من الاستقبال
+   2. التحقق من صلاحية الاستقبال
 ========================================= */
 
 if(
@@ -965,40 +1195,54 @@ loggedStaff.role!=="reception" &&
 loggedStaff.permissions!=="all"
 ){
 
-alert("ليس لديك صلاحية الدخول إلى لوحة الاستقبال.");
+alert(
+"ليس لديك صلاحية الدخول إلى لوحة الاستقبال."
+);
 
-window.location.href="staff-dashboard.html";
+window.location.href=
+"staff-dashboard.html";
 
 }
 
 
 /* =========================================
-   اسم الموظف
+   3. اسم الموظف
 ========================================= */
 
 if(loggedStaff){
 
-document.getElementById("welcomeName").textContent=
-"أهلاً بك، "+loggedStaff.name+" 👋";
+document.getElementById(
+"welcomeName"
+).textContent=
+"أهلاً بك، "+
+(loggedStaff.name || "موظف الاستقبال")+
+" 👋";
 
 }
 
 
 /* =========================================
-   قراءة المشتركين
+   4. قراءة المشتركين
 ========================================= */
 
 let customers=[];
+
+
+function loadCustomers(){
 
 try{
 
 customers=
 JSON.parse(
-localStorage.getItem("sanadCustomers") || "[]"
+localStorage.getItem(
+"sanadCustomers"
+) || "[]"
 );
 
 if(!Array.isArray(customers)){
+
 customers=[];
+
 }
 
 }catch(error){
@@ -1007,30 +1251,132 @@ customers=[];
 
 }
 
+}
+
 
 /* =========================================
-   رقم المشترك
+   5. تعريف الباقات
+========================================= */
+
+const packageData={
+
+basic:{
+
+name:"باقة سند الاعتيادية",
+
+price:252000,
+
+priceText:"252,000 د.ع / شهرياً",
+
+services:[
+
+"👩‍⚕️ زيارة الممرض الصحي يومياً",
+
+"🩺 زيارة الطبيب المقيم أسبوعياً",
+
+"👨‍⚕️ زيارة الطبيب الاختصاص",
+
+"🧪 الفحوصات والتحاليل",
+
+"🛁 الرعاية الشخصية اليومية",
+
+"📋 تقارير المتابعة"
+
+]
+
+},
+
+
+medium:{
+
+name:"الباقة المتوسطة",
+
+price:337000,
+
+priceText:"337,000 د.ع / شهرياً",
+
+services:[
+
+"👩‍⚕️ رعاية تمريضية موسعة",
+
+"🩺 متابعة الطبيب المقيم",
+
+"👨‍⚕️ متابعة الطبيب الاختصاص",
+
+"🧪 الفحوصات والتحاليل",
+
+"🧠 دعم نفسي",
+
+"🎭 خدمات ترفيهية",
+
+"📋 تقارير شاملة"
+
+]
+
+},
+
+
+luxury:{
+
+name:"باقة سند الفاخرة",
+
+price:0,
+
+priceText:"حسب الخدمات المختارة",
+
+services:[
+
+"👩‍⚕️ رعاية تمريضية مكثفة",
+
+"👨‍⚕️ متابعة طبية متقدمة",
+
+"🧠 دعم نفسي",
+
+"🥗 متابعة غذائية",
+
+"🏃 علاج طبيعي",
+
+"🎭 ترفيه ومرافقة",
+
+"💇 خدمات إضافية"
+
+]
+
+}
+
+};
+
+
+/* =========================================
+   6. رقم المشترك
 ========================================= */
 
 function generateCustomerId(){
 
 let maxNumber=0;
 
+
 customers.forEach(function(customer){
 
-if(customer.id){
+if(!customer.id){
+return;
+}
+
 
 const match=
-customer.id.match(/SANAD-(\d+)/);
+String(customer.id)
+.match(/SANAD-(\d+)/);
+
 
 if(match){
 
 const number=
-parseInt(match[1]);
+parseInt(match[1],10);
+
 
 if(number>maxNumber){
+
 maxNumber=number;
-}
 
 }
 
@@ -1038,61 +1384,146 @@ maxNumber=number;
 
 });
 
-return "SANAD-"+String(maxNumber+1).padStart(4,"0");
+
+return "SANAD-"+
+String(maxNumber+1)
+.padStart(4,"0");
 
 }
 
 
 /* =========================================
-   تسجيل مشترك
+   7. عرض معلومات الباقة
+========================================= */
+
+document
+.getElementById("customerPackage")
+.addEventListener(
+"change",
+function(){
+
+const type=this.value;
+
+const box=
+document.getElementById(
+"selectedPackageInfo"
+);
+
+if(!type || !packageData[type]){
+
+box.style.display="none";
+
+return;
+
+}
+
+
+const data=
+packageData[type];
+
+
+document.getElementById(
+"selectedPackageTitle"
+).textContent=
+"📦 "+data.name;
+
+
+document.getElementById(
+"selectedPackagePrice"
+).textContent=
+"💰 "+data.priceText;
+
+
+document.getElementById(
+"selectedPackageServices"
+).innerHTML=
+"<strong>الخدمات:</strong><br>"+
+data.services.join("<br>");
+
+
+box.style.display="block";
+
+});
+
+
+/* =========================================
+   8. تسجيل المشترك الجديد
 ========================================= */
 
 document
 .getElementById("customerForm")
-.addEventListener("submit",function(event){
+.addEventListener(
+"submit",
+function(event){
 
 event.preventDefault();
 
 
 const name=
-document.getElementById("customerName")
-.value.trim();
+document.getElementById(
+"customerName"
+).value.trim();
 
 
 const phone=
-document.getElementById("customerPhone")
-.value.trim();
+document.getElementById(
+"customerPhone"
+).value.trim();
 
 
 const familyName=
-document.getElementById("familyName")
-.value.trim();
+document.getElementById(
+"familyName"
+).value.trim();
 
 
 const familyPhone=
-document.getElementById("familyPhone")
-.value.trim();
+document.getElementById(
+"familyPhone"
+).value.trim();
 
 
 const age=
-document.getElementById("customerAge")
-.value.trim();
+document.getElementById(
+"customerAge"
+).value.trim();
 
 
 const packageType=
-document.getElementById("customerPackage")
-.value;
+document.getElementById(
+"customerPackage"
+).value;
 
 
 const address=
-document.getElementById("customerAddress")
-.value.trim();
+document.getElementById(
+"customerAddress"
+).value.trim();
 
 
 const notes=
-document.getElementById("customerNotes")
-.value.trim();
+document.getElementById(
+"customerNotes"
+).value.trim();
 
+
+const assistantRadio=
+document.querySelector(
+'input[name="assistantRequested"]:checked'
+);
+
+
+const assistantRequested=
+assistantRadio
+?
+assistantRadio.value==="true"
+:
+false;
+
+
+/* =========================================
+   التحقق
+========================================= */
 
 if(
 !name ||
@@ -1111,79 +1542,99 @@ return;
 }
 
 
-const packageNames={
-
-basic:"باقة سند الاعتيادية",
-
-medium:"الباقة المتوسطة",
-
-luxury:"باقة سند الفاخرة"
-
-};
+const selectedPackage=
+packageData[packageType];
 
 
-const packagePrices={
+if(!selectedPackage){
 
-basic:252000,
+showError(
+"يرجى اختيار باقة صحيحة."
+);
 
-medium:337000,
+return;
 
-luxury:0
-
-};
+}
 
 
-/*
-   الحالة الجديدة المهمة:
-
-   pending_schedule
-   = المشترك ينتظر المدير حتى يرتب موعده
-
-   لا توجد موافقة مدير.
-*/
+/* =========================================
+   إنشاء الملف
+========================================= */
 
 const newCustomer={
 
-id:generateCustomerId(),
+id:
+generateCustomerId(),
 
-name:name,
+name:
+name,
 
-phone:phone,
+phone:
+phone,
 
-familyName:familyName,
+familyName:
+familyName,
 
-familyPhone:familyPhone,
+familyPhone:
+familyPhone,
 
-age:age,
+age:
+age,
 
-package:packageType,
+package:
+packageType,
 
-packageName:packageNames[packageType],
+packageName:
+selectedPackage.name,
 
-packagePrice:packagePrices[packageType],
+packagePrice:
+selectedPackage.price,
 
-address:address,
+packagePriceText:
+selectedPackage.priceText,
 
-notes:notes,
+address:
+address,
 
-status:"pending_schedule",
+notes:
+notes,
 
-appointment:null,
+assistantRequested:
+assistantRequested,
+
+status:
+"pending_schedule",
+
+appointment:
+null,
 
 createdBy:
-loggedStaff ? loggedStaff.name : "الاستقبال",
+loggedStaff
+?
+loggedStaff.name
+:
+"الاستقبال",
 
-createdAt:new Date().toISOString()
+createdAt:
+new Date().toISOString(),
+
+lastScheduledAt:
+null,
+
+lastScheduledService:
+null
 
 };
 
 
-customers.push(newCustomer);
+/* =========================================
+   إضافة إلى قاعدة البيانات
+========================================= */
 
+customers.push(
+newCustomer
+);
 
-/*
-   حفظ نفس قاعدة البيانات
-*/
 
 localStorage.setItem(
 "sanadCustomers",
@@ -1191,16 +1642,66 @@ JSON.stringify(customers)
 );
 
 
-showSuccess(
-"✅ تم إنشاء ملف "+newCustomer.id+
-" بنجاح، وتم إرساله مباشرة إلى المدير لترتيب الموعد."
+/* =========================================
+   إشعار بتحديث البيانات
+========================================= */
+
+localStorage.setItem(
+"sanadCustomersLastUpdate",
+new Date().toISOString()
 );
 
+
+/* =========================================
+   رسالة نجاح
+========================================= */
+
+showSuccess(
+
+"✅ تم إنشاء ملف "+
+newCustomer.id+
+" بنجاح — "+
+newCustomer.name+
+" اختار "+
+newCustomer.packageName+
+" بسعر "+
+newCustomer.packagePriceText+
+". تم إرسال الملف مباشرة إلى المدير لترتيب المواعيد."
+
+);
+
+
+/* =========================================
+   إعادة النموذج
+========================================= */
 
 document
 .getElementById("customerForm")
 .reset();
 
+
+document.getElementById(
+"selectedPackageInfo"
+).style.display="none";
+
+
+/* إعادة اختيار لا يحتاج معين */
+
+const noAssistant=
+document.querySelector(
+'input[name="assistantRequested"][value="false"]'
+);
+
+if(noAssistant){
+
+noAssistant.checked=true;
+
+}
+
+
+/* =========================================
+   تحديث الصفحة
+========================================= */
 
 renderCustomers();
 
@@ -1210,13 +1711,15 @@ updateStats();
 
 
 /* =========================================
-   عرض المشتركين
+   9. عرض المشتركين
 ========================================= */
 
 function renderCustomers(){
 
 const list=
-document.getElementById("customerList");
+document.getElementById(
+"customerList"
+);
 
 list.innerHTML="";
 
@@ -1224,9 +1727,11 @@ list.innerHTML="";
 if(customers.length===0){
 
 list.innerHTML=`
+
 <div class="empty">
 لا توجد ملفات مشتركين حالياً.
 </div>
+
 `;
 
 return;
@@ -1242,7 +1747,9 @@ customers
 const element=
 document.createElement("div");
 
-element.className="customer";
+
+element.className=
+"customer";
 
 
 element.innerHTML=`
@@ -1250,26 +1757,75 @@ element.innerHTML=`
 <div>
 
 <div class="customer-name">
-👴 ${escapeHtml(customer.name)}
+
+👴
+${escapeHtml(customer.name)}
+
 </div>
+
 
 <div class="customer-info">
 
-📦 ${escapeHtml(customer.packageName)}
+📦
+<span class="package-small">
+${escapeHtml(
+customer.packageName || "غير محددة"
+)}
+</span>
+
+<br>
+
+💰
+${escapeHtml(
+customer.packagePriceText ||
+(
+customer.packagePrice
+?
+Number(customer.packagePrice)
+.toLocaleString("ar-IQ")+" د.ع"
+:
+"حسب الخدمات"
+)
+)}
 
 <br>
 
 👨‍👩‍👦 العائلة:
-${escapeHtml(customer.familyName)}
+${escapeHtml(
+customer.familyName || ""
+)}
+
+<br>
+
+📞 الهاتف:
+${escapeHtml(
+customer.familyPhone || ""
+)}
 
 <br>
 
 📌 الحالة:
+<span class="status-badge ${
+getStatusClass(customer.status)
+}">
 ${getStatusText(customer.status)}
+</span>
+
+${
+customer.assistantRequested
+?
+`
+<br>
+🛁 يحتاج معين خاص
+`
+:
+""
+}
 
 </div>
 
 </div>
+
 
 <div class="customer-id">
 
@@ -1288,7 +1844,7 @@ list.appendChild(element);
 
 
 /* =========================================
-   حالات المشترك
+   10. نص الحالة
 ========================================= */
 
 function getStatusText(status){
@@ -1296,7 +1852,7 @@ function getStatusText(status){
 const statuses={
 
 pending_schedule:
-"بانتظار ترتيب الموعد",
+"بانتظار المدير لترتيب الموعد",
 
 scheduled:
 "تم ترتيب الموعد",
@@ -1308,77 +1864,151 @@ suspended:
 "موقوف",
 
 completed:
-"مكتمل"
+"مكتمل",
+
+rejected:
+"مرفوض"
 
 };
 
 
-return statuses[status] || "غير محدد";
+return statuses[status] ||
+"غير محدد";
 
 }
 
 
 /* =========================================
-   الإحصائيات
+   11. لون الحالة
+========================================= */
+
+function getStatusClass(status){
+
+const classes={
+
+pending_schedule:
+"status-pending",
+
+scheduled:
+"status-scheduled",
+
+active:
+"status-active",
+
+suspended:
+"status-suspended"
+
+};
+
+
+return classes[status] ||
+"status-pending";
+
+}
+
+
+/* =========================================
+   12. الإحصائيات
 ========================================= */
 
 function updateStats(){
 
 document.getElementById(
 "customersCount"
-).textContent=customers.length;
+).textContent=
+customers.length;
+
+
+const today=
+new Date();
 
 
 document.getElementById(
 "newCustomersCount"
 ).textContent=
 
-customers.filter(function(customer){
+customers.filter(
+function(customer){
+
+if(!customer.createdAt){
+return false;
+}
 
 const created=
-new Date(customer.createdAt);
-
-const today=
-new Date();
+new Date(
+customer.createdAt
+);
 
 return(
 created.toDateString()===
 today.toDateString()
 );
 
-}).length;
+}
+).length;
 
 
 document.getElementById(
 "pendingCount"
 ).textContent=
 
-customers.filter(function(customer){
+customers.filter(
+function(customer){
 
-return customer.status==="pending_schedule";
+return(
+customer.status===
+"pending_schedule"
+);
 
-}).length;
+}
+).length;
 
 }
 
 
 /* =========================================
-   رسائل
+   13. الرسائل
 ========================================= */
 
 function showSuccess(message){
 
 const success=
-document.getElementById("successMessage");
+document.getElementById(
+"successMessage"
+);
 
 const error=
-document.getElementById("errorMessage");
+document.getElementById(
+"errorMessage"
+);
+
 
 error.style.display="none";
 
-success.textContent=message;
 
-success.style.display="block";
+success.textContent=
+message;
+
+
+success.style.display=
+"block";
+
+
+success.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
+
+
+setTimeout(function(){
+
+success.style.display=
+"none";
+
+},6000);
 
 }
 
@@ -1386,22 +2016,41 @@ success.style.display="block";
 function showError(message){
 
 const error=
-document.getElementById("errorMessage");
+document.getElementById(
+"errorMessage"
+);
 
 const success=
-document.getElementById("successMessage");
+document.getElementById(
+"successMessage"
+);
 
-success.style.display="none";
 
-error.textContent=message;
+success.style.display=
+"none";
 
-error.style.display="block";
+
+error.textContent=
+message;
+
+
+error.style.display=
+"block";
+
+
+error.scrollIntoView({
+
+behavior:"smooth",
+
+block:"center"
+
+});
 
 }
 
 
 /* =========================================
-   الانتقال
+   14. الانتقال للقسم
 ========================================= */
 
 function scrollToSection(id){
@@ -1409,10 +2058,15 @@ function scrollToSection(id){
 const section=
 document.getElementById(id);
 
+
 if(section){
 
 section.scrollIntoView({
-behavior:"smooth"
+
+behavior:"smooth",
+
+block:"start"
+
 });
 
 }
@@ -1421,22 +2075,27 @@ behavior:"smooth"
 
 
 /* =========================================
-   تسجيل الخروج
+   15. تسجيل الخروج
 ========================================= */
 
 function logoutStaff(event){
 
 if(event){
+
 event.preventDefault();
+
 }
+
 
 localStorage.removeItem(
 "sanadLoggedInStaff"
 );
 
+
 localStorage.removeItem(
 "sanadCurrentVisit"
 );
+
 
 window.location.href=
 "staff-login.html";
@@ -1445,24 +2104,70 @@ window.location.href=
 
 
 /* =========================================
-   حماية عرض HTML
+   16. حماية النصوص
 ========================================= */
 
 function escapeHtml(value){
 
 return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
 
 /* =========================================
-   تشغيل
+   17. تحديث تلقائي
 ========================================= */
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+event.key===
+"sanadCustomers"
+){
+
+loadCustomers();
+
+renderCustomers();
+
+updateStats();
+
+}
+
+});
+
+
+/* =========================================
+   18. التشغيل
+========================================= */
+
+loadCustomers();
 
 renderCustomers();
 
@@ -1473,4 +2178,3 @@ updateStats();
 </body>
 
 </html>
-```
