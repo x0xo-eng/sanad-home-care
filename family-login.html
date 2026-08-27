@@ -1,440 +1,132 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<a href="index.html" class="logo">
+  سند<span>.</span>
+</a>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<nav class="nav">
 
-  <title>دخول العائلة | سند</title>
+  <a href="index.html">
+    الرئيسية
+  </a>
 
-  <link rel="stylesheet" href="style.css">
+  <a href="services.html">
+    خدماتنا
+  </a>
 
-  <style>
+  <a href="index.html#how">
+    كيف يعمل سند؟
+  </a>
 
-    body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
-    }
+  <a href="index.html#about">
+    عن سند
+  </a>
 
-    .page {
-      min-height: calc(100vh - 180px);
-      padding: 65px 7%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+</nav>
+<div class="panel">
 
-    .panel {
-      width: 100%;
-      max-width: 520px;
-      background: white;
-      border-radius: 26px;
-      padding: 40px;
-      border: 1px solid #e3edeb;
-      box-shadow: 0 25px 65px rgba(22, 70, 65, .09);
-    }
 
-    .panel-header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+  <div class="panel-header">
 
-    .panel-icon {
-      width: 70px;
-      height: 70px;
-      margin: 0 auto 18px;
-      border-radius: 22px;
-      background: #e8f5f3;
-      color: #16877d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-    }
-
-    .panel-header h1 {
-      color: #163b38;
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .lead {
-      color: #718480;
-      font-size: 14px;
-      line-height: 1.8;
-      margin: 0;
-    }
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-bottom: 18px;
-    }
-
-    label {
-      font-weight: 700;
-      color: #163b38;
-      font-size: 14px;
-    }
-
-    input[type="tel"],
-    input[type="password"] {
-      padding: 14px 15px;
-      border-radius: 12px;
-      border: 1px solid #dfecea;
-      background: #fbfefe;
-      color: #163b38;
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
-      outline: none;
-      transition: .25s;
-    }
-
-    input[type="tel"]:focus,
-    input[type="password"]:focus {
-      border-color: #16877d;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(22, 135, 125, .08);
-    }
-
-    input::placeholder {
-      color: #a1b1ae;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-top: 25px;
-    }
-
-    .forgot {
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .forgot:hover {
-      text-decoration: underline;
-    }
-
-    .btn-login {
-      background: #16877d;
-      color: white;
-      padding: 13px 25px;
-      border-radius: 13px;
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(22, 135, 125, .18);
-      transition: .3s;
-    }
-
-    .btn-login:hover {
-      background: #0f7068;
-      transform: translateY(-3px);
-      box-shadow: 0 14px 30px rgba(22, 135, 125, .23);
-    }
-
-    .back {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      width: fit-content;
-      margin: 30px auto 0;
-      padding: 10px 17px;
-      border: 1px solid #d7e8e5;
-      border-radius: 12px;
-      background: #f8fcfb;
-      color: #16877d;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: .3s;
-    }
-
-    .back-icon {
-      width: 26px;
-      height: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      background: #e5f3f0;
-      color: #16877d;
-      font-size: 16px;
-      transition: .3s;
-    }
-
-    .back:hover {
-      background: #16877d;
-      color: white;
-      border-color: #16877d;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(22, 135, 125, .15);
-    }
-
-    .back:hover .back-icon {
-      background: rgba(255,255,255,.16);
-      color: white;
-    }
-
-    @media (max-width: 700px) {
-
-      .page {
-        padding: 40px 5%;
-      }
-
-      .panel {
-        padding: 30px 22px;
-        border-radius: 22px;
-      }
-
-      .panel-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 18px;
-        font-size: 28px;
-      }
-
-      .panel-header h1 {
-        font-size: 27px;
-      }
-
-      .lead {
-        font-size: 13px;
-      }
-
-      .actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .forgot {
-        text-align: center;
-        order: 2;
-      }
-
-      .btn-login {
-        width: 100%;
-        padding: 14px;
-      }
-
-      .back {
-        margin-top: 25px;
-      }
-    }
-
-    @media (max-width: 420px) {
-
-      .page {
-        padding: 30px 5%;
-      }
-
-      .panel {
-        padding: 25px 18px;
-      }
-
-      .panel-header h1 {
-        font-size: 24px;
-      }
-    }
-
-  </style>
-
-</head>
-
-
-<body>
-
-
-  <!-- HEADER -->
-
-  <header class="header">
-
-    <a href="index.html" class="logo">
-      سند<span>.</span>
-    </a>
-
-    <nav class="nav">
-
-      <a href="index.html">
-        الرئيسية
-      </a>
-
-      <a href="services.html">
-        خدماتنا
-      </a>
-
-      <a href="index.html#how">
-        كيف يعمل سند؟
-      </a>
-
-      <a href="index.html#about">
-        عن سند
-      </a>
-
-    </nav>
-
-  </header>
-
-
-  <!-- FAMILY LOGIN -->
-
-  <main class="page">
-
-    <div class="panel">
-
-
-      <div class="panel-header">
-
-        <div class="panel-icon">
-          👨‍👩‍👦
-        </div>
-
-        <h1>
-          تسجيل دخول العائلة
-        </h1>
-
-        <p class="lead">
-          سجل الدخول لمتابعة حالة المسن والتواصل مع فريق سند.
-        </p>
-
-      </div>
-
-
-      <form id="familyLoginForm">
-
-
-        <!-- PHONE -->
-
-        <div class="form-row">
-
-          <label for="familyPhone">
-            رقم الهاتف
-          </label>
-
-          <input
-            id="familyPhone"
-            type="tel"
-            placeholder="أدخل رقم الهاتف"
-            autocomplete="tel"
-            required
-          >
-
-        </div>
-
-
-        <!-- PASSWORD -->
-
-        <div class="form-row">
-
-          <label for="familyPassword">
-            كلمة المرور
-          </label>
-
-          <input
-            id="familyPassword"
-            type="password"
-            placeholder="أدخل كلمة المرور"
-            autocomplete="current-password"
-            required
-          >
-
-        </div>
-
-
-        <!-- ACTIONS -->
-
-        <div class="actions">
-
-          <a href="#" class="forgot">
-            هل نسيت كلمة المرور؟
-          </a>
-
-          <button
-            type="submit"
-            class="btn-login"
-          >
-            تسجيل الدخول
-          </button>
-
-        </div>
-
-
-      </form>
-
-
-      <!-- BACK -->
-
-      <a href="login.html" class="back">
-
-        <span class="back-icon">
-          ←
-        </span>
-
-        <span>
-          العودة لاختيار نوع الحساب
-        </span>
-
-      </a>
-
-
+    <div class="panel-icon">
+      👨‍👩‍👦
     </div>
 
-  </main>
+    <h1>
+      تسجيل دخول العائلة
+    </h1>
 
-
-  <!-- FOOTER -->
-
-  <footer>
-
-    <div class="footer-logo">
-      سند<span>.</span>
-    </div>
-
-    <p>
-      الرعاية المنزلية لكبار السن
+    <p class="lead">
+      سجل الدخول لمتابعة حالة المسن والتواصل مع فريق سند.
     </p>
 
-    <small>
-      © 2026 سند — جميع الحقوق محفوظة
-    </small>
-
-  </footer>
+  </div>
 
 
-  <!-- FAMILY LOGIN SCRIPT -->
-
-  <script>
-
-    document
-      .getElementById("familyLoginForm")
-      .addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        /*
-          حالياً الانتقال تجريبي.
-          لاحقاً نستبدل هذا الجزء بربط قاعدة البيانات
-          والتحقق من رقم الهاتف وكلمة المرور.
-        */
-
-        window.location.href = "family-dashboard.html";
-
-      });
-
-  </script>
+  <form id="familyLoginForm">
 
 
-</body>
+    <!-- PHONE -->
 
-</html>
+    <div class="form-row">
+
+      <label for="familyPhone">
+        رقم الهاتف
+      </label>
+
+      <input
+        id="familyPhone"
+        type="tel"
+        placeholder="أدخل رقم الهاتف"
+        autocomplete="tel"
+        required
+      >
+
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="form-row">
+
+      <label for="familyPassword">
+        كلمة المرور
+      </label>
+
+      <input
+        id="familyPassword"
+        type="password"
+        placeholder="أدخل كلمة المرور"
+        autocomplete="current-password"
+        required
+      >
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions">
+
+      <a href="#" class="forgot">
+        هل نسيت كلمة المرور؟
+      </a>
+
+      <button
+        type="submit"
+        class="btn-login"
+      >
+        تسجيل الدخول
+      </button>
+
+    </div>
+
+
+  </form>
+
+
+  <!-- BACK -->
+
+  <a href="login.html" class="back">
+
+    <span class="back-icon">
+      ←
+    </span>
+
+    <span>
+      العودة لاختيار نوع الحساب
+    </span>
+
+  </a>
+
+
+</div>
+<div class="footer-logo">
+  سند<span>.</span>
+</div>
+
+<p>
+  الرعاية المنزلية لكبار السن
+</p>
+
+<small>
+  © 2026 سند — جميع الحقوق محفوظة
+</small>
