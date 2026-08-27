@@ -29,10 +29,6 @@
       padding: 40px 6%;
     }
 
-    /* =========================
-       WELCOME
-    ========================= */
-
     .welcome {
       background: white;
       border: 1px solid #e3edeb;
@@ -85,10 +81,6 @@
       flex-shrink: 0;
     }
 
-    /* =========================
-       TODAY VISITS
-    ========================= */
-
     .today-box {
       background: white;
       border: 1px solid #e3edeb;
@@ -133,10 +125,6 @@
       font-weight: 900;
     }
 
-    /* =========================
-       SECTION
-    ========================= */
-
     .section {
       background: white;
       border: 1px solid #e3edeb;
@@ -165,10 +153,6 @@
       font-size: 13px;
       line-height: 1.7;
     }
-
-    /* =========================
-       VISITS TABLE
-    ========================= */
 
     .table-wrapper {
       width: 100%;
@@ -226,10 +210,6 @@
       line-height: 1.6;
     }
 
-    /* =========================
-       STATUS
-    ========================= */
-
     .status {
       display: inline-flex;
       padding: 7px 11px;
@@ -257,13 +237,15 @@
       color: #16815f;
     }
 
-    /* =========================
-       BUTTONS
-    ========================= */
+    .status-cancelled {
+      background: #fff0f0;
+      color: #a44b4b;
+    }
 
     .start-btn,
     .complete-btn,
-    .cancel-btn {
+    .cancel-btn,
+    .open-progress-btn {
 
       border: none;
 
@@ -292,6 +274,15 @@
       transform: translateY(-1px);
     }
 
+    .open-progress-btn {
+      background: #e8f5f3;
+      color: #16877d;
+    }
+
+    .open-progress-btn:hover {
+      background: #d8eeeb;
+    }
+
     .complete-btn {
       background: #16815f;
       color: white;
@@ -310,10 +301,6 @@
     .cancel-btn:hover {
       background: #ffe4e4;
     }
-
-    /* =========================
-       VISIT FORM
-    ========================= */
 
     #visitSection {
       display: none;
@@ -367,10 +354,6 @@
       font-size: 12px;
       font-weight: 900;
     }
-
-    /* =========================
-       FORM SECTIONS
-    ========================= */
 
     .medical-section {
       border: 1px solid #e3edeb;
@@ -444,10 +427,6 @@
       box-shadow: 0 0 0 4px rgba(22,135,125,.08);
     }
 
-    /* =========================
-       ROLE NOTICE
-    ========================= */
-
     .role-notice {
       background: #fffdf5;
       border: 1px solid #efe1bb;
@@ -463,10 +442,6 @@
 
       margin-bottom: 18px;
     }
-
-    /* =========================
-       VISIT ACTIONS
-    ========================= */
 
     .visit-actions {
       display: flex;
@@ -485,10 +460,6 @@
       padding: 13px 22px;
       font-size: 13px;
     }
-
-    /* =========================
-       REPORT RESULT
-    ========================= */
 
     .report-message {
       display: none;
@@ -511,9 +482,24 @@
       text-align: center;
     }
 
-    /* =========================
-       LOGOUT
-    ========================= */
+    .empty-message {
+      text-align: center;
+      padding: 40px 20px;
+      color: #718480;
+      line-height: 2;
+    }
+
+    .sync-message {
+      display: none;
+      margin-bottom: 18px;
+      padding: 13px 16px;
+      border-radius: 13px;
+      background: #eef8f6;
+      border: 1px solid #d5ebe7;
+      color: #16877d;
+      font-size: 12px;
+      font-weight: 800;
+    }
 
     .logout-area {
       text-align: center;
@@ -541,10 +527,6 @@
 
       font-weight: 800;
     }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
 
     @media (max-width: 900px) {
 
@@ -606,10 +588,6 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
 
   <a href="index.html" class="logo">
@@ -642,10 +620,6 @@
 <main class="dashboard">
 
 
-<!-- =========================
-     WELCOME
-========================= -->
-
 <section class="welcome">
 
   <div>
@@ -675,10 +649,6 @@
 </section>
 
 
-<!-- =========================
-     TODAY COUNT
-========================= -->
-
 <section class="today-box">
 
   <div class="today-number">
@@ -707,10 +677,6 @@
 </section>
 
 
-<!-- =========================
-     VISITS
-========================= -->
-
 <section class="section">
 
   <div class="section-title">
@@ -726,6 +692,14 @@
   </div>
 
 
+  <div
+    id="syncMessage"
+    class="sync-message"
+  >
+    🔄 يتم تحديث جدول الزيارات تلقائياً...
+  </div>
+
+
   <div class="table-wrapper">
 
     <table class="visits-table">
@@ -734,33 +708,19 @@
 
         <tr>
 
-          <th>
-            التاريخ
-          </th>
+          <th>التاريخ</th>
 
-          <th>
-            الوقت
-          </th>
+          <th>الوقت</th>
 
-          <th>
-            اسم المسن
-          </th>
+          <th>اسم المسن</th>
 
-          <th>
-            العنوان
-          </th>
+          <th>العنوان</th>
 
-          <th>
-            نوع الزيارة
-          </th>
+          <th>نوع الزيارة</th>
 
-          <th>
-            الحالة
-          </th>
+          <th>الحالة</th>
 
-          <th>
-            الإجراء
-          </th>
+          <th>الإجراء</th>
 
         </tr>
 
@@ -777,10 +737,6 @@
 
 </section>
 
-
-<!-- =========================
-     VISIT FORM
-========================= -->
 
 <section
   class="section"
@@ -803,22 +759,14 @@
   <div
     class="visit-header"
     id="currentVisitHeader"
-  >
-
-  </div>
+  ></div>
 
 
   <div
     class="role-notice"
     id="roleNotice"
-  >
+  ></div>
 
-  </div>
-
-
-  <!-- =========================
-       العلامات الحيوية
-  ========================= -->
 
   <div
     class="medical-section"
@@ -831,7 +779,6 @@
 
 
     <div class="fields">
-
 
       <div class="field">
 
@@ -922,15 +869,10 @@
 
       </div>
 
-
     </div>
 
   </div>
 
-
-  <!-- =========================
-       التقييم الطبي
-  ========================= -->
 
   <div
     class="medical-section"
@@ -943,7 +885,6 @@
 
 
     <div class="fields">
-
 
       <div class="field full">
 
@@ -1014,15 +955,10 @@
 
       </div>
 
-
     </div>
 
   </div>
 
-
-  <!-- =========================
-       التمريض
-  ========================= -->
 
   <div
     class="medical-section"
@@ -1035,7 +971,6 @@
 
 
     <div class="fields">
-
 
       <div class="field">
 
@@ -1129,15 +1064,10 @@
 
       </div>
 
-
     </div>
 
   </div>
 
-
-  <!-- =========================
-       التقرير النهائي
-  ========================= -->
 
   <div class="medical-section">
 
@@ -1165,10 +1095,6 @@
 
   </div>
 
-
-  <!-- =========================
-       ACTIONS
-  ========================= -->
 
   <div class="visit-actions">
 
@@ -1199,10 +1125,6 @@
 
 </section>
 
-
-<!-- =========================
-     LOGOUT
-========================= -->
 
 <div class="logout-area">
 
@@ -1240,20 +1162,16 @@
 <script>
 
 /* =====================================================
-   1. قراءة جلسة الكادر
+   1. جلسة الكادر
 ===================================================== */
 
 const loggedStaffRaw =
-  localStorage.getItem(
-    "sanadLoggedInStaff"
-  );
+  localStorage.getItem("sanadLoggedInStaff");
 
 
 if (!loggedStaffRaw) {
 
-  alert(
-    "يرجى تسجيل الدخول أولاً."
-  );
+  alert("يرجى تسجيل الدخول أولاً.");
 
   window.location.href =
     "staff-login.html";
@@ -1267,9 +1185,7 @@ let loggedStaff = null;
 try {
 
   loggedStaff =
-    JSON.parse(
-      loggedStaffRaw
-    );
+    JSON.parse(loggedStaffRaw);
 
 } catch (error) {
 
@@ -1284,7 +1200,7 @@ try {
 
 
 /* =====================================================
-   2. بيانات الكادر
+   2. عرض بيانات الكادر
 ===================================================== */
 
 if (loggedStaff) {
@@ -1293,7 +1209,7 @@ if (loggedStaff) {
     "welcomeName"
   ).textContent =
     "أهلاً بك، " +
-    loggedStaff.name +
+    (loggedStaff.name || "كادر سند") +
     " 👋";
 
 
@@ -1341,127 +1257,227 @@ if (loggedStaff) {
 
 
 /* =====================================================
-   3. الزيارات
+   3. قراءة الزيارات من النظام
 ===================================================== */
 
 let visits = [];
 
-try {
 
-  visits =
-    JSON.parse(
+function loadVisits() {
+
+  try {
+
+    const stored =
       localStorage.getItem(
         "sanadVisits"
-      ) || "[]"
-    );
-
-  if (!Array.isArray(visits)) {
-    visits = [];
-  }
-
-} catch (error) {
-
-  visits = [];
-
-}
+      );
 
 
-/* =====================================================
-   4. بيانات تجريبية إذا لا توجد زيارات
-===================================================== */
+    if (!stored) {
 
-if (visits.length === 0) {
+      visits = [];
 
-  const today =
-    new Date()
-      .toISOString()
-      .split("T")[0];
+      return;
 
-
-  visits = [
-
-    {
-      id: "VIS-001",
-      date: today,
-      time: "09:00",
-      patientName: "محمد علي",
-      address: "النجف - حي الأمير",
-      type: "زيارة تمريضية",
-      assignedRole: "nurse",
-      status: "waiting"
-    },
-
-    {
-      id: "VIS-002",
-      date: today,
-      time: "10:00",
-      patientName: "علي غلام",
-      address: "النجف - حي الجامعة",
-      type: "زيارة تمريضية",
-      assignedRole: "nurse",
-      status: "waiting"
-    },
-
-    {
-      id: "VIS-003",
-      date: today,
-      time: "11:00",
-      patientName: "أحمد معين",
-      address: "النجف - حي الإسكان",
-      type: "زيارة طبيب مقيم",
-      assignedRole: "resident",
-      status: "waiting"
-    },
-
-    {
-      id: "VIS-004",
-      date: today,
-      time: "12:00",
-      patientName: "حسين ناصر",
-      address: "النجف - حي الأمير",
-      type: "زيارة طبيب أخصائي",
-      assignedRole: "specialist",
-      status: "waiting"
     }
 
-  ];
+
+    const parsed =
+      JSON.parse(stored);
 
 
-  saveVisits();
+    if (Array.isArray(parsed)) {
+
+      visits = parsed;
+
+    } else {
+
+      visits = [];
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "خطأ في قراءة الزيارات:",
+      error
+    );
+
+    visits = [];
+
+  }
 
 }
 
 
 /* =====================================================
-   5. الزيارات الخاصة بالكادر
+   4. حفظ الزيارات
+===================================================== */
+
+function saveVisits() {
+
+  localStorage.setItem(
+    "sanadVisits",
+    JSON.stringify(visits)
+  );
+
+}
+
+
+/* =====================================================
+   5. التحقق من إسناد الزيارة
+===================================================== */
+
+function isVisitAssignedToStaff(
+  visit
+) {
+
+  if (!loggedStaff || !visit) {
+
+    return false;
+
+  }
+
+
+  /*
+     إذا كان الموعد مرتبطاً
+     بموظف محدد بالرقم
+  */
+
+  if (
+    visit.assignedEmployeeId &&
+    loggedStaff.employeeId
+  ) {
+
+    return (
+      String(
+        visit.assignedEmployeeId
+      ) ===
+      String(
+        loggedStaff.employeeId
+      )
+    );
+
+  }
+
+
+  /*
+     دعم الأسماء المحتملة
+     إذا كانت لوحة المدير تستخدم
+     staffId بدلاً من employeeId
+  */
+
+  if (
+    visit.assignedStaffId &&
+    loggedStaff.employeeId
+  ) {
+
+    return (
+      String(
+        visit.assignedStaffId
+      ) ===
+      String(
+        loggedStaff.employeeId
+      )
+    );
+
+  }
+
+
+  if (
+    visit.staffId &&
+    loggedStaff.employeeId
+  ) {
+
+    return (
+      String(
+        visit.staffId
+      ) ===
+      String(
+        loggedStaff.employeeId
+      )
+    );
+
+  }
+
+
+  /*
+     دعم assignedEmployeeName
+  */
+
+  if (
+    visit.assignedEmployeeName &&
+    loggedStaff.name
+  ) {
+
+    return (
+      String(
+        visit.assignedEmployeeName
+      ).trim() ===
+      String(
+        loggedStaff.name
+      ).trim()
+    );
+
+  }
+
+
+  /*
+     دعم assignedStaffName
+  */
+
+  if (
+    visit.assignedStaffName &&
+    loggedStaff.name
+  ) {
+
+    return (
+      String(
+        visit.assignedStaffName
+      ).trim() ===
+      String(
+        loggedStaff.name
+      ).trim()
+    );
+
+  }
+
+
+  /*
+     أخيراً:
+     دعم النظام القديم الذي يربط
+     الزيارة بالدور فقط
+  */
+
+  if (
+    visit.assignedRole &&
+    loggedStaff.role
+  ) {
+
+    return (
+      String(
+        visit.assignedRole
+      ) ===
+      String(
+        loggedStaff.role
+      )
+    );
+
+  }
+
+
+  return false;
+
+}
+
+
+/* =====================================================
+   6. زيارات الكادر
 ===================================================== */
 
 function getStaffVisits() {
 
   if (!loggedStaff) {
-    return [];
-  }
-
-
-  const fieldRoles = [
-
-    "nurse",
-    "resident",
-    "specialist",
-    "nutrition",
-    "physio",
-    "psychologist",
-    "entertainment",
-    "hairdresser"
-
-  ];
-
-
-  if (
-    !fieldRoles.includes(
-      loggedStaff.role
-    )
-  ) {
 
     return [];
 
@@ -1471,9 +1487,8 @@ function getStaffVisits() {
   return visits.filter(
     function(visit) {
 
-      return (
-        visit.assignedRole ===
-        loggedStaff.role
+      return isVisitAssignedToStaff(
+        visit
       );
 
     }
@@ -1483,7 +1498,7 @@ function getStaffVisits() {
 
 
 /* =====================================================
-   6. عرض عدد الزيارات اليوم
+   7. عدد زيارات اليوم
 ===================================================== */
 
 function updateTodayCount() {
@@ -1494,26 +1509,30 @@ function updateTodayCount() {
       .split("T")[0];
 
 
-  const todayVisits =
-    getStaffVisits().filter(
-      function(visit) {
+  const count =
+    getStaffVisits()
+      .filter(
+        function(visit) {
 
-        return visit.date === today;
+          return (
+            visit.date ===
+            today
+          );
 
-      }
-    );
+        }
+      ).length;
 
 
   document.getElementById(
     "todayVisitsCount"
   ).textContent =
-    todayVisits.length;
+    count;
 
 }
 
 
 /* =====================================================
-   7. عرض جدول الزيارات
+   8. عرض الجدول
 ===================================================== */
 
 function renderVisits() {
@@ -1539,16 +1558,18 @@ function renderVisits() {
 
       <tr>
 
-        <td
-          colspan="7"
-          style="
-            text-align:center;
-            padding:35px;
-            color:#718480;
-          "
-        >
+        <td colspan="7">
 
-          📅 لا توجد زيارات مسندة إليك حالياً.
+          <div class="empty-message">
+
+            📅 لا توجد زيارات مسندة إليك حالياً.
+
+            <br>
+
+            عند قيام الإدارة بإسناد موعد إليك،
+            سيظهر هنا تلقائياً.
+
+          </div>
 
         </td>
 
@@ -1561,24 +1582,24 @@ function renderVisits() {
   }
 
 
-  /* ترتيب الزيارات حسب التاريخ والوقت */
-
   staffVisits.sort(
     function(a, b) {
 
       const dateA =
         new Date(
-          a.date +
+          (a.date || "") +
           "T" +
-          a.time
+          (a.time || "00:00")
         );
+
 
       const dateB =
         new Date(
-          b.date +
+          (b.date || "") +
           "T" +
-          b.time
+          (b.time || "00:00")
         );
+
 
       return dateA - dateB;
 
@@ -1601,24 +1622,24 @@ function renderVisits() {
 
 
       /* =========================
-         بانتظار الزيارة
+         WAITING
       ========================= */
 
       if (
         visit.status ===
         "waiting"
+        ||
+        !visit.status
       ) {
 
         statusHTML = `
+
           <span class="status status-waiting">
             ⏳ بانتظار الزيارة
           </span>
+
         `;
 
-
-        /*
-           زر بدء الزيارة يظهر هنا فقط.
-        */
 
         actionHTML = `
 
@@ -1635,7 +1656,7 @@ function renderVisits() {
 
 
       /* =========================
-         الزيارة قيد التنفيذ
+         IN PROGRESS
       ========================= */
 
       else if (
@@ -1644,41 +1665,60 @@ function renderVisits() {
       ) {
 
         statusHTML = `
+
           <span class="status status-progress">
             🟢 قيد الزيارة
           </span>
+
         `;
 
 
         /*
-           مهم:
-           لا يوجد هنا زر بدء الزيارة
-           ولا زر متابعة الزيارة.
-
-           لأن واجهة الزيارة أصبحت
-           مفتوحة أسفل الجدول.
+           لا نضع زر بدء هنا.
+           الواجهة تظهر أسفل الجدول.
         */
 
-        actionHTML = `
+        if (
+          currentVisit &&
+          String(currentVisit.id) ===
+          String(visit.id)
+        ) {
 
-          <span
-            style="
-              color:#16877d;
-              font-size:11px;
-              font-weight:800;
-              white-space:nowrap;
-            "
-          >
-            🩺 الزيارة قيد التنفيذ
-          </span>
+          actionHTML = `
 
-        `;
+            <span
+              style="
+                color:#16877d;
+                font-size:11px;
+                font-weight:800;
+                white-space:nowrap;
+              "
+            >
+              🩺 الزيارة مفتوحة بالأسفل
+            </span>
+
+          `;
+
+        } else {
+
+          actionHTML = `
+
+            <button
+              class="open-progress-btn"
+              onclick="openExistingVisit('${escapeJS(visit.id)}')"
+            >
+              🩺 فتح الزيارة
+            </button>
+
+          `;
+
+        }
 
       }
 
 
       /* =========================
-         الزيارة مكتملة
+         COMPLETED
       ========================= */
 
       else if (
@@ -1687,9 +1727,11 @@ function renderVisits() {
       ) {
 
         statusHTML = `
+
           <span class="status status-completed">
             ✅ مكتملة
           </span>
+
         `;
 
 
@@ -1711,6 +1753,41 @@ function renderVisits() {
       }
 
 
+      /* =========================
+         CANCELLED
+      ========================= */
+
+      else if (
+        visit.status ===
+        "cancelled"
+      ) {
+
+        statusHTML = `
+
+          <span class="status status-cancelled">
+            ❌ ملغاة
+          </span>
+
+        `;
+
+
+        actionHTML = `
+
+          <span
+            style="
+              color:#a44b4b;
+              font-size:11px;
+              font-weight:800;
+            "
+          >
+            ملغاة
+          </span>
+
+        `;
+
+      }
+
+
       row.innerHTML = `
 
         <td>
@@ -1718,27 +1795,45 @@ function renderVisits() {
         </td>
 
         <td>
+
           <span class="visit-time">
-            ${escapeHTML(visit.time)}
+            ${escapeHTML(visit.time || "")}
           </span>
+
         </td>
 
         <td>
+
           <div class="patient-name">
-            👴 ${escapeHTML(visit.patientName)}
+            👴 ${escapeHTML(
+              visit.patientName ||
+              visit.patient ||
+              "غير محدد"
+            )}
           </div>
+
         </td>
 
         <td>
+
           <div class="address">
-            📍 ${escapeHTML(visit.address)}
+            📍 ${escapeHTML(
+              visit.address ||
+              "غير محدد"
+            )}
           </div>
+
         </td>
 
         <td>
+
           <span class="visit-type">
-            ${escapeHTML(visit.type)}
+            ${escapeHTML(
+              visit.type ||
+              "زيارة منزلية"
+            )}
           </span>
+
         </td>
 
         <td>
@@ -1763,11 +1858,15 @@ function renderVisits() {
 
 
 /* =====================================================
-   8. بدء الزيارة
+   9. المتغير الحالي
 ===================================================== */
 
 let currentVisit = null;
 
+
+/* =====================================================
+   10. بدء زيارة جديدة
+===================================================== */
 
 function startVisit(id) {
 
@@ -1775,7 +1874,8 @@ function startVisit(id) {
     visits.find(
       function(item) {
 
-        return item.id === id;
+        return String(item.id) ===
+          String(id);
 
       }
     );
@@ -1792,9 +1892,20 @@ function startVisit(id) {
   }
 
 
-  /*
-     منع إعادة بدء زيارة مكتملة
-  */
+  if (
+    !isVisitAssignedToStaff(
+      visit
+    )
+  ) {
+
+    alert(
+      "هذه الزيارة غير مسندة إليك."
+    );
+
+    return;
+
+  }
+
 
   if (
     visit.status ===
@@ -1810,7 +1921,18 @@ function startVisit(id) {
   }
 
 
-  currentVisit = visit;
+  if (
+    visit.status ===
+    "in_progress"
+  ) {
+
+    openExistingVisit(
+      visit.id
+    );
+
+    return;
+
+  }
 
 
   visit.status =
@@ -1821,21 +1943,37 @@ function startVisit(id) {
     new Date().toISOString();
 
 
+  visit.startedBy = {
+
+    employeeId:
+      loggedStaff
+        ? loggedStaff.employeeId || ""
+        : "",
+
+    name:
+      loggedStaff
+        ? loggedStaff.name || ""
+        : "",
+
+    role:
+      loggedStaff
+        ? loggedStaff.role || ""
+        : ""
+
+  };
+
+
   saveVisits();
 
 
-  /*
-     فتح واجهة الزيارة
-  */
+  currentVisit =
+    visit;
+
 
   showVisitInterface(
     visit
   );
 
-
-  /*
-     تحديث الجدول فوراً
-  */
 
   renderVisits();
 
@@ -1845,11 +1983,81 @@ function startVisit(id) {
 
 
 /* =====================================================
-   9. واجهة الزيارة
+   11. فتح زيارة قيد التنفيذ
+===================================================== */
+
+function openExistingVisit(id) {
+
+  const visit =
+    visits.find(
+      function(item) {
+
+        return String(item.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if (!visit) {
+
+    alert(
+      "لم يتم العثور على الزيارة."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !isVisitAssignedToStaff(
+      visit
+    )
+  ) {
+
+    alert(
+      "هذه الزيارة غير مسندة إليك."
+    );
+
+    return;
+
+  }
+
+
+  if (
+    visit.status !==
+    "in_progress"
+  ) {
+
+    startVisit(
+      visit.id
+    );
+
+    return;
+
+  }
+
+
+  currentVisit =
+    visit;
+
+
+  showVisitInterface(
+    visit,
+    true
+  );
+
+}
+
+
+/* =====================================================
+   12. واجهة الزيارة
 ===================================================== */
 
 function showVisitInterface(
-  visit
+  visit,
+  preserveForm = false
 ) {
 
   const section =
@@ -1867,11 +2075,18 @@ function showVisitInterface(
   ).innerHTML = `
 
     <h3>
-      👴 ${escapeHTML(visit.patientName)}
+      👴 ${escapeHTML(
+        visit.patientName ||
+        visit.patient ||
+        "غير محدد"
+      )}
     </h3>
 
     <p>
-      📍 ${escapeHTML(visit.address)}
+      📍 ${escapeHTML(
+        visit.address ||
+        "غير محدد"
+      )}
     </p>
 
     <div class="visit-info-grid">
@@ -1896,7 +2111,9 @@ function showVisitInterface(
         </div>
 
         <div class="info-value">
-          ${escapeHTML(visit.time)}
+          ${escapeHTML(
+            visit.time || ""
+          )}
         </div>
 
       </div>
@@ -1909,7 +2126,10 @@ function showVisitInterface(
         </div>
 
         <div class="info-value">
-          ${escapeHTML(visit.type)}
+          ${escapeHTML(
+            visit.type ||
+            "زيارة منزلية"
+          )}
         </div>
 
       </div>
@@ -1922,7 +2142,9 @@ function showVisitInterface(
         </div>
 
         <div class="info-value">
-          ${escapeHTML(visit.id)}
+          ${escapeHTML(
+            visit.id
+          )}
         </div>
 
       </div>
@@ -1935,19 +2157,26 @@ function showVisitInterface(
   configureRoleInterface();
 
 
-  clearVisitForm();
+  if (!preserveForm) {
+
+    clearVisitForm();
+
+  }
 
 
   section.scrollIntoView({
+
     behavior: "smooth",
+
     block: "start"
+
   });
 
 }
 
 
 /* =====================================================
-   10. تخصيص الواجهة حسب الكادر
+   13. تخصيص الواجهة حسب الدور
 ===================================================== */
 
 function configureRoleInterface() {
@@ -1982,96 +2211,121 @@ function configureRoleInterface() {
     );
 
 
-  /*
-     الممرض
-  */
-
-  if (role === "nurse") {
+  if (
+    role === "nurse"
+  ) {
 
     roleNotice.innerHTML = `
-      👩‍⚕️ <strong>واجهة الممرض:</strong>
-      يرجى تسجيل العلامات الحيوية، الأدوية،
-      الرعاية الشخصية وجميع الملاحظات التمريضية.
+
+      👩‍⚕️ <strong>
+      واجهة الممرض:
+      </strong>
+
+      يرجى تسجيل العلامات الحيوية،
+      الأدوية، الرعاية الشخصية
+      وجميع الملاحظات التمريضية.
+
     `;
+
 
     vitalSection.style.display =
       "block";
 
+
     nursingSection.style.display =
       "block";
 
+
     medicalSection.style.display =
       "none";
+
 
     return;
 
   }
 
 
-  /*
-     الطبيب المقيم
-  */
-
-  if (role === "resident") {
+  if (
+    role === "resident"
+  ) {
 
     roleNotice.innerHTML = `
-      🩺 <strong>واجهة الطبيب المقيم:</strong>
-      قم بتسجيل العلامات الحيوية والفحص الطبي
-      والتشخيص والعلاج والتوصيات.
+
+      🩺 <strong>
+      واجهة الطبيب المقيم:
+      </strong>
+
+      قم بتسجيل العلامات الحيوية
+      والفحص الطبي والتشخيص
+      والعلاج والتوصيات.
+
     `;
+
 
     vitalSection.style.display =
       "block";
 
+
     nursingSection.style.display =
       "none";
 
+
     medicalSection.style.display =
       "block";
+
 
     return;
 
   }
 
 
-  /*
-     الطبيب الأخصائي
-  */
-
-  if (role === "specialist") {
+  if (
+    role === "specialist"
+  ) {
 
     roleNotice.innerHTML = `
-      👨‍⚕️ <strong>واجهة الطبيب الأخصائي:</strong>
-      قم بتسجيل التقييم التخصصي والتشخيص
-      والتوصيات والخطة العلاجية.
+
+      👨‍⚕️ <strong>
+      واجهة الطبيب الأخصائي:
+      </strong>
+
+      قم بتسجيل التقييم التخصصي
+      والتشخيص والتوصيات
+      والخطة العلاجية.
+
     `;
+
 
     vitalSection.style.display =
       "block";
 
+
     nursingSection.style.display =
       "none";
 
+
     medicalSection.style.display =
       "block";
+
 
     return;
 
   }
 
-
-  /*
-     بقية الكوادر
-  */
 
   roleNotice.innerHTML = `
-    👤 <strong>${escapeHTML(
+
+    👤 <strong>
+    ${escapeHTML(
       loggedStaff
         ? loggedStaff.title
         : "الكادر"
-    )}:</strong>
+    )}:
+    </strong>
+
     أدخل تفاصيل الخدمة التي تم تقديمها
     والملاحظات والتوصيات الخاصة بالمسن.
+
   `;
 
 
@@ -2090,7 +2344,7 @@ function configureRoleInterface() {
 
 
 /* =====================================================
-   11. إتمام الزيارة وإرسال التقرير
+   14. إتمام الزيارة
 ===================================================== */
 
 function completeVisit() {
@@ -2119,9 +2373,9 @@ function completeVisit() {
   }
 
 
-  /*
-     إنشاء التقرير الكامل
-  */
+  const completedAt =
+    new Date().toISOString();
+
 
   const report = {
 
@@ -2129,55 +2383,64 @@ function completeVisit() {
       "REP-" +
       Date.now(),
 
+
     visitId:
       currentVisit.id,
+
 
     patient: {
 
       name:
-        currentVisit.patientName,
+        currentVisit.patientName ||
+        currentVisit.patient ||
+        "",
 
       address:
-        currentVisit.address
+        currentVisit.address ||
+        ""
 
     },
+
 
     visit: {
 
       date:
-        currentVisit.date,
+        currentVisit.date || "",
 
       time:
-        currentVisit.time,
+        currentVisit.time || "",
 
       type:
-        currentVisit.type
+        currentVisit.type ||
+        "زيارة منزلية"
 
     },
+
 
     staff: {
 
       employeeId:
         loggedStaff
-          ? loggedStaff.employeeId
+          ? loggedStaff.employeeId || ""
           : "",
 
       name:
         loggedStaff
-          ? loggedStaff.name
+          ? loggedStaff.name || ""
           : "كادر سند",
 
       title:
         loggedStaff
-          ? loggedStaff.title
+          ? loggedStaff.title || ""
           : "كادر سند",
 
       role:
         loggedStaff
-          ? loggedStaff.role
+          ? loggedStaff.role || ""
           : ""
 
     },
+
 
     vitalSigns: {
 
@@ -2201,6 +2464,7 @@ function completeVisit() {
 
     },
 
+
     medical: {
 
       symptoms:
@@ -2220,6 +2484,7 @@ function completeVisit() {
 
     },
 
+
     nursing: {
 
       medicationGiven:
@@ -2236,22 +2501,23 @@ function completeVisit() {
 
     },
 
+
     finalReport:
       getValue("finalReport"),
+
 
     startedAt:
       currentVisit.startedAt ||
       null,
 
+
     completedAt:
-      new Date().toISOString(),
+      completedAt,
+
 
     status:
       "completed",
 
-    /*
-       الجهات المستلمة للتقرير
-    */
 
     recipients: {
 
@@ -2263,11 +2529,6 @@ function completeVisit() {
 
     },
 
-    /*
-       في المرحلة الحالية
-       هذه الحالات محفوظة محلياً.
-       لاحقاً نربطها بالإرسال الحقيقي.
-    */
 
     deliveryStatus: {
 
@@ -2291,6 +2552,7 @@ function completeVisit() {
 
   let reports = [];
 
+
   try {
 
     reports =
@@ -2300,8 +2562,11 @@ function completeVisit() {
         ) || "[]"
       );
 
+
     if (!Array.isArray(reports)) {
+
       reports = [];
+
     }
 
   } catch (error) {
@@ -2333,11 +2598,31 @@ function completeVisit() {
 
 
   currentVisit.completedAt =
-    report.completedAt;
+    completedAt;
 
 
   currentVisit.reportId =
     report.id;
+
+
+  currentVisit.completedBy = {
+
+    employeeId:
+      loggedStaff
+        ? loggedStaff.employeeId || ""
+        : "",
+
+    name:
+      loggedStaff
+        ? loggedStaff.name || ""
+        : "",
+
+    role:
+      loggedStaff
+        ? loggedStaff.role || ""
+        : ""
+
+  };
 
 
   saveVisits();
@@ -2362,12 +2647,14 @@ function completeVisit() {
     تم إنشاء تقرير الزيارة رقم:
 
     <strong>
-      ${escapeHTML(report.id)}
+      ${escapeHTML(
+        report.id
+      )}
     </strong>
 
     <br><br>
 
-    📤 التقرير محفوظ لإرساله إلى:
+    📤 التقرير أصبح محفوظاً في نظام سند.
 
     <br>
 
@@ -2375,19 +2662,11 @@ function completeVisit() {
 
     <br>
 
-    👴 المسن
+    👴 ملف المسن
 
     <br>
 
-    👨‍👩‍👦 العائلة
-
-    <br><br>
-
-    <small>
-      الإرسال الفعلي إلى أجهزة الإدارة
-      والمسن والعائلة سيتم ربطه بقاعدة البيانات
-      ونظام الإشعارات في المرحلة القادمة.
-    </small>
+    👨‍👩‍👦 ملف العائلة
 
   `;
 
@@ -2396,25 +2675,14 @@ function completeVisit() {
     "block";
 
 
-  /*
-     إغلاق الزيارة الحالية
-  */
+  currentVisit =
+    null;
 
-  currentVisit = null;
-
-
-  /*
-     تحديث الجدول
-  */
 
   renderVisits();
 
   updateTodayCount();
 
-
-  /*
-     إخفاء واجهة الزيارة بعد عدة ثوانٍ
-  */
 
   setTimeout(
     function() {
@@ -2432,12 +2700,17 @@ function completeVisit() {
 
 
 /* =====================================================
-   12. إلغاء الزيارة الحالية
+   15. إلغاء / إغلاق الواجهة
 ===================================================== */
 
 function cancelVisit() {
 
   if (!currentVisit) {
+
+    document.getElementById(
+      "visitSection"
+    ).style.display =
+      "none";
 
     return;
 
@@ -2446,7 +2719,7 @@ function cancelVisit() {
 
   const confirmed =
     confirm(
-      "هل تريد الخروج من الزيارة؟ سيتم الاحتفاظ بحالة الزيارة قيد التنفيذ."
+      "هل تريد الخروج من واجهة الزيارة؟ ستبقى الزيارة قيد التنفيذ."
     );
 
 
@@ -2458,11 +2731,12 @@ function cancelVisit() {
 
 
   /*
-     لا نعيد الحالة إلى waiting.
-     الزيارة تبقى in_progress.
+     لا نرجعها إلى waiting.
+     تبقى in_progress.
   */
 
-  currentVisit = null;
+  currentVisit =
+    null;
 
 
   document.getElementById(
@@ -2477,7 +2751,7 @@ function cancelVisit() {
 
 
 /* =====================================================
-   13. تفريغ النموذج
+   16. تفريغ النموذج
 ===================================================== */
 
 function clearVisitForm() {
@@ -2485,19 +2759,29 @@ function clearVisitForm() {
   const fields = [
 
     "bloodPressure",
+
     "bloodSugar",
+
     "temperature",
+
     "pulse",
+
     "oxygen",
+
     "weight",
 
     "symptoms",
+
     "examination",
+
     "diagnosis",
+
     "treatment",
+
     "recommendations",
 
     "nursingNotes",
+
     "finalReport"
 
   ];
@@ -2507,7 +2791,9 @@ function clearVisitForm() {
     function(id) {
 
       const element =
-        document.getElementById(id);
+        document.getElementById(
+          id
+        );
 
 
       if (element) {
@@ -2520,37 +2806,34 @@ function clearVisitForm() {
   );
 
 
-  const medicationGiven =
-    document.getElementById(
-      "medicationGiven"
-    );
+  const selects = [
+
+    "medicationGiven",
+
+    "personalCare",
+
+    "nutritionStatus"
+
+  ];
 
 
-  if (medicationGiven) {
-    medicationGiven.value = "";
-  }
+  selects.forEach(
+    function(id) {
+
+      const element =
+        document.getElementById(
+          id
+        );
 
 
-  const personalCare =
-    document.getElementById(
-      "personalCare"
-    );
+      if (element) {
 
+        element.value = "";
 
-  if (personalCare) {
-    personalCare.value = "";
-  }
+      }
 
-
-  const nutritionStatus =
-    document.getElementById(
-      "nutritionStatus"
-    );
-
-
-  if (nutritionStatus) {
-    nutritionStatus.value = "";
-  }
+    }
+  );
 
 
   document.getElementById(
@@ -2562,13 +2845,15 @@ function clearVisitForm() {
 
 
 /* =====================================================
-   14. قراءة قيمة الحقل
+   17. قراءة قيمة
 ===================================================== */
 
 function getValue(id) {
 
   const element =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
 
 
   if (!element) {
@@ -2584,23 +2869,7 @@ function getValue(id) {
 
 
 /* =====================================================
-   15. حفظ الزيارات
-===================================================== */
-
-function saveVisits() {
-
-  localStorage.setItem(
-    "sanadVisits",
-    JSON.stringify(
-      visits
-    )
-  );
-
-}
-
-
-/* =====================================================
-   16. تنسيق التاريخ
+   18. تنسيق التاريخ
 ===================================================== */
 
 function formatDate(date) {
@@ -2613,12 +2882,16 @@ function formatDate(date) {
 
 
   const parts =
-    date.split("-");
+    String(date).split("-");
 
 
-  if (parts.length !== 3) {
+  if (
+    parts.length !== 3
+  ) {
 
-    return escapeHTML(date);
+    return escapeHTML(
+      date
+    );
 
   }
 
@@ -2635,7 +2908,7 @@ function formatDate(date) {
 
 
 /* =====================================================
-   17. حماية HTML
+   19. حماية HTML
 ===================================================== */
 
 function escapeHTML(value) {
@@ -2681,7 +2954,7 @@ function escapeHTML(value) {
 
 
 /* =====================================================
-   18. حماية ID عند وضعه داخل onclick
+   20. حماية JavaScript
 ===================================================== */
 
 function escapeJS(value) {
@@ -2697,18 +2970,22 @@ function escapeJS(value) {
 
 
   return String(value)
+
     .replaceAll(
       "\\",
       "\\\\"
     )
+
     .replaceAll(
       "'",
       "\\'"
     )
+
     .replaceAll(
       "\n",
       "\\n"
     )
+
     .replaceAll(
       "\r",
       "\\r"
@@ -2718,7 +2995,7 @@ function escapeJS(value) {
 
 
 /* =====================================================
-   19. تسجيل الخروج
+   21. تسجيل الخروج
 ===================================================== */
 
 function logoutStaff(event) {
@@ -2757,12 +3034,81 @@ function logoutStaff(event) {
 
 
 /* =====================================================
-   20. تشغيل الصفحة
+   22. تحديث تلقائي
 ===================================================== */
+
+function refreshStaffDashboard() {
+
+  const oldVisits =
+    JSON.stringify(visits);
+
+
+  loadVisits();
+
+
+  const newVisits =
+    JSON.stringify(visits);
+
+
+  if (
+    oldVisits !== newVisits
+  ) {
+
+    renderVisits();
+
+    updateTodayCount();
+
+  }
+
+}
+
+
+/* =====================================================
+   23. تشغيل الصفحة
+===================================================== */
+
+loadVisits();
 
 updateTodayCount();
 
 renderVisits();
+
+
+/*
+   تحديث كل ثانيتين حتى إذا المدير
+   أنشأ موعداً جديداً في نفس الجهاز
+   يظهر للكادر بدون إعادة تحميل الصفحة.
+*/
+
+setInterval(
+  refreshStaffDashboard,
+  2000
+);
+
+
+/*
+   إذا تغير localStorage من صفحة أخرى
+*/
+
+window.addEventListener(
+  "storage",
+  function(event) {
+
+    if (
+      event.key ===
+      "sanadVisits"
+    ) {
+
+      loadVisits();
+
+      renderVisits();
+
+      updateTodayCount();
+
+    }
+
+  }
+);
 
 </script>
 
