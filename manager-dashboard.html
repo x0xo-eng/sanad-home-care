@@ -262,6 +262,19 @@ grid-column:1/-1;
 background:#0f7068;
 }
 
+.schedule-customer-btn{
+border:none;
+border-radius:10px;
+padding:10px 14px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+margin-top:15px;
+}
+
 .appointment-list{
 display:flex;
 flex-direction:column;
@@ -378,9 +391,6 @@ padding:30px 5%;
 
 .welcome{
 padding:23px;
-}
-
-.welcome{
 flex-direction:column;
 text-align:center;
 }
@@ -520,7 +530,7 @@ flex-direction:column;
 </h2>
 
 <p>
-اختر المشترك لمعرفة باقته وتنظيم الخدمات المستحقة له
+اختر المشترك ثم اضغط ترتيب الموعد ليتم نقلك إلى جداول الكوادر
 </p>
 
 </div>
@@ -597,10 +607,10 @@ flex-direction:column;
 
 <label class="full">
 الممرض
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الممرض</option>
-<option>ممرض سند 1</option>
-<option>ممرض سند 2</option>
+<option value="ممرض سند 1">ممرض سند 1</option>
+<option value="ممرض سند 2">ممرض سند 2</option>
 </select>
 </label>
 
@@ -658,10 +668,10 @@ flex-direction:column;
 
 <label class="full">
 الطبيب المقيم
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الطبيب</option>
-<option>د. أحمد</option>
-<option>طبيب مقيم 2</option>
+<option value="د. أحمد">د. أحمد</option>
+<option value="طبيب مقيم 2">طبيب مقيم 2</option>
 </select>
 </label>
 
@@ -719,10 +729,10 @@ flex-direction:column;
 
 <label class="full">
 الطبيب الاختصاص
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الطبيب</option>
-<option>د. محمد</option>
-<option>طبيب اختصاص 2</option>
+<option value="د. محمد">د. محمد</option>
+<option value="طبيب اختصاص 2">طبيب اختصاص 2</option>
 </select>
 </label>
 
@@ -780,10 +790,10 @@ flex-direction:column;
 
 <label class="full">
 المرافق
-<select required>
+<select class="staff-select" required>
 <option value="">اختر المرافق</option>
-<option>مرافق سند</option>
-<option>مرافق سند 2</option>
+<option value="مرافق سند">مرافق سند</option>
+<option value="مرافق سند 2">مرافق سند 2</option>
 </select>
 </label>
 
@@ -841,10 +851,10 @@ flex-direction:column;
 
 <label class="full">
 الكوافير
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الكوافير</option>
-<option>كوافير سند</option>
-<option>كوافير سند 2</option>
+<option value="كوافير سند">كوافير سند</option>
+<option value="كوافير سند 2">كوافير سند 2</option>
 </select>
 </label>
 
@@ -902,10 +912,10 @@ flex-direction:column;
 
 <label class="full">
 أخصائي التغذية
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الأخصائي</option>
-<option>أخصائي التغذية</option>
-<option>أخصائي التغذية 2</option>
+<option value="أخصائي التغذية">أخصائي التغذية</option>
+<option value="أخصائي التغذية 2">أخصائي التغذية 2</option>
 </select>
 </label>
 
@@ -963,10 +973,10 @@ flex-direction:column;
 
 <label class="full">
 المعالج
-<select required>
+<select class="staff-select" required>
 <option value="">اختر المعالج</option>
-<option>معالج سند</option>
-<option>معالج سند 2</option>
+<option value="معالج سند">معالج سند</option>
+<option value="معالج سند 2">معالج سند 2</option>
 </select>
 </label>
 
@@ -1024,10 +1034,10 @@ flex-direction:column;
 
 <label class="full">
 الأخصائي النفسي
-<select required>
+<select class="staff-select" required>
 <option value="">اختر الأخصائي</option>
-<option>الأخصائي النفسي</option>
-<option>الأخصائي النفسي 2</option>
+<option value="الأخصائي النفسي">الأخصائي النفسي</option>
+<option value="الأخصائي النفسي 2">الأخصائي النفسي 2</option>
 </select>
 </label>
 
@@ -1042,7 +1052,7 @@ flex-direction:column;
 </div>
 
 
-<!-- المعين الاختياري -->
+<!-- المعين -->
 
 <div class="schedule-card">
 
@@ -1085,10 +1095,10 @@ flex-direction:column;
 
 <label class="full">
 المعين
-<select required>
+<select class="staff-select" required>
 <option value="">اختر المعين</option>
-<option>معين سند 1</option>
-<option>معين سند 2</option>
+<option value="معين سند 1">معين سند 1</option>
+<option value="معين سند 2">معين سند 2</option>
 </select>
 </label>
 
@@ -1170,7 +1180,7 @@ onclick="logoutManager(event)"
 <script>
 
 /* =========================================
-   التحقق من دخول المدير
+   1. التحقق من دخول المدير
 ========================================= */
 
 const loggedStaffRaw =
@@ -1222,7 +1232,7 @@ document.getElementById("welcomeName").textContent =
 
 
 /* =========================================
-   قراءة المشتركين
+   2. قراءة المشتركين
 ========================================= */
 
 let customers=[];
@@ -1246,7 +1256,7 @@ customers=[];
 
 
 /* =========================================
-   قراءة المواعيد
+   3. قراءة المواعيد
 ========================================= */
 
 let appointments=[];
@@ -1270,7 +1280,7 @@ appointments=[];
 
 
 /* =========================================
-   أنواع الخدمات
+   4. أنواع الخدمات
 ========================================= */
 
 const serviceNames={
@@ -1297,7 +1307,7 @@ assistant:"المعين الخاص"
 
 
 /* =========================================
-   الباقات والخدمات المستحقة
+   5. الخدمات حسب الباقة
 ========================================= */
 
 const packageServices={
@@ -1332,7 +1342,7 @@ luxury:[
 
 
 /* =========================================
-   تحديد الخدمات حسب الباقة
+   6. التحقق من خدمة المشترك
 ========================================= */
 
 function customerCanUseService(customer,service){
@@ -1356,7 +1366,7 @@ return services.includes(service);
 
 
 /* =========================================
-   خيارات المشتركين
+   7. تعبئة المشتركين
 ========================================= */
 
 function populateCustomerSelects(){
@@ -1370,6 +1380,10 @@ select.innerHTML =
 '<option value="">اختر المشترك</option>';
 
 customers.forEach(function(customer){
+
+if(customer.status==="rejected"){
+return;
+}
 
 const option =
 document.createElement("option");
@@ -1393,7 +1407,93 @@ select.appendChild(option);
 
 
 /* =========================================
-   تغيير المشترك
+   8. تحديد نوع الخدمة من الفورم
+========================================= */
+
+function getServiceTypeFromForm(form){
+
+if(!form){
+return "";
+}
+
+const code =
+form.getAttribute("onsubmit") || "";
+
+const match =
+code.match(/saveAppointment\(event,'([^']+)'\)/);
+
+return match ? match[1] : "";
+
+}
+
+
+/* =========================================
+   9. اختيار المشترك من قائمة الانتظار
+========================================= */
+
+function startCustomerScheduling(customerId){
+
+const customer =
+customers.find(function(item){
+
+return item.id===customerId;
+
+});
+
+if(!customer){
+
+showMessage(
+"لم يتم العثور على المشترك.",
+"error"
+);
+
+return;
+
+}
+
+
+/* اختيار المشترك في الجداول */
+
+document
+.querySelectorAll(".customer-select")
+.forEach(function(select){
+
+select.value=customerId;
+
+select.dispatchEvent(
+new Event("change",{bubbles:true})
+);
+
+});
+
+
+/* الانتقال إلى الجداول */
+
+const scheduleGrid =
+document.querySelector(".schedule-grid");
+
+if(scheduleGrid){
+
+scheduleGrid.scrollIntoView({
+
+behavior:"smooth",
+
+block:"start"
+
+});
+
+}
+
+showMessage(
+"📅 تم اختيار "+customer.name+" — الآن رتب مواعيده حسب الخدمات المستحقة.",
+"success"
+);
+
+}
+
+
+/* =========================================
+   10. عند تغيير المشترك
 ========================================= */
 
 document.addEventListener(
@@ -1411,16 +1511,8 @@ if(!form){
 return;
 }
 
-const service =
-form.getAttribute("onsubmit")
-.match(/'([^']+)'/);
-
-if(!service){
-return;
-}
-
 const serviceType =
-service[1];
+getServiceTypeFromForm(form);
 
 const customer =
 customers.find(function(item){
@@ -1432,29 +1524,23 @@ return item.id===event.target.value;
 const submit =
 form.querySelector(".save-schedule");
 
-if(!customer){
-submit.disabled=false;
-submit.style.opacity="1";
+if(!submit){
 return;
 }
 
-if(!customerCanUseService(customer,serviceType)){
+if(!customer){
 
-if(serviceType==="assistant"){
+submit.disabled=false;
+submit.style.opacity="1";
 
-showMessage(
-"⚠️ هذا المشترك لم يطلب خدمة المعين الخاص.",
-"error"
-);
-
-}else{
-
-showMessage(
-"⚠️ هذه الخدمة غير موجودة ضمن باقة هذا المشترك.",
-"error"
-);
+return;
 
 }
+
+if(!customerCanUseService(
+customer,
+serviceType
+)){
 
 submit.disabled=true;
 submit.style.opacity=".5";
@@ -1470,7 +1556,7 @@ submit.style.opacity="1";
 
 
 /* =========================================
-   حفظ الموعد
+   11. حفظ الموعد
 ========================================= */
 
 function saveAppointment(event,serviceType){
@@ -1479,23 +1565,26 @@ event.preventDefault();
 
 const form=event.target;
 
-const select=
+const select =
 form.querySelector(".customer-select");
 
-const customerId=select.value;
+const customerId =
+select.value;
 
-const date=
+const date =
 form.querySelector(".appointment-date").value;
 
-const time=
+const time =
 form.querySelector(".appointment-time-input").value;
 
-const staffSelect=
-form.querySelectorAll("select")[1];
+const staffSelect =
+form.querySelector(".staff-select");
 
-const staffName=
+const staffName =
 staffSelect ? staffSelect.value : "";
 
+
+/* البحث عن المشترك */
 
 const customer =
 customers.find(function(item){
@@ -1517,7 +1606,12 @@ return;
 }
 
 
-if(!customerCanUseService(customer,serviceType)){
+/* التحقق من الخدمة */
+
+if(!customerCanUseService(
+customer,
+serviceType
+)){
 
 showMessage(
 serviceType==="assistant"
@@ -1533,10 +1627,12 @@ return;
 }
 
 
+/* التحقق من البيانات */
+
 if(!date || !time || !staffName){
 
 showMessage(
-"يرجى إكمال بيانات الموعد.",
+"يرجى إكمال التاريخ والوقت واختيار الكادر.",
 "error"
 );
 
@@ -1545,20 +1641,40 @@ return;
 }
 
 
+/* =========================================
+   إنشاء الموعد
+========================================= */
+
 const appointment={
 
 id:
-"SCH-"+Date.now(),
+"SCH-"+Date.now()+"-"+Math.random()
+.toString(36)
+.substring(2,8),
 
-customerId:customer.id,
+customerId:
+customer.id,
 
-customerName:customer.name,
+customerName:
+customer.name,
+
+familyName:
+customer.familyName || "",
+
+familyPhone:
+customer.familyPhone || "",
+
+customerPhone:
+customer.phone || "",
+
+address:
+customer.address || "",
 
 package:
-customer.package,
+customer.package || "",
 
 packageName:
-customer.packageName,
+customer.packageName || "",
 
 service:
 serviceType,
@@ -1566,16 +1682,27 @@ serviceType,
 serviceName:
 serviceNames[serviceType],
 
-date:date,
+date:
+date,
 
-time:time,
+time:
+time,
 
-staff:staffName,
+staff:
+staffName,
 
-status:"scheduled",
+staffType:
+serviceType,
+
+status:
+"scheduled",
 
 createdBy:
-loggedStaff ? loggedStaff.name : "المدير",
+loggedStaff
+?
+loggedStaff.name
+:
+"المدير",
 
 createdAt:
 new Date().toISOString()
@@ -1583,8 +1710,49 @@ new Date().toISOString()
 };
 
 
-appointments.push(appointment);
+/* =========================================
+   منع التكرار
+========================================= */
 
+const duplicate =
+appointments.some(function(item){
+
+return (
+
+item.customerId === customer.id &&
+
+item.service === serviceType &&
+
+item.date === date &&
+
+item.time === time &&
+
+item.staff === staffName &&
+
+item.status !== "cancelled"
+
+);
+
+});
+
+
+if(duplicate){
+
+showMessage(
+"⚠️ هذا الموعد موجود مسبقاً.",
+"error"
+);
+
+return;
+
+}
+
+
+/* =========================================
+   حفظ الموعد
+========================================= */
+
+appointments.push(appointment);
 
 localStorage.setItem(
 "sanadAppointments",
@@ -1592,9 +1760,35 @@ JSON.stringify(appointments)
 );
 
 
-/* تحديث حالة المشترك */
+/*
+هذا التوقيت يخبر الحسابات الأخرى
+أن جدول المواعيد تغير
+*/
+
+localStorage.setItem(
+"sanadAppointmentsLastUpdate",
+new Date().toISOString()
+);
+
+
+/* =========================================
+   تحديث بيانات المشترك
+========================================= */
+
+customer.lastScheduledAt =
+new Date().toISOString();
+
+customer.lastScheduledService =
+serviceType;
+
+
+/*
+لا نغير الحالة إلى مكتمل
+إلا بعد اكتمال كل الخدمات.
+*/
 
 customer.status="scheduled";
+
 
 localStorage.setItem(
 "sanadCustomers",
@@ -1602,36 +1796,41 @@ JSON.stringify(customers)
 );
 
 
+/* =========================================
+   تحديث الصفحة
+========================================= */
+
 form.reset();
 
-showMessage(
-"✅ تم حفظ الموعد وإرساله إلى جدول زيارات الكادر.",
-"success"
-);
-
+populateCustomerSelects();
 
 renderAppointments();
 
+renderPendingCustomers();
+
 updateStats();
 
-renderPendingCustomers();
+
+showMessage(
+"✅ تم حفظ الموعد. سيظهر للكادر المسؤول عن هذه الزيارة.",
+"success"
+);
 
 }
 
 
 /* =========================================
-   عرض المواعيد
+   12. عرض المواعيد
 ========================================= */
 
 function renderAppointments(){
 
-const serviceTypes=
+const serviceTypes =
 Object.keys(serviceNames);
-
 
 serviceTypes.forEach(function(service){
 
-const container=
+const container =
 document.getElementById(
 service+"Appointments"
 );
@@ -1655,8 +1854,7 @@ return item.service===service;
 return (
 (a.date+" "+a.time)
 .localeCompare(
-(b.date+" "+b.time
-)
+(b.date+" "+b.time)
 );
 
 });
@@ -1664,7 +1862,7 @@ return (
 
 if(serviceAppointments.length===0){
 
-container.innerHTML=
+container.innerHTML =
 '<div class="empty">لا توجد مواعيد.</div>';
 
 return;
@@ -1684,13 +1882,19 @@ div.innerHTML=`
 <div class="appointment-top">
 
 <div class="appointment-name">
+
 👴 ${escapeHtml(item.customerName)}
+
 </div>
 
 <div class="appointment-time">
+
 📅 ${escapeHtml(item.date)}
+
 &nbsp;
+
 ⏰ ${escapeHtml(item.time)}
+
 </div>
 
 </div>
@@ -1698,10 +1902,16 @@ div.innerHTML=`
 <div class="appointment-info">
 
 📦 ${escapeHtml(item.packageName)}
+
 <br>
-👤 ${escapeHtml(item.staff)}
+
+👤 الكادر:
+${escapeHtml(item.staff)}
+
 <br>
-🟢 الحالة: ${getAppointmentStatus(item.status)}
+
+🟢 الحالة:
+${getAppointmentStatus(item.status)}
 
 </div>
 
@@ -1720,7 +1930,7 @@ renderAllAppointments();
 
 
 /* =========================================
-   الملخص العام
+   13. الملخص العام
 ========================================= */
 
 function renderAllAppointments(){
@@ -1733,7 +1943,7 @@ container.innerHTML="";
 
 if(appointments.length===0){
 
-container.innerHTML=
+container.innerHTML =
 '<div class="empty">لا توجد مواعيد منظمة حالياً.</div>';
 
 return;
@@ -1749,8 +1959,7 @@ appointments
 return (
 (a.date+" "+a.time)
 .localeCompare(
-(b.date+" "+b.time
-)
+(b.date+" "+b.time)
 );
 
 });
@@ -1768,13 +1977,19 @@ div.innerHTML=`
 <div class="appointment-top">
 
 <div class="appointment-name">
+
 ${escapeHtml(item.serviceName)}
- — ${escapeHtml(item.customerName)}
+—
+${escapeHtml(item.customerName)}
+
 </div>
 
 <div class="appointment-time">
+
 ${escapeHtml(item.date)}
- — ${escapeHtml(item.time)}
+—
+${escapeHtml(item.time)}
+
 </div>
 
 </div>
@@ -1782,9 +1997,14 @@ ${escapeHtml(item.date)}
 <div class="appointment-info">
 
 📦 ${escapeHtml(item.packageName)}
+
 <br>
-👤 الكادر: ${escapeHtml(item.staff)}
+
+👤 الكادر:
+${escapeHtml(item.staff)}
+
 <br>
+
 🟢 ${getAppointmentStatus(item.status)}
 
 </div>
@@ -1799,7 +2019,7 @@ container.appendChild(div);
 
 
 /* =========================================
-   المشتركين بانتظار الموعد
+   14. المشتركين بانتظار الترتيب
 ========================================= */
 
 function renderPendingCustomers(){
@@ -1820,7 +2040,7 @@ return customer.status==="pending_schedule";
 
 if(pending.length===0){
 
-container.innerHTML=
+container.innerHTML =
 '<div class="pending-empty">لا يوجد مشتركين بانتظار ترتيب المواعيد حالياً.</div>';
 
 return;
@@ -1842,38 +2062,63 @@ div.innerHTML=`
 <div>
 
 <div class="customer-name">
+
 👴 ${escapeHtml(customer.name)}
+
 </div>
 
 <div class="customer-meta">
 
-👨‍👩‍👦 ${escapeHtml(customer.familyName || "")}
+👨‍👩‍👦
+${escapeHtml(customer.familyName || "")}
+
 <br>
 
-📞 ${escapeHtml(customer.familyPhone || "")}
+📞
+${escapeHtml(customer.familyPhone || "")}
 
 </div>
 
 <span class="package-badge">
-📦 ${escapeHtml(customer.packageName || "")}
+
+📦
+${escapeHtml(customer.packageName || "")}
+
 </span>
 
 </div>
 
 <div class="customer-id">
+
 ${escapeHtml(customer.id)}
+
 </div>
 
 </div>
+
 
 <div class="customer-meta">
 
+<strong>
 الخدمات المستحقة حسب الباقة:
-<br>
+</strong>
+
+<br><br>
 
 ${getCustomerServices(customer)}
 
 </div>
+
+
+<button
+type="button"
+class="schedule-customer-btn"
+onclick="startCustomerScheduling('${escapeHtml(customer.id)}')"
+>
+
+📅 ترتيب موعد هذا المشترك
+
+</button>
 
 `;
 
@@ -1885,7 +2130,7 @@ container.appendChild(div);
 
 
 /* =========================================
-   خدمات المشترك
+   15. خدمات المشترك
 ========================================= */
 
 function getCustomerServices(customer){
@@ -1912,13 +2157,15 @@ text +=
 
 }
 
-return text || "لا توجد خدمات محددة.";
+
+return text ||
+"لا توجد خدمات محددة.";
 
 }
 
 
 /* =========================================
-   الإحصائيات
+   16. الإحصائيات
 ========================================= */
 
 function updateStats(){
@@ -1946,7 +2193,7 @@ document.getElementById(
 appointments.length;
 
 
-const today=
+const today =
 new Date()
 .toISOString()
 .split("T")[0];
@@ -1958,7 +2205,10 @@ document.getElementById(
 
 appointments.filter(function(item){
 
-return item.date===today;
+return (
+item.date===today &&
+item.status==="scheduled"
+);
 
 }).length;
 
@@ -1966,7 +2216,7 @@ return item.date===today;
 
 
 /* =========================================
-   حالة الموعد
+   17. حالة الموعد
 ========================================= */
 
 function getAppointmentStatus(status){
@@ -1989,19 +2239,23 @@ return statuses[status] || "مجدول";
 
 
 /* =========================================
-   الرسائل
+   18. الرسائل
 ========================================= */
 
 function showMessage(message,type){
 
-const box=
+const box =
 document.getElementById("message");
 
 box.textContent=message;
 
-box.className=
+box.className =
 "message "+
-(type==="success" ? "success" : "error");
+(type==="success"
+?
+"success"
+:
+"error");
 
 box.style.display="block";
 
@@ -2015,7 +2269,7 @@ box.style.display="none";
 
 
 /* =========================================
-   تسجيل الخروج
+   19. تسجيل الخروج
 ========================================= */
 
 function logoutManager(event){
@@ -2037,7 +2291,7 @@ window.location.href=
 
 
 /* =========================================
-   حماية HTML
+   20. حماية النصوص
 ========================================= */
 
 function escapeHtml(value){
@@ -2053,7 +2307,7 @@ return String(value ?? "")
 
 
 /* =========================================
-   التشغيل
+   21. التشغيل
 ========================================= */
 
 populateCustomerSelects();
