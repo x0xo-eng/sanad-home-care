@@ -1,572 +1,586 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>تسجيل الزيارة | سند</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <style>
-
-    body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
-    }
-
-    /* =========================
-       PAGE
-    ========================= */
-
-    .visit-page {
-      max-width: 1150px;
-      margin: auto;
-      padding: 45px 6%;
-    }
-
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .visit-header {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 26px;
-      padding: 28px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-
-      box-shadow: 0 18px 50px rgba(22,70,65,.07);
-
-      margin-bottom: 25px;
-    }
-
-    .eyebrow {
-      display: block;
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 7px;
-    }
-
-    .visit-header h1 {
-      color: #163b38;
-      font-size: 29px;
-      margin: 0 0 7px;
-    }
-
-    .visit-header p {
-      color: #718480;
-      margin: 0;
-      line-height: 1.8;
-      font-size: 13px;
-    }
-
-    .patient-icon {
-      width: 78px;
-      height: 78px;
-
-      border-radius: 24px;
-
-      background: #e8f5f3;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 38px;
-
-      flex-shrink: 0;
-    }
-
-
-    /* =========================
-       INFO
-    ========================= */
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .info-card {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 18px;
-      padding: 18px;
-
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-    }
-
-    .info-card span {
-      display: block;
-      color: #718480;
-      font-size: 11px;
-      margin-bottom: 6px;
-    }
-
-    .info-card strong {
-      color: #163b38;
-      font-size: 14px;
-    }
-
-
-    /* =========================
-       SECTION
-    ========================= */
-
-    .section {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 24px;
-      padding: 28px;
-      margin-bottom: 25px;
-
-      box-shadow: 0 15px 45px rgba(22,70,65,.05);
-    }
-
-    .section-title {
-      margin-bottom: 22px;
-    }
-
-    .section-title h2 {
-      color: #163b38;
-      font-size: 20px;
-      margin: 0 0 5px;
-    }
-
-    .section-title p {
-      color: #718480;
-      font-size: 12px;
-      margin: 0;
-    }
-
-
-    /* =========================
-       VITALS
-    ========================= */
-
-    .vitals {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-
-    .vital {
-      background: #fbfefe;
-      border: 1px solid #e3edeb;
-      border-radius: 16px;
-      padding: 16px;
-    }
-
-    .vital label {
-      display: block;
-      color: #163b38;
-      font-weight: 800;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .vital input {
-      width: 100%;
-      box-sizing: border-box;
-
-      padding: 12px;
-
-      border-radius: 11px;
-      border: 1px solid #dfecea;
-
-      background: white;
-      color: #163b38;
-
-      font-family: inherit;
-      outline: none;
-
-      transition: .25s;
-    }
-
-    .vital input:focus {
-      border-color: #16877d;
-      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
-    }
-
-
-    /* =========================
-       FORM
-    ========================= */
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      color: #163b38;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .form-group textarea,
-    .form-group input,
-    .form-group select {
-
-      width: 100%;
-      box-sizing: border-box;
-
-      padding: 13px 14px;
-
-      border-radius: 12px;
-      border: 1px solid #dfecea;
-
-      background: #fbfefe;
-      color: #163b38;
-
-      font-family: inherit;
-      font-size: 13px;
-
-      outline: none;
-
-      transition: .25s;
-    }
-
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-      line-height: 1.8;
-    }
-
-    .form-group textarea:focus,
-    .form-group input:focus,
-    .form-group select:focus {
-
-      border-color: #16877d;
-      background: white;
-
-      box-shadow:
-        0 0 0 4px rgba(22,135,125,.08);
-    }
-
-
-    /* =========================
-       CHECKS
-    ========================= */
-
-    .checks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .check {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 13px;
-
-      background: #fbfefe;
-      border: 1px solid #e3edeb;
-      border-radius: 13px;
-
-      color: #163b38;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .check input {
-      accent-color: #16877d;
-      width: 17px;
-      height: 17px;
-    }
-
-
-    /* =========================
-       LAB
-    ========================= */
-
-    .lab-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .lab-box {
-      background: #fbfefe;
-      border: 1px solid #e3edeb;
-      border-radius: 17px;
-      padding: 18px;
-    }
-
-    .lab-box label {
-      display: block;
-      color: #163b38;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .lab-box input,
-    .lab-box textarea {
-
-      width: 100%;
-      box-sizing: border-box;
-
-      padding: 13px;
-
-      border-radius: 12px;
-      border: 1px solid #dfecea;
-
-      background: white;
-      color: #163b38;
-
-      font-family: inherit;
-      outline: none;
-    }
-
-    .lab-box textarea {
-      min-height: 90px;
-      resize: vertical;
-      line-height: 1.8;
-    }
-
-    .lab-box input:focus,
-    .lab-box textarea:focus {
-      border-color: #16877d;
-      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
-    }
-
-
-    /* =========================
-       ACTIONS
-    ========================= */
-
-    .actions {
-
-      display: flex;
-
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 15px;
-
-      margin-top: 30px;
-    }
-
-    .btn {
-
-      border: none;
-      border-radius: 13px;
-
-      padding: 13px 23px;
-
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      transition: .25s;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 8px;
-    }
-
-    .btn-save {
-
-      background: #16877d;
-      color: white;
-
-      box-shadow:
-        0 10px 25px rgba(22,135,125,.18);
-    }
-
-    .btn-save:hover {
-      background: #0f7068;
-      transform: translateY(-2px);
-    }
-
-    .btn-back {
-
-      background: white;
-      color: #16877d;
-
-      border: 1px solid #d7e8e5;
-    }
-
-    .btn-back:hover {
-      background: #e8f5f3;
-      transform: translateY(-2px);
-    }
-
-
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    .success {
-
-      display: none;
-
-      margin-top: 20px;
-
-      padding: 16px;
-
-      border-radius: 14px;
-
-      background: #e6f6ef;
-
-      color: #16815f;
-
-      font-size: 13px;
-      font-weight: 800;
-
-      text-align: center;
-
-      border: 1px solid #ccecdf;
-    }
-
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    footer .footer-logo {
-      color: #163b38;
-      font-size: 25px;
-      font-weight: 900;
-    }
-
-    footer .footer-logo span {
-      color: #16877d;
-    }
-
-    footer p {
-      color: #718480;
-      font-size: 12px;
-    }
-
-    footer small {
-      color: #9aaba8;
-      font-size: 11px;
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 900px) {
-
-      .info-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .vitals {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .checks {
-        grid-template-columns: 1fr 1fr;
-      }
-
-    }
-
-
-    @media (max-width: 650px) {
-
-      .visit-page {
-        padding: 30px 5%;
-      }
-
-      .visit-header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .vitals {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
-      }
-
-      .checks {
-        grid-template-columns: 1fr;
-      }
-
-      .lab-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .actions {
-        flex-direction: column-reverse;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-    }
-
-
-    @media (max-width: 420px) {
-
-      .vitals {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>زيارة المسن | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+  color:#163b38;
+  font-family:Arial,Tahoma,sans-serif;
+}
+
+.visit-page{
+  max-width:1150px;
+  margin:auto;
+  padding:45px 6%;
+}
+
+.visit-header{
+  background:white;
+  border:1px solid #e3edeb;
+  border-radius:26px;
+  padding:28px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+
+  box-shadow:0 18px 50px rgba(22,70,65,.07);
+
+  margin-bottom:20px;
+}
+
+.eyebrow{
+  display:block;
+  color:#16877d;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:7px;
+}
+
+.visit-header h1{
+  color:#163b38;
+  font-size:29px;
+  margin:0 0 7px;
+}
+
+.visit-header p{
+  color:#718480;
+  margin:0;
+  line-height:1.8;
+  font-size:13px;
+}
+
+.patient-icon{
+  width:78px;
+  height:78px;
+  border-radius:24px;
+  background:#e8f5f3;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:38px;
+  flex-shrink:0;
+}
+
+.visit-status{
+  background:white;
+  border:1px solid #e3edeb;
+  border-radius:18px;
+  padding:15px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+
+  margin-bottom:20px;
+
+  box-shadow:0 10px 30px rgba(22,70,65,.04);
+}
+
+.status-text{
+  font-size:13px;
+  font-weight:800;
+}
+
+.status-badge{
+  padding:8px 15px;
+  border-radius:30px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.status-waiting{
+  background:#fff2d8;
+  color:#a66a0c;
+}
+
+.status-running{
+  background:#e8f5f3;
+  color:#16877d;
+}
+
+.status-completed{
+  background:#e6f6ef;
+  color:#16815f;
+}
+
+.timer{
+  font-size:18px;
+  font-weight:900;
+  color:#163b38;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.info-card{
+  background:white;
+  border:1px solid #e3edeb;
+  border-radius:18px;
+  padding:18px;
+
+  box-shadow:0 12px 35px rgba(22,70,65,.05);
+}
+
+.info-card span{
+  display:block;
+  color:#718480;
+  font-size:11px;
+  margin-bottom:6px;
+}
+
+.info-card strong{
+  color:#163b38;
+  font-size:14px;
+}
+
+.section{
+  background:white;
+  border:1px solid #e3edeb;
+  border-radius:24px;
+  padding:28px;
+  margin-bottom:25px;
+
+  box-shadow:0 15px 45px rgba(22,70,65,.05);
+}
+
+.section-title{
+  margin-bottom:22px;
+}
+
+.section-title h2{
+  color:#163b38;
+  font-size:20px;
+  margin:0 0 5px;
+}
+
+.section-title p{
+  color:#718480;
+  font-size:12px;
+  margin:0;
+  line-height:1.7;
+}
+
+.vitals{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.vital{
+  background:#fbfefe;
+  border:1px solid #e3edeb;
+  border-radius:16px;
+  padding:16px;
+}
+
+.vital label{
+  display:block;
+  color:#163b38;
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.vital input{
+  width:100%;
+  padding:12px;
+
+  border-radius:11px;
+  border:1px solid #dfecea;
+
+  background:white;
+  color:#163b38;
+
+  font-family:inherit;
+  outline:none;
+}
+
+.vital input:focus{
+  border-color:#16877d;
+  box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-group label{
+  color:#163b38;
+  font-size:13px;
+  font-weight:800;
+}
+
+.form-group textarea,
+.form-group input,
+.form-group select{
+
+  width:100%;
+  padding:13px 14px;
+
+  border-radius:12px;
+  border:1px solid #dfecea;
+
+  background:#fbfefe;
+  color:#163b38;
+
+  font-family:inherit;
+  font-size:13px;
+
+  outline:none;
+}
+
+.form-group textarea{
+  min-height:120px;
+  resize:vertical;
+  line-height:1.8;
+}
+
+.form-group textarea:focus,
+.form-group input:focus,
+.form-group select:focus{
+
+  border-color:#16877d;
+  background:white;
+
+  box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
+
+.checks{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.check{
+  display:flex;
+  align-items:center;
+  gap:9px;
+
+  padding:13px;
+
+  background:#fbfefe;
+  border:1px solid #e3edeb;
+  border-radius:13px;
+
+  color:#163b38;
+  font-size:12px;
+  font-weight:700;
+}
+
+.check input{
+  accent-color:#16877d;
+  width:17px;
+  height:17px;
+}
+
+.special-section{
+  display:none;
+}
+
+.lab-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.lab-box{
+  background:#fbfefe;
+  border:1px solid #e3edeb;
+  border-radius:17px;
+  padding:18px;
+}
+
+.lab-box label{
+  display:block;
+  color:#163b38;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.lab-box input,
+.lab-box textarea{
+  width:100%;
+  padding:13px;
+
+  border-radius:12px;
+  border:1px solid #dfecea;
+
+  background:white;
+  color:#163b38;
+
+  font-family:inherit;
+  outline:none;
+}
+
+.lab-box textarea{
+  min-height:90px;
+  resize:vertical;
+  line-height:1.8;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-top:30px;
+}
+
+.btn{
+  border:none;
+  border-radius:13px;
+
+  padding:14px 24px;
+
+  font-family:inherit;
+  font-size:13px;
+  font-weight:800;
+
+  cursor:pointer;
+  text-decoration:none;
+
+  transition:.25s;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+}
+
+.btn-start{
+  background:#16877d;
+  color:white;
+
+  box-shadow:0 10px 25px rgba(22,135,125,.18);
+}
+
+.btn-start:hover{
+  background:#0f7068;
+  transform:translateY(-2px);
+}
+
+.btn-complete{
+  background:#16815f;
+  color:white;
+}
+
+.btn-complete:hover{
+  background:#106b4f;
+  transform:translateY(-2px);
+}
+
+.btn-back{
+  background:white;
+  color:#16877d;
+  border:1px solid #d7e8e5;
+}
+
+.btn-back:hover{
+  background:#e8f5f3;
+}
+
+.success{
+  display:none;
+  margin-top:20px;
+  padding:16px;
+
+  border-radius:14px;
+
+  background:#e6f6ef;
+  color:#16815f;
+
+  font-size:13px;
+  font-weight:800;
+
+  text-align:center;
+
+  border:1px solid #ccecdf;
+}
+
+.warning{
+  display:none;
+
+  margin-top:15px;
+  padding:14px;
+
+  border-radius:13px;
+
+  background:#fff5df;
+  border:1px solid #f0dfb7;
+
+  color:#9a680f;
+
+  font-size:12px;
+  line-height:1.8;
+}
+
+.report-preview{
+  display:none;
+
+  background:#f7fbfa;
+  border:1px solid #dcebe8;
+  border-radius:17px;
+
+  padding:20px;
+
+  margin-top:20px;
+}
+
+.report-preview h3{
+  margin:0 0 12px;
+  color:#163b38;
+}
+
+.report-line{
+  padding:9px 0;
+  border-bottom:1px solid #e3edeb;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.report-line:last-child{
+  border-bottom:none;
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+}
+
+footer .footer-logo{
+  color:#163b38;
+  font-size:25px;
+  font-weight:900;
+}
+
+footer .footer-logo span{
+  color:#16877d;
+}
+
+footer p{
+  color:#718480;
+  font-size:12px;
+}
+
+footer small{
+  color:#9aaba8;
+  font-size:11px;
+}
+
+@media(max-width:950px){
+
+  .info-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .vitals{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .checks{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .visit-page{
+    padding:30px 5%;
+  }
+
+  .visit-header{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .vitals{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .checks{
+    grid-template-columns:1fr;
+  }
+
+  .lab-grid{
+    grid-template-columns:1fr;
+  }
+
+  .actions{
+    flex-direction:column-reverse;
+  }
+
+  .btn{
+    width:100%;
+  }
+
+}
+
+@media(max-width:420px){
+
+  .vitals{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header class="header">
 
@@ -576,506 +590,1167 @@
 
   <nav class="nav">
 
-    <a href="index.html">
-      الرئيسية
-    </a>
+    <a href="index.html">الرئيسية</a>
 
-    <a href="services.html">
-      خدماتنا
-    </a>
+    <a href="services.html">خدماتنا</a>
 
-    <a href="index.html#how">
-      كيف يعمل سند؟
-    </a>
+    <a href="index.html#how">كيف يعمل سند؟</a>
 
-    <a href="index.html#about">
-      عن سند
-    </a>
+    <a href="index.html#about">عن سند</a>
 
   </nav>
 
 </header>
 
 
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="visit-page">
 
 
-  <!-- =========================
-       VISIT HEADER
-  ========================= -->
+<!-- =========================
+     HEADER
+========================= -->
 
-  <section class="visit-header">
+<section class="visit-header">
 
-    <div>
+  <div>
 
-      <span class="eyebrow">
-        🩺 تسجيل الزيارة
-      </span>
+    <span class="eyebrow">
+      🩺 زيارة منزلية
+    </span>
 
-      <h1 id="patientName">
-        جاري تحميل اسم المسن...
-      </h1>
+    <h1 id="patientName">
+      جاري تحميل اسم المسن...
+    </h1>
 
-      <p id="visitDescription">
-        جاري تحميل تفاصيل الزيارة...
-      </p>
+    <p id="visitDescription">
+      جاري تحميل تفاصيل الزيارة...
+    </p>
 
+  </div>
+
+  <div class="patient-icon">
+    👴
+  </div>
+
+</section>
+
+
+<!-- =========================
+     VISIT STATUS
+========================= -->
+
+<section class="visit-status">
+
+  <div>
+
+    <div class="status-text" id="statusText">
+      الزيارة لم تبدأ بعد
     </div>
-
-    <div class="patient-icon">
-      👴
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       BASIC INFO
-  ========================= -->
-
-  <section class="info-grid">
-
-    <div class="info-card">
-
-      <span>
-        👤 المسن
-      </span>
-
-      <strong id="patientInfo">
-        —
-      </strong>
-
-    </div>
-
-
-    <div class="info-card">
-
-      <span>
-        🕐 وقت الزيارة
-      </span>
-
-      <strong id="visitTime">
-        —
-      </strong>
-
-    </div>
-
-
-    <div class="info-card">
-
-      <span>
-        📅 تاريخ الزيارة
-      </span>
-
-      <strong id="visitDate">
-        —
-      </strong>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       VITALS
-  ========================= -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        ❤️ العلامات الحيوية
-      </h2>
-
-      <p>
-        تسجيل القياسات التي تم أخذها أثناء الزيارة
-      </p>
-
-    </div>
-
-
-    <div class="vitals">
-
-      <div class="vital">
-
-        <label>
-          ضغط الدم
-        </label>
-
-        <input
-          type="text"
-          id="bloodPressure"
-          placeholder="مثال: 120/80"
-        >
-
-      </div>
-
-
-      <div class="vital">
-
-        <label>
-          سكر الدم
-        </label>
-
-        <input
-          type="text"
-          id="bloodSugar"
-          placeholder="مثال: 110 mg/dL"
-        >
-
-      </div>
-
-
-      <div class="vital">
-
-        <label>
-          درجة الحرارة
-        </label>
-
-        <input
-          type="text"
-          id="temperature"
-          placeholder="مثال: 36.7 °C"
-        >
-
-      </div>
-
-
-      <div class="vital">
-
-        <label>
-          النبض
-        </label>
-
-        <input
-          type="text"
-          id="pulse"
-          placeholder="مثال: 75"
-        >
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       HEALTH CHECK
-  ========================= -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        🩺 تقييم الحالة
-      </h2>
-
-      <p>
-        حدد الملاحظات الأساسية أثناء الزيارة
-      </p>
-
-    </div>
-
-
-    <div class="checks">
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="stable"
-        >
-
-        الحالة العامة مستقرة
-
-      </label>
-
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="appetite"
-        >
-
-        الشهية جيدة
-
-      </label>
-
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="sleep"
-        >
-
-        النوم طبيعي
-
-      </label>
-
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="noNewSymptoms"
-        >
-
-        لا توجد أعراض جديدة
-
-      </label>
-
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="medicationCommitment"
-        >
-
-        ملتزم بالأدوية
-
-      </label>
-
-
-      <label class="check">
-
-        <input
-          type="checkbox"
-          id="needsFollowup"
-        >
-
-        يحتاج متابعة
-
-      </label>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       REPORT
-  ========================= -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        📋 تقرير الزيارة
-      </h2>
-
-      <p>
-        اكتب تفاصيل الزيارة والملاحظات والتوصيات
-      </p>
-
-    </div>
-
-
-    <div class="form-grid">
-
-
-      <div class="form-group">
-
-        <label>
-          حالة المسن
-        </label>
-
-        <select id="condition">
-
-          <option value="">
-            اختر الحالة
-          </option>
-
-          <option value="مستقرة">
-            مستقرة
-          </option>
-
-          <option value="تحتاج متابعة">
-            تحتاج متابعة
-          </option>
-
-          <option value="تحتاج مراجعة الطبيب">
-            تحتاج مراجعة الطبيب
-          </option>
-
-          <option value="حالة طارئة">
-            حالة طارئة
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>
-          مستوى الالتزام بالأدوية
-        </label>
-
-        <select id="medication">
-
-          <option value="">
-            اختر المستوى
-          </option>
-
-          <option value="ملتزم بالكامل">
-            ملتزم بالكامل
-          </option>
-
-          <option value="ملتزم جزئياً">
-            ملتزم جزئياً
-          </option>
-
-          <option value="غير ملتزم">
-            غير ملتزم
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="form-group full">
-
-        <label>
-          📝 ملاحظات الزيارة
-        </label>
-
-        <textarea
-          id="notes"
-          placeholder="اكتب الملاحظات التي تم تسجيلها أثناء الزيارة..."
-        ></textarea>
-
-      </div>
-
-
-      <div class="form-group full">
-
-        <label>
-          💡 التوصيات
-        </label>
-
-        <textarea
-          id="recommendations"
-          placeholder="اكتب التوصيات أو التعليمات المطلوبة للمسن..."
-        ></textarea>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       LAB APPOINTMENT
-  ========================= -->
-
-  <section class="section">
-
-    <div class="section-title">
-
-      <h2>
-        🧪 موعد وإجراءات التحاليل
-      </h2>
-
-      <p>
-        تسجيل موعد التحليل والفحوصات المطلوبة للمسن
-      </p>
-
-    </div>
-
-
-    <div class="lab-grid">
-
-
-      <div class="lab-box">
-
-        <label>
-          📅 موعد إجراء التحليل
-        </label>
-
-        <input
-          type="datetime-local"
-          id="labDate"
-        >
-
-      </div>
-
-
-      <div class="lab-box">
-
-        <label>
-          🧪 نوع التحاليل المطلوبة
-        </label>
-
-        <textarea
-          id="labTests"
-          placeholder="مثال: صورة دم كاملة، وظائف الكلى..."
-        ></textarea>
-
-      </div>
-
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       ACTIONS
-  ========================= -->
-
-  <section class="section">
-
-    <div class="actions">
-
-      <a
-        href="staff-dashboard.html"
-        class="btn btn-back"
-      >
-        ← العودة إلى جدول الزيارات
-      </a>
-
-
-      <button
-        type="button"
-        class="btn btn-save"
-        id="saveVisitButton"
-      >
-        💾 حفظ الزيارة والتقرير
-      </button>
-
-    </div>
-
 
     <div
-      class="success"
-      id="successMessage"
+      class="timer"
+      id="visitTimer"
     >
-      ✅ تم حفظ الزيارة والتقرير بنجاح
+      00:00
     </div>
 
-  </section>
+  </div>
+
+  <div
+    class="status-badge status-waiting"
+    id="statusBadge"
+  >
+    ⏳ بانتظار البدء
+  </div>
+
+</section>
+
+
+<!-- =========================
+     BASIC INFO
+========================= -->
+
+<section class="info-grid">
+
+
+  <div class="info-card">
+
+    <span>👤 المسن</span>
+
+    <strong id="patientInfo">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="info-card">
+
+    <span>🕐 وقت الزيارة</span>
+
+    <strong id="visitTime">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="info-card">
+
+    <span>📅 تاريخ الزيارة</span>
+
+    <strong id="visitDate">
+      —
+    </strong>
+
+  </div>
+
+
+  <div class="info-card">
+
+    <span>👨‍⚕️ الكادر</span>
+
+    <strong id="staffInfo">
+      —
+    </strong>
+
+  </div>
+
+
+</section>
+
+
+<!-- =========================
+     VITALS
+========================= -->
+
+<section
+  class="section"
+  id="medicalSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      ❤️ العلامات الحيوية
+    </h2>
+
+    <p>
+      تسجيل القياسات التي تم أخذها أثناء الزيارة.
+    </p>
+
+  </div>
+
+
+  <div class="vitals">
+
+
+    <div class="vital">
+
+      <label>
+        ضغط الدم
+      </label>
+
+      <input
+        type="text"
+        id="bloodPressure"
+        placeholder="مثال: 120/80"
+      >
+
+    </div>
+
+
+    <div class="vital">
+
+      <label>
+        سكر الدم
+      </label>
+
+      <input
+        type="text"
+        id="bloodSugar"
+        placeholder="مثال: 110 mg/dL"
+      >
+
+    </div>
+
+
+    <div class="vital">
+
+      <label>
+        درجة الحرارة
+      </label>
+
+      <input
+        type="text"
+        id="temperature"
+        placeholder="مثال: 36.7 °C"
+      >
+
+    </div>
+
+
+    <div class="vital">
+
+      <label>
+        النبض
+      </label>
+
+      <input
+        type="text"
+        id="pulse"
+        placeholder="مثال: 75"
+      >
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GENERAL ASSESSMENT
+========================= -->
+
+<section
+  class="section"
+  id="generalAssessment"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🩺 تقييم الحالة
+    </h2>
+
+    <p>
+      حدد الملاحظات الأساسية أثناء الزيارة.
+    </p>
+
+  </div>
+
+
+  <div class="checks">
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="stable"
+      >
+
+      الحالة العامة مستقرة
+
+    </label>
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="appetite"
+      >
+
+      الشهية جيدة
+
+    </label>
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="sleep"
+      >
+
+      النوم طبيعي
+
+    </label>
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="noNewSymptoms"
+      >
+
+      لا توجد أعراض جديدة
+
+    </label>
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="medicationCommitment"
+      >
+
+      ملتزم بالأدوية
+
+    </label>
+
+
+    <label class="check">
+
+      <input
+        type="checkbox"
+        id="needsFollowup"
+      >
+
+      يحتاج متابعة
+
+    </label>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     DOCTOR SECTION
+========================= -->
+
+<section
+  class="section special-section"
+  id="doctorSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      👨‍⚕️ التقييم الطبي
+    </h2>
+
+    <p>
+      هذه البيانات تظهر للأطباء فقط.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        التشخيص / الانطباع الطبي
+      </label>
+
+      <input
+        type="text"
+        id="diagnosis"
+        placeholder="اكتب التشخيص أو الانطباع الطبي"
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        شدة الحالة
+      </label>
+
+      <select id="severity">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="طبيعية">
+          طبيعية
+        </option>
+
+        <option value="خفيفة">
+          خفيفة
+        </option>
+
+        <option value="متوسطة">
+          متوسطة
+        </option>
+
+        <option value="شديدة">
+          شديدة
+        </option>
+
+        <option value="طارئة">
+          طارئة
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        خطة العلاج / التعليمات الطبية
+      </label>
+
+      <textarea
+        id="medicalPlan"
+        placeholder="اكتب الخطة أو التعليمات الطبية..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     NURSE SECTION
+========================= -->
+
+<section
+  class="section special-section"
+  id="nurseSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      👩‍⚕️ متابعة التمريض
+    </h2>
+
+    <p>
+      البيانات الخاصة بعمل الممرض أثناء الزيارة.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        إعطاء الأدوية
+      </label>
+
+      <select id="medicationGiven">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="تم إعطاء الأدوية">
+          تم إعطاء الأدوية
+        </option>
+
+        <option value="تم إعطاء جزء من الأدوية">
+          تم إعطاء جزء من الأدوية
+        </option>
+
+        <option value="لم يتم إعطاء الأدوية">
+          لم يتم إعطاء الأدوية
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        الرعاية الشخصية
+      </label>
+
+      <select id="personalCare">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="تمت">
+          تمت
+        </option>
+
+        <option value="جزئياً">
+          جزئياً
+        </option>
+
+        <option value="لم تتم">
+          لم تتم
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        ملاحظات التمريض
+      </label>
+
+      <textarea
+        id="nursingNotes"
+        placeholder="اكتب ملاحظاتك كممرض..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     NUTRITION
+========================= -->
+
+<section
+  class="section special-section"
+  id="nutritionSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🥗 التغذية
+    </h2>
+
+    <p>
+      متابعة الحالة الغذائية للمسن.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        الشهية
+      </label>
+
+      <select id="nutritionAppetite">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="جيدة">
+          جيدة
+        </option>
+
+        <option value="متوسطة">
+          متوسطة
+        </option>
+
+        <option value="ضعيفة">
+          ضعيفة
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        الوزن
+      </label>
+
+      <input
+        type="text"
+        id="weight"
+        placeholder="مثال: 72 كغم"
+      >
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        الخطة الغذائية
+      </label>
+
+      <textarea
+        id="nutritionPlan"
+        placeholder="اكتب الخطة أو التوصيات الغذائية..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PHYSIOTHERAPY
+========================= -->
+
+<section
+  class="section special-section"
+  id="physioSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🏃 العلاج الطبيعي
+    </h2>
+
+    <p>
+      تسجيل الحالة الحركية والتمارين.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        القدرة على الحركة
+      </label>
+
+      <select id="mobility">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="مستقلة">
+          مستقلة
+        </option>
+
+        <option value="بمساعدة">
+          بمساعدة
+        </option>
+
+        <option value="محدودة">
+          محدودة
+        </option>
+
+        <option value="غير قادر">
+          غير قادر
+
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        تم تنفيذ التمارين؟
+      </label>
+
+      <select id="exercisesDone">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="نعم">
+          نعم
+        </option>
+
+        <option value="جزئياً">
+          جزئياً
+        </option>
+
+        <option value="لا">
+          لا
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        ملاحظات العلاج الطبيعي
+      </label>
+
+      <textarea
+        id="physioNotes"
+        placeholder="اكتب الملاحظات..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PSYCHOLOGY
+========================= -->
+
+<section
+  class="section special-section"
+  id="psychologySection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🧠 الدعم النفسي
+    </h2>
+
+    <p>
+      تقييم الحالة النفسية للمسن.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        الحالة النفسية
+      </label>
+
+      <select id="psychologicalState">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="جيدة">
+          جيدة
+        </option>
+
+        <option value="مستقرة">
+          مستقرة
+        </option>
+
+        <option value="قلق">
+          قلق
+        </option>
+
+        <option value="حزن">
+          حزن
+        </option>
+
+        <option value="تحتاج متابعة">
+          تحتاج متابعة
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        التواصل
+      </label>
+
+      <select id="communication">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="جيد">
+          جيد
+        </option>
+
+        <option value="متوسط">
+          متوسط
+        </option>
+
+        <option value="ضعيف">
+          ضعيف
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        ملاحظات الدعم النفسي
+      </label>
+
+      <textarea
+        id="psychologyNotes"
+        placeholder="اكتب الملاحظات..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ENTERTAINMENT
+========================= -->
+
+<section
+  class="section special-section"
+  id="entertainmentSection"
+>
+
+  <div class="section-title">
+
+    <h2>
+      🎭 النشاط والترفيه
+    </h2>
+
+    <p>
+      تسجيل النشاط الذي تم مع المسن.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        نوع النشاط
+      </label>
+
+      <input
+        type="text"
+        id="activityType"
+        placeholder="مثال: جلسة ترفيهية، مشي..."
+      >
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        مشاركة المسن
+      </label>
+
+      <select id="activityParticipation">
+
+        <option value="">
+          اختر
+        </option>
+
+        <option value="ممتازة">
+          ممتازة
+        </option>
+
+        <option value="جيدة">
+          جيدة
+        </option>
+
+        <option value="ضعيفة">
+          ضعيفة
+        </option>
+
+        <option value="لم يشارك">
+          لم يشارك
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        ملاحظات النشاط
+      </label>
+
+      <textarea
+        id="activityNotes"
+        placeholder="اكتب الملاحظات..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MAIN REPORT
+========================= -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <h2>
+      📋 التقرير العام للزيارة
+    </h2>
+
+    <p>
+      هذا الجزء مهم لأنه سيصل لاحقاً إلى الإدارة والمسن والعائلة.
+    </p>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-group">
+
+      <label>
+        حالة المسن
+      </label>
+
+      <select id="condition">
+
+        <option value="">
+          اختر الحالة
+        </option>
+
+        <option value="مستقرة">
+          مستقرة
+        </option>
+
+        <option value="تحتاج متابعة">
+          تحتاج متابعة
+        </option>
+
+        <option value="تحتاج مراجعة الطبيب">
+          تحتاج مراجعة الطبيب
+        </option>
+
+        <option value="حالة طارئة">
+          حالة طارئة
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group">
+
+      <label>
+        مستوى الالتزام بالأدوية
+      </label>
+
+      <select id="medication">
+
+        <option value="">
+          اختر المستوى
+        </option>
+
+        <option value="ملتزم بالكامل">
+          ملتزم بالكامل
+        </option>
+
+        <option value="ملتزم جزئياً">
+          ملتزم جزئياً
+        </option>
+
+        <option value="غير ملتزم">
+          غير ملتزم
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        📝 ملاحظات الزيارة
+      </label>
+
+      <textarea
+        id="notes"
+        placeholder="اكتب الملاحظات التي تم تسجيلها أثناء الزيارة..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label>
+        💡 التوصيات
+      </label>
+
+      <textarea
+        id="recommendations"
+        placeholder="اكتب التوصيات أو التعليمات المطلوبة للمسن..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     LAB
+========================= -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <h2>
+      🧪 التحاليل والفحوصات
+    </h2>
+
+    <p>
+      تسجيل أي تحاليل أو فحوصات مطلوبة.
+    </p>
+
+  </div>
+
+
+  <div class="lab-grid">
+
+
+    <div class="lab-box">
+
+      <label>
+        📅 موعد إجراء التحليل
+      </label>
+
+      <input
+        type="datetime-local"
+        id="labDate"
+      >
+
+    </div>
+
+
+    <div class="lab-box">
+
+      <label>
+        🧪 نوع التحاليل المطلوبة
+      </label>
+
+      <textarea
+        id="labTests"
+        placeholder="مثال: صورة دم كاملة، وظائف الكلى..."
+      ></textarea>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ACTIONS
+========================= -->
+
+<section class="section">
+
+  <div class="actions">
+
+
+    <a
+      href="staff-dashboard.html"
+      class="btn btn-back"
+    >
+      ← العودة إلى جدول الزيارات
+    </a>
+
+
+    <button
+      type="button"
+      class="btn btn-start"
+      id="startVisitButton"
+    >
+      ▶️ بدء الزيارة
+    </button>
+
+
+    <button
+      type="button"
+      class="btn btn-complete"
+      id="completeVisitButton"
+      style="display:none;"
+    >
+      ✅ إتمام الزيارة وإرسال التقرير
+    </button>
+
+
+  </div>
+
+
+  <div
+    class="warning"
+    id="warningMessage"
+  ></div>
+
+
+  <div
+    class="success"
+    id="successMessage"
+  >
+    ✅ تم إتمام الزيارة وحفظ التقرير بنجاح.
+  </div>
+
+
+  <div
+    class="report-preview"
+    id="reportPreview"
+  >
+
+    <h3>
+      📄 ملخص التقرير
+    </h3>
+
+    <div id="reportPreviewContent"></div>
+
+  </div>
+
+
+</section>
 
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
@@ -1094,33 +1769,33 @@
 </footer>
 
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
 <script>
 
-/* =========================================
-   تحميل بيانات الزيارة
-========================================= */
-
-let currentVisit = null;
-
-const savedVisit =
-  localStorage.getItem("sanadCurrentVisit");
+/* =====================================================
+   SANAD VISIT SYSTEM
+===================================================== */
 
 
-if (savedVisit) {
+/* =====================================================
+   1. بيانات الكادر
+===================================================== */
 
-  try {
+let loggedStaff = null;
 
-    currentVisit =
-      JSON.parse(savedVisit);
+const savedStaff =
+  localStorage.getItem("sanadLoggedInStaff");
 
-  } catch (error) {
+if(savedStaff){
+
+  try{
+
+    loggedStaff =
+      JSON.parse(savedStaff);
+
+  }catch(error){
 
     console.error(
-      "خطأ في قراءة بيانات الزيارة:",
+      "خطأ في قراءة بيانات الكادر",
       error
     );
 
@@ -1129,46 +1804,108 @@ if (savedVisit) {
 }
 
 
-/* =========================================
-   بيانات تجريبية
-   تستخدم فقط إذا لم تصل بيانات من لوحة الكادر
-========================================= */
+/* =====================================================
+   2. بيانات الزيارة
+===================================================== */
 
-if (!currentVisit) {
+let currentVisit = null;
+
+const savedVisit =
+  localStorage.getItem("sanadCurrentVisit");
+
+
+if(savedVisit){
+
+  try{
+
+    currentVisit =
+      JSON.parse(savedVisit);
+
+  }catch(error){
+
+    console.error(
+      "خطأ في قراءة بيانات الزيارة",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   3. بيانات تجريبية إذا لم توجد زيارة
+===================================================== */
+
+if(!currentVisit){
 
   currentVisit = {
 
-    patientName: "محمد علي",
+    id:
+      "VISIT-DEMO-" + Date.now(),
 
-    visitType: "فحص ومتابعة الحالة الصحية",
+    patientId:
+      "SANAD-001",
 
-    visitTime: "09:00 ص",
+    patientName:
+      "محمد علي",
 
-    date: "25 أغسطس 2026",
+    visitType:
+      "فحص ومتابعة الحالة الصحية",
 
-    staffName: "د. أحمد",
+    visitTime:
+      "09:00 ص",
 
-    staffRole: "طبيب مقيم"
+    date:
+      "27 أغسطس 2026",
+
+    address:
+      "عنوان المسن",
+
+    staffName:
+      loggedStaff?.name ||
+      "كادر سند",
+
+    staffRole:
+      loggedStaff?.role ||
+      "nurse"
 
   };
 
 }
 
 
-/* =========================================
-   عرض بيانات الزيارة
-========================================= */
+/* =====================================================
+   4. معلومات الكادر
+===================================================== */
 
-function fillVisitData() {
+const staffName =
+  currentVisit.staffName ||
+  loggedStaff?.name ||
+  "كادر سند";
+
+const staffRole =
+  currentVisit.staffRole ||
+  loggedStaff?.role ||
+  "staff";
+
+
+/* =====================================================
+   5. عرض معلومات الزيارة
+===================================================== */
+
+function fillVisitData(){
 
   document.getElementById("patientName")
     .textContent =
-    currentVisit.patientName || "—";
+    currentVisit.patientName ||
+    "—";
 
 
   document.getElementById("patientInfo")
     .textContent =
-    currentVisit.patientName || "—";
+    currentVisit.patientName ||
+    "—";
 
 
   document.getElementById("visitDescription")
@@ -1179,187 +1916,1070 @@ function fillVisitData() {
 
   document.getElementById("visitTime")
     .textContent =
-    currentVisit.visitTime || "—";
+    currentVisit.visitTime ||
+    "—";
 
 
   document.getElementById("visitDate")
     .textContent =
-    currentVisit.date || "—";
+    currentVisit.date ||
+    "—";
+
+
+  document.getElementById("staffInfo")
+    .textContent =
+    staffName;
 
 }
-
 
 fillVisitData();
 
 
-/* =========================================
-   حفظ الزيارة
-========================================= */
+/* =====================================================
+   6. معرفة نوع الكادر
+===================================================== */
+
+function normalizeRole(role){
+
+  if(!role){
+    return "staff";
+  }
+
+  return String(role)
+    .toLowerCase()
+    .trim();
+
+}
+
+
+/* =====================================================
+   7. إظهار واجهة الكادر المناسبة
+===================================================== */
+
+function configureRoleInterface(){
+
+  const role =
+    normalizeRole(staffRole);
+
+
+  /*
+    الممرض
+  */
+
+  if(
+    role === "nurse" ||
+    role.includes("nurse") ||
+    role.includes("ممرض") ||
+    role.includes("ممرضة") ||
+    role.includes("تمريض")
+  ){
+
+    document.getElementById(
+      "nurseSection"
+    ).style.display =
+      "block";
+
+    document.getElementById(
+      "medicalSection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    الطبيب المقيم
+  */
+
+  else if(
+    role === "resident_doctor" ||
+    role.includes("resident") ||
+    role.includes("مقيم")
+  ){
+
+    document.getElementById(
+      "doctorSection"
+    ).style.display =
+      "block";
+
+    document.getElementById(
+      "medicalSection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    الطبيب الأخصائي
+  */
+
+  else if(
+    role === "specialist_doctor" ||
+    role.includes("specialist") ||
+    role.includes("أخصائي") ||
+    role.includes("اختصاص")
+  ){
+
+    document.getElementById(
+      "doctorSection"
+    ).style.display =
+      "block";
+
+    document.getElementById(
+      "medicalSection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    التغذية
+  */
+
+  else if(
+    role === "nutrition" ||
+    role.includes("nutrition") ||
+    role.includes("تغذية")
+  ){
+
+    document.getElementById(
+      "nutritionSection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    العلاج الطبيعي
+  */
+
+  else if(
+    role === "physiotherapy" ||
+    role.includes("physio") ||
+    role.includes("علاج طبيعي") ||
+    role.includes("طبيعي")
+  ){
+
+    document.getElementById(
+      "physioSection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    الدعم النفسي
+  */
+
+  else if(
+    role === "psychology" ||
+    role.includes("psych") ||
+    role.includes("نفسي")
+  ){
+
+    document.getElementById(
+      "psychologySection"
+    ).style.display =
+      "block";
+
+  }
+
+
+  /*
+    الترفيه والمرافقة
+  */
+
+  else if(
+    role === "entertainment" ||
+    role.includes("entertainment") ||
+    role.includes("ترفيه") ||
+    role.includes("مرافق")
+  ){
+
+    document.getElementById(
+      "entertainmentSection"
+    ).style.display =
+      "block";
+
+  }
+
+}
+
+
+configureRoleInterface();
+
+
+/* =====================================================
+   8. حالة الزيارة
+===================================================== */
+
+let visitStarted = false;
+
+let visitCompleted = false;
+
+let visitStartTime = null;
+
+let timerInterval = null;
+
+
+/* =====================================================
+   9. استرجاع حالة الزيارة
+===================================================== */
+
+if(
+  currentVisit.status ===
+  "in_progress"
+){
+
+  visitStarted = true;
+
+  visitStartTime =
+    currentVisit.startedAt
+      ? new Date(
+          currentVisit.startedAt
+        )
+      : new Date();
+
+  startTimer();
+
+  setRunningUI();
+
+}
+
+
+if(
+  currentVisit.status ===
+  "completed"
+){
+
+  visitStarted = true;
+
+  visitCompleted = true;
+
+  setCompletedUI();
+
+}
+
+
+/* =====================================================
+   10. بدء الزيارة
+===================================================== */
 
 document
-  .getElementById("saveVisitButton")
-  .addEventListener("click", saveVisit);
+  .getElementById(
+    "startVisitButton"
+  )
+  .addEventListener(
+    "click",
+    startVisit
+  );
 
 
-function saveVisit() {
+function startVisit(){
 
-  const report = {
+  if(visitStarted){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل أنت متأكد من بدء زيارة هذا المسن الآن؟"
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  visitStarted = true;
+
+  visitStartTime =
+    new Date();
+
+
+  currentVisit.status =
+    "in_progress";
+
+
+  currentVisit.startedAt =
+    visitStartTime.toISOString();
+
+
+  currentVisit.startedBy =
+    staffName;
+
+
+  currentVisit.startedByRole =
+    staffRole;
+
+
+  localStorage.setItem(
+    "sanadCurrentVisit",
+    JSON.stringify(
+      currentVisit
+    )
+  );
+
+
+  startTimer();
+
+  setRunningUI();
+
+}
+
+
+/* =====================================================
+   11. المؤقت
+===================================================== */
+
+function startTimer(){
+
+  updateTimer();
+
+  timerInterval =
+    setInterval(
+      updateTimer,
+      1000
+    );
+
+}
+
+
+function updateTimer(){
+
+  if(!visitStartTime){
+
+    return;
+
+  }
+
+
+  const now =
+    new Date();
+
+
+  const difference =
+    Math.floor(
+      (
+        now -
+        visitStartTime
+      ) / 1000
+    );
+
+
+  const seconds =
+    difference % 60;
+
+
+  const minutes =
+    Math.floor(
+      difference / 60
+    ) % 60;
+
+
+  const hours =
+    Math.floor(
+      difference / 3600
+    );
+
+
+  const formatted =
+
+    String(hours)
+      .padStart(2,"0") +
+    ":" +
+
+    String(minutes)
+      .padStart(2,"0") +
+    ":" +
+
+    String(seconds)
+      .padStart(2,"0");
+
+
+  document.getElementById(
+    "visitTimer"
+  ).textContent =
+    formatted;
+
+}
+
+
+/* =====================================================
+   12. واجهة الزيارة الجارية
+===================================================== */
+
+function setRunningUI(){
+
+  document.getElementById(
+    "statusText"
+  ).textContent =
+    "الزيارة جارية الآن";
+
+
+  const badge =
+    document.getElementById(
+      "statusBadge"
+    );
+
+
+  badge.textContent =
+    "🟢 زيارة جارية";
+
+
+  badge.className =
+    "status-badge status-running";
+
+
+  document.getElementById(
+    "startVisitButton"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "completeVisitButton"
+  ).style.display =
+    "inline-flex";
+
+}
+
+
+/* =====================================================
+   13. زر إتمام الزيارة
+===================================================== */
+
+document
+  .getElementById(
+    "completeVisitButton"
+  )
+  .addEventListener(
+    "click",
+    completeVisit
+  );
+
+
+/* =====================================================
+   14. التحقق قبل الإتمام
+===================================================== */
+
+function validateVisit(){
+
+  const condition =
+    document
+      .getElementById("condition")
+      .value;
+
+
+  const notes =
+    document
+      .getElementById("notes")
+      .value
+      .trim();
+
+
+  const recommendations =
+    document
+      .getElementById("recommendations")
+      .value
+      .trim();
+
+
+  if(!condition){
+
+    showWarning(
+      "يرجى تحديد حالة المسن قبل إتمام الزيارة."
+    );
+
+    document
+      .getElementById("condition")
+      .focus();
+
+    return false;
+
+  }
+
+
+  if(
+    !notes &&
+    !recommendations
+  ){
+
+    showWarning(
+      "يرجى كتابة ملاحظات الزيارة أو التوصيات قبل إتمام الزيارة."
+    );
+
+    document
+      .getElementById("notes")
+      .focus();
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
+   15. إتمام الزيارة
+===================================================== */
+
+function completeVisit(){
+
+  if(!visitStarted){
+
+    showWarning(
+      "يجب بدء الزيارة أولاً."
+    );
+
+    return;
+
+  }
+
+
+  if(visitCompleted){
+
+    return;
+
+  }
+
+
+  if(!validateVisit()){
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "هل أنت متأكد من إتمام الزيارة؟ بعد الإتمام سيتم حفظ التقرير وإرساله إلى نظام سند."
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  const report =
+    buildVisitReport();
+
+
+  saveReport(report);
+
+
+  currentVisit.status =
+    "completed";
+
+
+  currentVisit.completedAt =
+    new Date().toISOString();
+
+
+  currentVisit.reportId =
+    report.id;
+
+
+  localStorage.setItem(
+    "sanadCurrentVisit",
+    JSON.stringify(
+      currentVisit
+    )
+  );
+
+
+  visitCompleted = true;
+
+
+  if(timerInterval){
+
+    clearInterval(
+      timerInterval
+    );
+
+  }
+
+
+  setCompletedUI();
+
+
+  showReportPreview(
+    report
+  );
+
+
+  showSuccess(
+    "✅ تم إتمام الزيارة وحفظ التقرير بنجاح. أصبح التقرير متاحاً لنظام الإدارة والمسن والعائلة."
+  );
+
+
+}
+
+
+/* =====================================================
+   16. إنشاء التقرير الكامل
+===================================================== */
+
+function buildVisitReport(){
+
+  return {
 
     id:
       "VISIT-" +
       Date.now(),
 
 
-    /* معلومات الزيارة */
+    visitId:
+      currentVisit.id ||
+      "",
+
+
+    patientId:
+      currentVisit.patientId ||
+      currentVisit.customerId ||
+      "",
+
 
     patientName:
-      document
-        .getElementById("patientName")
-        .textContent,
+      currentVisit.patientName ||
+      "",
+
+
+    patientAddress:
+      currentVisit.address ||
+      "",
+
+
+    familyName:
+      currentVisit.familyName ||
+      "",
+
+
+    familyPhone:
+      currentVisit.familyPhone ||
+      "",
+
 
     visitType:
-      document
-        .getElementById("visitDescription")
-        .textContent,
+      currentVisit.visitType ||
+      "",
+
 
     visitTime:
-      document
-        .getElementById("visitTime")
-        .textContent,
+      currentVisit.visitTime ||
+      "",
+
 
     visitDate:
-      document
-        .getElementById("visitDate")
-        .textContent,
+      currentVisit.date ||
+      "",
 
-
-    /* معلومات الكادر */
 
     staffName:
-      currentVisit.staffName ||
-      "كادر سند",
+      staffName,
+
 
     staffRole:
-      currentVisit.staffRole ||
-      "كادر سند",
+      staffRole,
+
+
+    startedAt:
+      currentVisit.startedAt ||
+      "",
+
+
+    completedAt:
+      new Date().toISOString(),
+
+
+    duration:
+      getVisitDuration(),
 
 
     /* العلامات الحيوية */
 
-    bloodPressure:
-      document
-        .getElementById("bloodPressure")
-        .value,
+    vitals:{
 
-    bloodSugar:
-      document
-        .getElementById("bloodSugar")
-        .value,
+      bloodPressure:
+        getValue("bloodPressure"),
 
-    temperature:
-      document
-        .getElementById("temperature")
-        .value,
+      bloodSugar:
+        getValue("bloodSugar"),
 
-    pulse:
-      document
-        .getElementById("pulse")
-        .value,
+      temperature:
+        getValue("temperature"),
+
+      pulse:
+        getValue("pulse")
+
+    },
 
 
-    /* التقييم */
+    /* التقييم العام */
 
-    stable:
-      document
-        .getElementById("stable")
-        .checked,
+    assessment:{
 
-    appetite:
-      document
-        .getElementById("appetite")
-        .checked,
+      stable:
+        getChecked("stable"),
 
-    sleep:
-      document
-        .getElementById("sleep")
-        .checked,
+      appetite:
+        getChecked("appetite"),
 
-    noNewSymptoms:
-      document
-        .getElementById("noNewSymptoms")
-        .checked,
+      sleep:
+        getChecked("sleep"),
 
-    medicationCommitment:
-      document
-        .getElementById("medicationCommitment")
-        .checked,
+      noNewSymptoms:
+        getChecked("noNewSymptoms"),
 
-    needsFollowup:
-      document
-        .getElementById("needsFollowup")
-        .checked,
+      medicationCommitment:
+        getChecked(
+          "medicationCommitment"
+        ),
+
+      needsFollowup:
+        getChecked(
+          "needsFollowup"
+        )
+
+    },
 
 
-    /* التقرير */
+    /* التقرير العام */
 
     condition:
-      document
-        .getElementById("condition")
-        .value,
+      getValue("condition"),
+
 
     medication:
-      document
-        .getElementById("medication")
-        .value,
+      getValue("medication"),
+
 
     notes:
-      document
-        .getElementById("notes")
-        .value,
+      getValue("notes"),
+
 
     recommendations:
-      document
-        .getElementById("recommendations")
-        .value,
+      getValue(
+        "recommendations"
+      ),
+
+
+    /* الطبيب */
+
+    doctor:{
+
+      diagnosis:
+        getValue("diagnosis"),
+
+      severity:
+        getValue("severity"),
+
+      medicalPlan:
+        getValue("medicalPlan")
+
+    },
+
+
+    /* التمريض */
+
+    nursing:{
+
+      medicationGiven:
+        getValue(
+          "medicationGiven"
+        ),
+
+      personalCare:
+        getValue(
+          "personalCare"
+        ),
+
+      notes:
+        getValue(
+          "nursingNotes"
+        )
+
+    },
+
+
+    /* التغذية */
+
+    nutrition:{
+
+      appetite:
+        getValue(
+          "nutritionAppetite"
+        ),
+
+      weight:
+        getValue(
+          "weight"
+        ),
+
+      plan:
+        getValue(
+          "nutritionPlan"
+        )
+
+    },
+
+
+    /* العلاج الطبيعي */
+
+    physiotherapy:{
+
+      mobility:
+        getValue(
+          "mobility"
+        ),
+
+      exercisesDone:
+        getValue(
+          "exercisesDone"
+        ),
+
+      notes:
+        getValue(
+          "physioNotes"
+        )
+
+    },
+
+
+    /* الدعم النفسي */
+
+    psychology:{
+
+      state:
+        getValue(
+          "psychologicalState"
+        ),
+
+      communication:
+        getValue(
+          "communication"
+        ),
+
+      notes:
+        getValue(
+          "psychologyNotes"
+        )
+
+    },
+
+
+    /* الترفيه */
+
+    entertainment:{
+
+      activityType:
+        getValue(
+          "activityType"
+        ),
+
+      participation:
+        getValue(
+          "activityParticipation"
+        ),
+
+      notes:
+        getValue(
+          "activityNotes"
+        )
+
+    },
 
 
     /* التحاليل */
 
-    labDate:
-      document
-        .getElementById("labDate")
-        .value,
+    laboratory:{
 
-    labTests:
-      document
-        .getElementById("labTests")
-        .value,
+      date:
+        getValue(
+          "labDate"
+        ),
+
+      tests:
+        getValue(
+          "labTests"
+        )
+
+    },
 
 
-    /* وقت الحفظ */
-
-    savedAt:
-      new Date().toLocaleString("ar-IQ"),
+    /* حالة التقرير */
 
     status:
-      "محفوظ"
+      "completed",
+
+
+    delivery:{
+
+      administration:
+        "pending",
+
+      patient:
+        "pending",
+
+      family:
+        "pending"
+
+    },
+
+
+    savedAt:
+      new Date().toISOString(),
+
+
+    savedAtArabic:
+      new Date().toLocaleString(
+        "ar-IQ"
+      )
 
   };
 
+}
 
-  /* =====================================
-     حفظ آخر تقرير
-  ===================================== */
+
+/* =====================================================
+   17. الحصول على قيمة
+===================================================== */
+
+function getValue(id){
+
+  const element =
+    document.getElementById(id);
+
+
+  if(!element){
+
+    return "";
+
+  }
+
+
+  return element.value || "";
+
+}
+
+
+/* =====================================================
+   18. الحصول على checkbox
+===================================================== */
+
+function getChecked(id){
+
+  const element =
+    document.getElementById(id);
+
+
+  if(!element){
+
+    return false;
+
+  }
+
+
+  return element.checked;
+
+}
+
+
+/* =====================================================
+   19. مدة الزيارة
+===================================================== */
+
+function getVisitDuration(){
+
+  if(!visitStartTime){
+
+    return "00:00:00";
+
+  }
+
+
+  const difference =
+    Math.floor(
+      (
+        new Date() -
+        visitStartTime
+      ) / 1000
+    );
+
+
+  const seconds =
+    difference % 60;
+
+
+  const minutes =
+    Math.floor(
+      difference / 60
+    ) % 60;
+
+
+  const hours =
+    Math.floor(
+      difference / 3600
+    );
+
+
+  return (
+
+    String(hours)
+      .padStart(2,"0") +
+
+    ":" +
+
+    String(minutes)
+      .padStart(2,"0") +
+
+    ":" +
+
+    String(seconds)
+      .padStart(2,"0")
+
+  );
+
+}
+
+
+/* =====================================================
+   20. حفظ التقرير
+===================================================== */
+
+function saveReport(report){
+
+  /*
+    آخر تقرير
+  */
 
   localStorage.setItem(
     "sanadLastVisitReport",
-    JSON.stringify(report)
+    JSON.stringify(
+      report
+    )
   );
 
 
-  /* =====================================
-     حفظ كل التقارير
-  ===================================== */
+  /*
+    جميع التقارير
+  */
 
   let reports = [];
 
@@ -1370,20 +2990,27 @@ function saveVisit() {
     );
 
 
-  if (oldReports) {
+  if(oldReports){
 
-    try {
+    try{
 
       reports =
-        JSON.parse(oldReports);
+        JSON.parse(
+          oldReports
+        );
 
-      if (!Array.isArray(reports)) {
+
+      if(
+        !Array.isArray(
+          reports
+        )
+      ){
 
         reports = [];
 
       }
 
-    } catch (error) {
+    }catch(error){
 
       reports = [];
 
@@ -1392,28 +3019,150 @@ function saveVisit() {
   }
 
 
-  reports.push(report);
+  reports.push(
+    report
+  );
 
 
   localStorage.setItem(
     "sanadVisitReports",
-    JSON.stringify(reports)
+    JSON.stringify(
+      reports
+    )
   );
 
 
-  /* =====================================
-     تعليم الزيارة بأنها محفوظة
-  ===================================== */
+  /*
+    إشارة إلى الإدارة
+  */
 
   localStorage.setItem(
-    "sanadVisitSaved",
+    "sanadNewReportForAdmin",
     "true"
   );
 
 
-  /* =====================================
-     رسالة النجاح
-  ===================================== */
+  /*
+    إشارة إلى المسن
+  */
+
+  localStorage.setItem(
+    "sanadNewReportForPatient",
+    "true"
+  );
+
+
+  /*
+    إشارة إلى العائلة
+  */
+
+  localStorage.setItem(
+    "sanadNewReportForFamily",
+    "true"
+  );
+
+
+  console.log(
+    "SANAD COMPLETED VISIT REPORT",
+    report
+  );
+
+}
+
+
+/* =====================================================
+   21. واجهة الإتمام
+===================================================== */
+
+function setCompletedUI(){
+
+  document.getElementById(
+    "statusText"
+  ).textContent =
+    "تم إتمام الزيارة";
+
+
+  const badge =
+    document.getElementById(
+      "statusBadge"
+    );
+
+
+  badge.textContent =
+    "✅ مكتملة";
+
+
+  badge.className =
+    "status-badge status-completed";
+
+
+  document.getElementById(
+    "startVisitButton"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "completeVisitButton"
+  ).style.display =
+    "none";
+
+
+  document
+    .querySelectorAll(
+      "input, textarea, select"
+    )
+    .forEach(
+      function(element){
+
+        element.disabled =
+          true;
+
+      }
+    );
+
+}
+
+
+/* =====================================================
+   22. رسالة تحذير
+===================================================== */
+
+function showWarning(message){
+
+  const warning =
+    document.getElementById(
+      "warningMessage"
+    );
+
+
+  warning.textContent =
+    "⚠️ " +
+    message;
+
+
+  warning.style.display =
+    "block";
+
+
+  warning.scrollIntoView({
+
+    behavior:
+      "smooth",
+
+    block:
+      "center"
+
+  });
+
+}
+
+
+/* =====================================================
+   23. رسالة نجاح
+===================================================== */
+
+function showSuccess(message){
 
   const success =
     document.getElementById(
@@ -1421,51 +3170,253 @@ function saveVisit() {
     );
 
 
-  success.style.display = "block";
-
-
   success.textContent =
-    "✅ تم حفظ الزيارة والتقرير بنجاح";
+    message;
+
+
+  success.style.display =
+    "block";
 
 
   success.scrollIntoView({
 
-    behavior: "smooth",
+    behavior:
+      "smooth",
 
-    block: "center"
+    block:
+      "center"
 
   });
 
+}
 
-  /* =====================================
-     تعطيل الزر مؤقتاً
-  ===================================== */
 
-  const button =
+/* =====================================================
+   24. عرض ملخص التقرير
+===================================================== */
+
+function showReportPreview(report){
+
+  const preview =
     document.getElementById(
-      "saveVisitButton"
+      "reportPreview"
     );
 
 
-  button.textContent =
-    "✅ تم الحفظ";
+  const content =
+    document.getElementById(
+      "reportPreviewContent"
+    );
 
 
-  button.style.background =
-    "#16815f";
+  content.innerHTML = `
+
+    <div class="report-line">
+
+      👴 <strong>المسن:</strong>
+
+      ${escapeHTML(
+        report.patientName
+      )}
+
+    </div>
 
 
-  /* =====================================
-     إظهار البيانات في Console
-     للمراجعة البرمجية
-  ===================================== */
+    <div class="report-line">
 
-  console.log(
-    "SANAD VISIT REPORT",
-    report
-  );
+      👨‍⚕️ <strong>الكادر:</strong>
+
+      ${escapeHTML(
+        report.staffName
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      🩺 <strong>نوع الزيارة:</strong>
+
+      ${escapeHTML(
+        report.visitType
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      ❤️ <strong>ضغط الدم:</strong>
+
+      ${escapeHTML(
+        report.vitals.bloodPressure ||
+        "غير مسجل"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      🩸 <strong>سكر الدم:</strong>
+
+      ${escapeHTML(
+        report.vitals.bloodSugar ||
+        "غير مسجل"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      🌡️ <strong>الحرارة:</strong>
+
+      ${escapeHTML(
+        report.vitals.temperature ||
+        "غير مسجل"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      ❤️ <strong>النبض:</strong>
+
+      ${escapeHTML(
+        report.vitals.pulse ||
+        "غير مسجل"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      📋 <strong>الحالة:</strong>
+
+      ${escapeHTML(
+        report.condition ||
+        "غير محددة"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      📝 <strong>الملاحظات:</strong>
+
+      ${escapeHTML(
+        report.notes ||
+        "لا توجد ملاحظات"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      💡 <strong>التوصيات:</strong>
+
+      ${escapeHTML(
+        report.recommendations ||
+        "لا توجد توصيات"
+      )}
+
+    </div>
+
+
+    <div class="report-line">
+
+      📤 <strong>حالة الإرسال:</strong>
+
+      الإدارة: بانتظار المعالجة —
+
+      المسن: بانتظار المعالجة —
+
+      العائلة: بانتظار المعالجة
+
+    </div>
+
+  `;
+
+
+  preview.style.display =
+    "block";
 
 }
+
+
+/* =====================================================
+   25. حماية النص
+===================================================== */
+
+function escapeHTML(value){
+
+  if(
+    value === null ||
+    value === undefined
+  ){
+
+    return "";
+
+  }
+
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   26. منع مغادرة الصفحة أثناء الزيارة
+===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function(event){
+
+    if(
+      visitStarted &&
+      !visitCompleted
+    ){
+
+      event.preventDefault();
+
+      event.returnValue =
+        "";
+
+    }
+
+  }
+);
 
 </script>
 
@@ -1473,4 +3424,3 @@ function saveVisit() {
 </body>
 
 </html>
-```
