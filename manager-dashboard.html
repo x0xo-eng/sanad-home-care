@@ -577,10 +577,6 @@ flex-direction:column;
 
 
 
-<!-- =========================================
-     المشتركين الجدد
-========================================= -->
-
 <section class="section">
 
 <div class="section-title">
@@ -607,10 +603,6 @@ flex-direction:column;
 
 
 
-<!-- =========================================
-     جداول الخدمات
-========================================= -->
-
 <section class="section">
 
 <div class="section-title">
@@ -630,7 +622,9 @@ flex-direction:column;
 
 
 
-<!-- الممرض -->
+<!-- =========================
+     الممرض
+========================= -->
 
 <div class="schedule-card">
 
@@ -653,6 +647,7 @@ flex-direction:column;
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -710,11 +705,17 @@ required
 اختر الممرض
 </option>
 
-<option value="ممرض سند 1">
+<option
+value="ST-006"
+data-staff-name="ممرض سند 1"
+>
 ممرض سند 1
 </option>
 
-<option value="ممرض سند 2">
+<option
+value="ST-012"
+data-staff-name="ممرض سند 2"
+>
 ممرض سند 2
 </option>
 
@@ -731,6 +732,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="nurseAppointments">
@@ -740,7 +742,9 @@ id="nurseAppointments">
 
 
 
-<!-- الطبيب المقيم -->
+<!-- =========================
+     الطبيب المقيم
+========================= -->
 
 <div class="schedule-card">
 
@@ -763,6 +767,7 @@ id="nurseAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -820,11 +825,17 @@ required
 اختر الطبيب
 </option>
 
-<option value="د. أحمد">
+<option
+value="ST-005"
+data-staff-name="د. أحمد"
+>
 د. أحمد
 </option>
 
-<option value="طبيب مقيم 2">
+<option
+value="ST-013"
+data-staff-name="طبيب مقيم 2"
+>
 طبيب مقيم 2
 </option>
 
@@ -841,6 +852,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="residentAppointments">
@@ -850,7 +862,9 @@ id="residentAppointments">
 
 
 
-<!-- الطبيب الاختصاص -->
+<!-- =========================
+     الطبيب الاختصاص
+========================= -->
 
 <div class="schedule-card">
 
@@ -873,6 +887,7 @@ id="residentAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -930,11 +945,17 @@ required
 اختر الطبيب
 </option>
 
-<option value="د. محمد">
+<option
+value="ST-004"
+data-staff-name="د. محمد"
+>
 د. محمد
 </option>
 
-<option value="طبيب اختصاص 2">
+<option
+value="ST-014"
+data-staff-name="طبيب اختصاص 2"
+>
 طبيب اختصاص 2
 </option>
 
@@ -951,6 +972,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="specialistAppointments">
@@ -960,7 +982,9 @@ id="specialistAppointments">
 
 
 
-<!-- الترفيه -->
+<!-- =========================
+     الترفيه
+========================= -->
 
 <div class="schedule-card">
 
@@ -983,6 +1007,7 @@ id="specialistAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1040,11 +1065,17 @@ required
 اختر المرافق
 </option>
 
-<option value="مرافق سند">
+<option
+value="ST-010"
+data-staff-name="مرافق سند"
+>
 مرافق سند
 </option>
 
-<option value="مرافق سند 2">
+<option
+value="ST-015"
+data-staff-name="مرافق سند 2"
+>
 مرافق سند 2
 </option>
 
@@ -1061,6 +1092,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="entertainmentAppointments">
@@ -1070,7 +1102,9 @@ id="entertainmentAppointments">
 
 
 
-<!-- الكوافير -->
+<!-- =========================
+     الكوافير
+========================= -->
 
 <div class="schedule-card">
 
@@ -1093,6 +1127,7 @@ id="entertainmentAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1150,11 +1185,17 @@ required
 اختر الكوافير
 </option>
 
-<option value="كوافير سند">
+<option
+value="ST-011"
+data-staff-name="كوافير سند"
+>
 كوافير سند
 </option>
 
-<option value="كوافير سند 2">
+<option
+value="ST-016"
+data-staff-name="كوافير سند 2"
+>
 كوافير سند 2
 </option>
 
@@ -1171,6 +1212,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="hairdresserAppointments">
@@ -1180,7 +1222,9 @@ id="hairdresserAppointments">
 
 
 
-<!-- التغذية -->
+<!-- =========================
+     التغذية
+========================= -->
 
 <div class="schedule-card">
 
@@ -1203,6 +1247,7 @@ id="hairdresserAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1260,11 +1305,17 @@ required
 اختر الأخصائي
 </option>
 
-<option value="أخصائي التغذية">
+<option
+value="ST-007"
+data-staff-name="أخصائي التغذية"
+>
 أخصائي التغذية
 </option>
 
-<option value="أخصائي التغذية 2">
+<option
+value="ST-017"
+data-staff-name="أخصائي التغذية 2"
+>
 أخصائي التغذية 2
 </option>
 
@@ -1281,6 +1332,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="nutritionAppointments">
@@ -1290,7 +1342,9 @@ id="nutritionAppointments">
 
 
 
-<!-- العلاج الطبيعي -->
+<!-- =========================
+     العلاج الطبيعي
+========================= -->
 
 <div class="schedule-card">
 
@@ -1313,6 +1367,7 @@ id="nutritionAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1370,11 +1425,17 @@ required
 اختر المعالج
 </option>
 
-<option value="معالج سند">
+<option
+value="ST-008"
+data-staff-name="معالج سند"
+>
 معالج سند
 </option>
 
-<option value="معالج سند 2">
+<option
+value="ST-018"
+data-staff-name="معالج سند 2"
+>
 معالج سند 2
 </option>
 
@@ -1391,6 +1452,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="physioAppointments">
@@ -1400,7 +1462,9 @@ id="physioAppointments">
 
 
 
-<!-- النفسي -->
+<!-- =========================
+     النفسي
+========================= -->
 
 <div class="schedule-card">
 
@@ -1423,6 +1487,7 @@ id="physioAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1480,11 +1545,17 @@ required
 اختر الأخصائي
 </option>
 
-<option value="الأخصائي النفسي">
+<option
+value="ST-009"
+data-staff-name="الأخصائي النفسي"
+>
 الأخصائي النفسي
 </option>
 
-<option value="الأخصائي النفسي 2">
+<option
+value="ST-019"
+data-staff-name="الأخصائي النفسي 2"
+>
 الأخصائي النفسي 2
 </option>
 
@@ -1501,6 +1572,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="psychologistAppointments">
@@ -1510,7 +1582,9 @@ id="psychologistAppointments">
 
 
 
-<!-- المعين -->
+<!-- =========================
+     المعين
+========================= -->
 
 <div class="schedule-card">
 
@@ -1533,6 +1607,7 @@ id="psychologistAppointments">
 </div>
 
 </div>
+
 
 <form
 class="schedule-form"
@@ -1590,11 +1665,17 @@ required
 اختر المعين
 </option>
 
-<option value="معين سند 1">
+<option
+value="ST-020"
+data-staff-name="معين سند 1"
+>
 معين سند 1
 </option>
 
-<option value="معين سند 2">
+<option
+value="ST-021"
+data-staff-name="معين سند 2"
+>
 معين سند 2
 </option>
 
@@ -1611,6 +1692,7 @@ required
 
 </form>
 
+
 <div
 class="appointment-list"
 id="assistantAppointments">
@@ -1624,10 +1706,6 @@ id="assistantAppointments">
 </section>
 
 
-
-<!-- =========================================
-     الملخص العام
-========================================= -->
 
 <section class="section">
 
@@ -1697,14 +1775,19 @@ onclick="logoutManager(event)"
 ===================================================== */
 
 const loggedStaffRaw =
-localStorage.getItem("sanadLoggedInStaff");
+localStorage.getItem(
+"sanadLoggedInStaff"
+);
 
 
 if(!loggedStaffRaw){
 
-alert("يرجى تسجيل الدخول أولاً.");
+alert(
+"يرجى تسجيل الدخول أولاً."
+);
 
-window.location.href="staff-login.html";
+window.location.href=
+"staff-login.html";
 
 }
 
@@ -1715,7 +1798,9 @@ let loggedStaff=null;
 try{
 
 loggedStaff=
-JSON.parse(loggedStaffRaw);
+JSON.parse(
+loggedStaffRaw
+);
 
 }catch(error){
 
@@ -1834,23 +1919,32 @@ appointments=[];
 
 const serviceNames={
 
-nurse:"الممرض الصحي",
+nurse:
+"الممرض الصحي",
 
-resident:"الطبيب المقيم",
+resident:
+"الطبيب المقيم",
 
-specialist:"الطبيب الاختصاص",
+specialist:
+"الطبيب الاختصاص",
 
-entertainment:"الترفيه ورفيق سند",
+entertainment:
+"الترفيه ورفيق سند",
 
-hairdresser:"الكوافير",
+hairdresser:
+"الكوافير",
 
-nutrition:"أخصائي التغذية",
+nutrition:
+"أخصائي التغذية",
 
-physio:"العلاج الطبيعي والتمارين",
+physio:
+"العلاج الطبيعي والتمارين",
 
-psychologist:"الأخصائي النفسي",
+psychologist:
+"الأخصائي النفسي",
 
-assistant:"المعين الخاص"
+assistant:
+"المعين الخاص"
 
 };
 
@@ -1936,12 +2030,14 @@ customer.package
 
 
 /*
-   المعين الخاص اختياري.
+   المعين الخاص اختياري
 */
 
 if(customer.assistantRequested){
 
-services.push("assistant");
+services.push(
+"assistant"
+);
 
 }
 
@@ -1956,7 +2052,9 @@ return services;
    7. عدد الخدمات المطلوبة
 ===================================================== */
 
-function getRequiredServiceCount(customer){
+function getRequiredServiceCount(
+customer
+){
 
 return getRequiredServices(
 customer
@@ -1973,7 +2071,9 @@ customer
 function formatPrice(price){
 
 const numericPrice=
-Number(price || 0);
+Number(
+price || 0
+);
 
 
 if(!numericPrice){
@@ -2041,7 +2141,8 @@ document.querySelectorAll(
 );
 
 
-selects.forEach(function(select){
+selects.forEach(
+function(select){
 
 const currentValue=
 select.value;
@@ -2095,16 +2196,15 @@ option
 });
 
 
-/*
-   إعادة الاختيار إذا كان موجوداً
-*/
-
 if(
-customers.some(function(item){
+customers.some(
+function(item){
 
-return item.id===currentValue;
+return item.id===
+currentValue;
 
-})
+}
+)
 ){
 
 select.value=
@@ -2122,7 +2222,9 @@ currentValue;
    11. تحديد الخدمة من الفورم
 ===================================================== */
 
-function getServiceTypeFromForm(form){
+function getServiceTypeFromForm(
+form
+){
 
 if(!form){
 
@@ -2184,10 +2286,6 @@ return;
 }
 
 
-/*
-   اختيار المشترك في كل الجداول
-*/
-
 document
 .querySelectorAll(
 ".customer-select"
@@ -2208,13 +2306,8 @@ bubbles:true
 )
 );
 
-}
-);
+});
 
-
-/*
-   الانتقال إلى الجداول
-*/
 
 const scheduleGrid=
 document.querySelector(
@@ -2256,7 +2349,6 @@ customer.name+
 document.addEventListener(
 "change",
 function(event){
-
 
 if(
 !event.target.classList.contains(
@@ -2391,7 +2483,7 @@ form.querySelector(
 );
 
 
-const staffName=
+const staffId=
 staffSelect
 ?
 staffSelect.value
@@ -2399,9 +2491,31 @@ staffSelect.value
 "";
 
 
-/*
+const selectedStaffOption=
+staffSelect
+?
+staffSelect.options[
+staffSelect.selectedIndex
+]
+:
+null;
+
+
+const staffName=
+selectedStaffOption
+?
+(
+selectedStaffOption.dataset.staffName ||
+selectedStaffOption.textContent.trim()
+)
+:
+"";
+
+
+
+/* =====================================================
    البحث عن المشترك
-*/
+===================================================== */
 
 const customer=
 customers.find(
@@ -2427,9 +2541,9 @@ return;
 
 
 
-/*
+/* =====================================================
    التحقق من الخدمة
-*/
+===================================================== */
 
 if(
 !customerCanUseService(
@@ -2443,11 +2557,9 @@ showMessage(
 serviceType==="assistant"
 
 ?
-
 "هذا المشترك لم يطلب خدمة المعين الخاص."
 
 :
-
 "هذه الخدمة غير موجودة ضمن باقة المشترك.",
 
 "error"
@@ -2460,14 +2572,14 @@ return;
 
 
 
-/*
+/* =====================================================
    التحقق من البيانات
-*/
+===================================================== */
 
 if(
 !date ||
 !time ||
-!staffName
+!staffId
 ){
 
 showMessage(
@@ -2481,19 +2593,22 @@ return;
 
 
 
-/*
-   منع حجز الكادر نفسه
-   في نفس الوقت
-*/
+/* =====================================================
+   منع حجز نفس الكادر في نفس الوقت
+===================================================== */
 
 const staffConflict=
 appointments.some(
 function(item){
 
+/*
+   نستخدم staffId وليس اسم الكادر.
+*/
+
 return (
 
-item.staff===
-staffName &&
+item.staffId===
+staffId &&
 
 item.date===
 date &&
@@ -2525,9 +2640,9 @@ return;
 
 
 
-/*
+/* =====================================================
    منع تكرار موعد نفس الخدمة
-*/
+===================================================== */
 
 const duplicate=
 appointments.some(
@@ -2547,8 +2662,8 @@ date &&
 item.time===
 time &&
 
-item.staff===
-staffName &&
+item.staffId===
+staffId &&
 
 item.status!=="cancelled"
 
@@ -2577,6 +2692,11 @@ return;
 
 const appointment={
 
+
+/*
+   معرف الموعد
+*/
+
 id:
 "SCH-"+
 Date.now()+
@@ -2586,37 +2706,40 @@ Math.random()
 .substring(2,8),
 
 
+
+/*
+   بيانات المشترك
+*/
+
 customerId:
 customer.id,
-
 
 customerName:
 customer.name,
 
-
 familyName:
 customer.familyName || "",
-
 
 familyPhone:
 customer.familyPhone || "",
 
-
 customerPhone:
 customer.phone || "",
-
 
 address:
 customer.address || "",
 
 
+
+/*
+   بيانات الباقة
+*/
+
 package:
 customer.package || "",
 
-
 packageName:
 customer.packageName || "",
-
 
 packagePrice:
 Number(
@@ -2624,9 +2747,13 @@ customer.packagePrice || 0
 ),
 
 
+
+/*
+   بيانات الخدمة
+*/
+
 service:
 serviceType,
-
 
 serviceName:
 serviceNames[
@@ -2634,25 +2761,60 @@ serviceType
 ],
 
 
+
+/*
+   التاريخ والوقت
+*/
+
 date:
 date,
-
 
 time:
 time,
 
 
+
+/* =====================================================
+   هوية الكادر
+===================================================== */
+
+/*
+   هذا هو أهم تعديل.
+*/
+
+staffId:
+staffId,
+
+
+/*
+   اسم الكادر للعرض فقط.
+*/
+
 staff:
 staffName,
 
+
+/*
+   نوع الخدمة / الكادر.
+*/
 
 staffType:
 serviceType,
 
 
+
+/*
+   حالة الموعد
+*/
+
 status:
 "scheduled",
 
+
+
+/*
+   من أنشأ الموعد
+*/
 
 createdBy:
 loggedStaff
@@ -2662,16 +2824,43 @@ loggedStaff.name
 "المدير",
 
 
+createdByStaffId:
+loggedStaff
+?
+(
+loggedStaff.staffId ||
+loggedStaff.employeeId ||
+""
+)
+:
+"",
+
+
+/*
+   وقت إنشاء الموعد
+*/
+
 createdAt:
-new Date().toISOString()
+new Date().toISOString(),
+
+
+/*
+   حالة الزيارة
+*/
+
+visitStartedAt:
+null,
+
+visitEndedAt:
+null
 
 };
 
 
 
-/*
+/* =====================================================
    إضافة الموعد
-*/
+===================================================== */
 
 appointments.push(
 appointment
@@ -2689,9 +2878,10 @@ appointments
 );
 
 
-/*
-   إشعار باقي اللوحات أن البيانات تغيرت
-*/
+
+/* =====================================================
+   إشعار باقي اللوحات
+===================================================== */
 
 localStorage.setItem(
 
@@ -2715,9 +2905,10 @@ customer.lastScheduledService=
 serviceType;
 
 
-/*
-   حساب الخدمات التي تم تنظيمها
-*/
+
+/* =====================================================
+   حساب الخدمات المنظمة
+===================================================== */
 
 const requiredServices=
 getRequiredServices(
@@ -2758,9 +2949,10 @@ return item.service;
 ];
 
 
-/*
+
+/* =====================================================
    هل اكتملت كل الخدمات؟
-*/
+===================================================== */
 
 const completedScheduling=
 requiredServices.length>0 &&
@@ -2802,7 +2994,7 @@ customers
 
 
 /* =====================================================
-   تحديث الصفحة
+   تحديث الواجهة
 ===================================================== */
 
 form.reset();
@@ -2819,12 +3011,16 @@ updateStats();
 showMessage(
 
 "✅ تم حفظ موعد "+
-serviceNames[serviceType]+
+serviceNames[
+serviceType
+]+
 " للمشترك "+
-
 customer.name+
-
-".",
+" للكادر "+
+staffName+
+" ("+
+staffId+
+")",
 
 "success"
 
@@ -2881,7 +3077,6 @@ container.innerHTML=
 return;
 
 }
-
 
 
 pending.forEach(
@@ -2969,9 +3164,6 @@ schedulingStatus=
 }
 
 
-/*
-   بناء قائمة الخدمات
-*/
 
 let servicesHtml="";
 
@@ -2981,7 +3173,9 @@ if(requiredServices.length===0){
 servicesHtml=
 `
 <div class="service-item">
+
 لا توجد خدمات محددة.
+
 </div>
 `;
 
@@ -2999,7 +3193,11 @@ service
 servicesHtml+=
 `
 <div class="service-item ${
-done ? "done" : ""
+done
+?
+"done"
+:
+""
 }">
 
 ${
@@ -3030,10 +3228,6 @@ done
 }
 
 
-
-/*
-   البطاقة
-*/
 
 div.innerHTML=
 `
@@ -3157,6 +3351,7 @@ ${servicesHtml}
 
 <br>
 
+
 <strong>
 📊 التقدم:
 </strong>
@@ -3270,7 +3465,9 @@ serviceAppointments.length===0
 container.innerHTML=
 `
 <div class="empty">
+
 لا توجد مواعيد.
+
 </div>
 `;
 
@@ -3346,6 +3543,13 @@ item.packagePrice
 👤 الكادر:
 ${escapeHtml(
 item.staff
+)}
+
+<br>
+
+🆔 معرف الكادر:
+${escapeHtml(
+item.staffId || "غير محدد"
 )}
 
 <br>
@@ -3485,21 +3689,21 @@ item.time
 
 <div class="appointment-info">
 
-🆔
+🆔 المشترك:
 ${escapeHtml(
 item.customerId
 )}
 
 <br>
 
-📦
+📦 الباقة:
 ${escapeHtml(
 item.packageName
 )}
 
 <br>
 
-💰
+💰 السعر:
 ${formatPrice(
 item.packagePrice
 )}
@@ -3513,7 +3717,14 @@ item.staff
 
 <br>
 
-🟢
+🆔 معرف الكادر:
+${escapeHtml(
+item.staffId || "غير محدد"
+)}
+
+<br>
+
+🟢 الحالة:
 ${getAppointmentStatus(
 item.status
 )}
@@ -3569,6 +3780,7 @@ customer.status===
 document.getElementById(
 "appointmentsCount"
 ).textContent=
+
 appointments.filter(
 function(item){
 
@@ -3707,6 +3919,21 @@ localStorage.removeItem(
 
 
 localStorage.removeItem(
+"sanadStaffId"
+);
+
+
+localStorage.removeItem(
+"sanadStaffName"
+);
+
+
+localStorage.removeItem(
+"sanadStaffRole"
+);
+
+
+localStorage.removeItem(
 "sanadCurrentVisit"
 );
 
@@ -3760,18 +3987,13 @@ value ?? ""
 
 
 /* =====================================================
-   23. تحديث تلقائي
+   23. التحديث التلقائي
 ===================================================== */
-
-/*
-   إذا الاستقبال أضاف مشترك جديد
-   والصفحة مفتوحة عند المدير،
-   المدير يشوفه بدون إعادة تحميل.
-*/
 
 window.addEventListener(
 "storage",
 function(event){
+
 
 if(
 event.key===
