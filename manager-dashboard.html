@@ -4,11 +4,16 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>لوحة مدير الشركة | سند</title>
 
 <link rel="stylesheet" href="style.css">
+
+<!-- قاعدة بيانات الكادر -->
+<script src="staff-database.js"></script>
 
 <style>
 
@@ -425,6 +430,15 @@ font-size:13px;
 font-weight:800;
 }
 
+.staff-empty{
+padding:10px;
+border-radius:10px;
+background:#fff7e6;
+color:#9a6b16;
+font-size:11px;
+text-align:center;
+}
+
 @media(max-width:1050px){
 
 .stats{
@@ -472,7 +486,9 @@ flex-direction:column;
 
 </head>
 
+
 <body>
+
 
 <header class="header">
 
@@ -483,8 +499,11 @@ flex-direction:column;
 <nav class="nav">
 
 <a href="index.html">الرئيسية</a>
+
 <a href="services.html">خدماتنا</a>
+
 <a href="how.html">كيف يعمل سند؟</a>
+
 <a href="about.html">عن سند</a>
 
 </nav>
@@ -492,8 +511,13 @@ flex-direction:column;
 </header>
 
 
+
 <main class="dashboard">
 
+
+<!-- =====================================================
+     الترحيب
+===================================================== -->
 
 <section class="welcome">
 
@@ -520,6 +544,11 @@ flex-direction:column;
 </section>
 
 
+
+<!-- =====================================================
+     الإحصائيات
+===================================================== -->
+
 <section class="stats">
 
 <div class="stat">
@@ -528,7 +557,9 @@ flex-direction:column;
 👥 إجمالي المشتركين
 </span>
 
-<div class="stat-number" id="customersCount">
+<div
+class="stat-number"
+id="customersCount">
 0
 </div>
 
@@ -541,7 +572,9 @@ flex-direction:column;
 ⏳ بانتظار ترتيب الموعد
 </span>
 
-<div class="stat-number" id="pendingCount">
+<div
+class="stat-number"
+id="pendingCount">
 0
 </div>
 
@@ -554,7 +587,9 @@ flex-direction:column;
 📅 المواعيد المنظمة
 </span>
 
-<div class="stat-number" id="appointmentsCount">
+<div
+class="stat-number"
+id="appointmentsCount">
 0
 </div>
 
@@ -567,7 +602,9 @@ flex-direction:column;
 🟢 زيارات اليوم
 </span>
 
-<div class="stat-number" id="todayCount">
+<div
+class="stat-number"
+id="todayCount">
 0
 </div>
 
@@ -576,6 +613,10 @@ flex-direction:column;
 </section>
 
 
+
+<!-- =====================================================
+     المشتركين
+===================================================== -->
 
 <section class="section">
 
@@ -603,6 +644,10 @@ flex-direction:column;
 
 
 
+<!-- =====================================================
+     جداول الخدمات
+===================================================== -->
+
 <section class="section">
 
 <div class="section-title">
@@ -622,9 +667,9 @@ flex-direction:column;
 
 
 
-<!-- =========================
+<!-- =====================================================
      الممرض
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -637,7 +682,7 @@ flex-direction:column;
 <div>
 
 <h3>
-جدول الممرضين
+جدول الممرض الصحي
 </h3>
 
 <p>
@@ -658,7 +703,10 @@ onsubmit="saveAppointment(event,'nurse')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -697,26 +745,15 @@ required
 
 <label class="full">
 
-الممرض
+الممرض الصحي
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الممرض
-</option>
-
-<option
-value="ST-006"
-data-staff-name="ممرض سند 1"
->
-ممرض سند 1
-</option>
-
-<option
-value="ST-012"
-data-staff-name="ممرض سند 2"
->
-ممرض سند 2
 </option>
 
 </select>
@@ -724,7 +761,9 @@ data-staff-name="ممرض سند 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد الممرض
 
@@ -742,9 +781,9 @@ id="nurseAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      الطبيب المقيم
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -778,7 +817,10 @@ onsubmit="saveAppointment(event,'resident')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -819,24 +861,13 @@ required
 
 الطبيب المقيم
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الطبيب
-</option>
-
-<option
-value="ST-005"
-data-staff-name="د. أحمد"
->
-د. أحمد
-</option>
-
-<option
-value="ST-013"
-data-staff-name="طبيب مقيم 2"
->
-طبيب مقيم 2
 </option>
 
 </select>
@@ -844,7 +875,9 @@ data-staff-name="طبيب مقيم 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد الطبيب المقيم
 
@@ -862,9 +895,9 @@ id="residentAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      الطبيب الاختصاص
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -898,7 +931,10 @@ onsubmit="saveAppointment(event,'specialist')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -939,24 +975,13 @@ required
 
 الطبيب الاختصاص
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الطبيب
-</option>
-
-<option
-value="ST-004"
-data-staff-name="د. محمد"
->
-د. محمد
-</option>
-
-<option
-value="ST-014"
-data-staff-name="طبيب اختصاص 2"
->
-طبيب اختصاص 2
 </option>
 
 </select>
@@ -964,7 +989,9 @@ data-staff-name="طبيب اختصاص 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد الطبيب الاختصاص
 
@@ -982,9 +1009,9 @@ id="specialistAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      الترفيه
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1018,7 +1045,10 @@ onsubmit="saveAppointment(event,'entertainment')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1057,26 +1087,15 @@ required
 
 <label class="full">
 
-المرافق
+أخصائي الترفيه
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
-اختر المرافق
-</option>
-
-<option
-value="ST-010"
-data-staff-name="مرافق سند"
->
-مرافق سند
-</option>
-
-<option
-value="ST-015"
-data-staff-name="مرافق سند 2"
->
-مرافق سند 2
+اختر الأخصائي
 </option>
 
 </select>
@@ -1084,7 +1103,9 @@ data-staff-name="مرافق سند 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد الترفيه
 
@@ -1102,9 +1123,9 @@ id="entertainmentAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      الكوافير
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1138,7 +1159,10 @@ onsubmit="saveAppointment(event,'hairdresser')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1179,24 +1203,13 @@ required
 
 الكوافير
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الكوافير
-</option>
-
-<option
-value="ST-011"
-data-staff-name="كوافير سند"
->
-كوافير سند
-</option>
-
-<option
-value="ST-016"
-data-staff-name="كوافير سند 2"
->
-كوافير سند 2
 </option>
 
 </select>
@@ -1204,7 +1217,9 @@ data-staff-name="كوافير سند 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد الكوافير
 
@@ -1222,9 +1237,9 @@ id="hairdresserAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      التغذية
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1258,7 +1273,10 @@ onsubmit="saveAppointment(event,'nutrition')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1299,24 +1317,13 @@ required
 
 أخصائي التغذية
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الأخصائي
-</option>
-
-<option
-value="ST-007"
-data-staff-name="أخصائي التغذية"
->
-أخصائي التغذية
-</option>
-
-<option
-value="ST-017"
-data-staff-name="أخصائي التغذية 2"
->
-أخصائي التغذية 2
 </option>
 
 </select>
@@ -1324,7 +1331,9 @@ data-staff-name="أخصائي التغذية 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد التغذية
 
@@ -1342,9 +1351,9 @@ id="nutritionAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      العلاج الطبيعي
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1378,7 +1387,10 @@ onsubmit="saveAppointment(event,'physio')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1417,26 +1429,15 @@ required
 
 <label class="full">
 
-المعالج
+أخصائي العلاج الطبيعي
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
-اختر المعالج
-</option>
-
-<option
-value="ST-008"
-data-staff-name="معالج سند"
->
-معالج سند
-</option>
-
-<option
-value="ST-018"
-data-staff-name="معالج سند 2"
->
-معالج سند 2
+اختر الأخصائي
 </option>
 
 </select>
@@ -1444,7 +1445,9 @@ data-staff-name="معالج سند 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد العلاج الطبيعي
 
@@ -1462,9 +1465,9 @@ id="physioAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      النفسي
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1498,7 +1501,10 @@ onsubmit="saveAppointment(event,'psychologist')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1539,24 +1545,13 @@ required
 
 الأخصائي النفسي
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر الأخصائي
-</option>
-
-<option
-value="ST-009"
-data-staff-name="الأخصائي النفسي"
->
-الأخصائي النفسي
-</option>
-
-<option
-value="ST-019"
-data-staff-name="الأخصائي النفسي 2"
->
-الأخصائي النفسي 2
 </option>
 
 </select>
@@ -1564,7 +1559,9 @@ data-staff-name="الأخصائي النفسي 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ الموعد النفسي
 
@@ -1582,9 +1579,9 @@ id="psychologistAppointments">
 
 
 
-<!-- =========================
+<!-- =====================================================
      المعين
-========================= -->
+===================================================== -->
 
 <div class="schedule-card">
 
@@ -1597,7 +1594,7 @@ id="psychologistAppointments">
 <div>
 
 <h3>
-جدول المعين الخاص
+جدول المعين
 </h3>
 
 <p>
@@ -1618,7 +1615,10 @@ onsubmit="saveAppointment(event,'assistant')"
 
 المشترك
 
-<select class="customer-select" required>
+<select
+class="customer-select"
+required
+>
 
 <option value="">
 اختر المشترك
@@ -1659,24 +1659,13 @@ required
 
 المعين
 
-<select class="staff-select" required>
+<select
+class="staff-select"
+required
+>
 
 <option value="">
 اختر المعين
-</option>
-
-<option
-value="ST-020"
-data-staff-name="معين سند 1"
->
-معين سند 1
-</option>
-
-<option
-value="ST-021"
-data-staff-name="معين سند 2"
->
-معين سند 2
 </option>
 
 </select>
@@ -1684,7 +1673,9 @@ data-staff-name="معين سند 2"
 </label>
 
 
-<button class="save-schedule">
+<button
+class="save-schedule"
+>
 
 💾 حفظ موعد المعين
 
@@ -1706,6 +1697,10 @@ id="assistantAppointments">
 </section>
 
 
+
+<!-- =====================================================
+     ملخص المواعيد
+===================================================== -->
 
 <section class="section">
 
@@ -1732,7 +1727,12 @@ id="assistantAppointments">
 </section>
 
 
-<div id="message" class="message"></div>
+
+<div
+id="message"
+class="message">
+</div>
+
 
 
 <div class="logout-area">
@@ -1742,12 +1742,15 @@ href="#"
 class="logout"
 onclick="logoutManager(event)"
 >
+
 🚪 تسجيل الخروج
+
 </a>
 
 </div>
 
 </main>
+
 
 
 <footer>
@@ -1844,7 +1847,7 @@ loggedStaff.name+
 
 
 /* =====================================================
-   2. قراءة المشتركين
+   2. المشتركين
 ===================================================== */
 
 let customers=[];
@@ -1879,7 +1882,7 @@ customers=[];
 
 
 /* =====================================================
-   3. قراءة المواعيد
+   3. المواعيد
 ===================================================== */
 
 let appointments=[];
@@ -1951,7 +1954,44 @@ assistant:
 
 
 /* =====================================================
-   5. الخدمات حسب الباقة
+   5. ربط الخدمة بوظيفة الكادر
+===================================================== */
+
+const serviceStaffRoles={
+
+nurse:
+"nurse",
+
+resident:
+"resident",
+
+specialist:
+"specialist",
+
+entertainment:
+"entertainment",
+
+hairdresser:
+"hairdresser",
+
+nutrition:
+"nutrition",
+
+physio:
+"physio",
+
+psychologist:
+"psychologist",
+
+assistant:
+"assistant"
+
+};
+
+
+
+/* =====================================================
+   6. الخدمات حسب الباقة
 ===================================================== */
 
 const packageServices={
@@ -1959,47 +1999,31 @@ const packageServices={
 basic:[
 
 "nurse",
-
 "resident",
-
 "specialist",
-
 "entertainment"
 
 ],
 
-
 medium:[
 
 "nurse",
-
 "resident",
-
 "specialist",
-
 "entertainment",
-
 "hairdresser"
 
 ],
 
-
 luxury:[
 
 "nurse",
-
 "resident",
-
 "specialist",
-
 "entertainment",
-
 "hairdresser",
-
 "nutrition",
-
 "physio",
-
 "psychologist"
 
 ]
@@ -2009,7 +2033,7 @@ luxury:[
 
 
 /* =====================================================
-   6. الحصول على خدمات المشترك
+   7. الحصول على خدمات المشترك
 ===================================================== */
 
 function getRequiredServices(customer){
@@ -2021,17 +2045,12 @@ return [];
 }
 
 
-let services=
-[
+let services=[
 ...(packageServices[
 customer.package
 ] || [])
 ];
 
-
-/*
-   المعين الخاص اختياري
-*/
 
 if(customer.assistantRequested){
 
@@ -2043,22 +2062,6 @@ services.push(
 
 
 return services;
-
-}
-
-
-
-/* =====================================================
-   7. عدد الخدمات المطلوبة
-===================================================== */
-
-function getRequiredServiceCount(
-customer
-){
-
-return getRequiredServices(
-customer
-).length;
 
 }
 
@@ -2093,7 +2096,7 @@ return numericPrice.toLocaleString(
 
 
 /* =====================================================
-   9. الخدمة ضمن الباقة؟
+   9. هل الخدمة مسموحة؟
 ===================================================== */
 
 function customerCanUseService(
@@ -2130,7 +2133,7 @@ service
 
 
 /* =====================================================
-   10. تعبئة قوائم المشتركين
+   10. تعبئة المشتركين
 ===================================================== */
 
 function populateCustomerSelects(){
@@ -2219,12 +2222,10 @@ currentValue;
 
 
 /* =====================================================
-   11. تحديد الخدمة من الفورم
+   11. تحديد نوع الخدمة
 ===================================================== */
 
-function getServiceTypeFromForm(
-form
-){
+function getServiceTypeFromForm(form){
 
 if(!form){
 
@@ -2256,7 +2257,143 @@ match[1]
 
 
 /* =====================================================
-   12. بدء ترتيب مشترك
+   12. تعبئة الكادر من قاعدة البيانات
+===================================================== */
+
+function populateStaffSelects(){
+
+const forms=
+document.querySelectorAll(
+".schedule-form"
+);
+
+
+forms.forEach(
+function(form){
+
+const serviceType=
+getServiceTypeFromForm(
+form
+);
+
+
+const role=
+serviceStaffRoles[
+serviceType
+];
+
+
+if(!role){
+
+return;
+
+}
+
+
+const select=
+form.querySelector(
+".staff-select"
+);
+
+
+if(!select){
+
+return;
+
+}
+
+
+const currentValue=
+select.value;
+
+
+select.innerHTML=
+`
+<option value="">
+اختر الكادر
+</option>
+`;
+
+
+const staff=
+getStaffByRole(
+role
+);
+
+
+if(staff.length===0){
+
+const option=
+document.createElement(
+"option"
+);
+
+option.disabled=true;
+
+option.textContent=
+"لا يوجد كادر متاح حالياً";
+
+select.appendChild(
+option
+);
+
+return;
+
+}
+
+
+staff.forEach(
+function(employee){
+
+const option=
+document.createElement(
+"option"
+);
+
+
+option.value=
+employee.id;
+
+
+option.dataset.staffName=
+employee.name;
+
+
+option.textContent=
+employee.name;
+
+
+select.appendChild(
+option
+);
+
+});
+
+
+if(
+staff.some(
+function(employee){
+
+return employee.id===
+currentValue;
+
+}
+)
+){
+
+select.value=
+currentValue;
+
+}
+
+});
+
+}
+
+
+
+/* =====================================================
+   13. بدء ترتيب مشترك
 ===================================================== */
 
 function startCustomerScheduling(
@@ -2295,7 +2432,6 @@ function(select){
 
 select.value=
 customerId;
-
 
 select.dispatchEvent(
 new Event(
@@ -2338,12 +2474,14 @@ customer.name+
 
 );
 
+
+
 }
 
 
 
 /* =====================================================
-   13. تغيير المشترك داخل جدول
+   14. تغيير المشترك
 ===================================================== */
 
 document.addEventListener(
@@ -2440,7 +2578,7 @@ submit.style.opacity="1";
 
 
 /* =====================================================
-   14. حفظ الموعد
+   15. حفظ الموعد
 ===================================================== */
 
 function saveAppointment(
@@ -2455,14 +2593,10 @@ const form=
 event.target;
 
 
-const select=
+const customerId=
 form.querySelector(
 ".customer-select"
-);
-
-
-const customerId=
-select.value;
+).value;
 
 
 const date=
@@ -2555,10 +2689,8 @@ serviceType
 showMessage(
 
 serviceType==="assistant"
-
 ?
 "هذا المشترك لم يطلب خدمة المعين الخاص."
-
 :
 "هذه الخدمة غير موجودة ضمن باقة المشترك.",
 
@@ -2594,16 +2726,12 @@ return;
 
 
 /* =====================================================
-   منع حجز نفس الكادر في نفس الوقت
+   منع تعارض الكادر
 ===================================================== */
 
 const staffConflict=
 appointments.some(
 function(item){
-
-/*
-   نستخدم staffId وليس اسم الكادر.
-*/
 
 return (
 
@@ -2641,7 +2769,7 @@ return;
 
 
 /* =====================================================
-   منع تكرار موعد نفس الخدمة
+   منع تكرار الموعد
 ===================================================== */
 
 const duplicate=
@@ -2692,11 +2820,6 @@ return;
 
 const appointment={
 
-
-/*
-   معرف الموعد
-*/
-
 id:
 "SCH-"+
 Date.now()+
@@ -2705,11 +2828,6 @@ Math.random()
 .toString(36)
 .substring(2,8),
 
-
-
-/*
-   بيانات المشترك
-*/
 
 customerId:
 customer.id,
@@ -2730,11 +2848,6 @@ address:
 customer.address || "",
 
 
-
-/*
-   بيانات الباقة
-*/
-
 package:
 customer.package || "",
 
@@ -2747,11 +2860,6 @@ customer.packagePrice || 0
 ),
 
 
-
-/*
-   بيانات الخدمة
-*/
-
 service:
 serviceType,
 
@@ -2761,11 +2869,6 @@ serviceType
 ],
 
 
-
-/*
-   التاريخ والوقت
-*/
-
 date:
 date,
 
@@ -2773,13 +2876,8 @@ time:
 time,
 
 
-
-/* =====================================================
-   هوية الكادر
-===================================================== */
-
 /*
-   هذا هو أهم تعديل.
+   هوية الكادر من قاعدة البيانات
 */
 
 staffId:
@@ -2787,34 +2885,20 @@ staffId,
 
 
 /*
-   اسم الكادر للعرض فقط.
+   اسم الكادر للعرض
 */
 
 staff:
 staffName,
 
 
-/*
-   نوع الخدمة / الكادر.
-*/
-
 staffType:
 serviceType,
 
 
-
-/*
-   حالة الموعد
-*/
-
 status:
 "scheduled",
 
-
-
-/*
-   من أنشأ الموعد
-*/
 
 createdBy:
 loggedStaff
@@ -2836,17 +2920,9 @@ loggedStaff.employeeId ||
 "",
 
 
-/*
-   وقت إنشاء الموعد
-*/
-
 createdAt:
 new Date().toISOString(),
 
-
-/*
-   حالة الزيارة
-*/
 
 visitStartedAt:
 null,
@@ -2859,7 +2935,7 @@ null
 
 
 /* =====================================================
-   إضافة الموعد
+   حفظ الموعد
 ===================================================== */
 
 appointments.push(
@@ -2878,11 +2954,6 @@ appointments
 );
 
 
-
-/* =====================================================
-   إشعار باقي اللوحات
-===================================================== */
-
 localStorage.setItem(
 
 "sanadAppointmentsLastUpdate",
@@ -2894,7 +2965,7 @@ new Date().toISOString()
 
 
 /* =====================================================
-   تحديث حالة المشترك
+   تحديث المشترك
 ===================================================== */
 
 customer.lastScheduledAt=
@@ -2907,7 +2978,7 @@ serviceType;
 
 
 /* =====================================================
-   حساب الخدمات المنظمة
+   حساب الخدمات
 ===================================================== */
 
 const requiredServices=
@@ -2949,12 +3020,8 @@ return item.service;
 ];
 
 
-
-/* =====================================================
-   هل اكتملت كل الخدمات؟
-===================================================== */
-
 const completedScheduling=
+
 requiredServices.length>0 &&
 
 requiredServices.every(
@@ -3001,6 +3068,8 @@ form.reset();
 
 populateCustomerSelects();
 
+populateStaffSelects();
+
 renderAppointments();
 
 renderPendingCustomers();
@@ -3031,7 +3100,7 @@ staffId+
 
 
 /* =====================================================
-   15. عرض المشتركين بانتظار الترتيب
+   16. عرض المشتركين
 ===================================================== */
 
 function renderPendingCustomers(){
@@ -3081,7 +3150,6 @@ return;
 
 pending.forEach(
 function(customer){
-
 
 const div=
 document.createElement(
@@ -3173,9 +3241,7 @@ if(requiredServices.length===0){
 servicesHtml=
 `
 <div class="service-item">
-
 لا توجد خدمات محددة.
-
 </div>
 `;
 
@@ -3366,13 +3432,9 @@ ${totalServices}
 
 
 <button
-
 type="button"
-
 class="schedule-customer-btn"
-
 onclick="startCustomerScheduling('${escapeHtml(customer.id)}')"
-
 >
 
 📅 ترتيب مواعيد هذا المشترك
@@ -3393,7 +3455,7 @@ div
 
 
 /* =====================================================
-   16. عرض المواعيد
+   17. عرض المواعيد
 ===================================================== */
 
 function renderAppointments(){
@@ -3406,7 +3468,6 @@ serviceNames
 
 serviceTypes.forEach(
 function(service){
-
 
 const container=
 document.getElementById(
@@ -3478,7 +3539,6 @@ return;
 
 serviceAppointments.forEach(
 function(item){
-
 
 const div=
 document.createElement(
@@ -3580,7 +3640,7 @@ renderAllAppointments();
 
 
 /* =====================================================
-   17. الملخص العام
+   18. الملخص العام
 ===================================================== */
 
 function renderAllAppointments(){
@@ -3638,7 +3698,6 @@ b.time
 
 sorted.forEach(
 function(item){
-
 
 const div=
 document.createElement(
@@ -3745,7 +3804,7 @@ div
 
 
 /* =====================================================
-   18. الإحصائيات
+   19. الإحصائيات
 ===================================================== */
 
 function updateStats(){
@@ -3821,12 +3880,10 @@ item.status===
 
 
 /* =====================================================
-   19. حالات الموعد
+   20. حالات الموعد
 ===================================================== */
 
-function getAppointmentStatus(
-status
-){
+function getAppointmentStatus(status){
 
 const statuses={
 
@@ -3855,7 +3912,7 @@ status
 
 
 /* =====================================================
-   20. الرسائل
+   21. الرسائل
 ===================================================== */
 
 function showMessage(
@@ -3903,12 +3960,10 @@ box.style.display=
 
 
 /* =====================================================
-   21. تسجيل الخروج
+   22. تسجيل الخروج
 ===================================================== */
 
-function logoutManager(
-event
-){
+function logoutManager(event){
 
 event.preventDefault();
 
@@ -3917,21 +3972,17 @@ localStorage.removeItem(
 "sanadLoggedInStaff"
 );
 
-
 localStorage.removeItem(
 "sanadStaffId"
 );
-
 
 localStorage.removeItem(
 "sanadStaffName"
 );
 
-
 localStorage.removeItem(
 "sanadStaffRole"
 );
-
 
 localStorage.removeItem(
 "sanadCurrentVisit"
@@ -3946,12 +3997,10 @@ window.location.href=
 
 
 /* =====================================================
-   22. حماية النصوص
+   23. حماية النصوص
 ===================================================== */
 
-function escapeHtml(
-value
-){
+function escapeHtml(value){
 
 return String(
 value ?? ""
@@ -3987,7 +4036,7 @@ value ?? ""
 
 
 /* =====================================================
-   23. التحديث التلقائي
+   24. التحديث التلقائي
 ===================================================== */
 
 window.addEventListener(
@@ -4024,13 +4073,23 @@ updateStats();
 
 }
 
+
+if(
+event.key===
+"sanadStaffDatabase"
+){
+
+populateStaffSelects();
+
+}
+
 }
 );
 
 
 
 /* =====================================================
-   24. التشغيل الأول
+   25. التشغيل الأول
 ===================================================== */
 
 loadCustomers();
@@ -4038,6 +4097,8 @@ loadCustomers();
 loadAppointments();
 
 populateCustomerSelects();
+
+populateStaffSelects();
 
 renderPendingCustomers();
 
