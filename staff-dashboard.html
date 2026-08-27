@@ -766,6 +766,10 @@
 
 <!-- =========================
      VISIT FORM
+     
+     هذه الواجهة موجودة سابقاً.
+     حالياً سنستخدم visit.html
+     كواجهة الزيارة الرئيسية.
 ========================= -->
 
 <section
@@ -802,9 +806,7 @@
   </div>
 
 
-  <!-- =========================
-       العلامات الحيوية
-  ========================= -->
+  <!-- العلامات الحيوية -->
 
   <div
     class="medical-section"
@@ -817,7 +819,6 @@
 
 
     <div class="fields">
-
 
       <div class="field">
 
@@ -908,15 +909,12 @@
 
       </div>
 
-
     </div>
 
   </div>
 
 
-  <!-- =========================
-       التقييم الطبي
-  ========================= -->
+  <!-- التقييم الطبي -->
 
   <div
     class="medical-section"
@@ -929,7 +927,6 @@
 
 
     <div class="fields">
-
 
       <div class="field full">
 
@@ -1000,15 +997,12 @@
 
       </div>
 
-
     </div>
 
   </div>
 
 
-  <!-- =========================
-       التمريض
-  ========================= -->
+  <!-- التمريض -->
 
   <div
     class="medical-section"
@@ -1021,7 +1015,6 @@
 
 
     <div class="fields">
-
 
       <div class="field">
 
@@ -1115,15 +1108,12 @@
 
       </div>
 
-
     </div>
 
   </div>
 
 
-  <!-- =========================
-       الملاحظات النهائية
-  ========================= -->
+  <!-- التقرير النهائي -->
 
   <div class="medical-section">
 
@@ -1326,12 +1316,6 @@ if (loggedStaff) {
    3. الزيارات
 ===================================================== */
 
-/*
-   في المرحلة الحالية نقرأ الزيارات من localStorage.
-
-   لاحقاً سنربطها بقاعدة البيانات.
-*/
-
 let visits =
   JSON.parse(
     localStorage.getItem(
@@ -1421,11 +1405,6 @@ function getStaffVisits() {
 
   }
 
-
-  /*
-     المالك والمدير والاستقبال لا يدخلون
-     ضمن جدول الزيارات الميدانية.
-  */
 
   const fieldRoles = [
 
@@ -1693,6 +1672,22 @@ function renderVisits() {
    8. بدء الزيارة
 ===================================================== */
 
+/*
+   ملاحظة مهمة:
+   هنا تم تعديل النظام.
+
+   سابقاً كانت الزيارة تفتح داخل
+   staff-dashboard.html.
+
+   الآن عند الضغط على "بدء الزيارة":
+
+   1. نحدد الزيارة قيد التنفيذ.
+   2. نحفظ بيانات المسن.
+   3. نحفظ بيانات الكادر.
+   4. نحفظ البيانات في sanadCurrentVisit.
+   5. نفتح visit.html.
+===================================================== */
+
 let currentVisit = null;
 
 
@@ -1719,8 +1714,11 @@ function startVisit(id) {
   }
 
 
-  currentVisit = visit;
-
+  /*
+     =========================================
+     تحديد الزيارة كقيد التنفيذ
+     =========================================
+  */
 
   visit.status =
     "in_progress";
@@ -1730,21 +1728,90 @@ function startVisit(id) {
     new Date().toISOString();
 
 
-  saveVisits();
+  /*
+     =========================================
+     بيانات الزيارة التي سترسل إلى visit.html
+     =========================================
+  */
+
+  const visitData = {
+
+    id:
+      visit.id,
+
+    patientName:
+      visit.patientName,
+
+    address:
+      visit.address,
+
+    visitType:
+      visit.type,
+
+    visitTime:
+      visit.time,
+
+    date:
+      visit.date,
+
+    staffName:
+      loggedStaff
+        ? loggedStaff.name
+        : "كادر سند",
+
+    staffRole:
+      loggedStaff
+        ? loggedStaff.role
+        : "staff",
+
+    staffTitle:
+      loggedStaff
+        ? loggedStaff.title
+        : "كادر سند",
+
+    startedAt:
+      visit.startedAt
+
+  };
 
 
-  showVisitInterface(
-    visit
+  /*
+     =========================================
+     حفظ الزيارة الحالية
+     =========================================
+  */
+
+  localStorage.setItem(
+    "sanadCurrentVisit",
+    JSON.stringify(
+      visitData
+    )
   );
 
 
-  renderVisits();
+  /*
+     =========================================
+     حفظ تحديث الزيارات
+     =========================================
+  */
+
+  saveVisits();
+
+
+  /*
+     =========================================
+     الانتقال إلى visit.html
+     =========================================
+  */
+
+  window.location.href =
+    "visit.html";
 
 }
 
 
 /* =====================================================
-   9. واجهة الزيارة
+   9. الواجهة القديمة داخل الصفحة
 ===================================================== */
 
 function showVisitInterface(
@@ -1881,10 +1948,6 @@ function configureRoleInterface() {
     );
 
 
-  /*
-     الممرض
-  */
-
   if (role === "nurse") {
 
     roleNotice.innerHTML = `
@@ -1906,10 +1969,6 @@ function configureRoleInterface() {
 
   }
 
-
-  /*
-     الطبيب المقيم
-  */
 
   if (role === "resident") {
 
@@ -1933,10 +1992,6 @@ function configureRoleInterface() {
   }
 
 
-  /*
-     الطبيب الأخصائي
-  */
-
   if (role === "specialist") {
 
     roleNotice.innerHTML = `
@@ -1958,10 +2013,6 @@ function configureRoleInterface() {
 
   }
 
-
-  /*
-     بقية الكوادر
-  */
 
   roleNotice.innerHTML = `
     👤 <strong>${escapeHTML(
@@ -1989,7 +2040,7 @@ function configureRoleInterface() {
 
 
 /* =====================================================
-   11. إتمام الزيارة
+   11. إتمام الزيارة - للواجهة القديمة
 ===================================================== */
 
 function completeVisit() {
@@ -2121,11 +2172,6 @@ function completeVisit() {
     completedAt:
       new Date().toISOString(),
 
-    /*
-       الجهات التي يجب أن تستلم التقرير
-       في النظام النهائي.
-    */
-
     recipients: {
 
       administration: true,
@@ -2152,10 +2198,6 @@ function completeVisit() {
   };
 
 
-  /* =========================
-     حفظ التقرير
-  ========================= */
-
   let reports =
     JSON.parse(
       localStorage.getItem(
@@ -2177,10 +2219,6 @@ function completeVisit() {
   );
 
 
-  /* =========================
-     تحديث الزيارة
-  ========================= */
-
   currentVisit.status =
     "completed";
 
@@ -2195,10 +2233,6 @@ function completeVisit() {
 
   saveVisits();
 
-
-  /* =========================
-     رسالة النجاح
-  ========================= */
 
   const message =
     document.getElementById(
@@ -2233,14 +2267,6 @@ function completeVisit() {
 
     👨‍👩‍👦 العائلة
 
-    <br><br>
-
-    <small>
-      الإرسال الفعلي إلى أجهزة المستخدمين
-      سيتم ربطه بقاعدة البيانات والإشعارات
-      في المرحلة القادمة.
-    </small>
-
   `;
 
 
@@ -2272,7 +2298,7 @@ function completeVisit() {
 
 
 /* =====================================================
-   12. إلغاء الزيارة الحالية
+   12. إلغاء الزيارة
 ===================================================== */
 
 function cancelVisit() {
@@ -2350,25 +2376,47 @@ function clearVisitForm() {
   );
 
 
-  document.getElementById(
-    "medicationGiven"
-  ).value = "";
+  const medicationGiven =
+    document.getElementById(
+      "medicationGiven"
+    );
+
+  if (medicationGiven) {
+    medicationGiven.value = "";
+  }
 
 
-  document.getElementById(
-    "personalCare"
-  ).value = "";
+  const personalCare =
+    document.getElementById(
+      "personalCare"
+    );
+
+  if (personalCare) {
+    personalCare.value = "";
+  }
 
 
-  document.getElementById(
-    "nutritionStatus"
-  ).value = "";
+  const nutritionStatus =
+    document.getElementById(
+      "nutritionStatus"
+    );
+
+  if (nutritionStatus) {
+    nutritionStatus.value = "";
+  }
 
 
-  document.getElementById(
-    "reportMessage"
-  ).style.display =
-    "none";
+  const reportMessage =
+    document.getElementById(
+      "reportMessage"
+    );
+
+  if (reportMessage) {
+
+    reportMessage.style.display =
+      "none";
+
+  }
 
 }
 
