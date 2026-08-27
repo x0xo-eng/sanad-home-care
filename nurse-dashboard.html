@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>لوحة الممرض | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* =========================================
+   GENERAL
+========================================= */
+
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
+
+.dashboard{
+max-width:1400px;
+margin:auto;
+padding:45px 5%;
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.welcome{
+background:white;
+border:1px solid #e3edeb;
+border-radius:26px;
+padding:30px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+gap:20px;
+
+box-shadow:
+0 18px 50px rgba(22,70,65,.07);
+
+margin-bottom:25px;
+}
+
+.eyebrow{
+display:block;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:7px;
+}
+
+.welcome h1{
+color:#163b38;
+font-size:30px;
+margin:0 0 8px;
+}
+
+.welcome p{
+color:#718480;
+margin:0;
+line-height:1.8;
+}
+
+.nurse-avatar{
+width:78px;
+height:78px;
+border-radius:24px;
+background:#e8f5f3;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:38px;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:28px;
+}
+
+.stat{
+background:white;
+border:1px solid #e3edeb;
+border-radius:20px;
+padding:22px;
+
+box-shadow:
+0 12px 35px rgba(22,70,65,.05);
+}
+
+.stat-label{
+color:#718480;
+font-size:13px;
+}
+
+.stat-number{
+color:#163b38;
+font-size:28px;
+font-weight:900;
+margin-top:10px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section{
+background:white;
+border:1px solid #e3edeb;
+border-radius:24px;
+padding:28px;
+
+margin-bottom:25px;
+
+box-shadow:
+0 15px 45px rgba(22,70,65,.05);
+}
+
+.section-title{
+margin-bottom:22px;
+}
+
+.section-title h2{
+color:#163b38;
+font-size:21px;
+margin:0 0 5px;
+}
+
+.section-title p{
+color:#718480;
+font-size:13px;
+margin:0;
+}
+
+
+/* =========================================
+   FILTERS
+========================================= */
+
+.filters{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
+}
+
+.filter-button{
+border:1px solid #dfecea;
+background:#fbfefe;
+
+color:#163b38;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+font-family:inherit;
+font-size:12px;
+font-weight:800;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+.filter-button:hover{
+border-color:#16877d;
+}
+
+.filter-button.active{
+background:#16877d;
+border-color:#16877d;
+color:white;
+}
+
+
+/* =========================================
+   VISIT LIST
+========================================= */
+
+.visit-list{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+
+/* =========================================
+   VISIT CARD
+========================================= */
+
+.visit-card{
+background:#fbfefe;
+
+border:1px solid #dfecea;
+
+border-radius:20px;
+
+padding:22px;
+
+transition:.2s;
+}
+
+.visit-card:hover{
+box-shadow:
+0 10px 30px rgba(22,70,65,.07);
+}
+
+.visit-card.active{
+border-color:#16877d;
+}
+
+.visit-card.completed{
+opacity:.88;
+}
+
+
+/* =========================================
+   VISIT HEADER
+========================================= */
+
+.visit-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+
+gap:15px;
+
+margin-bottom:18px;
+}
+
+.visit-title{
+display:flex;
+align-items:flex-start;
+gap:13px;
+}
+
+.visit-icon{
+width:50px;
+height:50px;
+
+border-radius:15px;
+
+background:#e8f5f3;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:25px;
+
+flex-shrink:0;
+}
+
+.visit-name{
+color:#163b38;
+font-size:17px;
+font-weight:900;
+}
+
+.visit-id{
+color:#16877d;
+font-size:11px;
+font-weight:900;
+margin-top:4px;
+}
+
+.status-badge{
+padding:7px 11px;
+border-radius:10px;
+
+font-size:11px;
+font-weight:900;
+
+white-space:nowrap;
+}
+
+.status-scheduled{
+background:#fff6df;
+color:#a87512;
+}
+
+.status-progress{
+background:#e7f5f2;
+color:#16877d;
+}
+
+.status-completed{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.status-cancelled{
+background:#fff0f0;
+color:#a44b4b;
+}
+
+
+/* =========================================
+   VISIT INFORMATION
+========================================= */
+
+.visit-info{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+
+gap:10px;
+
+margin-bottom:18px;
+}
+
+.info-box{
+background:white;
+
+border:1px solid #e3edeb;
+
+border-radius:13px;
+
+padding:12px;
+}
+
+.info-label{
+display:block;
+
+color:#718480;
+
+font-size:10px;
+
+margin-bottom:5px;
+}
+
+.info-value{
+color:#163b38;
+
+font-size:12px;
+
+font-weight:800;
+
+line-height:1.6;
+}
+
+
+/* =========================================
+   ADDRESS
+========================================= */
+
+.address-box{
+background:#eef8f6;
+
+border:1px solid #d8eee9;
+
+border-radius:14px;
+
+padding:14px;
+
+margin-bottom:18px;
+}
+
+.address-label{
+color:#16877d;
+
+font-size:11px;
+
+font-weight:900;
+
+margin-bottom:5px;
+}
+
+.address-value{
+color:#163b38;
+
+font-size:12px;
+
+line-height:1.8;
+}
+
+
+/* =========================================
+   NOTES
+========================================= */
+
+.notes-box{
+background:#fffaf0;
+
+border:1px solid #f0e5c8;
+
+border-radius:14px;
+
+padding:14px;
+
+margin-bottom:18px;
+}
+
+.notes-label{
+color:#9a741c;
+
+font-size:11px;
+
+font-weight:900;
+
+margin-bottom:5px;
+}
+
+.notes-value{
+color:#66552d;
+
+font-size:12px;
+
+line-height:1.8;
+}
+
+
+/* =========================================
+   VISIT ACTION
+========================================= */
+
+.visit-action{
+display:flex;
+justify-content:flex-end;
+
+padding-top:15px;
+
+border-top:1px solid #e7efed;
+}
+
+.visit-button{
+border:none;
+
+border-radius:13px;
+
+padding:13px 25px;
+
+font-family:inherit;
+
+font-size:13px;
+
+font-weight:900;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+.start-button{
+background:#16877d;
+color:white;
+}
+
+.start-button:hover{
+background:#0f7068;
+transform:translateY(-2px);
+}
+
+.finish-button{
+background:#16815f;
+color:white;
+}
+
+.finish-button:hover{
+background:#126c50;
+transform:translateY(-2px);
+}
+
+.disabled-button{
+background:#e7eeec;
+color:#81908c;
+cursor:not-allowed;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty{
+text-align:center;
+
+background:#fbfefe;
+
+border:1px dashed #dfecea;
+
+border-radius:17px;
+
+padding:40px 20px;
+
+color:#718480;
+
+font-size:13px;
+}
+
+.empty-icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message{
+display:none;
+
+padding:13px;
+
+border-radius:12px;
+
+margin-bottom:20px;
+
+text-align:center;
+
+font-size:12px;
+
+font-weight:800;
+}
+
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.error{
+background:#fff0f0;
+color:#a44b4b;
+}
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+.refresh-area{
+display:flex;
+justify-content:flex-end;
+
+margin-bottom:15px;
+}
+
+.refresh-button{
+border:1px solid #dfecea;
+
+background:white;
+
+color:#16877d;
+
+padding:10px 15px;
+
+border-radius:11px;
+
+font-family:inherit;
+
+font-size:11px;
+
+font-weight:800;
+
+cursor:pointer;
+}
+
+.refresh-button:hover{
+border-color:#16877d;
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.logout-area{
+text-align:center;
+
+margin:35px 0 10px;
+}
+
+.logout{
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:11px 20px;
+
+border-radius:12px;
+
+border:1px solid #eadede;
+
+background:white;
+
+color:#a44b4b;
+
+text-decoration:none;
+
+font-size:13px;
+
+font-weight:800;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1000px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.visit-info{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:650px){
+
+.dashboard{
+padding:30px 5%;
+}
+
+.welcome{
+padding:23px;
+flex-direction:column;
+text-align:center;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.visit-header{
+flex-direction:column;
+}
+
+.visit-info{
+grid-template-columns:1fr;
+}
+
+.visit-action{
+justify-content:stretch;
+}
+
+.visit-button{
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+<a href="index.html" class="logo">
+سند<span>.</span>
+</a>
+
+<nav class="nav">
+
+<a href="index.html">
+الرئيسية
+</a>
+
+<a href="services.html">
+خدماتنا
+</a>
+
+<a href="how.html">
+كيف يعمل سند؟
+</a>
+
+<a href="about.html">
+عن سند
+</a>
+
+</nav>
+
+</header>
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="dashboard">
+
+
+<!-- WELCOME -->
+
+<section class="welcome">
+
+<div>
+
+<span class="eyebrow">
+👩‍⚕️ لوحة الممرض الصحي
+</span>
+
+<h1 id="welcomeName">
+أهلاً بك 👋
+</h1>
+
+<p>
+هنا تظهر الزيارات المسندة إليك فقط.
+</p>
+
+</div>
+
+<div class="nurse-avatar">
+👩‍⚕️
+</div>
+
+</section>
+
+
+<!-- =========================================
+     STATS
+========================================= -->
+
+<section class="stats">
+
+
+<div class="stat">
+
+<span class="stat-label">
+📋 إجمالي الزيارات
+</span>
+
+<div
+class="stat-number"
+id="totalVisits">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+⏳ زيارات مجدولة
+</span>
+
+<div
+class="stat-number"
+id="scheduledVisits">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+🟢 قيد الزيارة
+</span>
+
+<div
+class="stat-number"
+id="activeVisits">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+✅ زيارات مكتملة
+</span>
+
+<div
+class="stat-number"
+id="completedVisits">
+0
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =========================================
+     VISITS
+========================================= -->
+
+<section class="section">
+
+
+<div class="section-title">
+
+<h2>
+🩺 جدول زياراتي
+</h2>
+
+<p>
+المواعيد التي حددها المدير والموجهة إليك
+</p>
+
+</div>
+
+
+<div id="message"
+class="message">
+</div>
+
+
+<div class="filters">
+
+<button
+type="button"
+class="filter-button active"
+data-filter="all"
+onclick="setFilter('all',this)"
+>
+الكل
+</button>
+
+
+<button
+type="button"
+class="filter-button"
+data-filter="scheduled"
+onclick="setFilter('scheduled',this)"
+>
+المجدولة
+</button>
+
+
+<button
+type="button"
+class="filter-button"
+data-filter="in_progress"
+onclick="setFilter('in_progress',this)"
+>
+قيد الزيارة
+</button>
+
+
+<button
+type="button"
+class="filter-button"
+data-filter="completed"
+onclick="setFilter('completed',this)"
+>
+المكتملة
+</button>
+
+</div>
+
+
+<div class="refresh-area">
+
+<button
+type="button"
+class="refresh-button"
+onclick="loadData()"
+>
+🔄 تحديث الجدول
+</button>
+
+</div>
+
+
+<div
+id="visitList"
+class="visit-list"
+>
+
+</div>
+
+
+</section>
+
+
+<!-- =========================================
+     LOGOUT
+========================================= -->
+
+<div class="logout-area">
+
+<a
+href="#"
+class="logout"
+onclick="logoutNurse(event)"
+>
+🚪 تسجيل الخروج
+</a>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+<div class="footer-logo">
+سند<span>.</span>
+</div>
+
+<p>
+الرعاية المنزلية لكبار السن
+</p>
+
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   1. التحقق من تسجيل الدخول
+===================================================== */
+
+const loggedStaffRaw =
+localStorage.getItem("sanadLoggedInStaff");
+
+
+if(!loggedStaffRaw){
+
+alert("يرجى تسجيل الدخول أولاً.");
+
+window.location.href =
+"staff-login.html";
+
+}
+
+
+let loggedStaff = null;
+
+
+try{
+
+loggedStaff =
+JSON.parse(loggedStaffRaw);
+
+}catch(error){
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+window.location.href =
+"staff-login.html";
+
+}
+
+
+/* =====================================================
+   2. التأكد من أن الموظف ممرض
+===================================================== */
+
+/*
+   نقبل أكثر من طريقة محتملة
+   حتى لا ينكسر النظام إذا كان
+   role مختلف في ملف تسجيل الدخول.
+*/
+
+if(loggedStaff){
+
+const isNurse =
+
+loggedStaff.role === "nurse" ||
+
+loggedStaff.role === "health_nurse" ||
+
+loggedStaff.role === "nurse1" ||
+
+loggedStaff.role === "nurse2";
+
+
+const hasAllPermissions =
+loggedStaff.permissions === "all";
+
+
+if(!isNurse && !hasAllPermissions){
+
+alert(
+"ليس لديك صلاحية الدخول إلى لوحة الممرض."
+);
+
+window.location.href =
+"staff-dashboard.html";
+
+}
+
+}
+
+
+/* =====================================================
+   3. اسم الممرض
+===================================================== */
+
+if(loggedStaff){
+
+document.getElementById(
+"welcomeName"
+).textContent =
+"أهلاً بك، "+
+(loggedStaff.name || "الممرض")+
+" 👋";
+
+}
+
+
+/* =====================================================
+   4. المتغيرات
+===================================================== */
+
+let appointments = [];
+
+let currentFilter = "all";
+
+
+/* =====================================================
+   5. قراءة المواعيد
+===================================================== */
+
+function loadAppointments(){
+
+try{
+
+appointments =
+JSON.parse(
+localStorage.getItem(
+"sanadAppointments"
+) || "[]"
+);
+
+
+if(!Array.isArray(appointments)){
+
+appointments=[];
+
+}
+
+}catch(error){
+
+appointments=[];
+
+}
+
+}
+
+
+/* =====================================================
+   6. تحديد اسم الممرض الحالي
+===================================================== */
+
+function getCurrentNurseName(){
+
+if(!loggedStaff){
+
+return "";
+
+}
+
+
+/*
+   نستخدم الاسم المخزن في تسجيل الدخول
+   كمرجع أساسي.
+*/
+
+return String(
+loggedStaff.name || ""
+).trim();
+
+}
+
+
+/* =====================================================
+   7. معرفة هل الموعد لهذا الممرض
+===================================================== */
+
+function isMyAppointment(appointment){
+
+if(!appointment){
+
+return false;
+
+}
+
+
+/*
+   الخدمة يجب أن تكون تمريضية.
+*/
+
+if(appointment.service !== "nurse"){
+
+return false;
+
+}
+
+
+const currentNurse =
+getCurrentNurseName();
+
+
+if(!currentNurse){
+
+return false;
+
+}
+
+
+/*
+   المطابقة الأساسية:
+   اسم الكادر الذي اختاره المدير
+   يجب أن يطابق اسم الممرض المسجل.
+*/
+
+return String(
+appointment.staff || ""
+).trim()
+===
+currentNurse;
+
+}
+
+
+/* =====================================================
+   8. جلب زيارات الممرض
+===================================================== */
+
+function getMyVisits(){
+
+return appointments
+.filter(function(item){
+
+return isMyAppointment(item);
+
+})
+.sort(function(a,b){
+
+const dateA =
+(a.date || "")+
+" "+
+(a.time || "");
+
+const dateB =
+(b.date || "")+
+" "+
+(b.time || "");
+
+return dateA.localeCompare(dateB);
+
+});
+
+}
+
+
+/* =====================================================
+   9. اسم الخدمة
+===================================================== */
+
+function getServiceName(service){
+
+const names = {
+
+nurse:
+"زيارة تمريضية",
+
+resident:
+"زيارة الطبيب المقيم",
+
+specialist:
+"زيارة الطبيب الاختصاص",
+
+entertainment:
+"الترفيه ورفيق سند",
+
+hairdresser:
+"الكوافير",
+
+nutrition:
+"أخصائي التغذية",
+
+physio:
+"العلاج الطبيعي",
+
+psychologist:
+"الدعم النفسي",
+
+assistant:
+"المعين الخاص"
+
+};
+
+return names[service] || service || "زيارة";
+
+}
+
+
+/* =====================================================
+   10. حالة الموعد
+===================================================== */
+
+function getStatusText(status){
+
+const statuses = {
+
+scheduled:
+"مجدولة",
+
+in_progress:
+"قيد الزيارة",
+
+completed:
+"تمت الزيارة",
+
+cancelled:
+"ملغى",
+
+missed:
+"لم تتم الزيارة"
+
+};
+
+return statuses[status] || "مجدولة";
+
+}
+
+
+/* =====================================================
+   11. كلاس الحالة
+===================================================== */
+
+function getStatusClass(status){
+
+if(status === "in_progress"){
+
+return "status-progress";
+
+}
+
+if(status === "completed"){
+
+return "status-completed";
+
+}
+
+if(status === "cancelled"){
+
+return "status-cancelled";
+
+}
+
+return "status-scheduled";
+
+}
+
+
+/* =====================================================
+   12. فلترة
+===================================================== */
+
+function setFilter(filter,button){
+
+currentFilter=filter;
+
+
+document
+.querySelectorAll(".filter-button")
+.forEach(function(item){
+
+item.classList.remove("active");
+
+});
+
+
+if(button){
+
+button.classList.add("active");
+
+}
+
+
+renderVisits();
+
+}
+
+
+/* =====================================================
+   13. عرض الزيارات
+===================================================== */
+
+function renderVisits(){
+
+const container =
+document.getElementById(
+"visitList"
+);
+
+container.innerHTML="";
+
+
+let myVisits =
+getMyVisits();
+
+
+/*
+   تطبيق الفلتر
+*/
+
+if(currentFilter !== "all"){
+
+myVisits =
+myVisits.filter(function(item){
+
+return item.status === currentFilter;
+
+});
+
+}
+
+
+if(myVisits.length === 0){
+
+container.innerHTML = `
+
+<div class="empty">
+
+<div class="empty-icon">
+🩺
+</div>
+
+لا توجد زيارات في هذا القسم حالياً.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+/*
+   عرض كل زيارة
+*/
+
+myVisits.forEach(function(item){
+
+const card =
+document.createElement("div");
+
+card.className =
+"visit-card "+
+(
+item.status === "in_progress"
+?
+"active"
+:
+item.status === "completed"
+?
+"completed"
+:
+""
+);
+
+
+const statusClass =
+getStatusClass(item.status);
+
+
+const statusText =
+getStatusText(item.status);
+
+
+/*
+   زر الزيارة
+*/
+
+let actionButton = "";
+
+
+if(item.status === "scheduled"){
+
+actionButton = `
+
+<button
+type="button"
+class="visit-button start-button"
+onclick="startVisit('${escapeHtml(item.id)}')"
+>
+
+▶️ بدء الزيارة
+
+</button>
+
+`;
+
+}
+
+
+else if(item.status === "in_progress"){
+
+actionButton = `
+
+<button
+type="button"
+class="visit-button finish-button"
+onclick="finishVisit('${escapeHtml(item.id)}')"
+>
+
+✅ إنهاء الزيارة
+
+</button>
+
+`;
+
+}
+
+
+else if(item.status === "completed"){
+
+actionButton = `
+
+<button
+type="button"
+class="visit-button disabled-button"
+disabled
+>
+
+✓ تمت الزيارة
+
+</button>
+
+`;
+
+}
+
+
+else if(item.status === "cancelled"){
+
+actionButton = `
+
+<button
+type="button"
+class="visit-button disabled-button"
+disabled
+>
+
+ملغى
+
+</button>
+
+`;
+
+}
+
+
+else{
+
+actionButton = `
+
+<button
+type="button"
+class="visit-button disabled-button"
+disabled
+>
+
+${escapeHtml(statusText)}
+
+</button>
+
+`;
+
+}
+
+
+/*
+   إنشاء البطاقة
+*/
+
+card.innerHTML = `
+
+<div class="visit-header">
+
+
+<div class="visit-title">
+
+
+<div class="visit-icon">
+👩‍⚕️
+</div>
+
+
+<div>
+
+<div class="visit-name">
+
+👴
+${escapeHtml(item.customerName)}
+
+</div>
+
+
+<div class="visit-id">
+
+${escapeHtml(item.customerId)}
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="status-badge ${statusClass}">
+
+${escapeHtml(statusText)}
+
+</div>
+
+
+</div>
+
+
+<div class="visit-info">
+
+
+<div class="info-box">
+
+<span class="info-label">
+📅 التاريخ
+</span>
+
+<div class="info-value">
+${escapeHtml(item.date)}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<span class="info-label">
+⏰ وقت الزيارة
+</span>
+
+<div class="info-value">
+${escapeHtml(item.time)}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<span class="info-label">
+📦 الباقة
+</span>
+
+<div class="info-value">
+${escapeHtml(item.packageName || "-")}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<span class="info-label">
+🩺 نوع الزيارة
+</span>
+
+<div class="info-value">
+${escapeHtml(
+getServiceName(item.service)
+)}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<span class="info-label">
+📞 هاتف المسن
+</span>
+
+<div class="info-value">
+${escapeHtml(item.customerPhone || "-")}
+</div>
+
+</div>
+
+
+<div class="info-box">
+
+<span class="info-label">
+👨‍👩‍👦 هاتف العائلة
+</span>
+
+<div class="info-value">
+${escapeHtml(item.familyPhone || "-")}
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="address-box">
+
+<div class="address-label">
+🏠 عنوان الزيارة
+</div>
+
+<div class="address-value">
+
+${escapeHtml(
+item.address || "لم يتم تسجيل العنوان"
+)}
+
+</div>
+
+</div>
+
+
+${
+item.notes
+?
+`
+
+<div class="notes-box">
+
+<div class="notes-label">
+📝 ملاحظات
+</div>
+
+<div class="notes-value">
+
+${escapeHtml(item.notes)}
+
+</div>
+
+</div>
+
+`
+:
+""
+}
+
+
+<div class="visit-action">
+
+${actionButton}
+
+</div>
+
+
+</div>
+
+`;
+
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* =====================================================
+   14. بدء الزيارة
+===================================================== */
+
+function startVisit(appointmentId){
+
+loadAppointments();
+
+
+const appointment =
+appointments.find(function(item){
+
+return item.id === appointmentId;
+
+});
+
+
+if(!appointment){
+
+showMessage(
+"لم يتم العثور على الزيارة.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   حماية:
+   لا يمكن للممرض بدء موعد
+   ليس تابعاً له.
+*/
+
+if(!isMyAppointment(appointment)){
+
+showMessage(
+"هذه الزيارة غير مسندة إليك.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   منع بدء زيارة مكتملة
+*/
+
+if(appointment.status === "completed"){
+
+showMessage(
+"هذه الزيارة مكتملة مسبقاً.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   منع بدء موعد ملغى
+*/
+
+if(appointment.status === "cancelled"){
+
+showMessage(
+"لا يمكن بدء زيارة ملغاة.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   تسجيل بداية الزيارة
+*/
+
+appointment.status =
+"in_progress";
+
+appointment.startedAt =
+new Date().toISOString();
+
+appointment.startedBy =
+loggedStaff
+?
+loggedStaff.name
+:
+"الممرض";
+
+
+/*
+   حفظ
+*/
+
+localStorage.setItem(
+"sanadAppointments",
+JSON.stringify(appointments)
+);
+
+
+/*
+   إشعار التحديث
+*/
+
+localStorage.setItem(
+"sanadAppointmentsLastUpdate",
+new Date().toISOString()
+);
+
+
+/*
+   إعادة العرض
+*/
+
+updateStats();
+
+renderVisits();
+
+
+showMessage(
+"▶️ تم بدء الزيارة بنجاح. عند الانتهاء اضغط «إنهاء الزيارة».",
+"success"
+);
+
+}
+
+
+/* =====================================================
+   15. إنهاء الزيارة
+===================================================== */
+
+function finishVisit(appointmentId){
+
+loadAppointments();
+
+
+const appointment =
+appointments.find(function(item){
+
+return item.id === appointmentId;
+
+});
+
+
+if(!appointment){
+
+showMessage(
+"لم يتم العثور على الزيارة.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   حماية
+*/
+
+if(!isMyAppointment(appointment)){
+
+showMessage(
+"هذه الزيارة غير مسندة إليك.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+   يجب أن تكون قيد التنفيذ
+*/
+
+if(appointment.status !== "in_progress"){
+
+if(appointment.status === "completed"){
+
+showMessage(
+"هذه الزيارة مكتملة مسبقاً.",
+"error"
+);
+
+}else{
+
+showMessage(
+"يجب بدء الزيارة أولاً.",
+"error"
+);
+
+}
+
+return;
+
+}
+
+
+/*
+   تسجيل النهاية
+*/
+
+appointment.status =
+"completed";
+
+appointment.finishedAt =
+new Date().toISOString();
+
+appointment.finishedBy =
+loggedStaff
+?
+loggedStaff.name
+:
+"الممرض";
+
+
+/*
+   حساب مدة الزيارة
+*/
+
+if(appointment.startedAt){
+
+const start =
+new Date(
+appointment.startedAt
+).getTime();
+
+const finish =
+new Date(
+appointment.finishedAt
+).getTime();
+
+const seconds =
+Math.max(
+0,
+Math.floor(
+(finish-start)/1000
+)
+);
+
+appointment.durationSeconds =
+seconds;
+
+}
+
+
+/*
+   حفظ
+*/
+
+localStorage.setItem(
+"sanadAppointments",
+JSON.stringify(appointments)
+);
+
+
+/*
+   إشعار التحديث
+*/
+
+localStorage.setItem(
+"sanadAppointmentsLastUpdate",
+new Date().toISOString()
+);
+
+
+/*
+   إعادة العرض
+*/
+
+updateStats();
+
+renderVisits();
+
+
+showMessage(
+"✅ تم إنهاء الزيارة وتسجيلها بنجاح.",
+"success"
+);
+
+}
+
+
+/* =====================================================
+   16. الإحصائيات
+===================================================== */
+
+function updateStats(){
+
+const myVisits =
+getMyVisits();
+
+
+const total =
+myVisits.length;
+
+
+const scheduled =
+myVisits.filter(function(item){
+
+return item.status === "scheduled";
+
+}).length;
+
+
+const active =
+myVisits.filter(function(item){
+
+return item.status === "in_progress";
+
+}).length;
+
+
+const completed =
+myVisits.filter(function(item){
+
+return item.status === "completed";
+
+}).length;
+
+
+document.getElementById(
+"totalVisits"
+).textContent =
+total;
+
+
+document.getElementById(
+"scheduledVisits"
+).textContent =
+scheduled;
+
+
+document.getElementById(
+"activeVisits"
+).textContent =
+active;
+
+
+document.getElementById(
+"completedVisits"
+).textContent =
+completed;
+
+}
+
+
+/* =====================================================
+   17. الرسائل
+===================================================== */
+
+function showMessage(message,type){
+
+const box =
+document.getElementById(
+"message"
+);
+
+
+box.textContent =
+message;
+
+
+box.className =
+"message "+
+(
+type === "success"
+?
+"success"
+:
+"error"
+);
+
+
+box.style.display =
+"block";
+
+
+setTimeout(function(){
+
+box.style.display =
+"none";
+
+},4000);
+
+}
+
+
+/* =====================================================
+   18. حماية HTML
+===================================================== */
+
+function escapeHtml(value){
+
+return String(value ?? "")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   19. تحديث البيانات
+===================================================== */
+
+function loadData(){
+
+loadAppointments();
+
+updateStats();
+
+renderVisits();
+
+
+showMessage(
+"🔄 تم تحديث جدول الزيارات.",
+"success"
+);
+
+}
+
+
+/* =====================================================
+   20. تسجيل الخروج
+===================================================== */
+
+function logoutNurse(event){
+
+event.preventDefault();
+
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+localStorage.removeItem(
+"sanadCurrentVisit"
+);
+
+
+window.location.href =
+"staff-login.html";
+
+}
+
+
+/* =====================================================
+   21. التحديث التلقائي
+===================================================== */
+
+/*
+   إذا المدير أضاف موعد جديد
+   من نافذة أخرى، الممرض يحصل عليه
+   عند تحديث البيانات.
+*/
+
+window.addEventListener(
+"storage",
+function(event){
+
+if(
+event.key === "sanadAppointments"
+){
+
+loadAppointments();
+
+updateStats();
+
+renderVisits();
+
+}
+
+});
+
+
+/*
+   تحديث كل 10 ثواني
+   حتى يظهر أي موعد جديد.
+*/
+
+setInterval(function(){
+
+loadAppointments();
+
+updateStats();
+
+renderVisits();
+
+},10000);
+
+
+/* =====================================================
+   22. التشغيل الأول
+===================================================== */
+
+loadAppointments();
+
+updateStats();
+
+renderVisits();
+
+</script>
+
+
+</body>
+
+</html>
