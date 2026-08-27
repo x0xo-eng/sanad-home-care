@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -7,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>لوحة مدير الشركة | سند</title>
+  <title>لوحة الكادر | سند</title>
 
   <link rel="stylesheet" href="style.css">
 
@@ -23,19 +22,6 @@
       color: #163b38;
       font-family: Arial, Tahoma, sans-serif;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
-
-    .header {
-      position: relative;
-      z-index: 10;
-    }
-
-    /* =========================
-       DASHBOARD
-    ========================= */
 
     .dashboard {
       max-width: 1250px;
@@ -84,7 +70,7 @@
       line-height: 1.8;
     }
 
-    .manager-avatar {
+    .staff-avatar {
       width: 82px;
       height: 82px;
 
@@ -109,18 +95,14 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
-
       margin-bottom: 28px;
     }
 
     .stat {
       background: white;
-
       border: 1px solid #e3edeb;
       border-radius: 20px;
-
       padding: 22px;
-
       box-shadow: 0 12px 35px rgba(22,70,65,.05);
     }
 
@@ -131,16 +113,9 @@
 
     .stat-number {
       color: #163b38;
-
       font-size: 28px;
-
       font-weight: 900;
-
       margin-top: 10px;
-    }
-
-    .pending-number {
-      color: #c68419;
     }
 
     /* =========================
@@ -149,14 +124,10 @@
 
     .section {
       background: white;
-
       border: 1px solid #e3edeb;
       border-radius: 24px;
-
       padding: 28px;
-
       margin-bottom: 25px;
-
       box-shadow: 0 15px 45px rgba(22,70,65,.05);
     }
 
@@ -166,19 +137,14 @@
 
     .section-title h2 {
       color: #163b38;
-
       font-size: 21px;
-
       margin: 0 0 6px;
     }
 
     .section-title p {
       color: #718480;
-
       font-size: 13px;
-
       margin: 0;
-
       line-height: 1.7;
     }
 
@@ -188,324 +154,246 @@
 
     .actions-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
+      grid-template-columns: repeat(4, 1fr);
       gap: 15px;
     }
 
     .action {
       border: 1px solid #e3edeb;
-
       background: #fbfefe;
-
       border-radius: 18px;
-
       padding: 22px 15px;
-
       text-align: center;
-
       cursor: pointer;
-
       transition: .25s;
-
       font-family: inherit;
     }
 
     .action:hover {
       transform: translateY(-4px);
-
       border-color: #16877d;
-
-      box-shadow:
-        0 10px 28px
-        rgba(22,135,125,.09);
+      box-shadow: 0 10px 28px rgba(22,135,125,.09);
     }
 
     .action-icon {
       width: 55px;
       height: 55px;
-
       border-radius: 17px;
-
       background: #e8f5f3;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       margin: 0 auto 12px;
-
       font-size: 26px;
     }
 
     .action h3 {
       color: #163b38;
-
       font-size: 14px;
-
       margin: 0 0 5px;
     }
 
     .action p {
       color: #718480;
-
       font-size: 11px;
-
       line-height: 1.6;
-
       margin: 0;
     }
 
     /* =========================
-       PENDING
+       PATIENTS
     ========================= */
 
-    .pending-list {
+    .patient-list {
       display: flex;
-
       flex-direction: column;
-
-      gap: 15px;
+      gap: 14px;
     }
 
-    .pending-card {
-      border: 1px solid #eadfca;
-
-      background: #fffdf8;
-
+    .patient-card {
+      background: #fbfefe;
+      border: 1px solid #e3edeb;
       border-radius: 18px;
-
       padding: 20px;
     }
 
-    .customer-top {
+    .patient-top {
       display: flex;
-
       justify-content: space-between;
-
       align-items: flex-start;
-
       gap: 15px;
-
       margin-bottom: 15px;
     }
 
-    .customer-name {
+    .patient-name {
       color: #163b38;
-
-      font-size: 16px;
-
+      font-size: 17px;
       font-weight: 900;
     }
 
-    .customer-id {
+    .patient-id {
       color: #16877d;
-
-      font-size: 12px;
-
-      font-weight: 900;
-
+      font-size: 11px;
+      font-weight: 800;
       margin-top: 5px;
     }
 
-    .status-badge {
-      background: #fff2d8;
-
-      color: #a66a0c;
-
-      border: 1px solid #efd8a9;
-
-      border-radius: 30px;
-
+    .status {
       padding: 7px 12px;
-
+      border-radius: 30px;
+      background: #e6f6ef;
+      color: #16815f;
       font-size: 11px;
-
       font-weight: 800;
-
       white-space: nowrap;
     }
 
-    .customer-details {
+    .patient-details {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-
-      margin-bottom: 16px;
+      margin-bottom: 15px;
     }
 
     .detail {
       background: white;
-
-      border: 1px solid #eee9dd;
-
+      border: 1px solid #e5eeec;
       border-radius: 12px;
-
-      padding: 11px;
+      padding: 12px;
     }
 
     .detail-label {
       color: #8a918e;
-
       font-size: 10px;
-
       margin-bottom: 5px;
     }
 
     .detail-value {
       color: #163b38;
-
       font-size: 12px;
-
       font-weight: 800;
-    }
-
-    .notes {
-      background: white;
-
-      border: 1px solid #eee9dd;
-
-      border-radius: 12px;
-
-      padding: 12px;
-
-      color: #718480;
-
-      font-size: 12px;
-
-      line-height: 1.8;
-
-      margin-bottom: 15px;
-    }
-
-    .approval-actions {
-      display: flex;
-
-      gap: 10px;
-
-      flex-wrap: wrap;
-    }
-
-    .approve-btn,
-    .reject-btn {
-      border: none;
-
-      border-radius: 11px;
-
-      padding: 11px 20px;
-
-      font-family: inherit;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-    }
-
-    .approve-btn {
-      background: #16877d;
-
-      color: white;
-    }
-
-    .approve-btn:hover {
-      background: #0f7068;
-    }
-
-    .reject-btn {
-      background: #fff0f0;
-
-      color: #a44b4b;
-
-      border: 1px solid #efd4d4;
-    }
-
-    .reject-btn:hover {
-      background: #ffe5e5;
     }
 
     /* =========================
-       CUSTOMERS
+       ROLE BOX
     ========================= */
 
-    .customer-list {
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 12px;
+    .role-box {
+      background: #f0f8f6;
+      border: 1px solid #dcece9;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 25px;
     }
 
-    .customer {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 15px;
-
-      padding: 17px;
-
-      background: #fbfefe;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 15px;
+    .role-box h2 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      color: #163b38;
     }
 
-    .customer-info {
+    .role-box p {
       color: #718480;
-
-      font-size: 11px;
-
-      line-height: 1.9;
-
-      margin-top: 5px;
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.8;
     }
 
-    .customer-actions {
+    /* =========================
+       VISIT FORM
+    ========================= */
+
+    .visit-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group {
       display: flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      flex-wrap: wrap;
-
-      justify-content: flex-end;
+      flex-direction: column;
+      gap: 7px;
     }
 
-    .small-status {
-      padding: 7px 11px;
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
 
-      border-radius: 20px;
-
-      font-size: 10px;
-
+    .form-group label {
+      color: #163b38;
+      font-size: 12px;
       font-weight: 800;
     }
 
-    .status-pending {
-      background: #fff2d8;
-      color: #a66a0c;
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #dfecea;
+      border-radius: 12px;
+      background: #fbfefe;
+      color: #163b38;
+      font-family: inherit;
+      outline: none;
     }
 
-    .status-active {
-      background: #e6f6ef;
-      color: #16815f;
+    .form-group textarea {
+      min-height: 110px;
+      resize: vertical;
     }
 
-    .status-rejected {
-      background: #fff0f0;
-      color: #a44b4b;
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #16877d;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
+    }
+
+    .save-btn {
+      border: none;
+      background: #16877d;
+      color: white;
+      padding: 13px 25px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      background: #0f7068;
+    }
+
+    /* =========================
+       INFO
+    ========================= */
+
+    .info-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .info-item {
+      padding: 16px;
+      background: #fbfefe;
+      border: 1px solid #e3edeb;
+      border-radius: 15px;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #163b38;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .info-item span {
+      color: #718480;
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     /* =========================
@@ -514,97 +402,12 @@
 
     .empty {
       text-align: center;
-
       color: #718480;
-
       padding: 30px;
-
       font-size: 13px;
-
       background: #fbfefe;
-
       border-radius: 15px;
-
       border: 1px dashed #dce8e5;
-    }
-
-    /* =========================
-       PACKAGES
-    ========================= */
-
-    .packages {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      gap: 18px;
-    }
-
-    .package {
-      border: 1px solid #e3edeb;
-
-      border-radius: 19px;
-
-      padding: 22px;
-
-      background: #fbfefe;
-    }
-
-    .package h3 {
-      color: #163b38;
-
-      margin: 0 0 8px;
-
-      font-size: 17px;
-    }
-
-    .package-price {
-      color: #16877d;
-
-      font-size: 21px;
-
-      font-weight: 900;
-
-      margin-bottom: 15px;
-    }
-
-    .package ul {
-      margin: 0;
-
-      padding-right: 20px;
-    }
-
-    .package li {
-      color: #718480;
-
-      font-size: 12px;
-
-      line-height: 2;
-    }
-
-    /* =========================
-       ACCESS
-    ========================= */
-
-    .access-box {
-      background: #f0f8f6;
-
-      border: 1px solid #dcece9;
-
-      border-radius: 17px;
-
-      padding: 20px;
-
-      color: #4e6d68;
-
-      font-size: 13px;
-
-      line-height: 2;
-    }
-
-    .access-box strong {
-      color: #163b38;
     }
 
     /* =========================
@@ -613,31 +416,20 @@
 
     .logout-area {
       text-align: center;
-
       margin: 35px 0 10px;
     }
 
     .logout {
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
-
       padding: 11px 20px;
-
       border-radius: 12px;
-
       border: 1px solid #eadede;
-
       background: white;
-
       color: #a44b4b;
-
       text-decoration: none;
-
       font-size: 13px;
-
       font-weight: 800;
     }
 
@@ -655,11 +447,7 @@
         grid-template-columns: 1fr 1fr;
       }
 
-      .packages {
-        grid-template-columns: 1fr;
-      }
-
-      .customer-details {
+      .patient-details {
         grid-template-columns: 1fr 1fr;
       }
 
@@ -679,27 +467,30 @@
         font-size: 24px;
       }
 
-      .manager-avatar {
+      .staff-avatar {
         width: 62px;
         height: 62px;
         font-size: 30px;
       }
 
-      .customer-top {
+      .patient-top {
         flex-direction: column;
       }
 
-      .customer-details {
+      .patient-details {
         grid-template-columns: 1fr;
       }
 
-      .customer {
-        flex-direction: column;
-        align-items: stretch;
+      .visit-form {
+        grid-template-columns: 1fr;
       }
 
-      .customer-actions {
-        justify-content: flex-start;
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .info-list {
+        grid-template-columns: 1fr;
       }
 
     }
@@ -717,15 +508,6 @@
       .welcome {
         flex-direction: column;
         text-align: center;
-      }
-
-      .approval-actions {
-        flex-direction: column;
-      }
-
-      .approve-btn,
-      .reject-btn {
-        width: 100%;
       }
 
     }
@@ -781,7 +563,7 @@
   <div>
 
     <span class="eyebrow">
-      👨‍💼 لوحة إدارة الشركة
+      🏥 نظام الكادر — سند
     </span>
 
     <h1 id="welcomeName">
@@ -789,15 +571,35 @@
     </h1>
 
     <p id="welcomeRole">
-      إدارة ومتابعة عمليات شركة سند
+      لوحة عمل الكادر
     </p>
 
   </div>
 
 
-  <div class="manager-avatar">
-    👨‍💼
+  <div
+    class="staff-avatar"
+    id="staffAvatar"
+  >
+    👨‍⚕️
   </div>
+
+</section>
+
+
+<!-- =========================
+     ROLE DESCRIPTION
+========================= -->
+
+<section class="role-box">
+
+  <h2 id="roleTitle">
+    لوحة الكادر
+  </h2>
+
+  <p id="roleDescription">
+    أهلاً بك في نظام سند لإدارة الرعاية المنزلية.
+  </p>
 
 </section>
 
@@ -808,7 +610,6 @@
 
 <section class="stats">
 
-
   <div class="stat">
 
     <span class="stat-label">
@@ -818,22 +619,6 @@
     <div
       class="stat-number"
       id="customersCount"
-    >
-      0
-    </div>
-
-  </div>
-
-
-  <div class="stat">
-
-    <span class="stat-label">
-      ⏳ بانتظار الموافقة
-    </span>
-
-    <div
-      class="stat-number pending-number"
-      id="pendingCount"
     >
       0
     </div>
@@ -860,15 +645,33 @@
   <div class="stat">
 
     <span class="stat-label">
-      📦 الباقات
+      📅 زياراتي اليوم
     </span>
 
-    <div class="stat-number">
-      3
+    <div
+      class="stat-number"
+      id="todayVisits"
+    >
+      0
     </div>
 
   </div>
 
+
+  <div class="stat">
+
+    <span class="stat-label">
+      📝 تقاريري
+    </span>
+
+    <div
+      class="stat-number"
+      id="myReports"
+    >
+      0
+    </div>
+
+  </div>
 
 </section>
 
@@ -882,327 +685,178 @@
   <div class="section-title">
 
     <h2>
-      ⚡ الإدارة السريعة
+      ⚡ مهامي السريعة
     </h2>
 
-    <p>
-      العمليات الأساسية التي يحتاجها مدير الشركة
-    </p>
-
-  </div>
-
-
-  <div class="actions-grid">
-
-
-    <button
-      class="action"
-      onclick="scrollToSection('pending')"
-    >
-
-      <div class="action-icon">
-        ⏳
-      </div>
-
-      <h3>
-        طلبات بانتظار الموافقة
-      </h3>
-
-      <p>
-        مراجعة المشتركين الجدد
-      </p>
-
-    </button>
-
-
-    <button
-      class="action"
-      onclick="scrollToSection('customers')"
-    >
-
-      <div class="action-icon">
-        👥
-      </div>
-
-      <h3>
-        ملفات المشتركين
-      </h3>
-
-      <p>
-        عرض جميع ملفات المشتركين
-      </p>
-
-    </button>
-
-
-    <button
-      class="action"
-      onclick="scrollToSection('packages')"
-    >
-
-      <div class="action-icon">
-        📦
-      </div>
-
-      <h3>
-        الباقات
-      </h3>
-
-      <p>
-        مراجعة الباقات والأسعار
-      </p>
-
-    </button>
-
-
-    <button
-      class="action"
-      onclick="alert('سيتم ربط التقارير المالية والإدارية لاحقاً.')"
-    >
-
-      <div class="action-icon">
-        📊
-      </div>
-
-      <h3>
-        التقارير
-      </h3>
-
-      <p>
-        التقارير الإدارية والمالية
-      </p>
-
-    </button>
-
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     PENDING CUSTOMERS
-========================= -->
-
-<section
-  class="section"
-  id="pending"
->
-
-  <div class="section-title">
-
-    <h2>
-      ⏳ المشتركين بانتظار موافقة المدير
-    </h2>
-
-    <p>
-      يقوم موظف الاستقبال بإنشاء الملف أولاً، وبعدها يظهر هنا حتى يراجعه المدير.
+    <p id="actionsDescription">
+      العمليات المتاحة لك حسب صفتك الوظيفية.
     </p>
 
   </div>
 
 
   <div
-    class="pending-list"
-    id="pendingList"
+    class="actions-grid"
+    id="actionsGrid"
   ></div>
 
 </section>
 
 
 <!-- =========================
-     ALL CUSTOMERS
+     PATIENTS
 ========================= -->
 
 <section
   class="section"
-  id="customers"
+  id="patientsSection"
 >
 
   <div class="section-title">
 
     <h2>
-      👥 ملفات المشتركين
+      👴 المشتركين الفعالين
     </h2>
 
     <p>
-      جميع الملفات المسجلة في نظام سند.
+      قائمة المشتركين الذين لديهم اشتراك فعال في نظام سند.
     </p>
 
   </div>
 
 
   <div
-    class="customer-list"
-    id="customerList"
+    class="patient-list"
+    id="patientList"
   ></div>
 
 </section>
 
 
 <!-- =========================
-     PACKAGES
+     ROLE WORK AREA
 ========================= -->
 
 <section
   class="section"
-  id="packages"
+  id="workSection"
 >
 
   <div class="section-title">
 
-    <h2>
-      📦 الباقات والأسعار
+    <h2 id="workTitle">
+      📝 تسجيل العمل
     </h2>
 
-    <p>
-      معلومات الباقات المتاحة داخل نظام سند.
+    <p id="workDescription">
+      سجل نشاطك أو زيارتك للمشترك.
     </p>
 
   </div>
 
 
-  <div class="packages">
+  <form
+    class="visit-form"
+    id="workForm"
+  >
 
+    <div class="form-group">
 
-    <div class="package">
+      <label for="workCustomer">
+        👴 المشترك
+      </label>
 
-      <h3>
-        🟢 باقة سند الاعتيادية
-      </h3>
+      <select
+        id="workCustomer"
+        required
+      >
 
-      <div class="package-price">
-        252,000 د.ع / شهرياً
-      </div>
+        <option value="">
+          اختر المشترك
+        </option>
 
-      <ul>
-
-        <li>
-          👩‍⚕️ زيارة الممرض الصحي يومياً
-        </li>
-
-        <li>
-          🩺 زيارة الطبيب المقيم أسبوعياً
-        </li>
-
-        <li>
-          👨‍⚕️ زيارة الطبيب الأخصائي
-        </li>
-
-        <li>
-          🧪 الفحوصات والتحاليل
-        </li>
-
-        <li>
-          🛁 الرعاية الشخصية
-        </li>
-
-        <li>
-          📋 تقارير المتابعة
-        </li>
-
-      </ul>
+      </select>
 
     </div>
 
 
-    <div class="package">
+    <div class="form-group">
 
-      <h3>
-        🔵 الباقة المتوسطة
-      </h3>
+      <label for="workType">
+        📋 نوع العمل
+      </label>
 
-      <div class="package-price">
-        337,000 د.ع / شهرياً
-      </div>
-
-      <ul>
-
-        <li>
-          👩‍⚕️ رعاية تمريضية موسعة
-        </li>
-
-        <li>
-          🩺 متابعة الطبيب المقيم
-        </li>
-
-        <li>
-          👨‍⚕️ متابعة الطبيب الأخصائي
-        </li>
-
-        <li>
-          🧪 الفحوصات والتحاليل
-        </li>
-
-        <li>
-          🧠 دعم نفسي
-        </li>
-
-        <li>
-          🎭 خدمات ترفيهية
-        </li>
-
-        <li>
-          📋 تقارير شاملة
-        </li>
-
-      </ul>
+      <select
+        id="workType"
+        required
+      ></select>
 
     </div>
 
 
-    <div class="package">
+    <div class="form-group">
 
-      <h3>
-        🟣 باقة سند الفاخرة
-      </h3>
+      <label for="workDate">
+        📅 التاريخ
+      </label>
 
-      <div class="package-price">
-        حسب الخدمات المختارة
-      </div>
-
-      <ul>
-
-        <li>
-          👩‍⚕️ رعاية تمريضية مكثفة
-        </li>
-
-        <li>
-          👨‍⚕️ متابعة طبية متقدمة
-        </li>
-
-        <li>
-          🧠 دعم نفسي
-        </li>
-
-        <li>
-          🥗 متابعة غذائية
-        </li>
-
-        <li>
-          🏃 علاج طبيعي
-        </li>
-
-        <li>
-          🎭 ترفيه ومرافقة
-        </li>
-
-        <li>
-          💇 خدمات إضافية
-        </li>
-
-      </ul>
+      <input
+        id="workDate"
+        type="date"
+        required
+      >
 
     </div>
 
 
-  </div>
+    <div class="form-group">
+
+      <label for="workTime">
+        🕐 الوقت
+      </label>
+
+      <input
+        id="workTime"
+        type="time"
+        required
+      >
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <label for="workNotes">
+        📝 الملاحظات والتقرير
+      </label>
+
+      <textarea
+        id="workNotes"
+        placeholder="اكتب تفاصيل الزيارة أو العمل المنجز..."
+        required
+      ></textarea>
+
+    </div>
+
+
+    <div class="form-group full">
+
+      <button
+        type="submit"
+        class="save-btn"
+      >
+        💾 حفظ التقرير
+      </button>
+
+    </div>
+
+  </form>
 
 </section>
 
 
 <!-- =========================
-     MANAGER PERMISSIONS
+     ROLE INFORMATION
 ========================= -->
 
 <section class="section">
@@ -1210,47 +864,20 @@
   <div class="section-title">
 
     <h2>
-      🔐 صلاحيات المدير
+      🔐 صلاحياتي
     </h2>
 
     <p>
-      حساب المدير مخصص لإدارة ومراجعة عمليات الشركة.
+      هذه الوظائف مرتبطة بصفتك الوظيفية.
     </p>
 
   </div>
 
 
-  <div class="access-box">
-
-    <strong>
-      صلاحيات حساب المدير:
-    </strong>
-
-    <br>
-
-    ✅ مراجعة ملفات المشتركين الجدد
-
-    <br>
-
-    ✅ الموافقة على الاشتراكات
-
-    <br>
-
-    ✅ رفض الاشتراكات
-
-    <br>
-
-    ✅ متابعة حالة المشتركين
-
-    <br>
-
-    ✅ الاطلاع على الباقات والأسعار
-
-    <br>
-
-    ⏳ سيتم إضافة إدارة الكادر والتقارير والجدولة في المراحل القادمة
-
-  </div>
+  <div
+    class="info-list"
+    id="permissionsList"
+  ></div>
 
 </section>
 
@@ -1295,7 +922,7 @@
 <script>
 
 /* =====================================================
-   1. التحقق من تسجيل الدخول
+   1. قراءة جلسة الكادر
 ===================================================== */
 
 const loggedStaffRaw =
@@ -1317,7 +944,7 @@ if (!loggedStaffRaw) {
 
 
 /* =====================================================
-   2. قراءة بيانات المدير
+   2. تحويل الجلسة إلى كائن
 ===================================================== */
 
 let loggedStaff = null;
@@ -1343,18 +970,417 @@ try {
 
 
 /* =====================================================
-   3. التحقق من الصلاحية
+   3. تعريف جميع الوظائف
 ===================================================== */
 
-if (
-  loggedStaff &&
-  loggedStaff.role !== "manager" &&
-  loggedStaff.role !== "owner" &&
-  loggedStaff.permissions !== "all"
-) {
+const roleConfig = {
+
+  owner: {
+
+    title: "مالك النظام",
+
+    description:
+      "لديك صلاحيات الإدارة العليا ومتابعة جميع أعمال شركة سند.",
+
+    icon: "👑",
+
+    workTitle:
+      "🛡️ المتابعة الإدارية",
+
+    workDescription:
+      "يمكنك متابعة أعمال الكادر والمشتركين والتقارير.",
+
+    workTypes: [
+      "متابعة إدارية",
+      "مراجعة تقرير",
+      "متابعة مشترك",
+      "ملاحظة إدارية"
+    ],
+
+    permissions: [
+      "إدارة النظام",
+      "متابعة الكادر",
+      "متابعة المشتركين",
+      "الاطلاع على التقارير",
+      "متابعة الزيارات"
+    ]
+
+  },
+
+
+  manager: {
+
+    title: "مدير الشركة",
+
+    description:
+      "إدارة ومتابعة عمليات شركة سند والمشتركين والكادر.",
+
+    icon: "👨‍💼",
+
+    workTitle:
+      "📊 المتابعة الإدارية",
+
+    workDescription:
+      "متابعة ملفات المشتركين وأداء الكادر.",
+
+    workTypes: [
+      "متابعة إدارية",
+      "مراجعة ملف",
+      "متابعة مشترك",
+      "ملاحظة إدارية"
+    ],
+
+    permissions: [
+      "إدارة المشتركين",
+      "مراجعة الطلبات",
+      "متابعة الكادر",
+      "التقارير",
+      "متابعة الزيارات"
+    ]
+
+  },
+
+
+  reception: {
+
+    title: "موظف الاستقبال",
+
+    description:
+      "إدارة تسجيل المشتركين والتواصل مع العائلات ومتابعة الملفات.",
+
+    icon: "🧑‍💼",
+
+    workTitle:
+      "📞 أعمال الاستقبال",
+
+    workDescription:
+      "تسجيل ومتابعة بيانات المشتركين والتواصل مع العائلة.",
+
+    workTypes: [
+      "تحديث بيانات",
+      "اتصال بالعائلة",
+      "متابعة ملف",
+      "تسجيل ملاحظة"
+    ],
+
+    permissions: [
+      "تسجيل المشتركين",
+      "تحديث بيانات المشترك",
+      "متابعة الملفات",
+      "متابعة المدفوعات",
+      "التواصل مع العائلة"
+    ]
+
+  },
+
+
+  specialist: {
+
+    title: "الطبيب الأخصائي",
+
+    description:
+      "متابعة الحالة الطبية للمسن وإجراء التقييمات الطبية المتخصصة.",
+
+    icon: "👨‍⚕️",
+
+    workTitle:
+      "🩺 التقرير الطبي للأخصائي",
+
+    workDescription:
+      "سجل تقييمك الطبي وملاحظاتك وتوصياتك للمشترك.",
+
+    workTypes: [
+      "فحص طبي",
+      "تقييم الحالة",
+      "وصفة أو توصية",
+      "متابعة طبية"
+    ],
+
+    permissions: [
+      "عرض بيانات المشترك الطبية",
+      "إجراء التقييم الطبي",
+      "كتابة التقرير الطبي",
+      "إضافة التوصيات",
+      "متابعة الحالة"
+    ]
+
+  },
+
+
+  resident: {
+
+    title: "الطبيب المقيم",
+
+    description:
+      "متابعة الحالة اليومية للمسن والتنسيق مع فريق الرعاية.",
+
+    icon: "🩺",
+
+    workTitle:
+      "🩺 زيارة الطبيب المقيم",
+
+    workDescription:
+      "سجل الزيارة الطبية والملاحظات والتوصيات.",
+
+    workTypes: [
+      "زيارة طبية",
+      "فحص عام",
+      "متابعة حالة",
+      "توصية علاجية"
+    ],
+
+    permissions: [
+      "عرض ملف المشترك",
+      "إجراء الفحص",
+      "تسجيل الزيارة",
+      "كتابة الملاحظات",
+      "رفع التوصيات"
+    ]
+
+  },
+
+
+  nurse: {
+
+    title: "الممرض الصحي",
+
+    description:
+      "تنفيذ الرعاية التمريضية اليومية ومتابعة المؤشرات الصحية للمسن.",
+
+    icon: "👩‍⚕️",
+
+    workTitle:
+      "🩺 الزيارة التمريضية",
+
+    workDescription:
+      "سجل تفاصيل الزيارة التمريضية والمؤشرات الصحية للمشترك.",
+
+    workTypes: [
+      "زيارة تمريضية",
+      "إعطاء الأدوية",
+      "قياس ضغط الدم",
+      "قياس سكر الدم",
+      "رعاية شخصية",
+      "تمرين خفيف"
+    ],
+
+    permissions: [
+      "عرض مرضاي",
+      "تسجيل الزيارة التمريضية",
+      "تسجيل الأدوية",
+      "قياس ضغط الدم",
+      "قياس سكر الدم",
+      "كتابة التقرير التمريضي"
+    ]
+
+  },
+
+
+  nutrition: {
+
+    title: "أخصائي التغذية",
+
+    description:
+      "متابعة التغذية الصحية للمسن ووضع التوصيات الغذائية المناسبة.",
+
+    icon: "🥗",
+
+    workTitle:
+      "🥗 التقرير الغذائي",
+
+    workDescription:
+      "سجل تقييم التغذية والخطة أو التوصيات الغذائية.",
+
+    workTypes: [
+      "تقييم غذائي",
+      "خطة غذائية",
+      "متابعة التغذية",
+      "توصية غذائية"
+    ],
+
+    permissions: [
+      "عرض بيانات المشترك",
+      "التقييم الغذائي",
+      "وضع خطة غذائية",
+      "تسجيل التوصيات",
+      "متابعة التغذية"
+    ]
+
+  },
+
+
+  physio: {
+
+    title: "أخصائي العلاج الطبيعي",
+
+    description:
+      "تنفيذ ومتابعة تمارين العلاج الطبيعي والحركة المناسبة للمسن.",
+
+    icon: "🏃",
+
+    workTitle:
+      "🏃 جلسة العلاج الطبيعي",
+
+    workDescription:
+      "سجل جلسة العلاج الطبيعي والتمارين والتقدم.",
+
+    workTypes: [
+      "جلسة علاج طبيعي",
+      "تقييم الحركة",
+      "تمارين",
+      "متابعة التحسن"
+    ],
+
+    permissions: [
+      "عرض حالة المشترك",
+      "تقييم الحركة",
+      "تسجيل جلسة العلاج",
+      "تسجيل التمارين",
+      "متابعة التقدم"
+    ]
+
+  },
+
+
+  psychologist: {
+
+    title: "الأخصائي النفسي",
+
+    description:
+      "متابعة الحالة النفسية والاجتماعية للمسن وتقديم الدعم المناسب.",
+
+    icon: "🧠",
+
+    workTitle:
+      "🧠 التقرير النفسي",
+
+    workDescription:
+      "سجل الملاحظات والتقييم والمتابعة النفسية للمشترك.",
+
+    workTypes: [
+      "جلسة نفسية",
+      "تقييم نفسي",
+      "متابعة الحالة",
+      "توصية نفسية"
+    ],
+
+    permissions: [
+      "عرض المعلومات اللازمة للحالة",
+      "التقييم النفسي",
+      "تسجيل الجلسة",
+      "تسجيل الملاحظات",
+      "رفع التوصيات"
+    ]
+
+  },
+
+
+  entertainment: {
+
+    title: "مرافق الترفيه",
+
+    description:
+      "تنظيم الأنشطة الترفيهية والاجتماعية ومرافقة المسن.",
+
+    icon: "🎭",
+
+    workTitle:
+      "🎭 النشاط الترفيهي",
+
+    workDescription:
+      "سجل النشاط أو المرافقة التي تم تنفيذها للمشترك.",
+
+    workTypes: [
+      "نشاط ترفيهي",
+      "مرافقة",
+      "خروج ترفيهي",
+      "نشاط اجتماعي"
+    ],
+
+    permissions: [
+      "عرض المشتركين المكلف بهم",
+      "تسجيل النشاط",
+      "تسجيل المرافقة",
+      "تسجيل الخروج الترفيهي",
+      "كتابة التقرير"
+    ]
+
+  },
+
+
+  hairdresser: {
+
+    title: "الكوافير",
+
+    description:
+      "تقديم خدمات العناية الشخصية بالمظهر والنظافة الشخصية للمسن.",
+
+    icon: "💇",
+
+    workTitle:
+      "💇 خدمة العناية الشخصية",
+
+    workDescription:
+      "سجل الخدمة التي تم تقديمها للمشترك.",
+
+    workTypes: [
+      "قص الشعر",
+      "حلاقة",
+      "العناية الشخصية",
+      "خدمة أخرى"
+    ],
+
+    permissions: [
+      "عرض المشترك المكلف به",
+      "تسجيل الخدمة",
+      "تسجيل تاريخ الخدمة",
+      "كتابة الملاحظات"
+    ]
+
+  }
+
+};
+
+
+/* =====================================================
+   4. التأكد من وجود الصفة
+===================================================== */
+
+if (!loggedStaff) {
+
+  window.location.href =
+    "staff-login.html";
+
+}
+
+
+const role =
+  loggedStaff.role;
+
+
+const config =
+  roleConfig[role];
+
+
+/*
+   مهم جداً:
+
+   لا نطرد الكادر إذا لم يكن
+   manager أو owner.
+
+   أي صفة موجودة في roleConfig
+   مسموح لها بالدخول إلى
+   staff-dashboard.html.
+*/
+
+if (!config) {
 
   alert(
-    "ليس لديك صلاحية الدخول إلى لوحة الإدارة."
+    "الصفة الوظيفية غير معروفة. يرجى تسجيل الدخول مرة أخرى."
+  );
+
+  localStorage.removeItem(
+    "sanadLoggedInStaff"
   );
 
   window.location.href =
@@ -1364,128 +1390,133 @@ if (
 
 
 /* =====================================================
-   4. عرض اسم المدير
+   5. عرض بيانات الموظف
 ===================================================== */
 
-if (loggedStaff) {
-
-  document.getElementById(
-    "welcomeName"
-  ).textContent =
-    "أهلاً بك، " +
-    loggedStaff.name +
-    " 👋";
+document.getElementById(
+  "welcomeName"
+).textContent =
+  "أهلاً بك، " +
+  (loggedStaff.name || "عضو الكادر") +
+  " 👋";
 
 
-  document.getElementById(
-    "welcomeRole"
-  ).textContent =
-    loggedStaff.title ||
-    "مدير الشركة — فريق سند";
+document.getElementById(
+  "welcomeRole"
+).textContent =
+  loggedStaff.title ||
+  config.title;
+
+
+document.getElementById(
+  "roleTitle"
+).textContent =
+  config.icon +
+  " " +
+  config.title;
+
+
+document.getElementById(
+  "roleDescription"
+).textContent =
+  config.description;
+
+
+document.getElementById(
+  "staffAvatar"
+).textContent =
+  config.icon;
+
+
+document.getElementById(
+  "workTitle"
+).textContent =
+  config.workTitle;
+
+
+document.getElementById(
+  "workDescription"
+).textContent =
+  config.workDescription;
+
+
+/* =====================================================
+   6. بيانات المشتركين
+===================================================== */
+
+let customers = [];
+
+
+try {
+
+  customers =
+    JSON.parse(
+      localStorage.getItem(
+        "sanadCustomers"
+      ) || "[]"
+    );
+
+} catch (error) {
+
+  customers = [];
 
 }
 
 
 /* =====================================================
-   5. قراءة المشتركين
+   7. المشتركين الفعالين
 ===================================================== */
 
-let customers =
-  JSON.parse(
-    localStorage.getItem(
-      "sanadCustomers"
-    ) || "[]"
+const activeCustomers =
+  customers.filter(
+    function(customer) {
+
+      return customer.status === "active";
+
+    }
   );
 
 
 /* =====================================================
-   6. حفظ المشتركين
+   8. الإحصائيات
 ===================================================== */
 
-function saveCustomers() {
+document.getElementById(
+  "customersCount"
+).textContent =
+  customers.length;
 
-  localStorage.setItem(
-    "sanadCustomers",
-    JSON.stringify(
-      customers
-    )
-  );
 
-}
+document.getElementById(
+  "activeCount"
+).textContent =
+  activeCustomers.length;
 
 
 /* =====================================================
-   7. نص الحالة
+   9. عرض المشتركين
 ===================================================== */
 
-function getStatusText(status) {
-
-  const statuses = {
-
-    pending_manager:
-      "بانتظار موافقة المدير",
-
-    active:
-      "اشتراك فعال",
-
-    rejected:
-      "مرفوض",
-
-    suspended:
-      "موقوف",
-
-    completed:
-      "مكتمل"
-
-  };
-
-
-  return (
-    statuses[status] ||
-    status ||
-    "غير محدد"
-  );
-
-}
-
-
-/* =====================================================
-   8. عرض طلبات الموافقة
-===================================================== */
-
-function renderPendingCustomers() {
+function renderPatients() {
 
   const list =
     document.getElementById(
-      "pendingList"
+      "patientList"
     );
 
 
   list.innerHTML = "";
 
 
-  const pendingCustomers =
-    customers.filter(
-      function(customer) {
-
-        return (
-          customer.status ===
-          "pending_manager"
-        );
-
-      }
-    );
-
-
   if (
-    pendingCustomers.length === 0
+    activeCustomers.length === 0
   ) {
 
     list.innerHTML = `
 
       <div class="empty">
 
-        ✅ لا توجد حالياً ملفات بانتظار موافقة المدير.
+        👴 لا توجد حالياً مشتركين فعالين.
 
       </div>
 
@@ -1496,7 +1527,7 @@ function renderPendingCustomers() {
   }
 
 
-  pendingCustomers
+  activeCustomers
     .slice()
     .reverse()
     .forEach(
@@ -1509,41 +1540,47 @@ function renderPendingCustomers() {
 
 
         card.className =
-          "pending-card";
+          "patient-card";
 
 
         card.innerHTML = `
 
-          <div class="customer-top">
+          <div class="patient-top">
 
             <div>
 
-              <div class="customer-name">
+              <div class="patient-name">
 
-                👴 ${escapeHTML(customer.name)}
+                👴 ${escapeHTML(
+                  customer.name ||
+                  "مشترك"
+                )}
 
               </div>
 
-              <div class="customer-id">
+              <div class="patient-id">
 
-                رقم الملف:
-                ${escapeHTML(customer.id)}
+                🆔 رقم الملف:
+                ${escapeHTML(
+                  customer.id ||
+                  "-"
+                )}
 
               </div>
 
             </div>
 
 
-            <div class="status-badge">
+            <div class="status">
 
-              ⏳ بانتظار الموافقة
+              ✅ اشتراك فعال
 
             </div>
 
           </div>
 
 
-          <div class="customer-details">
+          <div class="patient-details">
 
 
             <div class="detail">
@@ -1554,7 +1591,10 @@ function renderPendingCustomers() {
 
               <div class="detail-value">
 
-                ${escapeHTML(customer.packageName)}
+                ${escapeHTML(
+                  customer.packageName ||
+                  "غير محدد"
+                )}
 
               </div>
 
@@ -1564,68 +1604,16 @@ function renderPendingCustomers() {
             <div class="detail">
 
               <div class="detail-label">
-                💰 السعر
+                📞 الهاتف
               </div>
 
               <div class="detail-value">
 
-                ${
-                  customer.packagePrice
-                    ? Number(
-                        customer.packagePrice
-                      ).toLocaleString("ar-IQ") +
-                      " د.ع"
-                    : "حسب الخدمات"
-                }
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                👨‍👩‍👦 العائلة
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(customer.familyName)}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📞 هاتف العائلة
-              </div>
-
-              <div class="detail-value">
-
-                ${escapeHTML(customer.familyPhone)}
-
-              </div>
-
-            </div>
-
-
-            <div class="detail">
-
-              <div class="detail-label">
-                📱 هاتف المسن
-              </div>
-
-              <div class="detail-value">
-
-                ${
-                  escapeHTML(
-                    customer.phone || "غير مسجل"
-                  )
-                }
+                ${escapeHTML(
+                  customer.phone ||
+                  customer.familyPhone ||
+                  "غير مسجل"
+                )}
 
               </div>
 
@@ -1642,7 +1630,9 @@ function renderPendingCustomers() {
 
                 ${
                   customer.age
-                    ? escapeHTML(customer.age) +
+                    ? escapeHTML(
+                        customer.age
+                      ) +
                       " سنة"
                     : "غير مسجل"
                 }
@@ -1652,18 +1642,53 @@ function renderPendingCustomers() {
             </div>
 
 
-          </div>
+            <div class="detail">
 
+              <div class="detail-label">
+                👨‍👩‍👦 العائلة
+              </div>
 
-          <div class="detail">
+              <div class="detail-value">
 
-            <div class="detail-label">
-              🏠 العنوان
+                ${escapeHTML(
+                  customer.familyName ||
+                  "غير مسجل"
+                )}
+
+              </div>
+
             </div>
 
-            <div class="detail-value">
 
-              ${escapeHTML(customer.address)}
+            <div class="detail">
+
+              <div class="detail-label">
+                📍 العنوان
+              </div>
+
+              <div class="detail-value">
+
+                ${escapeHTML(
+                  customer.address ||
+                  "غير مسجل"
+                )}
+
+              </div>
+
+            </div>
+
+
+            <div class="detail">
+
+              <div class="detail-label">
+                📅 حالة الملف
+              </div>
+
+              <div class="detail-value">
+
+                فعال
+
+              </div>
 
             </div>
 
@@ -1671,58 +1696,26 @@ function renderPendingCustomers() {
 
 
           ${
-            customer.notes
+            role === "nurse"
               ? `
 
-                <div class="notes">
+                <div class="detail">
 
-                  📝 <strong>الملاحظات:</strong>
+                  <div class="detail-label">
+                    🩺 ملاحظة تمريضية
+                  </div>
 
-                  <br>
+                  <div class="detail-value">
 
-                  ${escapeHTML(customer.notes)}
+                    يمكن للممرض تسجيل الزيارة والمؤشرات الحيوية من نموذج العمل.
+
+                  </div>
 
                 </div>
 
               `
               : ""
           }
-
-
-          <div class="notes">
-
-            👤 <strong>تم التسجيل بواسطة:</strong>
-
-            ${escapeHTML(
-              customer.createdBy ||
-              "موظف الاستقبال"
-            )}
-
-          </div>
-
-
-          <div class="approval-actions">
-
-            <button
-              class="approve-btn"
-              onclick="approveCustomer('${customer.id}')"
-            >
-
-              ✅ الموافقة على المشترك
-
-            </button>
-
-
-            <button
-              class="reject-btn"
-              onclick="rejectCustomer('${customer.id}')"
-            >
-
-              ❌ رفض المشترك
-
-            </button>
-
-          </div>
 
         `;
 
@@ -1738,341 +1731,819 @@ function renderPendingCustomers() {
 
 
 /* =====================================================
-   9. الموافقة على المشترك
+   10. المهام السريعة
 ===================================================== */
 
-function approveCustomer(id) {
+function renderActions() {
 
-  const customer =
-    customers.find(
-      function(item) {
+  const grid =
+    document.getElementById(
+      "actionsGrid"
+    );
 
-        return item.id === id;
 
+  grid.innerHTML = "";
+
+
+  const actions = [];
+
+
+  if (
+    role === "nurse"
+  ) {
+
+    actions.push(
+      {
+        icon: "🩺",
+        title: "زيارة تمريضية",
+        text: "تسجيل زيارة الممرض",
+        section: "workSection"
+      },
+      {
+        icon: "💊",
+        title: "الأدوية",
+        text: "تسجيل إعطاء الأدوية",
+        section: "workSection"
+      },
+      {
+        icon: "🩸",
+        title: "العلامات الحيوية",
+        text: "ضغط وسكر",
+        section: "workSection"
+      },
+      {
+        icon: "📝",
+        title: "تقرير تمريضي",
+        text: "تسجيل الملاحظات",
+        section: "workSection"
       }
     );
 
+  }
 
-  if (!customer) {
+  else if (
+    role === "specialist"
+  ) {
 
-    alert(
-      "لم يتم العثور على ملف المشترك."
+    actions.push(
+      {
+        icon: "🩺",
+        title: "فحص طبي",
+        text: "إجراء تقييم طبي",
+        section: "workSection"
+      },
+      {
+        icon: "📋",
+        title: "التقارير",
+        text: "كتابة التقرير الطبي",
+        section: "workSection"
+      },
+      {
+        icon: "💊",
+        title: "التوصيات",
+        text: "إضافة التوصيات",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض المشتركين",
+        section: "patientsSection"
+      }
     );
 
-    return;
+  }
+
+  else if (
+    role === "resident"
+  ) {
+
+    actions.push(
+      {
+        icon: "🩺",
+        title: "زيارة طبية",
+        text: "تسجيل الزيارة",
+        section: "workSection"
+      },
+      {
+        icon: "📋",
+        title: "الفحص العام",
+        text: "تقييم الحالة",
+        section: "workSection"
+      },
+      {
+        icon: "💊",
+        title: "التوصيات",
+        text: "تسجيل التوصيات",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else if (
+    role === "nutrition"
+  ) {
+
+    actions.push(
+      {
+        icon: "🥗",
+        title: "تقييم غذائي",
+        text: "تقييم الحالة الغذائية",
+        section: "workSection"
+      },
+      {
+        icon: "🍎",
+        title: "الخطة الغذائية",
+        text: "إضافة خطة غذائية",
+        section: "workSection"
+      },
+      {
+        icon: "📋",
+        title: "التوصيات",
+        text: "تسجيل التوصيات",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else if (
+    role === "physio"
+  ) {
+
+    actions.push(
+      {
+        icon: "🏃",
+        title: "جلسة علاج",
+        text: "تسجيل الجلسة",
+        section: "workSection"
+      },
+      {
+        icon: "🦵",
+        title: "تقييم الحركة",
+        text: "تقييم قدرة الحركة",
+        section: "workSection"
+      },
+      {
+        icon: "🏋️",
+        title: "التمارين",
+        text: "تسجيل التمارين",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else if (
+    role === "psychologist"
+  ) {
+
+    actions.push(
+      {
+        icon: "🧠",
+        title: "جلسة نفسية",
+        text: "تسجيل الجلسة",
+        section: "workSection"
+      },
+      {
+        icon: "📋",
+        title: "تقييم نفسي",
+        text: "تقييم الحالة",
+        section: "workSection"
+      },
+      {
+        icon: "💬",
+        title: "الملاحظات",
+        text: "تسجيل الملاحظات",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else if (
+    role === "entertainment"
+  ) {
+
+    actions.push(
+      {
+        icon: "🎭",
+        title: "نشاط ترفيهي",
+        text: "تسجيل النشاط",
+        section: "workSection"
+      },
+      {
+        icon: "🚗",
+        title: "خروج ترفيهي",
+        text: "تسجيل الخروج",
+        section: "workSection"
+      },
+      {
+        icon: "🤝",
+        title: "مرافقة",
+        text: "تسجيل المرافقة",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else if (
+    role === "hairdresser"
+  ) {
+
+    actions.push(
+      {
+        icon: "💇",
+        title: "قص الشعر",
+        text: "تسجيل الخدمة",
+        section: "workSection"
+      },
+      {
+        icon: "🪒",
+        title: "الحلاقة",
+        text: "تسجيل الخدمة",
+        section: "workSection"
+      },
+      {
+        icon: "✨",
+        title: "العناية الشخصية",
+        text: "تسجيل الخدمة",
+        section: "workSection"
+      },
+      {
+        icon: "👴",
+        title: "المشتركين",
+        text: "عرض الملفات",
+        section: "patientsSection"
+      }
+    );
+
+  }
+
+  else {
+
+    actions.push(
+      {
+        icon: "👥",
+        title: "المشتركين",
+        text: "عرض المشتركين",
+        section: "patientsSection"
+      },
+      {
+        icon: "📝",
+        title: "تسجيل متابعة",
+        text: "تسجيل نشاط",
+        section: "workSection"
+      },
+      {
+        icon: "📊",
+        title: "التقارير",
+        text: "متابعة التقارير",
+        section: "workSection"
+      },
+      {
+        icon: "🔐",
+        title: "الصلاحيات",
+        text: "عرض صلاحياتك",
+        section: "permissionsList"
+      }
+    );
 
   }
 
 
-  const confirmed =
-    confirm(
-      "هل أنت متأكد من الموافقة على هذا المشترك؟"
-    );
+  actions.forEach(
+    function(action) {
+
+      const button =
+        document.createElement(
+          "button"
+        );
 
 
-  if (!confirmed) {
+      button.type = "button";
 
-    return;
-
-  }
-
-
-  customer.status =
-    "active";
+      button.className =
+        "action";
 
 
-  customer.approvedBy =
-    loggedStaff
-      ? loggedStaff.name
-      : "مدير الشركة";
+      button.innerHTML = `
+
+        <div class="action-icon">
+
+          ${action.icon}
+
+        </div>
+
+        <h3>
+
+          ${action.title}
+
+        </h3>
+
+        <p>
+
+          ${action.text}
+
+        </p>
+
+      `;
 
 
-  customer.approvedAt =
-    new Date().toISOString();
+      button.addEventListener(
+        "click",
+        function() {
+
+          scrollToSection(
+            action.section
+          );
+
+        }
+      );
 
 
-  saveCustomers();
+      grid.appendChild(
+        button
+      );
 
-
-  renderPendingCustomers();
-
-  renderCustomers();
-
-  updateStats();
-
-
-  alert(
-    "✅ تمت الموافقة على المشترك بنجاح."
+    }
   );
 
 }
 
 
 /* =====================================================
-   10. رفض المشترك
+   11. أنواع العمل
 ===================================================== */
 
-function rejectCustomer(id) {
+function renderWorkTypes() {
 
-  const customer =
-    customers.find(
-      function(item) {
-
-        return item.id === id;
-
-      }
+  const select =
+    document.getElementById(
+      "workType"
     );
 
 
-  if (!customer) {
+  select.innerHTML = `
 
-    alert(
-      "لم يتم العثور على ملف المشترك."
-    );
+    <option value="">
+      اختر نوع العمل
+    </option>
 
-    return;
-
-  }
+  `;
 
 
-  const confirmed =
-    confirm(
-      "هل أنت متأكد من رفض هذا الملف؟"
-    );
+  config.workTypes.forEach(
+    function(type) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
 
 
-  if (!confirmed) {
+      option.value =
+        type;
 
-    return;
-
-  }
-
-
-  customer.status =
-    "rejected";
+      option.textContent =
+        type;
 
 
-  customer.rejectedBy =
-    loggedStaff
-      ? loggedStaff.name
-      : "مدير الشركة";
+      select.appendChild(
+        option
+      );
 
-
-  customer.rejectedAt =
-    new Date().toISOString();
-
-
-  saveCustomers();
-
-
-  renderPendingCustomers();
-
-  renderCustomers();
-
-  updateStats();
-
-
-  alert(
-    "تم رفض ملف المشترك."
+    }
   );
 
 }
 
 
 /* =====================================================
-   11. عرض جميع المشتركين
+   12. المشتركين داخل النموذج
 ===================================================== */
 
-function renderCustomers() {
+function renderCustomerSelect() {
+
+  const select =
+    document.getElementById(
+      "workCustomer"
+    );
+
+
+  select.innerHTML = `
+
+    <option value="">
+      اختر المشترك
+    </option>
+
+  `;
+
+
+  activeCustomers.forEach(
+    function(customer) {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+
+      option.value =
+        customer.id;
+
+
+      option.textContent =
+        customer.name +
+        " — " +
+        customer.id;
+
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   13. الصلاحيات
+===================================================== */
+
+function renderPermissions() {
 
   const list =
     document.getElementById(
-      "customerList"
+      "permissionsList"
     );
 
 
   list.innerHTML = "";
 
 
-  if (
-    customers.length === 0
-  ) {
+  config.permissions.forEach(
+    function(permission) {
 
-    list.innerHTML = `
+      const item =
+        document.createElement(
+          "div"
+        );
 
-      <div class="empty">
 
-        لا توجد ملفات مشتركين حالياً.
+      item.className =
+        "info-item";
 
-      </div>
 
-    `;
+      item.innerHTML = `
 
-    return;
+        <strong>
+          ✅ ${escapeHTML(permission)}
+        </strong>
+
+        <span>
+          متاح ضمن صلاحياتك الوظيفية في نظام سند.
+        </span>
+
+      `;
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   14. حفظ التقرير
+===================================================== */
+
+document
+  .getElementById("workForm")
+  .addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+
+      const customerId =
+        document.getElementById(
+          "workCustomer"
+        ).value;
+
+
+      const workType =
+        document.getElementById(
+          "workType"
+        ).value;
+
+
+      const date =
+        document.getElementById(
+          "workDate"
+        ).value;
+
+
+      const time =
+        document.getElementById(
+          "workTime"
+        ).value;
+
+
+      const notes =
+        document.getElementById(
+          "workNotes"
+        ).value.trim();
+
+
+      if (
+        !customerId ||
+        !workType ||
+        !date ||
+        !time ||
+        !notes
+      ) {
+
+        alert(
+          "يرجى إكمال جميع الحقول."
+        );
+
+        return;
+
+      }
+
+
+      let reports = [];
+
+
+      try {
+
+        reports =
+          JSON.parse(
+            localStorage.getItem(
+              "sanadStaffReports"
+            ) || "[]"
+          );
+
+      } catch (error) {
+
+        reports = [];
+
+      }
+
+
+      const customer =
+        customers.find(
+          function(item) {
+
+            return item.id === customerId;
+
+          }
+        );
+
+
+      const report = {
+
+        id:
+          "REP-" +
+          Date.now(),
+
+        customerId:
+          customerId,
+
+        customerName:
+          customer
+            ? customer.name
+            : "غير معروف",
+
+        staffName:
+          loggedStaff.name,
+
+        staffPhone:
+          loggedStaff.phone,
+
+        employeeId:
+          loggedStaff.employeeId,
+
+        role:
+          loggedStaff.role,
+
+        title:
+          loggedStaff.title,
+
+        workType:
+          workType,
+
+        date:
+          date,
+
+        time:
+          time,
+
+        notes:
+          notes,
+
+        createdAt:
+          new Date().toISOString()
+
+      };
+
+
+      reports.push(
+        report
+      );
+
+
+      localStorage.setItem(
+        "sanadStaffReports",
+        JSON.stringify(
+          reports
+        )
+      );
+
+
+      updateReportCount();
+
+
+      document
+        .getElementById(
+          "workForm"
+        )
+        .reset();
+
+
+      setToday();
+
+
+      alert(
+        "✅ تم حفظ التقرير بنجاح."
+      );
+
+    }
+  );
+
+
+/* =====================================================
+   15. عدد التقارير
+===================================================== */
+
+function updateReportCount() {
+
+  let reports = [];
+
+
+  try {
+
+    reports =
+      JSON.parse(
+        localStorage.getItem(
+          "sanadStaffReports"
+        ) || "[]"
+      );
+
+  } catch (error) {
+
+    reports = [];
 
   }
 
 
-  customers
-    .slice()
-    .reverse()
-    .forEach(
-      function(customer) {
+  const myReports =
+    reports.filter(
+      function(report) {
 
-        const element =
-          document.createElement(
-            "div"
-          );
-
-
-        element.className =
-          "customer";
-
-
-        let statusClass =
-          "status-pending";
-
-
-        if (
-          customer.status ===
-          "active"
-        ) {
-
-          statusClass =
-            "status-active";
-
-        }
-
-
-        if (
-          customer.status ===
-          "rejected"
-        ) {
-
-          statusClass =
-            "status-rejected";
-
-        }
-
-
-        element.innerHTML = `
-
-          <div>
-
-            <div class="customer-name">
-
-              👴 ${escapeHTML(customer.name)}
-
-            </div>
-
-
-            <div class="customer-info">
-
-              🆔 ${escapeHTML(customer.id)}
-
-              <br>
-
-              📦 ${escapeHTML(customer.packageName)}
-
-              <br>
-
-              👨‍👩‍👦 العائلة:
-              ${escapeHTML(customer.familyName)}
-
-              <br>
-
-              👤 سجله:
-              ${escapeHTML(
-                customer.createdBy ||
-                "الاستقبال"
-              )}
-
-            </div>
-
-          </div>
-
-
-          <div class="customer-actions">
-
-            <span
-              class="small-status ${statusClass}"
-            >
-
-              ${getStatusText(
-                customer.status
-              )}
-
-            </span>
-
-          </div>
-
-        `;
-
-
-        list.appendChild(
-          element
+        return (
+          report.employeeId ===
+          loggedStaff.employeeId
         );
 
       }
     );
 
+
+  document.getElementById(
+    "myReports"
+  ).textContent =
+    myReports.length;
+
 }
 
 
 /* =====================================================
-   12. الإحصائيات
+   16. زيارات اليوم
 ===================================================== */
 
-function updateStats() {
+function updateTodayVisits() {
 
-  const pending =
-    customers.filter(
-      function(customer) {
+  let reports = [];
+
+
+  try {
+
+    reports =
+      JSON.parse(
+        localStorage.getItem(
+          "sanadStaffReports"
+        ) || "[]"
+      );
+
+  } catch (error) {
+
+    reports = [];
+
+  }
+
+
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+
+  const visits =
+    reports.filter(
+      function(report) {
 
         return (
-          customer.status ===
-          "pending_manager"
+          report.employeeId ===
+            loggedStaff.employeeId &&
+          report.date ===
+            today
         );
 
       }
-    ).length;
-
-
-  const active =
-    customers.filter(
-      function(customer) {
-
-        return (
-          customer.status ===
-          "active"
-        );
-
-      }
-    ).length;
+    );
 
 
   document.getElementById(
-    "customersCount"
+    "todayVisits"
   ).textContent =
-    customers.length;
-
-
-  document.getElementById(
-    "pendingCount"
-  ).textContent =
-    pending;
-
-
-  document.getElementById(
-    "activeCount"
-  ).textContent =
-    active;
+    visits.length;
 
 }
 
 
 /* =====================================================
-   13. الانتقال للقسم
+   17. التاريخ الحالي
+===================================================== */
+
+function setToday() {
+
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+
+  document.getElementById(
+    "workDate"
+  ).value =
+    today;
+
+}
+
+
+/* =====================================================
+   18. الانتقال إلى القسم
 ===================================================== */
 
 function scrollToSection(id) {
@@ -2102,7 +2573,7 @@ function scrollToSection(id) {
 
 
 /* =====================================================
-   14. تسجيل الخروج
+   19. تسجيل الخروج
 ===================================================== */
 
 function logoutStaff(event) {
@@ -2141,7 +2612,7 @@ function logoutStaff(event) {
 
 
 /* =====================================================
-   15. حماية النصوص
+   20. حماية النصوص
 ===================================================== */
 
 function escapeHTML(value) {
@@ -2157,24 +2628,49 @@ function escapeHTML(value) {
 
 
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
 /* =====================================================
-   16. تشغيل الصفحة
+   21. التشغيل
 ===================================================== */
 
-renderPendingCustomers();
+renderPatients();
 
-renderCustomers();
+renderActions();
 
-updateStats();
+renderWorkTypes();
+
+renderCustomerSelect();
+
+renderPermissions();
+
+updateReportCount();
+
+updateTodayVisits();
+
+setToday();
 
 </script>
 
@@ -2182,4 +2678,3 @@ updateStats();
 </body>
 
 </html>
-```
