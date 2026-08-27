@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لوحة مالك النظام | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
+
+.dashboard{
+max-width:1400px;
+margin:auto;
+padding:45px 5%;
+}
+
+.welcome{
+background:white;
+border:1px solid #e3edeb;
+border-radius:26px;
+padding:30px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 18px 50px rgba(22,70,65,.07);
+margin-bottom:25px;
+}
+
+.eyebrow{
+color:#16877d;
+font-size:13px;
+font-weight:800;
+}
+
+.welcome h1{
+color:#163b38;
+font-size:30px;
+margin:8px 0;
+}
+
+.welcome p{
+color:#718480;
+margin:0;
+}
+
+.avatar{
+width:78px;
+height:78px;
+border-radius:24px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-bottom:28px;
+}
+
+.stat{
+background:white;
+border:1px solid #e3edeb;
+border-radius:20px;
+padding:22px;
+box-shadow:0 12px 35px rgba(22,70,65,.05);
+}
+
+.stat-label{
+color:#718480;
+font-size:13px;
+}
+
+.stat-number{
+color:#163b38;
+font-size:28px;
+font-weight:900;
+margin-top:10px;
+}
+
+.section{
+background:white;
+border:1px solid #e3edeb;
+border-radius:24px;
+padding:28px;
+margin-bottom:25px;
+}
+
+.section h2{
+color:#163b38;
+margin-top:0;
+}
+
+.section p{
+color:#718480;
+font-size:13px;
+line-height:1.8;
+}
+
+.actions{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.action{
+background:#fbfefe;
+border:1px solid #e3edeb;
+border-radius:18px;
+padding:22px;
+text-decoration:none;
+display:block;
+transition:.2s;
+}
+
+.action:hover{
+border-color:#16877d;
+transform:translateY(-3px);
+}
+
+.action-icon{
+font-size:30px;
+margin-bottom:10px;
+}
+
+.action h3{
+color:#163b38;
+font-size:15px;
+margin:0 0 6px;
+}
+
+.action span{
+color:#718480;
+font-size:11px;
+}
+
+.logout-area{
+text-align:center;
+margin:35px 0 10px;
+}
+
+.logout{
+display:inline-flex;
+padding:11px 20px;
+border-radius:12px;
+border:1px solid #eadede;
+background:white;
+color:#a44b4b;
+text-decoration:none;
+font-size:13px;
+font-weight:800;
+}
+
+@media(max-width:900px){
+
+.stats{
+grid-template-columns:1fr 1fr;
+}
+
+.actions{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.welcome{
+flex-direction:column;
+text-align:center;
+}
+
+.stats,
+.actions{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<a href="index.html" class="logo">
+سند<span>.</span>
+</a>
+
+<nav class="nav">
+
+<a href="index.html">الرئيسية</a>
+<a href="services.html">خدماتنا</a>
+<a href="how.html">كيف يعمل سند؟</a>
+<a href="about.html">عن سند</a>
+
+</nav>
+
+</header>
+
+
+<main class="dashboard">
+
+<section class="welcome">
+
+<div>
+
+<span class="eyebrow">
+👑 لوحة مالك النظام
+</span>
+
+<h1 id="welcomeName">
+أهلاً بك
+</h1>
+
+<p>
+الإشراف الكامل على نظام شركة سند وإدارة الصلاحيات والإعدادات.
+</p>
+
+</div>
+
+<div class="avatar">
+👑
+</div>
+
+</section>
+
+
+<section class="stats">
+
+<div class="stat">
+
+<span class="stat-label">
+👥 إجمالي المشتركين
+</span>
+
+<div class="stat-number" id="customersCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+📅 إجمالي المواعيد
+</span>
+
+<div class="stat-number" id="appointmentsCount">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+👨‍⚕️ الكادر
+</span>
+
+<div class="stat-number">
+11
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<span class="stat-label">
+🟢 حالة النظام
+</span>
+
+<div class="stat-number" style="font-size:20px">
+فعال
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>
+⚙️ الإدارة العليا
+</h2>
+
+<p>
+هذه لوحة مالك النظام. المالك يمتلك أعلى صلاحية في النظام ويمكنه الإشراف على الشركة والمدير والكادر والمشتركين.
+</p>
+
+<div class="actions">
+
+<a href="manager-dashboard.html" class="action">
+
+<div class="action-icon">
+👨‍💼
+</div>
+
+<h3>
+لوحة مدير الشركة
+</h3>
+
+<span>
+الدخول إلى لوحة المدير ومتابعة التشغيل.
+</span>
+
+</a>
+
+
+<a href="reception-dashboard.html" class="action">
+
+<div class="action-icon">
+🧑‍💼
+</div>
+
+<h3>
+لوحة الاستقبال
+</h3>
+
+<span>
+متابعة المشتركين والتسجيلات والاستقبال.
+</span>
+
+</a>
+
+
+<a href="staff-dashboard.html" class="action">
+
+<div class="action-icon">
+👨‍⚕️
+</div>
+
+<h3>
+لوحة الكادر
+</h3>
+
+<span>
+معاينة لوحة العاملين في النظام.
+</span>
+
+</a>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>
+🔐 صلاحيات مالك النظام
+</h2>
+
+<p>
+✓ إدارة النظام بالكامل
+</p>
+
+<p>
+✓ الإشراف على مدير الشركة
+</p>
+
+<p>
+✓ الإشراف على الكادر
+</p>
+
+<p>
+✓ متابعة المشتركين
+</p>
+
+<p>
+✓ متابعة المواعيد والخدمات
+</p>
+
+<p>
+✓ إدارة إعدادات النظام مستقبلاً
+</p>
+
+</section>
+
+
+<div class="logout-area">
+
+<a
+href="#"
+class="logout"
+onclick="logoutOwner(event)"
+>
+🚪 تسجيل الخروج
+</a>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer-logo">
+سند<span>.</span>
+</div>
+
+<p>
+الرعاية المنزلية لكبار السن
+</p>
+
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
+
+</footer>
+
+
+<script>
+
+const loggedStaffRaw=
+localStorage.getItem("sanadLoggedInStaff");
+
+
+if(!loggedStaffRaw){
+
+alert("يرجى تسجيل الدخول أولاً.");
+
+window.location.href="staff-login.html";
+
+}
+
+
+let loggedStaff=null;
+
+try{
+
+loggedStaff=
+JSON.parse(loggedStaffRaw);
+
+}catch(error){
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+window.location.href="staff-login.html";
+
+}
+
+
+if(
+loggedStaff &&
+loggedStaff.role!=="owner"
+){
+
+alert(
+"ليس لديك صلاحية الدخول إلى لوحة مالك النظام."
+);
+
+window.location.href=
+loggedStaff.dashboard ||
+"staff-login.html";
+
+}
+
+
+if(loggedStaff){
+
+document.getElementById(
+"welcomeName"
+).textContent=
+"أهلاً بك، "+
+loggedStaff.name+
+" 👋";
+
+}
+
+
+let customers=[];
+
+try{
+
+customers=
+JSON.parse(
+localStorage.getItem("sanadCustomers")||"[]"
+);
+
+if(!Array.isArray(customers)){
+customers=[];
+}
+
+}catch(error){
+
+customers=[];
+
+}
+
+
+let appointments=[];
+
+try{
+
+appointments=
+JSON.parse(
+localStorage.getItem("sanadAppointments")||"[]"
+);
+
+if(!Array.isArray(appointments)){
+appointments=[];
+}
+
+}catch(error){
+
+appointments=[];
+
+}
+
+
+document.getElementById(
+"customersCount"
+).textContent=
+customers.length;
+
+
+document.getElementById(
+"appointmentsCount"
+).textContent=
+appointments.length;
+
+
+function logoutOwner(event){
+
+event.preventDefault();
+
+localStorage.removeItem(
+"sanadLoggedInStaff"
+);
+
+localStorage.removeItem(
+"sanadCurrentVisit"
+);
+
+window.location.href=
+"staff-login.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
