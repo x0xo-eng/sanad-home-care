@@ -564,15 +564,23 @@ async function loadVisits(){
     visits = [];
     return;
   }
+
   const appointments = await sanadGetAppointmentsForStaff(loggedStaff.staffId);
-  /* تحويل شكل بيانات الموعد لشكل موحّد تستخدمه الواجهة */
+  const customers = await sanadGetCustomers();
+
+  /* تحويل شكل بيانات الموعد لشكل موحّد تستخدمه الواجهة
+     (نربط بيانات المسن يدوياً من قائمة المشتركين) */
+
   visits = appointments.map(function(appointment){
+
+    const relatedCustomer = customers.find(function(c){ return c.id === appointment.customer_id; });
+
     return {
       id: appointment.id,
       date: appointment.visit_date,
       time: appointment.visit_time,
-      patientName: appointment.customers ? appointment.customers.name : "غير محدد",
-      address: appointment.customers ? appointment.customers.address : "غير محدد",
+      patientName: relatedCustomer ? relatedCustomer.name : "غير محدد",
+      address: relatedCustomer ? relatedCustomer.address : "غير محدد",
       type: appointment.service_name,
       status: appointment.status === "scheduled" ? "waiting" : appointment.status,
       startedAt: appointment.started_at || null,
