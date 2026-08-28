@@ -1002,7 +1002,7 @@ document.getElementById("customerForm").addEventListener("submit", async functio
     address: address,
     notes: notes,
     assistantRequested: assistantRequested,
-    createdBy: loggedStaff ? loggedStaff.name : "الاستقبال"
+    createdBy: loggedStaff ? loggedStaff.staffId : null
   });
 
   submitBtn.disabled = false;
