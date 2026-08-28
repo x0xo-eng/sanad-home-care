@@ -1550,8 +1550,10 @@ function renderAppointments(){
       const div = document.createElement("div");
       div.className = "appointment";
 
-      const customerName = item.customers ? item.customers.name : "";
-      const staffName = item.staff ? item.staff.name : "";
+      const relatedCustomer = customers.find(function(c){ return c.id === item.customer_id; });
+      const relatedStaff = staffList.find(function(s){ return s.id === item.staff_id; });
+      const customerName = relatedCustomer ? relatedCustomer.name : "";
+      const staffName = relatedStaff ? relatedStaff.name : "";
 
       div.innerHTML = `
 
@@ -1600,11 +1602,13 @@ function renderAllAppointments(){
     const div = document.createElement("div");
     div.className = "appointment";
 
-    const customerName = item.customers ? item.customers.name : "";
-    const packageName = item.customers ? item.customers.package_name : "";
-    const packagePrice = item.customers ? item.customers.package_price : 0;
-    const customerCode = item.customers ? item.customers.customer_code : "";
-    const staffName = item.staff ? item.staff.name : "";
+    const relatedCustomer = customers.find(function(c){ return c.id === item.customer_id; });
+    const relatedStaff = staffList.find(function(s){ return s.id === item.staff_id; });
+    const customerName = relatedCustomer ? relatedCustomer.name : "";
+    const packageName = relatedCustomer ? relatedCustomer.package_name : "";
+    const packagePrice = relatedCustomer ? relatedCustomer.package_price : 0;
+    const customerCode = relatedCustomer ? relatedCustomer.customer_code : "";
+    const staffName = relatedStaff ? relatedStaff.name : "";
 
     div.innerHTML = `
 
