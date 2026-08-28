@@ -1220,13 +1220,16 @@ async function saveAppointment(event, serviceType){
     return;
   }
 
-  /* منع تعارض الكادر */
+  /* منع تعارض الكادر (نقارن أول 5 خانات بس HH:MM لأن قاعدة البيانات
+     ترجع الوقت أحياناً بصيغة HH:MM:SS) */
+
+  const normalizedTime = String(time).slice(0, 5);
 
   const staffConflict = appointments.some(function(item){
     return (
       item.staff_id === staffId &&
       item.visit_date === date &&
-      item.visit_time === time &&
+      String(item.visit_time || "").slice(0, 5) === normalizedTime &&
       item.status !== "cancelled"
     );
   });
@@ -1243,7 +1246,7 @@ async function saveAppointment(event, serviceType){
       item.customer_id === customer.id &&
       item.service === serviceType &&
       item.visit_date === date &&
-      item.visit_time === time &&
+      String(item.visit_time || "").slice(0, 5) === normalizedTime &&
       item.staff_id === staffId &&
       item.status !== "cancelled"
     );
