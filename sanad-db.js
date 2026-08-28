@@ -246,7 +246,7 @@ async function sanadGetStaff() {
 async function sanadGetAppointmentsForStaff(staffId) {
   const { data, error } = await sanadClient
     .from("appointments")
-    .select("*, customers(*)")
+    .select("*")
     .eq("staff_id", staffId)
     .order("visit_date", { ascending: true });
 
@@ -265,7 +265,7 @@ async function sanadGetAppointmentsForStaff(staffId) {
 async function sanadGetAppointmentsForCustomer(customerId) {
   const { data, error } = await sanadClient
     .from("appointments")
-    .select("*, staff(*)")
+    .select("*")
     .eq("customer_id", customerId)
     .order("visit_date", { ascending: true });
 
@@ -284,7 +284,7 @@ async function sanadGetAppointmentsForCustomer(customerId) {
 async function sanadGetAllAppointments() {
   const { data, error } = await sanadClient
     .from("appointments")
-    .select("*, customers(*), staff(*)")
+    .select("*")
     .order("visit_date", { ascending: true })
     .order("visit_time", { ascending: true });
 
