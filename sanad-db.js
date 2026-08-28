@@ -228,8 +228,7 @@ async function sanadGetCustomers() {
 async function sanadGetStaff() {
   const { data, error } = await sanadClient
     .from("staff")
-    .select("*")
-    .order("created_at", { ascending: true });
+    .select("*");
 
   if (error) {
     console.error(error);
