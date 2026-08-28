@@ -1265,7 +1265,7 @@ async function saveAppointment(event, serviceType){
     serviceName: serviceNames[serviceType],
     date: date,
     time: time,
-    createdBy: loggedStaff ? loggedStaff.name : "المدير"
+    createdBy: loggedStaff ? loggedStaff.staffId : null
   });
 
   submitBtn.disabled = false;
