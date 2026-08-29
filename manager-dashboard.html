@@ -634,6 +634,65 @@ width:100%;
 <section class="section">
 
 <div class="section-title">
+<h2>👥 كل المشتركين (تعديل البيانات)</h2>
+<p>عدّل رقم الهاتف أو العنوان أو أي بيانات لأي مشترك.</p>
+</div>
+
+<div id="allCustomersList"></div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+<h2>🧑‍⚕️ إدارة الكادر</h2>
+<p>أضف حساب كادر جديد أو فعّل/عطّل حساب موجود.</p>
+</div>
+
+<form id="newStaffForm" class="schedule-form" style="margin-bottom:20px;">
+
+<label class="full">اسم الموظف
+<input type="text" id="newStaffName" placeholder="الاسم الكامل" required>
+</label>
+
+<label>رقم الهاتف
+<input type="tel" id="newStaffPhone" placeholder="رقم الهاتف" required>
+</label>
+
+<label>كلمة المرور (اختياري - افتراضياً رقم الهاتف)
+<input type="text" id="newStaffPassword" placeholder="اتركه فارغ لاستخدام رقم الهاتف">
+</label>
+
+<label class="full">الصفة الوظيفية
+<select id="newStaffRole" required>
+<option value="">اختر الصفة</option>
+<option value="manager">مدير الشركة</option>
+<option value="reception">موظف استقبال</option>
+<option value="specialist">طبيب أخصائي</option>
+<option value="resident">طبيب مقيم</option>
+<option value="nurse">ممرض صحي</option>
+<option value="nutrition">أخصائي تغذية</option>
+<option value="physio">أخصائي علاج طبيعي</option>
+<option value="psychologist">أخصائي نفسي</option>
+<option value="entertainment">أخصائي ترفيه</option>
+<option value="hairdresser">كوافير</option>
+<option value="assistant">معين</option>
+</select>
+</label>
+
+<button class="save-schedule" id="newStaffSubmitBtn">➕ إنشاء حساب الكادر</button>
+
+</form>
+
+<div id="staffListBox"></div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
 <h2>🗓️ جداول الخدمات</h2>
 <p>المدير يحدد التاريخ والوقت والكادر ثم يحفظ الموعد.</p>
 </div>
@@ -1682,56 +1741,14 @@ function viewAppointmentReport(appointmentId){
 
   const appointment = appointments.find(function(item){ return item.id === appointmentId; });
 
-  if(!appointment || !appointment.report){
+  const text = sanadFormatReportText(appointment);
+
+  if(!text){
     alert("لا يوجد تقرير محفوظ لهذا الموعد.");
     return;
   }
 
-  const report = appointment.report;
-  const lines = [];
-
-  lines.push("📄 تقرير الزيارة");
-  lines.push("الخدمة: " + (appointment.service_name || ""));
-  lines.push("التاريخ: " + (appointment.visit_date || "") + " — " + String(appointment.visit_time || "").slice(0,5));
-  lines.push("الكادر: " + (report.staff ? report.staff.name : ""));
-  lines.push("");
-
-  if(report.vitalSigns){
-    lines.push("❤️ العلامات الحيوية:");
-    lines.push("ضغط الدم: " + (report.vitalSigns.bloodPressure || "—"));
-    lines.push("سكر الدم: " + (report.vitalSigns.bloodSugar || "—"));
-    lines.push("الحرارة: " + (report.vitalSigns.temperature || "—"));
-    lines.push("النبض: " + (report.vitalSigns.pulse || "—"));
-    lines.push("الأوكسجين: " + (report.vitalSigns.oxygen || "—"));
-    lines.push("الوزن: " + (report.vitalSigns.weight || "—"));
-    lines.push("");
-  }
-
-  if(report.medical && (report.medical.symptoms || report.medical.diagnosis || report.medical.treatment)){
-    lines.push("🩺 التقييم الطبي:");
-    lines.push("الأعراض: " + (report.medical.symptoms || "—"));
-    lines.push("الفحص: " + (report.medical.examination || "—"));
-    lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
-    lines.push("العلاج: " + (report.medical.treatment || "—"));
-    lines.push("التوصيات: " + (report.medical.recommendations || "—"));
-    lines.push("");
-  }
-
-  if(report.nursing && (report.nursing.medicationGiven || report.nursing.nursingNotes)){
-    lines.push("👩‍⚕️ الرعاية التمريضية:");
-    lines.push("الأدوية: " + (report.nursing.medicationGiven || "—"));
-    lines.push("الرعاية الشخصية: " + (report.nursing.personalCare || "—"));
-    lines.push("التغذية: " + (report.nursing.nutritionStatus || "—"));
-    lines.push("ملاحظات: " + (report.nursing.nursingNotes || "—"));
-    lines.push("");
-  }
-
-  if(report.finalReport){
-    lines.push("📝 التقرير النهائي:");
-    lines.push(report.finalReport);
-  }
-
-  alert(lines.join("\n"));
+  alert(text);
 
 }
 
@@ -1834,6 +1851,8 @@ async function refreshAll(){
   populateCustomerSelects();
   populateStaffSelects();
   renderPendingCustomers();
+  renderAllCustomersList();
+  renderStaffList();
   renderAppointments();
   updateStats();
 }
@@ -1841,6 +1860,247 @@ async function refreshAll(){
 refreshAll();
 
 setInterval(refreshAll, 6000);
+
+/* =====================================================
+   29. قائمة كل المشتركين + تعديل بياناتهم
+===================================================== */
+
+function renderAllCustomersList(){
+
+  const container = document.getElementById("allCustomersList");
+  if(!container){ return; }
+
+  container.innerHTML = "";
+
+  if(customers.length === 0){
+    container.innerHTML = `<div class="pending-empty">لا يوجد مشتركين بعد.</div>`;
+    return;
+  }
+
+  customers.forEach(function(customer){
+
+    const familyMember = (customer.family_members && customer.family_members[0]) || null;
+
+    const div = document.createElement("div");
+    div.className = "customer-card";
+
+    div.innerHTML = `
+
+      <div class="customer-head">
+        <div>
+          <div class="customer-name">👴 ${escapeHtml(customer.name)}</div>
+          <div class="customer-meta">🆔 ${escapeHtml(customer.customer_code || "")} — 📦 ${escapeHtml(customer.package_name || "")}</div>
+        </div>
+        <button type="button" class="schedule-customer-btn" onclick="toggleEditCustomer('${escapeHtml(customer.id)}')">✏️ تعديل</button>
+      </div>
+
+      <div id="edit-box-${escapeHtml(customer.id)}" style="display:none; margin-top:15px;">
+
+        <div class="schedule-form" style="grid-template-columns:1fr 1fr;">
+
+          <label>اسم المسن
+            <input type="text" id="edit-name-${escapeHtml(customer.id)}" value="${escapeHtml(customer.name || "")}">
+          </label>
+
+          <label>رقم هاتف المسن
+            <input type="tel" id="edit-phone-${escapeHtml(customer.id)}" value="${escapeHtml(customer.phone || "")}">
+          </label>
+
+          <label class="full">العنوان
+            <input type="text" id="edit-address-${escapeHtml(customer.id)}" value="${escapeHtml(customer.address || "")}">
+          </label>
+
+          ${familyMember ? `
+          <label>اسم فرد العائلة
+            <input type="text" id="edit-family-name-${escapeHtml(customer.id)}" value="${escapeHtml(familyMember.name || "")}">
+          </label>
+
+          <label>هاتف العائلة
+            <input type="tel" id="edit-family-phone-${escapeHtml(customer.id)}" value="${escapeHtml(familyMember.phone || "")}">
+          </label>
+          ` : ""}
+
+          <button type="button" class="save-schedule" style="grid-column:1/-1;" onclick="saveCustomerEdit('${escapeHtml(customer.id)}', '${familyMember ? escapeHtml(familyMember.id) : ""}')">
+            💾 حفظ التعديلات
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    container.appendChild(div);
+
+  });
+
+}
+
+function toggleEditCustomer(customerId){
+  const box = document.getElementById("edit-box-" + customerId);
+  if(!box){ return; }
+  box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+async function saveCustomerEdit(customerId, familyMemberId){
+
+  const name = document.getElementById("edit-name-" + customerId).value.trim();
+  const phone = document.getElementById("edit-phone-" + customerId).value.trim();
+  const address = document.getElementById("edit-address-" + customerId).value.trim();
+
+  const result = await sanadUpdateCustomer(customerId, {
+    name: name,
+    phone: phone,
+    address: address
+  });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حفظ التعديلات.", "error");
+    return;
+  }
+
+  if(familyMemberId){
+
+    const familyNameInput = document.getElementById("edit-family-name-" + customerId);
+    const familyPhoneInput = document.getElementById("edit-family-phone-" + customerId);
+
+    if(familyNameInput && familyPhoneInput){
+      await sanadUpdateFamilyMember(familyMemberId, {
+        name: familyNameInput.value.trim(),
+        phone: familyPhoneInput.value.trim()
+      });
+    }
+
+  }
+
+  await loadAll();
+  renderAllCustomersList();
+  renderPendingCustomers();
+  updateStats();
+
+  showMessage("✅ تم حفظ تعديلات " + name + " بنجاح.", "success");
+
+}
+
+/* =====================================================
+   30. إنشاء حساب كادر جديد + عرض قائمة الكادر
+===================================================== */
+
+const roleLabels = {
+  owner: "مالك النظام",
+  manager: "مدير الشركة",
+  reception: "موظف استقبال",
+  specialist: "طبيب أخصائي",
+  resident: "طبيب مقيم",
+  nurse: "ممرض صحي",
+  nutrition: "أخصائي تغذية",
+  physio: "أخصائي علاج طبيعي",
+  psychologist: "أخصائي نفسي",
+  entertainment: "أخصائي ترفيه",
+  hairdresser: "كوافير",
+  assistant: "معين"
+};
+
+document.getElementById("newStaffForm").addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const name = document.getElementById("newStaffName").value.trim();
+  const phone = document.getElementById("newStaffPhone").value.trim();
+  const password = document.getElementById("newStaffPassword").value.trim();
+  const role = document.getElementById("newStaffRole").value;
+
+  if(!name || !phone || !role){
+    showMessage("يرجى إكمال اسم الموظف ورقم الهاتف والصفة الوظيفية.", "error");
+    return;
+  }
+
+  const submitBtn = document.getElementById("newStaffSubmitBtn");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "⏳ جارِ الحفظ...";
+
+  const result = await sanadCreateStaff({ name: name, phone: phone, password: password, role: role });
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "➕ إنشاء حساب الكادر";
+
+  if(!result.success){
+    showMessage(result.message || "تعذر إنشاء حساب الكادر.", "error");
+    return;
+  }
+
+  document.getElementById("newStaffForm").reset();
+
+  await loadAll();
+  populateStaffSelects();
+  renderStaffList();
+
+  showMessage(
+    "✅ تم إنشاء حساب " + result.staff.name + " (" + (roleLabels[role] || role) +
+    "). رقم الدخول: " + result.staff.phone + " — كلمة المرور: " + (password || result.staff.phone),
+    "success"
+  );
+
+});
+
+function renderStaffList(){
+
+  const box = document.getElementById("staffListBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(staffList.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا يوجد كادر مسجل بعد.</div>`;
+    return;
+  }
+
+  staffList.forEach(function(employee){
+
+    const div = document.createElement("div");
+    div.className = "customer-card";
+
+    div.innerHTML = `
+
+      <div class="customer-head">
+
+        <div>
+          <div class="customer-name">${employee.active === false ? "🔴" : "🟢"} ${escapeHtml(employee.name)}</div>
+          <div class="customer-meta">
+            📱 ${escapeHtml(employee.phone || "")} — 🏷️ ${escapeHtml(roleLabels[employee.role] || employee.role || "")}
+          </div>
+        </div>
+
+        <button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
+          ${employee.active === false ? "🟢 تفعيل" : "🔴 تعطيل"}
+        </button>
+
+      </div>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+async function toggleStaffActive(staffId, newActiveState){
+
+  const result = await sanadSetStaffActive(staffId, newActiveState);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تحديث حالة الموظف.", "error");
+    return;
+  }
+
+  await loadAll();
+  populateStaffSelects();
+  renderStaffList();
+
+  showMessage(newActiveState ? "🟢 تم تفعيل الحساب." : "🔴 تم تعطيل الحساب.", "success");
+
+}
 
 </script>
 
