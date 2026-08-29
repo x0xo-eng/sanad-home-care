@@ -26,10 +26,34 @@ const sanadClient = supabase.createClient(
 const SANAD_EMPTY_UUID = "00000000-0000-0000-0000-000000000000";
 
 /* =========================================================
+   1-ب. تطبيع رقم الهاتف (تحويل الأرقام العربية ٠-٩ لأرقام
+   عادية 0-9، وحذف المسافات والشرطات) حتى ما يصير فرق بين
+   رقم انكتب وقت التسجيل ونفس الرقم وقت تسجيل الدخول
+========================================================= */
+
+function sanadNormalizePhone(value) {
+  if (!value) return value;
+
+  const arabicDigits = "٠١٢٣٤٥٦٧٨٩";
+
+  let result = String(value).trim();
+
+  result = result.replace(/[٠-٩]/g, function (digit) {
+    return arabicDigits.indexOf(digit);
+  });
+
+  result = result.replace(/[^\d]/g, "");
+
+  return result;
+}
+
+/* =========================================================
    2. تسجيل دخول الكادر (staff)
 ========================================================= */
 
 async function sanadLoginStaff(phone, password) {
+  phone = sanadNormalizePhone(phone);
+
   const { data, error } = await sanadClient
     .from("staff")
     .select("*")
@@ -54,6 +78,9 @@ async function sanadLoginStaff(phone, password) {
 ========================================================= */
 
 async function sanadLoginElder(phone, password) {
+  phone = sanadNormalizePhone(phone);
+  password = sanadNormalizePhone(password);
+
   const { data, error } = await sanadClient
     .from("customers")
     .select("*")
@@ -77,6 +104,9 @@ async function sanadLoginElder(phone, password) {
 ========================================================= */
 
 async function sanadLoginFamily(phone, password) {
+  phone = sanadNormalizePhone(phone);
+  password = sanadNormalizePhone(password);
+
   const { data, error } = await sanadClient
     .from("family_members")
     .select("*, customers(*)")
@@ -134,14 +164,17 @@ function sanadClearSession() {
 async function sanadCreateCustomer(customer) {
   const code = "CU-" + Date.now();
 
+  const normalizedPhone = sanadNormalizePhone(customer.phone);
+  const normalizedFamilyPhone = sanadNormalizePhone(customer.familyPhone);
+
   const { data, error } = await sanadClient
     .from("customers")
     .insert({
       customer_code: code,
       name: customer.name,
-      phone: customer.phone,
+      phone: normalizedPhone,
       /* افتراضياً كلمة المرور = رقم هاتف المسن نفسه لسهولة الاستخدام */
-      password: customer.password || customer.phone,
+      password: sanadNormalizePhone(customer.password) || normalizedPhone,
       age: customer.age,
       address: customer.address,
       package: customer.package,
@@ -161,13 +194,13 @@ async function sanadCreateCustomer(customer) {
 
   /* إضافة فرد العائلة إذا توفرت بياناته */
 
-  if (customer.familyName && customer.familyPhone) {
+  if (customer.familyName && normalizedFamilyPhone) {
     await sanadClient.from("family_members").insert({
       customer_id: data.id,
       name: customer.familyName,
       /* افتراضياً كلمة مرور العائلة = رقم هاتفها */
-      phone: customer.familyPhone,
-      password: customer.familyPassword || customer.familyPhone,
+      phone: normalizedFamilyPhone,
+      password: sanadNormalizePhone(customer.familyPassword) || normalizedFamilyPhone,
       relation: customer.relation || ""
     });
   }
