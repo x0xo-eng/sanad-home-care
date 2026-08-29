@@ -100,6 +100,30 @@
 
     .view-report-btn:hover { background: #d8eeeb; }
 
+    .rating-box { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #edf2f1; }
+
+    .stars { display: flex; gap: 4px; margin-bottom: 8px; direction: ltr; justify-content: flex-end; }
+
+    .star-btn {
+      background: none; border: none; cursor: pointer; font-size: 22px; color: #dfe6e4; padding: 0; line-height: 1;
+    }
+
+    .star-btn.filled { color: #f0b429; }
+
+    .rating-comment-input {
+      width: 100%; box-sizing: border-box; padding: 8px 10px; border-radius: 8px; border: 1px solid #dfecea;
+      font-family: inherit; font-size: 11px; margin-bottom: 8px; resize: vertical; min-height: 50px;
+    }
+
+    .rating-submit-btn {
+      border: none; border-radius: 8px; padding: 8px 14px; background: #16877d; color: white;
+      font-family: inherit; font-size: 11px; font-weight: 800; cursor: pointer;
+    }
+
+    .rating-submit-btn:hover { background: #0f7068; }
+
+    .rating-display { font-size: 13px; color: #f0b429; direction: ltr; text-align: left; }
+
     .logout {
       display: flex; justify-content: center; margin: 35px auto 10px; width: fit-content;
       padding: 12px 24px; border-radius: 13px; border: 1px solid #e3edeb; background: white;
@@ -366,7 +390,83 @@ function renderReports(list){
 
     box.appendChild(div);
 
+    /* صندوق التقييم منفصل تحت البطاقة */
+
+    const ratingDiv = document.createElement("div");
+    ratingDiv.className = "report-card";
+    ratingDiv.style.marginTop = "-8px";
+
+    if(item.rating){
+
+      ratingDiv.innerHTML = `
+        <div style="width:100%;">
+          <span style="font-size:11px;color:#718480;">تقييمك لهذه الزيارة:</span>
+          <div class="rating-display">${"★".repeat(item.rating)}${"☆".repeat(5-item.rating)}</div>
+          ${item.rating_comment ? `<div style="font-size:11px;color:#718480;margin-top:4px;">"${escapeHtml(item.rating_comment)}"</div>` : ""}
+        </div>
+      `;
+
+    }else{
+
+      ratingDiv.innerHTML = `
+        <div style="width:100%;">
+          <span style="font-size:11px;color:#718480;display:block;margin-bottom:8px;">قيّم هذه الزيارة:</span>
+          <div class="stars" id="stars-${escapeHtml(item.id)}">
+            ${[1,2,3,4,5].map(function(n){ return `<button type="button" class="star-btn" data-value="${n}" onclick="setRatingValue('${escapeHtml(item.id)}', ${n})">★</button>`; }).join("")}
+          </div>
+          <textarea class="rating-comment-input" id="comment-${escapeHtml(item.id)}" placeholder="اكتب ملاحظتك (اختياري)..."></textarea>
+          <button type="button" class="rating-submit-btn" onclick="submitRating('${escapeHtml(item.id)}')">إرسال التقييم</button>
+        </div>
+      `;
+
+    }
+
+    box.appendChild(ratingDiv);
+
   });
+
+}
+
+const selectedRatings = {};
+
+function setRatingValue(appointmentId, value){
+
+  selectedRatings[appointmentId] = value;
+
+  const container = document.getElementById("stars-" + appointmentId);
+  if(!container){ return; }
+
+  container.querySelectorAll(".star-btn").forEach(function(btn){
+    const btnValue = Number(btn.getAttribute("data-value"));
+    if(btnValue <= value){
+      btn.classList.add("filled");
+    }else{
+      btn.classList.remove("filled");
+    }
+  });
+
+}
+
+async function submitRating(appointmentId){
+
+  const rating = selectedRatings[appointmentId];
+
+  if(!rating){
+    alert("يرجى اختيار عدد النجوم أولاً.");
+    return;
+  }
+
+  const commentInput = document.getElementById("comment-" + appointmentId);
+  const comment = commentInput ? commentInput.value.trim() : "";
+
+  const result = await sanadRateAppointment(appointmentId, rating, comment);
+
+  if(!result.success){
+    alert("تعذر إرسال التقييم: " + (result.message || ""));
+    return;
+  }
+
+  await loadAppointments();
 
 }
 
