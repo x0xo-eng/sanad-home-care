@@ -624,7 +624,7 @@ width:100%;
 <div class="pending-empty">لا يوجد مشتركين حالياً.</div>
 </div>
 
-<div class="delete-all-area">
+<div class="delete-all-area" id="deleteAllArea">
 <button type="button" class="delete-all-btn" onclick="deleteAllCustomers()">🗑️ حذف جميع المشتركين</button>
 </div>
 
@@ -643,11 +643,11 @@ width:100%;
 </section>
 
 
-<section class="section">
+<section class="section" id="staffManagementSection">
 
 <div class="section-title">
 <h2>🧑‍⚕️ إدارة الكادر</h2>
-<p>أضف حساب كادر جديد أو فعّل/عطّل حساب موجود.</p>
+<p>أضف حساب كادر جديد أو فعّل/عطّل حساب موجود. (متاح لمالك النظام فقط)</p>
 </div>
 
 <form id="newStaffForm" class="schedule-form" style="margin-bottom:20px;">
@@ -686,6 +686,18 @@ width:100%;
 </form>
 
 <div id="staffListBox"></div>
+
+</section>
+
+
+<section class="section" id="activityLogSection">
+
+<div class="section-title">
+<h2>🕓 سجل العمليات</h2>
+<p>آخر العمليات المهمة اللي صارت بالنظام (متاح لمالك النظام فقط)</p>
+</div>
+
+<div id="activityLogBox"></div>
 
 </section>
 
@@ -947,6 +959,10 @@ if(loggedStaff){
     welcome.textContent = "أهلاً بك، " + loggedStaff.name + " 👋";
   }
 }
+
+/* هل هذا الحساب "مالك النظام"؟ فقط المالك يقدر يحذف مشتركين/مواعيد
+   أو يدير حسابات الكادر (إنشاء/تفعيل/تعطيل) */
+const isOwner = loggedStaff && loggedStaff.role === "owner";
 
 /* =====================================================
    2. البيانات (تُقرأ من Supabase)
@@ -1338,6 +1354,15 @@ async function saveAppointment(event, serviceType){
     return;
   }
 
+  await sanadLogActivity(
+    "إنشاء موعد",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "appointment",
+    result.appointment.id,
+    serviceNames[serviceType] + " للمشترك " + customer.name + " مع الكادر " + staffName + " بتاريخ " + date + " " + time
+  );
+
   /* تحديث حالة المشترك بعد إعادة تحميل المواعيد */
 
   await loadAll();
@@ -1485,9 +1510,11 @@ function renderPendingCustomers(){
           📅 ترتيب مواعيد هذا المشترك
         </button>
 
+        ${isOwner ? `
         <button type="button" class="delete-customer-btn" onclick="deleteCustomer('${escapeHtml(customer.id)}')">
           🗑️ حذف المشترك
         </button>
+        ` : ""}
 
       </div>
 
@@ -1504,6 +1531,11 @@ function renderPendingCustomers(){
 ===================================================== */
 
 async function deleteCustomer(customerId){
+
+  if(!isOwner){
+    showMessage("هذه الميزة متاحة لمالك النظام فقط.", "error");
+    return;
+  }
 
   const customer = customers.find(function(item){ return item.id === customerId; });
 
@@ -1526,6 +1558,15 @@ async function deleteCustomer(customerId){
     return;
   }
 
+  await sanadLogActivity(
+    "حذف مشترك",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "customer",
+    customerId,
+    "المشترك: " + customer.name + " (" + (customer.customer_code || "") + ")"
+  );
+
   await loadAll();
 
   populateCustomerSelects();
@@ -1543,6 +1584,11 @@ async function deleteCustomer(customerId){
 ===================================================== */
 
 async function deleteAllCustomers(){
+
+  if(!isOwner){
+    showMessage("هذه الميزة متاحة لمالك النظام فقط.", "error");
+    return;
+  }
 
   if(customers.length === 0){
     showMessage("لا يوجد مشتركين لحذفهم.", "error");
@@ -1568,6 +1614,15 @@ async function deleteAllCustomers(){
     showMessage(result.message || "تعذر حذف المشتركين.", "error");
     return;
   }
+
+  await sanadLogActivity(
+    "حذف جميع المشتركين",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "customer",
+    "all",
+    "تم حذف " + customers.length + " مشترك"
+  );
 
   await loadAll();
 
@@ -1693,8 +1748,34 @@ function renderAllAppointments(){
       </div>
 
       <div class="customer-actions">
-        ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : ""}
+        ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : `<button type="button" class="schedule-customer-btn" onclick="toggleEditAppointment('${escapeHtml(item.id)}')">✏️ تعديل الموعد</button>`}
         <button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>
+      </div>
+
+      <div id="edit-appt-${escapeHtml(item.id)}" style="display:none; margin-top:12px;">
+
+        <div class="schedule-form" style="grid-template-columns:1fr 1fr;">
+
+          <label>التاريخ
+            <input type="date" id="edit-appt-date-${escapeHtml(item.id)}" value="${escapeHtml(item.visit_date || "")}">
+          </label>
+
+          <label>الوقت
+            <input type="time" id="edit-appt-time-${escapeHtml(item.id)}" value="${escapeHtml(String(item.visit_time || "").slice(0,5))}">
+          </label>
+
+          <label class="full">الكادر
+            <select id="edit-appt-staff-${escapeHtml(item.id)}">
+              ${getStaffByRole(serviceStaffRoles[item.service] || "").map(function(s){
+                return `<option value="${escapeHtml(s.id)}" ${s.id === item.staff_id ? "selected" : ""}>${escapeHtml(s.name)}</option>`;
+              }).join("")}
+            </select>
+          </label>
+
+          <button type="button" class="save-schedule" style="grid-column:1/-1;" onclick="saveAppointmentEdit('${escapeHtml(item.id)}')">💾 حفظ التعديل</button>
+
+        </div>
+
       </div>
 
     `;
@@ -1702,6 +1783,84 @@ function renderAllAppointments(){
     container.appendChild(div);
 
   });
+
+}
+
+/* =====================================================
+   20-أ. تعديل موعد موجود (تاريخ / وقت / كادر)
+===================================================== */
+
+function toggleEditAppointment(appointmentId){
+  const box = document.getElementById("edit-appt-" + appointmentId);
+  if(!box){ return; }
+  box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+async function saveAppointmentEdit(appointmentId){
+
+  const appointment = appointments.find(function(item){ return item.id === appointmentId; });
+  if(!appointment){ return; }
+
+  const dateInput = document.getElementById("edit-appt-date-" + appointmentId);
+  const timeInput = document.getElementById("edit-appt-time-" + appointmentId);
+  const staffSelect = document.getElementById("edit-appt-staff-" + appointmentId);
+
+  const newDate = dateInput.value;
+  const newTime = timeInput.value;
+  const newStaffId = staffSelect.value;
+
+  if(!newDate || !newTime || !newStaffId){
+    showMessage("يرجى إكمال التاريخ والوقت والكادر.", "error");
+    return;
+  }
+
+  const normalizedTime = String(newTime).slice(0, 5);
+
+  /* منع تعارض الكادر مع أي موعد آخر (باستثناء هذا الموعد نفسه) */
+
+  const conflict = appointments.some(function(item){
+    return (
+      item.id !== appointmentId &&
+      item.staff_id === newStaffId &&
+      item.visit_date === newDate &&
+      String(item.visit_time || "").slice(0, 5) === normalizedTime &&
+      item.status !== "cancelled"
+    );
+  });
+
+  if(conflict){
+    showMessage("⚠️ هذا الكادر لديه موعد آخر بنفس التاريخ والوقت.", "error");
+    return;
+  }
+
+  const result = await sanadUpdateAppointment(appointmentId, {
+    visit_date: newDate,
+    visit_time: newTime,
+    staff_id: newStaffId
+  });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حفظ التعديل.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "تعديل موعد",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "appointment",
+    appointmentId,
+    "تاريخ جديد: " + newDate + " " + newTime
+  );
+
+  await loadAll();
+
+  populateStaffSelects();
+  renderAppointments();
+  renderPendingCustomers();
+  updateStats();
+
+  showMessage("✅ تم حفظ تعديل الموعد بنجاح.", "success");
 
 }
 
@@ -1720,6 +1879,15 @@ async function deleteAppointmentAction(appointmentId){
     showMessage(result.message || "تعذر حذف الموعد.", "error");
     return;
   }
+
+  await sanadLogActivity(
+    "حذف موعد",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "appointment",
+    appointmentId,
+    ""
+  );
 
   await loadAll();
 
@@ -1857,9 +2025,66 @@ async function refreshAll(){
   updateStats();
 }
 
+/* إخفاء أدوات المالك فقط عن أي حساب manager عادي */
+if(!isOwner){
+
+  const deleteAllArea = document.getElementById("deleteAllArea");
+  if(deleteAllArea){ deleteAllArea.style.display = "none"; }
+
+  const staffSection = document.getElementById("staffManagementSection");
+  if(staffSection){ staffSection.style.display = "none"; }
+
+  const activityLogSection = document.getElementById("activityLogSection");
+  if(activityLogSection){ activityLogSection.style.display = "none"; }
+
+}
+
+async function loadAndRenderActivityLog(){
+
+  if(!isOwner){ return; }
+
+  const log = await sanadGetActivityLog(80);
+
+  const box = document.getElementById("activityLogBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(log.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد عمليات مسجلة بعد.</div>`;
+    return;
+  }
+
+  log.forEach(function(entry){
+
+    const div = document.createElement("div");
+    div.className = "appointment";
+
+    const time = entry.created_at ? new Date(entry.created_at).toLocaleString("ar-IQ") : "";
+
+    div.innerHTML = `
+      <div class="appointment-top">
+        <div class="appointment-name">${escapeHtml(entry.action || "")}</div>
+        <div class="appointment-time">${escapeHtml(time)}</div>
+      </div>
+      <div class="appointment-info">
+        👤 ${escapeHtml(entry.actor_name || "")} (${escapeHtml(roleLabels[entry.actor_role] || entry.actor_role || "")})
+        ${entry.details ? "<br>📝 " + escapeHtml(entry.details) : ""}
+      </div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
 refreshAll();
 
+loadAndRenderActivityLog();
+
 setInterval(refreshAll, 6000);
+setInterval(loadAndRenderActivityLog, 10000);
 
 /* =====================================================
    29. قائمة كل المشتركين + تعديل بياناتهم
@@ -1978,6 +2203,15 @@ async function saveCustomerEdit(customerId, familyMemberId){
   renderPendingCustomers();
   updateStats();
 
+  await sanadLogActivity(
+    "تعديل بيانات مشترك",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "customer",
+    customerId,
+    "الاسم: " + name + " — الهاتف: " + phone + " — العنوان: " + address
+  );
+
   showMessage("✅ تم حفظ تعديلات " + name + " بنجاح.", "success");
 
 }
@@ -2004,6 +2238,11 @@ const roleLabels = {
 document.getElementById("newStaffForm").addEventListener("submit", async function(event){
 
   event.preventDefault();
+
+  if(!isOwner){
+    showMessage("إنشاء حسابات الكادر متاح لمالك النظام فقط.", "error");
+    return;
+  }
 
   const name = document.getElementById("newStaffName").value.trim();
   const phone = document.getElementById("newStaffPhone").value.trim();
@@ -2034,6 +2273,15 @@ document.getElementById("newStaffForm").addEventListener("submit", async functio
   await loadAll();
   populateStaffSelects();
   renderStaffList();
+
+  await sanadLogActivity(
+    "إنشاء حساب كادر",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "staff",
+    result.staff.id,
+    result.staff.name + " — " + (roleLabels[role] || role)
+  );
 
   showMessage(
     "✅ تم إنشاء حساب " + result.staff.name + " (" + (roleLabels[role] || role) +
@@ -2087,6 +2335,11 @@ function renderStaffList(){
 
 async function toggleStaffActive(staffId, newActiveState){
 
+  if(!isOwner){
+    showMessage("تفعيل/تعطيل الكادر متاح لمالك النظام فقط.", "error");
+    return;
+  }
+
   const result = await sanadSetStaffActive(staffId, newActiveState);
 
   if(!result.success){
@@ -2097,6 +2350,15 @@ async function toggleStaffActive(staffId, newActiveState){
   await loadAll();
   populateStaffSelects();
   renderStaffList();
+
+  await sanadLogActivity(
+    newActiveState ? "تفعيل حساب كادر" : "تعطيل حساب كادر",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "staff",
+    staffId,
+    ""
+  );
 
   showMessage(newActiveState ? "🟢 تم تفعيل الحساب." : "🔴 تم تعطيل الحساب.", "success");
 
