@@ -621,6 +621,25 @@ async function sanadUpdateAppointment(appointmentId, updates) {
   return sanadUpdateAppointmentStatus(appointmentId, updates);
 }
 
+/* =========================================================
+   26. تقييم زيارة مكتملة من طرف العائلة (نجوم + تعليق)
+========================================================= */
+
+async function sanadRateAppointment(appointmentId, rating, comment) {
+  const { data, error } = await sanadClient
+    .from("appointments")
+    .update({ rating: rating, rating_comment: comment || "" })
+    .eq("id", appointmentId)
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true, appointment: data };
+}
+
 function sanadListenTable(tableName, callback) {
   return sanadClient
     .channel(tableName + "-changes")
