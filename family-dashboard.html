@@ -12,491 +12,111 @@
 
   <style>
 
-    body {
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
-    }
+    body { background: linear-gradient(180deg, #f7fbfa, #eef7f5); }
 
-    /* =========================
-       PAGE
-    ========================= */
-
-    .dashboard {
-      max-width: 1200px;
-      margin: auto;
-      padding: 45px 6%;
-    }
-
-
-    /* =========================
-       WELCOME
-    ========================= */
+    .dashboard { max-width: 1200px; margin: auto; padding: 45px 6%; }
 
     .welcome {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 25px;
-      padding: 30px;
-      margin-bottom: 25px;
-
+      background: white; border: 1px solid #e3edeb; border-radius: 25px; padding: 30px; margin-bottom: 25px;
       box-shadow: 0 18px 50px rgba(22,70,65,.07);
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
+      display: flex; justify-content: space-between; align-items: center; gap: 20px;
     }
 
-    .welcome-text h1 {
-      color: #163b38;
-      margin: 0 0 8px;
-      font-size: 30px;
-    }
-
-    .welcome-text p {
-      color: #718480;
-      margin: 0;
-      line-height: 1.8;
-    }
+    .welcome-text h1 { color: #163b38; margin: 0 0 8px; font-size: 30px; }
+    .welcome-text p { color: #718480; margin: 0; line-height: 1.8; }
 
     .family-icon {
-      width: 75px;
-      height: 75px;
-      border-radius: 24px;
-
-      background: #e8f5f3;
-      color: #16877d;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 36px;
-      flex-shrink: 0;
+      width: 75px; height: 75px; border-radius: 24px; background: #e8f5f3; color: #16877d;
+      display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0;
     }
-
-
-    /* =========================
-       ELDER CARD
-    ========================= */
 
     .elder-card {
-      background: linear-gradient(135deg, #16877d, #0f7068);
-      color: white;
-
-      border-radius: 25px;
-      padding: 30px;
-
-      margin-bottom: 25px;
-
-      box-shadow: 0 20px 50px rgba(22,135,125,.20);
+      background: linear-gradient(135deg, #16877d, #0f7068); color: white;
+      border-radius: 25px; padding: 30px; margin-bottom: 25px; box-shadow: 0 20px 50px rgba(22,135,125,.20);
     }
 
-    .elder-top {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 25px;
-    }
+    .elder-top { display: flex; align-items: center; gap: 18px; margin-bottom: 25px; }
 
     .elder-avatar {
-      width: 75px;
-      height: 75px;
-
-      border-radius: 22px;
-
-      background: rgba(255,255,255,.16);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 35px;
+      width: 75px; height: 75px; border-radius: 22px; background: rgba(255,255,255,.16);
+      display: flex; align-items: center; justify-content: center; font-size: 35px;
     }
 
-    .elder-info h2 {
-      margin: 0 0 5px;
-      font-size: 25px;
-    }
-
-    .elder-info p {
-      margin: 0;
-      opacity: .85;
-    }
+    .elder-info h2 { margin: 0 0 5px; font-size: 25px; }
+    .elder-info p { margin: 0; opacity: .85; }
 
     .package-name {
-      display: inline-block;
-
-      margin-top: 8px;
-
-      padding: 7px 13px;
-
-      border-radius: 20px;
-
-      background: rgba(255,255,255,.15);
-
-      font-size: 13px;
-      font-weight: 700;
+      display: inline-block; margin-top: 8px; padding: 7px 13px; border-radius: 20px;
+      background: rgba(255,255,255,.15); font-size: 13px; font-weight: 700;
     }
 
-
-    /* =========================
-       SUBSCRIPTION
-    ========================= */
-
-    .subscription {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 12px;
-    }
+    .subscription { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 
     .subscription-item {
-      background: rgba(255,255,255,.12);
-
-      border: 1px solid rgba(255,255,255,.13);
-
-      border-radius: 16px;
-
-      padding: 16px;
-
-      text-align: center;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.13);
+      border-radius: 16px; padding: 16px; text-align: center;
     }
 
-    .subscription-item span {
-      display: block;
+    .subscription-item span { display: block; font-size: 12px; opacity: .8; margin-bottom: 6px; }
+    .subscription-item strong { font-size: 15px; }
 
-      font-size: 12px;
+    .section-title { color: #163b38; font-size: 22px; margin: 30px 0 15px; }
 
-      opacity: .8;
+    .care-box { background: white; border: 1px solid #e3edeb; border-radius: 22px; padding: 25px; box-shadow: 0 12px 35px rgba(22,70,65,.05); }
 
-      margin-bottom: 6px;
-    }
-
-    .subscription-item strong {
-      font-size: 15px;
-    }
-
-
-    /* =========================
-       SECTION TITLE
-    ========================= */
-
-    .section-title {
-      color: #163b38;
-
-      font-size: 22px;
-
-      margin: 30px 0 15px;
-    }
-
-
-    /* =========================
-       STATUS CARDS
-    ========================= */
-
-    .status-grid {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 18px;
-    }
-
-    .status-card {
-      background: white;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-
-      transition: .25s;
-    }
-
-    .status-card:hover {
-      transform: translateY(-4px);
-
-      box-shadow: 0 18px 40px rgba(22,70,65,.08);
-    }
-
-    .status-icon {
-      width: 48px;
-      height: 48px;
-
-      border-radius: 15px;
-
-      background: #e8f5f3;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      font-size: 23px;
-
-      margin-bottom: 14px;
-    }
-
-    .status-card h3 {
-      color: #163b38;
-
-      font-size: 16px;
-
-      margin: 0 0 7px;
-    }
-
-    .status-card p {
-      color: #718480;
-
-      font-size: 13px;
-
-      margin: 0;
-
-      line-height: 1.7;
-    }
-
-
-    /* =========================
-       TODAY CARE
-    ========================= */
-
-    .care-box {
-      background: white;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 22px;
-
-      padding: 25px;
-
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-    }
-
-    .care-item {
-      display: flex;
-
-      align-items: center;
-
-      gap: 15px;
-
-      padding: 16px 0;
-
-      border-bottom: 1px solid #edf3f2;
-    }
-
-    .care-item:last-child {
-      border-bottom: none;
-    }
+    .care-item { display: flex; align-items: center; gap: 15px; padding: 16px 0; border-bottom: 1px solid #edf3f2; }
+    .care-item:last-child { border-bottom: none; }
 
     .care-icon {
-      width: 48px;
-      height: 48px;
-
-      border-radius: 14px;
-
-      background: #e8f5f3;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      font-size: 22px;
-
-      flex-shrink: 0;
+      width: 48px; height: 48px; border-radius: 14px; background: #e8f5f3;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
     }
 
-    .care-info {
-      flex: 1;
-    }
+    .care-info { flex: 1; }
+    .care-info strong { display: block; color: #163b38; margin-bottom: 4px; }
+    .care-info span { color: #718480; font-size: 12px; }
 
-    .care-info strong {
-      display: block;
+    .care-status { padding: 6px 10px; border-radius: 15px; background: #e8f5f3; color: #16877d; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .care-status.done { background: #e6f6ef; color: #16815f; }
 
-      color: #163b38;
-
-      margin-bottom: 4px;
-    }
-
-    .care-info span {
-      color: #718480;
-
-      font-size: 12px;
-    }
-
-    .care-status {
-      padding: 6px 10px;
-
-      border-radius: 15px;
-
-      background: #e8f5f3;
-
-      color: #16877d;
-
-      font-size: 11px;
-
-      font-weight: 700;
-    }
-
-
-    /* =========================
-       REPORTS
-    ========================= */
-
-    .reports {
-      display: grid;
-
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 18px;
+    .empty-box {
+      background: #fbfefe; border: 1px dashed #dfecea; border-radius: 15px;
+      padding: 25px; text-align: center; color: #718480; font-size: 12px;
     }
 
     .report-card {
-      background: white;
-
-      border: 1px solid #e3edeb;
-
-      border-radius: 20px;
-
-      padding: 22px;
-
-      text-decoration: none;
-
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-
-      transition: .25s;
+      background: white; border: 1px solid #e3edeb; border-radius: 15px; padding: 16px 18px;
+      box-shadow: 0 12px 35px rgba(22,70,65,.05); margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
     }
 
-    .report-card:hover {
-      transform: translateY(-4px);
+    .report-card strong { display: block; color: #163b38; margin-bottom: 4px; font-size: 13px; }
+    .report-card span { color: #718480; font-size: 11px; }
 
-      border-color: #16877d;
+    .view-report-btn {
+      border: none; border-radius: 10px; padding: 9px 14px; background: #e8f5f3; color: #16877d;
+      font-family: inherit; font-size: 11px; font-weight: 800; cursor: pointer; white-space: nowrap;
     }
 
-    .report-card strong {
-      display: block;
-
-      color: #163b38;
-
-      margin-bottom: 7px;
-    }
-
-    .report-card span {
-      color: #718480;
-
-      font-size: 12px;
-    }
-
-
-    /* =========================
-       LOGOUT
-    ========================= */
+    .view-report-btn:hover { background: #d8eeeb; }
 
     .logout {
-      display: flex;
-
-      justify-content: center;
-
-      margin: 35px auto 10px;
-
-      width: fit-content;
-
-      padding: 12px 24px;
-
-      border-radius: 13px;
-
-      border: 1px solid #e3edeb;
-
-      background: white;
-
-      color: #c05a5a;
-
-      text-decoration: none;
-
-      font-weight: 700;
-
-      transition: .25s;
+      display: flex; justify-content: center; margin: 35px auto 10px; width: fit-content;
+      padding: 12px 24px; border-radius: 13px; border: 1px solid #e3edeb; background: white;
+      color: #c05a5a; text-decoration: none; font-weight: 700; transition: .25s;
     }
 
-    .logout:hover {
-      background: #c05a5a;
-
-      color: white;
-
-      border-color: #c05a5a;
-    }
-
-
-    /* =========================
-       MOBILE
-    ========================= */
+    .logout:hover { background: #c05a5a; color: white; border-color: #c05a5a; }
 
     @media (max-width: 800px) {
-
-      .dashboard {
-        padding: 30px 5%;
-      }
-
-      .welcome {
-        padding: 23px;
-
-        align-items: flex-start;
-      }
-
-      .welcome-text h1 {
-        font-size: 24px;
-      }
-
-      .family-icon {
-        width: 60px;
-        height: 60px;
-
-        font-size: 28px;
-      }
-
-      .subscription {
-        grid-template-columns: 1fr;
-      }
-
-      .status-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .reports {
-        grid-template-columns: 1fr;
-      }
-
+      .dashboard { padding: 30px 5%; }
+      .welcome { padding: 23px; align-items: flex-start; }
+      .subscription { grid-template-columns: 1fr; }
     }
 
-
     @media (max-width: 500px) {
-
-      .welcome {
-        flex-direction: column-reverse;
-
-        text-align: center;
-
-        align-items: center;
-      }
-
-      .elder-card {
-        padding: 22px;
-      }
-
-      .elder-top {
-        flex-direction: column;
-
-        text-align: center;
-      }
-
-      .elder-info h2 {
-        font-size: 22px;
-      }
-
+      .welcome { flex-direction: column-reverse; text-align: center; align-items: center; }
+      .elder-top { flex-direction: column; text-align: center; }
     }
 
   </style>
@@ -507,139 +127,63 @@
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
 
-  <a href="index.html" class="logo">
-    سند<span>.</span>
-  </a>
+  <a href="index.html" class="logo">سند<span>.</span></a>
 
   <nav class="nav">
-
-    <a href="index.html">
-      الرئيسية
-    </a>
-
-    <a href="services.html">
-      خدماتنا
-    </a>
-
-    <a href="index.html#how">
-      كيف يعمل سند؟
-    </a>
-
-    <a href="index.html#about">
-      عن سند
-    </a>
-
+    <a href="index.html">الرئيسية</a>
+    <a href="services.html">خدماتنا</a>
+    <a href="index.html#how">كيف يعمل سند؟</a>
+    <a href="index.html#about">عن سند</a>
   </nav>
 
 </header>
 
 
-
-<!-- =========================
-     DASHBOARD
-========================= -->
-
 <main class="dashboard">
-
-
-  <!-- WELCOME -->
 
   <section class="welcome">
 
     <div class="welcome-text">
-
-      <h1>
-        أهلاً بك في سند 👋
-      </h1>
-
-      <p>
-        من هنا تستطيع العائلة متابعة حالة المسن
-        ومعرفة خدمات الرعاية المقدمة له.
-      </p>
-
+      <h1 id="welcomeName">أهلاً بك في سند 👋</h1>
+      <p>من هنا تستطيع متابعة حالة المسن ومعرفة خدمات الرعاية المقدمة له.</p>
     </div>
 
-    <div class="family-icon">
-      👨‍👩‍👦
-    </div>
+    <div class="family-icon">👨‍👩‍👦</div>
 
   </section>
 
-
-
-  <!-- ELDER -->
 
   <section class="elder-card">
 
     <div class="elder-top">
 
-      <div class="elder-avatar">
-        👴
-      </div>
+      <div class="elder-avatar">👴</div>
 
       <div class="elder-info">
-
-        <h2>
-          المسن: محمد علي
-        </h2>
-
-        <p>
-          حالة الاشتراك: نشط
-        </p>
-
-        <span class="package-name">
-          🟢 باقة سند الاعتيادية
-        </span>
-
+        <h2 id="elderName">المسن</h2>
+        <p id="elderStatus">حالة الاشتراك: —</p>
+        <span class="package-name" id="packageName">—</span>
       </div>
 
     </div>
-
 
     <div class="subscription">
 
       <div class="subscription-item">
-
-        <span>
-          تاريخ بدء الاشتراك
-        </span>
-
-        <strong>
-          01 / 08 / 2026
-        </strong>
-
+        <span>رقم المشترك</span>
+        <strong id="customerCode">—</strong>
       </div>
-
 
       <div class="subscription-item">
-
-        <span>
-          تاريخ انتهاء الاشتراك
-        </span>
-
-        <strong>
-          31 / 08 / 2026
-        </strong>
-
+        <span>تاريخ التسجيل</span>
+        <strong id="startDate">—</strong>
       </div>
-
 
       <div class="subscription-item">
-
-        <span>
-          المتبقي
-        </span>
-
-        <strong id="daysRemaining">
-          7 أيام
-        </strong>
-
+        <span>عنوان السكن</span>
+        <strong id="addressText">—</strong>
       </div>
 
     </div>
@@ -647,272 +191,264 @@
   </section>
 
 
+  <h2 class="section-title">📅 مواعيد المسن القادمة</h2>
 
-  <!-- STATUS -->
+  <section class="care-box" id="upcomingBox"></section>
 
-  <h2 class="section-title">
-    📊 حالة المسن
-  </h2>
 
+  <h2 class="section-title">📋 الزيارات المكتملة والتقارير</h2>
 
-  <section class="status-grid">
+  <section id="reportsBox"></section>
 
 
-    <div class="status-card">
-
-      <div class="status-icon">
-        ❤️
-      </div>
-
-      <h3>
-        الحالة الصحية
-      </h3>
-
-      <p>
-        تتم متابعة الحالة الصحية للمسن
-        بشكل مستمر من خلال فريق سند.
-      </p>
-
-    </div>
-
-
-    <div class="status-card">
-
-      <div class="status-icon">
-        🩺
-      </div>
-
-      <h3>
-        آخر زيارة تمريضية
-      </h3>
-
-      <p>
-        تمت زيارة الممرض اليوم
-        وإجراء المتابعة الصحية المطلوبة.
-      </p>
-
-    </div>
-
-
-    <div class="status-card">
-
-      <div class="status-icon">
-        📋
-      </div>
-
-      <h3>
-        آخر تقرير
-      </h3>
-
-      <p>
-        التقرير اليومي للمسن
-        متوفر ويمكن مراجعته.
-      </p>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- TODAY CARE -->
-
-  <h2 class="section-title">
-    🏠 رعاية المسن اليوم
-  </h2>
-
-
-  <section class="care-box">
-
-
-    <div class="care-item">
-
-      <div class="care-icon">
-        👨‍⚕️
-      </div>
-
-      <div class="care-info">
-
-        <strong>
-          زيارة الممرض الصحي
-        </strong>
-
-        <span>
-          زيارة واحدة يومياً
-        </span>
-
-      </div>
-
-      <div class="care-status">
-        ✓ مكتملة
-      </div>
-
-    </div>
-
-
-    <div class="care-item">
-
-      <div class="care-icon">
-        💊
-      </div>
-
-      <div class="care-info">
-
-        <strong>
-          متابعة الأدوية
-        </strong>
-
-        <span>
-          متابعة مواعيد العلاج حسب الخطة الصحية
-        </span>
-
-      </div>
-
-      <div class="care-status">
-        ✓ متابعة
-      </div>
-
-    </div>
-
-
-    <div class="care-item">
-
-      <div class="care-icon">
-        🩺
-      </div>
-
-      <div class="care-info">
-
-        <strong>
-          قياس المؤشرات الصحية
-        </strong>
-
-        <span>
-          متابعة ضغط الدم والسكر عند الحاجة
-        </span>
-
-      </div>
-
-      <div class="care-status">
-        ✓ متابعة
-      </div>
-
-    </div>
-
-
-  </section>
-
-
-
-  <!-- REPORTS -->
-
-  <h2 class="section-title">
-    📋 تقارير المسن
-  </h2>
-
-
-  <section class="reports">
-
-
-    <a href="#" class="report-card">
-
-      <strong>
-        📄 التقرير اليومي
-      </strong>
-
-      <span>
-        متابعة رعاية المسن خلال اليوم
-      </span>
-
-    </a>
-
-
-    <a href="#" class="report-card">
-
-      <strong>
-        📊 التقرير الأسبوعي
-      </strong>
-
-      <span>
-        ملخص الحالة والخدمات خلال الأسبوع
-      </span>
-
-    </a>
-
-
-    <a href="#" class="report-card">
-
-      <strong>
-        📑 التقرير الشهري
-      </strong>
-
-      <span>
-        التقرير الشامل للخدمات والرعاية
-      </span>
-
-    </a>
-
-
-  </section>
-
-
-
-  <!-- LOGOUT -->
-
-  <a href="login.html" class="logout">
-    تسجيل الخروج
-  </a>
-
+  <a href="#" class="logout" onclick="logoutFamily(event)">تسجيل الخروج</a>
 
 </main>
 
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
-
-  <div class="footer-logo">
-    سند<span>.</span>
-  </div>
-
-  <p>
-    الرعاية المنزلية لكبار السن
-  </p>
-
-  <small>
-    © 2026 سند — جميع الحقوق محفوظة
-  </small>
-
+  <div class="footer-logo">سند<span>.</span></div>
+  <p>الرعاية المنزلية لكبار السن</p>
+  <small>© 2026 سند — جميع الحقوق محفوظة</small>
 </footer>
 
 
-
-<!-- =========================
-     DAYS CALCULATION
-========================= -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sanad-db.js"></script>
 
 <script>
 
-  const endDate = new Date("2026-08-31T23:59:59");
+/* =====================================================
+   1. جلسة العائلة
+===================================================== */
 
-  const today = new Date();
+const loggedFamilyRaw = localStorage.getItem("sanadLoggedInFamily");
 
-  const difference =
-    endDate.getTime() - today.getTime();
+if(!loggedFamilyRaw){
+  alert("يرجى تسجيل الدخول أولاً.");
+  window.location.href = "family-login.html";
+}
 
-  const days =
-    Math.max(
-      0,
-      Math.ceil(
-        difference / (1000 * 60 * 60 * 24)
-      )
-    );
+let loggedFamily = null;
+let elderCustomer = null;
 
-  document.getElementById("daysRemaining").textContent =
-    days + " يوم";
+try{
+  loggedFamily = JSON.parse(loggedFamilyRaw);
+  elderCustomer = loggedFamily ? loggedFamily.customers : null;
+}catch(error){
+  localStorage.removeItem("sanadLoggedInFamily");
+  window.location.href = "family-login.html";
+}
+
+if(!elderCustomer){
+  alert("تعذر العثور على بيانات المسن المرتبط بحسابك.");
+}
+
+/* =====================================================
+   2. عرض البيانات الأساسية
+===================================================== */
+
+function renderProfile(){
+
+  if(!loggedFamily){ return; }
+
+  document.getElementById("welcomeName").textContent = "أهلاً بك، " + (loggedFamily.name || "") + " 👋";
+
+  if(!elderCustomer){ return; }
+
+  document.getElementById("elderName").textContent = "المسن: " + (elderCustomer.name || "");
+  document.getElementById("packageName").textContent = "🟢 " + (elderCustomer.package_name || "بدون باقة");
+  document.getElementById("customerCode").textContent = elderCustomer.customer_code || "—";
+  document.getElementById("addressText").textContent = elderCustomer.address || "—";
+
+  const statusTexts = {
+    pending_schedule: "بانتظار ترتيب المواعيد",
+    scheduling: "قيد ترتيب المواعيد",
+    scheduled: "تم ترتيب المواعيد",
+    active: "نشط",
+    suspended: "موقوف",
+    completed: "مكتمل"
+  };
+
+  document.getElementById("elderStatus").textContent = "حالة الاشتراك: " + (statusTexts[elderCustomer.status] || "غير محدد");
+
+  if(elderCustomer.created_at){
+    const date = new Date(elderCustomer.created_at);
+    document.getElementById("startDate").textContent =
+      String(date.getDate()).padStart(2,"0") + " / " + String(date.getMonth()+1).padStart(2,"0") + " / " + date.getFullYear();
+  }
+
+}
+
+/* =====================================================
+   3. تحميل المواعيد
+===================================================== */
+
+let staffList = [];
+
+async function loadAppointments(){
+
+  if(!elderCustomer){ return; }
+
+  const appointments = await sanadGetAppointmentsForCustomer(elderCustomer.id);
+  staffList = await sanadGetStaff();
+
+  const upcoming = appointments.filter(function(item){ return item.status === "scheduled" || item.status === "in_progress"; });
+  const completed = appointments.filter(function(item){ return item.status === "completed"; });
+
+  renderUpcoming(upcoming);
+  renderReports(completed);
+
+}
+
+function renderUpcoming(list){
+
+  const box = document.getElementById("upcomingBox");
+  box.innerHTML = "";
+
+  if(list.length === 0){
+    box.innerHTML = `<div class="empty-box">لا توجد مواعيد قادمة حالياً.</div>`;
+    return;
+  }
+
+  list.forEach(function(item){
+
+    const staffMember = staffList.find(function(s){ return s.id === item.staff_id; });
+    const staffName = staffMember ? staffMember.name : "غير محدد";
+
+    const div = document.createElement("div");
+    div.className = "care-item";
+
+    div.innerHTML = `
+
+      <div class="care-icon">🩺</div>
+
+      <div class="care-info">
+        <strong>${escapeHtml(item.service_name || "")}</strong>
+        <span>📅 ${escapeHtml(item.visit_date || "")} — ⏰ ${escapeHtml(String(item.visit_time || "").slice(0,5))} — 👤 ${escapeHtml(staffName)}</span>
+      </div>
+
+      <div class="care-status">قادمة</div>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+function renderReports(list){
+
+  const box = document.getElementById("reportsBox");
+  box.innerHTML = "";
+
+  if(list.length === 0){
+    box.innerHTML = `<div class="empty-box">لا توجد زيارات مكتملة حتى الآن.</div>`;
+    return;
+  }
+
+  list.forEach(function(item){
+
+    const div = document.createElement("div");
+    div.className = "report-card";
+
+    div.innerHTML = `
+
+      <div>
+        <strong>${escapeHtml(item.service_name || "")}</strong>
+        <span>📅 ${escapeHtml(item.visit_date || "")} — ⏰ ${escapeHtml(String(item.visit_time || "").slice(0,5))}</span>
+      </div>
+
+      ${item.report ? `<button type="button" class="view-report-btn" onclick='viewReport(${JSON.stringify(JSON.stringify(item.report))})'>📄 عرض التقرير</button>` : `<span style="font-size:11px;color:#a8b5b2;">لا يوجد تقرير</span>`}
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+function viewReport(reportJsonString){
+
+  let report = {};
+
+  try{
+    report = JSON.parse(reportJsonString);
+  }catch(error){
+    alert("تعذر عرض التقرير.");
+    return;
+  }
+
+  const lines = [];
+
+  lines.push("📄 تقرير الزيارة");
+
+  if(report.staff){
+    lines.push("الكادر: " + (report.staff.name || ""));
+  }
+
+  lines.push("");
+
+  if(report.vitalSigns){
+    lines.push("❤️ العلامات الحيوية:");
+    lines.push("ضغط الدم: " + (report.vitalSigns.bloodPressure || "—"));
+    lines.push("سكر الدم: " + (report.vitalSigns.bloodSugar || "—"));
+    lines.push("الحرارة: " + (report.vitalSigns.temperature || "—"));
+    lines.push("النبض: " + (report.vitalSigns.pulse || "—"));
+    lines.push("");
+  }
+
+  if(report.medical && (report.medical.diagnosis || report.medical.treatment)){
+    lines.push("🩺 التقييم الطبي:");
+    lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
+    lines.push("العلاج: " + (report.medical.treatment || "—"));
+    lines.push("التوصيات: " + (report.medical.recommendations || "—"));
+    lines.push("");
+  }
+
+  if(report.finalReport){
+    lines.push("📝 ملخص الزيارة:");
+    lines.push(report.finalReport);
+  }
+
+  alert(lines.join("\n"));
+
+}
+
+/* =====================================================
+   4. حماية النصوص
+===================================================== */
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/* =====================================================
+   5. تسجيل الخروج
+===================================================== */
+
+function logoutFamily(event){
+  if(event){ event.preventDefault(); }
+  localStorage.removeItem("sanadLoggedInFamily");
+  sanadClearSession();
+  window.location.href = "family-login.html";
+}
+
+/* =====================================================
+   6. التشغيل + تحديث دوري كل 8 ثواني
+===================================================== */
+
+renderProfile();
+loadAppointments();
+
+setInterval(loadAppointments, 8000);
 
 </script>
 
