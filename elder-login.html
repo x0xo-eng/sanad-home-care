@@ -1,132 +1,350 @@
-<a href="index.html" class="logo">
-  سند<span>.</span>
-</a>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تسجيل دخول المسن | سند</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
+
+.login-page{
+min-height:calc(100vh - 180px);
+padding:55px 7%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.panel{
+width:100%;
+max-width:460px;
+background:white;
+border-radius:28px;
+padding:42px;
+box-shadow:0 25px 70px rgba(22,70,65,.09);
+border:1px solid #e3edeb;
+}
+
+.panel-header{
+text-align:center;
+margin-bottom:28px;
+}
+
+.panel-icon{
+width:70px;
+height:70px;
+border-radius:22px;
+background:#e8f5f3;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+margin:0 auto 15px;
+}
+
+.panel-header h1{
+color:#163b38;
+font-size:26px;
+margin:0 0 8px;
+}
+
+.lead{
+color:#718480;
+font-size:13px;
+margin:0;
+line-height:1.8;
+}
+
+.hint-box{
+background:#f0f8f6;
+border:1px solid #dcece9;
+border-radius:13px;
+padding:12px 15px;
+color:#16877d;
+font-size:12px;
+font-weight:700;
+margin-bottom:22px;
+text-align:center;
+line-height:1.8;
+}
+
+.form-row{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:17px;
+}
+
+.form-row label{
+color:#163b38;
+font-size:13px;
+font-weight:800;
+}
+
+.form-row input{
+width:100%;
+box-sizing:border-box;
+padding:14px;
+border-radius:12px;
+border:1px solid #dfecea;
+background:#fbfefe;
+color:#163b38;
+font-family:inherit;
+font-size:14px;
+outline:none;
+}
+
+.form-row input:focus{
+border-color:#16877d;
+background:white;
+box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
+
+.actions{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-top:23px;
+}
+
+.forgot{
+color:#16877d;
+font-size:12px;
+font-weight:800;
+text-decoration:none;
+}
+
+.btn-login{
+border:none;
+border-radius:13px;
+padding:13px 28px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+}
+
+.btn-login:hover{
+background:#0f7068;
+}
+
+.btn-login:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
+
+.error,
+.success{
+display:none;
+margin-top:15px;
+padding:12px;
+border-radius:11px;
+text-align:center;
+font-size:12px;
+font-weight:800;
+}
+
+.error{
+background:#fff0f0;
+color:#a44b4b;
+border:1px solid #f0dada;
+}
+
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
+
+.back{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+width:fit-content;
+margin:26px auto 0;
+color:#16877d;
+text-decoration:none;
+font-size:12px;
+font-weight:800;
+}
+
+@media(max-width:500px){
+
+.login-page{
+padding:30px 5%;
+}
+
+.panel{
+padding:28px 22px;
+}
+
+.actions{
+flex-direction:column;
+align-items:stretch;
+}
+
+.btn-login{
+width:100%;
+}
+
+.forgot{
+text-align:center;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<a href="index.html" class="logo">سند<span>.</span></a>
 
 <nav class="nav">
-
-  <a href="index.html">
-    الرئيسية
-  </a>
-
-  <a href="services.html">
-    خدماتنا
-  </a>
-
-  <a href="index.html#how">
-    كيف يعمل سند؟
-  </a>
-
-  <a href="index.html#about">
-    عن سند
-  </a>
-
+<a href="index.html">الرئيسية</a>
+<a href="services.html">خدماتنا</a>
+<a href="index.html#how">كيف يعمل سند؟</a>
+<a href="index.html#about">عن سند</a>
 </nav>
+
+</header>
+
+
+<main class="login-page">
+
 <div class="panel">
 
-
-  <div class="panel-header">
-
-    <div class="panel-icon">
-      👴
-    </div>
-
-    <h1>
-      تسجيل دخول المسن
-    </h1>
-
-    <p class="lead">
-      سجل الدخول للوصول إلى معلومات الرعاية والملف الشخصي للمسن.
-    </p>
-
-  </div>
-
-
-  <form id="elderLoginForm">
-
-
-    <!-- PHONE -->
-
-    <div class="form-row">
-
-      <label for="elderPhone">
-        رقم الهاتف
-      </label>
-
-      <input
-        id="elderPhone"
-        type="tel"
-        placeholder="أدخل رقم الهاتف"
-        autocomplete="tel"
-        required
-      >
-
-    </div>
-
-
-    <!-- PASSWORD -->
-
-    <div class="form-row">
-
-      <label for="elderPassword">
-        كلمة المرور
-      </label>
-
-      <input
-        id="elderPassword"
-        type="password"
-        placeholder="أدخل كلمة المرور"
-        autocomplete="current-password"
-        required
-      >
-
-    </div>
-
-
-    <!-- ACTIONS -->
-
-    <div class="actions">
-
-      <a href="#" class="forgot">
-        هل نسيت كلمة المرور؟
-      </a>
-
-      <button
-        type="submit"
-        class="btn-login"
-      >
-        تسجيل الدخول
-      </button>
-
-    </div>
-
-
-  </form>
-
-
-  <!-- BACK -->
-
-  <a href="login.html" class="back">
-
-    <span class="back-icon">
-      ←
-    </span>
-
-    <span>
-      العودة لاختيار نوع الحساب
-    </span>
-
-  </a>
-
-
-</div>
-<div class="footer-logo">
-  سند<span>.</span>
+<div class="panel-header">
+<div class="panel-icon">👴</div>
+<h1>تسجيل دخول المسن</h1>
+<p class="lead">سجل الدخول للوصول إلى معلومات الرعاية والملف الشخصي.</p>
 </div>
 
-<p>
-  الرعاية المنزلية لكبار السن
-</p>
+<div class="hint-box">
+🔐 كلمة المرور الافتراضية هي رقم هاتفك المسجل لدى موظف الاستقبال
+</div>
 
-<small>
-  © 2026 سند — جميع الحقوق محفوظة
-</small>
+<form id="elderLoginForm">
+
+<div class="form-row">
+<label for="elderPhone">رقم الهاتف</label>
+<input id="elderPhone" type="tel" placeholder="أدخل رقم الهاتف" autocomplete="tel" required>
+</div>
+
+<div class="form-row">
+<label for="elderPassword">كلمة المرور</label>
+<input id="elderPassword" type="password" placeholder="أدخل كلمة المرور" autocomplete="current-password" required>
+</div>
+
+<div class="actions">
+<a href="#" class="forgot" onclick="forgotPassword(event)">هل نسيت كلمة المرور؟</a>
+<button type="submit" class="btn-login" id="submitBtn">تسجيل الدخول</button>
+</div>
+
+<div id="errorMessage" class="error"></div>
+<div id="successMessage" class="success"></div>
+
+</form>
+
+<a href="login.html" class="back">
+<span class="back-icon">←</span>
+<span>العودة لاختيار نوع الحساب</span>
+</a>
+
+</div>
+
+</main>
+
+
+<footer>
+<div class="footer-logo">سند<span>.</span></div>
+<p>الرعاية المنزلية لكبار السن</p>
+<small>© 2026 سند — جميع الحقوق محفوظة</small>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="sanad-db.js"></script>
+
+<script>
+
+document.getElementById("elderLoginForm").addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  hideMessages();
+
+  const phone = document.getElementById("elderPhone").value.trim();
+  const password = document.getElementById("elderPassword").value.trim();
+
+  const button = document.getElementById("submitBtn");
+  const originalText = button.textContent;
+  button.textContent = "جارِ التحقق...";
+  button.disabled = true;
+
+  const result = await sanadLoginElder(phone, password);
+
+  button.textContent = originalText;
+  button.disabled = false;
+
+  if(!result.success){
+    showError(result.message);
+    return;
+  }
+
+  localStorage.setItem("sanadLoggedInElder", JSON.stringify(result.customer));
+  sanadSaveSession("elder", result.customer);
+
+  showSuccess("✅ تم تسجيل الدخول بنجاح...");
+
+  setTimeout(function(){
+    window.location.href = "elder-dashboard.html";
+  }, 500);
+
+});
+
+function showError(message){
+  const error = document.getElementById("errorMessage");
+  error.textContent = message;
+  error.style.display = "block";
+}
+
+function showSuccess(message){
+  const success = document.getElementById("successMessage");
+  success.textContent = message;
+  success.style.display = "block";
+}
+
+function hideMessages(){
+  document.getElementById("errorMessage").style.display = "none";
+  document.getElementById("successMessage").style.display = "none";
+}
+
+function forgotPassword(event){
+  event.preventDefault();
+  alert("كلمة المرور الافتراضية هي رقم هاتفك. إذا استمرت المشكلة تواصل مع موظف الاستقبال.");
+}
+
+</script>
+
+
+</body>
+
+</html>
