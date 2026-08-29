@@ -579,6 +579,48 @@ async function sanadUpdateFamilyMember(familyMemberId, updates) {
   return { success: true };
 }
 
+/* =========================================================
+   24. تسجيل عملية بسجل العمليات (Audit Log)
+========================================================= */
+
+async function sanadLogActivity(action, actorName, actorRole, targetType, targetId, details) {
+  try {
+    await sanadClient.from("activity_log").insert({
+      action: action,
+      actor_name: actorName || "",
+      actor_role: actorRole || "",
+      target_type: targetType || "",
+      target_id: targetId || "",
+      details: typeof details === "string" ? details : JSON.stringify(details || {})
+    });
+  } catch (error) {
+    console.error("تعذر تسجيل العملية بالسجل:", error);
+  }
+}
+
+/* =========================================================
+   25. قراءة سجل العمليات (لمالك النظام)
+========================================================= */
+
+async function sanadGetActivityLog(limitCount) {
+  const { data, error } = await sanadClient
+    .from("activity_log")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(limitCount || 100);
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+async function sanadUpdateAppointment(appointmentId, updates) {
+  return sanadUpdateAppointmentStatus(appointmentId, updates);
+}
+
 function sanadListenTable(tableName, callback) {
   return sanadClient
     .channel(tableName + "-changes")
