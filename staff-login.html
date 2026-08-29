@@ -500,6 +500,23 @@ onclick="selectRole('hairdresser',this)"
 </button>
 
 
+<button
+type="button"
+class="role"
+onclick="selectRole('assistant',this)"
+>
+
+<div class="role-icon">
+🛁
+</div>
+
+<span class="role-name">
+المعين
+</span>
+
+</button>
+
+
 </div>
 
 
@@ -632,10 +649,14 @@ class="back-home"
 
 /* =========================================================
    خريطة الأدوار: اسم الصفة الظاهر + الأيقونة + اللوحة
+
+   ملاحظة مهمة: "owner" يروح لنفس manager-dashboard.html
+   (مو لصفحة owner-dashboard.html منفصلة) لأن لوحة المدير
+   أصلاً مبرمجة تتعرف على المالك وتعطيه صلاحيات كاملة زيادة
 ========================================================= */
 
 const SANAD_ROLE_INFO = {
-  owner:         { title: "مالك النظام",        dashboard: "owner-dashboard.html" },
+  owner:         { title: "مالك النظام",        dashboard: "manager-dashboard.html" },
   manager:       { title: "مدير الشركة",         dashboard: "manager-dashboard.html" },
   reception:     { title: "موظف استقبال",        dashboard: "reception-dashboard.html" },
   specialist:    { title: "طبيب أخصائي",         dashboard: "staff-dashboard.html" },
@@ -643,7 +664,8 @@ const SANAD_ROLE_INFO = {
   nurse:         { title: "ممرض صحي",            dashboard: "staff-dashboard.html" },
   nutrition:     { title: "أخصائي تغذية",        dashboard: "staff-dashboard.html" },
   physio:        { title: "أخصائي علاج طبيعي",   dashboard: "staff-dashboard.html" },
-  psychologist:  { title: "أخصائي نفسي",         dashboard: "staff-dashboard.html" },entertainment: { title: "أخصائي ترفيه",        dashboard: "staff-dashboard.html" },
+  psychologist:  { title: "أخصائي نفسي",         dashboard: "staff-dashboard.html" },
+  entertainment: { title: "أخصائي ترفيه",        dashboard: "staff-dashboard.html" },
   hairdresser:   { title: "كوافير",              dashboard: "staff-dashboard.html" },
   assistant:     { title: "معين",                dashboard: "staff-dashboard.html" }
 };
@@ -809,7 +831,8 @@ function forgotPassword(event) {
 
   event.preventDefault();
 
-  if (!selectedRole) {showError("اختر الصفة الوظيفية أولاً.");
+  if (!selectedRole) {
+    showError("اختر الصفة الوظيفية أولاً.");
     return;
   }
 
@@ -820,10 +843,6 @@ function forgotPassword(event) {
 
 </script>
 
-
-<!-- SUPABASE + DB HELPERS (يجب أن تكون قبل السكربت أعلاه) -->
-
-</script>
 
 </body>
 
