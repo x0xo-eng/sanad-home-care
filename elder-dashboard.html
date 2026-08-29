@@ -209,6 +209,18 @@
   </section>
 
 
+  <section style="margin-top:40px;">
+
+    <div class="section-heading">
+      <h2>📈 السجل الصحي</h2>
+      <p>تطور ضغط الدم وسكر الدم عبر الزيارات المسجلة</p>
+    </div>
+
+    <div id="vitalsChartBox"></div>
+
+  </section>
+
+
   <div class="logout-area">
     <a href="#" class="logout" onclick="logoutElder(event)">↩ تسجيل الخروج</a>
   </div>
@@ -296,6 +308,158 @@ async function loadAppointments(){
 
   renderAppointmentList("upcomingList", upcoming, false);
   renderAppointmentList("completedList", completed, true);
+
+  renderVitalsChart(buildVitalsHistory(appointments));
+
+}
+
+/* =====================================================
+   3-ب. السجل الصحي كرسم بياني (ضغط الدم وسكر الدم)
+===================================================== */
+
+function parseNumber(text){
+  if(!text){ return null; }
+  const match = String(text).match(/(\d+(\.\d+)?)/);
+  return match ? parseFloat(match[1]) : null;
+}
+
+function parseBloodPressure(text){
+  if(!text){ return null; }
+  const match = String(text).match(/(\d+)\s*\/\s*(\d+)/);
+  if(!match){ return null; }
+  return { systolic: parseFloat(match[1]), diastolic: parseFloat(match[2]) };
+}
+
+function buildVitalsHistory(appointmentsList){
+
+  const points = [];
+
+  appointmentsList.forEach(function(item){
+
+    if(item.status !== "completed" || !item.report || !item.report.vitalSigns){ return; }
+
+    const v = item.report.vitalSigns;
+    const bp = parseBloodPressure(v.bloodPressure);
+    const sugar = parseNumber(v.bloodSugar);
+
+    if(!bp && sugar === null){ return; }
+
+    points.push({
+      date: item.visit_date || "",
+      time: item.visit_time || "",
+      systolic: bp ? bp.systolic : null,
+      diastolic: bp ? bp.diastolic : null,
+      sugar: sugar
+    });
+
+  });
+
+  points.sort(function(a, b){
+    return (a.date + a.time).localeCompare(b.date + b.time);
+  });
+
+  return points;
+
+}
+
+function renderVitalsChart(points){
+
+  const container = document.getElementById("vitalsChartBox");
+  if(!container){ return; }
+
+  container.innerHTML = "";
+
+  if(points.length === 0){
+    container.innerHTML = `<div class="empty-box">لا توجد قياسات مسجلة بعد لعرضها كرسم بياني.</div>`;
+    return;
+  }
+
+  container.appendChild(buildVitalsSingleChart(points, [
+    { key: "systolic", label: "الانقباضي", color: "#16877d" },
+    { key: "diastolic", label: "الانبساطي", color: "#f0b429" }
+  ], "🩺 ضغط الدم عبر الوقت", "mmHg"));
+
+  container.appendChild(buildVitalsSingleChart(points, [
+    { key: "sugar", label: "سكر الدم", color: "#a44b4b" }
+  ], "🍬 سكر الدم عبر الوقت", "mg/dL"));
+
+}
+
+function buildVitalsSingleChart(points, seriesDefs, title, unit){
+
+  const wrapper = document.createElement("div");
+  wrapper.style.marginBottom = "20px";
+
+  const validPoints = points.filter(function(p){
+    return seriesDefs.some(function(s){ return p[s.key] !== null; });
+  });
+
+  if(validPoints.length < 2){
+    wrapper.innerHTML = `<h4 style="margin:0 0 10px;color:#163b38;font-size:14px;">${title}</h4><div class="empty-box">بيانات غير كافية لرسم بياني (تحتاج قياسين على الأقل من نفس النوع).</div>`;
+    return wrapper;
+  }
+
+  const W = 640, H = 200, padding = 35;
+
+  let allValues = [];
+  seriesDefs.forEach(function(s){
+    validPoints.forEach(function(p){ if(p[s.key] !== null){ allValues.push(p[s.key]); } });
+  });
+
+  const minVal = Math.min.apply(null, allValues);
+  const maxVal = Math.max.apply(null, allValues);
+  const range = (maxVal - minVal) || 1;
+
+  const stepX = (W - padding * 2) / (validPoints.length - 1);
+
+  function xFor(i){ return padding + i * stepX; }
+  function yFor(v){ return H - padding - ((v - minVal) / range) * (H - padding * 2); }
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;background:#fbfefe;border:1px solid #e3edeb;border-radius:14px;">`;
+  svg += `<line x1="${padding}" y1="${H-padding}" x2="${W-padding}" y2="${H-padding}" stroke="#dfecea" stroke-width="1"/>`;
+
+  seriesDefs.forEach(function(s){
+
+    const pathPoints = [];
+
+    validPoints.forEach(function(p, i){
+      if(p[s.key] !== null){
+        pathPoints.push(xFor(i) + "," + yFor(p[s.key]));
+      }
+    });
+
+    if(pathPoints.length > 1){
+      svg += `<polyline points="${pathPoints.join(" ")}" fill="none" stroke="${s.color}" stroke-width="2.5"/>`;
+    }
+
+    validPoints.forEach(function(p, i){
+      if(p[s.key] !== null){
+        svg += `<circle cx="${xFor(i)}" cy="${yFor(p[s.key])}" r="3.5" fill="${s.color}"/>`;
+      }
+    });
+
+  });
+
+  const labelEvery = Math.max(1, Math.ceil(validPoints.length / 6));
+
+  validPoints.forEach(function(p, i){
+    if(i % labelEvery === 0 || i === validPoints.length - 1){
+      svg += `<text x="${xFor(i)}" y="${H-10}" font-size="9" fill="#8a9692" text-anchor="middle">${escapeHtml(p.date ? p.date.slice(5) : "")}</text>`;
+    }
+  });
+
+  svg += `</svg>`;
+
+  const legendHtml = seriesDefs.map(function(s){
+    return `<span style="display:inline-flex;align-items:center;gap:5px;margin-left:12px;font-size:11px;color:#718480;"><span style="width:10px;height:10px;border-radius:50%;background:${s.color};display:inline-block;"></span>${s.label}</span>`;
+  }).join("");
+
+  wrapper.innerHTML =
+    `<h4 style="margin:0 0 10px;color:#163b38;font-size:14px;">${title} <span style="font-size:11px;color:#8a9692;">(${unit})</span></h4>` +
+    svg +
+    `<div style="margin-top:8px;">${legendHtml}</div>`;
+
+  return wrapper;
 
 }
 
