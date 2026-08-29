@@ -1562,12 +1562,17 @@ function renderAppointments(){
 
         <div class="appointment-top">
           <div class="appointment-name">👴 ${escapeHtml(customerName)}</div>
-          <div class="appointment-time">📅 ${escapeHtml(item.visit_date)} &nbsp; ⏰ ${escapeHtml(item.visit_time)}</div>
+          <div class="appointment-time">📅 ${escapeHtml(item.visit_date)} &nbsp; ⏰ ${escapeHtml(String(item.visit_time || "").slice(0,5))}</div>
         </div>
 
         <div class="appointment-info">
           👤 الكادر: ${escapeHtml(staffName)}
           <br>🟢 الحالة: ${getAppointmentStatus(item.status)}
+        </div>
+
+        <div class="customer-actions">
+          ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : ""}
+          <button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>
         </div>
 
       `;
@@ -1617,7 +1622,7 @@ function renderAllAppointments(){
 
       <div class="appointment-top">
         <div class="appointment-name">${escapeHtml(item.service_name)} — ${escapeHtml(customerName)}</div>
-        <div class="appointment-time">${escapeHtml(item.visit_date)} — ${escapeHtml(item.visit_time)}</div>
+        <div class="appointment-time">${escapeHtml(item.visit_date)} — ${escapeHtml(String(item.visit_time || "").slice(0,5))}</div>
       </div>
 
       <div class="appointment-info">
@@ -1628,11 +1633,105 @@ function renderAllAppointments(){
         <br>🟢 الحالة: ${getAppointmentStatus(item.status)}
       </div>
 
+      <div class="customer-actions">
+        ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : ""}
+        <button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>
+      </div>
+
     `;
 
     container.appendChild(div);
 
   });
+
+}
+
+/* =====================================================
+   20-ب. حذف موعد واحد
+===================================================== */
+
+async function deleteAppointmentAction(appointmentId){
+
+  const confirmed = confirm("⚠️ هل أنت متأكد من حذف هذا الموعد؟ لا يمكن التراجع عن هذا الإجراء.");
+  if(!confirmed){ return; }
+
+  const result = await sanadDeleteAppointment(appointmentId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حذف الموعد.", "error");
+    return;
+  }
+
+  await loadAll();
+
+  populateCustomerSelects();
+  populateStaffSelects();
+  renderPendingCustomers();
+  renderAppointments();
+  updateStats();
+
+  showMessage("🗑️ تم حذف الموعد بنجاح.", "success");
+
+}
+
+/* =====================================================
+   20-ج. عرض تقرير زيارة مكتملة
+===================================================== */
+
+function viewAppointmentReport(appointmentId){
+
+  const appointment = appointments.find(function(item){ return item.id === appointmentId; });
+
+  if(!appointment || !appointment.report){
+    alert("لا يوجد تقرير محفوظ لهذا الموعد.");
+    return;
+  }
+
+  const report = appointment.report;
+  const lines = [];
+
+  lines.push("📄 تقرير الزيارة");
+  lines.push("الخدمة: " + (appointment.service_name || ""));
+  lines.push("التاريخ: " + (appointment.visit_date || "") + " — " + String(appointment.visit_time || "").slice(0,5));
+  lines.push("الكادر: " + (report.staff ? report.staff.name : ""));
+  lines.push("");
+
+  if(report.vitalSigns){
+    lines.push("❤️ العلامات الحيوية:");
+    lines.push("ضغط الدم: " + (report.vitalSigns.bloodPressure || "—"));
+    lines.push("سكر الدم: " + (report.vitalSigns.bloodSugar || "—"));
+    lines.push("الحرارة: " + (report.vitalSigns.temperature || "—"));
+    lines.push("النبض: " + (report.vitalSigns.pulse || "—"));
+    lines.push("الأوكسجين: " + (report.vitalSigns.oxygen || "—"));
+    lines.push("الوزن: " + (report.vitalSigns.weight || "—"));
+    lines.push("");
+  }
+
+  if(report.medical && (report.medical.symptoms || report.medical.diagnosis || report.medical.treatment)){
+    lines.push("🩺 التقييم الطبي:");
+    lines.push("الأعراض: " + (report.medical.symptoms || "—"));
+    lines.push("الفحص: " + (report.medical.examination || "—"));
+    lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
+    lines.push("العلاج: " + (report.medical.treatment || "—"));
+    lines.push("التوصيات: " + (report.medical.recommendations || "—"));
+    lines.push("");
+  }
+
+  if(report.nursing && (report.nursing.medicationGiven || report.nursing.nursingNotes)){
+    lines.push("👩‍⚕️ الرعاية التمريضية:");
+    lines.push("الأدوية: " + (report.nursing.medicationGiven || "—"));
+    lines.push("الرعاية الشخصية: " + (report.nursing.personalCare || "—"));
+    lines.push("التغذية: " + (report.nursing.nutritionStatus || "—"));
+    lines.push("ملاحظات: " + (report.nursing.nursingNotes || "—"));
+    lines.push("");
+  }
+
+  if(report.finalReport){
+    lines.push("📝 التقرير النهائي:");
+    lines.push(report.finalReport);
+  }
+
+  alert(lines.join("\n"));
 
 }
 
