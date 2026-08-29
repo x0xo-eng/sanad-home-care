@@ -360,7 +360,7 @@ function renderReports(list){
         <span>📅 ${escapeHtml(item.visit_date || "")} — ⏰ ${escapeHtml(String(item.visit_time || "").slice(0,5))}</span>
       </div>
 
-      ${item.report ? `<button type="button" class="view-report-btn" onclick='viewReport(${JSON.stringify(JSON.stringify(item.report))})'>📄 عرض التقرير</button>` : `<span style="font-size:11px;color:#a8b5b2;">لا يوجد تقرير</span>`}
+      ${item.report ? `<button type="button" class="view-report-btn" onclick='viewReport(${JSON.stringify(JSON.stringify(item))})'>📄 عرض التقرير</button>` : `<span style="font-size:11px;color:#a8b5b2;">لا يوجد تقرير</span>`}
 
     `;
 
@@ -370,50 +370,20 @@ function renderReports(list){
 
 }
 
-function viewReport(reportJsonString){
+function viewReport(appointmentJsonString){
 
-  let report = {};
+  let appointment = {};
 
   try{
-    report = JSON.parse(reportJsonString);
+    appointment = JSON.parse(appointmentJsonString);
   }catch(error){
     alert("تعذر عرض التقرير.");
     return;
   }
 
-  const lines = [];
+  const text = sanadFormatReportText(appointment);
 
-  lines.push("📄 تقرير الزيارة");
-
-  if(report.staff){
-    lines.push("الكادر: " + (report.staff.name || ""));
-  }
-
-  lines.push("");
-
-  if(report.vitalSigns){
-    lines.push("❤️ العلامات الحيوية:");
-    lines.push("ضغط الدم: " + (report.vitalSigns.bloodPressure || "—"));
-    lines.push("سكر الدم: " + (report.vitalSigns.bloodSugar || "—"));
-    lines.push("الحرارة: " + (report.vitalSigns.temperature || "—"));
-    lines.push("النبض: " + (report.vitalSigns.pulse || "—"));
-    lines.push("");
-  }
-
-  if(report.medical && (report.medical.diagnosis || report.medical.treatment)){
-    lines.push("🩺 التقييم الطبي:");
-    lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
-    lines.push("العلاج: " + (report.medical.treatment || "—"));
-    lines.push("التوصيات: " + (report.medical.recommendations || "—"));
-    lines.push("");
-  }
-
-  if(report.finalReport){
-    lines.push("📝 ملخص الزيارة:");
-    lines.push(report.finalReport);
-  }
-
-  alert(lines.join("\n"));
+  alert(text || "لا يوجد تقرير محفوظ لهذه الزيارة.");
 
 }
 
