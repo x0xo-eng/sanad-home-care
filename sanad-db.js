@@ -427,9 +427,157 @@ async function sanadUpdateCustomerStatus(customerId, status) {
 }
 
 /* =========================================================
-   18. الاستماع للتحديثات اللحظية (تستخدم بأي لوحة تريد
-   تحديث تلقائي بدون ريفرش، إذا كان Realtime مفعّل بالجدول)
+   19. تنسيق تقرير الزيارة الكامل كنص (يُستخدم بنفس الشكل
+   عند المدير والعائلة والمسن حتى يكون التقرير موحّد وكامل)
 ========================================================= */
+
+function sanadFormatReportText(appointment) {
+  if (!appointment || !appointment.report) {
+    return null;
+  }
+
+  const report = appointment.report;
+  const lines = [];
+
+  lines.push("📄 تقرير الزيارة");
+  lines.push("الخدمة: " + (appointment.service_name || ""));
+  lines.push("التاريخ: " + (appointment.visit_date || "") + " — " + String(appointment.visit_time || "").slice(0, 5));
+
+  if (report.staff) {
+    lines.push("الكادر: " + (report.staff.name || ""));
+  }
+
+  lines.push("");
+
+  if (report.vitalSigns) {
+    lines.push("❤️ العلامات الحيوية:");
+    lines.push("ضغط الدم: " + (report.vitalSigns.bloodPressure || "—"));
+    lines.push("سكر الدم: " + (report.vitalSigns.bloodSugar || "—"));
+    lines.push("الحرارة: " + (report.vitalSigns.temperature || "—"));
+    lines.push("النبض: " + (report.vitalSigns.pulse || "—"));
+    lines.push("الأوكسجين: " + (report.vitalSigns.oxygen || "—"));
+    lines.push("الوزن: " + (report.vitalSigns.weight || "—"));
+    lines.push("");
+  }
+
+  if (report.medical) {
+    lines.push("🩺 التقييم الطبي:");
+    lines.push("الأعراض: " + (report.medical.symptoms || "—"));
+    lines.push("الفحص: " + (report.medical.examination || "—"));
+    lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
+    lines.push("العلاج: " + (report.medical.treatment || "—"));
+    lines.push("التوصيات: " + (report.medical.recommendations || "—"));
+    lines.push("");
+  }
+
+  if (report.nursing) {
+    lines.push("👩‍⚕️ الرعاية التمريضية:");
+    lines.push("الأدوية: " + (report.nursing.medicationGiven || "—"));
+    lines.push("الرعاية الشخصية: " + (report.nursing.personalCare || "—"));
+    lines.push("التغذية: " + (report.nursing.nutritionStatus || "—"));
+    lines.push("ملاحظات: " + (report.nursing.nursingNotes || "—"));
+    lines.push("");
+  }
+
+  if (report.finalReport) {
+    lines.push("📝 التقرير النهائي:");
+    lines.push(report.finalReport);
+  }
+
+  return lines.join("\n");
+}
+
+/* =========================================================
+   20. إنشاء حساب كادر جديد (من لوحة المدير)
+========================================================= */
+
+async function sanadCreateStaff(staffData) {
+  const normalizedPhone = sanadNormalizePhone(staffData.phone);
+
+  const { data, error } = await sanadClient
+    .from("staff")
+    .insert({
+      name: staffData.name,
+      phone: normalizedPhone,
+      password: sanadNormalizePhone(staffData.password) || normalizedPhone,
+      role: staffData.role,
+      active: true
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: "تعذر إنشاء حساب الكادر: " + error.message };
+  }
+
+  return { success: true, staff: data };
+}
+
+/* =========================================================
+   21. تفعيل / تعطيل حساب كادر
+========================================================= */
+
+async function sanadSetStaffActive(staffId, active) {
+  const { error } = await sanadClient
+    .from("staff")
+    .update({ active: active })
+    .eq("id", staffId);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true };
+}
+
+/* =========================================================
+   22. تعديل بيانات مشترك (رقم الهاتف، العنوان، إلخ)
+   من لوحة المدير
+========================================================= */
+
+async function sanadUpdateCustomer(customerId, updates) {
+  const cleanUpdates = Object.assign({}, updates);
+
+  if (cleanUpdates.phone) {
+    cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
+  }
+
+  const { data, error } = await sanadClient
+    .from("customers")
+    .update(cleanUpdates)
+    .eq("id", customerId)
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true, customer: data };
+}
+
+/* =========================================================
+   23. تعديل بيانات فرد عائلة (رقم الهاتف مثلاً)
+========================================================= */
+
+async function sanadUpdateFamilyMember(familyMemberId, updates) {
+  const cleanUpdates = Object.assign({}, updates);
+
+  if (cleanUpdates.phone) {
+    cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
+  }
+
+  const { error } = await sanadClient
+    .from("family_members")
+    .update(cleanUpdates)
+    .eq("id", familyMemberId);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true };
+}
 
 function sanadListenTable(tableName, callback) {
   return sanadClient
