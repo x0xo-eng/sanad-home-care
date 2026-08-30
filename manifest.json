@@ -1,0 +1,26 @@
+{
+  "name": "سند - الرعاية المنزلية لكبار السن",
+  "short_name": "سند",
+  "description": "تطبيق سند لرعاية كبار السن منزلياً - تنسيق الزيارات الطبية والتمريضية ومتابعة الحالة الصحية",
+  "start_url": "./login.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7fbfa",
+  "theme_color": "#16877d",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    { "src": "icons/final/icon-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/final/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/final/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
