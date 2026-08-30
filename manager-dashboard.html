@@ -709,7 +709,45 @@ width:100%;
 <p>عدّل رقم الهاتف أو العنوان أو أي بيانات لأي مشترك.</p>
 </div>
 
+<button type="button" class="week-nav-btn" style="margin-bottom:15px;" onclick="exportCustomersToExcel()">📤 تصدير كل البيانات إلى Excel</button>
+
 <div id="allCustomersList"></div>
+
+</section>
+
+
+<section class="section">
+
+<div class="section-title">
+<h2>💳 المدفوعات والاشتراكات الشهرية</h2>
+<p>سجّل دفعة اشتراك شهرية لأي مشترك وتابع حالة الدفع.</p>
+</div>
+
+<form id="paymentForm" class="schedule-form" style="margin-bottom:20px;">
+
+<label class="full">المشترك
+<select id="paymentCustomer" required>
+<option value="">اختر المشترك</option>
+</select>
+</label>
+
+<label>المبلغ (د.ع)
+<input type="number" id="paymentAmount" placeholder="المبلغ" min="0">
+</label>
+
+<label>الشهر
+<input type="month" id="paymentMonth" required>
+</label>
+
+<label class="full">طريقة الدفع / ملاحظات
+<input type="text" id="paymentNotes" placeholder="نقداً، تحويل... إلخ (اختياري)">
+</label>
+
+<button class="save-schedule">💾 تسجيل الدفعة</button>
+
+</form>
+
+<div id="paymentsListBox"></div>
 
 </section>
 
@@ -1015,6 +1053,7 @@ width:100%;
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sanad-db.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <script>
 
@@ -2115,11 +2154,14 @@ function escapeHtml(value){
 
 async function refreshAll(){
   await loadAll();
+  await loadPayments();
   populateCustomerSelects();
   populateStaffSelects();
+  populatePaymentCustomerSelect();
   renderPendingCustomers();
   renderAllCustomersList();
   renderStaffList();
+  renderPaymentsList();
   renderAppointments();
   renderWeeklySchedule();
   updateStats();
@@ -2302,6 +2344,230 @@ function changeWeek(delta){
 }
 
 /* =====================================================
+   32. تصدير كل البيانات إلى ملف Excel
+===================================================== */
+
+function exportCustomersToExcel(){
+
+  const customersRows = customers.map(function(customer){
+
+    const familyMember = (customer.family_members && customer.family_members[0]) || {};
+
+    return {
+      "رقم المشترك": customer.customer_code || "",
+      "الاسم": customer.name || "",
+      "الهاتف": customer.phone || "",
+      "العمر": customer.age || "",
+      "العنوان": customer.address || "",
+      "الباقة": customer.package_name || "",
+      "سعر الباقة": customer.package_price || "",
+      "الحالة": getStatusTextForExport(customer.status),
+      "تاريخ التسجيل": customer.created_at ? customer.created_at.split("T")[0] : "",
+      "اسم فرد العائلة": familyMember.name || "",
+      "هاتف العائلة": familyMember.phone || "",
+      "معين خاص؟": customer.assistant_requested ? "نعم" : "لا",
+      "ملاحظات": customer.notes || ""
+    };
+
+  });
+
+  const appointmentsRows = appointments.map(function(item){
+
+    const relatedCustomer = customers.find(function(c){ return c.id === item.customer_id; });
+    const relatedStaff = staffList.find(function(s){ return s.id === item.staff_id; });
+
+    return {
+      "المشترك": relatedCustomer ? relatedCustomer.name : "",
+      "رقم المشترك": relatedCustomer ? relatedCustomer.customer_code : "",
+      "الخدمة": item.service_name || "",
+      "التاريخ": item.visit_date || "",
+      "الوقت": String(item.visit_time || "").slice(0,5),
+      "الكادر": relatedStaff ? relatedStaff.name : "",
+      "الحالة": getAppointmentStatus(item.status),
+      "التقييم": item.rating || ""
+    };
+
+  });
+
+  const paymentsRows = payments.map(function(p){
+
+    const relatedCustomer = customers.find(function(c){ return c.id === p.customer_id; });
+
+    return {
+      "المشترك": relatedCustomer ? relatedCustomer.name : "",
+      "المبلغ": p.amount || "",
+      "الشهر": p.payment_month || "",
+      "تاريخ الدفع": p.paid_at ? p.paid_at.split("T")[0] : "",
+      "ملاحظات": p.notes || ""
+    };
+
+  });
+
+  const workbook = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(customersRows), "المشتركين");
+  XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(appointmentsRows), "المواعيد");
+  XLSX.utils.book_append_sheet(workbook, XLSX.utils.json_to_sheet(paymentsRows), "المدفوعات");
+
+  const today = new Date().toISOString().split("T")[0];
+
+  XLSX.writeFile(workbook, "sanad-data-" + today + ".xlsx");
+
+}
+
+function getStatusTextForExport(status){
+  const statuses = {
+    pending_schedule: "بانتظار المدير",
+    scheduling: "قيد الترتيب",
+    scheduled: "تم الترتيب",
+    active: "نشط",
+    suspended: "موقوف",
+    completed: "مكتمل",
+    rejected: "مرفوض"
+  };
+  return statuses[status] || (status || "");
+}
+
+/* =====================================================
+   33. المدفوعات والاشتراكات الشهرية
+===================================================== */
+
+let payments = [];
+
+function currentMonthString(){
+  const now = new Date();
+  return now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0");
+}
+
+function isPaidThisMonth(customerId){
+  const thisMonth = currentMonthString();
+  return payments.some(function(p){
+    return p.customer_id === customerId && p.payment_month === thisMonth;
+  });
+}
+
+function populatePaymentCustomerSelect(){
+
+  const select = document.getElementById("paymentCustomer");
+  if(!select){ return; }
+
+  const currentValue = select.value;
+
+  select.innerHTML = `<option value="">اختر المشترك</option>`;
+
+  customers.forEach(function(customer){
+    const option = document.createElement("option");
+    option.value = customer.id;
+    option.textContent = (customer.customer_code || "") + " — " + customer.name;
+    option.dataset.price = customer.package_price || "";
+    select.appendChild(option);
+  });
+
+  if(customers.some(function(c){ return c.id === currentValue; })){
+    select.value = currentValue;
+  }
+
+}
+
+document.getElementById("paymentCustomer").addEventListener("change", function(){
+  const selectedOption = this.options[this.selectedIndex];
+  const amountInput = document.getElementById("paymentAmount");
+  if(selectedOption && selectedOption.dataset.price && !amountInput.value){
+    amountInput.value = selectedOption.dataset.price;
+  }
+});
+
+document.getElementById("paymentMonth").value = currentMonthString();
+
+document.getElementById("paymentForm").addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const customerId = document.getElementById("paymentCustomer").value;
+  const amount = document.getElementById("paymentAmount").value;
+  const month = document.getElementById("paymentMonth").value;
+  const notes = document.getElementById("paymentNotes").value.trim();
+
+  if(!customerId || !month){
+    showMessage("يرجى اختيار المشترك والشهر.", "error");
+    return;
+  }
+
+  const result = await sanadCreatePayment({
+    customerId: customerId,
+    amount: amount || 0,
+    month: month,
+    notes: notes,
+    createdBy: loggedStaff ? loggedStaff.name : ""
+  });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تسجيل الدفعة.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "تسجيل دفعة",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "payment",
+    result.payment.id,
+    "المبلغ: " + amount + " — الشهر: " + month
+  );
+
+  document.getElementById("paymentForm").reset();
+  document.getElementById("paymentMonth").value = currentMonthString();
+
+  await loadPayments();
+  renderPaymentsList();
+  renderAllCustomersList();
+
+  showMessage("✅ تم تسجيل الدفعة بنجاح.", "success");
+
+});
+
+async function loadPayments(){
+  payments = await sanadGetAllPayments();
+}
+
+function renderPaymentsList(){
+
+  const box = document.getElementById("paymentsListBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(payments.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد دفعات مسجلة بعد.</div>`;
+    return;
+  }
+
+  payments.slice(0, 50).forEach(function(p){
+
+    const relatedCustomer = customers.find(function(c){ return c.id === p.customer_id; });
+
+    const div = document.createElement("div");
+    div.className = "appointment";
+
+    div.innerHTML = `
+      <div class="appointment-top">
+        <div class="appointment-name">👴 ${escapeHtml(relatedCustomer ? relatedCustomer.name : "")}</div>
+        <div class="appointment-time">${escapeHtml(p.payment_month || "")}</div>
+      </div>
+      <div class="appointment-info">
+        💰 ${p.amount ? Number(p.amount).toLocaleString("ar-IQ") + " د.ع" : "—"}
+        ${p.notes ? "<br>📝 " + escapeHtml(p.notes) : ""}
+        <br>📅 ${p.paid_at ? escapeHtml(p.paid_at.split("T")[0]) : ""}
+      </div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+/* =====================================================
    29. قائمة كل المشتركين + تعديل بياناتهم
 ===================================================== */
 
@@ -2330,6 +2596,9 @@ function renderAllCustomersList(){
         <div>
           <div class="customer-name">👴 ${escapeHtml(customer.name)}</div>
           <div class="customer-meta">🆔 ${escapeHtml(customer.customer_code || "")} — 📦 ${escapeHtml(customer.package_name || "")}</div>
+          <span class="status-badge ${isPaidThisMonth(customer.id) ? "status-active" : "status-pending"}">
+            ${isPaidThisMonth(customer.id) ? "✅ مدفوع هذا الشهر" : "⏳ غير مدفوع هذا الشهر"}
+          </span>
         </div>
         <button type="button" class="schedule-customer-btn" onclick="toggleEditCustomer('${escapeHtml(customer.id)}')">✏️ تعديل</button>
       </div>
