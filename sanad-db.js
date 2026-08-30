@@ -640,6 +640,68 @@ async function sanadRateAppointment(appointmentId, rating, comment) {
   return { success: true, appointment: data };
 }
 
+/* =========================================================
+   27. تسجيل دفعة اشتراك شهرية
+========================================================= */
+
+async function sanadCreatePayment(payment) {
+  const { data, error } = await sanadClient
+    .from("payments")
+    .insert({
+      customer_id: payment.customerId,
+      amount: payment.amount,
+      payment_month: payment.month,
+      method: payment.method || "",
+      notes: payment.notes || "",
+      created_by: payment.createdBy || null
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: "تعذر تسجيل الدفعة: " + error.message };
+  }
+
+  return { success: true, payment: data };
+}
+
+/* =========================================================
+   28. قراءة كل الدفعات (للمدير)
+========================================================= */
+
+async function sanadGetAllPayments() {
+  const { data, error } = await sanadClient
+    .from("payments")
+    .select("*")
+    .order("paid_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+/* =========================================================
+   29. قراءة دفعات مشترك معين
+========================================================= */
+
+async function sanadGetPaymentsForCustomer(customerId) {
+  const { data, error } = await sanadClient
+    .from("payments")
+    .select("*")
+    .eq("customer_id", customerId)
+    .order("paid_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
 function sanadListenTable(tableName, callback) {
   return sanadClient
     .channel(tableName + "-changes")
