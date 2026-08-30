@@ -105,6 +105,18 @@
       padding: 25px; text-align: center; color: #718480; font-size: 12px;
     }
 
+    .notif-item {
+      display: flex; align-items: center; gap: 12px; background: white; border: 1px solid #e3edeb;
+      border-radius: 15px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 8px 20px rgba(22,70,65,.04);
+    }
+
+    .notif-item.upcoming { border-right: 4px solid #16877d; }
+    .notif-item.done { border-right: 4px solid #16815f; }
+
+    .notif-icon { font-size: 20px; }
+    .notif-text { font-size: 12px; color: #163b38; line-height: 1.7; }
+    .notif-text strong { color: #16877d; }
+
     .logout-area { text-align: center; margin-top: 40px; }
 
     .logout {
@@ -151,6 +163,9 @@
     <h1 id="welcomeName">أهلاً بك 👋</h1>
     <p>كل ما يتعلق برعايتك واشتراكك في سند أمامك.</p>
   </section>
+
+
+  <section id="notificationsBox" style="margin-bottom:25px;"></section>
 
 
   <section class="subscription-card">
@@ -310,6 +325,70 @@ async function loadAppointments(){
   renderAppointmentList("completedList", completed, true);
 
   renderVitalsChart(buildVitalsHistory(appointments));
+
+  renderNotifications(appointments);
+
+}
+
+/* =====================================================
+   3-ج. مركز التنبيهات (مواعيد قريبة + زيارات مكتملة حديثاً)
+===================================================== */
+
+function renderNotifications(appointmentsList){
+
+  const box = document.getElementById("notificationsBox");
+  if(!box){ return; }
+
+  const now = new Date();
+  const notifications = [];
+
+  appointmentsList.forEach(function(item){
+
+    if((item.status === "scheduled" || item.status === "in_progress") && item.visit_date){
+
+      const visitDateTime = new Date(item.visit_date + "T" + (item.visit_time || "00:00"));
+      const hoursUntil = (visitDateTime - now) / (1000*60*60);
+
+      if(hoursUntil > 0 && hoursUntil <= 24){
+        notifications.push({
+          type: "upcoming",
+          icon: "⏰",
+          text: "لديك موعد قريب: <strong>" + escapeHtml(item.service_name || "") + "</strong> بتاريخ " + escapeHtml(item.visit_date) + " الساعة " + escapeHtml(String(item.visit_time||"").slice(0,5))
+        });
+      }
+
+    }
+
+    if(item.status === "completed" && item.completed_at){
+
+      const completedDate = new Date(item.completed_at);
+      const hoursSince = (now - completedDate) / (1000*60*60);
+
+      if(hoursSince >= 0 && hoursSince <= 24){
+        notifications.push({
+          type: "done",
+          icon: "✅",
+          text: "تم إتمام زيارة <strong>" + escapeHtml(item.service_name || "") + "</strong> والتقرير جاهز للاطلاع"
+        });
+      }
+
+    }
+
+  });
+
+  if(notifications.length === 0){
+    box.innerHTML = "";
+    return;
+  }
+
+  box.innerHTML = notifications.map(function(n){
+    return `
+      <div class="notif-item ${n.type}">
+        <div class="notif-icon">${n.icon}</div>
+        <div class="notif-text">${n.text}</div>
+      </div>
+    `;
+  }).join("");
 
 }
 
