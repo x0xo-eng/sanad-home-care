@@ -2,7 +2,7 @@
   "name": "سند - الرعاية المنزلية لكبار السن",
   "short_name": "سند",
   "description": "تطبيق سند لرعاية كبار السن منزلياً - تنسيق الزيارات الطبية والتمريضية ومتابعة الحالة الصحية",
-  "start_url": "./login.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
