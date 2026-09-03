@@ -54,20 +54,34 @@ function sanadNormalizePhone(value) {
 async function sanadLoginStaff(phone, password) {
   phone = sanadNormalizePhone(phone);
 
+  /* الخطوة 1: تسجيل الدخول الحقيقي عن طريق نظام Supabase Auth
+     (الإيميل المستخدم داخلياً بس هو رقم الهاتف + @sanad.internal) */
+
+  const authEmail = phone + "@sanad.internal";
+
+  const { data: authData, error: authError } =
+    await sanadClient.auth.signInWithPassword({
+      email: authEmail,
+      password: password
+    });
+
+  if (authError || !authData || !authData.user) {
+    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  }
+
+  /* الخطوة 2: بعد التحقق من الهوية، نجيب بيانات الموظف
+     (الاسم، الدور، إلخ) من جدول staff العادي بنفس رقم الهاتف */
+
   const { data, error } = await sanadClient
     .from("staff")
     .select("*")
     .eq("phone", phone)
-    .eq("password", password)
     .eq("active", true)
     .maybeSingle();
 
-  if (error) {
-    return { success: false, message: "حدث خطأ أثناء تسجيل الدخول." };
-  }
-
-  if (!data) {
-    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  if (error || !data) {
+    await sanadClient.auth.signOut();
+    return { success: false, message: "تعذر العثور على بيانات الموظف." };
   }
 
   return { success: true, staff: data };
@@ -155,6 +169,8 @@ function sanadGetSession() {
 function sanadClearSession() {
   localStorage.removeItem("sanadSessionType");
   localStorage.removeItem("sanadSessionData");
+  /* تسجيل خروج حقيقي من نظام المصادقة (للكادر خصوصاً) */
+  sanadClient.auth.signOut();
 }
 
 /* =========================================================
