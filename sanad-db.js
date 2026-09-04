@@ -642,18 +642,17 @@ async function sanadUpdateAppointment(appointmentId, updates) {
 ========================================================= */
 
 async function sanadRateAppointment(appointmentId, rating, comment) {
-  const { data, error } = await sanadClient
-    .from("appointments")
-    .update({ rating: rating, rating_comment: comment || "" })
-    .eq("id", appointmentId)
-    .select()
-    .single();
+  const { error } = await sanadClient.rpc("sanad_submit_rating", {
+    p_appointment_id: appointmentId,
+    p_rating: rating,
+    p_comment: comment || ""
+  });
 
   if (error) {
     return { success: false, message: error.message };
   }
 
-  return { success: true, appointment: data };
+  return { success: true };
 }
 
 /* =========================================================
