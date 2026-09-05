@@ -327,9 +327,12 @@ function renderProfile(){
 
 let staffList = [];
 
+let sanadAppointmentsCache = [];
+
 async function loadAppointments(){
 
   const appointments = await sanadGetAppointmentsForCustomer(loggedElder.id);
+  sanadAppointmentsCache = appointments;
   staffList = await sanadGetStaff();
 
   const upcoming = appointments.filter(function(item){ return item.status === "scheduled" || item.status === "in_progress"; });
@@ -575,7 +578,7 @@ function renderAppointmentList(containerId, list, isCompleted){
     div.className = "service-item";
 
     const reportButton = isCompleted && item.report
-      ? `<button type="button" class="view-report-btn-elder" onclick='sanadShowReport(${JSON.stringify(JSON.stringify(item))})'>📄 عرض التقرير</button>`
+      ? `<button type="button" class="view-report-btn-elder" onclick="sanadShowReportById('${escapeHtml(item.id)}')">📄 عرض التقرير</button>`
       : "";
 
     div.innerHTML = `
@@ -602,12 +605,10 @@ function renderAppointmentList(containerId, list, isCompleted){
 
 }
 
-function sanadShowReport(appointmentJsonString){
-  let appointment = {};
-  try{
-    appointment = JSON.parse(appointmentJsonString);
-  }catch(error){
-    alert("تعذر عرض التقرير.");
+function sanadShowReportById(appointmentId){
+  const appointment = sanadAppointmentsCache.find(function(item){ return item.id === appointmentId; });
+  if(!appointment){
+    alert("تعذر العثور على هذه الزيارة.");
     return;
   }
   const text = sanadFormatReportText(appointment);
