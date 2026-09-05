@@ -95,19 +95,27 @@ async function sanadLoginElder(phone, password) {
   phone = sanadNormalizePhone(phone);
   password = sanadNormalizePhone(password);
 
+  const authEmail = phone + "@sanad-customer.internal";
+
+  const { data: authData, error: authError } =
+    await sanadClient.auth.signInWithPassword({
+      email: authEmail,
+      password: password
+    });
+
+  if (authError || !authData || !authData.user) {
+    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  }
+
   const { data, error } = await sanadClient
     .from("customers")
     .select("*")
     .eq("phone", phone)
-    .eq("password", password)
     .maybeSingle();
 
-  if (error) {
-    return { success: false, message: "حدث خطأ أثناء تسجيل الدخول." };
-  }
-
-  if (!data) {
-    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  if (error || !data) {
+    await sanadClient.auth.signOut();
+    return { success: false, message: "تعذر العثور على بيانات المسن." };
   }
 
   return { success: true, customer: data };
@@ -121,19 +129,27 @@ async function sanadLoginFamily(phone, password) {
   phone = sanadNormalizePhone(phone);
   password = sanadNormalizePhone(password);
 
+  const authEmail = phone + "@sanad-family.internal";
+
+  const { data: authData, error: authError } =
+    await sanadClient.auth.signInWithPassword({
+      email: authEmail,
+      password: password
+    });
+
+  if (authError || !authData || !authData.user) {
+    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  }
+
   const { data, error } = await sanadClient
     .from("family_members")
     .select("*, customers(*)")
     .eq("phone", phone)
-    .eq("password", password)
     .maybeSingle();
 
-  if (error) {
-    return { success: false, message: "حدث خطأ أثناء تسجيل الدخول." };
-  }
-
-  if (!data) {
-    return { success: false, message: "رقم الهاتف أو كلمة المرور غير صحيحة." };
+  if (error || !data) {
+    await sanadClient.auth.signOut();
+    return { success: false, message: "تعذر العثور على بيانات العائلة." };
   }
 
   return { success: true, familyMember: data };
