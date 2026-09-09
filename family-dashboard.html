@@ -110,6 +110,108 @@
     .notif-text { font-size: 12px; color: #163b38; line-height: 1.7; }
     .notif-text strong { color: #16877d; }
 
+    .urgent-request-btn {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 18px;
+      background: linear-gradient(135deg, #c0392b, #a53125);
+      color: white;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 15px 35px rgba(192,57,43,.20);
+    }
+
+    .urgent-request-btn:hover { background: linear-gradient(135deg, #a53125, #8a281e); }
+
+    .urgent-services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .urgent-service-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1.5px solid #e3edeb;
+      border-radius: 15px;
+      padding: 14px;
+      cursor: pointer;
+      text-align: right;
+      font-family: inherit;
+      transition: .2s;
+    }
+
+    .urgent-service-option:hover, .urgent-service-option.selected {
+      border-color: #16877d;
+      background: #f0f8f6;
+    }
+
+    .urgent-service-icon { font-size: 22px; }
+    .urgent-service-name { font-size: 12px; color: #163b38; font-weight: 800; }
+
+    .urgent-form-box {
+      background: white;
+      border: 1px solid #e3edeb;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .urgent-form-box label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #163b38;
+      margin-bottom: 8px;
+    }
+
+    .urgent-form-box select,
+    .urgent-form-box input,
+    .urgent-form-box textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #dfecea;
+      font-family: inherit;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .urgent-submit-btn {
+      border: none;
+      border-radius: 13px;
+      padding: 13px 25px;
+      background: #16877d;
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .urgent-submit-btn:hover { background: #0f7068; }
+
+    .request-status-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .request-status-pending { background: #fff2d8; color: #a66a0c; }
+    .request-status-scheduled { background: #e8f5f3; color: #16877d; }
+    .request-status-completed { background: #e6f6ef; color: #16815f; }
+    .request-status-cancelled { background: #fff0f0; color: #a44b4b; }
+
     .report-card {
       background: white; border: 1px solid #e3edeb; border-radius: 15px; padding: 16px 18px;
       box-shadow: 0 12px 35px rgba(22,70,65,.05); margin-bottom: 12px;
@@ -206,6 +308,17 @@
 
 
   <section id="notificationsBox" style="margin-bottom:25px;"></section>
+
+
+  <section style="margin-bottom:30px;">
+
+    <button type="button" id="urgentRequestToggleBtn" class="urgent-request-btn" onclick="toggleUrgentServiceBox()">
+      🤝 طلب خدمة رفيق سند
+    </button>
+
+    <div id="urgentServiceBox" style="display:none; margin-top:18px;"></div>
+
+  </section>
 
 
   <section class="elder-card">
@@ -770,6 +883,190 @@ renderProfile();
 loadAppointments();
 
 setInterval(loadAppointments, 8000);
+
+/* =====================================================
+   7. طلب خدمة رفيق سند
+===================================================== */
+
+const SANAD_URGENT_SERVICES = [
+  { key: "assistant_bath", label: "زيارة معين للاستحمام وترتيب الأغراض الشخصية", icon: "🛁", price: 15000, priceNote: "" },
+  { key: "nursing_visit", label: "زيارة تمريضية", icon: "👩‍⚕️", price: null, priceNote: "حسب الحالة" },
+  { key: "resident_checkup", label: "زيارة طبيب مقيم لإجراء فحوصات اعتيادية", icon: "🩺", price: 25000, priceNote: "" },
+  { key: "specialist_visit", label: "زيارة طبيب أخصائي", icon: "👨‍⚕️", price: 50000, priceNote: "" },
+  { key: "phone_consult", label: "استشارة هاتفية مع طبيب أخصائي", icon: "📞", price: 25000, priceNote: "" },
+  { key: "surgery_escort", label: "مرافقة خاصة للعمليات", icon: "🚑", price: 20000, priceNote: "لكل 10 ساعات" },
+  { key: "hairdresser_visit", label: "كوافير", icon: "💇", price: 10000, priceNote: "" },
+  { key: "lab_test", label: "إجراء تحاليل اعتيادية وتخصصية", icon: "🧪", price: null, priceNote: "حسب نوع التحليل" }
+];
+
+function formatUrgentServicePrice(s){
+  if(s.price === null){ return s.priceNote || "حسب الحالة"; }
+  const priceText = Number(s.price).toLocaleString("ar-IQ") + " د.ع";
+  return s.priceNote ? priceText + " " + s.priceNote : priceText;
+}
+
+let selectedUrgentService = null;
+let urgentBoxOpen = false;
+
+function toggleUrgentServiceBox(){
+  urgentBoxOpen = !urgentBoxOpen;
+  const box = document.getElementById("urgentServiceBox");
+  box.style.display = urgentBoxOpen ? "block" : "none";
+  if(urgentBoxOpen){
+    renderUrgentServiceMenu();
+    loadMyServiceRequests();
+  }
+}
+
+function renderUrgentServiceMenu(){
+
+  const box = document.getElementById("urgentServiceBox");
+
+  const isActive = !!(elderCustomer && elderCustomer.companion_active);
+
+  const lockNotice = !isActive ? `
+    <div class="empty-box" style="background:#fff7e6;border-color:#f0dfb0;color:#8a6a1a;margin-bottom:15px;">
+      🔒 لطلب أي من هذي الخدمات، لازم يكون اشتراك "رفيق سند" مفعّل (10,000 د.ع شهرياً).
+      تواصل مع فريق الاستقبال لتفعيله.
+    </div>
+  ` : "";
+
+  const gridHtml = SANAD_URGENT_SERVICES.map(function(s){
+    return `
+      <button type="button" class="urgent-service-option" id="urgent-opt-${s.key}" ${isActive ? `onclick="selectUrgentService('${s.key}')"` : "disabled style=\"opacity:.6;cursor:not-allowed;\""}>
+        <span class="urgent-service-icon">${s.icon}</span>
+        <span class="urgent-service-name">${escapeHtml(s.label)}<br><span style="color:#16877d;font-weight:900;">${escapeHtml(formatUrgentServicePrice(s))}</span></span>
+      </button>
+    `;
+  }).join("");
+
+  box.innerHTML = `
+    ${lockNotice}
+    <div class="urgent-services-grid">${gridHtml}</div>
+    <div id="urgentFormArea"></div>
+    <div id="myRequestsArea" style="margin-top:20px;"></div>
+  `;
+
+}
+
+function selectUrgentService(key){
+
+  selectedUrgentService = SANAD_URGENT_SERVICES.find(function(s){ return s.key === key; });
+
+  document.querySelectorAll(".urgent-service-option").forEach(function(btn){
+    btn.classList.remove("selected");
+  });
+  document.getElementById("urgent-opt-" + key).classList.add("selected");
+
+  const formArea = document.getElementById("urgentFormArea");
+
+  formArea.innerHTML = `
+
+    <div class="urgent-form-box">
+
+      <label>📍 مكان تقديم الخدمة</label>
+      <select id="urgentLocationType">
+        <option value="home">بالمنزل</option>
+        <option value="external">مكان خارجي (عيادة، مستشفى...)</option>
+      </select>
+
+      <div id="urgentLocationNoteBox" style="display:none;">
+        <label>العنوان أو تفاصيل المكان</label>
+        <input type="text" id="urgentLocationNote" placeholder="اكتب العنوان بالتفصيل">
+      </div>
+
+      <label>ملاحظات إضافية (اختياري)</label>
+      <textarea id="urgentNotes" placeholder="أي تفاصيل تساعدنا نجهز الخدمة..." style="min-height:70px;"></textarea>
+
+      <button type="button" class="urgent-submit-btn" onclick="submitUrgentRequest()">📨 إرسال الطلب</button>
+
+    </div>
+
+  `;
+
+  document.getElementById("urgentLocationType").addEventListener("change", function(){
+    document.getElementById("urgentLocationNoteBox").style.display =
+      this.value === "external" ? "block" : "none";
+  });
+
+}
+
+async function submitUrgentRequest(){
+
+  if(!elderCustomer || !elderCustomer.companion_active){
+    alert("اشتراك رفيق سند غير مفعّل بعد. تواصل مع الاستقبال لتفعيله.");
+    return;
+  }
+
+  if(!selectedUrgentService){
+    alert("يرجى اختيار نوع الخدمة أولاً.");
+    return;
+  }
+
+  if(!elderCustomer){
+    alert("تعذر العثور على بيانات المسن المرتبط بحسابك.");
+    return;
+  }
+
+  const locationType = document.getElementById("urgentLocationType").value;
+  const locationNote = document.getElementById("urgentLocationNote") ? document.getElementById("urgentLocationNote").value.trim() : "";
+  const notes = document.getElementById("urgentNotes").value.trim();
+
+  const result = await sanadCreateServiceRequest({
+    customerId: elderCustomer.id,
+    serviceType: selectedUrgentService.key,
+    serviceLabel: selectedUrgentService.label,
+    locationType: locationType,
+    locationNote: locationNote,
+    notes: notes,
+    requestedBy: "family"
+  });
+
+  if(!result.success){
+    alert(result.message || "تعذر إرسال الطلب.");
+    return;
+  }
+
+  alert("✅ تم إرسال طلبك، سيتواصل معك فريق سند بأسرع وقت.");
+
+  selectedUrgentService = null;
+  renderUrgentServiceMenu();
+  loadMyServiceRequests();
+
+}
+
+async function loadMyServiceRequests(){
+
+  if(!elderCustomer){ return; }
+
+  const requests = await sanadGetServiceRequestsForCustomer(elderCustomer.id);
+
+  const area = document.getElementById("myRequestsArea");
+  if(!area){ return; }
+
+  if(requests.length === 0){
+    area.innerHTML = "";
+    return;
+  }
+
+  const statusLabels = {
+    pending: "بانتظار الترتيب",
+    scheduled: "تم الترتيب",
+    completed: "مكتمل",
+    cancelled: "ملغى"
+  };
+
+  area.innerHTML = "<h4 style='margin:0 0 10px;color:#163b38;font-size:13px;'>الطلبات السابقة</h4>" +
+    requests.map(function(r){
+      return `
+        <div class="empty-box" style="text-align:right;">
+          ${escapeHtml(r.service_label)}
+          <span class="request-status-badge request-status-${r.status}">${statusLabels[r.status] || r.status}</span>
+        </div>
+      `;
+    }).join("");
+
+}
 
 </script>
 
