@@ -813,6 +813,18 @@ width:100%;
 </section>
 
 
+<section class="section" id="serviceRequestsSection">
+
+<div class="section-title">
+<h2>🤝 طلبات رفيق سند</h2>
+<p>طلبات الخدمات الفردية الواردة من المسنين والعائلات — رتّبها بسرعة</p>
+</div>
+
+<div id="serviceRequestsBox"></div>
+
+</section>
+
+
 <section class="section" id="activityLogSection">
 
 <div class="section-title">
@@ -1172,7 +1184,8 @@ const serviceStaffRoles = {
 const packageServices = {
   basic: ["nurse", "resident", "specialist", "entertainment"],
   medium: ["nurse", "resident", "specialist", "entertainment", "hairdresser"],
-  luxury: ["nurse", "resident", "specialist", "entertainment", "hairdresser", "nutrition", "physio", "psychologist"]
+  luxury: ["nurse", "resident", "specialist", "entertainment", "hairdresser", "nutrition", "physio", "psychologist"],
+  companion: []
 };
 
 /* =====================================================
@@ -2238,8 +2251,205 @@ async function loadAndRenderActivityLog(){
 refreshAll();
 
 loadAndRenderActivityLog();
+loadAndRenderServiceRequests();
 
 setInterval(refreshAll, 6000);
+setInterval(loadAndRenderServiceRequests, 8000);
+
+/* =====================================================
+   32. طلبات رفيق سند (خدمات فردية)
+===================================================== */
+
+const SANAD_URGENT_SERVICE_ROLE_HINT = {
+  assistant_bath: "assistant",
+  nursing_visit: "nurse",
+  resident_checkup: "resident",
+  specialist_visit: "specialist",
+  phone_consult: "specialist",
+  surgery_escort: "assistant",
+  hairdresser_visit: "hairdresser",
+  lab_test: "nurse"
+};
+
+const SANAD_LOCATION_LABELS = { home: "بالمنزل", external: "مكان خارجي" };
+const SANAD_REQUEST_STATUS_LABELS = {
+  pending: "بانتظار الترتيب",
+  scheduled: "تم الترتيب",
+  completed: "مكتمل",
+  cancelled: "ملغى"
+};
+
+async function loadAndRenderServiceRequests(){
+
+  const requests = await sanadGetAllServiceRequests();
+
+  const box = document.getElementById("serviceRequestsBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(requests.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد طلبات حالياً.</div>`;
+    return;
+  }
+
+  requests.forEach(function(request){
+
+    const customer = customers.find(function(c){ return c.id === request.customer_id; });
+
+    const div = document.createElement("div");
+    div.className = "customer-card";
+
+    const suggestedRole = SANAD_URGENT_SERVICE_ROLE_HINT[request.service_type] || "";
+    const roleStaff = getStaffByRole(suggestedRole);
+
+    div.innerHTML = `
+
+      <div class="customer-head">
+        <div>
+          <div class="customer-name">🤝 ${escapeHtml(request.service_label || "")}</div>
+          <div class="customer-meta">
+            👴 المشترك: ${escapeHtml(customer ? customer.name : "غير معروف")} (${escapeHtml(customer ? customer.customer_code : "")})
+            <br>📍 ${escapeHtml(SANAD_LOCATION_LABELS[request.location_type] || "")}
+            ${request.location_note ? " — " + escapeHtml(request.location_note) : ""}
+            ${request.notes ? "<br>📝 " + escapeHtml(request.notes) : ""}
+          </div>
+          <span class="customer-status">📊 ${escapeHtml(SANAD_REQUEST_STATUS_LABELS[request.status] || request.status)}</span>
+        </div>
+      </div>
+
+      ${request.status === "pending" ? `
+
+      <div class="schedule-form" style="grid-template-columns:1fr 1fr; margin-top:15px;">
+
+        <label>التاريخ
+          <input type="date" id="req-date-${escapeHtml(request.id)}">
+        </label>
+
+        <label>الوقت
+          <input type="time" id="req-time-${escapeHtml(request.id)}">
+        </label>
+
+        <label>السعر (د.ع)
+          <input type="number" id="req-price-${escapeHtml(request.id)}" placeholder="السعر المتفق عليه">
+        </label>
+
+        <label>الكادر
+          <select id="req-staff-${escapeHtml(request.id)}">
+            <option value="">اختر الكادر</option>
+            ${roleStaff.map(function(s){ return `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)}</option>`; }).join("")}
+            ${roleStaff.length === 0 ? staffList.map(function(s){ return `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)} (${escapeHtml(roleLabels[s.role]||s.role)})</option>`; }).join("") : ""}
+          </select>
+        </label>
+
+        <button type="button" class="save-schedule" style="grid-column:1/-1;" onclick="scheduleServiceRequest('${escapeHtml(request.id)}')">
+          📅 ترتيب الموعد وتأكيد الطلب
+        </button>
+
+        <button type="button" class="delete-customer-btn" style="grid-column:1/-1;" onclick="cancelServiceRequest('${escapeHtml(request.id)}')">
+          ❌ رفض / إلغاء الطلب
+        </button>
+
+      </div>
+
+      ` : ""}
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+async function scheduleServiceRequest(requestId){
+
+  const request = (await sanadGetAllServiceRequests()).find(function(r){ return r.id === requestId; });
+  if(!request){ return; }
+
+  const date = document.getElementById("req-date-" + requestId).value;
+  const time = document.getElementById("req-time-" + requestId).value;
+  const price = document.getElementById("req-price-" + requestId).value;
+  const staffId = document.getElementById("req-staff-" + requestId).value;
+
+  if(!date || !time || !staffId){
+    showMessage("يرجى إكمال التاريخ والوقت والكادر.", "error");
+    return;
+  }
+
+  const customer = customers.find(function(c){ return c.id === request.customer_id; });
+  const staffMember = staffList.find(function(s){ return s.id === staffId; });
+
+  const appointmentResult = await sanadCreateAppointment({
+    customerId: request.customer_id,
+    staffId: staffId,
+    service: "companion_" + request.service_type,
+    serviceName: "🤝 " + request.service_label,
+    date: date,
+    time: time,
+    createdBy: loggedStaff ? loggedStaff.name : "المدير"
+  });
+
+  if(!appointmentResult.success){
+    showMessage(appointmentResult.message || "تعذر إنشاء الموعد.", "error");
+    return;
+  }
+
+  await sanadUpdateServiceRequest(requestId, {
+    status: "scheduled",
+    linked_appointment_id: appointmentResult.appointment.id,
+    price: price || null
+  });
+
+  if(price){
+    await sanadCreatePayment({
+      customerId: request.customer_id,
+      amount: price,
+      month: new Date().toISOString().slice(0,7),
+      notes: "رفيق سند: " + request.service_label,
+      createdBy: loggedStaff ? loggedStaff.name : ""
+    });
+  }
+
+  await sanadLogActivity(
+    "ترتيب طلب رفيق سند",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "service_request",
+    requestId,
+    request.service_label + " للمشترك " + (customer ? customer.name : "") + " مع " + (staffMember ? staffMember.name : "")
+  );
+
+  await loadAll();
+  loadAndRenderServiceRequests();
+  renderAppointments();
+  updateStats();
+
+  showMessage("✅ تم ترتيب الطلب وإنشاء الموعد بنجاح.", "success");
+
+}
+
+async function cancelServiceRequest(requestId){
+
+  const confirmed = confirm("هل أنت متأكد من إلغاء هذا الطلب؟");
+  if(!confirmed){ return; }
+
+  await sanadUpdateServiceRequest(requestId, { status: "cancelled" });
+
+  await sanadLogActivity(
+    "إلغاء طلب رفيق سند",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "service_request",
+    requestId,
+    ""
+  );
+
+  loadAndRenderServiceRequests();
+
+  showMessage("❌ تم إلغاء الطلب.", "success");
+
+}
 setInterval(loadAndRenderActivityLog, 10000);
 
 /* =====================================================
@@ -2613,8 +2823,16 @@ function renderAllCustomersList(){
           <span class="status-badge ${isPaidThisMonth(customer.id) ? "status-active" : "status-pending"}">
             ${isPaidThisMonth(customer.id) ? "✅ مدفوع هذا الشهر" : "⏳ غير مدفوع هذا الشهر"}
           </span>
+          <span class="status-badge ${customer.companion_active ? "status-active" : "status-pending"}" style="margin-right:6px;">
+            🤝 ${customer.companion_active ? "رفيق سند مفعّل" : "رفيق سند غير مفعّل"}
+          </span>
         </div>
-        <button type="button" class="schedule-customer-btn" onclick="toggleEditCustomer('${escapeHtml(customer.id)}')">✏️ تعديل</button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="schedule-customer-btn" onclick="toggleCompanionActive('${escapeHtml(customer.id)}', ${customer.companion_active ? "false" : "true"})">
+            ${customer.companion_active ? "🔒 تعطيل رفيق سند" : "🤝 تفعيل رفيق سند"}
+          </button>
+          <button type="button" class="schedule-customer-btn" onclick="toggleEditCustomer('${escapeHtml(customer.id)}')">✏️ تعديل</button>
+        </div>
       </div>
 
       <div id="edit-box-${escapeHtml(customer.id)}" style="display:none; margin-top:15px;">
@@ -2656,6 +2874,31 @@ function renderAllCustomersList(){
     container.appendChild(div);
 
   });
+
+}
+
+async function toggleCompanionActive(customerId, newState){
+
+  const result = await sanadUpdateCustomer(customerId, { companion_active: newState });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تحديث حالة رفيق سند.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    newState ? "تفعيل رفيق سند" : "تعطيل رفيق سند",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "customer",
+    customerId,
+    ""
+  );
+
+  await loadAll();
+  renderAllCustomersList();
+
+  showMessage(newState ? "🤝 تم تفعيل رفيق سند لهذا المشترك." : "🔒 تم تعطيل رفيق سند لهذا المشترك.", "success");
 
 }
 
