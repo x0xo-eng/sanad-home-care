@@ -2279,12 +2279,22 @@ const SANAD_REQUEST_STATUS_LABELS = {
   cancelled: "ملغى"
 };
 
+let lastServiceRequestsSignature = "";
+
 async function loadAndRenderServiceRequests(){
 
   const requests = await sanadGetAllServiceRequests();
 
   const box = document.getElementById("serviceRequestsBox");
   if(!box){ return; }
+
+  const signature = requests.map(function(r){ return r.id + r.status; }).join(",");
+
+  if(signature === lastServiceRequestsSignature && box.innerHTML.trim() !== ""){
+    return;
+  }
+
+  lastServiceRequestsSignature = signature;
 
   box.innerHTML = "";
 
@@ -2364,68 +2374,93 @@ async function loadAndRenderServiceRequests(){
 
 async function scheduleServiceRequest(requestId){
 
-  const request = (await sanadGetAllServiceRequests()).find(function(r){ return r.id === requestId; });
-  if(!request){ return; }
+  try{
 
-  const date = document.getElementById("req-date-" + requestId).value;
-  const time = document.getElementById("req-time-" + requestId).value;
-  const price = document.getElementById("req-price-" + requestId).value;
-  const staffId = document.getElementById("req-staff-" + requestId).value;
+    const request = (await sanadGetAllServiceRequests()).find(function(r){ return r.id === requestId; });
+    if(!request){
+      showMessage("تعذر العثور على الطلب (يمكن انحذف أو انرتب من متصفح ثاني).", "error");
+      return;
+    }
 
-  if(!date || !time || !staffId){
-    showMessage("يرجى إكمال التاريخ والوقت والكادر.", "error");
-    return;
-  }
+    const dateInput = document.getElementById("req-date-" + requestId);
+    const timeInput = document.getElementById("req-time-" + requestId);
+    const priceInput = document.getElementById("req-price-" + requestId);
+    const staffInput = document.getElementById("req-staff-" + requestId);
 
-  const customer = customers.find(function(c){ return c.id === request.customer_id; });
-  const staffMember = staffList.find(function(s){ return s.id === staffId; });
+    if(!dateInput || !timeInput || !staffInput){
+      showMessage("تعذر إيجاد حقول النموذج، جرب تحدّث الصفحة وتعيد المحاولة.", "error");
+      return;
+    }
 
-  const appointmentResult = await sanadCreateAppointment({
-    customerId: request.customer_id,
-    staffId: staffId,
-    service: "companion_" + request.service_type,
-    serviceName: "🤝 " + request.service_label,
-    date: date,
-    time: time,
-    createdBy: loggedStaff ? loggedStaff.name : "المدير"
-  });
+    const date = dateInput.value;
+    const time = timeInput.value;
+    const price = priceInput ? priceInput.value : "";
+    const staffId = staffInput.value;
 
-  if(!appointmentResult.success){
-    showMessage(appointmentResult.message || "تعذر إنشاء الموعد.", "error");
-    return;
-  }
+    if(!date || !time || !staffId){
+      showMessage("يرجى إكمال التاريخ والوقت والكادر.", "error");
+      return;
+    }
 
-  await sanadUpdateServiceRequest(requestId, {
-    status: "scheduled",
-    linked_appointment_id: appointmentResult.appointment.id,
-    price: price || null
-  });
+    const customer = customers.find(function(c){ return c.id === request.customer_id; });
+    const staffMember = staffList.find(function(s){ return s.id === staffId; });
 
-  if(price){
-    await sanadCreatePayment({
+    const appointmentResult = await sanadCreateAppointment({
       customerId: request.customer_id,
-      amount: price,
-      month: new Date().toISOString().slice(0,7),
-      notes: "رفيق سند: " + request.service_label,
-      createdBy: loggedStaff ? loggedStaff.name : ""
+      staffId: staffId,
+      service: "companion_" + request.service_type,
+      serviceName: "🤝 " + request.service_label,
+      date: date,
+      time: time,
+      createdBy: loggedStaff ? loggedStaff.name : "المدير"
     });
+
+    if(!appointmentResult.success){
+      showMessage(appointmentResult.message || "تعذر إنشاء الموعد.", "error");
+      return;
+    }
+
+    const updateResult = await sanadUpdateServiceRequest(requestId, {
+      status: "scheduled",
+      linked_appointment_id: appointmentResult.appointment.id,
+      price: price || null
+    });
+
+    if(!updateResult.success){
+      showMessage("تم إنشاء الموعد لكن تعذر تحديث حالة الطلب: " + (updateResult.message || ""), "error");
+    }
+
+    if(price){
+      await sanadCreatePayment({
+        customerId: request.customer_id,
+        amount: price,
+        month: new Date().toISOString().slice(0,7),
+        notes: "رفيق سند: " + request.service_label,
+        createdBy: loggedStaff ? loggedStaff.name : ""
+      });
+    }
+
+    await sanadLogActivity(
+      "ترتيب طلب رفيق سند",
+      loggedStaff ? loggedStaff.name : "",
+      loggedStaff ? loggedStaff.role : "",
+      "service_request",
+      requestId,
+      request.service_label + " للمشترك " + (customer ? customer.name : "") + " مع " + (staffMember ? staffMember.name : "")
+    );
+
+    await loadAll();
+    lastServiceRequestsSignature = "";
+    await loadAndRenderServiceRequests();
+    renderAppointments();
+    updateStats();
+
+    showMessage("✅ تم ترتيب الطلب وإنشاء الموعد بنجاح.", "success");
+
+  }catch(err){
+    showMessage("خطأ برمجي أثناء ترتيب الطلب: " + (err && err.message ? err.message : String(err)), "error");
+    console.error("scheduleServiceRequest error:", err);
   }
-
-  await sanadLogActivity(
-    "ترتيب طلب رفيق سند",
-    loggedStaff ? loggedStaff.name : "",
-    loggedStaff ? loggedStaff.role : "",
-    "service_request",
-    requestId,
-    request.service_label + " للمشترك " + (customer ? customer.name : "") + " مع " + (staffMember ? staffMember.name : "")
-  );
-
-  await loadAll();
-  loadAndRenderServiceRequests();
-  renderAppointments();
-  updateStats();
-
-  showMessage("✅ تم ترتيب الطلب وإنشاء الموعد بنجاح.", "success");
 
 }
 
