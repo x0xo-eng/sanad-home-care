@@ -2421,7 +2421,7 @@ async function scheduleServiceRequest(requestId){
       serviceName: "🤝 " + request.service_label,
       date: date,
       time: time,
-      createdBy: loggedStaff ? loggedStaff.name : "المدير"
+      createdBy: loggedStaff ? loggedStaff.staffId : null
     });
 
     if(!appointmentResult.success){
