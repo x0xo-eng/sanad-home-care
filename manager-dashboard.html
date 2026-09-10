@@ -440,12 +440,18 @@ font-weight:800;
 
 .message{
 display:none;
-padding:12px;
-border-radius:11px;
-margin-top:15px;
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+z-index:9999;
+max-width:90%;
+padding:14px 22px;
+border-radius:13px;
 text-align:center;
-font-size:12px;
+font-size:13px;
 font-weight:800;
+box-shadow:0 15px 40px rgba(0,0,0,.18);
 }
 
 .success{
@@ -2142,7 +2148,7 @@ function showMessage(message, type){
   box.textContent = message;
   box.className = "message " + (type === "success" ? "success" : "error");
   box.style.display = "block";
-  setTimeout(function(){ box.style.display = "none"; }, 4000);
+  setTimeout(function(){ box.style.display = "none"; }, 6000);
 }
 
 /* =====================================================
@@ -2248,10 +2254,13 @@ async function loadAndRenderActivityLog(){
 
 }
 
-refreshAll();
+async function initManagerDashboard(){
+  await refreshAll();
+  await loadAndRenderActivityLog();
+  await loadAndRenderServiceRequests();
+}
 
-loadAndRenderActivityLog();
-loadAndRenderServiceRequests();
+initManagerDashboard();
 
 setInterval(refreshAll, 6000);
 setInterval(loadAndRenderServiceRequests, 8000);
