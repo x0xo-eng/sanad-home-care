@@ -214,7 +214,7 @@ async function sanadCreateCustomer(customer) {
       package_price: customer.packagePrice,
       notes: customer.notes,
       assistant_requested: customer.assistantRequested,
-      status: "pending_schedule",
+      status: customer.package === "companion" ? "active" : "pending_schedule",
       created_by: customer.createdBy || null
     })
     .select()
@@ -651,6 +651,90 @@ async function sanadGetActivityLog(limitCount) {
 
 async function sanadUpdateAppointment(appointmentId, updates) {
   return sanadUpdateAppointmentStatus(appointmentId, updates);
+}
+
+/* =========================================================
+   30. طلبات الخدمة المستعجلة (من المسن/العائلة)
+========================================================= */
+
+async function sanadCreateServiceRequest(request) {
+  const { data, error } = await sanadClient
+    .from("service_requests")
+    .insert({
+      customer_id: request.customerId,
+      service_type: request.serviceType,
+      service_label: request.serviceLabel,
+      location_type: request.locationType,
+      location_note: request.locationNote || "",
+      notes: request.notes || "",
+      status: "pending",
+      requested_by: request.requestedBy || ""
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: "تعذر إرسال الطلب: " + error.message };
+  }
+
+  return { success: true, request: data };
+}
+
+async function sanadGetServiceRequestsForCustomer(customerId) {
+  const { data, error } = await sanadClient
+    .from("service_requests")
+    .select("*")
+    .eq("customer_id", customerId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+async function sanadGetAllServiceRequests() {
+  const { data, error } = await sanadClient
+    .from("service_requests")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+async function sanadUpdateServiceRequest(requestId, updates) {
+  const { data, error } = await sanadClient
+    .from("service_requests")
+    .update(updates)
+    .eq("id", requestId)
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true, request: data };
+}
+
+async function sanadDeleteServiceRequest(requestId) {
+  const { error } = await sanadClient
+    .from("service_requests")
+    .delete()
+    .eq("id", requestId);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true };
 }
 
 /* =========================================================
