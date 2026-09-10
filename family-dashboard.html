@@ -978,7 +978,9 @@ function selectUrgentService(key){
       <label>ملاحظات إضافية (اختياري)</label>
       <textarea id="urgentNotes" placeholder="أي تفاصيل تساعدنا نجهز الخدمة..." style="min-height:70px;"></textarea>
 
-      <button type="button" class="urgent-submit-btn" onclick="submitUrgentRequest()">📨 إرسال الطلب</button>
+      <button type="button" class="urgent-submit-btn" id="urgentSubmitBtn" onclick="submitUrgentRequest()">📨 إرسال الطلب</button>
+
+      <div id="urgentSubmitError" style="display:none; margin-top:12px; padding:12px; border-radius:10px; background:#fff0f0; color:#a44b4b; font-size:12px;"></div>
 
     </div>
 
@@ -993,45 +995,66 @@ function selectUrgentService(key){
 
 async function submitUrgentRequest(){
 
-  if(!elderCustomer || !elderCustomer.companion_active){
-    alert("اشتراك رفيق سند غير مفعّل بعد. تواصل مع الاستقبال لتفعيله.");
-    return;
+  const errorBox = document.getElementById("urgentSubmitError");
+  const submitBtn = document.getElementById("urgentSubmitBtn");
+
+  if(errorBox){ errorBox.style.display = "none"; }
+
+  try{
+
+    if(!elderCustomer || !elderCustomer.companion_active){
+      if(errorBox){ errorBox.textContent = "اشتراك رفيق سند غير مفعّل بعد. تواصل مع الاستقبال لتفعيله."; errorBox.style.display = "block"; }
+      return;
+    }
+
+    if(!selectedUrgentService){
+      if(errorBox){ errorBox.textContent = "يرجى اختيار نوع الخدمة أولاً."; errorBox.style.display = "block"; }
+      return;
+    }
+
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = "⏳ جارِ الإرسال..."; }
+
+    const locationType = document.getElementById("urgentLocationType").value;
+    const locationNote = document.getElementById("urgentLocationNote") ? document.getElementById("urgentLocationNote").value.trim() : "";
+    const notes = document.getElementById("urgentNotes").value.trim();
+
+    const result = await sanadCreateServiceRequest({
+      customerId: elderCustomer.id,
+      serviceType: selectedUrgentService.key,
+      serviceLabel: selectedUrgentService.label,
+      locationType: locationType,
+      locationNote: locationNote,
+      notes: notes,
+      requestedBy: "family"
+    });
+
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = "📨 إرسال الطلب"; }
+
+    if(!result.success){
+      if(errorBox){ errorBox.textContent = "تعذر إرسال الطلب: " + (result.message || "خطأ غير معروف"); errorBox.style.display = "block"; }
+      return;
+    }
+
+    if(errorBox){
+      errorBox.style.background = "#e6f6ef";
+      errorBox.style.color = "#16815f";
+      errorBox.textContent = "✅ تم إرسال طلبك، سيتواصل معك فريق سند بأسرع وقت.";
+      errorBox.style.display = "block";
+    }
+
+    selectedUrgentService = null;
+    setTimeout(function(){
+      renderUrgentServiceMenu();
+      loadMyServiceRequests();
+    }, 2500);
+
+  }catch(err){
+
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = "📨 إرسال الطلب"; }
+    if(errorBox){ errorBox.textContent = "خطأ برمجي: " + (err && err.message ? err.message : String(err)); errorBox.style.display = "block"; }
+    console.error("submitUrgentRequest error:", err);
+
   }
-
-  if(!selectedUrgentService){
-    alert("يرجى اختيار نوع الخدمة أولاً.");
-    return;
-  }
-
-  if(!elderCustomer){
-    alert("تعذر العثور على بيانات المسن المرتبط بحسابك.");
-    return;
-  }
-
-  const locationType = document.getElementById("urgentLocationType").value;
-  const locationNote = document.getElementById("urgentLocationNote") ? document.getElementById("urgentLocationNote").value.trim() : "";
-  const notes = document.getElementById("urgentNotes").value.trim();
-
-  const result = await sanadCreateServiceRequest({
-    customerId: elderCustomer.id,
-    serviceType: selectedUrgentService.key,
-    serviceLabel: selectedUrgentService.label,
-    locationType: locationType,
-    locationNote: locationNote,
-    notes: notes,
-    requestedBy: "family"
-  });
-
-  if(!result.success){
-    alert(result.message || "تعذر إرسال الطلب.");
-    return;
-  }
-
-  alert("✅ تم إرسال طلبك، سيتواصل معك فريق سند بأسرع وقت.");
-
-  selectedUrgentService = null;
-  renderUrgentServiceMenu();
-  loadMyServiceRequests();
 
 }
 
