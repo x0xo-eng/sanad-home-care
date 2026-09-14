@@ -1856,7 +1856,7 @@ function renderAppointments(){
 
         <div class="customer-actions">
           ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : ""}
-          <button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>
+          ${item.status !== "completed" ? `<button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>` : ""}
         </div>
 
       `;
@@ -1902,6 +1902,8 @@ function renderAllAppointments(){
     const customerCode = relatedCustomer ? relatedCustomer.customer_code : "";
     const staffName = relatedStaff ? relatedStaff.name : "";
 
+    const isCompleted = item.status === "completed";
+
     div.innerHTML = `
 
       <div class="appointment-top">
@@ -1919,8 +1921,8 @@ function renderAllAppointments(){
       </div>
 
       <div class="customer-actions">
-        ${item.status === "completed" ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : `<button type="button" class="schedule-customer-btn" onclick="toggleEditAppointment('${escapeHtml(item.id)}')">✏️ تعديل الموعد</button>`}
-        <button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>
+        ${isCompleted ? `<button type="button" class="schedule-customer-btn" onclick="viewAppointmentReport('${escapeHtml(item.id)}')">📄 عرض التقرير</button>` : `<button type="button" class="schedule-customer-btn" onclick="toggleEditAppointment('${escapeHtml(item.id)}')">✏️ تعديل الموعد</button>`}
+        ${isCompleted ? `<span style="font-size:11px;color:#8a9692;padding:10px 4px;">🔒 لا يمكن حذف موعد مكتمل (محفوظ كسجل طبي)</span>` : `<button type="button" class="delete-customer-btn" onclick="deleteAppointmentAction('${escapeHtml(item.id)}')">🗑️ حذف الموعد</button>`}
       </div>
 
       <div id="edit-appt-${escapeHtml(item.id)}" style="display:none; margin-top:12px;">
@@ -2040,6 +2042,13 @@ async function saveAppointmentEdit(appointmentId){
 ===================================================== */
 
 async function deleteAppointmentAction(appointmentId){
+
+  const appointment = appointments.find(function(item){ return item.id === appointmentId; });
+
+  if(appointment && appointment.status === "completed"){
+    showMessage("🔒 لا يمكن حذف موعد مكتمل (محفوظ كسجل طبي).", "error");
+    return;
+  }
 
   const confirmed = confirm("⚠️ هل أنت متأكد من حذف هذا الموعد؟ لا يمكن التراجع عن هذا الإجراء.");
   if(!confirmed){ return; }
