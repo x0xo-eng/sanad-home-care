@@ -391,6 +391,7 @@ const loggedElderRaw = localStorage.getItem("sanadLoggedInElder");
 if(!loggedElderRaw){
   alert("يرجى تسجيل الدخول أولاً.");
   window.location.href = "elder-login.html";
+  throw new Error("sanadRedirect: غير مسجل الدخول");
 }
 
 let loggedElder = null;
@@ -400,6 +401,7 @@ try{
 }catch(error){
   localStorage.removeItem("sanadLoggedInElder");
   window.location.href = "elder-login.html";
+  throw new Error("sanadRedirect: جلسة غير صالحة");
 }
 
 /* =====================================================
@@ -442,7 +444,42 @@ let staffList = [];
 
 let sanadAppointmentsCache = [];
 
+/* =====================================================
+   3-أ. تحديث بيانات الملف الشخصي (خصوصاً تفعيل رفيق سند)
+   لأن loggedElder تُحفظ بالجهاز وقت الدخول فقط، وإذا فعّل
+   المدير الاشتراك بعدين، ما تنعكس إلا لو حدّثناها من القاعدة
+===================================================== */
+
+let lastKnownCompanionActive = !!loggedElder.companion_active;
+
+async function refreshElderProfile(){
+  try{
+    const allCustomers = await sanadGetCustomers();
+    const fresh = allCustomers.find(function(c){ return c.id === loggedElder.id; });
+    if(!fresh){ return; }
+
+    const activeChanged = !!fresh.companion_active !== lastKnownCompanionActive;
+    lastKnownCompanionActive = !!fresh.companion_active;
+
+    loggedElder = Object.assign({}, loggedElder, fresh);
+    localStorage.setItem("sanadLoggedInElder", JSON.stringify(loggedElder));
+
+    renderProfile();
+
+    /* ما نعيد رسم قائمة الخدمات المستعجلة إلا إذا تغيّرت حالة
+       التفعيل فعلياً، وما اكو طلب قيد التعبئة حالياً
+       (حتى ما نمسح كتابة المستخدم وسط تعبئته للفورم) */
+    if(urgentBoxOpen && activeChanged && !selectedUrgentService){
+      renderUrgentServiceMenu();
+    }
+  }catch(error){
+    console.error("تعذر تحديث بيانات الملف الشخصي:", error);
+  }
+}
+
 async function loadAppointments(){
+
+  await refreshElderProfile();
 
   const appointments = await sanadGetAppointmentsForCustomer(loggedElder.id);
   sanadAppointmentsCache = appointments;
