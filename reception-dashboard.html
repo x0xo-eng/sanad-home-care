@@ -750,6 +750,7 @@ flex-direction:column;
 <option value="basic">باقة سند الاعتيادية — 252,000 د.ع</option>
 <option value="medium">الباقة المتوسطة — 337,000 د.ع</option>
 <option value="luxury">باقة سند الفاخرة — حسب الخدمات</option>
+<option value="companion">🤝 رفيق سند — 10,000 د.ع (خدمات فردية عند الطلب)</option>
 </select>
 
 <div class="package-info" id="selectedPackageInfo">
@@ -852,6 +853,7 @@ const loggedStaffRaw = localStorage.getItem("sanadLoggedInStaff");
 if(!loggedStaffRaw){
   alert("يرجى تسجيل الدخول أولاً.");
   window.location.href = "staff-login.html";
+  throw new Error("sanadRedirect: غير مسجل الدخول");
 }
 
 let loggedStaff = null;
@@ -861,6 +863,7 @@ try{
 }catch(error){
   localStorage.removeItem("sanadLoggedInStaff");
   window.location.href = "staff-login.html";
+  throw new Error("sanadRedirect: جلسة غير صالحة");
 }
 
 if(
@@ -930,6 +933,26 @@ const packageData = {
       "🏃 علاج طبيعي",
       "🎭 ترفيه ومرافقة",
       "💇 خدمات إضافية"
+    ]
+  },
+
+  companion: {
+    name: "رفيق سند",
+    price: 10000,
+    priceText: "10,000 د.ع / شهرياً",
+    services: [
+      "🤝 اشتراك يفتح حساب لطلب الخدمات الفردية وقت الحاجة",
+      "💉 إعطاء إبرة أو وضع كانيولا",
+      "🩺 قياس ضغط أو سكر",
+      "🧵 رفع خيوط العملية",
+      "🫀 تخطيط القلب",
+      "🧪 تحاليل حسب الطلب",
+      "👨‍⚕️ زيارة طبيب أخصائي",
+      "💇 زيارة كوافير",
+      "📞 استشارة هاتفية",
+      "🏥 مرافقة للعيادات",
+      "🚑 مرافقة للعمليات",
+      "💰 كل خدمة تُدفع بسعرها عند الطلب (السعر يُحدد حسب الحالة)"
     ]
   }
 
