@@ -215,6 +215,10 @@ async function sanadCreateCustomer(customer) {
       notes: customer.notes,
       assistant_requested: customer.assistantRequested,
       status: customer.package === "companion" ? "active" : "pending_schedule",
+      /* من يشترك مباشرة بباقة "رفيق سند" يكون مفعّل تلقائياً
+         (لأنه دفع اشتراكها وقت التسجيل) بدل ما ينتظر المدير
+         يتذكر يفعّله يدوياً من لوحة "كل المشتركين" */
+      companion_active: customer.package === "companion",
       created_by: customer.createdBy || null
     })
     .select()
@@ -367,6 +371,11 @@ async function sanadGetAllAppointments() {
 async function sanadDeleteCustomer(customerId) {
   await sanadClient.from("appointments").delete().eq("customer_id", customerId);
   await sanadClient.from("family_members").delete().eq("customer_id", customerId);
+  /* لازم نحذفهم كمان قبل المشترك نفسه، وإلا قاعدة البيانات
+     ترفض حذف المشترك لأن سجل بجدول الطلبات/الدفعات لسه
+     مرتبط بيه (foreign key) */
+  await sanadClient.from("service_requests").delete().eq("customer_id", customerId);
+  await sanadClient.from("payments").delete().eq("customer_id", customerId);
 
   const { error } = await sanadClient
     .from("customers")
@@ -387,6 +396,11 @@ async function sanadDeleteCustomer(customerId) {
 async function sanadDeleteAllCustomers() {
   await sanadClient.from("appointments").delete().neq("id", SANAD_EMPTY_UUID);
   await sanadClient.from("family_members").delete().neq("id", SANAD_EMPTY_UUID);
+  /* لازم نحذفهم كمان قبل المشتركين أنفسهم، وإلا قاعدة البيانات
+     ترفض حذف أي مشترك لسه مرتبط بيه طلب رفيق سند أو دفعة
+     (foreign key) وتفشل عملية الحذف بالكامل بدون ما توضح السبب */
+  await sanadClient.from("service_requests").delete().neq("id", SANAD_EMPTY_UUID);
+  await sanadClient.from("payments").delete().neq("id", SANAD_EMPTY_UUID);
 
   const { error } = await sanadClient
     .from("customers")
