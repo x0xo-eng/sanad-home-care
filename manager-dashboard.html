@@ -2699,7 +2699,7 @@ async function scheduleServiceRequest(requestId){
         amount: price,
         month: new Date().toISOString().slice(0,7),
         notes: "رفيق سند: " + request.service_label,
-        createdBy: loggedStaff ? loggedStaff.name : ""
+        createdBy: loggedStaff ? loggedStaff.staffId : null
       });
     }
 
@@ -3021,7 +3021,7 @@ document.getElementById("paymentForm").addEventListener("submit", async function
     amount: amount || 0,
     month: month,
     notes: notes,
-    createdBy: loggedStaff ? loggedStaff.name : ""
+    createdBy: loggedStaff ? loggedStaff.staffId : null
   });
 
   if(!result.success){
