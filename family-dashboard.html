@@ -398,6 +398,7 @@ const loggedFamilyRaw = localStorage.getItem("sanadLoggedInFamily");
 if(!loggedFamilyRaw){
   alert("يرجى تسجيل الدخول أولاً.");
   window.location.href = "family-login.html";
+  throw new Error("sanadRedirect: غير مسجل الدخول");
 }
 
 let loggedFamily = null;
@@ -409,6 +410,7 @@ try{
 }catch(error){
   localStorage.removeItem("sanadLoggedInFamily");
   window.location.href = "family-login.html";
+  throw new Error("sanadRedirect: جلسة غير صالحة");
 }
 
 if(!elderCustomer){
@@ -459,9 +461,43 @@ let staffList = [];
 
 let sanadAppointmentsCache = [];
 
+/* =====================================================
+   3-أ. تحديث بيانات المسن (خصوصاً تفعيل رفيق سند)
+   لأن elderCustomer تُحفظ بالجهاز وقت الدخول فقط، وإذا فعّل
+   المدير الاشتراك بعدين، ما تنعكس إلا لو حدّثناها من القاعدة
+===================================================== */
+
+let lastKnownCompanionActive = !!(elderCustomer && elderCustomer.companion_active);
+
+async function refreshElderProfile(){
+  if(!elderCustomer){ return; }
+  try{
+    const allCustomers = await sanadGetCustomers();
+    const fresh = allCustomers.find(function(c){ return c.id === elderCustomer.id; });
+    if(!fresh){ return; }
+
+    const activeChanged = !!fresh.companion_active !== lastKnownCompanionActive;
+    lastKnownCompanionActive = !!fresh.companion_active;
+
+    elderCustomer = Object.assign({}, elderCustomer, fresh);
+    loggedFamily.customers = elderCustomer;
+    localStorage.setItem("sanadLoggedInFamily", JSON.stringify(loggedFamily));
+
+    renderProfile();
+
+    if(urgentBoxOpen && activeChanged && !selectedUrgentService){
+      renderUrgentServiceMenu();
+    }
+  }catch(error){
+    console.error("تعذر تحديث بيانات المسن:", error);
+  }
+}
+
 async function loadAppointments(){
 
   if(!elderCustomer){ return; }
+
+  await refreshElderProfile();
 
   const appointments = await sanadGetAppointmentsForCustomer(elderCustomer.id);
   sanadAppointmentsCache = appointments;
