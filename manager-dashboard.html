@@ -1261,6 +1261,7 @@ const loggedStaffRaw = localStorage.getItem("sanadLoggedInStaff");
 if(!loggedStaffRaw){
   alert("يرجى تسجيل الدخول أولاً.");
   window.location.href = "staff-login.html";
+  throw new Error("sanadRedirect: غير مسجل الدخول");
 }
 
 let loggedStaff = null;
@@ -1270,6 +1271,7 @@ try{
 }catch(error){
   localStorage.removeItem("sanadLoggedInStaff");
   window.location.href = "staff-login.html";
+  throw new Error("sanadRedirect: جلسة غير صالحة");
 }
 
 const normalizedRole = loggedStaff && loggedStaff.role ? String(loggedStaff.role).trim().toLowerCase() : "";
