@@ -861,6 +861,7 @@ flex:0 0 auto;
 <button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد</button>
 <button type="button" class="tab-btn" data-tab="archive" onclick="showTab('archive')">🗄️ الأرشيف</button>
 <button type="button" class="tab-btn" data-tab="finance" id="tabBtnFinance" onclick="showTab('finance')">💰 الحسابات</button>
+<button type="button" class="tab-btn" data-tab="notifications" onclick="showTab('notifications')">🔔 الإشعارات</button>
 
 </div>
 
@@ -1376,6 +1377,49 @@ flex:0 0 auto;
 </form>
 
 <div id="salariesListBox"></div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<div class="tab-panel" id="tab-notifications">
+
+<section class="section">
+
+<div class="section-title">
+<h2>🔔 الإشعارات الفورية</h2>
+<p>فعّل الإشعارات حتى توصلك تنبيهات الطلبات الطارئة لهذا الجهاز، أو ابعث رسالة عامة لكل المشتركين</p>
+</div>
+
+<button type="button" id="pushSubscribeBtn" class="schedule-customer-btn" onclick="handlePushSubscribeClick()" style="margin-bottom:22px;">
+🔔 فعّل التنبيهات الفورية بهذا الجهاز
+</button>
+
+<div id="broadcastBox" style="display:none;">
+
+<div class="section-title" style="margin-top:10px;">
+<h2 style="font-size:16px;">📢 رسالة عامة لكل المشتركين والعوائل</h2>
+<p>متاحة لمالك النظام فقط — تستخدم للتهاني بالأعياد أو تنبيه مهم (عطل، تغيير مواعيد، الخ)</p>
+</div>
+
+<form id="broadcastForm" class="schedule-form" style="grid-template-columns:1fr;">
+
+<label>عنوان الرسالة
+<input type="text" id="broadcastTitle" placeholder="مثال: تهنئة بمناسبة العيد" required>
+</label>
+
+<label>نص الرسالة
+<textarea id="broadcastBody" placeholder="اكتب نص الإشعار هنا..." required style="min-height:90px;"></textarea>
+</label>
+
+<button type="submit" class="save-schedule">📤 إرسال للجميع</button>
+
+</form>
+
+<div id="broadcastResult" style="margin-top:12px; font-size:13px; color:#4e6d68;"></div>
 
 </div>
 
@@ -1903,6 +1947,22 @@ async function saveAppointment(event, serviceType){
     result.appointment.id,
     serviceNames[serviceType] + " للمشترك " + customer.name + " مع الكادر " + staffName + " بتاريخ " + date + " " + time
   );
+
+  /* إشعار فوري للمسن وعائلته بالموعد الجديد */
+  sanadSendPushNotification(
+    { type: "customer", id: customer.id },
+    "📅 موعد جديد - سند",
+    serviceNames[serviceType] + " بتاريخ " + date + " الساعة " + time,
+    "./elder-dashboard.html"
+  ).catch(function(){});
+  if(customer.family_members && customer.family_members[0]){
+    sanadSendPushNotification(
+      { type: "family", id: customer.family_members[0].id },
+      "📅 موعد جديد - سند",
+      serviceNames[serviceType] + " لـ" + customer.name + " بتاريخ " + date + " الساعة " + time,
+      "./family-dashboard.html"
+    ).catch(function(){});
+  }
 
   /* تحديث حالة المشترك بعد إعادة تحميل المواعيد */
 
@@ -2615,6 +2675,12 @@ if(!isOwner){
 
 }
 
+/* صندوق الرسالة العامة متاح للمالك فقط، زر تفعيل الإشعارات متاح للجميع */
+if(isOwner){
+  const broadcastBox = document.getElementById("broadcastBox");
+  if(broadcastBox){ broadcastBox.style.display = "block"; }
+}
+
 /* استرجاع آخر تبويب كان مفتوح (تجربة استخدام أفضل) */
 (function restoreLastTab(){
   try{
@@ -2670,6 +2736,94 @@ async function initManagerDashboard(){
   await refreshAll();
   await loadAndRenderActivityLog();
   await loadAndRenderServiceRequests();
+  await refreshPushButtonState();
+}
+
+/* =====================================================
+   زر تفعيل الإشعارات الفورية (مدير / مالك) + الرسالة العامة
+===================================================== */
+
+async function refreshPushButtonState(){
+  const btn = document.getElementById("pushSubscribeBtn");
+  if(!btn){ return; }
+  const subscribed = await sanadIsPushSubscribed();
+  if(subscribed){
+    btn.textContent = "🔔 الإشعارات مفعّلة بهذا الجهاز";
+  }else{
+    btn.textContent = "🔔 فعّل التنبيهات الفورية بهذا الجهاز";
+  }
+}
+
+async function handlePushSubscribeClick(){
+  const alreadySubscribed = await sanadIsPushSubscribed();
+  if(alreadySubscribed){ return; }
+
+  const btn = document.getElementById("pushSubscribeBtn");
+  if(btn){ btn.textContent = "⏳ جارِ التفعيل..."; }
+
+  if(!loggedStaff || !loggedStaff.staffId){
+    showMessage("تعذر تحديد حساب الموظف.", "error");
+    await refreshPushButtonState();
+    return;
+  }
+
+  const result = await sanadSubscribeToPush("staff", loggedStaff.staffId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تفعيل الإشعارات.", "error");
+    await refreshPushButtonState();
+    return;
+  }
+
+  showMessage("✅ تم تفعيل الإشعارات الفورية بنجاح.", "success");
+  await refreshPushButtonState();
+}
+
+const broadcastFormEl = document.getElementById("broadcastForm");
+if(broadcastFormEl){
+  broadcastFormEl.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    const title = document.getElementById("broadcastTitle").value.trim();
+    const body = document.getElementById("broadcastBody").value.trim();
+    const resultBox = document.getElementById("broadcastResult");
+
+    if(!title || !body){ return; }
+
+    const submitBtn = broadcastFormEl.querySelector("button[type=submit]");
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = "⏳ جارِ الإرسال..."; }
+
+    const result = await sanadSendPushNotification(
+      { type: "broadcast" },
+      title,
+      body,
+      "./elder-dashboard.html"
+    );
+
+    if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = "📤 إرسال للجميع"; }
+
+    if(!result.success){
+      if(resultBox){ resultBox.textContent = "❌ تعذر الإرسال: " + (result.message || ""); }
+      return;
+    }
+
+    if(resultBox){
+      resultBox.textContent = "✅ تم الإرسال بنجاح — وصل إلى " + (result.sent || 0) + " جهاز.";
+    }
+
+    await sanadLogActivity(
+      "إرسال رسالة عامة",
+      loggedStaff ? loggedStaff.name : "",
+      loggedStaff ? loggedStaff.role : "",
+      "broadcast",
+      null,
+      title
+    );
+
+    broadcastFormEl.reset();
+
+  });
 }
 
 initManagerDashboard();
