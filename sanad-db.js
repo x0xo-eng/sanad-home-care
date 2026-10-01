@@ -45,6 +45,127 @@ function sanadGetEmergencyWhatsAppLink(message) {
 const SANAD_EMPTY_UUID = "00000000-0000-0000-0000-000000000000";
 
 /* =========================================================
+   1-د. الإشعارات الفورية (Push Notifications)
+   =========================================================
+   المفتاح العام (VAPID Public Key) - آمن يكون بالكود الظاهر،
+   هذا طبيعي وموجود بكل أنظمة الإشعارات (المفتاح الخاص محفوظ
+   بسرية بإعدادات Supabase Edge Function، مو هنا إطلاقاً)
+========================================================= */
+
+const SANAD_VAPID_PUBLIC_KEY =
+  "BCl81XuBPD7WhRPqQumOyYejb7myG2FxW4P0oYu2uFLUSl5W-dwhP32YBl_5gJrpSxXj-wI1UKhd03-ZNnCPFz4";
+
+const SANAD_PUSH_FUNCTION_URL =
+  SANAD_SUPABASE_URL + "/functions/v1/send-push";
+
+function sanadUrlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+  const rawData = atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; i++) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+/* يفعّل الإشعارات لهذا الجهاز لمستخدم معيّن (مسن / عائلة / كادر) */
+async function sanadSubscribeToPush(subscriberType, subscriberId) {
+  try {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+      return { success: false, message: "هذا المتصفح ما يدعم الإشعارات الفورية." };
+    }
+
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
+      return { success: false, message: "لازم توافق على إذن الإشعارات من المتصفح." };
+    }
+
+    const registration = await navigator.serviceWorker.ready;
+
+    let subscription = await registration.pushManager.getSubscription();
+    if (!subscription) {
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: sanadUrlBase64ToUint8Array(SANAD_VAPID_PUBLIC_KEY)
+      });
+    }
+
+    const subJson = subscription.toJSON();
+
+    const { error } = await sanadClient.from("push_subscriptions").insert({
+      subscriber_type: subscriberType,
+      subscriber_id: subscriberId,
+      endpoint: subJson.endpoint,
+      p256dh: subJson.keys.p256dh,
+      auth: subJson.keys.auth
+    });
+
+    /* لو نفس الاشتراك موجود مسبقاً (endpoint مكرر)، نعتبرها نجاح */
+    if (error && !String(error.message || "").toLowerCase().includes("duplicate")) {
+      return { success: false, message: error.message };
+    }
+
+    try { localStorage.setItem("sanadPushEnabled", "true"); } catch (e) {}
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, message: String(error) };
+  }
+}
+
+/* يتحقق إذا الإشعارات مفعّلة بهذا الجهاز حالياً */
+async function sanadIsPushSubscribed() {
+  try {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
+      return false;
+    }
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription();
+    return !!subscription;
+  } catch (error) {
+    return false;
+  }
+}
+
+/* يرسل إشعار فعلي عبر Edge Function، يُستخدم من داخل التطبيق
+   target أشكاله الممكنة:
+     { type: "customer", id: customerId }
+     { type: "family", id: familyMemberId }
+     { type: "staff_role", roles: ["owner","manager"] }
+     { type: "broadcast" }  (المالك فقط) */
+async function sanadSendPushNotification(target, title, body, url) {
+  try {
+    const { data: sessionData } = await sanadClient.auth.getSession();
+    const accessToken = sessionData && sessionData.session && sessionData.session.access_token;
+
+    if (!accessToken) {
+      return { success: false, message: "لا توجد جلسة دخول صالحة لإرسال الإشعار." };
+    }
+
+    const response = await fetch(SANAD_PUSH_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + accessToken
+      },
+      body: JSON.stringify({ target: target, title: title, body: body, url: url })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      return { success: false, message: result.error || "تعذر إرسال الإشعار." };
+    }
+
+    return { success: true, sent: result.sent, failed: result.failed };
+  } catch (error) {
+    /* ما نوقف أي عملية بالتطبيق بسبب فشل الإشعار */
+    return { success: false, message: String(error) };
+  }
+}
+
+/* =========================================================
    1-ج. إنشاء حساب دخول حقيقي (Supabase Auth) لمسن أو فرد عائلة
    بدون ما يسجل خروج موظف الاستقبال من حسابه الحالي.
 
