@@ -1964,6 +1964,14 @@ async function saveAppointment(event, serviceType){
     ).catch(function(){});
   }
 
+  /* إشعار فوري للكادر المعيّن بالموعد الجديد */
+  sanadSendPushNotification(
+    { type: "staff", id: staffId },
+    "📅 موعد جديد مسند إليك - سند",
+    serviceNames[serviceType] + " للمشترك " + customer.name + " بتاريخ " + date + " الساعة " + time,
+    "./staff-dashboard.html"
+  ).catch(function(){});
+
   /* تحديث حالة المشترك بعد إعادة تحميل المواعيد */
 
   await loadAll();
@@ -3029,6 +3037,24 @@ async function scheduleServiceRequest(requestId){
       requestId,
       request.service_label + " للمشترك " + (customer ? customer.name : "") + " مع " + (staffMember ? staffMember.name : "")
     );
+
+    /* إشعار فوري للكادر المعيّن بموعد رفيق سند الجديد */
+    sanadSendPushNotification(
+      { type: "staff", id: staffId },
+      "📅 موعد جديد مسند إليك - سند",
+      "🤝 " + request.service_label + " للمشترك " + (customer ? customer.name : "") + " بتاريخ " + date + " الساعة " + time,
+      "./staff-dashboard.html"
+    ).catch(function(){});
+
+    /* إشعار فوري للمسن بترتيب طلبه */
+    if(request.customer_id){
+      sanadSendPushNotification(
+        { type: "customer", id: request.customer_id },
+        "📅 تم ترتيب طلبك - سند",
+        "🤝 " + request.service_label + " بتاريخ " + date + " الساعة " + time,
+        "./elder-dashboard.html"
+      ).catch(function(){});
+    }
 
     await loadAll();
     lastServiceRequestsSignature = "";
