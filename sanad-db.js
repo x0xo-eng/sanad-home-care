@@ -831,6 +831,109 @@ async function sanadGetPaymentsForCustomer(customerId) {
   return data;
 }
 
+/* =========================================================
+   31. المصاريف (مصاريف تشغيل الشركة: إيجار، مستلزمات، إلخ)
+========================================================= */
+
+async function sanadCreateExpense(expense) {
+  const { data, error } = await sanadClient
+    .from("expenses")
+    .insert({
+      title: expense.title,
+      category: expense.category || "",
+      amount: expense.amount,
+      expense_date: expense.date,
+      notes: expense.notes || "",
+      created_by: expense.createdBy || null
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: "تعذر تسجيل المصروف: " + error.message };
+  }
+
+  return { success: true, expense: data };
+}
+
+async function sanadGetAllExpenses() {
+  const { data, error } = await sanadClient
+    .from("expenses")
+    .select("*")
+    .order("expense_date", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+async function sanadDeleteExpense(expenseId) {
+  const { error } = await sanadClient
+    .from("expenses")
+    .delete()
+    .eq("id", expenseId);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true };
+}
+
+/* =========================================================
+   32. رواتب الكادر
+========================================================= */
+
+async function sanadCreateSalaryPayment(payment) {
+  const { data, error } = await sanadClient
+    .from("salary_payments")
+    .insert({
+      staff_id: payment.staffId,
+      amount: payment.amount,
+      salary_month: payment.month,
+      notes: payment.notes || "",
+      created_by: payment.createdBy || null
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return { success: false, message: "تعذر تسجيل الراتب: " + error.message };
+  }
+
+  return { success: true, payment: data };
+}
+
+async function sanadGetAllSalaryPayments() {
+  const { data, error } = await sanadClient
+    .from("salary_payments")
+    .select("*")
+    .order("paid_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data;
+}
+
+async function sanadDeleteSalaryPayment(paymentId) {
+  const { error } = await sanadClient
+    .from("salary_payments")
+    .delete()
+    .eq("id", paymentId);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  return { success: true };
+}
+
 function sanadListenTable(tableName, callback) {
   return sanadClient
     .channel(tableName + "-changes")
