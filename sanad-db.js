@@ -45,6 +45,91 @@ function sanadGetEmergencyWhatsAppLink(message) {
 const SANAD_EMPTY_UUID = "00000000-0000-0000-0000-000000000000";
 
 /* =========================================================
+   1-ج. إنشاء حساب دخول حقيقي (Supabase Auth) لمسن أو فرد عائلة
+   بدون ما يسجل خروج موظف الاستقبال من حسابه الحالي.
+
+   المشكلة اللي نحلها: sanadClient هو نفس الاتصال المستخدم لجلسة
+   تسجيل دخول الموظف الحالي. لو استخدمناه مباشرة لإنشاء حساب جديد
+   (auth.signUp)، نظام Supabase يستبدل الجلسة الحالية بجلسة
+   الحساب الجديد ويطلع الموظف من حسابه فجأة.
+   الحل: نسوي اتصال "مؤقت" منفصل تماماً (persistSession: false)
+   يصير بس لحظة إنشاء الحساب الجديد، ولا يلمس جلسة الموظف إطلاقاً.
+========================================================= */
+
+async function sanadCreateAuthAccount(email, password) {
+  try {
+    const tempClient = supabase.createClient(
+      SANAD_SUPABASE_URL,
+      SANAD_SUPABASE_KEY,
+      {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+          detectSessionInUrl: false
+        }
+      }
+    );
+
+    const { data, error } = await tempClient.auth.signUp({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      /* إذا الحساب موجود مسبقاً (نادراً، أو إعادة محاولة)، نعتبرها
+         نجاح حتى ما توقف عملية تسجيل المشترك بالكامل */
+      if (String(error.message || "").toLowerCase().includes("already registered")) {
+        return { success: true, alreadyExisted: true };
+      }
+      return { success: false, message: error.message };
+    }
+
+    return { success: true, data: data };
+  } catch (error) {
+    return { success: false, message: String(error) };
+  }
+}
+
+/* =========================================================
+   1-أ-2. إصلاح حساب دخول مشترك قديم (ناقص الحساب الحقيقي)
+   تُستخدم لمشتركين انسجلوا قبل تفعيل الإنشاء التلقائي للحساب
+========================================================= */
+
+async function sanadRepairCustomerLogin(customerId) {
+  const { data: customer, error: customerError } = await sanadClient
+    .from("customers")
+    .select("*, family_members(*)")
+    .eq("id", customerId)
+    .maybeSingle();
+
+  if (customerError || !customer) {
+    return { success: false, message: "تعذر إيجاد بيانات المشترك." };
+  }
+
+  const results = [];
+
+  if (customer.phone) {
+    const r = await sanadCreateAuthAccount(
+      customer.phone + "@sanad-customer.internal",
+      customer.password || customer.phone
+    );
+    results.push("المسن: " + (r.success ? "✅" : "❌ " + r.message));
+  }
+
+  const familyMember = (customer.family_members && customer.family_members[0]) || null;
+
+  if (familyMember && familyMember.phone) {
+    const r = await sanadCreateAuthAccount(
+      familyMember.phone + "@sanad-family.internal",
+      familyMember.password || familyMember.phone
+    );
+    results.push("العائلة: " + (r.success ? "✅" : "❌ " + r.message));
+  }
+
+  return { success: true, message: results.join(" — ") };
+}
+
+/* =========================================================
    1-ب. تطبيع رقم الهاتف (تحويل الأرقام العربية ٠-٩ لأرقام
    عادية 0-9، وحذف المسافات والشرطات) حتى ما يصير فرق بين
    رقم انكتب وقت التسجيل ونفس الرقم وقت تسجيل الدخول
@@ -218,6 +303,11 @@ async function sanadCreateCustomer(customer) {
   const normalizedPhone = sanadNormalizePhone(customer.phone);
   const normalizedFamilyPhone = sanadNormalizePhone(customer.familyPhone);
 
+  /* كلمة المرور الفعلية لكل حساب (نفس الرقم افتراضياً)، نحسبها هنا
+     حتى نستخدمها بإنشاء حساب الدخول الحقيقي بالأسفل أيضاً */
+  const customerPassword = sanadNormalizePhone(customer.password) || normalizedPhone;
+  const familyPassword = sanadNormalizePhone(customer.familyPassword) || normalizedFamilyPhone;
+
   const { data, error } = await sanadClient
     .from("customers")
     .insert({
@@ -225,7 +315,7 @@ async function sanadCreateCustomer(customer) {
       name: customer.name,
       phone: normalizedPhone,
       /* افتراضياً كلمة المرور = رقم هاتف المسن نفسه لسهولة الاستخدام */
-      password: sanadNormalizePhone(customer.password) || normalizedPhone,
+      password: customerPassword,
       age: customer.age,
       address: customer.address,
       package: customer.package,
@@ -247,6 +337,21 @@ async function sanadCreateCustomer(customer) {
     return { success: false, message: "تعذر حفظ المشترك: " + error.message };
   }
 
+  /* إنشاء حساب دخول حقيقي للمسن (Supabase Auth) حتى يقدر يسجل
+     دخول فعلياً بلوحته من elder-login.html */
+  if (normalizedPhone) {
+    const authResult = await sanadCreateAuthAccount(
+      normalizedPhone + "@sanad-customer.internal",
+      customerPassword
+    );
+    if (!authResult.success) {
+      return {
+        success: false,
+        message: "تم حفظ ملف المشترك لكن تعذر إنشاء حساب الدخول: " + authResult.message
+      };
+    }
+  }
+
   /* إضافة فرد العائلة إذا توفرت بياناته */
 
   if (customer.familyName && normalizedFamilyPhone) {
@@ -255,9 +360,15 @@ async function sanadCreateCustomer(customer) {
       name: customer.familyName,
       /* افتراضياً كلمة مرور العائلة = رقم هاتفها */
       phone: normalizedFamilyPhone,
-      password: sanadNormalizePhone(customer.familyPassword) || normalizedFamilyPhone,
+      password: familyPassword,
       relation: customer.relation || ""
     });
+
+    /* ونفس الشي، حساب دخول حقيقي لفرد العائلة */
+    await sanadCreateAuthAccount(
+      normalizedFamilyPhone + "@sanad-family.internal",
+      familyPassword
+    );
   }
 
   return { success: true, customer: data };
