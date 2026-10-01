@@ -688,6 +688,70 @@ font-size:11px;
 margin-bottom:18px;
 }
 
+.finance-summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:26px;
+}
+
+.finance-card{
+background:#fbfefe;
+border:1px solid #e3edeb;
+border-radius:16px;
+padding:18px;
+}
+
+.finance-card span{
+display:block;
+color:#718480;
+font-size:11px;
+margin-bottom:8px;
+}
+
+.finance-card strong{
+display:block;
+font-size:19px;
+color:#163b38;
+}
+
+.finance-card.income strong{ color:#16815f; }
+.finance-card.expense strong{ color:#a44b4b; }
+.finance-card.profit strong{ color:#16877d; }
+
+.finance-tabs-sub{
+display:flex;
+gap:8px;
+margin-bottom:18px;
+flex-wrap:wrap;
+}
+
+.finance-sub-btn{
+border:1px solid #dfecea;
+background:white;
+color:#4e6d68;
+border-radius:10px;
+padding:8px 14px;
+font-family:inherit;
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+}
+
+.finance-sub-btn.active{
+background:#16877d;
+color:white;
+border-color:#16877d;
+}
+
+@media(max-width:950px){
+.finance-summary{ grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:650px){
+.finance-summary{ grid-template-columns:1fr; }
+}
+
 @media(max-width:650px){
 
 .tab-bar{
@@ -796,6 +860,7 @@ flex:0 0 auto;
 <button type="button" class="tab-btn" data-tab="scheduleforms" onclick="showTab('scheduleforms')">🗓️ جداول الخدمات</button>
 <button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد</button>
 <button type="button" class="tab-btn" data-tab="archive" onclick="showTab('archive')">🗄️ الأرشيف</button>
+<button type="button" class="tab-btn" data-tab="finance" id="tabBtnFinance" onclick="showTab('finance')">💰 الحسابات</button>
 
 </div>
 
@@ -1221,6 +1286,97 @@ flex:0 0 auto;
 <div class="archive-group">
 <h3>💳 دفعات قديمة (أرشيف)</h3>
 <div id="archivePaymentsBox"></div>
+</div>
+
+</section>
+
+</div>
+
+
+<div class="tab-panel" id="tab-finance">
+
+<section class="section">
+
+<div class="section-title">
+<h2>💰 الحسابات</h2>
+<p>مصاريف الشركة، رواتب الكادر، ومعرفة الربح الصافي (متاح لمالك النظام فقط)</p>
+</div>
+
+<div class="finance-summary" id="financeSummaryBox"></div>
+
+<div class="finance-tabs-sub">
+<button type="button" class="finance-sub-btn active" data-fsub="expenses" onclick="showFinanceSub('expenses')">💸 المصاريف</button>
+<button type="button" class="finance-sub-btn" data-fsub="salaries" onclick="showFinanceSub('salaries')">🧾 الرواتب</button>
+</div>
+
+<div id="financeExpensesPanel">
+
+<form id="expenseForm" class="schedule-form" style="margin-bottom:20px;">
+
+<label class="full">عنوان المصروف
+<input type="text" id="expenseTitle" placeholder="مثال: إيجار المكتب، أدوية، صيانة..." required>
+</label>
+
+<label>التصنيف
+<select id="expenseCategory">
+<option value="إيجار">🏢 إيجار</option>
+<option value="كهرباء وماء">💡 كهرباء وماء</option>
+<option value="مستلزمات طبية">🩺 مستلزمات طبية</option>
+<option value="صيانة">🔧 صيانة</option>
+<option value="نقل ومواصلات">🚗 نقل ومواصلات</option>
+<option value="تسويق وإعلان">📣 تسويق وإعلان</option>
+<option value="أخرى">📦 أخرى</option>
+</select>
+</label>
+
+<label>المبلغ (د.ع)
+<input type="number" id="expenseAmount" placeholder="المبلغ" min="0" required>
+</label>
+
+<label>التاريخ
+<input type="date" id="expenseDate" required>
+</label>
+
+<label class="full">ملاحظات (اختياري)
+<input type="text" id="expenseNotes" placeholder="أي تفاصيل إضافية">
+</label>
+
+<button class="save-schedule">💾 تسجيل المصروف</button>
+
+</form>
+
+<div id="expensesListBox"></div>
+
+</div>
+
+<div id="financeSalariesPanel" style="display:none;">
+
+<form id="salaryForm" class="schedule-form" style="margin-bottom:20px;">
+
+<label class="full">الموظف
+<select id="salaryStaff" required>
+<option value="">اختر الموظف</option>
+</select>
+</label>
+
+<label>المبلغ (د.ع)
+<input type="number" id="salaryAmount" placeholder="المبلغ" min="0" required>
+</label>
+
+<label>شهر الراتب
+<input type="month" id="salaryMonth" required>
+</label>
+
+<label class="full">ملاحظات (اختياري)
+<input type="text" id="salaryNotes" placeholder="أي تفاصيل إضافية">
+</label>
+
+<button class="save-schedule">💾 تسجيل الراتب</button>
+
+</form>
+
+<div id="salariesListBox"></div>
+
 </div>
 
 </section>
@@ -2433,6 +2589,7 @@ async function refreshAll(){
   renderWeeklySchedule();
   updateStats();
   renderArchive();
+  if(isOwner){ await loadAndRenderFinance(); }
 }
 
 /* إخفاء أدوات المالك فقط عن أي حساب manager عادي */
@@ -2453,13 +2610,16 @@ if(!isOwner){
   const tabBtnActivity = document.getElementById("tabBtnActivity");
   if(tabBtnActivity){ tabBtnActivity.style.display = "none"; }
 
+  const tabBtnFinance = document.getElementById("tabBtnFinance");
+  if(tabBtnFinance){ tabBtnFinance.style.display = "none"; }
+
 }
 
 /* استرجاع آخر تبويب كان مفتوح (تجربة استخدام أفضل) */
 (function restoreLastTab(){
   try{
     const savedTab = localStorage.getItem("sanadManagerLastTab");
-    const restrictedTabs = ["staff", "activity"];
+    const restrictedTabs = ["staff", "activity", "finance"];
     if(savedTab && (isOwner || !restrictedTabs.includes(savedTab))){
       showTab(savedTab);
     }
@@ -3554,6 +3714,344 @@ async function toggleStaffActive(staffId, newActiveState){
   );
 
   showMessage(newActiveState ? "🟢 تم تفعيل الحساب." : "🔴 تم تعطيل الحساب.", "success");
+
+}
+
+/* =====================================================
+   35. الحسابات (مصاريف + رواتب + أرباح) — لمالك النظام فقط
+===================================================== */
+
+let expenses = [];
+let salaryPayments = [];
+
+function currentFinanceMonth(){
+  const now = new Date();
+  return now.getFullYear() + "-" + String(now.getMonth()+1).padStart(2,"0");
+}
+
+document.getElementById("expenseDate").value = new Date().toISOString().split("T")[0];
+document.getElementById("salaryMonth").value = currentFinanceMonth();
+
+function showFinanceSub(which){
+
+  document.getElementById("financeExpensesPanel").style.display = which === "expenses" ? "block" : "none";
+  document.getElementById("financeSalariesPanel").style.display = which === "salaries" ? "block" : "none";
+
+  document.querySelectorAll(".finance-sub-btn").forEach(function(btn){
+    btn.classList.toggle("active", btn.getAttribute("data-fsub") === which);
+  });
+
+}
+
+async function loadAndRenderFinance(){
+
+  expenses = await sanadGetAllExpenses();
+  salaryPayments = await sanadGetAllSalaryPayments();
+
+  populateSalaryStaffSelect();
+  renderFinanceSummary();
+  renderExpensesList();
+  renderSalariesList();
+
+}
+
+function populateSalaryStaffSelect(){
+
+  const select = document.getElementById("salaryStaff");
+  if(!select){ return; }
+
+  const currentValue = select.value;
+
+  select.innerHTML = `<option value="">اختر الموظف</option>`;
+
+  staffList.forEach(function(employee){
+    const option = document.createElement("option");
+    option.value = employee.id;
+    option.textContent = employee.name + " — " + (roleLabels[employee.role] || employee.role || "");
+    select.appendChild(option);
+  });
+
+  if(staffList.some(function(s){ return s.id === currentValue; })){
+    select.value = currentValue;
+  }
+
+}
+
+function renderFinanceSummary(){
+
+  const box = document.getElementById("financeSummaryBox");
+  if(!box){ return; }
+
+  const thisMonth = currentFinanceMonth();
+
+  const incomeAll = payments.reduce(function(sum, p){ return sum + Number(p.amount || 0); }, 0);
+  const incomeMonth = payments
+    .filter(function(p){ return p.payment_month === thisMonth; })
+    .reduce(function(sum, p){ return sum + Number(p.amount || 0); }, 0);
+
+  const expensesAll = expenses.reduce(function(sum, e){ return sum + Number(e.amount || 0); }, 0);
+  const expensesMonth = expenses
+    .filter(function(e){ return (e.expense_date || "").slice(0,7) === thisMonth; })
+    .reduce(function(sum, e){ return sum + Number(e.amount || 0); }, 0);
+
+  const salariesAll = salaryPayments.reduce(function(sum, s){ return sum + Number(s.amount || 0); }, 0);
+  const salariesMonth = salaryPayments
+    .filter(function(s){ return s.salary_month === thisMonth; })
+    .reduce(function(sum, s){ return sum + Number(s.amount || 0); }, 0);
+
+  const profitMonth = incomeMonth - expensesMonth - salariesMonth;
+  const profitAll = incomeAll - expensesAll - salariesAll;
+
+  function fmt(n){ return Number(n || 0).toLocaleString("ar-IQ") + " د.ع"; }
+
+  box.innerHTML = `
+
+    <div class="finance-card income">
+      <span>💰 دخل هذا الشهر (مدفوعات المشتركين)</span>
+      <strong>${fmt(incomeMonth)}</strong>
+    </div>
+
+    <div class="finance-card expense">
+      <span>💸 مصاريف + رواتب هذا الشهر</span>
+      <strong>${fmt(expensesMonth + salariesMonth)}</strong>
+    </div>
+
+    <div class="finance-card profit">
+      <span>📈 صافي الربح هذا الشهر</span>
+      <strong>${fmt(profitMonth)}</strong>
+    </div>
+
+    <div class="finance-card">
+      <span>📊 صافي الربح الكلي (كل الفترة)</span>
+      <strong>${fmt(profitAll)}</strong>
+    </div>
+
+  `;
+
+}
+
+function renderExpensesList(){
+
+  const box = document.getElementById("expensesListBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(expenses.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد مصاريف مسجلة بعد.</div>`;
+    return;
+  }
+
+  expenses.forEach(function(e){
+
+    const div = document.createElement("div");
+    div.className = "appointment";
+
+    div.innerHTML = `
+      <div class="appointment-top">
+        <div class="appointment-name">💸 ${escapeHtml(e.title || "")}</div>
+        <div class="appointment-time">${escapeHtml(e.expense_date || "")}</div>
+      </div>
+      <div class="appointment-info">
+        🏷️ ${escapeHtml(e.category || "أخرى")} — 💰 ${Number(e.amount || 0).toLocaleString("ar-IQ")} د.ع
+        ${e.notes ? "<br>📝 " + escapeHtml(e.notes) : ""}
+      </div>
+      <div class="customer-actions">
+        <button type="button" class="delete-customer-btn" onclick="deleteExpenseAction('${escapeHtml(e.id)}')">🗑️ حذف</button>
+      </div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+function renderSalariesList(){
+
+  const box = document.getElementById("salariesListBox");
+  if(!box){ return; }
+
+  box.innerHTML = "";
+
+  if(salaryPayments.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد رواتب مسجلة بعد.</div>`;
+    return;
+  }
+
+  salaryPayments.forEach(function(s){
+
+    const employee = staffList.find(function(st){ return st.id === s.staff_id; });
+
+    const div = document.createElement("div");
+    div.className = "appointment";
+
+    div.innerHTML = `
+      <div class="appointment-top">
+        <div class="appointment-name">🧾 ${escapeHtml(employee ? employee.name : "موظف محذوف")}</div>
+        <div class="appointment-time">${escapeHtml(s.salary_month || "")}</div>
+      </div>
+      <div class="appointment-info">
+        💰 ${Number(s.amount || 0).toLocaleString("ar-IQ")} د.ع
+        ${s.notes ? "<br>📝 " + escapeHtml(s.notes) : ""}
+        <br>📅 ${s.paid_at ? escapeHtml(new Date(s.paid_at).toLocaleString("ar-IQ")) : ""}
+      </div>
+      <div class="customer-actions">
+        <button type="button" class="delete-customer-btn" onclick="deleteSalaryAction('${escapeHtml(s.id)}')">🗑️ حذف</button>
+      </div>
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
+
+document.getElementById("expenseForm").addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const title = document.getElementById("expenseTitle").value.trim();
+  const category = document.getElementById("expenseCategory").value;
+  const amount = document.getElementById("expenseAmount").value;
+  const date = document.getElementById("expenseDate").value;
+  const notes = document.getElementById("expenseNotes").value.trim();
+
+  if(!title || !amount || !date){
+    showMessage("يرجى إكمال عنوان المصروف والمبلغ والتاريخ.", "error");
+    return;
+  }
+
+  const result = await sanadCreateExpense({
+    title: title,
+    category: category,
+    amount: amount,
+    date: date,
+    notes: notes,
+    createdBy: loggedStaff ? loggedStaff.staffId : null
+  });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تسجيل المصروف.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "تسجيل مصروف",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "expense",
+    result.expense.id,
+    title + " — " + amount + " د.ع"
+  );
+
+  document.getElementById("expenseForm").reset();
+  document.getElementById("expenseDate").value = new Date().toISOString().split("T")[0];
+
+  await loadAndRenderFinance();
+
+  showMessage("✅ تم تسجيل المصروف بنجاح.", "success");
+
+});
+
+async function deleteExpenseAction(expenseId){
+
+  const confirmed = confirm("هل أنت متأكد من حذف هذا المصروف؟");
+  if(!confirmed){ return; }
+
+  const result = await sanadDeleteExpense(expenseId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حذف المصروف.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "حذف مصروف",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "expense",
+    expenseId,
+    ""
+  );
+
+  await loadAndRenderFinance();
+
+  showMessage("🗑️ تم حذف المصروف.", "success");
+
+}
+
+document.getElementById("salaryForm").addEventListener("submit", async function(event){
+
+  event.preventDefault();
+
+  const staffId = document.getElementById("salaryStaff").value;
+  const amount = document.getElementById("salaryAmount").value;
+  const month = document.getElementById("salaryMonth").value;
+  const notes = document.getElementById("salaryNotes").value.trim();
+
+  if(!staffId || !amount || !month){
+    showMessage("يرجى اختيار الموظف وإكمال المبلغ والشهر.", "error");
+    return;
+  }
+
+  const result = await sanadCreateSalaryPayment({
+    staffId: staffId,
+    amount: amount,
+    month: month,
+    notes: notes,
+    createdBy: loggedStaff ? loggedStaff.staffId : null
+  });
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تسجيل الراتب.", "error");
+    return;
+  }
+
+  const employee = staffList.find(function(s){ return s.id === staffId; });
+
+  await sanadLogActivity(
+    "تسجيل راتب",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "salary",
+    result.payment.id,
+    (employee ? employee.name : "") + " — " + amount + " د.ع — " + month
+  );
+
+  document.getElementById("salaryForm").reset();
+  document.getElementById("salaryMonth").value = currentFinanceMonth();
+
+  await loadAndRenderFinance();
+
+  showMessage("✅ تم تسجيل الراتب بنجاح.", "success");
+
+});
+
+async function deleteSalaryAction(paymentId){
+
+  const confirmed = confirm("هل أنت متأكد من حذف هذا السجل؟");
+  if(!confirmed){ return; }
+
+  const result = await sanadDeleteSalaryPayment(paymentId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حذف السجل.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "حذف راتب",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "salary",
+    paymentId,
+    ""
+  );
+
+  await loadAndRenderFinance();
+
+  showMessage("🗑️ تم حذف السجل.", "success");
 
 }
 
