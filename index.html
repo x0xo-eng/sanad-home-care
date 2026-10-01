@@ -19,6 +19,42 @@
 <meta name="apple-mobile-web-app-title" content="سند">
 
   <link rel="stylesheet" href="style.css">
+
+<script>
+/* =========================================================
+   عند فتح التطبيق المثبّت (PWA) من أيقونة الموبايل، آبل
+   تفتح دائماً هذي الصفحة (الرئيسية) بغض النظر وين كان
+   المستخدم. هذا يحوّله تلقائياً للوحته لو عنده جلسة دخول
+   محفوظة أصلاً، بدل ما يحس انه "طلع من حسابه".
+   يشتغل بس بوضع التطبيق المثبّت standalone، مو بالتصفح العادي،
+   حتى ما يضايق زائر عادي يفتح الموقع من المتصفح.
+========================================================= */
+(function(){
+  try{
+    var isStandalone = (window.navigator.standalone === true) ||
+      (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+
+    if(!isStandalone){ return; }
+
+    var elder = localStorage.getItem("sanadLoggedInElder");
+    if(elder){ window.location.replace("elder-dashboard.html"); return; }
+
+    var family = localStorage.getItem("sanadLoggedInFamily");
+    if(family){ window.location.replace("family-dashboard.html"); return; }
+
+    var staffRaw = localStorage.getItem("sanadLoggedInStaff");
+    if(staffRaw){
+      try{
+        var staff = JSON.parse(staffRaw);
+        window.location.replace(staff.dashboard || "staff-dashboard.html");
+      }catch(e){
+        window.location.replace("staff-dashboard.html");
+      }
+    }
+  }catch(e){}
+})();
+</script>
+
 </head>
 
 <body>
