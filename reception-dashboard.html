@@ -182,8 +182,65 @@ margin:0;
 
 .packages{
 display:grid;
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:18px;
+}
+
+.tab-bar{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:22px;
+background:white;
+border:1px solid #e3edeb;
+border-radius:20px;
+padding:10px;
+box-shadow:0 12px 35px rgba(22,70,65,.05);
+}
+
+.tab-btn{
+border:none;
+background:transparent;
+color:#4e6d68;
+font-family:inherit;
+font-size:12px;
+font-weight:800;
+padding:11px 16px;
+border-radius:13px;
+cursor:pointer;
+white-space:nowrap;
+transition:background .15s, color .15s;
+}
+
+.tab-btn:hover{
+background:#f0f8f6;
+}
+
+.tab-btn.active{
+background:#16877d;
+color:white;
+}
+
+.tab-panel{
+display:none;
+}
+
+.tab-panel.active{
+display:block;
+}
+
+@media(max-width:650px){
+
+.tab-bar{
+overflow-x:auto;
+flex-wrap:nowrap;
+-webkit-overflow-scrolling:touch;
+}
+
+.tab-btn{
+flex:0 0 auto;
+}
+
 }
 
 .package{
@@ -650,6 +707,15 @@ flex-direction:column;
 </section>
 
 
+<div class="tab-bar" id="tabBar">
+<button type="button" class="tab-btn active" data-tab="newCustomer" onclick="showTab('newCustomer')">➕ تسجيل مشترك جديد</button>
+<button type="button" class="tab-btn" data-tab="customers" onclick="showTab('customers')">👥 ملفات المشتركين</button>
+<button type="button" class="tab-btn" data-tab="packages" onclick="showTab('packages')">📦 الباقات والأسعار</button>
+</div>
+
+
+<div class="tab-panel" id="tab-packages">
+
 <section class="section" id="packages">
 
 <div class="section-title">
@@ -700,10 +766,26 @@ flex-direction:column;
 </ul>
 </div>
 
+<div class="package">
+<h3>🤝 رفيق سند (اختيارية)</h3>
+<div class="package-price">10,000 د.ع / شهرياً + سعر كل خدمة عند الطلب</div>
+<ul>
+<li>📞 فتح حساب لطلب خدمات فردية وقت الحاجة فقط</li>
+<li>💉 إبرة / كانيولا، قياس ضغط أو سكر</li>
+<li>🩺 زيارة طبيب أخصائي عند الطلب</li>
+<li>🏥 مرافقة للعيادات أو العمليات</li>
+<li>💰 كل خدمة تُدفع بسعرها عند الطلب</li>
+</ul>
+</div>
+
 </div>
 
 </section>
 
+</div>
+
+
+<div class="tab-panel active" id="tab-newCustomer">
 
 <section class="section" id="newCustomer">
 
@@ -810,6 +892,10 @@ flex-direction:column;
 
 </section>
 
+</div>
+
+
+<div class="tab-panel" id="tab-customers">
 
 <section class="section" id="customers">
 
@@ -821,6 +907,8 @@ flex-direction:column;
 <div class="customer-list" id="customerList"></div>
 
 </section>
+
+</div>
 
 
 <div class="logout-area">
@@ -1222,11 +1310,39 @@ function showError(message){
 ========================================= */
 
 function scrollToSection(id){
+  showTab(id);
   const section = document.getElementById(id);
   if(section){
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+
+function showTab(tabName){
+
+  document.querySelectorAll(".tab-panel").forEach(function(panel){
+    panel.classList.remove("active");
+  });
+
+  document.querySelectorAll(".tab-btn").forEach(function(btn){
+    btn.classList.remove("active");
+  });
+
+  const panel = document.getElementById("tab-" + tabName);
+  if(panel){ panel.classList.add("active"); }
+
+  const btn = document.querySelector(".tab-btn[data-tab=\"" + tabName + "\"]");
+  if(btn){ btn.classList.add("active"); }
+
+  try{ localStorage.setItem("sanadReceptionLastTab", tabName); }catch(e){}
+
+}
+
+(function restoreLastTab(){
+  try{
+    const savedTab = localStorage.getItem("sanadReceptionLastTab");
+    if(savedTab){ showTab(savedTab); }
+  }catch(e){}
+})();
 
 /* =========================================
    12. تسجيل الخروج
