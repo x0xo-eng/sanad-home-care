@@ -537,20 +537,22 @@ async function refreshPushButtonState(){
 
 async function handlePushSubscribeClick(){
   const btn = document.getElementById("pushSubscribeBtn");
-  const alreadySubscribed = await sanadIsPushSubscribed();
-  if(alreadySubscribed){ return; }
-
-  if(btn){ btn.textContent = "⏳ جارِ التفعيل..."; }
+  /* فحص متزامن (بدون await) حتى ما نكسر "ضغطة المستخدم" المطلوبة
+     من آيفون لإظهار نافذة طلب الإذن - أي await قبل سطر الاشتراك
+     يخلي Safari يرفض يظهر النافذة ويعلّق الزر للأبد بصمت */
+  if(btn && btn.classList.contains("subscribed")){ return; }
 
   /* اشتراك العائلة يحتاج معرّف فرد العائلة نفسه، لا المسن */
   const familyMemberId = loggedFamily && loggedFamily.id;
   if(!familyMemberId){
     alert("تعذر تحديد حساب العائلة.");
-    await refreshPushButtonState();
     return;
   }
 
+  if(btn){ btn.disabled = true; btn.textContent = "⏳ جارِ التفعيل..."; }
+
   const result = await sanadSubscribeToPush("family", familyMemberId);
+  if(btn){ btn.disabled = false; }
 
   if(!result.success){
     alert(result.message || "تعذر تفعيل الإشعارات.");
