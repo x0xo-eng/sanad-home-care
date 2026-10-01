@@ -612,6 +612,10 @@ async function loadVisits(){
       status: appointment.status === "scheduled" ? "waiting" : appointment.status,
       startedAt: appointment.started_at || null,
       completedAt: appointment.completed_at || null,
+      customerId: appointment.customer_id,
+      familyMemberId: (relatedCustomer && relatedCustomer.family_members && relatedCustomer.family_members[0])
+        ? relatedCustomer.family_members[0].id
+        : null,
       raw: appointment
     };
   });
@@ -947,6 +951,24 @@ async function completeVisit(){
   `;
 
   message.style.display = "block";
+
+  /* إشعار فوري للمسن وعائلته بجهوزية التقرير */
+  if(currentVisit.customerId){
+    sanadSendPushNotification(
+      { type: "customer", id: currentVisit.customerId },
+      "📋 تقرير زيارة جاهز - سند",
+      "تم تسجيل تقرير زيارة " + (currentVisit.type || "") + " وأصبح متاحاً بملفك.",
+      "./elder-dashboard.html"
+    ).catch(function(){});
+  }
+  if(currentVisit.familyMemberId){
+    sanadSendPushNotification(
+      { type: "family", id: currentVisit.familyMemberId },
+      "📋 تقرير زيارة جاهز - سند",
+      "تم تسجيل تقرير زيارة " + (currentVisit.type || "") + " لـ" + (currentVisit.patientName || "") + ".",
+      "./family-dashboard.html"
+    ).catch(function(){});
+  }
 
   await sanadLogActivity(
     "إتمام زيارة",
