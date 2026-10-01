@@ -3263,6 +3263,10 @@ function renderAllCustomersList(){
   const container = document.getElementById("allCustomersList");
   if(!container){ return; }
 
+  /* ما نعيد بناء القائمة إذا اكو تعديل مفتوح حالياً، حتى ما
+     ينسكر صندوق التعديل من تلقاء نفسه بسبب التحديث التلقائي */
+  if(openEditCustomerId){ return; }
+
   container.innerHTML = "";
 
   if(customers.length === 0){
@@ -3367,10 +3371,16 @@ async function toggleCompanionActive(customerId, newState){
 
 }
 
+/* يحفظ أي مشترك قيد التعديل حالياً، حتى ما يسكر صندوق التعديل
+   من تلقاء نفسه كل 6 ثواني بسبب التحديث التلقائي للقائمة */
+let openEditCustomerId = null;
+
 function toggleEditCustomer(customerId){
   const box = document.getElementById("edit-box-" + customerId);
   if(!box){ return; }
-  box.style.display = box.style.display === "none" ? "block" : "none";
+  const willOpen = box.style.display === "none";
+  box.style.display = willOpen ? "block" : "none";
+  openEditCustomerId = willOpen ? customerId : null;
 }
 
 /* =====================================================
@@ -3434,6 +3444,8 @@ async function saveCustomerEdit(customerId, familyMemberId){
     }
 
   }
+
+  openEditCustomerId = null;
 
   await loadAll();
   renderAllCustomersList();
