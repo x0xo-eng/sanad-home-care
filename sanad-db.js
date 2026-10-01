@@ -69,26 +69,58 @@ function sanadUrlBase64ToUint8Array(base64String) {
   return outputArray;
 }
 
-/* يفعّل الإشعارات لهذا الجهاز لمستخدم معيّن (مسن / عائلة / كادر) */
+/* يلف أي Promise بمهلة زمنية، حتى ما يضل الزر "جارِ التفعيل..."
+   عالق للأبد لو تعطلت خطوة معينة (مثلاً الاتصال بخدمة الإشعارات) */
+function sanadWithTimeout(promise, ms, timeoutMessage) {
+  return Promise.race([
+    promise,
+    new Promise(function (_, reject) {
+      setTimeout(function () {
+        reject(new Error(timeoutMessage || "انتهت مهلة الانتظار."));
+      }, ms);
+    })
+  ]);
+}
+
+/* يفعّل الإشعارات لهذا الجهاز لمستخدم معيّن (مسن / عائلة / كادر)
+   ملاحظة مهمة: لازم تُستدعى هذي الدالة مباشرة من داخل معالج ضغطة
+   الزر (click) بدون أي "await" قبلها، وإلا متصفح آيفون (Safari)
+   يرفض يظهر نافذة طلب الإذن ويضل الطلب معلّق للأبد بصمت */
 async function sanadSubscribeToPush(subscriberType, subscriberId) {
   try {
     if (!("serviceWorker" in navigator) || !("PushManager" in window)) {
-      return { success: false, message: "هذا المتصفح ما يدعم الإشعارات الفورية." };
+      return {
+        success: false,
+        message:
+          "هذا الجهاز/المتصفح ما يدعم الإشعارات الفورية. على آيفون لازم: (1) نظام iOS 16.4 فأعلى، و(2) تفتح سند من أيقونة الشاشة الرئيسية (مثبّت كتطبيق) مو من متصفح Safari مباشرة."
+      };
     }
 
-    const permission = await Notification.requestPermission();
+    const permission = await sanadWithTimeout(
+      Notification.requestPermission(),
+      60000,
+      "ما ظهرت نافذة طلب الإذن أو ما تم الرد عليها خلال وقت كافٍ."
+    );
     if (permission !== "granted") {
       return { success: false, message: "لازم توافق على إذن الإشعارات من المتصفح." };
     }
 
-    const registration = await navigator.serviceWorker.ready;
+    const registration = await sanadWithTimeout(
+      navigator.serviceWorker.ready,
+      15000,
+      "تعذر تجهيز خدمة الإشعارات (Service Worker) بالوقت المحدد."
+    );
 
     let subscription = await registration.pushManager.getSubscription();
     if (!subscription) {
-      subscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: sanadUrlBase64ToUint8Array(SANAD_VAPID_PUBLIC_KEY)
-      });
+      subscription = await sanadWithTimeout(
+        registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: sanadUrlBase64ToUint8Array(SANAD_VAPID_PUBLIC_KEY)
+        }),
+        20000,
+        "تعذر الاتصال بخدمة الإشعارات (قد تكون مشكلة بالشبكة أو الإنترنت)."
+      );
     }
 
     const subJson = subscription.toJSON();
