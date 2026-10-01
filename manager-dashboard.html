@@ -3296,6 +3296,7 @@ function renderAllCustomersList(){
             ${customer.companion_active ? "🔒 تعطيل رفيق سند" : "🤝 تفعيل رفيق سند"}
           </button>
           <button type="button" class="schedule-customer-btn" onclick="toggleEditCustomer('${escapeHtml(customer.id)}')">✏️ تعديل</button>
+          <button type="button" class="schedule-customer-btn" onclick="repairCustomerLoginAction('${escapeHtml(customer.id)}')">🔑 إصلاح حساب الدخول</button>
         </div>
       </div>
 
@@ -3370,6 +3371,37 @@ function toggleEditCustomer(customerId){
   const box = document.getElementById("edit-box-" + customerId);
   if(!box){ return; }
   box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+/* =====================================================
+   إصلاح حساب الدخول (Supabase Auth) لمشترك قديم ما انشئله
+   حساب دخول حقيقي وقت التسجيل (مشكلة كانت بمشتركين سابقين)
+===================================================== */
+
+async function repairCustomerLoginAction(customerId){
+
+  if(!confirm("راح ننشئ/نصلّح حساب الدخول الحقيقي لهذا المسن وعائلته. متابعة؟")){
+    return;
+  }
+
+  const result = await sanadRepairCustomerLogin(customerId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر إصلاح حساب الدخول.", "error");
+    return;
+  }
+
+  showMessage("✅ تم: " + result.message, "success");
+
+  await sanadLogActivity(
+    "إصلاح حساب دخول مشترك",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "customer",
+    customerId,
+    result.message
+  );
+
 }
 
 async function saveCustomerEdit(customerId, familyMemberId){
