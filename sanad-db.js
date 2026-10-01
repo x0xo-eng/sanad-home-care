@@ -22,6 +22,25 @@ const sanadClient = supabase.createClient(
   SANAD_SUPABASE_KEY
 );
 
+/* =========================================================
+   1-أ. رقم واتساب الطوارئ / التواصل السريع
+   =========================================================
+   اكتب رقم الواتساب هنا بالصيغة الدولية بدون + أو أصفار بالأول
+   (مثال: رقم عراقي 07701234567 يصير 9647701234567)
+   لو تركته فاضي "" زر الطوارئ ما يظهر للمسن والعائلة أبداً،
+   يعني تكدر تضيفه بأي وقت بس تسوي بس تعدل هذا السطر.
+========================================================= */
+
+const SANAD_EMERGENCY_WHATSAPP_NUMBER = "";
+
+function sanadGetEmergencyWhatsAppLink(message) {
+  if (!SANAD_EMERGENCY_WHATSAPP_NUMBER) {
+    return null;
+  }
+  const text = encodeURIComponent(message || "مرحباً، أحتاج مساعدة بخصوص اشتراكي بسند.");
+  return "https://wa.me/" + SANAD_EMERGENCY_WHATSAPP_NUMBER + "?text=" + text;
+}
+
 /* معرّف "فارغ" نستخدمه لحيلة حذف كل الصفوف (Supabase يطلب شرط فلترة دائماً) */
 const SANAD_EMPTY_UUID = "00000000-0000-0000-0000-000000000000";
 
