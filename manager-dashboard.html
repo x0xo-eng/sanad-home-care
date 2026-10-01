@@ -3283,6 +3283,7 @@ function renderAllCustomersList(){
         <div>
           <div class="customer-name">👴 ${escapeHtml(customer.name)}</div>
           <div class="customer-meta">🆔 ${escapeHtml(customer.customer_code || "")} — 📦 ${escapeHtml(customer.package_name || "")}</div>
+          <div class="customer-meta">📱 هاتف المسن: ${escapeHtml(customer.phone || "—")}${familyMember ? ` — 👨‍👩‍👦 هاتف العائلة: ${escapeHtml(familyMember.phone || "—")}` : ""}</div>
           <span class="status-badge ${isPaidThisMonth(customer.id) ? "status-active" : "status-pending"}">
             ${isPaidThisMonth(customer.id) ? "✅ مدفوع هذا الشهر" : "⏳ غير مدفوع هذا الشهر"}
           </span>
