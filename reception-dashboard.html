@@ -1104,6 +1104,23 @@ document.getElementById("customerForm").addEventListener("submit", async functio
     return;
   }
 
+  /* رقم الهاتف يُستخدم أيضاً ككلمة مرور لحساب الدخول، فلازم يكون
+     رقم حقيقي كامل (6 أرقام على الأقل) وإلا يفشل إنشاء الحساب
+     بصمت بالخلفية ويصير المسن أو العائلة ما يكدرون يسجلون دخول */
+
+  const digitsOnlyPhone = phone.replace(/\D/g, "");
+  const digitsOnlyFamilyPhone = familyPhone.replace(/\D/g, "");
+
+  if(phone && digitsOnlyPhone.length < 7){
+    showError("رقم هاتف المسن قصير جداً، لازم يكون رقم حقيقي كامل (مثل 07701234567).");
+    return;
+  }
+
+  if(digitsOnlyFamilyPhone.length < 7){
+    showError("رقم هاتف العائلة قصير جداً، لازم يكون رقم حقيقي كامل (مثل 07701234567).");
+    return;
+  }
+
   const selectedPackage = packageData[packageType];
 
   if(!selectedPackage){
