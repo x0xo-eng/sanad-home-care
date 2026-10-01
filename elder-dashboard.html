@@ -60,7 +60,7 @@
       white-space: nowrap;
     }
 
-    .subscription-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 25px; }
+    .subscription-details { display: grid; grid-template-columns: repeat(4, 1fr); gap: 13px; margin-top: 25px; }
 
     .subscription-detail {
       background: rgba(255,255,255,.09);
@@ -146,6 +146,28 @@
     }
 
     .urgent-request-btn:hover { background: linear-gradient(135deg, #a53125, #8a281e); }
+
+    .emergency-whatsapp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 16px;
+      background: #e9fbf2;
+      border: 1.5px solid #bdeccf;
+      color: #16815f;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+
+    .emergency-whatsapp-btn:hover { background: #d7f6e6; }
 
     .urgent-services-grid {
       display: grid;
@@ -292,6 +314,10 @@
 
     <div id="urgentServiceBox" style="display:none; margin-top:18px;"></div>
 
+    <a href="#" id="emergencyWhatsAppBtn" class="emergency-whatsapp-btn" style="display:none;" target="_blank" rel="noopener">
+      📞 تواصل سريع مع سند عبر واتساب
+    </a>
+
   </section>
 
 
@@ -320,6 +346,11 @@
       <div class="subscription-detail">
         <span>عنوان السكن</span>
         <strong id="addressText">—</strong>
+      </div>
+
+      <div class="subscription-detail">
+        <span>تجديد الاشتراك</span>
+        <strong id="renewalText">—</strong>
       </div>
 
     </div>
@@ -434,6 +465,36 @@ function renderProfile(){
       String(date.getDate()).padStart(2,"0") + " / " + String(date.getMonth()+1).padStart(2,"0") + " / " + date.getFullYear();
   }
 
+  setupEmergencyWhatsAppButton();
+
+}
+
+/* =====================================================
+   2-أ. زر التواصل السريع (واتساب الطوارئ)
+   يبقى مخفياً تلقائياً لين تتوفر دالة sanadGetEmergencyWhatsAppLink
+   برقم فعلي بملف sanad-db.js
+===================================================== */
+
+function setupEmergencyWhatsAppButton(){
+  const btn = document.getElementById("emergencyWhatsAppBtn");
+  if(!btn){ return; }
+
+  if(typeof sanadGetEmergencyWhatsAppLink !== "function"){
+    btn.style.display = "none";
+    return;
+  }
+
+  const message = "مرحباً، أنا " + (loggedElder.name || "مشترك بسند") +
+    " (كود: " + (loggedElder.customer_code || "—") + ") وأحتاج مساعدة بخصوص اشتراكي.";
+
+  const link = sanadGetEmergencyWhatsAppLink(message);
+
+  if(link){
+    btn.href = link;
+    btn.style.display = "flex";
+  }else{
+    btn.style.display = "none";
+  }
 }
 
 /* =====================================================
@@ -477,9 +538,54 @@ async function refreshElderProfile(){
   }
 }
 
+/* =====================================================
+   3-د. موعد تجديد الاشتراك (شهري) وعدد الأيام المتبقية
+   نحسبه من آخر دفعة مسجلة: شهر كامل من تاريخها.
+   إذا ما اكو دفعات بعد، نحسبه من تاريخ التسجيل.
+===================================================== */
+
+function renderRenewalInfo(paymentsList){
+
+  const box = document.getElementById("renewalText");
+  if(!box){ return; }
+
+  const sorted = (paymentsList || []).slice().sort(function(a, b){
+    return new Date(b.paid_at) - new Date(a.paid_at);
+  });
+
+  const lastPayment = sorted[0];
+  const baseDate = lastPayment ? new Date(lastPayment.paid_at) : (loggedElder.created_at ? new Date(loggedElder.created_at) : null);
+
+  if(!baseDate || isNaN(baseDate.getTime())){
+    box.textContent = "—";
+    return;
+  }
+
+  const dueDate = new Date(baseDate);
+  dueDate.setMonth(dueDate.getMonth() + 1);
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const daysRemaining = Math.ceil((dueDate - new Date()) / msPerDay);
+
+  const dueDateText =
+    String(dueDate.getDate()).padStart(2,"0") + "/" + String(dueDate.getMonth()+1).padStart(2,"0") + "/" + dueDate.getFullYear();
+
+  if(daysRemaining < 0){
+    box.innerHTML = `<span style="color:#a44b4b;">⚠️ متأخر ${Math.abs(daysRemaining)} يوم (${dueDateText})</span>`;
+  }else if(daysRemaining <= 5){
+    box.innerHTML = `<span style="color:#9a6b16;">باقي ${daysRemaining} يوم (${dueDateText})</span>`;
+  }else{
+    box.textContent = "باقي " + daysRemaining + " يوم (" + dueDateText + ")";
+  }
+
+}
+
 async function loadAppointments(){
 
   await refreshElderProfile();
+
+  const myPayments = await sanadGetPaymentsForCustomer(loggedElder.id);
+  renderRenewalInfo(myPayments);
 
   const appointments = await sanadGetAppointmentsForCustomer(loggedElder.id);
   sanadAppointmentsCache = appointments;
