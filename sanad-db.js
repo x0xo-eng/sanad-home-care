@@ -716,6 +716,10 @@ async function sanadUpdateCustomer(customerId, updates) {
 
   if (cleanUpdates.phone) {
     cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
+    /* كلمة المرور الافتراضية = رقم الهاتف، فإذا تغيّر الرقم لازم
+       نحدّث كلمة المرور المخزّنة معاه حتى تضل متطابقة ويقدر
+       يسجل دخول بالرقم الجديد (وإلا تضل كلمة مرور الرقم القديم) */
+    cleanUpdates.password = cleanUpdates.phone;
   }
 
   const { data, error } = await sanadClient
@@ -741,6 +745,8 @@ async function sanadUpdateFamilyMember(familyMemberId, updates) {
 
   if (cleanUpdates.phone) {
     cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
+    /* نفس منطق المسن: كلمة المرور = رقم الهاتف، فلازم تتحدث معاه */
+    cleanUpdates.password = cleanUpdates.phone;
   }
 
   const { error } = await sanadClient
