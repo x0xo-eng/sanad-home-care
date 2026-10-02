@@ -196,6 +196,77 @@
       cursor: default;
     }
 
+    .notif-bell-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      border: 1.5px solid #e4d8c3;
+      border-radius: 18px;
+      padding: 16px;
+      background: #fff8ec;
+      color: #8a6a1f;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    .notif-bell-btn:hover { background: #fdeecb; }
+    .notif-badge {
+      background: #e8453c;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      border-radius: 999px;
+      min-width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+    }
+    .notif-panel-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 30, .45);
+      z-index: 999;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 16px;
+    }
+    .notif-panel-overlay.open { display: flex; }
+    .notif-panel {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 440px;
+      width: 100%;
+      max-height: 70vh;
+      overflow: auto;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    }
+    .notif-panel h3 { margin: 0 0 12px; font-size: 17px; }
+    .notif-item { padding: 12px; border-radius: 14px; background: #f7f9fc; margin-bottom: 10px; }
+    .notif-item strong { display: block; margin-bottom: 4px; font-size: 14px; }
+    .notif-item p { margin: 0; font-size: 13px; color: #555; }
+    .notif-item time { display: block; margin-top: 6px; font-size: 11px; color: #999; }
+    .notif-empty { text-align: center; color: #999; padding: 30px 10px; font-size: 14px; }
+    .notif-close-btn {
+      display: block;
+      margin: 14px auto 0;
+      background: #eee;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
     .urgent-services-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -349,7 +420,20 @@
       🔔 فعّل التنبيهات الفورية
     </button>
 
+    <button type="button" id="notifBellBtn" class="notif-bell-btn" onclick="openNotificationsPanel()">
+      🔔 الإشعارات
+      <span id="notifBadge" class="notif-badge" style="display:none;">0</span>
+    </button>
+
   </section>
+
+  <div class="notif-panel-overlay" id="notifPanelOverlay" onclick="if(event.target===this){ closeNotificationsPanel(); }">
+    <div class="notif-panel">
+      <h3>🔔 الإشعارات</h3>
+      <div id="notifListContainer"><div class="notif-empty">لا توجد إشعارات بعد.</div></div>
+      <button type="button" class="notif-close-btn" onclick="closeNotificationsPanel()">إغلاق</button>
+    </div>
+  </div>
 
 
   <section class="subscription-card">
@@ -538,6 +622,57 @@ async function handlePushSubscribeClick(){
 
   alert("✅ تم تفعيل الإشعارات الفورية بنجاح.");
   await refreshPushButtonState();
+}
+
+/* =====================================================
+   2-ج. سجل الإشعارات الدائم (🔔 الإشعارات)
+===================================================== */
+
+let sanadLatestNotifications = [];
+
+async function refreshNotificationsBadge(){
+  if(!loggedElder || !loggedElder.id){ return; }
+  sanadLatestNotifications = await sanadGetNotificationsLog("customer", loggedElder.id);
+  const badge = document.getElementById("notifBadge");
+  if(!badge){ return; }
+  const unseen = sanadCountUnseenNotifications("customer", loggedElder.id, sanadLatestNotifications);
+  if(unseen > 0){
+    badge.style.display = "flex";
+    badge.textContent = unseen > 9 ? "9+" : String(unseen);
+  }else{
+    badge.style.display = "none";
+  }
+}
+
+function renderNotificationsList(){
+  const container = document.getElementById("notifListContainer");
+  if(!container){ return; }
+  if(!sanadLatestNotifications || sanadLatestNotifications.length === 0){
+    container.innerHTML = '<div class="notif-empty">لا توجد إشعارات بعد.</div>';
+    return;
+  }
+  container.innerHTML = sanadLatestNotifications.map(function(n){
+    return '<div class="notif-item"><strong>' + sanadEscapeHTML(n.title || "") + '</strong>' +
+      '<p>' + sanadEscapeHTML(n.body || "") + '</p>' +
+      '<time>' + sanadFormatRelativeTime(n.created_at) + '</time></div>';
+  }).join("");
+}
+
+async function openNotificationsPanel(){
+  if(sanadLatestNotifications.length === 0){
+    await refreshNotificationsBadge();
+  }
+  renderNotificationsList();
+  const overlay = document.getElementById("notifPanelOverlay");
+  if(overlay){ overlay.classList.add("open"); }
+  sanadMarkNotificationsSeen("customer", loggedElder.id);
+  const badge = document.getElementById("notifBadge");
+  if(badge){ badge.style.display = "none"; }
+}
+
+function closeNotificationsPanel(){
+  const overlay = document.getElementById("notifPanelOverlay");
+  if(overlay){ overlay.classList.remove("open"); }
 }
 
 /* =====================================================
@@ -972,8 +1107,10 @@ function logoutElder(event){
 
 renderProfile();
 loadAppointments();
+refreshNotificationsBadge();
 
 setInterval(loadAppointments, 8000);
+setInterval(refreshNotificationsBadge, 15000);
 
 /* =====================================================
    7. طلب خدمة مستعجلة
