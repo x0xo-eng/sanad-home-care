@@ -1063,7 +1063,8 @@ async function sanadCreateServiceRequest(request) {
       location_note: request.locationNote || "",
       notes: request.notes || "",
       status: "pending",
-      requested_by: request.requestedBy || ""
+      requested_by: request.requestedBy || "",
+      requested_by_id: request.requestedById || null
     })
     .select()
     .single();
