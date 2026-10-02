@@ -766,6 +766,24 @@ flex:0 0 auto;
 
 }
 
+.tab-btn{ position: relative; }
+.tab-badge {
+  display: none;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  background: #e8453c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  border-radius: 999px;
+  min-width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  line-height: 1;
+}
 .notif-item { padding: 12px; border-radius: 14px; background: #f7f9fc; margin-bottom: 10px; }
 .notif-item strong { display: block; margin-bottom: 4px; font-size: 14px; }
 .notif-item p { margin: 0; font-size: 13px; color: #555; }
@@ -860,11 +878,11 @@ flex:0 0 auto;
 <button type="button" class="tab-btn" data-tab="allcustomers" onclick="showTab('allcustomers')">👥 كل المشتركين</button>
 <button type="button" class="tab-btn" data-tab="payments" onclick="showTab('payments')">💳 المدفوعات</button>
 <button type="button" class="tab-btn" data-tab="staff" id="tabBtnStaff" onclick="showTab('staff')">🧑‍⚕️ إدارة الكادر</button>
-<button type="button" class="tab-btn" data-tab="requests" onclick="showTab('requests')">🤝 طلبات رفيق سند</button>
+<button type="button" class="tab-btn" data-tab="requests" onclick="showTab('requests')">🤝 طلبات رفيق سند<span id="requestsTabBadge" class="tab-badge">0</span></button>
 <button type="button" class="tab-btn" data-tab="activity" id="tabBtnActivity" onclick="showTab('activity')">🕓 سجل العمليات</button>
 <button type="button" class="tab-btn" data-tab="weekly" onclick="showTab('weekly')">📅 الجدول الأسبوعي</button>
 <button type="button" class="tab-btn" data-tab="scheduleforms" onclick="showTab('scheduleforms')">🗓️ جداول الخدمات</button>
-<button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد</button>
+<button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد<span id="summaryTabBadge" class="tab-badge">0</span></button>
 <button type="button" class="tab-btn" data-tab="archive" onclick="showTab('archive')">🗄️ الأرشيف</button>
 <button type="button" class="tab-btn" data-tab="finance" id="tabBtnFinance" onclick="showTab('finance')">💰 الحسابات</button>
 <button type="button" class="tab-btn" data-tab="notifications" onclick="showTab('notifications')">🔔 الإشعارات</button>
@@ -1539,6 +1557,11 @@ function showTab(tabName){
 
   if(tabName === "notifications" && typeof loadAndRenderNotifications === "function"){
     loadAndRenderNotifications();
+  }
+
+  if(tabName === "summary"){
+    try{ localStorage.setItem("sanadManagerSummarySeenAt", new Date().toISOString()); }catch(e){}
+    if(typeof updateSummaryTabBadge === "function"){ updateSummaryTabBadge(); }
   }
 
 }
@@ -2328,7 +2351,31 @@ function renderAppointments(){
   });
 
   renderAllAppointments();
+  updateSummaryTabBadge();
 
+}
+
+/* علامة "جديد" بتبويب ملخص المواعيد: تحسب أي زيارة اكتملت
+   بعد آخر مرة فتح فيها المدير هذا التبويب */
+function updateSummaryTabBadge(){
+  const badge = document.getElementById("summaryTabBadge");
+  if(!badge){ return; }
+
+  let seenAt = null;
+  try{ seenAt = localStorage.getItem("sanadManagerSummarySeenAt"); }catch(e){}
+  const seenTime = seenAt ? new Date(seenAt).getTime() : 0;
+
+  const newCount = appointments.filter(function(item){
+    return item.status === "completed" && item.completed_at &&
+      new Date(item.completed_at).getTime() > seenTime;
+  }).length;
+
+  if(newCount > 0){
+    badge.style.display = "flex";
+    badge.textContent = newCount > 9 ? "9+" : String(newCount);
+  }else{
+    badge.style.display = "none";
+  }
 }
 
 /* =====================================================
@@ -2917,6 +2964,18 @@ async function loadAndRenderServiceRequests(){
   /* الطلبات الملغية اللي مرّ عليها أكثر من 24 ساعة تنتقل للأرشيف
      وما تظهر بهذه القائمة بعد الآن */
   const requests = allRequests.filter(function(r){ return !isRequestArchived(r); });
+
+  /* علامة "جديد" بتبويب طلبات رفيق سند: عدد الطلبات بانتظار الترتيب */
+  const requestsBadge = document.getElementById("requestsTabBadge");
+  if(requestsBadge){
+    const pendingCount = requests.filter(function(r){ return r.status === "pending"; }).length;
+    if(pendingCount > 0){
+      requestsBadge.style.display = "flex";
+      requestsBadge.textContent = pendingCount > 9 ? "9+" : String(pendingCount);
+    }else{
+      requestsBadge.style.display = "none";
+    }
+  }
 
   const box = document.getElementById("serviceRequestsBox");
   if(!box){ return; }
