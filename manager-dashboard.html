@@ -766,6 +766,12 @@ flex:0 0 auto;
 
 }
 
+.notif-item { padding: 12px; border-radius: 14px; background: #f7f9fc; margin-bottom: 10px; }
+.notif-item strong { display: block; margin-bottom: 4px; font-size: 14px; }
+.notif-item p { margin: 0; font-size: 13px; color: #555; }
+.notif-item time { display: block; margin-top: 6px; font-size: 11px; color: #999; }
+.notif-empty { text-align: center; color: #999; padding: 30px 10px; font-size: 14px; }
+
 </style>
 
 </head>
@@ -1425,6 +1431,17 @@ flex:0 0 auto;
 
 </section>
 
+<section class="section">
+
+<div class="section-title">
+<h2>📜 سجل الإشعارات</h2>
+<p>آخر الإشعارات اللي وصلت لحسابك بهذا النظام (تبقى محفوظة هنا حتى لو التطبيق كان مسكر وقت الإرسال)</p>
+</div>
+
+<div id="notifListContainer"><div class="notif-empty">لا توجد إشعارات بعد.</div></div>
+
+</section>
+
 </div>
 
 
@@ -1519,6 +1536,10 @@ function showTab(tabName){
   if(btn){ btn.classList.add("active"); }
 
   try{ localStorage.setItem("sanadManagerLastTab", tabName); }catch(e){}
+
+  if(tabName === "notifications" && typeof loadAndRenderNotifications === "function"){
+    loadAndRenderNotifications();
+  }
 
 }
 
@@ -1951,14 +1972,14 @@ async function saveAppointment(event, serviceType){
   /* إشعار فوري للمسن وعائلته بالموعد الجديد */
   sanadSendPushNotification(
     { type: "customer", id: customer.id },
-    "📅 موعد جديد - سند",
+    "📅 موعد جديد",
     serviceNames[serviceType] + " بتاريخ " + date + " الساعة " + time,
     "./elder-dashboard.html"
   ).catch(function(){});
   if(customer.family_members && customer.family_members[0]){
     sanadSendPushNotification(
       { type: "family", id: customer.family_members[0].id },
-      "📅 موعد جديد - سند",
+      "📅 موعد جديد",
       serviceNames[serviceType] + " لـ" + customer.name + " بتاريخ " + date + " الساعة " + time,
       "./family-dashboard.html"
     ).catch(function(){});
@@ -1967,7 +1988,7 @@ async function saveAppointment(event, serviceType){
   /* إشعار فوري للكادر المعيّن بالموعد الجديد */
   sanadSendPushNotification(
     { type: "staff", id: staffId },
-    "📅 موعد جديد مسند إليك - سند",
+    "📅 موعد جديد مسند إليك",
     serviceNames[serviceType] + " للمشترك " + customer.name + " بتاريخ " + date + " الساعة " + time,
     "./staff-dashboard.html"
   ).catch(function(){});
@@ -2789,6 +2810,29 @@ async function handlePushSubscribeClick(){
   await refreshPushButtonState();
 }
 
+/* =====================================================
+   سجل الإشعارات الدائم (📜 تبويب الإشعارات)
+===================================================== */
+
+async function loadAndRenderNotifications(){
+  const container = document.getElementById("notifListContainer");
+  if(!container || !loggedStaff || !loggedStaff.staffId){ return; }
+
+  const notifications = await sanadGetNotificationsLog("staff", loggedStaff.staffId);
+
+  if(notifications.length === 0){
+    container.innerHTML = '<div class="notif-empty">لا توجد إشعارات بعد.</div>';
+  }else{
+    container.innerHTML = notifications.map(function(n){
+      return '<div class="notif-item"><strong>' + sanadEscapeHTML(n.title || "") + '</strong>' +
+        '<p>' + sanadEscapeHTML(n.body || "") + '</p>' +
+        '<time>' + sanadFormatRelativeTime(n.created_at) + '</time></div>';
+    }).join("");
+  }
+
+  sanadMarkNotificationsSeen("staff", loggedStaff.staffId);
+}
+
 const broadcastFormEl = document.getElementById("broadcastForm");
 if(broadcastFormEl){
   broadcastFormEl.addEventListener("submit", async function(event){
@@ -3041,7 +3085,7 @@ async function scheduleServiceRequest(requestId){
     /* إشعار فوري للكادر المعيّن بموعد رفيق سند الجديد */
     sanadSendPushNotification(
       { type: "staff", id: staffId },
-      "📅 موعد جديد مسند إليك - سند",
+      "📅 موعد جديد مسند إليك",
       "🤝 " + request.service_label + " للمشترك " + (customer ? customer.name : "") + " بتاريخ " + date + " الساعة " + time,
       "./staff-dashboard.html"
     ).catch(function(){});
@@ -3050,7 +3094,7 @@ async function scheduleServiceRequest(requestId){
     if(request.customer_id){
       sanadSendPushNotification(
         { type: "customer", id: request.customer_id },
-        "📅 تم ترتيب طلبك - سند",
+        "📅 تم ترتيب طلبك",
         "🤝 " + request.service_label + " بتاريخ " + date + " الساعة " + time,
         "./elder-dashboard.html"
       ).catch(function(){});
