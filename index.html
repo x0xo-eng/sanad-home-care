@@ -20,6 +20,77 @@
 
   <link rel="stylesheet" href="style.css">
 
+<style>
+  /* صورة الغلاف خلف نص وأزرار الواجهة الرئيسية */
+  .hero-content{
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    padding: 38px 26px;
+    isolation: isolate;
+  }
+  .hero-content::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('images/hero-elderly-nurse.jpg');
+    background-size: cover;
+    background-position: center 18%;
+    z-index: -2;
+  }
+  .hero-content::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,45,42,.55) 0%, rgba(10,45,42,.72) 55%, rgba(8,38,35,.88) 100%);
+    z-index: -1;
+  }
+  .hero-content .eyebrow{
+    background: rgba(255,255,255,.16);
+    color: #ffffff;
+    border-color: rgba(255,255,255,.4);
+  }
+  .hero-content h1{
+    color: #ffffff;
+  }
+  .hero-content h1 span{
+    color: #8fe3d2;
+  }
+  .hero-content .trust-row strong{
+    color: #ffffff;
+  }
+  .hero-content .trust-row span{
+    color: rgba(255,255,255,.78);
+  }
+  .hero-content .trust-line{
+    background: rgba(255,255,255,.28);
+  }
+  .hero-content .btn-primary{
+    background: #ffffff;
+    color: #0f5c53;
+    box-shadow: 0 14px 30px rgba(0,0,0,.28);
+  }
+  .hero-content .btn-primary:hover{
+    background: #eafaf7;
+  }
+  .hero-content .btn-outline{
+    background: rgba(255,255,255,.14);
+    border: 1.5px solid rgba(255,255,255,.65);
+    color: #ffffff;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  .hero-content .btn-outline:hover{
+    background: rgba(255,255,255,.26);
+  }
+  @media (max-width: 640px){
+    .hero-content{
+      padding: 30px 20px;
+      border-radius: 22px;
+    }
+  }
+</style>
+
 <script>
 /* =========================================================
    عند فتح التطبيق المثبّت (PWA) من أيقونة الموبايل، آبل
