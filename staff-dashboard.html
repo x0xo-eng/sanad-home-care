@@ -1085,6 +1085,14 @@ async function completeVisit(){
     ).catch(function(){});
   }
 
+  /* إشعار فوري للمدير والمالك بإتمام الزيارة وجهوزية التقرير */
+  sanadSendPushNotification(
+    { type: "staff_role", roles: ["owner", "manager"] },
+    "✅ تم إتمام زيارة",
+    (loggedStaff ? loggedStaff.name : "أحد الكادر") + " أنهى زيارة " + (currentVisit.type || "") + " لـ" + (currentVisit.patientName || "") + ".",
+    "./manager-dashboard.html"
+  ).catch(function(){});
+
   await sanadLogActivity(
     "إتمام زيارة",
     loggedStaff ? loggedStaff.name : "",
