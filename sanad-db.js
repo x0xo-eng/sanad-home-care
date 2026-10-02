@@ -198,6 +198,98 @@ async function sanadSendPushNotification(target, title, body, url) {
 }
 
 /* =========================================================
+   1-هـ. سجل الإشعارات الدائم (notifications_log)
+   =========================================================
+   هذا مختلف عن الإشعار الفوري (push) - هذا سجل يبقى محفوظ
+   بقاعدة البيانات ويظهر بقائمة "🔔 الإشعارات" داخل كل لوحة،
+   حتى لو المستخدم ما فعّل الإشعارات الفورية بجهازه أو كان
+   التطبيق مسكر وقت الإرسال */
+
+/* يرجع آخر الإشعارات لحساب معيّن (مسن/عائلة/كادر)
+   recipientType: "customer" | "family" | "staff"
+   options.includeBroadcast: افتراضياً true للمسن والعائلة،
+   و false تلقائياً للكادر (رسائل المالك الجماعية خاصة بالمشتركين فقط) */
+async function sanadGetNotificationsLog(recipientType, recipientId, options) {
+  options = options || {};
+  const includeBroadcast =
+    options.includeBroadcast !== false && recipientType !== "staff";
+
+  let orFilter =
+    "and(recipient_type.eq." + recipientType + ",recipient_id.eq." + recipientId + ")";
+  if (includeBroadcast) {
+    orFilter += ",recipient_type.eq.broadcast";
+  }
+
+  const { data, error } = await sanadClient
+    .from("notifications_log")
+    .select("*")
+    .or(orFilter)
+    .order("created_at", { ascending: false })
+    .limit(options.limit || 30);
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data || [];
+}
+
+/* تتبّع "آخر مرة فتح فيها المستخدم قائمة الإشعارات" محلياً
+   بهذا الجهاز، حتى نعرف شنو جديد (نقطة حمراء بالجرس) */
+function sanadGetNotificationsSeenKey(recipientType, recipientId) {
+  return "sanadNotifSeenAt_" + recipientType + "_" + recipientId;
+}
+
+function sanadMarkNotificationsSeen(recipientType, recipientId) {
+  try {
+    localStorage.setItem(
+      sanadGetNotificationsSeenKey(recipientType, recipientId),
+      new Date().toISOString()
+    );
+  } catch (e) {}
+}
+
+function sanadCountUnseenNotifications(recipientType, recipientId, notifications) {
+  let seenAt = null;
+  try {
+    seenAt = localStorage.getItem(sanadGetNotificationsSeenKey(recipientType, recipientId));
+  } catch (e) {}
+
+  if (!seenAt) {
+    return (notifications || []).length;
+  }
+
+  const seenTime = new Date(seenAt).getTime();
+  return (notifications || []).filter(function (n) {
+    return new Date(n.created_at).getTime() > seenTime;
+  }).length;
+}
+
+/* يهرّب أي نص قبل حقنه بـ innerHTML، حتى ما ينكسر التصميم أو
+   يصير ثغرة لو احتوى اسم/رسالة على رموز HTML */
+function sanadEscapeHTML(value) {
+  return String(value === null || value === undefined ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/* ينسّق "منذ متى" بشكل مختصر بالعربي (مثل: الآن، قبل 5 دقائق...) */
+function sanadFormatRelativeTime(dateString) {
+  const diffMs = Date.now() - new Date(dateString).getTime();
+  const diffMin = Math.floor(diffMs / 60000);
+  if (diffMin < 1) return "الآن";
+  if (diffMin < 60) return "قبل " + diffMin + " دقيقة";
+  const diffHour = Math.floor(diffMin / 60);
+  if (diffHour < 24) return "قبل " + diffHour + " ساعة";
+  const diffDay = Math.floor(diffHour / 24);
+  return "قبل " + diffDay + " يوم";
+}
+
+/* =========================================================
    1-ج. إنشاء حساب دخول حقيقي (Supabase Auth) لمسن أو فرد عائلة
    بدون ما يسجل خروج موظف الاستقبال من حسابه الحالي.
 
