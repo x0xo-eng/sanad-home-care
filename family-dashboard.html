@@ -1382,7 +1382,8 @@ async function submitUrgentRequest(){
       locationType: locationType,
       locationNote: locationNote,
       notes: notes,
-      requestedBy: "family"
+      requestedBy: "family",
+      requestedById: loggedFamily ? loggedFamily.id : null
     });
 
     if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = "📨 إرسال الطلب"; }
