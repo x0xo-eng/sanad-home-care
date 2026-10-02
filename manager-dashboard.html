@@ -3141,31 +3141,36 @@ async function scheduleServiceRequest(requestId){
       request.service_label + " للمشترك " + (customer ? customer.name : "") + " مع " + (staffMember ? staffMember.name : "")
     );
 
-    /* إشعار فوري للكادر المعيّن بموعد رفيق سند الجديد */
-    sanadSendPushNotification(
+    /* إشعارات فورية (نتحقق من نتيجة كل وحدة حتى لو فشلت نعرف السبب
+       بدل ما تختفي بصمت - مهم جداً للتشخيص) */
+    const notifyErrors = [];
+
+    const staffNotifyResult = await sanadSendPushNotification(
       { type: "staff", id: staffId },
       "📅 موعد جديد مسند إليك",
       "🤝 " + request.service_label + " للمشترك " + (customer ? customer.name : "") + " بتاريخ " + date + " الساعة " + time,
       "./staff-dashboard.html"
-    ).catch(function(){});
+    );
+    if(!staffNotifyResult.success){ notifyErrors.push("الكادر: " + staffNotifyResult.message); }
 
-    /* إشعار فوري للمسن وعائلته بترتيب طلبه */
     if(request.customer_id){
-      sanadSendPushNotification(
+      const customerNotifyResult = await sanadSendPushNotification(
         { type: "customer", id: request.customer_id },
         "📅 تم ترتيب طلبك",
         "🤝 " + request.service_label + " بتاريخ " + date + " الساعة " + time,
         "./elder-dashboard.html"
-      ).catch(function(){});
+      );
+      if(!customerNotifyResult.success){ notifyErrors.push("المسن: " + customerNotifyResult.message); }
 
       const requestFamilyMember = customer && customer.family_members && customer.family_members[0];
       if(requestFamilyMember){
-        sanadSendPushNotification(
+        const familyNotifyResult = await sanadSendPushNotification(
           { type: "family", id: requestFamilyMember.id },
           "📅 تم ترتيب الطلب",
           "🤝 " + request.service_label + " لـ" + (customer.name || "") + " بتاريخ " + date + " الساعة " + time,
           "./family-dashboard.html"
-        ).catch(function(){});
+        );
+        if(!familyNotifyResult.success){ notifyErrors.push("العائلة: " + familyNotifyResult.message); }
       }
     }
 
@@ -3175,7 +3180,11 @@ async function scheduleServiceRequest(requestId){
     renderAppointments();
     updateStats();
 
-    showMessage("✅ تم ترتيب الطلب وإنشاء الموعد بنجاح.", "success");
+    if(notifyErrors.length > 0){
+      showMessage("✅ تم ترتيب الطلب، لكن تعذر إرسال بعض الإشعارات: " + notifyErrors.join(" | "), "error");
+    }else{
+      showMessage("✅ تم ترتيب الطلب وإنشاء الموعد بنجاح.", "success");
+    }
 
   }catch(err){
     showMessage("خطأ برمجي أثناء ترتيب الطلب: " + (err && err.message ? err.message : String(err)), "error");
@@ -3200,34 +3209,45 @@ async function cancelServiceRequest(requestId){
     ""
   );
 
-  /* إشعار فوري للمسن وعائلته إن طلبه انرفض/انلغى */
+  /* إشعار فوري للمسن وعائلته إن طلبه انرفض/انلغى
+     (نتحقق من النتيجة حتى لو فشل الإرسال نعرف السبب بدل ما يختفي بصمت) */
+  const cancelNotifyErrors = [];
+
   if(updateResult.success && updateResult.request && updateResult.request.customer_id){
     const cancelledCustomerId = updateResult.request.customer_id;
     const cancelledServiceLabel = updateResult.request.service_label || "رفيق سند";
 
-    sanadSendPushNotification(
+    const customerCancelResult = await sanadSendPushNotification(
       { type: "customer", id: cancelledCustomerId },
       "❌ تم إلغاء طلبك",
       "عذراً، تم إلغاء طلب " + cancelledServiceLabel + ". تواصل معنا لمزيد من التفاصيل.",
       "./elder-dashboard.html"
-    ).catch(function(){});
+    );
+    if(!customerCancelResult.success){ cancelNotifyErrors.push("المسن: " + customerCancelResult.message); }
 
     const relatedCustomer = customers.find(function(c){ return c.id === cancelledCustomerId; });
     const relatedFamilyMember = relatedCustomer && relatedCustomer.family_members && relatedCustomer.family_members[0];
     if(relatedFamilyMember){
-      sanadSendPushNotification(
+      const familyCancelResult = await sanadSendPushNotification(
         { type: "family", id: relatedFamilyMember.id },
         "❌ تم إلغاء الطلب",
         "عذراً، تم إلغاء طلب " + cancelledServiceLabel + " لـ" + (relatedCustomer.name || "") + ". تواصل معنا لمزيد من التفاصيل.",
         "./family-dashboard.html"
-      ).catch(function(){});
+      );
+      if(!familyCancelResult.success){ cancelNotifyErrors.push("العائلة: " + familyCancelResult.message); }
     }
+  }else if(!updateResult.success){
+    cancelNotifyErrors.push("تعذر تحديث حالة الطلب أصلاً: " + updateResult.message);
   }
 
   loadAndRenderServiceRequests();
   renderArchive();
 
-  showMessage("❌ تم إلغاء الطلب.", "success");
+  if(cancelNotifyErrors.length > 0){
+    showMessage("❌ تم إلغاء الطلب، لكن تعذر إرسال بعض الإشعارات: " + cancelNotifyErrors.join(" | "), "error");
+  }else{
+    showMessage("❌ تم إلغاء الطلب.", "success");
+  }
 
 }
 setInterval(loadAndRenderActivityLog, 10000);
