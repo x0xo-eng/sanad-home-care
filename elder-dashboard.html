@@ -1253,7 +1253,8 @@ async function submitUrgentRequest(){
       locationType: locationType,
       locationNote: locationNote,
       notes: notes,
-      requestedBy: "elder"
+      requestedBy: "elder",
+      requestedById: loggedElder.id
     });
 
     if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = "📨 إرسال الطلب"; }
