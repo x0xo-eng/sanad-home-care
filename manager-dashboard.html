@@ -2999,6 +2999,16 @@ async function loadAndRenderServiceRequests(){
 
     const customer = customers.find(function(c){ return c.id === request.customer_id; });
 
+    /* تحديد صاحب الطلب الفعلي: المسن نفسه أو أحد أفراد العائلة
+       (نستخدم requested_by_id لو موجود، وإلا أول فرد عائلة مسجل
+       كحل احتياطي للطلبات القديمة قبل إضافة هذا الحقل) */
+    let requesterLabel = "👴 المسن نفسه";
+    if(request.requested_by === "family"){
+      const famList = (customer && customer.family_members) || [];
+      const requestingFamilyMember = famList.find(function(f){ return f.id === request.requested_by_id; }) || famList[0] || null;
+      requesterLabel = "👨‍👩‍👧 العائلة" + (requestingFamilyMember ? " (" + escapeHtml(requestingFamilyMember.name || "") + ")" : "");
+    }
+
     const div = document.createElement("div");
     div.className = "customer-card";
 
@@ -3012,6 +3022,7 @@ async function loadAndRenderServiceRequests(){
           <div class="customer-name">🤝 ${escapeHtml(request.service_label || "")}</div>
           <div class="customer-meta">
             👴 المشترك: ${escapeHtml(customer ? customer.name : "غير معروف")} (${escapeHtml(customer ? customer.customer_code : "")})
+            <br>📨 الطلب من: ${requesterLabel}
             <br>📍 ${escapeHtml(SANAD_LOCATION_LABELS[request.location_type] || "")}
             ${request.location_note ? " — " + escapeHtml(request.location_note) : ""}
             ${request.notes ? "<br>📝 " + escapeHtml(request.notes) : ""}
@@ -3209,32 +3220,44 @@ async function cancelServiceRequest(requestId){
     ""
   );
 
-  /* إشعار فوري للمسن وعائلته إن طلبه انرفض/انلغى
-     (نتحقق من النتيجة حتى لو فشل الإرسال نعرف السبب بدل ما يختفي بصمت) */
+  /* إشعار فوري لصاحب الطلب الأصلي فقط إن طلبه انرفض/انلغى
+     (المسن نفسه لو هو من طلب، أو فرد العائلة المحدد لو هو من طلب -
+     وليس الاثنين معاً). نتحقق من النتيجة حتى لو فشل الإرسال نعرف
+     السبب بدل ما يختفي بصمت */
   const cancelNotifyErrors = [];
 
   if(updateResult.success && updateResult.request && updateResult.request.customer_id){
-    const cancelledCustomerId = updateResult.request.customer_id;
-    const cancelledServiceLabel = updateResult.request.service_label || "رفيق سند";
-
-    const customerCancelResult = await sanadSendPushNotification(
-      { type: "customer", id: cancelledCustomerId },
-      "❌ تم إلغاء طلبك",
-      "عذراً، تم إلغاء طلب " + cancelledServiceLabel + ". تواصل معنا لمزيد من التفاصيل.",
-      "./elder-dashboard.html"
-    );
-    if(!customerCancelResult.success){ cancelNotifyErrors.push("المسن: " + customerCancelResult.message); }
-
+    const cancelledRequest = updateResult.request;
+    const cancelledCustomerId = cancelledRequest.customer_id;
+    const cancelledServiceLabel = cancelledRequest.service_label || "رفيق سند";
     const relatedCustomer = customers.find(function(c){ return c.id === cancelledCustomerId; });
-    const relatedFamilyMember = relatedCustomer && relatedCustomer.family_members && relatedCustomer.family_members[0];
-    if(relatedFamilyMember){
-      const familyCancelResult = await sanadSendPushNotification(
-        { type: "family", id: relatedFamilyMember.id },
-        "❌ تم إلغاء الطلب",
-        "عذراً، تم إلغاء طلب " + cancelledServiceLabel + " لـ" + (relatedCustomer.name || "") + ". تواصل معنا لمزيد من التفاصيل.",
-        "./family-dashboard.html"
+
+    if(cancelledRequest.requested_by === "family"){
+      /* الطلب كان من العائلة -> الإشعار يروح لنفس فرد العائلة اللي طلب
+         (أو أول فرد عائلة مسجل كحل احتياطي للطلبات القديمة) */
+      const famList = (relatedCustomer && relatedCustomer.family_members) || [];
+      const requestingFamilyMember = famList.find(function(f){ return f.id === cancelledRequest.requested_by_id; }) || famList[0] || null;
+
+      if(requestingFamilyMember){
+        const familyCancelResult = await sanadSendPushNotification(
+          { type: "family", id: requestingFamilyMember.id },
+          "❌ تم إلغاء الطلب",
+          "عذراً، تم إلغاء طلب " + cancelledServiceLabel + " لـ" + (relatedCustomer ? relatedCustomer.name : "") + ". تواصل معنا لمزيد من التفاصيل.",
+          "./family-dashboard.html"
+        );
+        if(!familyCancelResult.success){ cancelNotifyErrors.push("العائلة: " + familyCancelResult.message); }
+      }else{
+        cancelNotifyErrors.push("تعذر تحديد فرد العائلة صاحب الطلب لإرسال الإشعار له.");
+      }
+    }else{
+      /* الطلب كان من المسن نفسه (أو طلب قديم بدون تحديد) -> الإشعار يروح للمسن فقط */
+      const customerCancelResult = await sanadSendPushNotification(
+        { type: "customer", id: cancelledCustomerId },
+        "❌ تم إلغاء طلبك",
+        "عذراً، تم إلغاء طلب " + cancelledServiceLabel + ". تواصل معنا لمزيد من التفاصيل.",
+        "./elder-dashboard.html"
       );
-      if(!familyCancelResult.success){ cancelNotifyErrors.push("العائلة: " + familyCancelResult.message); }
+      if(!customerCancelResult.success){ cancelNotifyErrors.push("المسن: " + customerCancelResult.message); }
     }
   }else if(!updateResult.success){
     cancelNotifyErrors.push("تعذر تحديث حالة الطلب أصلاً: " + updateResult.message);
