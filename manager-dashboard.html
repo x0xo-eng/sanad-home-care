@@ -3149,7 +3149,7 @@ async function scheduleServiceRequest(requestId){
       "./staff-dashboard.html"
     ).catch(function(){});
 
-    /* إشعار فوري للمسن بترتيب طلبه */
+    /* إشعار فوري للمسن وعائلته بترتيب طلبه */
     if(request.customer_id){
       sanadSendPushNotification(
         { type: "customer", id: request.customer_id },
@@ -3157,6 +3157,16 @@ async function scheduleServiceRequest(requestId){
         "🤝 " + request.service_label + " بتاريخ " + date + " الساعة " + time,
         "./elder-dashboard.html"
       ).catch(function(){});
+
+      const requestFamilyMember = customer && customer.family_members && customer.family_members[0];
+      if(requestFamilyMember){
+        sanadSendPushNotification(
+          { type: "family", id: requestFamilyMember.id },
+          "📅 تم ترتيب الطلب",
+          "🤝 " + request.service_label + " لـ" + (customer.name || "") + " بتاريخ " + date + " الساعة " + time,
+          "./family-dashboard.html"
+        ).catch(function(){});
+      }
     }
 
     await loadAll();
@@ -3179,7 +3189,7 @@ async function cancelServiceRequest(requestId){
   const confirmed = confirm("هل أنت متأكد من إلغاء هذا الطلب؟");
   if(!confirmed){ return; }
 
-  await sanadUpdateServiceRequest(requestId, { status: "cancelled", cancelled_at: new Date().toISOString() });
+  const updateResult = await sanadUpdateServiceRequest(requestId, { status: "cancelled", cancelled_at: new Date().toISOString() });
 
   await sanadLogActivity(
     "إلغاء طلب رفيق سند",
@@ -3189,6 +3199,30 @@ async function cancelServiceRequest(requestId){
     requestId,
     ""
   );
+
+  /* إشعار فوري للمسن وعائلته إن طلبه انرفض/انلغى */
+  if(updateResult.success && updateResult.request && updateResult.request.customer_id){
+    const cancelledCustomerId = updateResult.request.customer_id;
+    const cancelledServiceLabel = updateResult.request.service_label || "رفيق سند";
+
+    sanadSendPushNotification(
+      { type: "customer", id: cancelledCustomerId },
+      "❌ تم إلغاء طلبك",
+      "عذراً، تم إلغاء طلب " + cancelledServiceLabel + ". تواصل معنا لمزيد من التفاصيل.",
+      "./elder-dashboard.html"
+    ).catch(function(){});
+
+    const relatedCustomer = customers.find(function(c){ return c.id === cancelledCustomerId; });
+    const relatedFamilyMember = relatedCustomer && relatedCustomer.family_members && relatedCustomer.family_members[0];
+    if(relatedFamilyMember){
+      sanadSendPushNotification(
+        { type: "family", id: relatedFamilyMember.id },
+        "❌ تم إلغاء الطلب",
+        "عذراً، تم إلغاء طلب " + cancelledServiceLabel + " لـ" + (relatedCustomer.name || "") + ". تواصل معنا لمزيد من التفاصيل.",
+        "./family-dashboard.html"
+      ).catch(function(){});
+    }
+  }
 
   loadAndRenderServiceRequests();
   renderArchive();
