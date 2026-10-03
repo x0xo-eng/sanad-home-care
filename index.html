@@ -114,6 +114,7 @@
   .care-scene .care-info{
     position: relative;
     z-index: 1;
+    margin-top: 22px;
   }
   .care-scene .care-info span{
     color: rgba(255,255,255,.72);
@@ -173,26 +174,62 @@
     55%{ stroke-dashoffset: 0; }
     100%{ stroke-dashoffset: -16; }
   }
-  .sanad-ecg-heart{
+  /* شريط قراءات حيوية أسفل الدائرة، متل شاشة جهاز متابعة حقيقي */
+  .sanad-vitals-panel{
     position: absolute;
-    bottom: -3px;
-    left: -3px;
-    width: 34px;
-    height: 34px;
-    background: #ffffff;
-    border-radius: 50%;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: #e0505a;
-    box-shadow: 0 8px 18px rgba(8,22,45,.22);
-    animation: sanadHeartPulse 1.25s ease-in-out infinite;
+    justify-content: space-between;
+    gap: 6px;
+    background: rgba(5,15,14,.82);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px;
+    padding: 8px 10px;
+    box-shadow: 0 10px 26px rgba(0,0,0,.35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
     z-index: 3;
   }
-  @keyframes sanadHeartPulse{
-    0%, 100%{ transform: scale(1); }
-    50%{ transform: scale(1.18); }
+  .sanad-vital{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+  }
+  .sanad-vital-label{
+    font-size: 9px;
+    color: rgba(255,255,255,.55);
+    font-weight: 600;
+    letter-spacing: .2px;
+    white-space: nowrap;
+  }
+  .sanad-vital-value{
+    font-size: 15px;
+    font-weight: 800;
+    font-family: 'Courier New', monospace;
+    letter-spacing: .3px;
+  }
+  .sanad-vital-value small{
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .sanad-vital-hr .sanad-vital-value{
+    color: #39e6c5;
+    animation: sanadVitalPulse 1.1s ease-in-out infinite;
+  }
+  .sanad-vital-o2 .sanad-vital-value{
+    color: #38bdf8;
+  }
+  .sanad-vital-bp .sanad-vital-value{
+    color: #fbbf24;
+  }
+  @keyframes sanadVitalPulse{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: .55; }
   }
   .hero-content::before{
     content: "";
@@ -414,7 +451,24 @@
               </svg>
             </div>
 
-            <span class="sanad-ecg-heart">♥</span>
+            <div class="sanad-vitals-panel">
+
+              <div class="sanad-vital sanad-vital-hr">
+                <span class="sanad-vital-label">♥ نبض</span>
+                <span class="sanad-vital-value">78</span>
+              </div>
+
+              <div class="sanad-vital sanad-vital-o2">
+                <span class="sanad-vital-label">O₂</span>
+                <span class="sanad-vital-value">98<small>%</small></span>
+              </div>
+
+              <div class="sanad-vital sanad-vital-bp">
+                <span class="sanad-vital-label">ضغط</span>
+                <span class="sanad-vital-value">120/80</span>
+              </div>
+
+            </div>
 
           </div>
 
