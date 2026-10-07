@@ -682,6 +682,19 @@ async function sanadGetStaff() {
   return data;
 }
 
+/* دليل الكادر العام: الاسم والدور فقط (بدون كلمات المرور).
+   يُستخدم في لوحة المسن والعائلة بدل قراءة جدول الكادر كامل. */
+async function sanadGetStaffDirectory() {
+  const { data, error } = await sanadClient.rpc("sanad_staff_directory");
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data || [];
+}
+
 /* =========================================================
    10. قراءة مواعيد موظف معين (لوحة الكادر)
 ========================================================= */
