@@ -820,7 +820,7 @@ async function loadAppointments(){
 
   const appointments = await sanadGetAppointmentsForCustomer(elderCustomer.id);
   sanadAppointmentsCache = appointments;
-  staffList = await sanadGetStaff();
+  staffList = await sanadGetStaffDirectory();
 
   const upcoming = appointments.filter(function(item){ return item.status === "scheduled" || item.status === "in_progress"; });
   const completed = appointments.filter(function(item){ return item.status === "completed"; });
