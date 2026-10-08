@@ -3,10 +3,11 @@
 
 <head>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-  <title>لوحة الكادر | سند</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تسجيل دخول الكادر | سند</title>
 
 <link rel="manifest" href="manifest-staff.json">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/final/icon-180.png">
@@ -22,394 +23,257 @@
 <meta name="apple-mobile-web-app-title" content="سند">
 
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-  <style>
+<style>
 
-    * { box-sizing: border-box; }
+body{
+background:linear-gradient(180deg,#f7fbfa,#eef7f5);
+}
 
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #f7fbfa, #eef7f5);
-      color: #163b38;
-      font-family: Arial, Tahoma, sans-serif;
-    }
+.login-page{
+min-height:calc(100vh - 180px);
+padding:55px 7%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-    .dashboard {
-      max-width: 1250px;
-      margin: auto;
-      padding: 40px 6%;
-    }
+.login-container{
+width:100%;
+max-width:1000px;
+background:white;
+border-radius:28px;
+padding:42px;
+box-shadow:0 25px 70px rgba(22,70,65,.09);
+border:1px solid #e3edeb;
+}
 
-    .welcome {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 26px;
-      padding: 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      box-shadow: 0 18px 50px rgba(22,70,65,.07);
-      margin-bottom: 22px;
-    }
+.login-header{
+text-align:center;
+margin-bottom:30px;
+}
 
-    .eyebrow {
-      display: block;
-      color: #16877d;
-      font-size: 13px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
+.eyebrow{
+display:block;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:8px;
+}
 
-    .welcome h1 { margin: 0 0 8px; font-size: 29px; color: #163b38; }
-    .welcome p { margin: 0; color: #718480; line-height: 1.8; font-size: 14px; }
+.login-header h1{
+color:#163b38;
+font-size:34px;
+margin:0 0 8px;
+}
 
-    .staff-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 24px;
-      background: #e8f5f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 38px;
-      flex-shrink: 0;
-    }
+.login-header p{
+color:#718480;
+font-size:14px;
+margin:0;
+}
 
-    .today-box {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 22px;
-      padding: 24px;
-      margin-bottom: 25px;
-      box-shadow: 0 12px 35px rgba(22,70,65,.05);
-    }
+.roles-title{
+color:#163b38;
+font-size:17px;
+font-weight:800;
+margin-bottom:15px;
+}
 
-    .today-number { display: flex; align-items: center; gap: 15px; }
+.roles{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:13px;
+margin-bottom:28px;
+}
 
-    .today-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 17px;
-      background: #e8f5f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-    }
+.role{
+border:1.5px solid #e3edeb;
+background:#fbfefe;
+border-radius:17px;
+padding:17px 10px;
+min-height:115px;
+cursor:pointer;
+text-align:center;
+font-family:inherit;
+transition:.25s;
+}
 
-    .today-label { color: #718480; font-size: 13px; margin-bottom: 5px; }
-    .today-count { color: #163b38; font-size: 28px; font-weight: 900; }
+.role:hover{
+border-color:#16877d;
+transform:translateY(-3px);
+}
 
-    .section {
-      background: white;
-      border: 1px solid #e3edeb;
-      border-radius: 24px;
-      padding: 27px;
-      margin-bottom: 25px;
-      box-shadow: 0 15px 45px rgba(22,70,65,.05);
-    }
+.role.active{
+background:#e8f5f3;
+border-color:#16877d;
+box-shadow:0 8px 22px rgba(22,135,125,.12);
+}
 
-    .section-title { margin-bottom: 20px; }
-    .section-title h2 { margin: 0 0 6px; color: #163b38; font-size: 21px; }
-    .section-title p { margin: 0; color: #718480; font-size: 13px; line-height: 1.7; }
+.role-icon{
+font-size:28px;
+margin-bottom:8px;
+}
 
-    .table-wrapper { width: 100%; overflow-x: auto; }
+.role-name{
+display:block;
+color:#163b38;
+font-size:12px;
+font-weight:800;
+line-height:1.5;
+}
 
-    .visits-table { width: 100%; border-collapse: collapse; min-width: 850px; }
+.form-box{
+border-top:1px solid #e3edeb;
+padding-top:28px;
+}
 
-    .visits-table th {
-      background: #f0f8f6;
-      color: #4e6d68;
-      padding: 14px 10px;
-      font-size: 12px;
-      font-weight: 900;
-      text-align: right;
-      border-bottom: 1px solid #dcece9;
-    }
+.selected-role{
+background:#f0f8f6;
+border:1px solid #dcece9;
+border-radius:13px;
+padding:12px 15px;
+color:#16877d;
+font-size:13px;
+font-weight:800;
+margin-bottom:20px;
+text-align:center;
+}
 
-    .visits-table td {
-      padding: 15px 10px;
-      color: #4e6d68;
-      font-size: 12px;
-      border-bottom: 1px solid #edf2f1;
-      vertical-align: middle;
-    }
+.form-row{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-bottom:17px;
+}
 
-    .patient-name { color: #163b38; font-weight: 900; }
-    .visit-time { color: #16877d; font-weight: 900; }
-    .visit-type { color: #718480; }
-    .address { max-width: 210px; line-height: 1.6; }
+.form-row label{
+color:#163b38;
+font-size:13px;
+font-weight:800;
+}
 
-    .status {
-      display: inline-flex;
-      padding: 7px 11px;
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
+.form-row input{
+width:100%;
+box-sizing:border-box;
+padding:14px;
+border-radius:12px;
+border:1px solid #dfecea;
+background:#fbfefe;
+color:#163b38;
+font-family:inherit;
+font-size:14px;
+outline:none;
+}
 
-    .status-waiting { background: #fff2d8; color: #a66a0c; }
-    .status-progress { background: #e8f5f3; color: #16877d; }
-    .status-completed { background: #e6f6ef; color: #16815f; }
-    .status-cancelled { background: #fff0f0; color: #a44b4b; }
+.form-row input:focus{
+border-color:#16877d;
+background:white;
+box-shadow:0 0 0 4px rgba(22,135,125,.08);
+}
 
-    .start-btn, .complete-btn, .cancel-btn, .open-progress-btn {
-      border: none;
-      border-radius: 10px;
-      padding: 10px 15px;
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: .2s;
-    }
+.actions{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-top:23px;
+}
 
-    .start-btn { background: #16877d; color: white; }
-    .start-btn:hover { background: #0f7068; transform: translateY(-1px); }
+.forgot{
+color:#16877d;
+font-size:12px;
+font-weight:800;
+text-decoration:none;
+}
 
-    .open-progress-btn { background: #e8f5f3; color: #16877d; }
-    .open-progress-btn:hover { background: #d8eeeb; }
+.btn-login{
+border:none;
+border-radius:13px;
+padding:13px 28px;
+background:#16877d;
+color:white;
+font-family:inherit;
+font-size:13px;
+font-weight:800;
+cursor:pointer;
+}
 
-    .complete-btn { background: #16815f; color: white; }
-    .complete-btn:hover { background: #116d50; transform: translateY(-1px); }
+.btn-login:hover{
+background:#0f7068;
+}
 
-    .cancel-btn { background: #fff0f0; color: #a44b4b; }
-    .cancel-btn:hover { background: #ffe4e4; }
+.error,
+.success{
+display:none;
+margin-top:15px;
+padding:12px;
+border-radius:11px;
+text-align:center;
+font-size:12px;
+font-weight:800;
+}
 
-    #visitSection { display: none; }
+.error{
+background:#fff0f0;
+color:#a44b4b;
+border:1px solid #f0dada;
+}
 
-    .visit-header {
-      background: #f0f8f6;
-      border: 1px solid #dcece9;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 22px;
-    }
+.success{
+background:#e6f6ef;
+color:#16815f;
+}
 
-    .visit-header h3 { margin: 0 0 8px; color: #163b38; font-size: 19px; }
-    .visit-header p { margin: 4px 0; color: #718480; font-size: 12px; }
+.back-home{
+display:flex;
+width:fit-content;
+margin:28px auto 0;
+color:#16877d;
+text-decoration:none;
+font-size:12px;
+font-weight:800;
+}
 
-    .visit-info-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 17px;
-    }
+@media(max-width:900px){
 
-    .info-item { background: white; border: 1px solid #e3edeb; border-radius: 12px; padding: 12px; }
-    .info-label { color: #8a9692; font-size: 10px; margin-bottom: 5px; }
-    .info-value { color: #163b38; font-size: 12px; font-weight: 900; }
+.roles{
+grid-template-columns:repeat(3,1fr);
+}
 
-    .medical-section {
-      border: 1px solid #e3edeb;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-      background: #fbfefe;
-    }
+}
 
-    .medical-section h3 { margin: 0 0 17px; color: #163b38; font-size: 16px; }
+@media(max-width:650px){
 
-    .fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-    .field { display: flex; flex-direction: column; gap: 7px; }
-    .field.full { grid-column: 1 / -1; }
-    .field label { color: #163b38; font-size: 12px; font-weight: 900; }
+.login-page{
+padding:30px 5%;
+}
 
-    .field input, .field select, .field textarea {
-      width: 100%;
-      border: 1px solid #dfecea;
-      border-radius: 11px;
-      background: white;
-      color: #163b38;
-      padding: 12px;
-      font-family: inherit;
-      font-size: 12px;
-      outline: none;
-    }
+.login-container{
+padding:28px 20px;
+}
 
-    .field textarea { min-height: 110px; resize: vertical; line-height: 1.8; }
+.roles{
+grid-template-columns:repeat(2,1fr);
+}
 
-    .field input:focus, .field select:focus, .field textarea:focus {
-      border-color: #16877d;
-      box-shadow: 0 0 0 4px rgba(22,135,125,.08);
-    }
+.actions{
+flex-direction:column;
+align-items:stretch;
+}
 
-    .role-notice {
-      background: #fffdf5;
-      border: 1px solid #efe1bb;
-      border-radius: 14px;
-      padding: 14px 16px;
-      color: #856c34;
-      font-size: 12px;
-      line-height: 1.8;
-      margin-bottom: 18px;
-    }
+.btn-login{
+width:100%;
+}
 
-    .visit-actions { display: flex; gap: 10px; justify-content: flex-end; padding-top: 10px; }
-    .complete-btn { padding: 13px 25px; font-size: 13px; }
-    .cancel-btn { padding: 13px 22px; font-size: 13px; }
+.forgot{
+text-align:center;
+}
 
-    .report-message {
-      display: none;
-      background: #e6f6ef;
-      border: 1px solid #cce9dc;
-      color: #16815f;
-      border-radius: 15px;
-      padding: 16px;
-      margin-top: 18px;
-      font-size: 13px;
-      line-height: 1.8;
-      text-align: center;
-    }
+}
 
-    .empty-message { text-align: center; padding: 40px 20px; color: #718480; line-height: 2; }
-
-    .sync-message {
-      display: none;
-      margin-bottom: 18px;
-      padding: 13px 16px;
-      border-radius: 13px;
-      background: #eef8f6;
-      border: 1px solid #d5ebe7;
-      color: #16877d;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .logout-area { text-align: center; margin: 30px 0 10px; }
-
-    .logout {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 20px;
-      border-radius: 12px;
-      border: 1px solid #eadede;
-      background: white;
-      color: #a44b4b;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    @media (max-width: 900px) {
-      .visit-info-grid { grid-template-columns: 1fr 1fr; }
-      .fields { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 650px) {
-      .dashboard { padding: 30px 5%; }
-      .welcome { flex-direction: column; text-align: center; }
-      .staff-avatar { width: 65px; height: 65px; font-size: 30px; }
-      .visit-info-grid { grid-template-columns: 1fr; }
-      .fields { grid-template-columns: 1fr; }
-      .field.full { grid-column: auto; }
-      .visit-actions { flex-direction: column; }
-      .complete-btn, .cancel-btn { width: 100%; }
-    }
-
-    .push-subscribe-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      border: none;
-      border-radius: 18px;
-      padding: 16px;
-      background: #eef5ff;
-      border: 1.5px solid #c9ddfb;
-      color: #1a5fb4;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 900;
-      cursor: pointer;
-      margin-top: 18px;
-    }
-
-    .push-subscribe-btn:hover { background: #dcebff; }
-    .push-subscribe-btn.subscribed {
-      background: #e6f6ef;
-      border-color: #bdeccf;
-      color: #16815f;
-      cursor: default;
-    }
-
-    .notif-bell-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      border: 1.5px solid #e4d8c3;
-      border-radius: 18px;
-      padding: 16px;
-      background: #fff8ec;
-      color: #8a6a1f;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 900;
-      cursor: pointer;
-      margin-top: 12px;
-    }
-    .notif-bell-btn:hover { background: #fdeecb; }
-    .notif-badge {
-      background: #e8453c;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 900;
-      border-radius: 999px;
-      min-width: 18px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 5px;
-    }
-    .notif-panel-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 20, 30, .45);
-      z-index: 999;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 60px 16px;
-    }
-    .notif-panel-overlay.open { display: flex; }
-    .notif-panel {
-      background: #fff;
-      border-radius: 20px;
-      max-width: 440px;
-      width: 100%;
-      max-height: 70vh;
-      overflow: auto;
-      padding: 18px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.25);
-    }
-    .notif-panel h3 { margin: 0 0 12px; font-size: 17px; }
-    .notif-item { padding: 12px; border-radius: 14px; background: #f7f9fc; margin-bottom: 10px; }
-    .notif-item strong { display: block; margin-bottom: 4px; font-size: 14px; }
-    .notif-item p { margin: 0; font-size: 13px; color: #555; }
-    .notif-item time { display: block; margin-top: 6px; font-size: 11px; color: #999; }
-    .notif-empty { text-align: center; color: #999; padding: 30px 10px; font-size: 14px; }
-    .notif-close-btn {
-      display: block;
-      margin: 14px auto 0;
-      background: #eee;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 18px;
-      font-weight: 800;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -419,218 +283,358 @@
 
 <header class="header">
 
-  <a href="index.html" class="logo">سند<span>.</span></a>
+<a href="staff-login.html" class="logo">
+سند<span>.</span>
+</a>
 
-  <nav class="nav">
-    <a href="index.html">الرئيسية</a>
-    <a href="services.html">خدماتنا</a>
-    <a href="how.html">كيف يعمل سند؟</a>
-    <a href="about.html">عن سند</a>
-  </nav>
+<nav class="nav"><span style="font-weight:700;color:#16877d;font-size:13px;">نظام الكادر</span></nav>
 
 </header>
 
 
-<main class="dashboard">
+<main class="login-page">
+
+<div class="login-container">
 
 
-<section class="welcome">
+<div class="login-header">
 
-  <div>
-    <span class="eyebrow">🏥 نظام الكادر — سند</span>
-    <h1 id="welcomeName">أهلاً بك</h1>
-    <p id="welcomeRole">فريق سند للرعاية المنزلية</p>
-  </div>
+<span class="eyebrow">
+🏥 نظام الكادر — سند
+</span>
 
-  <div class="staff-avatar" id="staffAvatar">👨‍⚕️</div>
+<h1>
+تسجيل دخول الكادر
+</h1>
 
-</section>
+<p>
+اختر صفتك الوظيفية ثم أدخل بيانات حسابك
+</p>
 
-
-<section class="today-box">
-
-  <div class="today-number">
-    <div class="today-icon">📅</div>
-    <div>
-      <div class="today-label">عدد زياراتك اليوم</div>
-      <div class="today-count" id="todayVisitsCount">0</div>
-    </div>
-  </div>
-
-  <button type="button" id="pushSubscribeBtn" class="push-subscribe-btn" onclick="handlePushSubscribeClick()">
-    🔔 فعّل التنبيهات الفورية
-  </button>
-
-  <button type="button" id="notifBellBtn" class="notif-bell-btn" onclick="openNotificationsPanel()">
-    🔔 الإشعارات
-    <span id="notifBadge" class="notif-badge" style="display:none;">0</span>
-  </button>
-
-</section>
-
-<div class="notif-panel-overlay" id="notifPanelOverlay" onclick="if(event.target===this){ closeNotificationsPanel(); }">
-  <div class="notif-panel">
-    <h3>🔔 الإشعارات</h3>
-    <div id="notifListContainer"><div class="notif-empty">لا توجد إشعارات بعد.</div></div>
-    <button type="button" class="notif-close-btn" onclick="closeNotificationsPanel()">إغلاق</button>
-  </div>
 </div>
 
 
-<section class="section">
-
-  <div class="section-title">
-    <h2>📋 جدول الزيارات</h2>
-    <p>جميع الزيارات المسندة إليك مرتبة حسب التاريخ والوقت.</p>
-  </div>
-
-  <div id="syncMessage" class="sync-message">🔄 يتم تحديث جدول الزيارات تلقائياً...</div>
-
-  <div class="table-wrapper">
-
-    <table class="visits-table">
-
-      <thead>
-        <tr>
-          <th>التاريخ</th>
-          <th>الوقت</th>
-          <th>اسم المسن</th>
-          <th>العنوان</th>
-          <th>نوع الزيارة</th>
-          <th>الحالة</th>
-          <th>الإجراء</th>
-        </tr>
-      </thead>
-
-      <tbody id="visitsTableBody"></tbody>
-
-    </table>
-
-  </div>
-
-</section>
-
-
-<section class="section" id="visitSection">
-
-  <div class="section-title">
-    <h2>🩺 واجهة الزيارة</h2>
-    <p>أدخل المعلومات المطلوبة أثناء الزيارة ثم أتمم الزيارة لإرسال التقرير.</p>
-  </div>
-
-  <div class="visit-header" id="currentVisitHeader"></div>
-
-  <div class="role-notice" id="roleNotice"></div>
-
-  <div class="medical-section" id="vitalSection">
-
-    <h3>❤️ العلامات الحيوية</h3>
-
-    <div class="fields">
-
-      <div class="field"><label>🩸 ضغط الدم</label><input type="text" id="bloodPressure" placeholder="مثال: 120/80"></div>
-      <div class="field"><label>🍬 سكر الدم</label><input type="text" id="bloodSugar" placeholder="مثال: 110 mg/dL"></div>
-      <div class="field"><label>🌡️ درجة الحرارة</label><input type="text" id="temperature" placeholder="مثال: 36.8 °C"></div>
-      <div class="field"><label>❤️ النبض</label><input type="text" id="pulse" placeholder="نبضة / دقيقة"></div>
-      <div class="field"><label>🫁 نسبة الأوكسجين</label><input type="text" id="oxygen" placeholder="مثال: 97%"></div>
-      <div class="field"><label>⚖️ الوزن</label><input type="text" id="weight" placeholder="مثال: 72 كغم"></div>
-
-    </div>
-
-  </div>
-
-
-  <div class="medical-section" id="medicalSection">
-
-    <h3>🩺 التقييم والفحص</h3>
-
-    <div class="fields">
-
-      <div class="field full"><label>الأعراض / الشكوى الرئيسية</label><textarea id="symptoms" placeholder="اكتب شكوى المسن والأعراض التي تم ملاحظتها..."></textarea></div>
-      <div class="field full"><label>نتيجة الفحص</label><textarea id="examination" placeholder="اكتب نتيجة الفحص والملاحظات الطبية..."></textarea></div>
-      <div class="field full"><label>التشخيص</label><textarea id="diagnosis" placeholder="التشخيص إن وجد..."></textarea></div>
-      <div class="field full"><label>العلاج / الأدوية / الإجراءات</label><textarea id="treatment" placeholder="اكتب العلاج أو الأدوية أو الإجراءات التي تم اتخاذها..."></textarea></div>
-      <div class="field full"><label>التوصيات</label><textarea id="recommendations" placeholder="اكتب توصياتك للزيارة القادمة أو للعائلة..."></textarea></div>
-
-    </div>
-
-  </div>
-
-
-  <div class="medical-section" id="nursingSection">
-
-    <h3>👩‍⚕️ تفاصيل الرعاية التمريضية</h3>
-
-    <div class="fields">
-
-      <div class="field">
-        <label>💊 إعطاء الأدوية</label>
-        <select id="medicationGiven">
-          <option value="">اختر الحالة</option>
-          <option value="yes">تم إعطاء الأدوية</option>
-          <option value="no">لم يتم إعطاء الأدوية</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>🛁 الرعاية الشخصية</label>
-        <select id="personalCare">
-          <option value="">اختر الحالة</option>
-          <option value="completed">تمت</option>
-          <option value="not_completed">لم تتم</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>🥗 التغذية</label>
-        <select id="nutritionStatus">
-          <option value="">اختر الحالة</option>
-          <option value="good">جيدة</option>
-          <option value="moderate">متوسطة</option>
-          <option value="poor">ضعيفة</option>
-        </select>
-      </div>
-
-      <div class="field full"><label>📝 ملاحظات التمريض</label><textarea id="nursingNotes" placeholder="اكتب جميع الملاحظات المتعلقة بالرعاية التمريضية..."></textarea></div>
-
-    </div>
-
-  </div>
-
-
-  <div class="medical-section">
-
-    <h3>📝 التقرير النهائي</h3>
-
-    <div class="fields">
-      <div class="field full"><label>تقرير الزيارة الكامل</label><textarea id="finalReport" placeholder="اكتب ملخص الزيارة بالتفصيل..."></textarea></div>
-    </div>
-
-  </div>
-
-
-  <div class="visit-actions">
-    <button type="button" class="cancel-btn" onclick="cancelVisit()">إلغاء الزيارة</button>
-    <button type="button" class="complete-btn" onclick="completeVisit()">✅ إتمام الزيارة وإرسال التقرير</button>
-  </div>
-
-  <div id="reportMessage" class="report-message"></div>
-
-</section>
-
-
-<div class="logout-area">
-  <a href="#" class="logout" onclick="logoutStaff(event)">🚪 تسجيل الخروج</a>
+<div class="roles-title">
+اختر الصفة الوظيفية
 </div>
 
+
+<div class="roles">
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('owner',this)"
+><div class="role-icon">
+👑
+</div>
+
+<span class="role-name">
+مالك النظام
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('manager',this)"
+>
+
+<div class="role-icon">
+👨‍💼
+</div>
+
+<span class="role-name">
+مدير الشركة
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('reception',this)"
+>
+
+<div class="role-icon">
+🧑‍💼
+</div>
+
+<span class="role-name">
+موظف الاستقبال
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('specialist',this)"
+>
+
+<div class="role-icon">
+👨‍⚕️
+</div>
+
+<span class="role-name">
+الطبيب الأخصائي
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('resident',this)"
+>
+
+<div class="role-icon">
+🩺
+</div>
+
+<span class="role-name">
+الطبيب المقيم
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('nurse',this)"
+>
+
+<div class="role-icon">
+👩‍⚕️
+</div>
+
+<span class="role-name">
+الممرض الصحي
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('nutrition',this)"
+>
+
+<div class="role-icon">
+🥗
+</div>
+
+<span class="role-name">
+أخصائي التغذية
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('physio',this)"
+>
+
+<div class="role-icon">
+🏃
+</div>
+
+<span class="role-name">
+أخصائي العلاج الطبيعي
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('psychologist',this)"
+>
+
+<div class="role-icon">
+🧠
+</div>
+
+<span class="role-name">
+الأخصائي النفسي
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('entertainment',this)"
+>
+
+<div class="role-icon">
+🎭
+</div>
+
+<span class="role-name">
+مرافق الترفيه
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('hairdresser',this)"
+>
+
+<div class="role-icon">
+💇
+</div>
+
+<span class="role-name">
+الكوافير
+</span>
+
+</button>
+
+
+<button
+type="button"
+class="role"
+onclick="selectRole('assistant',this)"
+>
+
+<div class="role-icon">
+🛁
+</div>
+
+<span class="role-name">
+المعين
+</span>
+
+</button>
+
+
+</div>
+
+
+<div class="form-box">
+
+
+<div
+class="selected-role"
+id="selectedRole"
+>
+
+⚠️ يرجى اختيار الصفة الوظيفية أولاً
+
+</div>
+
+
+<form id="staffLoginForm">
+
+
+<div class="form-row">
+
+<label for="staffPhone">
+📱 رقم الهاتف
+</label>
+
+<input
+id="staffPhone"
+type="tel"
+placeholder="أدخل رقم الهاتف"
+autocomplete="tel"
+required
+>
+
+</div>
+
+
+<div class="form-row">
+
+<label for="staffPassword">
+🔐 كلمة المرور
+</label>
+
+<input
+id="staffPassword"
+type="password"
+placeholder="أدخل كلمة المرور"
+autocomplete="current-password"
+required
+>
+
+</div>
+
+
+<div class="actions">
+
+
+<a
+href="#"
+class="forgot"
+onclick="forgotPassword(event)"
+>
+نسيت كلمة المرور؟
+</a>
+
+
+<button
+type="submit"
+class="btn-login"
+>
+تسجيل الدخول
+</button>
+
+
+</div>
+
+
+<div
+id="errorMessage"
+class="error"
+></div>
+
+
+<div
+id="successMessage"
+class="success"
+></div>
+
+
+</form>
+
+
+</div>
+</div>
 
 </main>
 
 
 <footer>
-  <div class="footer-logo">سند<span>.</span></div>
-  <p>الرعاية المنزلية لكبار السن</p>
-  <small>© 2026 سند — جميع الحقوق محفوظة</small>
+
+<div class="footer-logo">
+سند<span>.</span>
+</div>
+
+<p>
+الرعاية المنزلية لكبار السن
+</p>
+
+<small>
+© 2026 سند — جميع الحقوق محفوظة
+</small>
+
 </footer>
 
 
@@ -639,730 +643,225 @@
 
 <script>
 
-/* =====================================================
-   1. جلسة الكادر
-===================================================== */
 
-const loggedStaffRaw = localStorage.getItem("sanadLoggedInStaff");
+/* =========================================================
+   خريطة الأدوار: اسم الصفة الظاهر + الأيقونة + اللوحة
 
-if (!loggedStaffRaw) {
-  alert("يرجى تسجيل الدخول أولاً.");
-  window.location.href = "staff-login.html";
-  throw new Error("sanadRedirect: غير مسجل الدخول");
-}
+   ملاحظة مهمة: "owner" يروح لنفس manager-dashboard.html
+   (مو لصفحة owner-dashboard.html منفصلة) لأن لوحة المدير
+   أصلاً مبرمجة تتعرف على المالك وتعطيه صلاحيات كاملة زيادة
+========================================================= */
 
-let loggedStaff = null;
+const SANAD_ROLE_INFO = {
+  owner:         { title: "مالك النظام",        dashboard: "manager-dashboard.html" },
+  manager:       { title: "مدير الشركة",         dashboard: "manager-dashboard.html" },
+  reception:     { title: "موظف استقبال",        dashboard: "reception-dashboard.html" },
+  specialist:    { title: "طبيب أخصائي",         dashboard: "staff-dashboard.html" },
+  resident:      { title: "طبيب مقيم",           dashboard: "staff-dashboard.html" },
+  nurse:         { title: "ممرض صحي",            dashboard: "staff-dashboard.html" },
+  nutrition:     { title: "أخصائي تغذية",        dashboard: "staff-dashboard.html" },
+  physio:        { title: "أخصائي علاج طبيعي",   dashboard: "staff-dashboard.html" },
+  psychologist:  { title: "أخصائي نفسي",         dashboard: "staff-dashboard.html" },
+  entertainment: { title: "أخصائي ترفيه",        dashboard: "staff-dashboard.html" },
+  hairdresser:   { title: "كوافير",              dashboard: "staff-dashboard.html" },
+  assistant:     { title: "معين",                dashboard: "staff-dashboard.html" }
+};
 
-try {
-  loggedStaff = JSON.parse(loggedStaffRaw);
-} catch (error) {
-  localStorage.removeItem("sanadLoggedInStaff");
-  window.location.href = "staff-login.html";
-  throw new Error("sanadRedirect: جلسة غير صالحة");
-}
 
-/* =====================================================
-   2. عرض بيانات الكادر
-===================================================== */
+let selectedRole = null;
 
-if (loggedStaff) {
 
-  document.getElementById("welcomeName").textContent =
-    "أهلاً بك، " + (loggedStaff.name || "كادر سند") + " 👋";
+/*
+====================================================
+اختيار الصفة الوظيفية
+====================================================
+*/
 
-  document.getElementById("welcomeRole").textContent =
-    loggedStaff.title || "فريق سند";
+function selectRole(role, element) {
 
-  const avatars = {
-    owner: "👑", manager: "👨‍💼", reception: "🧑‍💼", specialist: "👨‍⚕️",
-    resident: "🩺", nurse: "👩‍⚕️", nutrition: "🥗", physio: "🏃",
-    psychologist: "🧠", entertainment: "🎭", hairdresser: "💇", assistant: "🛁"
-  };
+  selectedRole = role;
 
-  document.getElementById("staffAvatar").textContent = avatars[loggedStaff.role] || "👨‍⚕️";
+  document
+    .querySelectorAll(".role")
+    .forEach(function(button) {
+      button.classList.remove("active");
+    });
 
-}
+  element.classList.add("active");
 
-/* =====================================================
-   3. قراءة المواعيد المسندة لهذا الكادر من قاعدة البيانات
-   (loggedStaff.staffId = معرّف الكادر الحقيقي بقاعدة البيانات)
-===================================================== */
+  const info = SANAD_ROLE_INFO[role];
 
-let visits = [];
-
-/* أي زيارة اكتملت وأرسل الكادر تقريرها من أكثر من 24 ساعة
-   تختفي من جدول الكادر نفسه (تبقى محفوظة بالكامل عند المدير) */
-function isOlderThan24h(dateString){
-  if(!dateString){ return false; }
-  const then = new Date(dateString).getTime();
-  if(isNaN(then)){ return false; }
-  return (Date.now() - then) > (24 * 60 * 60 * 1000);
-}
-
-async function loadVisits(){
-  if(!loggedStaff || !loggedStaff.staffId){
-    visits = [];
-    return;
+  if (info) {
+    document.getElementById("selectedRole").textContent =
+      "✅ الصفة المختارة: " + info.title;
   }
 
-  const appointments = (await sanadGetAppointmentsForStaff(loggedStaff.staffId)).filter(function(appointment){
-    return !(appointment.status === "completed" && isOlderThan24h(appointment.completed_at));
-  });
-  const customers = await sanadGetCustomers();
+}
 
-  /* تحويل شكل بيانات الموعد لشكل موحّد تستخدمه الواجهة
-     (نربط بيانات المسن يدوياً من قائمة المشتركين) */
 
-  visits = appointments.map(function(appointment){
+/*
+====================================================
+تسجيل الدخول (يتحقق من قاعدة البيانات الحقيقية)
+====================================================
+*/
 
-    const relatedCustomer = customers.find(function(c){ return c.id === appointment.customer_id; });
+document
+  .getElementById("staffLoginForm")
+  .addEventListener("submit", async function(event) {
 
-    return {
-      id: appointment.id,
-      date: appointment.visit_date,
-      time: appointment.visit_time,
-      patientName: relatedCustomer ? relatedCustomer.name : "غير محدد",
-      address: relatedCustomer ? relatedCustomer.address : "غير محدد",
-      type: appointment.service_name,
-      status: appointment.status === "scheduled" ? "waiting" : appointment.status,
-      startedAt: appointment.started_at || null,
-      completedAt: appointment.completed_at || null,
-      customerId: appointment.customer_id,
-      familyMemberId: (relatedCustomer && relatedCustomer.family_members && relatedCustomer.family_members[0])
-        ? relatedCustomer.family_members[0].id
-        : null,
-      raw: appointment
+    event.preventDefault();
+
+    hideMessages();
+
+    const phone =
+      document.getElementById("staffPhone").value.trim();
+
+    const password =
+      document.getElementById("staffPassword").value.trim();
+
+    if (!selectedRole) {
+      showError("يرجى اختيار الصفة الوظيفية أولاً.");
+      return;
+    }
+
+    const button =
+      event.target.querySelector("button[type=submit]");
+
+    const originalText = button.textContent;
+    button.textContent = "جارِ التحقق...";
+    button.disabled = true;
+
+    const result = await sanadLoginStaff(phone, password);
+
+    button.textContent = originalText;
+    button.disabled = false;
+
+    if (!result.success) {
+      showError(result.message);
+      return;
+    }
+
+    if (result.staff.role !== selectedRole) {
+      showError("رقم الهاتف أو كلمة المرور غير صحيحة لهذه الصفة.");
+      return;
+    }
+
+    const info = SANAD_ROLE_INFO[result.staff.role] || {};
+
+    const loggedInStaff = {
+      phone: result.staff.phone,
+      role: result.staff.role,
+      name: result.staff.name,
+      title: info.title || result.staff.role,
+      staffId: result.staff.id,
+      employeeId: result.staff.staff_code,
+      dashboard: info.dashboard || "staff-dashboard.html",
+      loginTime: new Date().toISOString()
     };
-  });
-}
 
-/* =====================================================
-   4. عدد زيارات اليوم
-===================================================== */
+    sanadSaveSession("staff", result.staff);
 
-function updateTodayCount(){
+    localStorage.removeItem("sanadLoggedInStaff");
+    localStorage.removeItem("sanadStaffId");
+    localStorage.removeItem("sanadStaffName");
+    localStorage.removeItem("sanadStaffRole");
 
-  const today = new Date().toISOString().split("T")[0];
+    localStorage.setItem("sanadLoggedInStaff", JSON.stringify(loggedInStaff));
+    localStorage.setItem("sanadStaffId", loggedInStaff.staffId);
+    localStorage.setItem("sanadStaffName", loggedInStaff.name);
+    localStorage.setItem("sanadStaffRole", loggedInStaff.title);
 
-  const count = visits.filter(function(visit){ return visit.date === today; }).length;
+    showSuccess("✅ تم تسجيل الدخول بنجاح...");
 
-  document.getElementById("todayVisitsCount").textContent = count;
-
-}
-
-/* =====================================================
-   5. عرض الجدول
-===================================================== */
-
-function renderVisits(){
-
-  const body = document.getElementById("visitsTableBody");
-  body.innerHTML = "";
-
-  if(visits.length === 0){
-    body.innerHTML = `
-      <tr>
-        <td colspan="7">
-          <div class="empty-message">
-            📅 لا توجد زيارات مسندة إليك حالياً.
-            <br>
-            عند قيام الإدارة بإسناد موعد إليك، سيظهر هنا تلقائياً.
-          </div>
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  const sorted = visits.slice().sort(function(a, b){
-    const dateA = new Date((a.date || "") + "T" + (a.time || "00:00"));
-    const dateB = new Date((b.date || "") + "T" + (b.time || "00:00"));
-    return dateA - dateB;
-  });
-
-  sorted.forEach(function(visit){
-
-    const row = document.createElement("tr");
-
-    let statusHTML = "";
-    let actionHTML = "";
-
-    if(visit.status === "waiting"){
-
-      statusHTML = `<span class="status status-waiting">⏳ بانتظار الزيارة</span>`;
-      actionHTML = `<button class="start-btn" onclick="startVisit('${escapeJS(visit.id)}')">▶ بدء الزيارة</button>`;
-
-    }else if(visit.status === "in_progress"){
-
-      statusHTML = `<span class="status status-progress">🟢 قيد الزيارة</span>`;
-
-      if(currentVisit && String(currentVisit.id) === String(visit.id)){
-        actionHTML = `<span style="color:#16877d;font-size:11px;font-weight:800;white-space:nowrap;">🩺 الزيارة مفتوحة بالأسفل</span>`;
-      }else{
-        actionHTML = `<button class="open-progress-btn" onclick="openExistingVisit('${escapeJS(visit.id)}')">🩺 فتح الزيارة</button>`;
-      }
-
-    }else if(visit.status === "completed"){
-
-      statusHTML = `<span class="status status-completed">✅ مكتملة</span>`;
-      actionHTML = `<span style="color:#16815f;font-size:11px;font-weight:800;white-space:nowrap;">تم إرسال التقرير</span>`;
-
-    }else if(visit.status === "cancelled"){
-
-      statusHTML = `<span class="status status-cancelled">❌ ملغاة</span>`;
-      actionHTML = `<span style="color:#a44b4b;font-size:11px;font-weight:800;">ملغاة</span>`;
-
-    }
-
-    row.innerHTML = `
-      <td>${formatDate(visit.date)}</td>
-      <td><span class="visit-time">${escapeHTML(visit.time || "")}</span></td>
-      <td><div class="patient-name">👴 ${escapeHTML(visit.patientName || "غير محدد")}</div></td>
-      <td><div class="address">📍 ${escapeHTML(visit.address || "غير محدد")}</div></td>
-      <td><span class="visit-type">${escapeHTML(visit.type || "زيارة منزلية")}</span></td>
-      <td>${statusHTML}</td>
-      <td>${actionHTML}</td>
-    `;
-
-    body.appendChild(row);
+    setTimeout(function() {
+      window.location.href = loggedInStaff.dashboard;
+    }, 500);
 
   });
 
+
+/*
+====================================================
+عرض رسالة الخطأ
+====================================================
+*/
+
+function showError(message) {
+  const error = document.getElementById("errorMessage");
+  error.textContent = message;
+  error.style.display = "block";
 }
 
-/* =====================================================
-   6. المتغير الحالي
-===================================================== */
 
-let currentVisit = null;
+/*
+====================================================
+عرض رسالة النجاح
+====================================================
+*/
 
-/* =====================================================
-   7. بدء زيارة جديدة
-===================================================== */
+function showSuccess(message) {
+  const success = document.getElementById("successMessage");
+  success.textContent = message;
+  success.style.display = "block";
+}
 
-async function startVisit(id){
 
-  const visit = visits.find(function(item){ return String(item.id) === String(id); });
+/*
+====================================================
+إخفاء الرسائل
+====================================================
+*/
 
-  if(!visit){
-    alert("لم يتم العثور على الزيارة.");
+function hideMessages() {
+  document.getElementById("errorMessage").style.display = "none";
+  document.getElementById("successMessage").style.display = "none";
+}
+
+
+/*
+====================================================
+نسيت كلمة المرور
+====================================================
+*/
+
+function forgotPassword(event) {
+
+  event.preventDefault();
+
+  if (!selectedRole) {
+    showError("اختر الصفة الوظيفية أولاً.");
     return;
   }
 
-  if(visit.status === "completed"){
-    alert("هذه الزيارة مكتملة بالفعل.");
-    return;
-  }
-
-  if(visit.status === "in_progress"){
-    openExistingVisit(visit.id);
-    return;
-  }
-
-  const result = await sanadUpdateAppointmentStatus(visit.id, {
-    status: "in_progress",
-    started_at: new Date().toISOString(),
-    started_by: loggedStaff ? loggedStaff.name : ""
-  });
-
-  if(!result.success){
-    alert("تعذر بدء الزيارة: " + (result.message || ""));
-    return;
-  }
-
-  await loadVisits();
-
-  currentVisit = visits.find(function(item){ return String(item.id) === String(id); });
-
-  await sanadLogActivity(
-    "بدء زيارة",
-    loggedStaff ? loggedStaff.name : "",
-    loggedStaff ? loggedStaff.role : "",
-    "appointment",
-    id,
-    currentVisit ? (currentVisit.type + " للمسن " + currentVisit.patientName) : ""
-  );
-
-  showVisitInterface(currentVisit);
-
-  renderVisits();
-  updateTodayCount();
+  alert("سيتم لاحقاً ربط استعادة كلمة المرور بواتساب وإدارة النظام.");
 
 }
 
-/* =====================================================
-   8. فتح زيارة قيد التنفيذ
-===================================================== */
-
-function openExistingVisit(id){
-
-  const visit = visits.find(function(item){ return String(item.id) === String(id); });
-
-  if(!visit){
-    alert("لم يتم العثور على الزيارة.");
-    return;
-  }
-
-  if(visit.status !== "in_progress"){
-    startVisit(visit.id);
-    return;
-  }
-
-  currentVisit = visit;
-
-  showVisitInterface(visit, true);
-
-}
-
-/* =====================================================
-   9. واجهة الزيارة
-===================================================== */
-
-function showVisitInterface(visit, preserveForm = false){
-
-  const section = document.getElementById("visitSection");
-  section.style.display = "block";
-
-  document.getElementById("currentVisitHeader").innerHTML = `
-
-    <h3>👴 ${escapeHTML(visit.patientName || "غير محدد")}</h3>
-    <p>📍 ${escapeHTML(visit.address || "غير محدد")}</p>
-
-    <div class="visit-info-grid">
-
-      <div class="info-item"><div class="info-label">📅 التاريخ</div><div class="info-value">${formatDate(visit.date)}</div></div>
-      <div class="info-item"><div class="info-label">🕐 وقت الزيارة</div><div class="info-value">${escapeHTML(visit.time || "")}</div></div>
-      <div class="info-item"><div class="info-label">🩺 نوع الزيارة</div><div class="info-value">${escapeHTML(visit.type || "زيارة منزلية")}</div></div>
-      <div class="info-item"><div class="info-label">🆔 رقم الزيارة</div><div class="info-value">${escapeHTML(visit.id)}</div></div>
-
-    </div>
-
-  `;
-
-  configureRoleInterface();
-
-  if(!preserveForm){
-    clearVisitForm();
-  }
-
-  section.scrollIntoView({ behavior: "smooth", block: "start" });
-
-}
-
-/* =====================================================
-   10. تخصيص الواجهة حسب الدور
-===================================================== */
-
-function configureRoleInterface(){
-
-  const role = loggedStaff ? loggedStaff.role : "";
-
-  const roleNotice = document.getElementById("roleNotice");
-  const medicalSection = document.getElementById("medicalSection");
-  const nursingSection = document.getElementById("nursingSection");
-  const vitalSection = document.getElementById("vitalSection");
-
-  if(role === "nurse"){
-    roleNotice.innerHTML = `👩‍⚕️ <strong>واجهة الممرض:</strong> يرجى تسجيل العلامات الحيوية، الأدوية، الرعاية الشخصية وجميع الملاحظات التمريضية.`;
-    vitalSection.style.display = "block";
-    nursingSection.style.display = "block";
-    medicalSection.style.display = "none";
-    return;
-  }
-
-  if(role === "resident"){
-    roleNotice.innerHTML = `🩺 <strong>واجهة الطبيب المقيم:</strong> قم بتسجيل العلامات الحيوية والفحص الطبي والتشخيص والعلاج والتوصيات.`;
-    vitalSection.style.display = "block";
-    nursingSection.style.display = "none";
-    medicalSection.style.display = "block";
-    return;
-  }
-
-  if(role === "specialist"){
-    roleNotice.innerHTML = `👨‍⚕️ <strong>واجهة الطبيب الأخصائي:</strong> قم بتسجيل التقييم التخصصي والتشخيص والتوصيات والخطة العلاجية.`;
-    vitalSection.style.display = "block";
-    nursingSection.style.display = "none";
-    medicalSection.style.display = "block";
-    return;
-  }
-
-  roleNotice.innerHTML = `👤 <strong>${escapeHTML(loggedStaff ? loggedStaff.title : "الكادر")}:</strong> أدخل تفاصيل الخدمة التي تم تقديمها والملاحظات والتوصيات الخاصة بالمسن.`;
-
-  vitalSection.style.display = "none";
-  medicalSection.style.display = "block";
-  nursingSection.style.display = "none";
-
-}
-
-/* =====================================================
-   11. إتمام الزيارة
-===================================================== */
-
-async function completeVisit(){
-
-  if(!currentVisit){
-    alert("لا توجد زيارة مفتوحة حالياً.");
-    return;
-  }
-
-  const confirmed = confirm("هل أنت متأكد من إتمام الزيارة وإرسال التقرير؟");
-  if(!confirmed){ return; }
-
-  const completedAt = new Date().toISOString();
-
-  const report = {
-
-    vitalSigns: {
-      bloodPressure: getValue("bloodPressure"),
-      bloodSugar: getValue("bloodSugar"),
-      temperature: getValue("temperature"),
-      pulse: getValue("pulse"),
-      oxygen: getValue("oxygen"),
-      weight: getValue("weight")
-    },
-
-    medical: {
-      symptoms: getValue("symptoms"),
-      examination: getValue("examination"),
-      diagnosis: getValue("diagnosis"),
-      treatment: getValue("treatment"),
-      recommendations: getValue("recommendations")
-    },
-
-    nursing: {
-      medicationGiven: getValue("medicationGiven"),
-      personalCare: getValue("personalCare"),
-      nutritionStatus: getValue("nutritionStatus"),
-      nursingNotes: getValue("nursingNotes")
-    },
-
-    finalReport: getValue("finalReport"),
-
-    staff: {
-      name: loggedStaff ? loggedStaff.name : "كادر سند",
-      role: loggedStaff ? loggedStaff.role : ""
-    }
-
-  };
-
-  const result = await sanadUpdateAppointmentStatus(currentVisit.id, {
-    status: "completed",
-    completed_at: completedAt,
-    completed_by: loggedStaff ? loggedStaff.name : "",
-    report: report
-  });
-
-  if(!result.success){
-    alert("تعذر إتمام الزيارة: " + (result.message || ""));
-    return;
-  }
-
-  const message = document.getElementById("reportMessage");
-
-  message.innerHTML = `
-    ✅ تمت الزيارة بنجاح.
-    <br><br>
-    📤 تم حفظ التقرير بنظام سند، وأصبح متاحاً للإدارة وملف المسن والعائلة.
-  `;
-
-  message.style.display = "block";
-
-  /* إشعار فوري للمسن وعائلته بجهوزية التقرير */
-  if(currentVisit.customerId){
-    sanadSendPushNotification(
-      { type: "customer", id: currentVisit.customerId },
-      "📋 تقرير زيارة جاهز",
-      "تم تسجيل تقرير زيارة " + (currentVisit.type || "") + " وأصبح متاحاً بملفك.",
-      "./elder-dashboard.html"
-    ).catch(function(){});
-  }
-  if(currentVisit.familyMemberId){
-    sanadSendPushNotification(
-      { type: "family", id: currentVisit.familyMemberId },
-      "📋 تقرير زيارة جاهز",
-      "تم تسجيل تقرير زيارة " + (currentVisit.type || "") + " لـ" + (currentVisit.patientName || "") + ".",
-      "./family-dashboard.html"
-    ).catch(function(){});
-  }
-
-  /* إشعار فوري للمدير والمالك بإتمام الزيارة وجهوزية التقرير */
-  sanadSendPushNotification(
-    { type: "staff_role", roles: ["owner", "manager"] },
-    "✅ تم إتمام زيارة",
-    (loggedStaff ? loggedStaff.name : "أحد الكادر") + " أنهى زيارة " + (currentVisit.type || "") + " لـ" + (currentVisit.patientName || "") + ".",
-    "./manager-dashboard.html"
-  ).catch(function(){});
-
-  await sanadLogActivity(
-    "إتمام زيارة",
-    loggedStaff ? loggedStaff.name : "",
-    loggedStaff ? loggedStaff.role : "",
-    "appointment",
-    currentVisit.id,
-    currentVisit.type + " للمسن " + currentVisit.patientName
-  );
-
-  currentVisit = null;
-
-  await loadVisits();
-
-  renderVisits();
-  updateTodayCount();
-
-  setTimeout(function(){
-    document.getElementById("visitSection").style.display = "none";
-  }, 5000);
-
-}
-
-/* =====================================================
-   12. إلغاء / إغلاق الواجهة
-===================================================== */
-
-function cancelVisit(){
-
-  if(!currentVisit){
-    document.getElementById("visitSection").style.display = "none";
-    return;
-  }
-
-  const confirmed = confirm("هل تريد الخروج من واجهة الزيارة؟ ستبقى الزيارة قيد التنفيذ.");
-  if(!confirmed){ return; }
-
-  currentVisit = null;
-
-  document.getElementById("visitSection").style.display = "none";
-
-  renderVisits();
-
-}
-
-/* =====================================================
-   13. تفريغ النموذج
-===================================================== */
-
-function clearVisitForm(){
-
-  const fields = [
-    "bloodPressure", "bloodSugar", "temperature", "pulse", "oxygen", "weight",
-    "symptoms", "examination", "diagnosis", "treatment", "recommendations",
-    "nursingNotes", "finalReport"
-  ];
-
-  fields.forEach(function(id){
-    const element = document.getElementById(id);
-    if(element){ element.value = ""; }
-  });
-
-  const selects = ["medicationGiven", "personalCare", "nutritionStatus"];
-
-  selects.forEach(function(id){
-    const element = document.getElementById(id);
-    if(element){ element.value = ""; }
-  });
-
-  document.getElementById("reportMessage").style.display = "none";
-
-}
-
-/* =====================================================
-   14. قراءة قيمة
-===================================================== */
-
-function getValue(id){
-  const element = document.getElementById(id);
-  if(!element){ return ""; }
-  return element.value.trim();
-}
-
-/* =====================================================
-   15. تنسيق التاريخ
-===================================================== */
-
-function formatDate(date){
-  if(!date){ return ""; }
-  const parts = String(date).split("-");
-  if(parts.length !== 3){ return escapeHTML(date); }
-  return parts[2] + "/" + parts[1] + "/" + parts[0];
-}
-
-/* =====================================================
-   16. حماية HTML
-===================================================== */
-
-function escapeHTML(value){
-  if(value === null || value === undefined){ return ""; }
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-/* =====================================================
-   17. حماية JavaScript
-===================================================== */
-
-function escapeJS(value){
-  if(value === null || value === undefined){ return ""; }
-  return String(value)
-    .replaceAll("\\", "\\\\")
-    .replaceAll("'", "\\'")
-    .replaceAll("\n", "\\n")
-    .replaceAll("\r", "\\r");
-}
-
-/* =====================================================
-   18. تسجيل الخروج
-===================================================== */
-
-function logoutStaff(event){
-  if(event){ event.preventDefault(); }
-  localStorage.removeItem("sanadLoggedInStaff");
-  localStorage.removeItem("sanadStaffName");
-  localStorage.removeItem("sanadStaffRole");
-  localStorage.removeItem("sanadCurrentVisit");
-  sanadClearSession();
-  window.location.href = "staff-login.html";
-}
-
-/* =====================================================
-   19. تحديث تلقائي من قاعدة البيانات كل 4 ثواني
-   (حتى إذا المدير أسند موعداً جديداً من أي جهاز
-   يظهر عندك بدون إعادة تحميل الصفحة)
-===================================================== */
-
-async function refreshStaffDashboard(){
-
-  const oldVisitsSignature = JSON.stringify(visits.map(function(v){ return v.id + v.status; }));
-
-  await loadVisits();
-
-  const newVisitsSignature = JSON.stringify(visits.map(function(v){ return v.id + v.status; }));
-
-  if(oldVisitsSignature !== newVisitsSignature){
-    renderVisits();
-    updateTodayCount();
-  }
-
-}
-
-/* =====================================================
-   20. تشغيل الصفحة
-===================================================== */
-
-async function initStaffDashboard(){
-  await loadVisits();
-  updateTodayCount();
-  renderVisits();
-  refreshPushButtonState();
-  refreshNotificationsBadge();
-}
-
-initStaffDashboard();
-
-setInterval(refreshStaffDashboard, 4000);
-setInterval(refreshNotificationsBadge, 15000);
-
-/* =====================================================
-   21. زر تفعيل الإشعارات الفورية (Push Notifications)
-===================================================== */
-
-async function refreshPushButtonState(){
-  const btn = document.getElementById("pushSubscribeBtn");
-  if(!btn){ return; }
-  const subscribed = await sanadIsPushSubscribed();
-  if(subscribed){
-    btn.textContent = "🔔 الإشعارات مفعّلة";
-    btn.classList.add("subscribed");
-  }else{
-    btn.textContent = "🔔 فعّل التنبيهات الفورية";
-    btn.classList.remove("subscribed");
-  }
-}
-
-async function handlePushSubscribeClick(){
-  const btn = document.getElementById("pushSubscribeBtn");
-  /* فحص متزامن (بدون await) حتى ما نكسر "ضغطة المستخدم" المطلوبة
-     من آيفون لإظهار نافذة طلب الإذن - أي await قبل سطر الاشتراك
-     يخلي Safari يرفض يظهر النافذة ويعلّق الزر للأبد بصمت */
-  if(btn && btn.classList.contains("subscribed")){ return; }
-
-  if(!loggedStaff || !loggedStaff.staffId){
-    alert("تعذر تحديد حساب الكادر.");
-    return;
-  }
-
-  if(btn){ btn.disabled = true; btn.textContent = "⏳ جارِ التفعيل..."; }
-
-  const result = await sanadSubscribeToPush("staff", loggedStaff.staffId);
-  if(btn){ btn.disabled = false; }
-
-  if(!result.success){
-    alert(result.message || "تعذر تفعيل الإشعارات.");
-    await refreshPushButtonState();
-    return;
-  }
-
-  alert("✅ تم تفعيل الإشعارات الفورية بنجاح.");
-  await refreshPushButtonState();
-}
-
-/* =====================================================
-   22. سجل الإشعارات الدائم (🔔 الإشعارات)
-===================================================== */
-
-let sanadLatestNotifications = [];
-
-async function refreshNotificationsBadge(){
-  if(!loggedStaff || !loggedStaff.staffId){ return; }
-  sanadLatestNotifications = await sanadGetNotificationsLog("staff", loggedStaff.staffId);
-  const badge = document.getElementById("notifBadge");
-  if(!badge){ return; }
-  const unseen = sanadCountUnseenNotifications("staff", loggedStaff.staffId, sanadLatestNotifications);
-  if(unseen > 0){
-    badge.style.display = "flex";
-    badge.textContent = unseen > 9 ? "9+" : String(unseen);
-  }else{
-    badge.style.display = "none";
-  }
-}
-
-function renderNotificationsList(){
-  const container = document.getElementById("notifListContainer");
-  if(!container){ return; }
-  if(!sanadLatestNotifications || sanadLatestNotifications.length === 0){
-    container.innerHTML = '<div class="notif-empty">لا توجد إشعارات بعد.</div>';
-    return;
-  }
-  container.innerHTML = sanadLatestNotifications.map(function(n){
-    return '<div class="notif-item"><strong>' + sanadEscapeHTML(n.title || "") + '</strong>' +
-      '<p>' + sanadEscapeHTML(n.body || "") + '</p>' +
-      '<time>' + sanadFormatRelativeTime(n.created_at) + '</time></div>';
-  }).join("");
-}
-
-async function openNotificationsPanel(){
-  if(sanadLatestNotifications.length === 0){
-    await refreshNotificationsBadge();
-  }
-  renderNotificationsList();
-  const overlay = document.getElementById("notifPanelOverlay");
-  if(overlay){ overlay.classList.add("open"); }
-  if(loggedStaff && loggedStaff.staffId){ sanadMarkNotificationsSeen("staff", loggedStaff.staffId); }
-  const badge = document.getElementById("notifBadge");
-  if(badge){ badge.style.display = "none"; }
-}
-
-function closeNotificationsPanel(){
-  const overlay = document.getElementById("notifPanelOverlay");
-  if(overlay){ overlay.classList.remove("open"); }
-}
 
 </script>
 
 
+
+<script>
+/* تطبيق الكادر: إذا الموظف مسجل دخوله أصلاً، يروح مباشرة للوحته */
+(function(){
+  try{
+    if(sessionStorage.getItem("sanadStaffAutoRedirect") === "1"){ return; }
+    var raw = localStorage.getItem("sanadLoggedInStaff");
+    if(!raw){ return; }
+    var saved = JSON.parse(raw);
+    if(!saved || !saved.dashboard){ return; }
+    sanadClient.auth.getSession().then(function(res){
+      var session = res && res.data && res.data.session;
+      var email = session && session.user && session.user.email ? String(session.user.email) : "";
+      if(email.slice(-14) === "@sanad.internal"){
+        sessionStorage.setItem("sanadStaffAutoRedirect", "1");
+        window.location.href = saved.dashboard;
+      }
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script>
 <script src="pwa-register.js"></script>
 </body>
 
