@@ -3920,9 +3920,9 @@ function renderStaffList(){
           </div>
         </div>
 
-        <button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
+        ${(loggedStaff && String(loggedStaff.staffId) === String(employee.id)) ? `<span class="customer-meta">👤 حسابك الحالي</span>` : `<button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
           ${employee.active === false ? "🟢 تفعيل" : "🔴 تعطيل"}
-        </button>
+        </button>`}
 
       </div>
 
@@ -4087,6 +4087,12 @@ async function toggleStaffActive(staffId, newActiveState){
 
   if(!isOwner){
     showMessage("تفعيل/تعطيل الكادر متاح لمالك النظام فقط.", "error");
+    return;
+  }
+
+  /* حماية: المالك ما يقدر يعطل حسابه بنفسه */
+  if(loggedStaff && String(loggedStaff.staffId) === String(staffId) && newActiveState === false){
+    showMessage("لا يمكنك تعطيل حسابك الحالي.", "error");
     return;
   }
 
