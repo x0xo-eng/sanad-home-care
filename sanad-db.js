@@ -865,7 +865,9 @@ async function sanadUpdateCustomerStatus(customerId, status) {
    عند المدير والعائلة والمسن حتى يكون التقرير موحّد وكامل)
 ========================================================= */
 
-function sanadFormatReportText(appointment) {
+function sanadFormatReportText(appointment, options) {
+  /* options.includeFinalReport === false يخفي "التقرير النهائي" (للمسن والعائلة) */
+  const includeFinalReport = !(options && options.includeFinalReport === false);
   if (!appointment || !appointment.report) {
     return null;
   }
@@ -913,7 +915,7 @@ function sanadFormatReportText(appointment) {
     lines.push("");
   }
 
-  if (report.finalReport) {
+  if (report.finalReport && includeFinalReport) {
     lines.push("📝 التقرير النهائي:");
     lines.push(report.finalReport);
   }
