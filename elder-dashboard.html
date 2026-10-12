@@ -1073,7 +1073,7 @@ function sanadShowReportById(appointmentId){
     alert("تعذر العثور على هذه الزيارة.");
     return;
   }
-  const text = sanadFormatReportText(appointment);
+  const text = sanadFormatReportText(appointment, { includeFinalReport: false });
   alert(text || "لا يوجد تقرير محفوظ لهذه الزيارة.");
 }
 
