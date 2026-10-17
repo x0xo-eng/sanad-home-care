@@ -301,35 +301,30 @@ function sanadFormatRelativeTime(dateString) {
    يصير بس لحظة إنشاء الحساب الجديد، ولا يلمس جلسة الموظف إطلاقاً.
 ========================================================= */
 
-async function sanadCreateAuthAccount(email, password) {
+async function sanadCallAccounts(action, payload) {
+  /* كل إنشاء حسابات وإعادة تعيين كلمات المرور يمر عبر الدالة الآمنة
+     sanad-accounts (Edge Function) والسيرفر يتحقق من صلاحية المتصل */
   try {
-    const tempClient = supabase.createClient(
-      SANAD_SUPABASE_URL,
-      SANAD_SUPABASE_KEY,
-      {
-        auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false
-        }
-      }
-    );
-
-    const { data, error } = await tempClient.auth.signUp({
-      email: email,
-      password: password
+    const { data, error } = await sanadClient.functions.invoke("sanad-accounts", {
+      body: Object.assign({ action: action }, payload || {})
     });
 
     if (error) {
-      /* إذا الحساب موجود مسبقاً (نادراً، أو إعادة محاولة)، نعتبرها
-         نجاح حتى ما توقف عملية تسجيل المشترك بالكامل */
-      if (String(error.message || "").toLowerCase().includes("already registered")) {
-        return { success: true, alreadyExisted: true };
-      }
-      return { success: false, message: error.message };
+      let message = error.message || "تعذر الاتصال بالخادم.";
+      try {
+        if (error.context && typeof error.context.json === "function") {
+          const body = await error.context.json();
+          if (body && body.message) { message = body.message; }
+        }
+      } catch (e) {}
+      return { success: false, message: message };
     }
 
-    return { success: true, data: data };
+    if (!data) {
+      return { success: false, message: "لا يوجد رد من الخادم." };
+    }
+
+    return data;
   } catch (error) {
     return { success: false, message: String(error) };
   }
@@ -354,21 +349,15 @@ async function sanadRepairCustomerLogin(customerId) {
   const results = [];
 
   if (customer.phone) {
-    const r = await sanadCreateAuthAccount(
-      customer.phone + "@sanad-customer.internal",
-      customer.password || customer.phone
-    );
-    results.push("المسن: " + (r.success ? "✅" : "❌ " + r.message));
+    const r = await sanadCallAccounts("reset_password", { kind: "customer", phone: customer.phone });
+    results.push("المسن (" + customer.phone + "): " + (r.success ? "✅ كلمة المرور الجديدة " + r.password : "❌ " + r.message));
   }
 
   const familyMember = (customer.family_members && customer.family_members[0]) || null;
 
   if (familyMember && familyMember.phone) {
-    const r = await sanadCreateAuthAccount(
-      familyMember.phone + "@sanad-family.internal",
-      familyMember.password || familyMember.phone
-    );
-    results.push("العائلة: " + (r.success ? "✅" : "❌ " + r.message));
+    const r = await sanadCallAccounts("reset_password", { kind: "family", phone: familyMember.phone });
+    results.push("العائلة (" + familyMember.phone + "): " + (r.success ? "✅ كلمة المرور الجديدة " + r.password : "❌ " + r.message));
   }
 
   return { success: true, message: results.join(" — ") };
@@ -548,10 +537,9 @@ async function sanadCreateCustomer(customer) {
   const normalizedPhone = sanadNormalizePhone(customer.phone);
   const normalizedFamilyPhone = sanadNormalizePhone(customer.familyPhone);
 
-  /* كلمة المرور الفعلية لكل حساب (نفس الرقم افتراضياً)، نحسبها هنا
-     حتى نستخدمها بإنشاء حساب الدخول الحقيقي بالأسفل أيضاً */
-  const customerPassword = sanadNormalizePhone(customer.password) || normalizedPhone;
-  const familyPassword = sanadNormalizePhone(customer.familyPassword) || normalizedFamilyPhone;
+  /* كلمات المرور لا تُخزَّن بالجداول أبداً. تُولَّد عشوائياً بالسيرفر
+     وتُعرض لموظف الاستقبال مرة واحدة ليسلّمها للمسن والعائلة.
+     عمود password القديم يحمل قيمة ثابتة غير حقيقية */
 
   const { data, error } = await sanadClient
     .from("customers")
@@ -559,8 +547,7 @@ async function sanadCreateCustomer(customer) {
       customer_code: code,
       name: customer.name,
       phone: normalizedPhone,
-      /* افتراضياً كلمة المرور = رقم هاتف المسن نفسه لسهولة الاستخدام */
-      password: customerPassword,
+      password: "managed-by-auth",
       age: customer.age,
       address: customer.address,
       package: customer.package,
@@ -570,8 +557,7 @@ async function sanadCreateCustomer(customer) {
       assistant_requested: customer.assistantRequested,
       status: customer.package === "companion" ? "active" : "pending_schedule",
       /* من يشترك مباشرة بباقة "رفيق سند" يكون مفعّل تلقائياً
-         (لأنه دفع اشتراكها وقت التسجيل) بدل ما ينتظر المدير
-         يتذكر يفعّله يدوياً من لوحة "كل المشتركين" */
+         (لأنه دفع اشتراكها وقت التسجيل) */
       companion_active: customer.package === "companion",
       created_by: customer.createdBy || null
     })
@@ -582,41 +568,50 @@ async function sanadCreateCustomer(customer) {
     return { success: false, message: "تعذر حفظ المشترك: " + error.message };
   }
 
-  /* إنشاء حساب دخول حقيقي للمسن (Supabase Auth) حتى يقدر يسجل
-     دخول فعلياً بلوحته من elder-login.html */
-  if (normalizedPhone) {
-    const authResult = await sanadCreateAuthAccount(
-      normalizedPhone + "@sanad-customer.internal",
-      customerPassword
-    );
-    if (!authResult.success) {
-      return {
-        success: false,
-        message: "تم حفظ ملف المشترك لكن تعذر إنشاء حساب الدخول: " + authResult.message
-      };
-    }
-  }
-
   /* إضافة فرد العائلة إذا توفرت بياناته */
 
   if (customer.familyName && normalizedFamilyPhone) {
     await sanadClient.from("family_members").insert({
       customer_id: data.id,
       name: customer.familyName,
-      /* افتراضياً كلمة مرور العائلة = رقم هاتفها */
       phone: normalizedFamilyPhone,
-      password: familyPassword,
+      password: "managed-by-auth",
       relation: customer.relation || ""
     });
-
-    /* ونفس الشي، حساب دخول حقيقي لفرد العائلة */
-    await sanadCreateAuthAccount(
-      normalizedFamilyPhone + "@sanad-family.internal",
-      familyPassword
-    );
   }
 
-  return { success: true, customer: data };
+  /* إنشاء حسابات الدخول (للمسن والعائلة) من جهة السيرفر */
+
+  const credentials = {
+    customerPhone: normalizedPhone || "",
+    customerPassword: "",
+    familyPhone: normalizedFamilyPhone || "",
+    familyPassword: ""
+  };
+
+  if (normalizedPhone || (customer.familyName && normalizedFamilyPhone)) {
+    const accounts = await sanadCallAccounts("create_customer_logins", {
+      customerPhone: normalizedPhone || "",
+      familyPhone: (customer.familyName && normalizedFamilyPhone) ? normalizedFamilyPhone : ""
+    });
+
+    if (!accounts.success) {
+      return {
+        success: false,
+        message: "تم حفظ ملف المشترك لكن تعذر إنشاء حسابات الدخول: " + (accounts.message || "")
+      };
+    }
+
+    credentials.customerPassword = accounts.customerPassword || "";
+    credentials.familyPassword = accounts.familyPassword || "";
+
+    const problems = [];
+    if (accounts.customerError) { problems.push("المسن: " + accounts.customerError); }
+    if (accounts.familyError) { problems.push("العائلة: " + accounts.familyError); }
+    if (problems.length) { credentials.problems = problems.join(" — "); }
+  }
+
+  return { success: true, customer: data, credentials: credentials };
 }
 
 /* =========================================================
@@ -929,24 +924,25 @@ function sanadFormatReportText(appointment, options) {
 
 async function sanadCreateStaff(staffData) {
   const normalizedPhone = sanadNormalizePhone(staffData.phone);
+  const password = String(staffData.password || "");
 
-  const { data, error } = await sanadClient
-    .from("staff")
-    .insert({
-      name: staffData.name,
-      phone: normalizedPhone,
-      password: sanadNormalizePhone(staffData.password) || normalizedPhone,
-      role: staffData.role,
-      active: true
-    })
-    .select()
-    .single();
-
-  if (error) {
-    return { success: false, message: "تعذر إنشاء حساب الكادر: " + error.message };
+  if (password.length < 8) {
+    return { success: false, message: "كلمة المرور لازم تكون 8 خانات على الأقل." };
   }
 
-  return { success: true, staff: data };
+  /* الإنشاء كاملاً (الموظف + حساب الدخول) يتم بالسيرفر ويتحقق أن المتصل مالك النظام */
+  const result = await sanadCallAccounts("create_staff", {
+    name: staffData.name,
+    phone: normalizedPhone,
+    role: staffData.role,
+    password: password
+  });
+
+  if (!result.success) {
+    return { success: false, message: "تعذر إنشاء حساب الكادر: " + (result.message || "") };
+  }
+
+  return { success: true, staff: result.staff };
 }
 
 /* =========================================================
@@ -976,10 +972,6 @@ async function sanadUpdateCustomer(customerId, updates) {
 
   if (cleanUpdates.phone) {
     cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
-    /* كلمة المرور الافتراضية = رقم الهاتف، فإذا تغيّر الرقم لازم
-       نحدّث كلمة المرور المخزّنة معاه حتى تضل متطابقة ويقدر
-       يسجل دخول بالرقم الجديد (وإلا تضل كلمة مرور الرقم القديم) */
-    cleanUpdates.password = cleanUpdates.phone;
   }
 
   const { data, error } = await sanadClient
@@ -1005,8 +997,6 @@ async function sanadUpdateFamilyMember(familyMemberId, updates) {
 
   if (cleanUpdates.phone) {
     cleanUpdates.phone = sanadNormalizePhone(cleanUpdates.phone);
-    /* نفس منطق المسن: كلمة المرور = رقم الهاتف، فلازم تتحدث معاه */
-    cleanUpdates.password = cleanUpdates.phone;
   }
 
   const { error } = await sanadClient
