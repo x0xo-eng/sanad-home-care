@@ -879,6 +879,11 @@ flex-direction:column;
 <button type="submit" class="save-button" id="submitBtn">💾 إنشاء ملف المشترك</button>
 
 <div id="successMessage" class="message success"></div>
+<div id="credentialsBox" style="display:none;margin:14px 0;padding:16px;border:2px solid #16877d;border-radius:14px;background:#f0faf8;line-height:2;font-size:15px;">
+  <strong style="display:block;margin-bottom:6px;color:#163b38;">🔐 بيانات الدخول (تظهر مرة واحدة فقط، سجّلها وسلّمها الآن)</strong>
+  <div id="credentialsBody"></div>
+  <button type="button" onclick="document.getElementById('credentialsBox').style.display='none'" style="margin-top:10px;padding:8px 16px;border:0;border-radius:10px;background:#16877d;color:#fff;font-weight:700;cursor:pointer;">✅ سجّلتها، إخفاء</button>
+</div>
 <div id="errorMessage" class="message error"></div>
 
 </form>
@@ -1161,9 +1166,27 @@ document.getElementById("customerForm").addEventListener("submit", async functio
     "✅ تم إنشاء ملف " + result.customer.customer_code + " بنجاح — " +
     result.customer.name + " اختار " + selectedPackage.name +
     " بسعر " + selectedPackage.priceText +
-    ". تم إرسال الملف مباشرة إلى المدير لترتيب المواعيد.\n" +
-    "🔐 كلمة مرور دخول المسن والعائلة هي رقم هاتف كل منهما."
+    ". تم إرسال الملف مباشرة إلى المدير لترتيب المواعيد."
   );
+
+  /* بيانات الدخول العشوائية: تُعرض بصندوق ثابت (لا يختفي تلقائياً) */
+  (function(){
+    const c = result.credentials || {};
+    let html = "";
+    if(c.customerPassword){
+      html += "👴 المسن — رقم الدخول: <b>" + c.customerPhone + "</b> — كلمة المرور: <b dir=\"ltr\">" + c.customerPassword + "</b><br>";
+    }
+    if(c.familyPassword){
+      html += "👨‍👩‍👦 العائلة — رقم الدخول: <b>" + c.familyPhone + "</b> — كلمة المرور: <b dir=\"ltr\">" + c.familyPassword + "</b><br>";
+    }
+    if(c.problems){
+      html += "⚠️ " + c.problems + "<br>";
+    }
+    if(html){
+      document.getElementById("credentialsBody").innerHTML = html;
+      document.getElementById("credentialsBox").style.display = "block";
+    }
+  })();
 
   document.getElementById("customerForm").reset();
   document.getElementById("selectedPackageInfo").style.display = "none";
