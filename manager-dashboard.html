@@ -980,7 +980,7 @@ flex:0 0 auto;
 </label>
 
 <label>كلمة المرور (اختياري - افتراضياً رقم الهاتف)
-<input type="text" id="newStaffPassword" placeholder="اتركه فارغ لاستخدام رقم الهاتف">
+<input type="text" id="newStaffPassword" placeholder="كلمة مرور قوية (8 خانات على الأقل)" minlength="8" autocomplete="off">
 </label>
 
 <label class="full">الصفة الوظيفية
@@ -3742,7 +3742,7 @@ function toggleEditCustomer(customerId){
 
 async function repairCustomerLoginAction(customerId){
 
-  if(!confirm("راح ننشئ/نصلّح حساب الدخول الحقيقي لهذا المسن وعائلته. متابعة؟")){
+  if(!confirm("راح ننشئ/نصلّح حساب الدخول لهذا المسن وعائلته، وتتولد لهم كلمات مرور جديدة عشوائية تظهر لك مرة واحدة. متابعة؟")){
     return;
   }
 
@@ -3753,7 +3753,10 @@ async function repairCustomerLoginAction(customerId){
     return;
   }
 
-  showMessage("✅ تم: " + result.message, "success");
+  /* كلمات المرور الجديدة تظهر مرة واحدة بنافذة (لا تُسجّل بسجل العمليات) */
+  alert("✅ تم:\n\n" + result.message.split(" — ").join("\n") + "\n\nسجّل كلمات المرور وسلّمها الآن، لن تظهر مرة ثانية.");
+
+  showMessage("✅ تم إنشاء/إعادة تعيين حسابات الدخول.", "success");
 
   await sanadLogActivity(
     "إصلاح حساب دخول مشترك",
@@ -3761,7 +3764,7 @@ async function repairCustomerLoginAction(customerId){
     loggedStaff ? loggedStaff.role : "",
     "customer",
     customerId,
-    result.message
+    "إعادة تعيين كلمات مرور الدخول"
   );
 
 }
@@ -3855,6 +3858,11 @@ document.getElementById("newStaffForm").addEventListener("submit", async functio
     return;
   }
 
+  if(password.length < 8){
+    showMessage("كلمة المرور لازم تكون 8 خانات على الأقل.", "error");
+    return;
+  }
+
   const submitBtn = document.getElementById("newStaffSubmitBtn");
   submitBtn.disabled = true;
   submitBtn.textContent = "⏳ جارِ الحفظ...";
@@ -3886,7 +3894,7 @@ document.getElementById("newStaffForm").addEventListener("submit", async functio
 
   showMessage(
     "✅ تم إنشاء حساب " + result.staff.name + " (" + (roleLabels[role] || role) +
-    "). رقم الدخول: " + result.staff.phone + " — كلمة المرور: " + (password || result.staff.phone),
+    "). رقم الدخول: " + result.staff.phone + " — كلمة المرور: " + password,
     "success"
   );
 
