@@ -889,6 +889,7 @@ flex:0 0 auto;
 <button type="button" class="tab-btn" data-tab="scheduleforms" onclick="showTab('scheduleforms')">🗓️ جداول الخدمات</button>
 <button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد<span id="summaryTabBadge" class="tab-badge">0</span></button>
 <button type="button" class="tab-btn" data-tab="archive" onclick="showTab('archive')">🗄️ الأرشيف</button>
+<button type="button" class="tab-btn" data-tab="cashbox" id="tabBtnCashbox" style="display:none;" onclick="showTab('cashbox')">🏦 الصندوق</button>
 <button type="button" class="tab-btn" data-tab="finance" id="tabBtnFinance" onclick="showTab('finance')">💰 الحسابات</button>
 <button type="button" class="tab-btn" data-tab="notifications" onclick="showTab('notifications')">🔔 الإشعارات</button>
 
@@ -1340,13 +1341,46 @@ flex:0 0 auto;
 </div>
 
 
+<div class="tab-panel" id="tab-cashbox">
+
+<section class="section">
+
+<div class="section-title">
+<h2>🏦 الصندوق المالي</h2>
+<p>يبدأ من أول دفعة، يزداد بدفعات المشتركين وينقص بالمصاريف والرواتب. سجل ثابت لا يُعدَّل ولا يُحذف. (للمالك فقط)</p>
+</div>
+
+<div id="cashBalanceCard" style="padding:22px;border-radius:18px;background:#f0faf8;border:2px solid #16877d;text-align:center;margin-bottom:14px;">
+  <div style="font-size:14px;color:#456;">الرصيد الحالي</div>
+  <div id="cashBalanceValue" style="font-size:34px;font-weight:800;margin:6px 0;">—</div>
+  <div id="cashBalanceNote" style="font-size:13px;"></div>
+</div>
+
+<div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+  <div style="flex:1;min-width:140px;padding:12px;border-radius:12px;background:#eef9f0;text-align:center;">⬆️ إجمالي الداخل<br><b id="cashTotalIn">—</b></div>
+  <div style="flex:1;min-width:140px;padding:12px;border-radius:12px;background:#fdf0ef;text-align:center;">⬇️ إجمالي الخارج<br><b id="cashTotalOut">—</b></div>
+</div>
+
+<div class="finance-tabs-sub" style="margin-bottom:12px;">
+<button type="button" class="finance-sub-btn active" data-cash="today" onclick="setCashFilter('today')">اليوم</button>
+<button type="button" class="finance-sub-btn" data-cash="week" onclick="setCashFilter('week')">آخر 7 أيام</button>
+<button type="button" class="finance-sub-btn" data-cash="month" onclick="setCashFilter('month')">هذا الشهر</button>
+<button type="button" class="finance-sub-btn" data-cash="all" onclick="setCashFilter('all')">الكل</button>
+</div>
+
+<div id="cashLedgerBox"></div>
+
+</section>
+
+</div>
+
 <div class="tab-panel" id="tab-finance">
 
 <section class="section">
 
 <div class="section-title">
 <h2>💰 الحسابات</h2>
-<p>مصاريف الشركة، رواتب الكادر، ومعرفة الربح الصافي (متاح لمالك النظام فقط)</p>
+<p>تسجيل مصاريف الشركة ورواتب الكادر. كل عملية تُسجَّل تلقائياً بالصندوق.</p>
 </div>
 
 <div class="finance-summary" id="financeSummaryBox"></div>
@@ -2747,7 +2781,8 @@ async function refreshAll(){
   renderWeeklySchedule();
   updateStats();
   renderArchive();
-  if(isOwner){ await loadAndRenderFinance(); }
+  await loadAndRenderFinance();
+  if(isOwner){ await loadAndRenderCashBox(); }
 }
 
 /* إخفاء أدوات المالك فقط عن أي حساب manager عادي */
@@ -2768,9 +2803,11 @@ if(!isOwner){
   const tabBtnActivity = document.getElementById("tabBtnActivity");
   if(tabBtnActivity){ tabBtnActivity.style.display = "none"; }
 
-  const tabBtnFinance = document.getElementById("tabBtnFinance");
-  if(tabBtnFinance){ tabBtnFinance.style.display = "none"; }
+}
 
+if(isOwner){
+  const tabBtnCashbox = document.getElementById("tabBtnCashbox");
+  if(tabBtnCashbox){ tabBtnCashbox.style.display = ""; }
 }
 
 /* صندوق الرسالة العامة متاح للمالك فقط، زر تفعيل الإشعارات متاح للجميع */
@@ -2783,7 +2820,7 @@ if(isOwner){
 (function restoreLastTab(){
   try{
     const savedTab = localStorage.getItem("sanadManagerLastTab");
-    const restrictedTabs = ["staff", "activity", "finance"];
+    const restrictedTabs = ["staff", "activity", "cashbox"];
     if(savedTab && (isOwner || !restrictedTabs.includes(savedTab))){
       showTab(savedTab);
     }
@@ -3630,11 +3667,42 @@ function renderPaymentsList(){
         ${p.notes ? "<br>📝 " + escapeHtml(p.notes) : ""}
         <br>📅 ${p.paid_at ? escapeHtml(p.paid_at.split("T")[0]) : ""}
       </div>
+      ${isOwner ? `<div class="customer-actions">
+        <button type="button" class="delete-customer-btn" onclick="deletePaymentAction('${escapeHtml(p.id)}')">🗑️ حذف (ينقص من الصندوق)</button>
+      </div>` : ""}
     `;
 
     box.appendChild(div);
 
   });
+
+}
+
+async function deletePaymentAction(paymentId){
+
+  if(!isOwner){ return; }
+
+  if(!confirm("حذف هذه الدفعة سينقص مبلغها من الصندوق. متابعة؟")){ return; }
+
+  const result = await sanadDeletePayment(paymentId);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حذف الدفعة.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "حذف دفعة",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "payment",
+    paymentId,
+    ""
+  );
+
+  await loadAll();
+
+  showMessage("🗑️ تم حذف الدفعة وإنقاصها من الصندوق.", "success");
 
 }
 
@@ -4423,6 +4491,9 @@ function renderFinanceSummary(){
   const box = document.getElementById("financeSummaryBox");
   if(!box){ return; }
 
+  /* ملخص الأرباح للمالك فقط */
+  if(!isOwner){ box.style.display = "none"; return; }
+
   const thisMonth = currentFinanceMonth();
 
   const incomeAll = payments.reduce(function(sum, p){ return sum + Number(p.amount || 0); }, 0);
@@ -4497,9 +4568,9 @@ function renderExpensesList(){
         🏷️ ${escapeHtml(e.category || "أخرى")} — 💰 ${Number(e.amount || 0).toLocaleString("ar-IQ")} د.ع
         ${e.notes ? "<br>📝 " + escapeHtml(e.notes) : ""}
       </div>
-      <div class="customer-actions">
+      ${isOwner ? `<div class="customer-actions">
         <button type="button" class="delete-customer-btn" onclick="deleteExpenseAction('${escapeHtml(e.id)}')">🗑️ حذف</button>
-      </div>
+      </div>` : ""}
     `;
 
     box.appendChild(div);
@@ -4537,9 +4608,9 @@ function renderSalariesList(){
         ${s.notes ? "<br>📝 " + escapeHtml(s.notes) : ""}
         <br>📅 ${s.paid_at ? escapeHtml(new Date(s.paid_at).toLocaleString("ar-IQ")) : ""}
       </div>
-      <div class="customer-actions">
+      ${isOwner ? `<div class="customer-actions">
         <button type="button" class="delete-customer-btn" onclick="deleteSalaryAction('${escapeHtml(s.id)}')">🗑️ حذف</button>
-      </div>
+      </div>` : ""}
     `;
 
     box.appendChild(div);
@@ -4590,10 +4661,91 @@ document.getElementById("expenseForm").addEventListener("submit", async function
   document.getElementById("expenseDate").value = new Date().toISOString().split("T")[0];
 
   await loadAndRenderFinance();
+  if(isOwner){ await loadAndRenderCashBox(); }
 
   showMessage("✅ تم تسجيل المصروف بنجاح.", "success");
 
 });
+
+/* ---------- الصندوق (للمالك فقط) ---------- */
+
+let cashFilter = "today";
+
+function cashFmt(n){ return Number(n || 0).toLocaleString("en-US") + " د.ع"; }
+
+function cashRange(){
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  if(cashFilter === "today"){ return [startOfDay.toISOString(), null]; }
+  if(cashFilter === "week"){
+    const d = new Date(startOfDay); d.setDate(d.getDate() - 6);
+    return [d.toISOString(), null];
+  }
+  if(cashFilter === "month"){
+    return [new Date(now.getFullYear(), now.getMonth(), 1).toISOString(), null];
+  }
+  return [null, null];
+}
+
+function setCashFilter(which){
+  cashFilter = which;
+  document.querySelectorAll("[data-cash]").forEach(function(b){
+    b.classList.toggle("active", b.getAttribute("data-cash") === which);
+  });
+  loadAndRenderCashBox();
+}
+
+async function loadAndRenderCashBox(){
+
+  if(!isOwner){ return; }
+
+  const summary = await sanadGetCashBoxSummary();
+  const valueEl = document.getElementById("cashBalanceValue");
+  const noteEl = document.getElementById("cashBalanceNote");
+  const card = document.getElementById("cashBalanceCard");
+
+  if(!summary){
+    valueEl.textContent = "—";
+    noteEl.textContent = "تعذر قراءة الصندوق. تأكد من تشغيل ملف SQL الخاص بالصندوق.";
+  } else {
+    const balance = Number(summary.balance || 0);
+    valueEl.textContent = cashFmt(balance);
+    valueEl.style.color = balance < 0 ? "#c0392b" : "#16877d";
+    card.style.borderColor = balance < 0 ? "#c0392b" : "#16877d";
+    card.style.background = balance < 0 ? "#fdf0ef" : "#f0faf8";
+    noteEl.textContent = balance < 0 ? "⚠️ عجز: المصروف أكثر من الداخل" : (Number(summary.entries) === 0 ? "لا توجد حركات بعد" : "");
+    document.getElementById("cashTotalIn").textContent = cashFmt(summary.total_in);
+    document.getElementById("cashTotalOut").textContent = cashFmt(summary.total_out);
+  }
+
+  const range = cashRange();
+  const rows = await sanadGetCashBoxLedger(range[0], range[1]);
+  const box = document.getElementById("cashLedgerBox");
+  box.innerHTML = "";
+
+  if(rows.length === 0){
+    box.innerHTML = `<div class="pending-empty">لا توجد حركات بهذه الفترة.</div>`;
+    return;
+  }
+
+  rows.forEach(function(r){
+    const isIn = r.entry_type === "in";
+    const div = document.createElement("div");
+    div.className = "appointment";
+    div.innerHTML = `
+      <div class="appointment-top">
+        <div class="appointment-name" style="color:${isIn ? "#16877d" : "#c0392b"};">${isIn ? "⬆️ +" : "⬇️ −"} ${cashFmt(r.amount)}</div>
+        <div class="appointment-time">${escapeHtml(new Date(r.created_at).toLocaleString("ar-IQ"))}</div>
+      </div>
+      <div class="appointment-info">
+        ${escapeHtml(r.description || "")}
+        ${r.created_by_name ? "<br>👤 " + escapeHtml(r.created_by_name) : ""}
+        <br>🏦 الرصيد بعدها: <b>${cashFmt(r.running_balance)}</b>
+      </div>
+    `;
+    box.appendChild(div);
+  });
+}
 
 async function deleteExpenseAction(expenseId){
 
@@ -4617,6 +4769,7 @@ async function deleteExpenseAction(expenseId){
   );
 
   await loadAndRenderFinance();
+  if(isOwner){ await loadAndRenderCashBox(); }
 
   showMessage("🗑️ تم حذف المصروف.", "success");
 
@@ -4664,6 +4817,7 @@ document.getElementById("salaryForm").addEventListener("submit", async function(
   document.getElementById("salaryMonth").value = currentFinanceMonth();
 
   await loadAndRenderFinance();
+  if(isOwner){ await loadAndRenderCashBox(); }
 
   showMessage("✅ تم تسجيل الراتب بنجاح.", "success");
 
@@ -4691,6 +4845,7 @@ async function deleteSalaryAction(paymentId){
   );
 
   await loadAndRenderFinance();
+  if(isOwner){ await loadAndRenderCashBox(); }
 
   showMessage("🗑️ تم حذف السجل.", "success");
 
