@@ -3928,9 +3928,12 @@ function renderStaffList(){
           </div>
         </div>
 
-        ${(loggedStaff && String(loggedStaff.staffId) === String(employee.id)) ? `<span class="customer-meta">👤 حسابك الحالي</span>` : `<button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
-          ${employee.active === false ? "🟢 تفعيل" : "🔴 تعطيل"}
-        </button>`}
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <button type="button" class="schedule-customer-btn" onclick="changeStaffPassword('${escapeHtml(employee.phone || "")}', '${escapeHtml(employee.name || "")}')">🔑 كلمة المرور</button>
+          ${(loggedStaff && String(loggedStaff.staffId) === String(employee.id)) ? `<span class="customer-meta">👤 حسابك الحالي</span>` : `<button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
+            ${employee.active === false ? "🟢 تفعيل" : "🔴 تعطيل"}
+          </button>`}
+        </div>
 
       </div>
 
@@ -4088,6 +4091,42 @@ function renderArchivePayments(){
     box.appendChild(div);
 
   });
+
+}
+
+async function changeStaffPassword(phone, name){
+
+  if(!isOwner){
+    showMessage("تغيير كلمات مرور الكادر متاح لمالك النظام فقط.", "error");
+    return;
+  }
+
+  const newPassword = prompt("اكتب كلمة المرور الجديدة للموظف: " + name + "\n(8 خانات على الأقل)");
+
+  if(newPassword === null){ return; }
+
+  if(String(newPassword).length < 8){
+    showMessage("كلمة المرور لازم تكون 8 خانات على الأقل.", "error");
+    return;
+  }
+
+  const result = await sanadResetStaffPassword(phone, newPassword);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر تغيير كلمة المرور.", "error");
+    return;
+  }
+
+  await sanadLogActivity(
+    "تغيير كلمة مرور كادر",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "staff",
+    "",
+    name
+  );
+
+  showMessage("✅ تم تغيير كلمة مرور " + name + ". سلّمها له بشكل آمن.", "success");
 
 }
 
