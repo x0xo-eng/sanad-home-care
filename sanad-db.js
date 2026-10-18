@@ -985,6 +985,14 @@ async function sanadResetStaffPassword(phone, newPassword) {
 }
 
 /* =========================================================
+   20-ج. حذف موظف (المالك فقط). يفشل برسالة واضحة إذا له سجلات
+========================================================= */
+
+async function sanadDeleteStaff(phone) {
+  return await sanadCallAccounts("delete_staff", { phone: sanadNormalizePhone(phone) });
+}
+
+/* =========================================================
    21. تفعيل / تعطيل حساب كادر
 ========================================================= */
 
