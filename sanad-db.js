@@ -1228,6 +1228,54 @@ async function sanadCreatePayment(payment) {
   return { success: true, payment: data };
 }
 
+/* ---------- الصندوق المالي ---------- */
+
+// الاستقبال/المدير/المالك: تسجيل دفعة (تدخل الصندوق تلقائياً)
+async function sanadRecordPayment(customerId, amount, month, notes) {
+  const { data, error } = await sanadClient.rpc("sanad_record_payment", {
+    p_customer_id: customerId,
+    p_amount: Number(amount),
+    p_month: month,
+    p_notes: notes || ""
+  });
+
+  if (error) {
+    return { success: false, message: "تعذر تسجيل الدفعة: " + error.message };
+  }
+  return { success: true, paymentId: data };
+}
+
+// المالك فقط: حذف دفعة (ينقص من الصندوق بقيد عكسي)
+async function sanadDeletePayment(paymentId) {
+  const { error } = await sanadClient.rpc("sanad_delete_payment", { p_payment_id: paymentId });
+  if (error) {
+    return { success: false, message: "تعذر حذف الدفعة: " + error.message };
+  }
+  return { success: true };
+}
+
+// المالك فقط
+async function sanadGetCashBoxSummary() {
+  const { data, error } = await sanadClient.rpc("sanad_cash_box_summary");
+  if (error) {
+    console.error(error);
+    return null;
+  }
+  return data;
+}
+
+async function sanadGetCashBoxLedger(fromIso, toIso) {
+  const { data, error } = await sanadClient.rpc("sanad_cash_box_ledger", {
+    p_from: fromIso || null,
+    p_to: toIso || null
+  });
+  if (error) {
+    console.error(error);
+    return [];
+  }
+  return data || [];
+}
+
 /* =========================================================
    28. قراءة كل الدفعات (للمدير)
 ========================================================= */
