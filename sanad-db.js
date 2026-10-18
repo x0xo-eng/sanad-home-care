@@ -967,6 +967,24 @@ async function sanadCreateStaff(staffData) {
 }
 
 /* =========================================================
+   20-ب. تغيير كلمة مرور موظف (المالك فقط، عبر الدالة الآمنة)
+========================================================= */
+
+async function sanadResetStaffPassword(phone, newPassword) {
+  const password = String(newPassword || "");
+
+  if (password.length < 8) {
+    return { success: false, message: "كلمة المرور لازم تكون 8 خانات على الأقل." };
+  }
+
+  return await sanadCallAccounts("reset_password", {
+    kind: "staff",
+    phone: sanadNormalizePhone(phone),
+    password: password
+  });
+}
+
+/* =========================================================
    21. تفعيل / تعطيل حساب كادر
 ========================================================= */
 
