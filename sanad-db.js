@@ -753,6 +753,13 @@ async function sanadGetAllAppointments() {
 ========================================================= */
 
 async function sanadDeleteCustomer(customerId) {
+  /* نحتفظ بأرقام الهواتف قبل الحذف حتى نحذف حسابات الدخول أيضاً */
+  const { data: toDelete } = await sanadClient
+    .from("customers")
+    .select("phone, family_members(phone)")
+    .eq("id", customerId)
+    .maybeSingle();
+
   await sanadClient.from("appointments").delete().eq("customer_id", customerId);
   await sanadClient.from("family_members").delete().eq("customer_id", customerId);
   /* لازم نحذفهم كمان قبل المشترك نفسه، وإلا قاعدة البيانات
@@ -768,6 +775,16 @@ async function sanadDeleteCustomer(customerId) {
 
   if (error) {
     return { success: false, message: error.message };
+  }
+
+  /* حذف حسابات الدخول (المسن + العائلة) حتى ما تبقى حسابات يتيمة
+     وحتى يمكن إعادة استخدام نفس الأرقام لمشترك جديد */
+  if (toDelete) {
+    const family = (toDelete.family_members && toDelete.family_members[0]) || null;
+    await sanadCallAccounts("delete_customer_logins", {
+      customerPhone: toDelete.phone || "",
+      familyPhone: family ? (family.phone || "") : ""
+    });
   }
 
   return { success: true };
@@ -794,6 +811,9 @@ async function sanadDeleteAllCustomers() {
   if (error) {
     return { success: false, message: error.message };
   }
+
+  /* حذف كل حسابات دخول المشتركين والعائلات */
+  await sanadCallAccounts("delete_all_customer_logins", {});
 
   return { success: true };
 }
