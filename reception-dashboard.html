@@ -838,6 +838,10 @@ flex-direction:column;
 <div class="package-info-services" id="selectedPackageServices"></div>
 </div>
 
+<label style="margin-top:12px;display:block;">💵 المبلغ المستلم الآن (د.ع)</label>
+<input id="customerPaidAmount" type="number" min="0" step="1" inputmode="numeric" placeholder="اكتب المبلغ الذي استلمته من المشترك">
+<div style="font-size:11px;color:#718480;margin-top:4px;">يُضاف تلقائياً إلى الصندوق. اتركه فارغاً إذا لم تستلم شيئاً.</div>
+
 </div>
 
 <div class="form-row full">
@@ -1064,6 +1068,11 @@ document.getElementById("customerPackage").addEventListener("change", function()
 
   const data = packageData[type];
 
+  const paidInput = document.getElementById("customerPaidAmount");
+  if(paidInput){
+    paidInput.value = (typeof data.price === "number" && data.price > 0) ? data.price : "";
+  }
+
   document.getElementById("selectedPackageTitle").textContent = "📦 " + data.name;
   document.getElementById("selectedPackagePrice").textContent = "💰 " + data.priceText;
   document.getElementById("selectedPackageServices").innerHTML =
@@ -1097,6 +1106,12 @@ document.getElementById("customerForm").addEventListener("submit", async functio
   const packageType = document.getElementById("customerPackage").value;
   const address = document.getElementById("customerAddress").value.trim();
   const notes = document.getElementById("customerNotes").value.trim();
+  const paidAmount = Number(document.getElementById("customerPaidAmount").value || 0);
+
+  if(isNaN(paidAmount) || paidAmount < 0){
+    showError("المبلغ المستلم غير صحيح.");
+    return;
+  }
 
   const assistantRadio = document.querySelector('input[name="assistantRequested"]:checked');
   const assistantRequested = assistantRadio ? assistantRadio.value === "true" : false;
@@ -1157,6 +1172,16 @@ document.getElementById("customerForm").addEventListener("submit", async functio
     return;
   }
 
+  let paymentNote = "";
+  if(paidAmount > 0){
+    const d = new Date();
+    const monthStr = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+    const payResult = await sanadRecordPayment(result.customer.id, paidAmount, monthStr, "استلام عند التسجيل");
+    paymentNote = payResult.success
+      ? " 💵 تم تسجيل المبلغ المستلم " + paidAmount.toLocaleString("en-US") + " د.ع في الصندوق."
+      : " ⚠️ تم إنشاء المشترك لكن فشل تسجيل المبلغ: " + payResult.message;
+  }
+
   await sanadLogActivity(
     "إنشاء مشترك جديد",
     loggedStaff ? loggedStaff.name : "",
@@ -1170,7 +1195,7 @@ document.getElementById("customerForm").addEventListener("submit", async functio
     "✅ تم إنشاء ملف " + result.customer.customer_code + " بنجاح — " +
     result.customer.name + " اختار " + selectedPackage.name +
     " بسعر " + selectedPackage.priceText +
-    ". تم إرسال الملف مباشرة إلى المدير لترتيب المواعيد."
+    ". تم إرسال الملف مباشرة إلى المدير لترتيب المواعيد." + paymentNote
   );
 
   /* بيانات الدخول العشوائية: تُعرض بصندوق ثابت (لا يختفي تلقائياً) */
