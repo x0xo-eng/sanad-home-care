@@ -556,9 +556,10 @@ async function sanadCreateCustomer(customer) {
       notes: customer.notes,
       assistant_requested: customer.assistantRequested,
       status: customer.package === "companion" ? "active" : "pending_schedule",
-      /* من يشترك مباشرة بباقة "رفيق سند" يكون مفعّل تلقائياً
-         (لأنه دفع اشتراكها وقت التسجيل) */
-      companion_active: customer.package === "companion",
+      /* رفيق سند مفعّل تلقائياً لكل المشتركين: مجاناً مع الباقات
+         (الاعتيادية والمتوسطة والفاخرة)، وبالاشتراك المدفوع لمن اختار
+         باقة "رفيق سند" وحدها. يقدر المدير يعطّله يدوياً عند الحاجة */
+      companion_active: true,
       created_by: customer.createdBy || null
     })
     .select()
