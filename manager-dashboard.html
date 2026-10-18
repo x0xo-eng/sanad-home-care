@@ -679,6 +679,21 @@ align-items:center;
 gap:8px;
 }
 
+.archive-filters{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin:0 0 16px;padding:12px;border:1px solid #d7e8e5;border-radius:14px;background:#f8fcfb;
+}
+.archive-filters select{
+  padding:9px 12px;border:1px solid #cfe3df;border-radius:10px;background:#fff;font-family:inherit;font-size:14px;
+}
+.archive-filters button{
+  padding:9px 14px;border:1px solid #16877d;border-radius:10px;background:#fff;color:#16877d;
+  font-weight:700;cursor:pointer;font-family:inherit;font-size:13px;
+}
+.archive-filters button.active{background:#16877d;color:#fff;}
+.archive-month-head{
+  margin:18px 0 8px;padding:8px 12px;border-radius:10px;background:#e8f5f3;color:#163b38;font-weight:800;font-size:14px;
+}
 .archive-note{
 background:#fff7e6;
 color:#9a6b16;
@@ -1286,7 +1301,24 @@ flex:0 0 auto;
 <p>العناصر المكتملة/الملغية اللي مرّ عليها أكثر من 24 ساعة تنتقل هنا تلقائياً حتى تبقى الأقسام الرئيسية مرتبة.</p>
 </div>
 
-<div class="archive-note">ℹ️ هذه العناصر لسه موجودة بالكامل (ما انحذفت) — بس انتقلت هنا لأنها قديمة.</div>
+<div class="archive-note">ℹ️ هذه العناصر لسه موجودة بالكامل (ما انحذفت) — بس انتقلت هنا لأنها قديمة. تُرتَّب حسب الشهر، ويمكنك التصفية بالشهر أو الأسبوع.</div>
+
+<div class="archive-filters" id="archiveFilters">
+  <button type="button" id="archBtnAll" class="active" onclick="setArchiveQuick('all')">الكل</button>
+  <button type="button" id="archBtn7" onclick="setArchiveQuick('7')">آخر 7 أيام</button>
+  <button type="button" id="archBtn30" onclick="setArchiveQuick('30')">آخر 30 يوم</button>
+  <select id="archiveMonthSelect" onchange="onArchiveFilterChange()">
+    <option value="">كل الأشهر</option>
+  </select>
+  <select id="archiveWeekSelect" onchange="onArchiveFilterChange()" disabled>
+    <option value="">كل أسابيع الشهر</option>
+    <option value="1">الأسبوع 1 (1–7)</option>
+    <option value="2">الأسبوع 2 (8–14)</option>
+    <option value="3">الأسبوع 3 (15–21)</option>
+    <option value="4">الأسبوع 4 (22–28)</option>
+    <option value="5">الأسبوع 5 (29–نهاية الشهر)</option>
+  </select>
+</div>
 
 <div class="archive-group">
 <h3>📅 مواعيد مكتملة (أرشيف)</h3>
@@ -3930,6 +3962,7 @@ function renderStaffList(){
 
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <button type="button" class="schedule-customer-btn" onclick="changeStaffPassword('${escapeHtml(employee.phone || "")}', '${escapeHtml(employee.name || "")}')">🔑 كلمة المرور</button>
+          ${(loggedStaff && String(loggedStaff.staffId) === String(employee.id)) || employee.role === "owner" ? "" : `<button type="button" class="delete-customer-btn" onclick="deleteStaffAction('${escapeHtml(employee.phone || "")}', '${escapeHtml(employee.name || "")}')">🗑️ حذف</button>`}
           ${(loggedStaff && String(loggedStaff.staffId) === String(employee.id)) ? `<span class="customer-meta">👤 حسابك الحالي</span>` : `<button type="button" class="delete-customer-btn" onclick="toggleStaffActive('${escapeHtml(employee.id)}', ${employee.active === false ? "true" : "false"})">
             ${employee.active === false ? "🟢 تفعيل" : "🔴 تعطيل"}
           </button>`}
@@ -3950,10 +3983,118 @@ function renderStaffList(){
    والدفعات اللي مرّ عليها أكثر من 24 ساعة
 ===================================================== */
 
-function renderArchive(){
+/* ---- تصفية وتجميع الأرشيف حسب الشهر والأسبوع ---- */
+
+let archiveFilter = { month: "", week: "", lastDays: 0 };
+
+function archiveDateOf(value){
+  if(!value){ return null; }
+  const d = new Date(value);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function archiveKey(d){
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0");
+}
+
+function archivePasses(dateString){
+  const d = archiveDateOf(dateString);
+  const noFilter = !archiveFilter.month && !archiveFilter.week && !archiveFilter.lastDays;
+  if(!d){ return noFilter; }
+  if(archiveFilter.lastDays){
+    return (Date.now() - d.getTime()) <= archiveFilter.lastDays * 24 * 60 * 60 * 1000;
+  }
+  if(archiveFilter.month && archiveKey(d) !== archiveFilter.month){ return false; }
+  if(archiveFilter.week && String(Math.ceil(d.getDate() / 7)) !== archiveFilter.week){ return false; }
+  return true;
+}
+
+function makeArchiveGrouper(items, getDate){
+  const counts = {};
+  items.forEach(function(item){
+    const d = archiveDateOf(getDate(item));
+    const k = d ? archiveKey(d) : "none";
+    counts[k] = (counts[k] || 0) + 1;
+  });
+  let last = null;
+  return function(item, box){
+    const d = archiveDateOf(getDate(item));
+    const k = d ? archiveKey(d) : "none";
+    if(k === last){ return; }
+    last = k;
+    const head = document.createElement("div");
+    head.className = "archive-month-head";
+    head.textContent = "📆 " + (d ? d.toLocaleDateString("ar-IQ", { month: "long", year: "numeric" }) : "بدون تاريخ") + " — " + counts[k] + " عنصر";
+    box.appendChild(head);
+  };
+}
+
+function populateArchiveMonths(allRequests){
+  const select = document.getElementById("archiveMonthSelect");
+  if(!select){ return; }
+
+  const keys = {};
+  function add(value){
+    const d = archiveDateOf(value);
+    if(d){ keys[archiveKey(d)] = d; }
+  }
+
+  appointments.filter(isAppointmentArchived).forEach(function(a){ add(a.completed_at); });
+  (allRequests || []).filter(isRequestArchived).forEach(function(r){ add(r.cancelled_at); });
+  payments.filter(isPaymentArchived).forEach(function(p){ add(p.paid_at); });
+
+  const sorted = Object.keys(keys).sort().reverse();
+  const current = archiveFilter.month;
+
+  select.innerHTML = `<option value="">كل الأشهر</option>` + sorted.map(function(k){
+    const label = keys[k].toLocaleDateString("ar-IQ", { month: "long", year: "numeric" });
+    return `<option value="${k}">${label}</option>`;
+  }).join("");
+
+  select.value = sorted.indexOf(current) !== -1 ? current : "";
+}
+
+function setArchiveQuick(mode){
+  archiveFilter = { month: "", week: "", lastDays: mode === "all" ? 0 : Number(mode) };
+  const m = document.getElementById("archiveMonthSelect");
+  const w = document.getElementById("archiveWeekSelect");
+  if(m){ m.value = ""; }
+  if(w){ w.value = ""; w.disabled = true; }
+  updateArchiveButtons();
+  renderArchive();
+}
+
+function onArchiveFilterChange(){
+  const m = document.getElementById("archiveMonthSelect");
+  const w = document.getElementById("archiveWeekSelect");
+  archiveFilter.lastDays = 0;
+  archiveFilter.month = m ? m.value : "";
+  if(w){
+    w.disabled = !archiveFilter.month;
+    if(!archiveFilter.month){ w.value = ""; }
+    archiveFilter.week = w.value;
+  }
+  updateArchiveButtons();
+  renderArchive();
+}
+
+function updateArchiveButtons(){
+  const all = !archiveFilter.month && !archiveFilter.week && !archiveFilter.lastDays;
+  const map = { archBtnAll: all, archBtn7: archiveFilter.lastDays === 7, archBtn30: archiveFilter.lastDays === 30 };
+  Object.keys(map).forEach(function(id){
+    const el = document.getElementById(id);
+    if(el){ el.classList.toggle("active", !!map[id]); }
+  });
+}
+
+async function renderArchive(){
+
+  const allRequests = await sanadGetAllServiceRequests();
+
+  populateArchiveMonths(allRequests);
 
   renderArchiveAppointments();
-  renderArchiveRequests();
+  renderArchiveRequests(allRequests);
   renderArchivePayments();
 
 }
@@ -3965,6 +4106,7 @@ function renderArchiveAppointments(){
 
   const archived = appointments
     .filter(isAppointmentArchived)
+    .filter(function(item){ return archivePasses(item.completed_at); })
     .sort(function(a, b){
       return String(b.completed_at || "").localeCompare(String(a.completed_at || ""));
     });
@@ -3976,7 +4118,11 @@ function renderArchiveAppointments(){
     return;
   }
 
+  const groupHeader = makeArchiveGrouper(archived, function(i){ return i.completed_at; });
+
   archived.forEach(function(item){
+
+    groupHeader(item, box);
 
     const div = document.createElement("div");
     div.className = "appointment";
@@ -4005,15 +4151,16 @@ function renderArchiveAppointments(){
 
 }
 
-function renderArchiveRequests(){
+function renderArchiveRequests(requestsList){
 
   const box = document.getElementById("archiveRequestsBox");
   if(!box){ return; }
 
-  sanadGetAllServiceRequests().then(function(allRequests){
+  Promise.resolve(requestsList || sanadGetAllServiceRequests()).then(function(allRequests){
 
     const archived = allRequests
       .filter(isRequestArchived)
+      .filter(function(r){ return archivePasses(r.cancelled_at); })
       .sort(function(a, b){
         return String(b.cancelled_at || "").localeCompare(String(a.cancelled_at || ""));
       });
@@ -4025,7 +4172,11 @@ function renderArchiveRequests(){
       return;
     }
 
+    const groupHeader = makeArchiveGrouper(archived, function(r){ return r.cancelled_at; });
+
     archived.forEach(function(request){
+
+      groupHeader(request, box);
 
       const customer = customers.find(function(c){ return c.id === request.customer_id; });
 
@@ -4058,6 +4209,7 @@ function renderArchivePayments(){
 
   const archived = payments
     .filter(isPaymentArchived)
+    .filter(function(p){ return archivePasses(p.paid_at); })
     .sort(function(a, b){
       return String(b.paid_at || "").localeCompare(String(a.paid_at || ""));
     });
@@ -4069,7 +4221,11 @@ function renderArchivePayments(){
     return;
   }
 
+  const groupHeader = makeArchiveGrouper(archived, function(x){ return x.paid_at; });
+
   archived.forEach(function(p){
+
+    groupHeader(p, box);
 
     const relatedCustomer = customers.find(function(c){ return c.id === p.customer_id; });
 
@@ -4091,6 +4247,41 @@ function renderArchivePayments(){
     box.appendChild(div);
 
   });
+
+}
+
+async function deleteStaffAction(phone, name){
+
+  if(!isOwner){
+    showMessage("حذف الكادر متاح لمالك النظام فقط.", "error");
+    return;
+  }
+
+  if(!confirm("⚠️ حذف الموظف: " + name + "\n\nسيتم حذف حسابه نهائياً ولا يمكن التراجع.\nإذا كان له مواعيد أو سجلات، عطّل حسابه بدلاً من حذفه.\n\nمتابعة؟")){
+    return;
+  }
+
+  const result = await sanadDeleteStaff(phone);
+
+  if(!result.success){
+    showMessage(result.message || "تعذر حذف الموظف.", "error");
+    return;
+  }
+
+  await loadAll();
+  populateStaffSelects();
+  renderStaffList();
+
+  await sanadLogActivity(
+    "حذف حساب كادر",
+    loggedStaff ? loggedStaff.name : "",
+    loggedStaff ? loggedStaff.role : "",
+    "staff",
+    "",
+    name
+  );
+
+  showMessage("🗑️ تم حذف الموظف " + name + ".", "success");
 
 }
 
