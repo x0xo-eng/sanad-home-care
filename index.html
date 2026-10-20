@@ -325,6 +325,13 @@
 
     if(!isStandalone){ return; }
 
+    /* التنقل من داخل الحساب (?browse=1) لا يرجّعه للوحة تلقائياً */
+    if(window.location.search.indexOf("browse=1") !== -1){
+      try{ sessionStorage.setItem("sanadBrowsing","1"); }catch(e){}
+      return;
+    }
+    try{ if(sessionStorage.getItem("sanadBrowsing") === "1"){ return; } }catch(e){}
+
     var elder = localStorage.getItem("sanadLoggedInElder");
     if(elder){ window.location.replace("elder-dashboard.html"); return; }
 
@@ -599,5 +606,27 @@
 </footer>
 
 <script src="pwa-register.js"></script>
+
+<script>
+/* رابط "حسابي" يظهر فقط للمسن/العائلة المسجلين، حتى يرجعون لحسابهم من أي صفحة */
+(function(){
+  try{
+    var target = null;
+    if(localStorage.getItem("sanadLoggedInElder")){ target = "elder-dashboard.html"; }
+    else if(localStorage.getItem("sanadLoggedInFamily")){ target = "family-dashboard.html"; }
+    if(!target){ return; }
+    try{ sessionStorage.setItem("sanadBrowsing","1"); }catch(e){}
+    var nav = document.querySelector(".header .nav, header .nav");
+    if(!nav){ return; }
+    var a = document.createElement("a");
+    a.href = target;
+    a.textContent = "👤 حسابي";
+    a.style.cssText = "background:#16877d;color:#fff;border-radius:10px;";
+    nav.insertBefore(a, nav.firstChild);
+    var lb = document.querySelector(".login-btn");
+    if(lb){ lb.href = target; lb.textContent = "حسابي"; }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
