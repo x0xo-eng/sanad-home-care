@@ -4696,18 +4696,29 @@ function setCashFilter(which){
   loadAndRenderCashBox();
 }
 
+let cashBoxLoadId = 0;
+let cashBoxLastSummary = null;
+
 async function loadAndRenderCashBox(){
 
   if(!isOwner){ return; }
 
-  const summary = await sanadGetCashBoxSummary();
+  const myLoadId = ++cashBoxLoadId;
+  let summary = await sanadGetCashBoxSummary();
+
+  /* طلب أحدث بدأ بعدي: أترك له العرض */
+  if(myLoadId !== cashBoxLoadId){ return; }
+
+  /* إذا فشلت قراءة عابرة، أبقي آخر رقم صحيح بدل ما أمسحه */
+  if(!summary && cashBoxLastSummary){ summary = cashBoxLastSummary; }
+  if(summary){ cashBoxLastSummary = summary; }
   const valueEl = document.getElementById("cashBalanceValue");
   const noteEl = document.getElementById("cashBalanceNote");
   const card = document.getElementById("cashBalanceCard");
 
   if(!summary){
     valueEl.textContent = "—";
-    noteEl.textContent = "تعذر قراءة الصندوق. تأكد من تشغيل ملف SQL الخاص بالصندوق.";
+    noteEl.textContent = "تعذر قراءة الصندوق" + (window.sanadLastCashError ? " (" + window.sanadLastCashError + ")" : "") + ". حدّث الصفحة، وإذا بقي الخطأ ابعث صورة لهذا السطر.";
   } else {
     const balance = Number(summary.balance || 0);
     valueEl.textContent = cashFmt(balance);
