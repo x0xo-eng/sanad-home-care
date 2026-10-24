@@ -1256,12 +1256,15 @@ async function sanadDeletePayment(paymentId) {
 
 // المالك فقط
 async function sanadGetCashBoxSummary() {
-  const { data, error } = await sanadClient.rpc("sanad_cash_box_summary");
-  if (error) {
+  window.sanadLastCashError = "";
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const { data, error } = await sanadClient.rpc("sanad_cash_box_summary");
+    if (!error && data) { return data; }
     console.error(error);
-    return null;
+    window.sanadLastCashError = error ? (error.message || "") : "لا توجد بيانات";
+    await new Promise(function(r){ setTimeout(r, 800); });
   }
-  return data;
+  return null;
 }
 
 async function sanadGetCashBoxLedger(fromIso, toIso) {
