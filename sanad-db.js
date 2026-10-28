@@ -1292,20 +1292,147 @@ function sanadOpenReportViewer(appointment, opts) {
 }
 
 
-/* طباعة تقرير زيارة (صفحة مرتبة بشعار سند) */
-function sanadPrintReport(appointment, opts) {
+/* طباعة تقرير زيارة: ورقة A4 بتصميم رسمي فاخر */
+function sanadBuildPrintableHtml(appointment, opts) {
   opts = opts || {};
-  const text = sanadFormatReportText(appointment, { includeFinalReport: opts.includeFinalReport !== false });
-
-  if (!text) {
-    alert("لا يوجد تقرير محفوظ لهذه الزيارة.");
-    return;
-  }
+  const includeFinal = opts.includeFinalReport !== false;
+  const r = appointment.report || {};
 
   const esc = function (v) {
     return String(v == null ? "" : v)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   };
+  const val = function (v) {
+    const t = String(v == null ? "" : v).trim();
+    return t ? esc(t) : '<span class="empty">—</span>';
+  };
+  const row = function (label, value) {
+    return '<tr><th>' + label + '</th><td>' + val(value) + '</td></tr>';
+  };
+
+  const refNo = "SND-" + String(appointment.id || "").replace(/-/g, "").slice(0, 8).toUpperCase();
+  const visitDate = appointment.visit_date || "";
+  const visitTime = String(appointment.visit_time || "").slice(0, 5);
+  const staffName = r.staff && r.staff.name ? r.staff.name : "";
+  const printedAt = new Date().toLocaleDateString("ar-IQ", { year: "numeric", month: "long", day: "numeric" });
+
+  let vitals = "";
+  if (r.vitalSigns) {
+    const v = r.vitalSigns;
+    const cell = function (label, value, unit) {
+      const has = String(value == null ? "" : value).trim() !== "";
+      return '<div class="vital"><div class="vl">' + label + '</div><div class="vv">' +
+        (has ? esc(value) + (unit ? '<small>' + unit + '</small>' : '') : '<span class="empty">—</span>') + '</div></div>';
+    };
+    vitals =
+      '<section><h3><i></i>العلامات الحيوية</h3><div class="vitals">' +
+      cell("ضغط الدم", v.bloodPressure, "mmHg") +
+      cell("سكر الدم", v.bloodSugar, "mg/dL") +
+      cell("الحرارة", v.temperature, "°C") +
+      cell("النبض", v.pulse, "bpm") +
+      cell("الأوكسجين", v.oxygen, "%") +
+      cell("الوزن", v.weight, "kg") +
+      '</div></section>';
+  }
+
+  let medical = "";
+  if (r.medical) {
+    const m = r.medical;
+    medical =
+      '<section><h3><i></i>التقييم الطبي</h3><table class="kv">' +
+      row("الأعراض", m.symptoms) + row("الفحص السريري", m.examination) +
+      row("التشخيص", m.diagnosis) + row("العلاج", m.treatment) + row("التوصيات", m.recommendations) +
+      '</table></section>';
+  }
+
+  let nursing = "";
+  if (r.nursing) {
+    const n = r.nursing;
+    nursing =
+      '<section><h3><i></i>الرعاية التمريضية</h3><table class="kv">' +
+      row("الأدوية المعطاة", n.medicationGiven) + row("الرعاية الشخصية", n.personalCare) +
+      row("الحالة الغذائية", n.nutritionStatus) + row("ملاحظات التمريض", n.nursingNotes) +
+      '</table></section>';
+  }
+
+  let finalBox = "";
+  if (r.finalReport && includeFinal) {
+    finalBox = '<section><h3><i></i>الملخص النهائي</h3><div class="final">' + esc(r.finalReport) + '</div></section>';
+  }
+
+  const css =
+    "@page{size:A4;margin:0}" +
+    "*{box-sizing:border-box}" +
+    "html,body{margin:0;padding:0;background:#e9eeed;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
+    "body{font-family:'Tajawal','Cairo',Tahoma,Arial,sans-serif;color:#1b3a37;line-height:1.7;font-size:13px}" +
+    ".sheet{position:relative;width:210mm;min-height:296mm;margin:0 auto;background:#fff;display:flex;flex-direction:column;overflow:hidden}" +
+    ".wm{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:210px;font-weight:800;color:#16877d;opacity:.035;white-space:nowrap;pointer-events:none}" +
+    ".top{background:linear-gradient(135deg,#0d5f58,#16877d);color:#fff;padding:8mm 16mm 8mm;position:relative}" +
+    ".top:after{content:'';position:absolute;right:0;left:0;bottom:0;height:3mm;background:linear-gradient(90deg,#c9a24a,#ecd28a,#c9a24a)}" +
+    ".brand{display:flex;justify-content:space-between;align-items:flex-end}" +
+    ".logo{font-size:48px;font-weight:800;letter-spacing:-2px;line-height:1}" +
+    ".logo span{color:#e7c76a}" +
+    ".tag{font-size:12px;opacity:.85;margin-top:4px;letter-spacing:.3px}" +
+    ".ref{text-align:left;font-size:11.5px;opacity:.92;line-height:1.7}" +
+    ".ref b{font-size:14px;letter-spacing:1px;color:#f3dc95}" +
+    ".title{padding:5mm 16mm 0;display:flex;align-items:center;gap:12px}" +
+    ".title h1{margin:0;font-size:26px;color:#0d5f58;font-weight:800}" +
+    ".title .line{flex:1;height:1px;background:linear-gradient(90deg,#c9a24a,transparent)}" +
+    ".info{margin:5mm 16mm 0;border:1px solid #e6dcc0;background:#fffdf6;border-radius:12px;padding:10px 16px;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}" +
+    ".info div{display:flex;gap:8px;font-size:13px}.info b{color:#8a6a1f;min-width:78px;font-weight:700}" +
+    "section{margin:4mm 16mm 0;break-inside:avoid}" +
+    "h3{margin:0 0 8px;font-size:16px;color:#0d5f58;display:flex;align-items:center;gap:9px;font-weight:800}" +
+    "h3 i{display:inline-block;width:5px;height:19px;border-radius:3px;background:linear-gradient(#c9a24a,#e7c76a)}" +
+    ".vitals{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}" +
+    ".vital{border:1px solid #d6e6e3;border-radius:12px;padding:6px 8px;text-align:center;background:linear-gradient(180deg,#fff,#f4faf9)}" +
+    ".vl{font-size:11px;color:#6a8582;font-weight:600}.vv{font-size:18px;font-weight:800;color:#0d5f58;line-height:1.45}" +
+    ".vv small{display:block;font-size:9.5px;color:#8aa09d;font-weight:600;line-height:1.2}" +
+    "table.kv{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #d6e6e3;border-radius:12px;overflow:hidden}" +
+    "table.kv th{width:26%;text-align:right;background:#eef7f5;color:#0d5f58;font-weight:700;padding:4px 14px;vertical-align:top;border-bottom:1px solid #e0edeb}" +
+    "table.kv td{padding:4px 14px;text-align:right;border-bottom:1px solid #e9f1ef;white-space:pre-wrap;vertical-align:top}" +
+    "table.kv tr:last-child th,table.kv tr:last-child td{border-bottom:0}" +
+    ".final{border:1px solid #e6dcc0;border-right:5px solid #c9a24a;background:#fffdf6;border-radius:12px;padding:12px 16px;white-space:pre-wrap}" +
+    ".empty{color:#b3c2bf}" +
+    ".sign{margin:7mm 16mm 5mm;display:grid;grid-template-columns:1fr 1fr;gap:30px;break-inside:avoid}" +
+    ".sign div{border-top:1px solid #9bb3af;padding-top:6px;text-align:center;font-size:12px;color:#5f7774}" +
+    ".sign b{display:block;color:#1b3a37;font-size:13px;min-height:20px}" +
+    ".foot{margin-top:auto;padding:5mm 16mm 5mm;border-top:3px solid #c9a24a;background:#f4faf9;text-align:center;font-size:11px;color:#5f7774;line-height:1.7}" +
+    ".foot b{color:#0d5f58}" +
+    "@media print{html,body{background:#fff}.sheet{margin:0;box-shadow:none}}" +
+    "@media screen{.sheet{box-shadow:0 10px 40px rgba(0,0,0,.18);margin:16px auto}}";
+
+  return "<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'>" +
+    "<meta name='viewport' content='width=device-width,initial-scale=1'>" +
+    "<title>تقرير زيارة " + esc(refNo) + " - سند</title>" +
+    "<link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>" +
+    "<link href='https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap' rel='stylesheet'>" +
+    "<style>" + css + "</style></head><body><div class='sheet'><div class='wm'>سند</div>" +
+    "<div class='top'><div class='brand'>" +
+    "<div><div class='logo'>سند<span>.</span></div><div class='tag'>الرعاية المنزلية لكبار السن</div></div>" +
+    "<div class='ref'>رقم التقرير<br><b>" + esc(refNo) + "</b><br>تاريخ الإصدار: " + esc(printedAt) + "</div>" +
+    "</div></div>" +
+    "<div class='title'><h1>تقرير زيارة منزلية</h1><div class='line'></div></div>" +
+    "<div class='info'>" +
+    "<div><b>المشترك</b><span>" + val(opts.patientName) + "</span></div>" +
+    "<div><b>رقم الملف</b><span>" + val(opts.patientCode) + "</span></div>" +
+    "<div><b>الخدمة</b><span>" + val(appointment.service_name) + "</span></div>" +
+    "<div><b>موعد الزيارة</b><span>" + val((visitDate + (visitTime ? " — " + visitTime : "")).trim()) + "</span></div>" +
+    "<div><b>الكادر المنفذ</b><span>" + val(staffName) + "</span></div>" +
+    "<div><b>حالة الزيارة</b><span>مكتملة</span></div>" +
+    "</div>" +
+    vitals + medical + nursing + finalBox +
+    "<div class='sign'><div><b>" + esc(staffName) + "</b>توقيع الكادر المنفذ</div><div><b>&nbsp;</b>ختم وتوقيع الشركة</div></div>" +
+    "<div class='foot'><b>سند لرعاية كبار السن</b><br>هذا التقرير للمتابعة الصحية ولا يغني عن مراجعة الطبيب. المعلومات الواردة سرّية وتخص المشترك وعائلته.</div>" +
+    "</div></body></html>";
+}
+
+function sanadPrintReport(appointment, opts) {
+  opts = opts || {};
+
+  if (!appointment || !appointment.report) {
+    alert("لا يوجد تقرير محفوظ لهذه الزيارة.");
+    return;
+  }
 
   const w = window.open("", "_blank");
   if (!w) {
@@ -1313,27 +1440,23 @@ function sanadPrintReport(appointment, opts) {
     return;
   }
 
-  const patient = opts.patientName ? "<div class='meta'>المشترك: " + esc(opts.patientName) + "</div>" : "";
-  w.document.write(
-    "<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><title>تقرير زيارة - سند</title>" +
-    "<style>" +
-    "body{font-family:Tahoma,Arial,sans-serif;color:#163b38;margin:0;padding:32px;line-height:2;}" +
-    ".head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #16877d;padding-bottom:10px;margin-bottom:18px;}" +
-    ".logo{font-size:38px;font-weight:800;color:#16877d;}.logo span{color:#d8a84e;}" +
-    ".sub{color:#718480;font-size:13px;}.meta{font-size:15px;margin-bottom:10px;font-weight:700;}" +
-    ".report{white-space:pre-wrap;font-size:15px;border:1px solid #d5e3e0;border-radius:12px;padding:18px;}" +
-    ".foot{margin-top:24px;color:#9aa;font-size:12px;text-align:center;border-top:1px solid #e5efed;padding-top:10px;}" +
-    "@media print{body{padding:12px;}}" +
-    "</style></head><body>" +
-    "<div class='head'><div class='logo'>سند<span>.</span></div><div class='sub'>الرعاية المنزلية لكبار السن<br>النجف</div></div>" +
-    patient +
-    "<div class='report'>" + esc(text) + "</div>" +
-    "<div class='foot'>طُبع بتاريخ " + esc(new Date().toLocaleDateString("ar-IQ")) + " — هذا التقرير للمتابعة ولا يغني عن مراجعة الطبيب</div>" +
-    "</body></html>"
-  );
+  w.document.write(sanadBuildPrintableHtml(appointment, opts));
   w.document.close();
   w.focus();
-  setTimeout(function () { w.print(); }, 350);
+
+  /* ننتظر تحميل الخط ثم نطبع (مع مهلة احتياطية) */
+  let printed = false;
+  const doPrint = function () {
+    if (printed) { return; }
+    printed = true;
+    try { w.print(); } catch (e) {}
+  };
+  try {
+    if (w.document.fonts && w.document.fonts.ready) {
+      w.document.fonts.ready.then(function () { setTimeout(doPrint, 250); });
+    }
+  } catch (e) {}
+  setTimeout(doPrint, 2200);
 }
 
 /* =========================================================
@@ -1412,7 +1535,7 @@ function sanadRenderCompletedReports(cfg) {
         '<button type="button" data-act="print" style="flex:1;padding:9px;border:0;background:#16877d;color:#fff;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">🖨️ طباعة</button>' +
         '</div>';
 
-      const opts = { includeFinalReport: includeFinal, patientName: c ? c.name : "" };
+      const opts = { includeFinalReport: includeFinal, patientName: c ? c.name : "", patientCode: c ? (c.customer_code || "") : "" };
       div.querySelector('[data-act="view"]').onclick = function () { sanadOpenReportViewer(a, opts); };
       div.querySelector('[data-act="print"]').onclick = function () { sanadPrintReport(a, opts); };
       listEl.appendChild(div);
