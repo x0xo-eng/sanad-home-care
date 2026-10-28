@@ -888,6 +888,7 @@ flex:0 0 auto;
 <button type="button" class="tab-btn" data-tab="weekly" onclick="showTab('weekly')">📅 الجدول الأسبوعي</button>
 <button type="button" class="tab-btn" data-tab="scheduleforms" onclick="showTab('scheduleforms')">🗓️ جداول الخدمات</button>
 <button type="button" class="tab-btn" data-tab="summary" onclick="showTab('summary')">📊 ملخص المواعيد<span id="summaryTabBadge" class="tab-badge">0</span></button>
+<button type="button" class="tab-btn" data-tab="reports" onclick="showTab('reports')">📁 التقارير المكتملة</button>
 <button type="button" class="tab-btn" data-tab="archive" onclick="showTab('archive')">🗄️ الأرشيف</button>
 <button type="button" class="tab-btn" data-tab="cashbox" id="tabBtnCashbox" style="display:none;" onclick="showTab('cashbox')">🏦 الصندوق</button>
 <button type="button" class="tab-btn" data-tab="finance" id="tabBtnFinance" onclick="showTab('finance')">💰 الحسابات</button>
@@ -1293,6 +1294,21 @@ flex:0 0 auto;
 </div>
 
 
+<div class="tab-panel" id="tab-reports">
+
+<section class="section">
+
+<div class="section-title">
+<h2>📁 التقارير المكتملة</h2>
+<p>كل تقارير الزيارات المكتملة مع «التقرير النهائي». ابحث أو اختر الشهر، ثم اعرض أو اطبع.</p>
+</div>
+
+<div id="completedReportsRoot"></div>
+
+</section>
+
+</div>
+
 <div class="tab-panel" id="tab-archive">
 
 <section class="section">
@@ -1610,6 +1626,8 @@ function showTab(tabName){
   if(btn){ btn.classList.add("active"); }
 
   try{ localStorage.setItem("sanadManagerLastTab", tabName); }catch(e){}
+
+  if(tabName === "reports" && typeof renderCompletedReportsTab === "function"){ renderCompletedReportsTab(); }
 
   if(tabName === "notifications" && typeof loadAndRenderNotifications === "function"){
     loadAndRenderNotifications();
@@ -2661,14 +2679,14 @@ function viewAppointmentReport(appointmentId){
 
   const appointment = appointments.find(function(item){ return item.id === appointmentId; });
 
-  const text = sanadFormatReportText(appointment);
-
-  if(!text){
+  if(!appointment){
     alert("لا يوجد تقرير محفوظ لهذا الموعد.");
     return;
   }
 
-  alert(text);
+  const relatedCustomer = customers.find(function(c){ return c.id === appointment.customer_id; });
+
+  sanadOpenReportViewer(appointment, { patientName: relatedCustomer ? relatedCustomer.name : "" });
 
 }
 
@@ -4694,6 +4712,17 @@ function setCashFilter(which){
     b.classList.toggle("active", b.getAttribute("data-cash") === which);
   });
   loadAndRenderCashBox();
+}
+
+function renderCompletedReportsTab(){
+  const root = document.getElementById("completedReportsRoot");
+  if(!root){ return; }
+  sanadRenderCompletedReports({
+    root: root,
+    appointments: appointments,
+    customers: customers,
+    includeFinalReport: true
+  });
 }
 
 let cashBoxLoadId = 0;
