@@ -2686,7 +2686,7 @@ function viewAppointmentReport(appointmentId){
 
   const relatedCustomer = customers.find(function(c){ return c.id === appointment.customer_id; });
 
-  sanadOpenReportViewer(appointment, { patientName: relatedCustomer ? relatedCustomer.name : "" });
+  sanadOpenReportViewer(appointment, { patientName: relatedCustomer ? relatedCustomer.name : "", patientCode: relatedCustomer ? (relatedCustomer.customer_code || "") : "" });
 
 }
 
