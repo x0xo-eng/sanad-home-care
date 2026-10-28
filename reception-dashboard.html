@@ -703,6 +703,7 @@ flex-direction:column;
 <div class="tab-bar" id="tabBar">
 <button type="button" class="tab-btn active" data-tab="newCustomer" onclick="showTab('newCustomer')">➕ تسجيل مشترك جديد</button>
 <button type="button" class="tab-btn" data-tab="customers" onclick="showTab('customers')">👥 ملفات المشتركين</button>
+<button type="button" class="tab-btn" data-tab="reports" onclick="showTab('reports')">📁 التقارير المكتملة</button>
 <button type="button" class="tab-btn" data-tab="packages" onclick="showTab('packages')">📦 الباقات والأسعار</button>
 </div>
 
@@ -929,6 +930,22 @@ flex-direction:column;
 </div>
 
 <div class="customer-list" id="customerList"></div>
+
+</section>
+
+</div>
+
+
+<div class="tab-panel" id="tab-reports">
+
+<section class="section" id="reports">
+
+<div class="section-title">
+<h2>📁 التقارير المكتملة</h2>
+<p>تقارير الزيارات المكتملة للأرشفة والطباعة. ابحث باسم المشترك أو اختر الشهر.</p>
+</div>
+
+<div id="completedReportsRoot"></div>
 
 </section>
 
@@ -1432,6 +1449,22 @@ function showTab(tabName){
 
   try{ localStorage.setItem("sanadReceptionLastTab", tabName); }catch(e){}
 
+  if(tabName === "reports"){ loadCompletedReports(); }
+
+}
+
+async function loadCompletedReports(){
+  const root = document.getElementById("completedReportsRoot");
+  if(!root){ return; }
+  root.innerHTML = '<div style="padding:20px;text-align:center;color:#718480;">⏳ جارِ التحميل...</div>';
+  const appointments = await sanadGetAllAppointments();
+  /* الاستقبال يرى التقرير بدون "التقرير النهائي" (للمدير فقط) */
+  sanadRenderCompletedReports({
+    root: root,
+    appointments: appointments,
+    customers: customers,
+    includeFinalReport: false
+  });
 }
 
 (function restoreLastTab(){
