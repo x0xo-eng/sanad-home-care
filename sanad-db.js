@@ -1228,6 +1228,202 @@ async function sanadCreatePayment(payment) {
   return { success: true, payment: data };
 }
 
+
+/* =========================================================
+   عارض التقرير مع زر الطباعة
+   opts: { includeFinalReport: bool, patientName: string }
+========================================================= */
+
+function sanadOpenReportViewer(appointment, opts) {
+  opts = opts || {};
+  const text = sanadFormatReportText(appointment, { includeFinalReport: opts.includeFinalReport !== false });
+
+  if (!text) {
+    alert("لا يوجد تقرير محفوظ لهذه الزيارة.");
+    return;
+  }
+
+  const esc = function (v) {
+    return String(v == null ? "" : v)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  };
+
+  const old = document.getElementById("sanadReportViewer");
+  if (old) { old.remove(); }
+
+  const overlay = document.createElement("div");
+  overlay.id = "sanadReportViewer";
+  overlay.style.cssText = "position:fixed;inset:0;background:rgba(15,40,38,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;";
+
+  const box = document.createElement("div");
+  box.dir = "rtl";
+  box.style.cssText = "background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.25);font-family:inherit;";
+
+  const body = document.createElement("div");
+  body.style.cssText = "padding:22px 22px 8px;overflow:auto;white-space:pre-wrap;line-height:2;font-size:15px;color:#163b38;";
+  body.textContent = text;
+
+  const bar = document.createElement("div");
+  bar.style.cssText = "display:flex;gap:10px;padding:14px 22px 20px;border-top:1px solid #e5efed;";
+
+  const printBtn = document.createElement("button");
+  printBtn.type = "button";
+  printBtn.textContent = "🖨️ طباعة";
+  printBtn.style.cssText = "flex:1;padding:12px;border:0;border-radius:12px;background:#16877d;color:#fff;font-weight:800;font-size:15px;cursor:pointer;";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.textContent = "إغلاق";
+  closeBtn.style.cssText = "flex:1;padding:12px;border:1px solid #d5e3e0;border-radius:12px;background:#fff;color:#456;font-weight:700;font-size:15px;cursor:pointer;";
+
+  closeBtn.onclick = function () { overlay.remove(); };
+  overlay.onclick = function (e) { if (e.target === overlay) { overlay.remove(); } };
+
+  printBtn.onclick = function () {
+    sanadPrintReport(appointment, opts);
+  };
+
+  bar.appendChild(printBtn);
+  bar.appendChild(closeBtn);
+  box.appendChild(body);
+  box.appendChild(bar);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+}
+
+
+/* طباعة تقرير زيارة (صفحة مرتبة بشعار سند) */
+function sanadPrintReport(appointment, opts) {
+  opts = opts || {};
+  const text = sanadFormatReportText(appointment, { includeFinalReport: opts.includeFinalReport !== false });
+
+  if (!text) {
+    alert("لا يوجد تقرير محفوظ لهذه الزيارة.");
+    return;
+  }
+
+  const esc = function (v) {
+    return String(v == null ? "" : v)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  };
+
+  const w = window.open("", "_blank");
+  if (!w) {
+    alert("المتصفح منع نافذة الطباعة. اسمح بالنوافذ المنبثقة لهذا الموقع وأعد المحاولة.");
+    return;
+  }
+
+  const patient = opts.patientName ? "<div class='meta'>المشترك: " + esc(opts.patientName) + "</div>" : "";
+  w.document.write(
+    "<!DOCTYPE html><html lang='ar' dir='rtl'><head><meta charset='UTF-8'><title>تقرير زيارة - سند</title>" +
+    "<style>" +
+    "body{font-family:Tahoma,Arial,sans-serif;color:#163b38;margin:0;padding:32px;line-height:2;}" +
+    ".head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #16877d;padding-bottom:10px;margin-bottom:18px;}" +
+    ".logo{font-size:38px;font-weight:800;color:#16877d;}.logo span{color:#d8a84e;}" +
+    ".sub{color:#718480;font-size:13px;}.meta{font-size:15px;margin-bottom:10px;font-weight:700;}" +
+    ".report{white-space:pre-wrap;font-size:15px;border:1px solid #d5e3e0;border-radius:12px;padding:18px;}" +
+    ".foot{margin-top:24px;color:#9aa;font-size:12px;text-align:center;border-top:1px solid #e5efed;padding-top:10px;}" +
+    "@media print{body{padding:12px;}}" +
+    "</style></head><body>" +
+    "<div class='head'><div class='logo'>سند<span>.</span></div><div class='sub'>الرعاية المنزلية لكبار السن<br>النجف</div></div>" +
+    patient +
+    "<div class='report'>" + esc(text) + "</div>" +
+    "<div class='foot'>طُبع بتاريخ " + esc(new Date().toLocaleDateString("ar-IQ")) + " — هذا التقرير للمتابعة ولا يغني عن مراجعة الطبيب</div>" +
+    "</body></html>"
+  );
+  w.document.close();
+  w.focus();
+  setTimeout(function () { w.print(); }, 350);
+}
+
+/* =========================================================
+   قسم "التقارير المكتملة" (للاستقبال والمدير): بحث + شهر + عرض + طباعة
+   cfg: { root: عنصر, appointments, customers, includeFinalReport }
+========================================================= */
+
+function sanadRenderCompletedReports(cfg) {
+  const root = cfg.root;
+  if (!root) { return; }
+
+  const esc = function (v) {
+    return String(v == null ? "" : v)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  };
+
+  const customers = cfg.customers || [];
+  const includeFinal = cfg.includeFinalReport !== false;
+
+  const completed = (cfg.appointments || [])
+    .filter(function (a) { return a.status === "completed" && a.report; })
+    .sort(function (a, b) {
+      return (String(b.visit_date || "") + String(b.visit_time || "")).localeCompare(String(a.visit_date || "") + String(a.visit_time || ""));
+    });
+
+  root.innerHTML =
+    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">' +
+    '<input type="text" class="sanad-rep-search" placeholder="🔍 ابحث باسم المشترك أو كوده" style="flex:2;min-width:200px;padding:11px 14px;border:1px solid #d5e3e0;border-radius:12px;font-family:inherit;font-size:14px;">' +
+    '<input type="month" class="sanad-rep-month" style="flex:1;min-width:150px;padding:11px 14px;border:1px solid #d5e3e0;border-radius:12px;font-family:inherit;font-size:14px;">' +
+    '</div>' +
+    '<div class="sanad-rep-count" style="font-size:13px;color:#718480;margin-bottom:10px;"></div>' +
+    '<div class="sanad-rep-list"></div>';
+
+  const searchEl = root.querySelector(".sanad-rep-search");
+  const monthEl = root.querySelector(".sanad-rep-month");
+  const countEl = root.querySelector(".sanad-rep-count");
+  const listEl = root.querySelector(".sanad-rep-list");
+
+  function customerOf(a) {
+    return customers.find(function (c) { return String(c.id) === String(a.customer_id); });
+  }
+
+  function draw() {
+    const q = (searchEl.value || "").trim().toLowerCase();
+    const month = monthEl.value || "";
+
+    const rows = completed.filter(function (a) {
+      if (month && String(a.visit_date || "").slice(0, 7) !== month) { return false; }
+      if (!q) { return true; }
+      const c = customerOf(a);
+      const hay = ((c ? c.name : "") + " " + (c ? c.customer_code : "") + " " + (a.service_name || "")).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+
+    countEl.textContent = "عدد التقارير: " + rows.length;
+    listEl.innerHTML = "";
+
+    if (rows.length === 0) {
+      listEl.innerHTML = '<div style="padding:22px;text-align:center;color:#718480;border:1px dashed #cfe0dd;border-radius:14px;">لا توجد تقارير مكتملة مطابقة.</div>';
+      return;
+    }
+
+    rows.slice(0, 200).forEach(function (a) {
+      const c = customerOf(a);
+      const staffName = a.report && a.report.staff ? a.report.staff.name : "";
+      const div = document.createElement("div");
+      div.style.cssText = "border:1px solid #e1ecea;border-radius:16px;padding:14px 16px;margin-bottom:10px;background:#fff;";
+      div.innerHTML =
+        '<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;">' +
+        '<b style="color:#163b38;">👴 ' + esc(c ? c.name : "مشترك") + (c && c.customer_code ? ' <span style="color:#718480;font-weight:600;font-size:12px;">(' + esc(c.customer_code) + ')</span>' : '') + '</b>' +
+        '<span style="color:#16877d;font-weight:700;font-size:13px;">' + esc(a.visit_date || "") + ' — ' + esc(String(a.visit_time || "").slice(0, 5)) + '</span>' +
+        '</div>' +
+        '<div style="font-size:13px;color:#5f7774;margin:4px 0 10px;">' + esc(a.service_name || "") + (staffName ? ' • الكادر: ' + esc(staffName) : '') + '</div>' +
+        '<div style="display:flex;gap:8px;">' +
+        '<button type="button" data-act="view" style="flex:1;padding:9px;border:1px solid #16877d;background:#fff;color:#16877d;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">📄 عرض</button>' +
+        '<button type="button" data-act="print" style="flex:1;padding:9px;border:0;background:#16877d;color:#fff;border-radius:10px;font-weight:700;cursor:pointer;font-family:inherit;">🖨️ طباعة</button>' +
+        '</div>';
+
+      const opts = { includeFinalReport: includeFinal, patientName: c ? c.name : "" };
+      div.querySelector('[data-act="view"]').onclick = function () { sanadOpenReportViewer(a, opts); };
+      div.querySelector('[data-act="print"]').onclick = function () { sanadPrintReport(a, opts); };
+      listEl.appendChild(div);
+    });
+  }
+
+  searchEl.addEventListener("input", draw);
+  monthEl.addEventListener("change", draw);
+  draw();
+}
+
 /* ---------- الصندوق المالي ---------- */
 
 // الاستقبال/المدير/المالك: تسجيل دفعة (تدخل الصندوق تلقائياً)
