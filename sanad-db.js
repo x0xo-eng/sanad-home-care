@@ -1393,8 +1393,8 @@ function sanadBuildPrintableHtml(appointment, opts) {
     "table.kv tr:last-child th,table.kv tr:last-child td{border-bottom:0}" +
     ".final{border:1px solid #e6dcc0;border-right:5px solid #c9a24a;background:#fffdf6;border-radius:12px;padding:12px 16px;white-space:pre-wrap}" +
     ".empty{color:#b3c2bf}" +
-    ".sign{margin:auto 16mm 8mm;padding-top:10mm;display:grid;grid-template-columns:1fr 1fr;gap:30px;break-inside:avoid}" +
-    ".sign div{border-top:1px solid #9bb3af;padding-top:6px;text-align:center;font-size:12px;color:#5f7774}" +
+    ".sign{margin:auto auto 8mm;padding-top:10mm;display:flex;justify-content:center;gap:26mm;break-inside:avoid}" +
+    ".sign div{width:64mm;border-top:1px solid #9bb3af;padding-top:6px;text-align:center;font-size:12px;color:#5f7774}" +
     ".sign b{display:block;color:#1b3a37;font-size:13px;min-height:20px}" +
     ".foot{margin-top:0;padding:5mm 16mm 5mm;border-top:3px solid #c9a24a;background:#f4faf9;text-align:center;font-size:11px;color:#5f7774;line-height:1.7}" +
     ".foot b{color:#0d5f58}" +
