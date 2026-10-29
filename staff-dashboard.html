@@ -545,6 +545,7 @@
       <div class="field full"><label>نتيجة الفحص</label><textarea id="examination" placeholder="اكتب نتيجة الفحص والملاحظات الطبية..."></textarea></div>
       <div class="field full"><label>التشخيص</label><textarea id="diagnosis" placeholder="التشخيص إن وجد..."></textarea></div>
       <div class="field full"><label>العلاج / الأدوية / الإجراءات</label><textarea id="treatment" placeholder="اكتب العلاج أو الأدوية أو الإجراءات التي تم اتخاذها..."></textarea></div>
+      <div class="field full" id="referralField" style="display:none;"><label>🔁 إحالة أو تحاليل/فحوصات مطلوبة</label><textarea id="referral" placeholder="اكتب أي إحالة أو تحاليل أو صور مطلوبة، أو اتركه فارغاً إذا لا يوجد..."></textarea></div>
       <div class="field full"><label>التوصيات</label><textarea id="recommendations" placeholder="اكتب توصياتك للزيارة القادمة أو للعائلة..."></textarea></div>
 
     </div>
@@ -586,11 +587,26 @@
         </select>
       </div>
 
+      <div class="field">
+        <label>🩹 حالة الجلد / الجروح</label>
+        <select id="skinCondition">
+          <option value="">اختر الحالة</option>
+          <option value="سليم">سليم</option>
+          <option value="جفاف">جفاف</option>
+          <option value="احمرار">احمرار</option>
+          <option value="جرح يحتاج متابعة">جرح يحتاج متابعة</option>
+          <option value="تقرحات فراش">تقرحات فراش</option>
+        </select>
+      </div>
+
       <div class="field full"><label>📝 ملاحظات التمريض</label><textarea id="nursingNotes" placeholder="اكتب جميع الملاحظات المتعلقة بالرعاية التمريضية..."></textarea></div>
 
     </div>
 
   </div>
+
+
+  <div class="medical-section" id="roleFormBox" style="display:none;"></div>
 
 
   <div class="medical-section">
@@ -948,6 +964,158 @@ function showVisitInterface(visit, preserveForm = false){
    10. تخصيص الواجهة حسب الدور
 ===================================================== */
 
+/* نماذج الأدوار الأخرى (كل دور له حقول من صلب عمله فقط) */
+const ROLE_FORMS = {
+
+  nutrition: {
+    icon: "🥗", name: "أخصائي التغذية", title: "التقييم الغذائي",
+    notice: "سجّل الوزن والشهية والخطة الغذائية والتوصيات.",
+    fields: [
+      { key: "weight", label: "⚖️ الوزن", type: "text", ph: "مثال: 72 كغم" },
+      { key: "appetite", label: "🍽️ الشهية", type: "select", options: ["جيدة", "متوسطة", "ضعيفة"] },
+      { key: "fluids", label: "💧 شرب السوائل", type: "select", options: ["كافٍ", "قليل", "قليل جداً"] },
+      { key: "dietPlan", label: "📋 الخطة الغذائية", type: "textarea", ph: "اكتب الخطة الغذائية المتبعة أو المقترحة..." },
+      { key: "recommendations", label: "💡 التوصيات", type: "textarea", ph: "توصيات للمسن والعائلة..." }
+    ]
+  },
+
+  physio: {
+    icon: "🏃", name: "أخصائي العلاج الطبيعي", title: "تقييم العلاج الطبيعي",
+    notice: "سجّل مستوى الحركة والتمارين ودرجة الألم والتقدم.",
+    fields: [
+      { key: "mobility", label: "🚶 مستوى الحركة", type: "select", options: ["مستقل", "بمساعدة", "محدود", "طريح الفراش"] },
+      { key: "pain", label: "😣 درجة الألم (0 - 10)", type: "text", ph: "مثال: 4" },
+      { key: "progress", label: "📈 التقدم", type: "select", options: ["تحسّن", "ثابت", "تراجع"] },
+      { key: "exercises", label: "🏋️ التمارين المنفذة", type: "textarea", ph: "اكتب التمارين التي تمت أثناء الجلسة..." },
+      { key: "homeExercises", label: "🏠 تمارين منزلية موصى بها", type: "textarea", ph: "التمارين التي ينفذها المسن بين الجلسات..." }
+    ]
+  },
+
+  psychologist: {
+    icon: "🧠", name: "الأخصائي النفسي", title: "تقييم الدعم النفسي",
+    notice: "سجّل المزاج والنوم والقلق والتواصل وملاحظات الجلسة.",
+    fields: [
+      { key: "mood", label: "🙂 المزاج", type: "select", options: ["جيد", "مستقر", "حزين", "منزعج", "قلِق"] },
+      { key: "sleep", label: "😴 النوم", type: "select", options: ["جيد", "متقطع", "سيئ"] },
+      { key: "anxiety", label: "😟 مستوى القلق", type: "select", options: ["لا يوجد", "خفيف", "متوسط", "شديد"] },
+      { key: "engagement", label: "🗣️ التواصل والتفاعل", type: "select", options: ["متفاعل", "متوسط", "منعزل"] },
+      { key: "sessionNotes", label: "📝 ملاحظات الجلسة", type: "textarea", ph: "اكتب ملاحظات الجلسة..." },
+      { key: "familyRec", label: "👨‍👩‍👦 توصيات للعائلة", type: "textarea", ph: "توصيات للعائلة للتعامل مع المسن..." }
+    ]
+  },
+
+  entertainment: {
+    icon: "🎭", name: "مرافق الترفيه", title: "تقرير النشاط الترفيهي",
+    notice: "سجّل نوع النشاط ومدته ومشاركة المسن ومزاجه.",
+    fields: [
+      { key: "activityType", label: "🎯 نوع النشاط", type: "text", ph: "مثال: نزهة، ألعاب، قراءة، حديث..." },
+      { key: "duration", label: "⏱️ المدة", type: "text", ph: "مثال: ساعة" },
+      { key: "participation", label: "🤝 مستوى المشاركة", type: "select", options: ["مشاركة كاملة", "مشاركة جزئية", "قليلة", "رفض المشاركة"] },
+      { key: "mood", label: "🙂 مزاج المسن", type: "select", options: ["سعيد", "مرتاح", "عادي", "منزعج"] },
+      { key: "notes", label: "📝 ملاحظات", type: "textarea", ph: "أي ملاحظات عن النشاط..." }
+    ]
+  },
+
+  hairdresser: {
+    icon: "💇", name: "الكوافير", title: "تقرير خدمة الحلاقة والتجميل",
+    notice: "سجّل الخدمات التي قدمتها وحالة فروة الرأس والجلد وراحة المسن.",
+    fields: [
+      { key: "services", label: "✂️ الخدمات المقدمة", type: "checks", options: ["قص شعر", "حلاقة ذقن", "غسل شعر", "صبغة", "تسريح", "تقليم أظافر", "أخرى"] },
+      { key: "scalp", label: "🧴 حالة فروة الرأس والجلد", type: "select", options: ["سليمة", "جفاف", "حكة أو التهاب", "جروح أو خدوش"] },
+      { key: "comfort", label: "😊 راحة المسن ورضاه", type: "select", options: ["راضٍ جداً", "راضٍ", "غير مرتاح"] },
+      { key: "notes", label: "📝 ملاحظات", type: "textarea", ph: "أي ملاحظات تخص الخدمة أو حالة المسن..." }
+    ]
+  },
+
+  assistant: {
+    icon: "🛁", name: "المعين الخاص", title: "تقرير الرعاية الشخصية",
+    notice: "سجّل الاستحمام والنظافة وحالة الجلد والمساعدة المقدمة.",
+    fields: [
+      { key: "bathing", label: "🛁 الاستحمام", type: "select", options: ["تم", "جزئي", "لم يتم"] },
+      { key: "hygiene", label: "🧼 النظافة الشخصية واللبس", type: "select", options: ["تمت", "جزئية", "لم تتم"] },
+      { key: "skin", label: "🩹 حالة الجلد", type: "select", options: ["سليم", "جفاف", "احمرار", "تقرحات"] },
+      { key: "mobilityHelp", label: "🚶 المساعدة بالحركة", type: "select", options: ["تمت", "لم تتم", "غير مطلوبة"] },
+      { key: "mealHelp", label: "🍽️ المساعدة بالأكل", type: "select", options: ["تمت", "لم تتم", "غير مطلوبة"] },
+      { key: "notes", label: "📝 ملاحظات", type: "textarea", ph: "أي ملاحظات عن حالة المسن أثناء الرعاية..." }
+    ]
+  }
+
+};
+
+function renderRoleForm(role){
+
+  const box = document.getElementById("roleFormBox");
+  const form = ROLE_FORMS[role];
+
+  if(!form){
+    box.style.display = "none";
+    box.innerHTML = "";
+    return;
+  }
+
+  let html = "<h3>" + form.icon + " " + escapeHTML(form.title) + "</h3><div class=\"fields\">";
+
+  form.fields.forEach(function(f){
+
+    const id = "rf_" + f.key;
+    const full = (f.type === "textarea" || f.type === "checks") ? " full" : "";
+
+    html += "<div class=\"field" + full + "\"><label>" + f.label + "</label>";
+
+    if(f.type === "select"){
+      html += "<select id=\"" + id + "\"><option value=\"\">اختر</option>";
+      f.options.forEach(function(o){ html += "<option value=\"" + escapeHTML(o) + "\">" + escapeHTML(o) + "</option>"; });
+      html += "</select>";
+    } else if(f.type === "textarea"){
+      html += "<textarea id=\"" + id + "\" placeholder=\"" + escapeHTML(f.ph || "") + "\"></textarea>";
+    } else if(f.type === "checks"){
+      html += "<div id=\"" + id + "\" style=\"display:flex;flex-wrap:wrap;gap:10px 18px;padding:6px 2px;\">";
+      f.options.forEach(function(o){
+        html += "<label style=\"display:flex;align-items:center;gap:6px;font-weight:600;\"><input type=\"checkbox\" value=\"" + escapeHTML(o) + "\"> " + escapeHTML(o) + "</label>";
+      });
+      html += "</div>";
+    } else {
+      html += "<input type=\"text\" id=\"" + id + "\" placeholder=\"" + escapeHTML(f.ph || "") + "\">";
+    }
+
+    html += "</div>";
+  });
+
+  html += "</div>";
+
+  box.innerHTML = html;
+  box.style.display = "block";
+
+}
+
+function readRoleForm(role){
+
+  const form = ROLE_FORMS[role];
+  if(!form){ return null; }
+
+  const rows = [];
+
+  form.fields.forEach(function(f){
+
+    const el = document.getElementById("rf_" + f.key);
+    let value = "";
+
+    if(f.type === "checks"){
+      if(el){
+        value = Array.prototype.map.call(el.querySelectorAll("input:checked"), function(c){ return c.value; }).join("، ");
+      }
+    } else if(el){
+      value = (el.value || "").trim();
+    }
+
+    rows.push({ label: f.label.replace(/^[^\s]+\s/, ""), value: value });
+
+  });
+
+  return { title: form.title, rows: rows };
+
+}
+
 function configureRoleInterface(){
 
   const role = loggedStaff ? loggedStaff.role : "";
@@ -956,6 +1124,10 @@ function configureRoleInterface(){
   const medicalSection = document.getElementById("medicalSection");
   const nursingSection = document.getElementById("nursingSection");
   const vitalSection = document.getElementById("vitalSection");
+  const referralField = document.getElementById("referralField");
+
+  referralField.style.display = "none";
+  renderRoleForm(role);
 
   if(role === "nurse"){
     roleNotice.innerHTML = `👩‍⚕️ <strong>واجهة الممرض:</strong> يرجى تسجيل العلامات الحيوية، الأدوية، الرعاية الشخصية وجميع الملاحظات التمريضية.`;
@@ -978,6 +1150,16 @@ function configureRoleInterface(){
     vitalSection.style.display = "block";
     nursingSection.style.display = "none";
     medicalSection.style.display = "block";
+    referralField.style.display = "block";
+    return;
+  }
+
+  if(ROLE_FORMS[role]){
+    const f = ROLE_FORMS[role];
+    roleNotice.innerHTML = `${f.icon} <strong>واجهة ${escapeHTML(f.name)}:</strong> ${escapeHTML(f.notice)}`;
+    vitalSection.style.display = "none";
+    nursingSection.style.display = "none";
+    medicalSection.style.display = "none";
     return;
   }
 
@@ -1005,40 +1187,59 @@ async function completeVisit(){
 
   const completedAt = new Date().toISOString();
 
+  const role = loggedStaff ? loggedStaff.role : "";
+
   const report = {
+    finalReport: getValue("finalReport"),
+    staff: {
+      name: loggedStaff ? loggedStaff.name : "كادر سند",
+      role: role
+    }
+  };
 
-    vitalSigns: {
-      bloodPressure: getValue("bloodPressure"),
-      bloodSugar: getValue("bloodSugar"),
-      temperature: getValue("temperature"),
-      pulse: getValue("pulse"),
-      oxygen: getValue("oxygen"),
-      weight: getValue("weight")
-    },
+  const vitals = {
+    bloodPressure: getValue("bloodPressure"),
+    bloodSugar: getValue("bloodSugar"),
+    temperature: getValue("temperature"),
+    pulse: getValue("pulse"),
+    oxygen: getValue("oxygen"),
+    weight: getValue("weight")
+  };
 
-    medical: {
-      symptoms: getValue("symptoms"),
-      examination: getValue("examination"),
-      diagnosis: getValue("diagnosis"),
-      treatment: getValue("treatment"),
-      recommendations: getValue("recommendations")
-    },
+  const medical = {
+    symptoms: getValue("symptoms"),
+    examination: getValue("examination"),
+    diagnosis: getValue("diagnosis"),
+    treatment: getValue("treatment"),
+    recommendations: getValue("recommendations")
+  };
 
-    nursing: {
+  if(role === "nurse"){
+
+    report.vitalSigns = vitals;
+    report.nursing = {
       medicationGiven: getValue("medicationGiven"),
       personalCare: getValue("personalCare"),
       nutritionStatus: getValue("nutritionStatus"),
+      skinCondition: getValue("skinCondition"),
       nursingNotes: getValue("nursingNotes")
-    },
+    };
 
-    finalReport: getValue("finalReport"),
+  } else if(role === "resident" || role === "specialist"){
 
-    staff: {
-      name: loggedStaff ? loggedStaff.name : "كادر سند",
-      role: loggedStaff ? loggedStaff.role : ""
-    }
+    report.vitalSigns = vitals;
+    report.medical = medical;
+    if(role === "specialist"){ report.medical.referral = getValue("referral"); }
 
-  };
+  } else if(ROLE_FORMS[role]){
+
+    report.roleReport = readRoleForm(role);
+
+  } else {
+
+    report.medical = medical;
+
+  }
 
   const result = await sanadUpdateAppointmentStatus(currentVisit.id, {
     status: "completed",
@@ -1141,7 +1342,7 @@ function clearVisitForm(){
   const fields = [
     "bloodPressure", "bloodSugar", "temperature", "pulse", "oxygen", "weight",
     "symptoms", "examination", "diagnosis", "treatment", "recommendations",
-    "nursingNotes", "finalReport"
+    "nursingNotes", "finalReport", "referral"
   ];
 
   fields.forEach(function(id){
@@ -1149,12 +1350,14 @@ function clearVisitForm(){
     if(element){ element.value = ""; }
   });
 
-  const selects = ["medicationGiven", "personalCare", "nutritionStatus"];
+  const selects = ["medicationGiven", "personalCare", "nutritionStatus", "skinCondition"];
 
   selects.forEach(function(id){
     const element = document.getElementById(id);
     if(element){ element.value = ""; }
   });
+
+  if(typeof renderRoleForm === "function" && loggedStaff){ renderRoleForm(loggedStaff.role); }
 
   document.getElementById("reportMessage").style.display = "none";
 
