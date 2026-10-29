@@ -881,6 +881,18 @@ async function sanadUpdateCustomerStatus(customerId, status) {
    عند المدير والعائلة والمسن حتى يكون التقرير موحّد وكامل)
 ========================================================= */
 
+
+/* تحويل رموز التقارير القديمة/الجديدة إلى نص عربي مفهوم */
+function sanadReportLabel(v) {
+  const map = {
+    yes: "تم إعطاء الأدوية", no: "لم يتم إعطاء الأدوية",
+    completed: "تمت", not_completed: "لم تتم",
+    good: "جيدة", moderate: "متوسطة", poor: "ضعيفة"
+  };
+  const t = String(v == null ? "" : v).trim();
+  return map[t] || t;
+}
+
 function sanadFormatReportText(appointment, options) {
   /* options.includeFinalReport === false يخفي "التقرير النهائي" (للمسن والعائلة) */
   const includeFinalReport = !(options && options.includeFinalReport === false);
@@ -919,15 +931,29 @@ function sanadFormatReportText(appointment, options) {
     lines.push("التشخيص: " + (report.medical.diagnosis || "—"));
     lines.push("العلاج: " + (report.medical.treatment || "—"));
     lines.push("التوصيات: " + (report.medical.recommendations || "—"));
+    if (report.medical.referral) {
+      lines.push("إحالة / تحاليل مطلوبة: " + report.medical.referral);
+    }
     lines.push("");
   }
 
   if (report.nursing) {
     lines.push("👩‍⚕️ الرعاية التمريضية:");
-    lines.push("الأدوية: " + (report.nursing.medicationGiven || "—"));
-    lines.push("الرعاية الشخصية: " + (report.nursing.personalCare || "—"));
-    lines.push("التغذية: " + (report.nursing.nutritionStatus || "—"));
+    lines.push("الأدوية: " + (sanadReportLabel(report.nursing.medicationGiven) || "—"));
+    lines.push("الرعاية الشخصية: " + (sanadReportLabel(report.nursing.personalCare) || "—"));
+    lines.push("التغذية: " + (sanadReportLabel(report.nursing.nutritionStatus) || "—"));
+    if (report.nursing.skinCondition) {
+      lines.push("حالة الجلد: " + report.nursing.skinCondition);
+    }
     lines.push("ملاحظات: " + (report.nursing.nursingNotes || "—"));
+    lines.push("");
+  }
+
+  if (report.roleReport && Array.isArray(report.roleReport.rows)) {
+    lines.push("📋 " + (report.roleReport.title || "تفاصيل الخدمة") + ":");
+    report.roleReport.rows.forEach(function (row) {
+      lines.push((row.label || "") + ": " + (row.value || "—"));
+    });
     lines.push("");
   }
 
@@ -1342,6 +1368,7 @@ function sanadBuildPrintableHtml(appointment, opts) {
       '<section><h3><i></i>التقييم الطبي</h3><table class="kv">' +
       row("الأعراض", m.symptoms) + row("الفحص السريري", m.examination) +
       row("التشخيص", m.diagnosis) + row("العلاج", m.treatment) + row("التوصيات", m.recommendations) +
+      (m.referral ? row("إحالة / تحاليل مطلوبة", m.referral) : "") +
       '</table></section>';
   }
 
@@ -1350,8 +1377,18 @@ function sanadBuildPrintableHtml(appointment, opts) {
     const n = r.nursing;
     nursing =
       '<section><h3><i></i>الرعاية التمريضية</h3><table class="kv">' +
-      row("الأدوية المعطاة", n.medicationGiven) + row("الرعاية الشخصية", n.personalCare) +
-      row("الحالة الغذائية", n.nutritionStatus) + row("ملاحظات التمريض", n.nursingNotes) +
+      row("الأدوية المعطاة", sanadReportLabel(n.medicationGiven)) + row("الرعاية الشخصية", sanadReportLabel(n.personalCare)) +
+      row("الحالة الغذائية", sanadReportLabel(n.nutritionStatus)) +
+      (n.skinCondition ? row("حالة الجلد / الجروح", n.skinCondition) : "") +
+      row("ملاحظات التمريض", n.nursingNotes) +
+      '</table></section>';
+  }
+
+  let roleBox = "";
+  if (r.roleReport && Array.isArray(r.roleReport.rows)) {
+    roleBox =
+      '<section><h3><i></i>' + esc(r.roleReport.title || "تفاصيل الخدمة") + '</h3><table class="kv">' +
+      r.roleReport.rows.map(function (x) { return row(esc(x.label || ""), x.value); }).join("") +
       '</table></section>';
   }
 
@@ -1420,7 +1457,7 @@ function sanadBuildPrintableHtml(appointment, opts) {
     "<div><b>الكادر المنفذ</b><span>" + val(staffName) + "</span></div>" +
     "<div><b>حالة الزيارة</b><span>مكتملة</span></div>" +
     "</div>" +
-    vitals + medical + nursing + finalBox +
+    vitals + medical + nursing + roleBox + finalBox +
     "<div class='sign'><div><b>" + esc(staffName) + "</b>توقيع الكادر المنفذ</div><div><b>&nbsp;</b>ختم وتوقيع الشركة</div></div>" +
     "<div class='foot'><b>سند لرعاية كبار السن</b><br>هذا التقرير للمتابعة الصحية ولا يغني عن مراجعة الطبيب. المعلومات الواردة سرّية وتخص المشترك وعائلته.</div>" +
     "</div></body></html>";
